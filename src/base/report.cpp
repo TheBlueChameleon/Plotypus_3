@@ -9,7 +9,6 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-
     void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
@@ -60,29 +59,49 @@ namespace Plotypus
         return invalidFilenameChars;
     }
 
-    const std::string& Report::getSeparatorTXT() const
+    const std::string& Report::getSeparatorTxt() const
     {
-        return separatorTXT;
+        return separatorTxt;
     }
 
-    void Report::setSeparatorTXT(const std::string& newSeparatorTXT)
+    void Report::setSeparatorTxt(const std::string& newSeparatorTXT)
     {
-        separatorTXT = newSeparatorTXT;
+        separatorTxt = newSeparatorTXT;
     }
 
-    const std::string& Report::getSeparatorDAT() const
+    const std::string& Report::getSeparatorDat() const
     {
-        return separatorDAT;
+        return separatorDat;
     }
 
-    void Report::setSeparatorDAT(const std::string& newSeparatorDAT)
+    void Report::setSeparatorDat(const std::string& newSeparatorDAT)
     {
-        separatorDAT = newSeparatorDAT;
+        separatorDat = newSeparatorDAT;
     }
 
     const std::string& Report::getOutputDirectory() const
     {
         return outputDirectory;
+    }
+
+    const std::string& Report::getNewPageTxt() const
+    {
+        return newPageTxt;
+    }
+
+    void Report::setNewPageTxt(const std::string& newNewPageTXT)
+    {
+        newPageTxt = newNewPageTXT;
+    }
+
+    const std::string& Report::getNewFrameTxt() const
+    {
+        return newFrameTxt;
+    }
+
+    void Report::setNewFrameTxt(const std::string& newNewFrameTXT)
+    {
+        newFrameTxt = newNewFrameTXT;
     }
 
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
@@ -102,59 +121,59 @@ namespace Plotypus
         filenameBase = newFilenameBase;
     }
 
-    const std::string& Report::getExtTXT() const
+    const std::string& Report::getExtTxt() const
     {
-        return extTXT;
+        return extTxt;
     }
 
-    void Report::setExtTXT(const std::string& newExtTXT)
+    void Report::setExtTxt(const std::string& newExtTXT)
     {
         throwIfInvalidFilename("extension for text files", newExtTXT);
-        extTXT = newExtTXT;
+        extTxt = newExtTXT;
     }
 
-    const std::string& Report::getExtDAT() const
+    const std::string& Report::getExtDat() const
     {
-        return extDAT;
+        return extDat;
     }
 
-    void Report::setExtDAT(const std::string& newExtDAT)
+    void Report::setExtDat(const std::string& newExtDAT)
     {
         throwIfInvalidFilename("extension for gnuplot data files", newExtDAT);
-        extDAT = newExtDAT;
+        extDat = newExtDAT;
     }
 
-    const std::string& Report::getExtTEX() const
+    const std::string& Report::getExtTex() const
     {
-        return extTEX;
+        return extTex;
     }
 
-    void Report::setExtTEX(const std::string& newExtTEX)
+    void Report::setExtTex(const std::string& newExtTEX)
     {
         throwIfInvalidFilename("extension for latex files", newExtTEX);
-        extTEX = newExtTEX;
+        extTex = newExtTEX;
     }
 
-    const std::string& Report::getExtPDF() const
+    const std::string& Report::getExtPdf() const
     {
-        return extPDF;
+        return extPdf;
     }
 
-    void Report::setExtPDF(const std::string& newExtPDF)
+    void Report::setExtPdf(const std::string& newExtPDF)
     {
         throwIfInvalidFilename("extension for PDF files", newExtPDF);
-        extPDF = newExtPDF;
+        extPdf = newExtPDF;
     }
 
-    const std::string& Report::getExtGNU() const
+    const std::string& Report::getExtGnu() const
     {
-        return extGNU;
+        return extGnu;
     }
 
-    void Report::setExtGNU(const std::string& newExtGNU)
+    void Report::setExtGnu(const std::string& newExtGNU)
     {
         throwIfInvalidFilename("extension for gnuplot script files", newExtGNU);
-        extGNU = newExtGNU;
+        extGnu = newExtGNU;
     }
 
     bool Report::getAutoRunScript() const
@@ -167,14 +186,14 @@ namespace Plotypus
         autoRunScript = newAutoRunScript;
     }
 
-    bool Report::getStandaloneTEX() const
+    bool Report::getStandaloneTex() const
     {
-        return standaloneTEX;
+        return standaloneTex;
     }
 
-    void Report::setStandaloneTEX(bool newStandaloneTEX)
+    void Report::setStandaloneTex(bool newStandaloneTEX)
     {
-        standaloneTEX = newStandaloneTEX;
+        standaloneTex = newStandaloneTEX;
     }
 
     int Report::getNumberPrecision() const
@@ -185,5 +204,12 @@ namespace Plotypus
     void Report::setNumberPrecision(int newNumberPrecision)
     {
         numberPrecision = newNumberPrecision;
+    }
+
+    // ====================================================================== //
+
+    void Report::writeTxt()
+    {
+
     }
 }

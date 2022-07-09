@@ -141,4 +141,22 @@ namespace Plotypus
 
         addLabel(l);
     }
+
+    void Sheet::writeTXTHead(std::ofstream &hFile)
+    {
+
+    }
+
+    void Sheet::writeTXTContent(std::ofstream &hFile)
+    {
+
+    }
+
+    void Sheet::writeTXTLabels(std::ofstream &hFile)
+    {
+
+    }
+
+    // ====================================================================== //
+
 }

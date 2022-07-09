@@ -16,20 +16,23 @@ namespace Plotypus
 
             constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
 
-            std::string separatorTXT = "\t";
-            std::string separatorDAT = "\t";
+            std::string separatorTxt = "\t";
+            std::string separatorDat = "\t";
+
+            std::string newPageTxt  = "================================================================================\n";
+            std::string newFrameTxt = "--------------------------------------------------------------------------------\n";
 
             std::string outputDirectory;
             std::string filenameBase = "report";
 
-            std::string extTXT = "txt";
-            std::string extDAT = "dat";
-            std::string extTEX = "tex";
-            std::string extPDF = "pdf";
-            std::string extGNU = "gnuplot";
+            std::string extTxt = "txt";
+            std::string extDat = "dat";
+            std::string extTex = "tex";
+            std::string extPdf = "pdf";
+            std::string extGnu = "gnuplot";
 
             bool autoRunScript = true;
-            bool standaloneTEX = true;
+            bool standaloneTex = true;
 
             int  numberPrecision = 6;           // used only in txt output
 
@@ -52,31 +55,35 @@ namespace Plotypus
 
             const char*         getInvalidFilenameChars() const;
 
-            const std::string&  getSeparatorTXT() const;
-            void                setSeparatorTXT(const std::string& newSeparatorTXT);
-            const std::string&  getSeparatorDAT() const;
-            void                setSeparatorDAT(const std::string& newSeparatorDAT);
+            const std::string&  getSeparatorTxt() const;
+            void                setSeparatorTxt(const std::string& newSeparatorTXT);
+            const std::string&  getSeparatorDat() const;
+            void                setSeparatorDat(const std::string& newSeparatorDAT);
+            const std::string&  getNewPageTxt() const;
+            void                setNewPageTxt(const std::string& newNewPageTXT);
+            const std::string&  getNewFrameTxt() const;
+            void                setNewFrameTxt(const std::string& newNewFrameTXT);
 
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);
             const std::string&  getFilenameBase() const;
             void                setFilenameBase(const std::string& newFilenameBase);
 
-            const std::string&  getExtTXT() const;
-            void                setExtTXT(const std::string& newExtTXT);
-            const std::string&  getExtDAT() const;
-            void                setExtDAT(const std::string& newExtDAT);
-            const std::string&  getExtTEX() const;
-            void                setExtTEX(const std::string& newExtTEX);
-            const std::string&  getExtPDF() const;
-            void                setExtPDF(const std::string& newExtPDF);
-            const std::string&  getExtGNU() const;
-            void                setExtGNU(const std::string& newExtGNU);
+            const std::string&  getExtTxt() const;
+            void                setExtTxt(const std::string& newExtTXT);
+            const std::string&  getExtDat() const;
+            void                setExtDat(const std::string& newExtDAT);
+            const std::string&  getExtTex() const;
+            void                setExtTex(const std::string& newExtTEX);
+            const std::string&  getExtPdf() const;
+            void                setExtPdf(const std::string& newExtPDF);
+            const std::string&  getExtGnu() const;
+            void                setExtGnu(const std::string& newExtGNU);
 
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
-            bool                getStandaloneTEX() const;
-            void                setStandaloneTEX(bool newStandaloneTEX);
+            bool                getStandaloneTex() const;
+            void                setStandaloneTex(bool newStandaloneTEX);
 
             int                 getNumberPrecision() const;
             void                setNumberPrecision(int newNumberPrecision);
@@ -84,10 +91,10 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            void writeTXT();
-            void writeTEX();
-            void writeGNU();
-            void writeSCRIPT();
+            void writeTxt();
+            void writeTex();
+            void writeDat();
+            void writePdf();
     };
 
 }

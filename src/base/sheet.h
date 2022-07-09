@@ -1,6 +1,7 @@
 #ifndef SHEET_H
 #define SHEET_H
 
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -60,6 +61,10 @@ namespace Plotypus
             void                            addLabel(const Label& newLabel);
             void                            addLabel(const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
             void                            clearLabels();
+
+            virtual void writeTXTHead   (std::ofstream& hFile);
+            virtual void writeTXTContent(std::ofstream& hFile);
+            virtual void writeTXTLabels (std::ofstream& hFile);
     };
 
 }
