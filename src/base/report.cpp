@@ -256,23 +256,21 @@ namespace Plotypus
             throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));
         }
 
-        hFile << "# ---------------------------------------------------------------------------- #" << std::endl;
+        hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
-
-        hFile << "set output '" << filenamePdf << "'" << std::endl;
-        hFile << std::endl;
+        hFile << "set term pdfcairo" << std::endl;
+        hFile << "set output '" << filenamePdf << "'" << std::endl << std::endl;
 
         for (size_t i = 1u; auto sheet : sheets)
         {
+            hFile << "# " << std::string(76, '=') << " #\n";
+            hFile << "# page " << i << std::endl << std::endl;
+
             sheet->writePdfHead  (hFile);
+            sheet->writePdfSetup (hFile);
             sheet->writePdfData  (hFile);
             sheet->writePdfLabels(hFile);
             sheet->writePdfFooter(hFile, i);
-
-            if (i != sheets.size())
-            {
-                hFile << "# " << newPageTxt << " #";
-            }
             ++i;
         }
     }

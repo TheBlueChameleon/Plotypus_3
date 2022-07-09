@@ -73,17 +73,18 @@ void playground ()
     auto& s2 = r.addSheet("bar");
     auto& s3 = r.addSheet();
 
-    s1.addLabel(" FOO ", 10, 10);
-    s1.addLabel("(foo)", 10, 50);
+    s1.addLabel(" FOO ", .10, .10);
+    s1.addLabel("(foo)", .10, .50);
 
-    s2.addLabel(" BAR ", 10, 10, true);
-    s2.addLabel("(bar)", 10, 50, true);
+    s2.addLabel(" BAR ", .10, .10, true);
+    s2.addLabel("(bar)", .10, .50, true);
 
     s3.addBoxstyle("red", true, "yellow");
-    s3.addLabel("empty", 10, 10, true, 1);
-    s3.addLabel("empty", 10, 50, true, 1);
+    s3.addLabel("empty", .10, .10, true, 1);
+    s3.addLabel("empty", .10, .50, true, 1);
 
     r.writeTxt();
+    r.writePdf();
 }
 
 // ========================================================================== //

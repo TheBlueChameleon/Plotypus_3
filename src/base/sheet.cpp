@@ -102,7 +102,7 @@ namespace Plotypus
     {
         addBoxstyle(
         {
-            (ID < 0 ? static_cast<signed>(boxStyles.size()) : ID),  // ID
+            (ID < 0 ? static_cast<signed>(boxStyles.size() + 1) : ID),  // ID
             true,                                                   // opaque
             fillcolor,
             border,
@@ -178,23 +178,148 @@ namespace Plotypus
 
     void Sheet::writePdfHead(std::ofstream& hFile)
     {
-        hFile << "set term pdfcairo font \"" << defaultFont << "\"" << std::endl;
+        hFile << "set font \"" << defaultFont << "\"" << std::endl;
         hFile << std::endl;
+    }
+
+    void Sheet::writePdfSetup(std::ofstream& hFile)
+    {
+        if (customScriptBegin.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom setup script" << std::endl << std::endl;
+            hFile << customScriptBegin << std::endl;
+        }
+
+        if (boxStyles.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom box style definition" << std::endl << std::endl;
+
+            /* cf. gnuplot 5.4 documentation, p.201
+             *
+             * set style textbox {<boxstyle-index>}
+             *           {opaque|transparent} {fillcolor <color>}
+             *           {{no}border {<bordercolor>}}{linewidth <lw>}
+             *           {margins <xmargin>,<ymargin>}
+             */
+
+            for (const auto& style : boxStyles)
+            {
+                hFile << "set style textbox ";
+                hFile << (style.ID                     ? std::to_string(style.ID) + " "                        : ""s);
+                hFile << (style.opaque                 ? "opaque "                                             : "transparent ") ;
+                hFile << (style.fillcolor.size()       ? "fillcolor \""s + style.fillcolor + "\" "             : ""s);
+                if (style.border)
+                {
+                    hFile << "border ";
+                    hFile << (style.bordercolor.size() ? "bordercolor \""s + style.bordercolor + "\" "         : "");
+                    hFile << (style.linewidth          ? "linewidth "s + std::to_string(style.linewidth) + " " : "");
+                }
+                else
+                {
+                    hFile << "noborder ";
+                }
+                hFile << style.options;
+
+                hFile << std::endl;
+            }
+        }
     }
 
     void Sheet::writePdfData(std::ofstream& hFile)
     {
-
+        if (customScriptEnd.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom setup script" << std::endl << std::endl;
+            hFile << customScriptEnd << std::endl;
+        }
     }
 
     void Sheet::writePdfLabels(std::ofstream& hFile)
     {
+        /* cf. gnuplot 5.4 documentation, p. 159
+         *
+         * set label {<tag>} {"<label text>"} {at <position>}
+         *           {left | center | right}
+         *           {norotate | rotate {by <degrees>}}
+         *           {font "<name>{,<size>}"}
+         *           {noenhanced}
+         *           {front | back}
+         *           {textcolor <colorspec>}
+         *           {point <pointstyle> | nopoint}
+         *           {offset <offset>}
+         *           {nobox} {boxed {bs <boxstyle>}}
+         *           {hypertext}
+         */
 
+        if (labels.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# labels" << std::endl << std::endl;
+
+            for (auto& label : labels)
+            {
+                /* cf. gnuplot 5.4 documentation, p. 164
+                 *
+                 * set label {<tag>} {"<label text>"} {at <position>}
+                 *           {left | center | right}
+                 *           {norotate | rotate {by <degrees>}}
+                 *           {font "<name>{,<size>}"}
+                 *           {noenhanced}
+                 *           {front | back}
+                 *           {textcolor <colorspec>}
+                 *           {point <pointstyle> | nopoint}
+                 *           {offset <offset>}
+                 *           {nobox} {boxed {bs <boxstyle>}}
+                 *           {hypertext}
+                 */
+
+
+
+                hFile << "set label ";
+                hFile << (label.ID               ? std::to_string(label.ID) + " "                     : ""s);
+                hFile << "\"" << label.text << "\" ";
+                hFile << "at ";
+                hFile << (label.screenCS         ? "screen "                                          : "") ;
+                hFile <<  label.coordinates.first << ", " << label.coordinates.second << " ";
+                hFile << (label.alignment.size() ? label.alignment + " "                              : ""s);
+                hFile << (label.rotate           ? "rotate by "s + std::to_string(label.rotate) + " " : "");
+                hFile << (label.font.size()      ? "font \""s + label.font + "\" "                    : ""s);
+                hFile << "front ";
+                hFile << (label.textcolor.size() ? "textcolor \""s + label.textcolor+ "\" "           : ""s);
+                if (label.boxed)
+                {
+                    hFile << "boxed ";
+                    hFile << (label.boxStyleID     ? "bs "s + std::to_string(label.boxStyleID) + " "  : "");
+                }
+                hFile << label.options;
+                hFile << std::endl;
+            }
+            hFile << std::endl;
+        }
     }
 
-    void Sheet::writePdfFooter(std::ofstream &hFile, int pageNum)
+    void Sheet::writePdfFooter(std::ofstream& hFile, int pageNum)
     {
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# dummy plot for empty page" << std::endl << std::endl;
+        hFile << "set title \"" << title << "\"" << std::endl;
 
+        hFile << "set key off" << std::endl;
+        hFile << "unset border" << std::endl;
+        hFile << "unset xtics" << std::endl;
+        hFile << "unset xlabel" << std::endl;
+        hFile << "unset ytics" << std::endl;
+        hFile << "unset ylabel" << std::endl;
+
+        hFile << "set xrange[0:1]" << std::endl;
+        hFile << "set yrange[1:0]" << std::endl;
+
+        hFile << "plot [][-1:1] 1/0 t\"\"" << std::endl;
+        hFile << "unset label" << std::endl;
+        hFile << std::endl;
     }
 
     // ====================================================================== //

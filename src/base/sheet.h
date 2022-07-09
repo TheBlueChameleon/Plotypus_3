@@ -68,6 +68,7 @@ namespace Plotypus
             virtual void writeTxtFooter (std::ofstream& hFile, int pageNum);
 
             virtual void writePdfHead   (std::ofstream& hFile);
+            virtual void writePdfSetup  (std::ofstream& hFile);
             virtual void writePdfData   (std::ofstream& hFile);
             virtual void writePdfLabels (std::ofstream& hFile);
             virtual void writePdfFooter (std::ofstream& hFile, int pageNum);
