@@ -80,6 +80,8 @@ namespace Plotypus
             const std::string&  getExtGnu() const;
             void                setExtGnu(const std::string& newExtGNU);
 
+            std::string getOutputFilename(const std::string& extension) const;
+
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
             bool                getStandaloneTex() const;

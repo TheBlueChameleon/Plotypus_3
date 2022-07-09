@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <iostream>
 
 #include "../definitions/errors.h"
@@ -5,6 +6,7 @@
 #include "localMacros.h"
 #include "report.h"
 
+namespace fs = std::filesystem;
 using namespace Plotypus;
 
 namespace Plotypus
@@ -176,6 +178,16 @@ namespace Plotypus
         extGnu = newExtGNU;
     }
 
+    std::string Report::getOutputFilename(const std::string& extension) const
+    {
+        fs::path p(outputDirectory);
+        p.append(filenameBase);
+        p.concat(".");
+        p.concat(extension);
+
+        return p;
+    }
+
     bool Report::getAutoRunScript() const
     {
         return autoRunScript;
@@ -210,6 +222,58 @@ namespace Plotypus
 
     void Report::writeTxt()
     {
+        const std::string filename = getOutputFilename(extTxt);
+        std::ofstream hFile(filename);
 
+        if (!hFile.is_open())
+        {
+            throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
+        }
+
+        for (size_t i = 1u; auto sheet : sheets)
+        {
+            sheet->writeTxtHead  (hFile);
+            sheet->writeTxtData  (hFile);
+            sheet->writeTxtLabels(hFile);
+            sheet->writeTxtFooter(hFile, i);
+
+            if (i != sheets.size())
+            {
+                hFile << newPageTxt;
+            }
+            ++i;
+        }
+    }
+
+    void Report::writePdf()
+    {
+        const std::string filenameGnu = getOutputFilename(extGnu),
+                          filenamePdf = getOutputFilename(extPdf);
+        std::ofstream hFile(filenameGnu);
+
+        if (!hFile.is_open())
+        {
+            throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));
+        }
+
+        hFile << "# ---------------------------------------------------------------------------- #" << std::endl;
+        hFile << "# output setup" << std::endl << std::endl;
+
+        hFile << "set output '" << filenamePdf << "'" << std::endl;
+        hFile << std::endl;
+
+        for (size_t i = 1u; auto sheet : sheets)
+        {
+            sheet->writePdfHead  (hFile);
+            sheet->writePdfData  (hFile);
+            sheet->writePdfLabels(hFile);
+            sheet->writePdfFooter(hFile, i);
+
+            if (i != sheets.size())
+            {
+                hFile << "# " << newPageTxt << " #";
+            }
+            ++i;
+        }
     }
 }

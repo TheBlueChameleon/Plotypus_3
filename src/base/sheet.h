@@ -62,9 +62,15 @@ namespace Plotypus
             void                            addLabel(const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
             void                            clearLabels();
 
-            virtual void writeTXTHead   (std::ofstream& hFile);
-            virtual void writeTXTContent(std::ofstream& hFile);
-            virtual void writeTXTLabels (std::ofstream& hFile);
+            virtual void writeTxtHead   (std::ofstream& hFile);
+            virtual void writeTxtData   (std::ofstream& hFile);
+            virtual void writeTxtLabels (std::ofstream& hFile);
+            virtual void writeTxtFooter (std::ofstream& hFile, int pageNum);
+
+            virtual void writePdfHead   (std::ofstream& hFile);
+            virtual void writePdfData   (std::ofstream& hFile);
+            virtual void writePdfLabels (std::ofstream& hFile);
+            virtual void writePdfFooter (std::ofstream& hFile, int pageNum);
     };
 
 }

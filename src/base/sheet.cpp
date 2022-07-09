@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 
 #include "localMacros.h"
@@ -142,17 +143,56 @@ namespace Plotypus
         addLabel(l);
     }
 
-    void Sheet::writeTXTHead(std::ofstream &hFile)
+    // ====================================================================== //
+
+    void Sheet::writeTxtHead(std::ofstream& hFile)
+    {
+        if (title.size())
+        {
+            hFile << title << std::endl;
+            hFile << std::string(title.size(), '~') << std::endl;
+        }
+    }
+
+    void Sheet::writeTxtData(std::ofstream& hFile)
     {
 
     }
 
-    void Sheet::writeTXTContent(std::ofstream &hFile)
+    void Sheet::writeTxtLabels(std::ofstream& hFile)
+    {
+        for (const auto& label : labels)
+        {
+            hFile << label.text << std::endl;
+        }
+    }
+
+    void Sheet::writeTxtFooter(std::ofstream& hFile, int pageNum)
+    {
+        const int lineWidth = 80;
+        const int spaces = pageNum ?
+                           lineWidth - (std::log10(pageNum) + 1) :
+                           lineWidth - 1;
+        hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
+    }
+
+    void Sheet::writePdfHead(std::ofstream& hFile)
+    {
+        hFile << "set term pdfcairo font \"" << defaultFont << "\"" << std::endl;
+        hFile << std::endl;
+    }
+
+    void Sheet::writePdfData(std::ofstream& hFile)
     {
 
     }
 
-    void Sheet::writeTXTLabels(std::ofstream &hFile)
+    void Sheet::writePdfLabels(std::ofstream& hFile)
+    {
+
+    }
+
+    void Sheet::writePdfFooter(std::ofstream &hFile, int pageNum)
     {
 
     }

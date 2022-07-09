@@ -17,6 +17,7 @@ namespace Plotypus
      */
     PLOTYPUS_ERROR(InvalidFilenameError);
     PLOTYPUS_ERROR(InvalidIndexError);
+    PLOTYPUS_ERROR(FileIOError);
 //! @}
 }
 

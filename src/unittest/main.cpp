@@ -67,20 +67,23 @@ void playground ()
 {
     Plotypus::Report r;
 
-    {
-        auto& s = r.addSheet();
-    }
+    r.setOutputDirectory("TestOutput");
 
-    r.addSheet();
+    auto& s1 = r.addSheet("foo");
+    auto& s2 = r.addSheet("bar");
+    auto& s3 = r.addSheet();
 
-    try
-    {
-        r.getSheet(2);
-    }
-    catch (const Plotypus::InvalidIndexError& e)
-    {
-        std::cout << e.what() << std::endl;
-    }
+    s1.addLabel(" FOO ", 10, 10);
+    s1.addLabel("(foo)", 10, 50);
+
+    s2.addLabel(" BAR ", 10, 10, true);
+    s2.addLabel("(bar)", 10, 50, true);
+
+    s3.addBoxstyle("red", true, "yellow");
+    s3.addLabel("empty", 10, 10, true, 1);
+    s3.addLabel("empty", 10, 50, true, 1);
+
+    r.writeTxt();
 }
 
 // ========================================================================== //
@@ -136,7 +139,7 @@ int main()
 
     std::cout << std::endl;
     std::cout << "FREE RANGE CODE BEGINS HERE" << std::endl;
-    //playground();
+    playground();
 
     return 0;
 }
