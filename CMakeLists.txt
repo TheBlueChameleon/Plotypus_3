@@ -16,7 +16,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_library(Plotypus-lib SHARED
     src/plotypus.h src/plotypus.cpp
-    src/elements/types.h
+    #
+    src/definitions/types.h
+    src/definitions/styles.h
+    #
+    src/base/sheet.h src/base/sheet.cpp
+    src/base/report.h src/base/report.cpp
 )
 
 set_target_properties(Plotypus-lib PROPERTIES
@@ -25,8 +30,16 @@ set_target_properties(Plotypus-lib PROPERTIES
     PUBLIC_HEADER src/plotypus.h
 )
 
+target_precompile_headers(Plotypus-lib PUBLIC
+  src/plotypus.h
+)
+
 # ============================================================================ #
 
 add_executable(Plotypus-unittest
     src/unittest/main.cpp
+)
+
+target_link_libraries(Plotypus-unittest
+    Plotypus-lib
 )

@@ -1,6 +1,18 @@
 #ifndef PLOTYPUS_H
 #define PLOTYPUS_H
 
-#include "elements/types.h"
+/**
+ * @defgroup Platypus_Definitions Platypus Definitions
+ *
+ * @brief Definitions shared between the components of the \em Platypus Package, as well as convenience functions to handle them.
+ *
+ * @todo Definitions: specify Platypus errors
+ */
+
+#include "definitions/types.h"
+#include "definitions/styles.h"
+
+#include "base/report.h"
+#include "base/sheet.h"
 
 #endif // PLOTYPUS_H

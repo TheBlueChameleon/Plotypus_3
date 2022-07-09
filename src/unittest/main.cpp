@@ -4,6 +4,7 @@
 
 int main()
 {
+    Plotypus::Report r;
 
     return 0;
 }
