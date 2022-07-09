@@ -17,6 +17,7 @@ namespace Plotypus
 
         public:
             Sheet();
+            ~Sheet();
     };
 
 }

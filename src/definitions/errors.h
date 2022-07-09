@@ -16,6 +16,7 @@ namespace Plotypus
      * @brief thrown when trying to set an invalid file name
      */
     PLOTYPUS_ERROR(InvalidFilenameError);
+    PLOTYPUS_ERROR(InvalidIndexError);
 //! @}
 }
 

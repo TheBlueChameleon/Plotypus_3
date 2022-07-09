@@ -1,5 +1,11 @@
+#include <iostream>
+
+#include "../definitions/errors.h"
+
 #include "localMacros.h"
 #include "report.h"
+
+using namespace Plotypus;
 
 namespace Plotypus
 {
@@ -7,15 +13,50 @@ namespace Plotypus
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
         {
-            throw std::invalid_argument(THROWTEXT("    Attempted to set invalid "s + component + ".\n" +
-                                                  "    value               : '" + stringToTest + "'\n" +
-                                                  "    forbidden characters: " + invalidFilenameChars
-                                                 ));
+            throw InvalidFilenameError(THROWTEXT("    Attempted to set invalid "s + component + ".\n" +
+                                                 "    value               : '" + stringToTest + "'\n" +
+                                                 "    forbidden characters: " + invalidFilenameChars
+                                                ));
         }
     }
 
     Report::Report()
     {}
+
+    Report::~Report()
+    {
+        for (auto ptr : sheets)
+        {
+            delete ptr;
+        }
+    }
+
+    size_t Report::getReportSize() const
+    {
+        return sheets.size();
+    }
+
+    Sheet& Report::addSheet()
+    {
+        sheets.push_back(new Sheet);
+//        std::cout << "pushed sheet at " << sheets.back() << std::endl;
+
+        return *sheets.back();
+    }
+
+    Sheet& Report::getSheet(int i) const
+    {
+        const int maxSize = sheets.size();
+        // *INDENT-OFF*
+        if      (i >= maxSize) {THROW_INVALID_INDEX(i, "sheet index");}
+        else if (i <        0) {
+            i += maxSize;
+            if  (i <        0) {THROW_INVALID_INDEX(i, "sheet index");}
+        }
+        // *INDENT-ON*
+
+        return *(sheets[i]);
+    }
 
     const char* Report::getInvalidFilenameChars() const
     {

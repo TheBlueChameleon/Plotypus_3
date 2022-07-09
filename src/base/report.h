@@ -12,7 +12,7 @@ namespace Plotypus
     class Report
     {
         private:
-            std::vector<Plotypus::Sheet*> pages;
+            std::vector<Plotypus::Sheet*> sheets;
 
             constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
 
@@ -34,8 +34,20 @@ namespace Plotypus
 
         public:
             Report();
+            ~Report();
 
-            const char* getInvalidFilenameChars() const;
+            // -------------------------------------------------------------- //
+            // content management
+
+            size_t getReportSize() const;
+
+            Plotypus::Sheet& addSheet();
+            Plotypus::Sheet& getSheet(int i) const;
+
+            // -------------------------------------------------------------- //
+            // file output specs
+
+            const char*         getInvalidFilenameChars() const;
 
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);
@@ -60,6 +72,14 @@ namespace Plotypus
 
             int                 getNumberPrecision() const;
             void                setNumberPrecision(int newNumberPrecision);
+
+            // -------------------------------------------------------------- //
+            // writers
+
+            void writeTXT();
+            void writeTEX();
+            void writeGNU();
+            void writeSCRIPT();
     };
 
 }
