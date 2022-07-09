@@ -9,6 +9,7 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
+
     void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
@@ -19,6 +20,8 @@ namespace Plotypus
                                                 ));
         }
     }
+
+    // ====================================================================== //
 
     Report::Report()
     {}
@@ -31,36 +34,50 @@ namespace Plotypus
         }
     }
 
+    // ====================================================================== //
+
     size_t Report::getReportSize() const
     {
         return sheets.size();
     }
 
-    Sheet& Report::addSheet()
+    Sheet& Report::addSheet(const std::string& title)
     {
-        sheets.push_back(new Sheet);
-//        std::cout << "pushed sheet at " << sheets.back() << std::endl;
-
+        sheets.push_back(new Sheet(title));
         return *sheets.back();
     }
 
     Sheet& Report::getSheet(int i) const
     {
-        const int maxSize = sheets.size();
-        // *INDENT-OFF*
-        if      (i >= maxSize) {THROW_INVALID_INDEX(i, "sheet index");}
-        else if (i <        0) {
-            i += maxSize;
-            if  (i <        0) {THROW_INVALID_INDEX(i, "sheet index");}
-        }
-        // *INDENT-ON*
-
+        CHECK_INDEX_EXT(i, sheets, "sheet index");
         return *(sheets[i]);
     }
+
+    // ====================================================================== //
 
     const char* Report::getInvalidFilenameChars() const
     {
         return invalidFilenameChars;
+    }
+
+    const std::string& Report::getSeparatorTXT() const
+    {
+        return separatorTXT;
+    }
+
+    void Report::setSeparatorTXT(const std::string& newSeparatorTXT)
+    {
+        separatorTXT = newSeparatorTXT;
+    }
+
+    const std::string& Report::getSeparatorDAT() const
+    {
+        return separatorDAT;
+    }
+
+    void Report::setSeparatorDAT(const std::string& newSeparatorDAT)
+    {
+        separatorDAT = newSeparatorDAT;
     }
 
     const std::string& Report::getOutputDirectory() const

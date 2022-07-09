@@ -16,6 +16,9 @@ namespace Plotypus
 
             constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
 
+            std::string separatorTXT = "\t";
+            std::string separatorDAT = "\t";
+
             std::string outputDirectory;
             std::string filenameBase = "report";
 
@@ -41,13 +44,18 @@ namespace Plotypus
 
             size_t getReportSize() const;
 
-            Plotypus::Sheet& addSheet();
+            Plotypus::Sheet& addSheet(const std::string& title = "");
             Plotypus::Sheet& getSheet(int i) const;
 
             // -------------------------------------------------------------- //
             // file output specs
 
             const char*         getInvalidFilenameChars() const;
+
+            const std::string&  getSeparatorTXT() const;
+            void                setSeparatorTXT(const std::string& newSeparatorTXT);
+            const std::string&  getSeparatorDAT() const;
+            void                setSeparatorDAT(const std::string& newSeparatorDAT);
 
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);

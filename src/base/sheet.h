@@ -2,6 +2,7 @@
 #define SHEET_H
 
 #include <string>
+#include <vector>
 
 #include "../definitions/types.h"
 
@@ -13,11 +14,52 @@ namespace Plotypus
             // .............................................................. //
             // behaviour objects
 
-            PlotType type = PlotType::Sheet;
+            const PlotType type = PlotType::Sheet;
+
+            std::string title = "";
+            std::string defaultFont = "arial,7";
+
+            std::string customScriptBegin = "";
+            std::string customScriptEnd   = "";
+
+            std::vector<BoxStyle> boxStyles;
+            std::vector<Label>    labels;
 
         public:
-            Sheet();
+            Sheet(const std::string& title);
             ~Sheet();
+
+            PlotType getType() const;
+
+            virtual void reset();
+
+            const std::string&  getTitle() const;
+            void                setTitle(const std::string& newTitle);
+
+            const std::string&  getDefaultFont() const;
+            void                setDefaultFont(const std::string& newDefaultFont);
+
+            const std::string&  getCustomScriptBegin() const;
+            void                setCustomScriptBegin(const std::string& newCustomScriptBegin);
+            const std::string&  getCustomScriptEnd() const;
+            void                setCustomScriptEnd(const std::string& newCustomScriptEnd);
+
+            const std::vector<BoxStyle>&    getBoxStyles() const;
+            BoxStyle&                       getBoxStyle(int i);
+            void                            setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
+            void                            addBoxstyle (const BoxStyle& newBoxstyle);
+            void                            addBoxstyle (const std::string& fillcolor, bool border = true, const std::string& bordercolor = "", int ID = -1);
+            /* if ID = -1, use default:
+             *  use current length of boxstyle list as ID.
+             * ==> first call sets default, subsequent calls set user styles.
+             */
+
+            const std::vector<Label>&       getLabels() const;
+            void                            setLabels(const std::vector<Label>& newLabels);
+            Label&                          getLabel(int i);
+            void                            addLabel(const Label& newLabel);
+            void                            addLabel(const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
+            void                            clearLabels();
     };
 
 }
