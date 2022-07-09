@@ -11,6 +11,7 @@
 
 #include "definitions/types.h"
 #include "definitions/styles.h"
+#include "definitions/errors.h"
 
 #include "base/report.h"
 #include "base/sheet.h"

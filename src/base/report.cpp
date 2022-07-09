@@ -1,13 +1,26 @@
+#include "localMacros.h"
 #include "report.h"
 
 namespace Plotypus
 {
-    Report::Report() {}
+    void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
+    {
+        if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
+        {
+            throw std::invalid_argument(THROWTEXT("    Attempted to set invalid "s + component + ".\n" +
+                                                  "    value               : '" + stringToTest + "'\n" +
+                                                  "    forbidden characters: " + invalidFilenameChars
+                                                 ));
+        }
+    }
 
-//    const std::string &Report::getInvalidFilenameChars() const
-//    {
-//        return invalidFilenameChars;
-//    }
+    Report::Report()
+    {}
+
+    const char* Report::getInvalidFilenameChars() const
+    {
+        return invalidFilenameChars;
+    }
 
     const std::string& Report::getOutputDirectory() const
     {
@@ -16,6 +29,7 @@ namespace Plotypus
 
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
     {
+        throwIfInvalidFilename("output directory", newOutputDirectory);
         outputDirectory = newOutputDirectory;
     }
 
@@ -26,6 +40,7 @@ namespace Plotypus
 
     void Report::setFilenameBase(const std::string& newFilenameBase)
     {
+        throwIfInvalidFilename("filename base", newFilenameBase);
         filenameBase = newFilenameBase;
     }
 
@@ -36,17 +51,19 @@ namespace Plotypus
 
     void Report::setExtTXT(const std::string& newExtTXT)
     {
+        throwIfInvalidFilename("extension for text files", newExtTXT);
         extTXT = newExtTXT;
     }
 
-    const std::string& Report::getExtGNU() const
+    const std::string& Report::getExtDAT() const
     {
-        return extGNU;
+        return extDAT;
     }
 
-    void Report::setExtGNU(const std::string& newExtGNU)
+    void Report::setExtDAT(const std::string& newExtDAT)
     {
-        extGNU = newExtGNU;
+        throwIfInvalidFilename("extension for gnuplot data files", newExtDAT);
+        extDAT = newExtDAT;
     }
 
     const std::string& Report::getExtTEX() const
@@ -56,6 +73,7 @@ namespace Plotypus
 
     void Report::setExtTEX(const std::string& newExtTEX)
     {
+        throwIfInvalidFilename("extension for latex files", newExtTEX);
         extTEX = newExtTEX;
     }
 
@@ -66,17 +84,19 @@ namespace Plotypus
 
     void Report::setExtPDF(const std::string& newExtPDF)
     {
+        throwIfInvalidFilename("extension for PDF files", newExtPDF);
         extPDF = newExtPDF;
     }
 
-    const std::string& Report::getExtScript() const
+    const std::string& Report::getExtGNU() const
     {
-        return extSCRIPT;
+        return extGNU;
     }
 
-    void Report::setExtScript(const std::string& newExtSCRIPT)
+    void Report::setExtGNU(const std::string& newExtGNU)
     {
-        extSCRIPT = newExtSCRIPT;
+        throwIfInvalidFilename("extension for gnuplot script files", newExtGNU);
+        extGNU = newExtGNU;
     }
 
     bool Report::getAutoRunScript() const

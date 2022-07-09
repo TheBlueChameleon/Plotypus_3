@@ -19,21 +19,23 @@ namespace Plotypus
             std::string outputDirectory;
             std::string filenameBase = "report";
 
-            std::string extTXT       = "txt";
-            std::string extGNU       = "dat";
-            std::string extTEX       = "tex";
-            std::string extPDF       = "pdf";
-            std::string extSCRIPT    = "gnuplot";
+            std::string extTXT = "txt";
+            std::string extDAT = "dat";
+            std::string extTEX = "tex";
+            std::string extPDF = "pdf";
+            std::string extGNU = "gnuplot";
 
             bool autoRunScript = true;
             bool standaloneTEX = true;
 
             int  numberPrecision = 6;           // used only in txt output
 
+            void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
+
         public:
             Report();
 
-            //const std::string& getInvalidFilenameChars() const;
+            const char* getInvalidFilenameChars() const;
 
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);
@@ -42,14 +44,14 @@ namespace Plotypus
 
             const std::string&  getExtTXT() const;
             void                setExtTXT(const std::string& newExtTXT);
-            const std::string&  getExtGNU() const;
-            void                setExtGNU(const std::string& newExtGNU);
+            const std::string&  getExtDAT() const;
+            void                setExtDAT(const std::string& newExtDAT);
             const std::string&  getExtTEX() const;
             void                setExtTEX(const std::string& newExtTEX);
             const std::string&  getExtPDF() const;
             void                setExtPDF(const std::string& newExtPDF);
-            const std::string&  getExtScript() const;
-            void                setExtScript(const std::string& newExtSCRIPT);
+            const std::string&  getExtGNU() const;
+            void                setExtGNU(const std::string& newExtGNU);
 
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
