@@ -6,6 +6,7 @@
 
 #include "../definitions/types.h"
 #include "sheet.h"
+#include "stylescollection.h"
 
 namespace Plotypus
 {
@@ -15,12 +16,6 @@ namespace Plotypus
             std::vector<Plotypus::Sheet*> sheets;
 
             constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
-
-            std::string separatorTxt = "\t";
-            std::string separatorDat = "\t";
-
-            std::string newPageTxt  = "================================================================================\n";
-            std::string newFrameTxt = "--------------------------------------------------------------------------------\n";
 
             std::string outputDirectory;
             std::string filenameBase = "report";
@@ -34,7 +29,15 @@ namespace Plotypus
             bool autoRunScript = true;
             bool standaloneTex = true;
 
-            int  numberPrecision = 6;           // used only in txt output
+            int  numberPrecision = 6;           // used only in txt and tex output
+
+            std::string columnSeparatorTxt = "\t";
+            std::string columnSeparatorDat = "\t";
+
+            std::string pageSeparatorTxt  = "================================================================================\n";
+            std::string frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
+
+            StylesCollection stylesCollection;
 
             void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
 
@@ -55,15 +58,6 @@ namespace Plotypus
 
             const char*         getInvalidFilenameChars() const;
 
-            const std::string&  getSeparatorTxt() const;
-            void                setSeparatorTxt(const std::string& newSeparatorTXT);
-            const std::string&  getSeparatorDat() const;
-            void                setSeparatorDat(const std::string& newSeparatorDAT);
-            const std::string&  getNewPageTxt() const;
-            void                setNewPageTxt(const std::string& newNewPageTXT);
-            const std::string&  getNewFrameTxt() const;
-            void                setNewFrameTxt(const std::string& newNewFrameTXT);
-
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);
             const std::string&  getFilenameBase() const;
@@ -80,7 +74,7 @@ namespace Plotypus
             const std::string&  getExtGnu() const;
             void                setExtGnu(const std::string& newExtGNU);
 
-            std::string getOutputFilename(const std::string& extension) const;
+            std::string         getOutputFilename(const std::string& extension) const;
 
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
@@ -89,6 +83,16 @@ namespace Plotypus
 
             int                 getNumberPrecision() const;
             void                setNumberPrecision(int newNumberPrecision);
+
+            const std::string&  getColumnSeparatorTxt() const;
+            void                setColumnSeparatorTxt(const std::string& newSeparatorTXT);
+            const std::string&  getColumnSeparatorDat() const;
+            void                setColumnSeparatorDat(const std::string& newSeparatorDAT);
+            const std::string&  getPageSeparatorTxt() const;
+            void                setPageSeparatorTxt(const std::string& newNewPageTXT);
+
+            StylesCollection&   getStylesCollection();
+            void                setStylesCollection(const StylesCollection& newStylesCollection);
 
             // -------------------------------------------------------------- //
             // writers

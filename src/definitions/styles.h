@@ -166,9 +166,6 @@ namespace Plotypus
          *
          * This includes the rarely used options in version 5.4 or any later
          * added features I'm not aware of yet.
-         *
-         * You may also abuse this to include a \n and any code to be executed before
-         * the custom gnuplot code is run.
          */
         std::string                 options     = "";
     };

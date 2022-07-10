@@ -69,6 +69,9 @@ void playground ()
 
     r.setOutputDirectory("TestOutput");
 
+    auto& sc = r.getStylesCollection();
+    sc.addBoxStyle("red", true, "yellow");
+
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");
     auto& s3 = r.addSheet();
@@ -79,7 +82,6 @@ void playground ()
     s2.addLabel(" BAR ", .10, .10, true);
     s2.addLabel("(bar)", .10, .50, true);
 
-    s3.addBoxstyle("red", true, "yellow");
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 

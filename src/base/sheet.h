@@ -23,15 +23,10 @@ namespace Plotypus
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";
 
-            std::vector<BoxStyle>   boxStyles;
-            std::vector<LineStyle>  lineStyles;
-            std::vector<PointStyle> pointStyles;
-
             std::vector<Label>    labels;
 
         public:
             Sheet(const std::string& title);
-            ~Sheet();
 
             PlotType getType() const;
 
@@ -48,16 +43,6 @@ namespace Plotypus
             const std::string&  getCustomScriptEnd() const;
             void                setCustomScriptEnd(const std::string& newCustomScriptEnd);
 
-            const std::vector<BoxStyle>&    getBoxStyles() const;
-            BoxStyle&                       getBoxStyle(int i);
-            void                            setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
-            void                            addBoxstyle (const BoxStyle& newBoxstyle);
-            void                            addBoxstyle (const std::string& fillcolor, bool border = true, const std::string& bordercolor = "", int ID = -1);
-            /* if ID = -1, use default:
-             *  use current length of boxstyle list as ID.
-             * ==> first call sets default, subsequent calls set user styles.
-             */
-
             const std::vector<Label>&       getLabels() const;
             void                            setLabels(const std::vector<Label>& newLabels);
             Label&                          getLabel(int i);
@@ -65,6 +50,7 @@ namespace Plotypus
             void                            addLabel(const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
             void                            clearLabels();
 
+            // writers
             virtual void writeTxtHead   (std::ofstream& hFile);
             virtual void writeTxtData   (std::ofstream& hFile);
             virtual void writeTxtLabels (std::ofstream& hFile);

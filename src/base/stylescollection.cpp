@@ -7,6 +7,17 @@ namespace Plotypus
 {
     StylesCollection::StylesCollection() {}
 
+    // ====================================================================== //
+
+    void StylesCollection::reset()
+    {
+        boxStyles .clear();
+        lineStyles.clear();
+        pointStyles = {{PointForm::Point, 1.0, ""}};
+    }
+
+    // ---------------------------------------------------------------------- //
+
     const std::vector<BoxStyle>& StylesCollection::getBoxStyles() const
     {
         return boxStyles;
@@ -90,6 +101,10 @@ namespace Plotypus
 
     void StylesCollection::setPointStyles(const std::vector<PointStyle>& newPointStyles)
     {
+        if (newPointStyles.size() == 0)
+        {
+            throw InvalidArgumentError(THROWTEXT("A point styles list must define at least one default point style"));
+        }
         pointStyles = newPointStyles;
     }
 
@@ -108,4 +123,51 @@ namespace Plotypus
             color
         });
     }
+
+    // ====================================================================== //
+
+
+    void StylesCollection::writeBoxStyles(std::ofstream& hFile) const
+    {
+        if (boxStyles.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom box style definition" << std::endl << std::endl;
+
+            /* cf. gnuplot 5.4 documentation, p.206
+             *
+             * set style textbox {<boxstyle-index>}
+             *           {opaque|transparent} {fillcolor <color>}
+             *           {{no}border {<bordercolor>}}{linewidth <lw>}
+             *           {margins <xmargin>,<ymargin>}
+             */
+
+            for (const auto& style : boxStyles)
+            {
+                hFile << "set style textbox ";
+                hFile << (style.ID                     ? std::to_string(style.ID) + " "                        : ""s);
+                hFile << (style.opaque                 ? "opaque "                                             : "transparent ") ;
+                hFile << (style.fillcolor.size()       ? "fillcolor \""s + style.fillcolor + "\" "             : ""s);
+                if (style.border)
+                {
+                    hFile << "border ";
+                    hFile << (style.bordercolor.size() ? "bordercolor \""s + style.bordercolor + "\" "         : "");
+                    hFile << (style.linewidth          ? "linewidth "s + std::to_string(style.linewidth) + " " : "");
+                }
+                else
+                {
+                    hFile << "noborder ";
+                }
+                hFile << style.options;
+
+                hFile << std::endl;
+            }
+        }
+    }
+
+    void StylesCollection::writeLineStyles(std::ofstream &hFile) const
+    {
+
+    }
+
 }

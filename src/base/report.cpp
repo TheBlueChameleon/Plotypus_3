@@ -11,6 +11,7 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
+
     void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
@@ -59,51 +60,6 @@ namespace Plotypus
     const char* Report::getInvalidFilenameChars() const
     {
         return invalidFilenameChars;
-    }
-
-    const std::string& Report::getSeparatorTxt() const
-    {
-        return separatorTxt;
-    }
-
-    void Report::setSeparatorTxt(const std::string& newSeparatorTXT)
-    {
-        separatorTxt = newSeparatorTXT;
-    }
-
-    const std::string& Report::getSeparatorDat() const
-    {
-        return separatorDat;
-    }
-
-    void Report::setSeparatorDat(const std::string& newSeparatorDAT)
-    {
-        separatorDat = newSeparatorDAT;
-    }
-
-    const std::string& Report::getOutputDirectory() const
-    {
-        return outputDirectory;
-    }
-
-    const std::string& Report::getNewPageTxt() const
-    {
-        return newPageTxt;
-    }
-
-    void Report::setNewPageTxt(const std::string& newNewPageTXT)
-    {
-        newPageTxt = newNewPageTXT;
-    }
-
-    const std::string& Report::getNewFrameTxt() const
-    {
-        return newFrameTxt;
-    }
-
-    void Report::setNewFrameTxt(const std::string& newNewFrameTXT)
-    {
-        newFrameTxt = newNewFrameTXT;
     }
 
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
@@ -218,6 +174,51 @@ namespace Plotypus
         numberPrecision = newNumberPrecision;
     }
 
+    const std::string& Report::getColumnSeparatorTxt() const
+    {
+        return columnSeparatorTxt;
+    }
+
+    void Report::setColumnSeparatorTxt(const std::string& newSeparatorTXT)
+    {
+        columnSeparatorTxt = newSeparatorTXT;
+    }
+
+    const std::string& Report::getColumnSeparatorDat() const
+    {
+        return columnSeparatorDat;
+    }
+
+    void Report::setColumnSeparatorDat(const std::string& newSeparatorDAT)
+    {
+        columnSeparatorDat = newSeparatorDAT;
+    }
+
+    const std::string& Report::getOutputDirectory() const
+    {
+        return outputDirectory;
+    }
+
+    const std::string& Report::getPageSeparatorTxt() const
+    {
+        return pageSeparatorTxt;
+    }
+
+    void Report::setPageSeparatorTxt(const std::string& newNewPageTXT)
+    {
+        pageSeparatorTxt = newNewPageTXT;
+    }
+
+    StylesCollection& Report::getStylesCollection()
+    {
+        return stylesCollection;
+    }
+
+    void Report::setStylesCollection(const StylesCollection& newStylesCollection)
+    {
+        stylesCollection = newStylesCollection;
+    }
+
     // ====================================================================== //
 
     void Report::writeTxt()
@@ -239,7 +240,7 @@ namespace Plotypus
 
             if (i != sheets.size())
             {
-                hFile << newPageTxt;
+                hFile << pageSeparatorTxt;
             }
             ++i;
         }
@@ -260,6 +261,9 @@ namespace Plotypus
         hFile << "# output setup" << std::endl << std::endl;
         hFile << "set term pdfcairo" << std::endl;
         hFile << "set output '" << filenamePdf << "'" << std::endl << std::endl;
+
+        stylesCollection.writeBoxStyles(hFile);
+        stylesCollection.writeLineStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)
         {
