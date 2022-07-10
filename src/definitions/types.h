@@ -21,8 +21,6 @@ namespace Plotypus
         Plot2D,
         //! @brief  same, but accepts 3D data sequences
         Plot3D,
-        //! @brief  same, but accepts flattened 3D data sequences
-        Plot3D_flattened,
 
         //! @brief  a sheet with multiple plots on it
         Multiplot

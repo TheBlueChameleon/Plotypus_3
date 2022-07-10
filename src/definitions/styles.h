@@ -13,7 +13,7 @@ namespace Plotypus
     /**
      * @brief Sheet element: Point Style (used with plots)
      */
-    enum class PointStyle
+    enum class PointForm
     {
         None = -1,
         Point,
@@ -34,20 +34,31 @@ namespace Plotypus
         FilledPentagon
     };
 
+    struct PointStyle
+    {
+        PointForm   form = PointForm::Point;
+        double      size = 1.0;
+        std::string color = "";
+
+    };
+
     // ========================================================================== //
     /**
      * @brief Sheet element: Line Style (used with plots)
      *
-     * cf. gnuplot 5.4 documentation, p. 198
-     * Used with class Platypus::Plot2D
+     * cf. gnuplot 5.4 documentation, p. 203
+     * Note: there, line*types* are used, which differ from line styles in permanence
+     * of the definition
      */
     struct LineStyle
     {
-        std::string  color     = "";
-        double       width     = 0;
-        PointStyle   point     = PointStyle::Point;
-        double       pointsize = 0;
-        std::string  options   = "";
+        int         ID          = 0;
+        std::string color       = "";
+        double      width       = 0;
+        std::string dashtype    = "";
+        PointForm   point       = PointForm::Point;
+        double      pointsize   = 0;
+        std::string options     = "";
 
         /*
          */
@@ -86,19 +97,10 @@ namespace Plotypus
     /**
      * @brief Sheet element: Label (Text overlay)
      *
-     * From this, a gnuplot command will be generated describing a textbox element
-     * with the indicated properties.
+     * From this, a gnuplot command will be generated describing a textbox
+     * element with the indicated properties.
      *
-     *
-     *
-     * in general, empty std::string elements are ignored.
-     *
-     * options is appended to the gnuplot command and can hold arbitrary gnuplot
-     * options that are valid in context of set label. This includes the rarely
-     * used options in version 5.4 or any later added features I'm not aware of
-     * yet.
-     * You may also abuse this to include a \n and any code to be executed before
-     * the custom gnuplot code is run.
+     * In general, empty std::string elements are ignored.
      */
 
     struct Label
@@ -157,6 +159,17 @@ namespace Plotypus
         int                         rotate      = 0;
         std::string                 font        = "";
         std::string                 textcolor   = "";
+
+        /**
+         * @brief options is appended to the gnuplot command and can hold
+         *  arbitrary gnuplot options that are valid in context of set label.
+         *
+         * This includes the rarely used options in version 5.4 or any later
+         * added features I'm not aware of yet.
+         *
+         * You may also abuse this to include a \n and any code to be executed before
+         * the custom gnuplot code is run.
+         */
         std::string                 options     = "";
     };
 

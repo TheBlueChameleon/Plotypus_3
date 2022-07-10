@@ -23,7 +23,10 @@ namespace Plotypus
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";
 
-            std::vector<BoxStyle> boxStyles;
+            std::vector<BoxStyle>   boxStyles;
+            std::vector<LineStyle>  lineStyles;
+            std::vector<PointStyle> pointStyles;
+
             std::vector<Label>    labels;
 
         public:
