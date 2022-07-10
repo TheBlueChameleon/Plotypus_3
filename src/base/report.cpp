@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <filesystem>
 #include <iostream>
 
@@ -11,7 +12,6 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-
     void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
@@ -21,6 +21,20 @@ namespace Plotypus
                                                  "    forbidden characters: " + invalidFilenameChars
                                                 ));
         }
+    }
+
+    void Report::runGnuplot(const std::string& filename) const
+    {
+        // *INDENT-OFF*
+        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+
+        const auto error = std::system((std::string("gnuplot ") + filename).data());
+
+        if (verbose) {
+            if (error)  {std::cout << "done." << std::endl;}
+            else        {std::cerr << "gnuplot did not succeed.";}
+        }
+        // *INDENT-ON*
     }
 
     // ====================================================================== //
@@ -144,6 +158,16 @@ namespace Plotypus
         return p;
     }
 
+    bool Report::getVerbose() const
+    {
+        return verbose;
+    }
+
+    void Report::setVerbose(bool newVerbose)
+    {
+        verbose = newVerbose;
+    }
+
     bool Report::getAutoRunScript() const
     {
         return autoRunScript;
@@ -262,7 +286,7 @@ namespace Plotypus
         hFile << "set term pdfcairo" << std::endl;
         hFile << "set output '" << filenamePdf << "'" << std::endl << std::endl;
 
-        stylesCollection.writeBoxStyles(hFile);
+        stylesCollection.writeBoxStyles (hFile);
         stylesCollection.writeLineStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)
@@ -271,11 +295,17 @@ namespace Plotypus
             hFile << "# page " << i << std::endl << std::endl;
 
             sheet->writePdfHead  (hFile);
-            sheet->writePdfSetup (hFile);
             sheet->writePdfData  (hFile);
             sheet->writePdfLabels(hFile);
             sheet->writePdfFooter(hFile, i);
             ++i;
+        }
+
+        hFile.close();
+
+        if (autoRunScript)
+        {
+            runGnuplot(filenameGnu);
         }
     }
 }

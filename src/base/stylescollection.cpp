@@ -11,9 +11,9 @@ namespace Plotypus
 
     void StylesCollection::reset()
     {
-        boxStyles .clear();
-        lineStyles.clear();
-        pointStyles = {{PointForm::Point, 1.0, ""}};
+        boxStyles  .clear();
+        lineStyles .clear();
+        pointStyles.clear();
     }
 
     // ---------------------------------------------------------------------- //
@@ -34,21 +34,15 @@ namespace Plotypus
         boxStyles = newBoxstyles;
     }
 
-    void StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
+    size_t StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
     {
         boxStyles.push_back(newBoxstyle);
+        return boxStyles.size() - 1;
     }
 
-    void StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor, int ID)
+    size_t StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
     {
-        addBoxStyle(
-        {
-            (ID < 0 ? static_cast<signed>(boxStyles.size() + 1) : ID),  // ID
-            true,                                                       // opaque
-            fillcolor,
-            border,
-            bordercolor
-        });
+        return addBoxStyle({true, fillcolor, border, bordercolor});
     }
 
     // ---------------------------------------------------------------------- //
@@ -69,21 +63,15 @@ namespace Plotypus
         lineStyles = newLineStyles;
     }
 
-    void StylesCollection::addLineStyle(const LineStyle& newLineStyle)
+    size_t StylesCollection::addLineStyle(const LineStyle& newLineStyle)
     {
         lineStyles.push_back(newLineStyle);
+        return lineStyles.size() - 1;
     }
 
-    void StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm, int ID)
+    size_t StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
     {
-        addLineStyle(
-        {
-            (ID < 0 ? static_cast<signed>(boxStyles.size() + 1) : ID),  // ID
-            color,
-            width,
-            dashtype,
-            pointForm
-        });
+        return addLineStyle({color, width, dashtype, pointForm});
     }
 
     // ---------------------------------------------------------------------- //
@@ -101,20 +89,16 @@ namespace Plotypus
 
     void StylesCollection::setPointStyles(const std::vector<PointStyle>& newPointStyles)
     {
-        if (newPointStyles.size() == 0)
-        {
-            throw InvalidArgumentError(THROWTEXT("A point styles list must define at least one default point style"));
-        }
         pointStyles = newPointStyles;
     }
 
-    int StylesCollection::addPointStyle(const PointStyle& newPointStyle)
+    size_t StylesCollection::addPointStyle(const PointStyle& newPointStyle)
     {
         pointStyles.push_back(newPointStyle);
         return pointStyles.size() - 1;
     }
 
-    int StylesCollection::addPointStyle(PointForm form, double size, std::string color)
+    size_t StylesCollection::addPointStyle(PointForm form, double size, std::string color)
     {
         return addPointStyle(
         {
@@ -132,20 +116,20 @@ namespace Plotypus
         if (boxStyles.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom box style definition" << std::endl << std::endl;
+            hFile << "# box style definition" << std::endl << std::endl;
 
             /* cf. gnuplot 5.4 documentation, p.206
              *
              * set style textbox {<boxstyle-index>}
-             *           {opaque|transparent} {fillcolor <color>}
-             *           {{no}border {<bordercolor>}}{linewidth <lw>}
-             *           {margins <xmargin>,<ymargin>}
+             *                   {opaque|transparent} {fillcolor <color>}
+             *                   {{no}border {<bordercolor>}}{linewidth <lw>}
+             *                   {margins <xmargin>,<ymargin>}
              */
 
-            for (const auto& style : boxStyles)
+            for (size_t ID = 1u; const auto& style : boxStyles)
             {
                 hFile << "set style textbox ";
-                hFile << (style.ID                     ? std::to_string(style.ID) + " "                        : ""s);
+                hFile << std::to_string(ID) + " ";
                 hFile << (style.opaque                 ? "opaque "                                             : "transparent ") ;
                 hFile << (style.fillcolor.size()       ? "fillcolor \""s + style.fillcolor + "\" "             : ""s);
                 if (style.border)
@@ -158,16 +142,61 @@ namespace Plotypus
                 {
                     hFile << "noborder ";
                 }
-                hFile << style.options;
+                hFile << style.options << std::endl;
 
-                hFile << std::endl;
+                ++ID;
             }
+            hFile << std::endl;
         }
     }
 
-    void StylesCollection::writeLineStyles(std::ofstream &hFile) const
+    void StylesCollection::writeLineStyles(std::ofstream& hFile) const
     {
+        if (lineStyles.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# line style definition" << std::endl << std::endl;
 
+            /* cf. gnuplot 5.4 documentation, p. 203
+             *
+             * set style line <index> {{linetype | lt} <line_type> | <colorspec>}
+             *                        {{linecolor | lc} <colorspec>}
+             *                        {{linewidth | lw} <line_width>}
+             *                        {{pointtype | pt} <point_type>}
+             *                        {{pointsize | ps} <point_size>}
+             *                        {{pointinterval | pi} <interval>}
+             *                        {{pointnumber | pn} <max_symbols>}
+             *                        {{dashtype | dt} <dashtype>}
+             *                        {palette}
+             */
+
+            for (size_t ID = 1u; const auto& style : lineStyles)
+            {
+                hFile << "set style line ";
+                hFile << std::to_string(ID) + " ";
+
+                if (!style.color.empty())
+                {
+                    hFile << "linecolor " + style.color + " ";
+                }
+                hFile << "linewidth " + std::to_string(style.width) + " ";
+
+                if (style.pointForm != PointForm::None)
+                {
+                    hFile << "pointtype " + std::to_string(static_cast<unsigned>(style.pointForm) ) + " ";
+                    hFile << "pointsize " + std::to_string(                      style.pointsize  ) + " ";
+                }
+
+                if (!style.dashtype.empty())
+                {
+                    hFile << "dashtype " + style.dashtype + " ";
+                }
+
+                hFile << style.options << std::endl;
+                ++ID;
+            }
+            hFile << std::endl;
+        }
     }
-
 }
+

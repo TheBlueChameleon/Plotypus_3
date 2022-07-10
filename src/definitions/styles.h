@@ -52,11 +52,10 @@ namespace Plotypus
      */
     struct LineStyle
     {
-        int         ID          = 0;
         std::string color       = "";
         double      width       = 0;
         std::string dashtype    = "";
-        PointForm   point       = PointForm::Point;
+        PointForm   pointForm   = PointForm::Point;
         double      pointsize   = 0;
         std::string options     = "";
 
@@ -74,17 +73,6 @@ namespace Plotypus
      */
     struct BoxStyle
     {
-        /**
-         * @brief ID is a constant that can be used for later reference in a
-         *  custom code element.
-         *
-         * If zero, it will be ignored. May not be negative.
-         * (gnuplot doesn't allow that).
-         *
-         * ID can be referenced by the Label member boxStyle. If zero, this will
-         * be ommitted and (re)defines the standard box style.
-         */
-        int         ID          = 0;
         bool        opaque      = true;
         std::string fillcolor   = "";
         bool        border      = true;

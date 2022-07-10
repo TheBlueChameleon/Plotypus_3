@@ -16,4 +16,6 @@
 #include "base/report.h"
 #include "base/sheet.h"
 
+#include "plot/plot.h"
+
 #endif // PLOTYPUS_H

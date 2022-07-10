@@ -140,10 +140,7 @@ namespace Plotypus
     {
         hFile << "set font \"" << defaultFont << "\"" << std::endl;
         hFile << std::endl;
-    }
 
-    void Sheet::writePdfSetup(std::ofstream& hFile)
-    {
         if (customScriptBegin.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";

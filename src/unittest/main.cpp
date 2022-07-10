@@ -70,7 +70,7 @@ void playground ()
     r.setOutputDirectory("TestOutput");
 
     auto& sc = r.getStylesCollection();
-    sc.addBoxStyle("red", true, "yellow");
+    sc.addBoxStyle("cyan", true, "blue");
 
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");

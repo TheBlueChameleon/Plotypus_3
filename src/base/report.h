@@ -26,6 +26,7 @@ namespace Plotypus
             std::string extPdf = "pdf";
             std::string extGnu = "gnuplot";
 
+            bool verbose       = true;
             bool autoRunScript = true;
             bool standaloneTex = true;
 
@@ -40,6 +41,7 @@ namespace Plotypus
             StylesCollection stylesCollection;
 
             void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
+            void runGnuplot(const std::string& filename) const;
 
         public:
             Report();
@@ -76,6 +78,8 @@ namespace Plotypus
 
             std::string         getOutputFilename(const std::string& extension) const;
 
+            bool                getVerbose() const;
+            void                setVerbose(bool newVerbose);
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
             bool                getStandaloneTex() const;
