@@ -8,108 +8,47 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
+    std::string Plot::generateRangeString(double min, double max)
+    {
+        return "[" +
+               (std::isnan(min) ? "*" : std::to_string(min)) +
+               ":" +
+               (std::isnan(max) ? "*" : std::to_string(max)) +
+               "]";
+    }
+
+    void Plot::writeAxisDescriptor(std::ofstream& hFile, const std::string& axis, const AxisDescriptor& label) const
+    {
+        const std::string alabel = axis + "label";
+        const std::string atics  = axis + "tics";
+        const std::string arange = axis + "range";
+
+        const std::string rangeString = generateRangeString(label.rangeMin, label.rangeMax);
+
+        // *INDENT-OFF*
+        if (!label.label.empty())   {hFile <<   "set " << alabel << " " << std::quoted(label.label) << " " << label.labelOptions << std::endl;}
+        else                        {hFile << "unset " << alabel << std::endl;}
+
+        if (label.tics) {hFile <<   "set " << atics << " " << label.ticsOptions << std::endl;}
+        else            {hFile << "unset " << atics << std::endl;}
+        // *INDENT-ON*
+
+        hFile << "set " << arange << " " << rangeString << " " << label.rangeOptions << std::endl;
+        hFile << std::endl;
+    }
+
     Plot::Plot(const std::string& title) :
         Sheet(title)
     {}
 
-    const std::string& Plot::getXLabel() const
+    AxisDescriptor& Plot::getXAxis()
     {
-        return xLabel;
+        return xAxis;
     }
 
-    void Plot::setXLabel(const std::string& newXLabel)
+    AxisDescriptor& Plot::getYAxis()
     {
-        xLabel = newXLabel;
-    }
-
-    const std::string& Plot::getYLabel() const
-    {
-        return yLabel;
-    }
-
-    void Plot::setYLabel(const std::string& newYLabel)
-    {
-        yLabel = newYLabel;
-    }
-
-    bool Plot::getXTicks() const
-    {
-        return xTicks;
-    }
-
-    void Plot::setXTicks(bool newXAxis)
-    {
-        xTicks = newXAxis;
-    }
-
-    double Plot::getXRangeMin() const
-    {
-        return xRangeMin;
-    }
-
-    void Plot::setXRangeMin(double newXRangeMin)
-    {
-        xRangeMin = newXRangeMin;
-    }
-
-    double Plot::getXRangeMax() const
-    {
-        return xRangeMax;
-    }
-
-    void Plot::setXRangeMax(double newXRangeMax)
-    {
-        xRangeMax = newXRangeMax;
-    }
-
-    int Plot::getXRangeStride() const
-    {
-        return xRangeStride;
-    }
-
-    void Plot::setXRangeStride(int newXRangeStride)
-    {
-        xRangeStride = newXRangeStride;
-    }
-
-    bool Plot::getYTicks() const
-    {
-        return yTicks;
-    }
-
-    void Plot::setYTicks(bool newYAxis)
-    {
-        yTicks = newYAxis;
-    }
-
-    double Plot::getYRangeMin() const
-    {
-        return yRangeMin;
-    }
-
-    void Plot::setYRangeMin(double newYRangeMin)
-    {
-        yRangeMin = newYRangeMin;
-    }
-
-    double Plot::getYRangeMax() const
-    {
-        return yRangeMax;
-    }
-
-    void Plot::setYRangeMax(double newYRangeMax)
-    {
-        yRangeMax = newYRangeMax;
-    }
-
-    int Plot::getYRangeStride() const
-    {
-        return yRangeStride;
-    }
-
-    void Plot::setYRangeStride(int newYRangeStride)
-    {
-        yRangeStride = newYRangeStride;
+        return yAxis;
     }
 
     bool Plot::getKey() const
@@ -170,16 +109,12 @@ namespace Plotypus
         {
             hFile << "set size " << aspect << std::endl;
         }
-
         hFile << "set key " << (key ? "on" : "off") << std::endl;
         hFile << (border ? "" : "un") << "set border" << std::endl;
-        hFile << (xTicks ? "" : "un") << "set xtics"  << std::endl;
-        hFile << "set xlabel " << std::quoted(xLabel) << std::endl;
-        hFile << (yTicks ? "" : "un") << "set ytics"  << std::endl;
-        hFile << "set ylabel " << std::quoted(yLabel) << std::endl;
+        hFile << std::endl;
 
-        hFile << "set xrange[0:1]" << std::endl;
-        hFile << "set yrange[1:0]" << std::endl;
+        writeAxisDescriptor(hFile, "x", xAxis);
+        writeAxisDescriptor(hFile, "y", yAxis);
 
         hFile << std::endl;
     }

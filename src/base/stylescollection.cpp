@@ -37,7 +37,7 @@ namespace Plotypus
     size_t StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
     {
         boxStyles.push_back(newBoxstyle);
-        return boxStyles.size() - 1;
+        return boxStyles.size();
     }
 
     size_t StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
@@ -66,7 +66,7 @@ namespace Plotypus
     size_t StylesCollection::addLineStyle(const LineStyle& newLineStyle)
     {
         lineStyles.push_back(newLineStyle);
-        return lineStyles.size() - 1;
+        return lineStyles.size();
     }
 
     size_t StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
@@ -95,7 +95,7 @@ namespace Plotypus
     size_t StylesCollection::addPointStyle(const PointStyle& newPointStyle)
     {
         pointStyles.push_back(newPointStyle);
-        return pointStyles.size() - 1;
+        return pointStyles.size();
     }
 
     size_t StylesCollection::addPointStyle(PointForm form, double size, std::string color)

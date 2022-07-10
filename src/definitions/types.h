@@ -1,7 +1,9 @@
 #ifndef TYPES_H
 #define TYPES_H
 
+#include <cmath>
 #include <functional>
+#include <string>
 
 namespace Plotypus
 {
@@ -26,6 +28,22 @@ namespace Plotypus
 
         //! @brief a sheet with multiple plots on it
         Multiplot
+    };
+
+    // ====================================================================== //
+    /**
+     * @brief used to compactly describe an axis of a plot
+     */
+    struct AxisDescriptor
+    {
+        std::string label          = "";
+        std::string labelOptions   = "";
+        bool        tics           = true;
+        std::string ticsOptions    = "";
+        double      rangeMin       = 0;
+        double      rangeMax       = std::nan("inf");
+        int         rangeStride    = 1;
+        std::string rangeOptions   = "";
     };
 
     // ====================================================================== //
