@@ -27,6 +27,7 @@ add_library(Plotypus-lib SHARED
     src/base/report.h src/base/report.cpp
     #
     src/plot/plot.h src/plot/plot.cpp
+    src/plot/plot2d.h src/plot/plot2d.cpp
 )
 
 set_target_properties(Plotypus-lib PROPERTIES

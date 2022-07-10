@@ -17,12 +17,14 @@ namespace Plotypus
         //! @brief an empty sheet, optionally with title. Ready to be populated with overlays
         Sheet,
 
-        //! @brief  functionality of sheet, together with frame formatting and capacity to accept 2D data sequences
+        //! @brief functionality of sheet, together with frame formatting and capacity to accept 2D data sequences
         Plot2D,
-        //! @brief  same, but accepts 3D data sequences
+        //! @brief same, but accepts 3D data sequences
         Plot3D,
+        //! @brief same, but renders the z data as coloured pixels
+        PlotColormap,
 
-        //! @brief  a sheet with multiple plots on it
+        //! @brief a sheet with multiple plots on it
         Multiplot
     };
 

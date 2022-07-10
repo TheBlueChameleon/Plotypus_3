@@ -7,7 +7,8 @@
 namespace Plotypus
 {
     Sheet::Sheet(const std::string& title) :
-        title(title)
+        title(title),
+        type(PlotType::Sheet)
     {}
 
     // ====================================================================== //
@@ -138,15 +139,19 @@ namespace Plotypus
 
     void Sheet::writePdfHead(std::ofstream& hFile)
     {
-        hFile << "set font \"" << defaultFont << "\"" << std::endl;
-        hFile << std::endl;
-
         if (customScriptBegin.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script" << std::endl << std::endl;
+            hFile << "# custom setup script I" << std::endl << std::endl;
             hFile << customScriptBegin << std::endl;
         }
+
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# generated setup script" << std::endl << std::endl;
+
+        hFile << "set font \"" << defaultFont << "\"" << std::endl;
+        hFile << "set title \"" << title << "\"" << std::endl;
+        hFile << std::endl;
     }
 
     void Sheet::writePdfData(std::ofstream& hFile)
@@ -154,7 +159,7 @@ namespace Plotypus
         if (customScriptEnd.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script" << std::endl << std::endl;
+            hFile << "# custom setup script II" << std::endl << std::endl;
             hFile << customScriptEnd << std::endl;
         }
     }
@@ -227,19 +232,8 @@ namespace Plotypus
     {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# dummy plot for empty page" << std::endl << std::endl;
-        hFile << "set title \"" << title << "\"" << std::endl;
 
-        hFile << "set key off" << std::endl;
-        hFile << "unset border" << std::endl;
-        hFile << "unset xtics" << std::endl;
-        hFile << "unset xlabel" << std::endl;
-        hFile << "unset ytics" << std::endl;
-        hFile << "unset ylabel" << std::endl;
-
-        hFile << "set xrange[0:1]" << std::endl;
-        hFile << "set yrange[1:0]" << std::endl;
-
-        hFile << "plot [][-1:1] 1/0 t\"\"" << std::endl;
+        hFile << "plot [][] 1/0 t\"\"" << std::endl;
         hFile << "unset label" << std::endl;
         hFile << std::endl;
     }

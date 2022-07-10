@@ -1,6 +1,7 @@
 #ifndef REPORT_H
 #define REPORT_H
 
+#include <fstream>
 #include <string>
 #include <vector>
 
@@ -42,6 +43,7 @@ namespace Plotypus
 
             void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
             void runGnuplot(const std::string& filename) const;
+            void writeCleanSheetCommands(std::ofstream& hFile);
 
         public:
             Report();
@@ -52,7 +54,8 @@ namespace Plotypus
 
             size_t getReportSize() const;
 
-            Plotypus::Sheet& addSheet(const std::string& title = "");
+            Plotypus::Sheet& addSheet (const std::string& title = "");
+            Plotypus::Sheet& addPlot2D(const std::string& title = "");
             Plotypus::Sheet& getSheet(int i) const;
 
             // -------------------------------------------------------------- //

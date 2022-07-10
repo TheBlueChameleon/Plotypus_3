@@ -4,6 +4,8 @@
 
 #include "../definitions/errors.h"
 
+#include "../plot/plot2d.h"
+
 #include "localMacros.h"
 #include "report.h"
 
@@ -31,10 +33,29 @@ namespace Plotypus
         const auto error = std::system((std::string("gnuplot ") + filename).data());
 
         if (verbose) {
-            if (error)  {std::cout << "done." << std::endl;}
-            else        {std::cerr << "gnuplot did not succeed.";}
+            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
+            else        {std::cout << "done." << std::endl;}
         }
         // *INDENT-ON*
+    }
+
+    void Report::writeCleanSheetCommands(std::ofstream& hFile)
+    {
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# prepare empty page" << std::endl << std::endl;
+
+        hFile << "set key off"  << std::endl;
+        hFile << "unset border" << std::endl;
+        hFile << "unset xtics"  << std::endl;
+        hFile << "unset xlabel" << std::endl;
+        hFile << "unset ytics"  << std::endl;
+        hFile << "unset ylabel" << std::endl;
+        hFile << "unset ztics"  << std::endl;
+        hFile << "unset zlabel" << std::endl;
+
+        hFile << "set xrange[0:1]" << std::endl;
+        hFile << "set yrange[1:0]" << std::endl;
+        hFile << std::endl;
     }
 
     // ====================================================================== //
@@ -60,6 +81,12 @@ namespace Plotypus
     Sheet& Report::addSheet(const std::string& title)
     {
         sheets.push_back(new Sheet(title));
+        return *sheets.back();
+    }
+
+    Sheet& Report::addPlot2D(const std::string& title)
+    {
+        sheets.push_back(new Plot2D(title));
         return *sheets.back();
     }
 
@@ -281,6 +308,8 @@ namespace Plotypus
             throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));
         }
 
+        bool needCleanSheetCommands = true;
+
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
         hFile << "set term pdfcairo" << std::endl;
@@ -293,6 +322,11 @@ namespace Plotypus
         {
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
+
+            // *INDENT-OFF*
+            if (needCleanSheetCommands && sheet->getType() == PlotType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);
+            } else if                    (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
+            // *INDENT-ON*
 
             sheet->writePdfHead  (hFile);
             sheet->writePdfData  (hFile);
