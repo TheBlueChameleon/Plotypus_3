@@ -44,7 +44,7 @@ namespace Plotypus
     size_t Plot2D<T>::addDataView(const DataView2D<T>& dataView)
     {
         dataViews.push_back(dataView);
-        return dataViews.size();
+        return dataViews.size() - 1;
     }
 
     template<class T>

@@ -69,6 +69,11 @@ namespace Plotypus
         customScriptEnd = newCustomScriptEnd;
     }
 
+    size_t Sheet::getLabelCount() const
+    {
+        return labels.size();
+    }
+
     // ====================================================================== //
 
     const std::vector<Label>& Sheet::getLabels() const
@@ -87,12 +92,13 @@ namespace Plotypus
         return labels[i];
     }
 
-    void Sheet::addLabel(const Label& newLabel)
+    size_t Sheet::addLabel(const Label& newLabel)
     {
         labels.push_back(newLabel);
+        return labels.size() - 1;
     }
 
-    void Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
+    size_t Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
     {
         Label l;     // use the default values, in case options and/or boxStyle are empty.
 
@@ -101,7 +107,7 @@ namespace Plotypus
         l.boxed       = boxed;
         l.boxStyleID  = boxStyleID;
 
-        addLabel(l);
+        return addLabel(l);
     }
 
     // ====================================================================== //

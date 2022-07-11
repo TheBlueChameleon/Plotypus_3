@@ -23,7 +23,7 @@ namespace Plotypus
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";
 
-            std::vector<Label>    labels;
+            std::vector<Label> labels;
 
         public:
             Sheet(const std::string& title);
@@ -43,11 +43,12 @@ namespace Plotypus
             const std::string&  getCustomScriptEnd() const;
             void                setCustomScriptEnd(const std::string& newCustomScriptEnd);
 
+            size_t                          getLabelCount() const;
             const std::vector<Label>&       getLabels() const;
             void                            setLabels(const std::vector<Label>& newLabels);
             Label&                             label (const size_t i);
-            void                            addLabel (const Label& newLabel);
-            void                            addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
+            size_t                          addLabel (const Label& newLabel);
+            size_t                          addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
             void                            clearLabels();
 
             // writers
