@@ -23,9 +23,9 @@ namespace Plotypus
         return boxStyles;
     }
 
-    BoxStyle& StylesCollection::getBoxStyle(int i)
+    BoxStyle& StylesCollection::getBoxStyle(const size_t i)
     {
-        CHECK_INDEX_EXT(i, boxStyles, "box style index")
+        CHECK_INDEX(i, boxStyles, "box style index");
         return boxStyles[i];
     }
 
@@ -52,9 +52,9 @@ namespace Plotypus
         return lineStyles;
     }
 
-    LineStyle& StylesCollection::getLineStyle(int i)
+    LineStyle& StylesCollection::getLineStyle(const size_t i)
     {
-        CHECK_INDEX_EXT(i, lineStyles, "box style index")
+        CHECK_INDEX(i, lineStyles, "box style index");
         return lineStyles[i];
     }
 
@@ -81,9 +81,9 @@ namespace Plotypus
         return pointStyles;
     }
 
-    PointStyle& StylesCollection::getPointStyle(int i)
+    PointStyle& StylesCollection::getPointStyle(const size_t i)
     {
-        CHECK_INDEX_EXT(i, pointStyles, "box style index")
+        CHECK_INDEX(i, pointStyles, "box style index");
         return pointStyles[i];
     }
 

@@ -34,9 +34,9 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView2D<T>& Plot2D<T>::dataView(int i)
+    DataView2D<T>& Plot2D<T>::dataView(const size_t i)
     {
-        CHECK_INDEX_EXT(i, dataViews, "dataView index");
+        CHECK_INDEX(i, dataViews, "dataView index");
         return dataViews[i];
     }
 

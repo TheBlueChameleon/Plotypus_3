@@ -61,7 +61,7 @@ namespace Plotypus
             template <class T>
             Plotypus::Sheet& addPlot2D(const std::string& title = "");
 
-            Plotypus::Sheet& sheet(int i) const;
+            Plotypus::Sheet& sheet(const size_t i) const;
 
             // -------------------------------------------------------------- //
             // file output specs

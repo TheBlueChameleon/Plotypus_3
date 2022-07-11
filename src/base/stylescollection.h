@@ -32,19 +32,19 @@ namespace Plotypus
             void reset();
 
             const std::vector<BoxStyle>&    getBoxStyles() const;
-            BoxStyle&                       getBoxStyle (int i);
+            BoxStyle&                       getBoxStyle (const size_t i);
             void                            setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
             size_t                          addBoxStyle (const BoxStyle& newBoxstyle);
             size_t                          addBoxStyle (const std::string& fillcolor, bool border = true, const std::string& bordercolor = "");
 
             const std::vector<LineStyle>&   getLineStyles() const;
-            LineStyle&                      getLineStyle (int i);
+            LineStyle&                      getLineStyle (const size_t i);
             void                            setLineStyles(const std::vector<LineStyle>& newLineStyles);
             size_t                          addLineStyle (const LineStyle& newLineStyle);
             size_t                          addLineStyle (const std::string& color, double width = 1.0, std::string dashtype = "", PointForm pointForm = PointForm::Point);
 
             const std::vector<PointStyle>&  getPointStyles() const;
-            PointStyle&                     getPointStyle (int i);
+            PointStyle&                     getPointStyle (const size_t i);
             void                            setPointStyles(const std::vector<PointStyle>& newPointStyles);
             size_t                          addPointStyle (const PointStyle& newPointStyle);
             size_t                          addPointStyle (PointForm form = PointForm::Point, double size = 1.0, std::string color = "");

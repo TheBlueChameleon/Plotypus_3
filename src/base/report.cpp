@@ -113,9 +113,9 @@ namespace Plotypus
         return *sheets.back();
     }
 
-    Sheet& Report::sheet(int i) const
+    Sheet& Report::sheet(const size_t i) const
     {
-        CHECK_INDEX_EXT(i, sheets, "sheet index");
+        CHECK_INDEX(i, sheets, "sheet index");
         return *(sheets[i]);
     }
 

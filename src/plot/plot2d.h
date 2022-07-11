@@ -26,7 +26,7 @@ namespace Plotypus
             const std::vector<DataView2D<T> >&  getDataViews() const;
             void                                setDataViews(const std::vector<DataView2D<T> >& newDataViews);
 
-            DataView2D<T>&  dataView(int i);
+            DataView2D<T>&  dataView(const size_t i);
             size_t          addDataView(const DataView2D<T>& dataView);
             size_t          addDataView(const std::span<T> data, const std::string& label);
 

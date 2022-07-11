@@ -45,9 +45,9 @@ namespace Plotypus
 
             const std::vector<Label>&       getLabels() const;
             void                            setLabels(const std::vector<Label>& newLabels);
-            Label&                             label(int i);
-            void                            addLabel(const Label& newLabel);
-            void                            addLabel(const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
+            Label&                             label (const size_t i);
+            void                            addLabel (const Label& newLabel);
+            void                            addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
             void                            clearLabels();
 
             // writers
