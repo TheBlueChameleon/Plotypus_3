@@ -6,6 +6,8 @@
 #include <vector>
 
 #include "../definitions/types.h"
+#include "../plot/plot2d.h"
+
 #include "sheet.h"
 #include "stylescollection.h"
 
@@ -59,7 +61,7 @@ namespace Plotypus
             Plotypus::Sheet& addSheet (const std::string& title = "");
 
             template <class T>
-            Plotypus::Sheet& addPlot2D(const std::string& title = "");
+            Plotypus::Plot2D<T>& addPlot2D(const std::string& title = "");
 
             Plotypus::Sheet& sheet(const size_t i) const;
 

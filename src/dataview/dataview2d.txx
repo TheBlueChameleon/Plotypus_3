@@ -1,3 +1,8 @@
+#include <iostream>
+#include <functional>
+
+#include "../definitions/types.h"
+
 #include "dataview2d.h"
 
 using namespace Plotypus;
@@ -20,16 +25,22 @@ namespace Plotypus
     }
 
     template<class T>
-    const std::span<const T>& DataView2D<T>::getDataX() const
+    const std::span<const double>& DataView2D<T>::getDataX() const
     {
         return dataX;
     }
 
     template<class T>
-    void DataView2D<T>::setDataX(const std::span<const T>& newData)
+    void DataView2D<T>::setDataX(const std::span<const double>& newData)
     {
         dataX = newData;
         func = "";
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataX(const double* newData, size_t N)
+    {
+        setDataX( std::span<const T>(newData, newData + N) );
     }
 
     template<class T>
@@ -43,6 +54,12 @@ namespace Plotypus
     {
         dataY = newData;
         func = "";
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataY(const T* newData, size_t N)
+    {
+        setDataY( std::span<const T>(newData, newData + N) );
     }
 
     template<class T>
@@ -82,5 +99,22 @@ namespace Plotypus
     void DataView2D<T>::setLineStyle(int newLineStyle)
     {
         lineStyle = newLineStyle;
+    }
+
+    template<class T>
+    bool DataView2D<T>::complete() const
+    {
+        // *INDENT-OFF*
+        if (func.empty()) {
+            const auto sizeX = dataX.size();
+            const auto sizeY = dataY.size();
+
+            if (!sizeY)                     {return false;}
+            if (sizeX && (sizeX != sizeY))  {return false;}
+            if (!selector)                  {return false;}
+        }
+        // *INDENT-ON*
+
+        return true;
     }
 }

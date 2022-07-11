@@ -1,6 +1,7 @@
 #ifndef DATAVIEW2D_H
 #define DATAVIEW2D_H
 
+#include <concepts>
 #include <span>
 #include <string>
 #include <vector>
@@ -16,12 +17,12 @@ namespace Plotypus
     {
         protected:
             // data view
-            std::span<const T>  dataX;
-            std::span<const T>  dataY;
-            DataSelector<T>     selector;
+            std::span<const double> dataX;
+            std::span<const T>      dataY;
+            DataSelector<T>         selector;
 
             // function view
-            std::string         func;
+            std::string             func;
 
             // both
             int lineStyle;
@@ -31,22 +32,25 @@ namespace Plotypus
 
             virtual void reset();
 
-            const std::span<const T>&   getDataX() const;
-            void                        setDataX(const std::span<const T>& newData);
+            const std::span<const double>&  getDataX() const;
+            void                            setDataX(const std::span<const double>& newData);
+            void                            setDataX(const double* newData, size_t N);
 
-            const std::span<const T>&   getDataY() const;
-            void                        setDataY(const std::span<const T>& newData);
+            const std::span<const T>&       getDataY() const;
+            void                            setDataY(const std::span<const T>& newData);
+            void                            setDataY(const T* newData, size_t N);
 
-            const DataSelector<T>&      getSelector() const;
-            void                        setSelector(const DataSelector<T>& newSelector);
+            const DataSelector<T>&          getSelector() const;
+            void                            setSelector(const DataSelector<T>& newSelector);
 
-            const std::string&          getFunc() const;
-            void                        setFunc(const std::string& newFunc);
+            const std::string&              getFunc() const;
+            void                            setFunc(const std::string& newFunc);
 
-            int                         getLineStyle() const;
-            void                        setLineStyle(int newLineStyle);
+            int                             getLineStyle() const;
+            void                            setLineStyle(int newLineStyle);
+
+            bool complete() const;
     };
-
 }
 
 #include "dataview2d.txx"

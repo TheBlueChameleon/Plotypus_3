@@ -65,6 +65,9 @@ bool unittest_report()
 
 void playground ()
 {
+    std::vector<double> dataX = {1, 2, 3};
+    std::vector<double> dataY = {1, 2, 3};
+
     Plotypus::Report r;
 
     r.setOutputDirectory("TestOutput");
@@ -86,6 +89,9 @@ void playground ()
 
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
+
+    s4.addDataView(dataX, dataY, defaultDataSelector<double>);
+    std::cout << s4.dataView(0).complete() << std::endl;
 
     r.writeTxt();
     r.writePdf();

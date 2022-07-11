@@ -7,14 +7,11 @@ using namespace Plotypus;
 namespace Plotypus
 {
     template <class T>
-    Sheet& Report::addPlot2D(const std::string& title)
+    Plot2D<T>& Report::addPlot2D(const std::string& title)
     {
-        {
-            // instantiate Plot2D<T> just so that the code exists -- gcc should optimize this away
-            Plot2D<T> x("");
-        }
-        sheets.push_back(new Plot2D<T>(title));
-        return *sheets.back();
+        Plot2D<T>* newPlot = new Plot2D<T>(title);
+        sheets.push_back(newPlot);
+        return *newPlot;
     }
 }
 

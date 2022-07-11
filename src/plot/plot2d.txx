@@ -48,6 +48,31 @@ namespace Plotypus
     }
 
     template<class T>
+    size_t Plot2D<T>::addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label)
+    {
+        DataView2D<T> dataView(label, "lines");
+
+        dataView.setDataY   (dataY);
+        dataView.setSelector(selector);
+
+        return addDataView(dataView);
+    }
+
+    template<class T>
+    size_t Plot2D<T>::addDataView(const std::span<double> dataX, const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label)
+    {
+        DataView2D<T> dataView(label, "lines");
+
+        dataView.setDataX   (dataX);
+        dataView.setDataY   (dataY);
+        dataView.setSelector(selector);
+
+        return addDataView(dataView);
+    }
+
+    // ====================================================================== //
+
+    template<class T>
     void Plot2D<T>::writePdfFooter(std::ofstream& hFile, int pageNum)
     {
         hFile << "plot [][] 1/0 t\"\"" << std::endl;
