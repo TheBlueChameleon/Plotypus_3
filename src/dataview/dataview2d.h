@@ -16,7 +16,8 @@ namespace Plotypus
     {
         protected:
             // data view
-            std::span<const T>  data;
+            std::span<const T>  dataX;
+            std::span<const T>  dataY;
             DataSelector<T>     selector;
 
             // function view
@@ -30,8 +31,11 @@ namespace Plotypus
 
             virtual void reset();
 
-            const std::span<const T>&   getData() const;
-            void                        setData(const std::span<const T>& newData);
+            const std::span<const T>&   getDataX() const;
+            void                        setDataX(const std::span<const T>& newData);
+
+            const std::span<const T>&   getDataY() const;
+            void                        setDataY(const std::span<const T>& newData);
 
             const DataSelector<T>&      getSelector() const;
             void                        setSelector(const DataSelector<T>& newSelector);

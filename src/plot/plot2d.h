@@ -2,7 +2,11 @@
 #define PLOT2D_H
 
 #include <fstream>
+#include <span>
 #include <string>
+#include <vector>
+
+#include "../dataview/dataview2d.h"
 
 #include "plot.h"
 
@@ -11,10 +15,20 @@ namespace Plotypus
     template<class T>
     class Plot2D : public Plot
     {
+        private:
+            std::vector<DataView2D<T>> dataViews;
+
         public:
             Plot2D(const std::string& title);
 
             virtual void reset();
+
+            const std::vector<DataView2D<T> >&  getDataViews() const;
+            void                                setDataViews(const std::vector<DataView2D<T> >& newDataViews);
+
+            DataView2D<T>&  dataView(int i);
+            size_t          addDataView(const DataView2D<T>& dataView);
+            size_t          addDataView(const std::span<T> data, const std::string& label);
 
             virtual void writePdfFooter(std::ofstream& hFile, int pageNum);
     };

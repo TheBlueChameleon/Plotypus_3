@@ -14,21 +14,34 @@ namespace Plotypus
     {
         DataView::reset();
 
-        data        = std::span<T>();
+        dataY        = std::span<T>();
         selector    = std::function<double (const T)>();
         func        = "";
     }
 
     template<class T>
-    const std::span<const T>& DataView2D<T>::getData() const
+    const std::span<const T>& DataView2D<T>::getDataX() const
     {
-        return data;
+        return dataX;
     }
 
     template<class T>
-    void DataView2D<T>::setData(const std::span<const T>& newData)
+    void DataView2D<T>::setDataX(const std::span<const T>& newData)
     {
-        data = newData;
+        dataX = newData;
+        func = "";
+    }
+
+    template<class T>
+    const std::span<const T>& DataView2D<T>::getDataY() const
+    {
+        return dataY;
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataY(const std::span<const T>& newData)
+    {
+        dataY = newData;
         func = "";
     }
 
@@ -55,7 +68,7 @@ namespace Plotypus
     void DataView2D<T>::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
-        data        = std::span<T>();
+        dataY        = std::span<T>();
         selector    = std::function<double (const T)>();
     }
 
