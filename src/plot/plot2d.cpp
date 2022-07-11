@@ -10,6 +10,11 @@ namespace Plotypus
         type = PlotType::Plot2D;
     }
 
+    void Plot2D::reset()
+    {
+        Plot::reset();
+    }
+
     void Plot2D::writePdfFooter(std::ofstream& hFile, int pageNum)
     {
         hFile << "plot [][] 1/0 t\"\"" << std::endl;

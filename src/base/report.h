@@ -49,6 +49,8 @@ namespace Plotypus
             Report();
             ~Report();
 
+            void reset();
+
             // -------------------------------------------------------------- //
             // content management
 

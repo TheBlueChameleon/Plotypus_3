@@ -41,6 +41,18 @@ namespace Plotypus
         Sheet(title)
     {}
 
+    void Plot::reset()
+    {
+        Sheet::reset();
+
+        xAxis = {"x"};
+        yAxis = {"y"};
+
+        key     = true;
+        border  = true;
+        aspect  = "ratio -1";
+    }
+
     AxisDescriptor& Plot::getXAxis()
     {
         return xAxis;

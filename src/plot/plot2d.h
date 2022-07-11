@@ -13,6 +13,8 @@ namespace Plotypus
         public:
             Plot2D(const std::string& title);
 
+            virtual void reset();
+
             virtual void writePdfFooter(std::ofstream& hFile, int pageNum);
     };
 }

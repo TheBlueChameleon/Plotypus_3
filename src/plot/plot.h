@@ -27,6 +27,8 @@ namespace Plotypus
         public:
             Plot(const std::string& title);
 
+            virtual void reset();
+
             AxisDescriptor& getXAxis();
             AxisDescriptor& getYAxis();
 

@@ -65,10 +65,39 @@ namespace Plotypus
 
     Report::~Report()
     {
+        reset();
+    }
+
+    void Report::reset()
+    {
         for (auto ptr : sheets)
         {
             delete ptr;
         }
+        sheets.clear();
+
+        outputDirectory = "";
+        filenameBase = "report";
+
+        extTxt = "txt";
+        extDat = "dat";
+        extTex = "tex";
+        extPdf = "pdf";
+        extGnu = "gnuplot";
+
+        verbose       = true;
+        autoRunScript = true;
+        standaloneTex = true;
+
+        numberPrecision = 6;           // used only in txt and tex output
+
+        columnSeparatorTxt = "\t";
+        columnSeparatorDat = "\t";
+
+        pageSeparatorTxt  = "================================================================================\n";
+        frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
+
+        stylesCollection.reset();
     }
 
     // ====================================================================== //
