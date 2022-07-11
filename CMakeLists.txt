@@ -28,6 +28,9 @@ add_library(Plotypus-lib SHARED
     #
     src/plot/plot.h src/plot/plot.cpp
     src/plot/plot2d.h src/plot/plot2d.cpp
+    #
+    src/dataview/dataview.h src/dataview/dataview.cpp
+    src/dataview/dataview2d.h src/dataview/dataview2d.txx
 )
 
 set_target_properties(Plotypus-lib PROPERTIES
