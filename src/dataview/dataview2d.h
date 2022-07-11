@@ -45,6 +45,5 @@ namespace Plotypus
 
 }
 
-#endif // DATAVIEW2D_H
-
 #include "dataview2d.txx"
+#endif // DATAVIEW2D_H

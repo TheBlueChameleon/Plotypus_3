@@ -8,6 +8,7 @@
 
 namespace Plotypus
 {
+    template<class T>
     class Plot2D : public Plot
     {
         public:
@@ -18,4 +19,6 @@ namespace Plotypus
             virtual void writePdfFooter(std::ofstream& hFile, int pageNum);
     };
 }
+
+#include "plot2d.txx"
 #endif // PLOT2D_H

@@ -4,7 +4,7 @@
 
 #include "../definitions/errors.h"
 
-#include "../plot/plot2d.h"
+
 
 #include "localMacros.h"
 #include "report.h"
@@ -110,12 +110,6 @@ namespace Plotypus
     Sheet& Report::addSheet(const std::string& title)
     {
         sheets.push_back(new Sheet(title));
-        return *sheets.back();
-    }
-
-    Sheet& Report::addPlot2D(const std::string& title)
-    {
-        sheets.push_back(new Plot2D(title));
         return *sheets.back();
     }
 

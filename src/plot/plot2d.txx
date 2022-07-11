@@ -4,18 +4,20 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    Plot2D::Plot2D(const std::string& title) :
+    template<class T>
+    Plot2D<T>::Plot2D(const std::string& title) :
         Plot(title)
     {
         type = PlotType::Plot2D;
     }
 
-    void Plot2D::reset()
+    template<class T>
+    void Plot2D<T>::reset()
     {
         Plot::reset();
     }
-
-    void Plot2D::writePdfFooter(std::ofstream& hFile, int pageNum)
+    template<class T>
+    void Plot2D<T>::writePdfFooter(std::ofstream& hFile, int pageNum)
     {
         hFile << "plot [][] 1/0 t\"\"" << std::endl;
     }

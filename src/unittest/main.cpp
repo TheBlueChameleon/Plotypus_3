@@ -75,7 +75,7 @@ void playground ()
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");
     auto& s3 = r.addSheet();
-    auto& s4 = r.addPlot2D("plot");
+    auto& s4 = r.addPlot2D<double>("plot");
     auto& s5 = r.addSheet();
 
     s1.addLabel(" FOO ", .10, .10);
