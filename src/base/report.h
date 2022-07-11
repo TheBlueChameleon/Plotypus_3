@@ -56,7 +56,7 @@ namespace Plotypus
 
             Plotypus::Sheet& addSheet (const std::string& title = "");
             Plotypus::Sheet& addPlot2D(const std::string& title = "");
-            Plotypus::Sheet& getSheet(int i) const;
+            Plotypus::Sheet& sheet(int i) const;
 
             // -------------------------------------------------------------- //
             // file output specs

@@ -81,7 +81,7 @@ namespace Plotypus
         labels = newLabels;
     }
 
-    Label& Sheet::getLabel(int i)
+    Label& Sheet::label(int i)
     {
         CHECK_INDEX_EXT(i, labels, "label index")
         return labels[i];

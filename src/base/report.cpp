@@ -90,7 +90,7 @@ namespace Plotypus
         return *sheets.back();
     }
 
-    Sheet& Report::getSheet(int i) const
+    Sheet& Report::sheet(int i) const
     {
         CHECK_INDEX_EXT(i, sheets, "sheet index");
         return *(sheets[i]);

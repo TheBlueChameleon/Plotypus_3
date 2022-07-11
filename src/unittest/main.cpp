@@ -27,7 +27,7 @@ bool unittest_report()
     UNITTEST_ASSERT(r.getReportSize() == 0,
                     "initialize empty list of sheets");
 
-    UNITTEST_THROWS(r.getSheet(0),
+    UNITTEST_THROWS(r.sheet(0),
                     Plotypus::InvalidIndexError,
                     "prevent access to nonexistent sheets");
 
@@ -41,17 +41,17 @@ bool unittest_report()
     UNITTEST_ASSERT(r.getReportSize() == 2,
                     "add sheet in scope and persist thereafter");
 
-    UNITTEST_DOESNT_THROW(r.getSheet(0),
+    UNITTEST_DOESNT_THROW(r.sheet(0),
                           std::exception,
                           "access existing sheet (positive index)");
-    UNITTEST_DOESNT_THROW(r.getSheet(-1),
+    UNITTEST_DOESNT_THROW(r.sheet(-1),
                           std::exception,
                           "access existing sheet (negative index)");
-    UNITTEST_THROWS(r.getSheet(2),
+    UNITTEST_THROWS(r.sheet(2),
                     Plotypus::InvalidIndexError,
                     "prevent out of scope index access (positive index)"
                    );
-    UNITTEST_THROWS(r.getSheet(-3),
+    UNITTEST_THROWS(r.sheet(-3),
                     Plotypus::InvalidIndexError,
                     "prevent out of scope index access (negative index)"
                    );
