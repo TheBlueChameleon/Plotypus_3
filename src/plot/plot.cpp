@@ -83,6 +83,26 @@ namespace Plotypus
         border = newBorder;
     }
 
+    bool Plot::getParametric() const
+    {
+        return parametric;
+    }
+
+    void Plot::setParametric(bool newParametric)
+    {
+        parametric = newParametric;
+    }
+
+    bool Plot::getPolar() const
+    {
+        return polar;
+    }
+
+    void Plot::setPolar(bool newPolar)
+    {
+        polar = newPolar;
+    }
+
     const std::string& Plot::getAspect() const
     {
         return aspect;

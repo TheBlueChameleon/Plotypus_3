@@ -30,6 +30,7 @@ namespace Plotypus
             size_t          addDataView(const DataView2D<T>& dataView);
             size_t          addDataView(                               const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
             size_t          addDataView(const std::span<double> dataX, const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
+            size_t          addDataView(const std::string& func, const std::string& label = "");
 
             virtual void writePdfFooter(std::ofstream& hFile, int pageNum);
     };

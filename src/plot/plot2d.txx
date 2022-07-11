@@ -70,6 +70,17 @@ namespace Plotypus
         return addDataView(dataView);
     }
 
+    template<class T>
+    size_t Plot2D<T>::addDataView(const std::string& func, const std::string& label)
+    {
+        DataView2D<T> dataView(label, "lines");
+
+        dataView.setFunc(func);
+        dataView.setSelector(selector);
+
+        return addDataView(dataView);
+    }
+
     // ====================================================================== //
 
     template<class T>

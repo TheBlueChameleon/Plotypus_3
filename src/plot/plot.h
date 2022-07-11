@@ -16,8 +16,10 @@ namespace Plotypus
             AxisDescriptor xAxis = {"x"};
             AxisDescriptor yAxis = {"y"};
 
-            bool        key     = true;
-            bool        border  = true;
+            bool        key         = true;
+            bool        border      = true;
+            bool        parametric  = false;
+            bool        polar       = false;
             std::string aspect  = "ratio -1";
 
         protected:
@@ -36,6 +38,10 @@ namespace Plotypus
             void                setKey(bool newKey);
             bool                getBorder() const;
             void                setBorder(bool newBorder);
+            bool                getParametric() const;
+            void                setParametric(bool newParametric);
+            bool                getPolar() const;
+            void                setPolar(bool newPolar);
 
             const std::string&  getAspect      () const;
             void                setAspect      (const std::string& newAspect);
