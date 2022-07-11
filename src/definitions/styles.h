@@ -56,7 +56,7 @@ namespace Plotypus
         double      width       = 0;
         std::string dashtype    = "";
         PointForm   pointForm   = PointForm::Point;
-        double      pointsize   = 0;
+        double      pointsize   = 1.;
         std::string options     = "";
 
         /*

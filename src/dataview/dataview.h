@@ -10,7 +10,7 @@ namespace Plotypus
         protected:
             std::string label;
             std::string style;
-            std::string dataColumnFormat = "#";
+            std::string dataColumnFormat = "#"; //! @todo support dataColumnFormat
 
         public:
             DataView(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
@@ -26,6 +26,9 @@ namespace Plotypus
             const std::string&  getDataColumnFormat() const;
             void                setDataColumnFormat(const std::string& newDataColumnFormat);
             void                setDataColumnFormatPositive();                            // shortcut: set format such that only positive values are plotted.
+
+            // writers
+            virtual void writePdfData   (std::ofstream& hFile) const = 0;
     };
 }
 

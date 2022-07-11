@@ -76,7 +76,6 @@ namespace Plotypus
         DataView2D<T> dataView(label, "lines");
 
         dataView.setFunc(func);
-        dataView.setSelector(selector);
 
         return addDataView(dataView);
     }
@@ -84,8 +83,27 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void Plot2D<T>::writePdfFooter(std::ofstream& hFile, int pageNum)
+    void Plot2D<T>::writePdfData(std::ofstream& hFile) const
     {
-        hFile << "plot [][] 1/0 t\"\"" << std::endl;
+        Plot::writePdfData(hFile);
+
+        hFile << "plot ";
+        const auto viewCount = dataViews.size();
+        for (size_t i = 0u; const DataView2D<T>& dataView : dataViews)
+        {
+            dataView.writePdfData(hFile);
+            ++i;
+            if (i < viewCount)
+            {
+                hFile << ", \\\n\t";
+            }
+        }
+        hFile << std::endl;
+    }
+
+    template<class T>
+    void Plot2D<T>::writePdfFooter(std::ofstream& hFile, int pageNum) const
+    {
+        hFile << std::endl;
     }
 }

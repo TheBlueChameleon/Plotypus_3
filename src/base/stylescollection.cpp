@@ -177,7 +177,7 @@ namespace Plotypus
 
                 if (!style.color.empty())
                 {
-                    hFile << "linecolor " + style.color + " ";
+                    hFile << "linecolor "s << std::quoted(style.color) << " ";
                 }
                 hFile << "linewidth " + std::to_string(style.width) + " ";
 
@@ -189,7 +189,7 @@ namespace Plotypus
 
                 if (!style.dashtype.empty())
                 {
-                    hFile << "dashtype " + style.dashtype + " ";
+                    hFile << "dashtype " << std::quoted(style.dashtype) << " ";
                 }
 
                 hFile << style.options << std::endl;

@@ -1,5 +1,6 @@
 #include <functional>
 #include <iostream>
+#include <numbers>
 #include <string>
 #include <vector>
 
@@ -65,8 +66,9 @@ bool unittest_report()
 
 void playground ()
 {
-    std::vector<double> dataX = {1, 2, 3};
-    std::vector<double> dataY = {1, 2, 3};
+    const auto& pi = std::numbers::pi;
+    std::vector<double> dataX = {0, 1./3.*pi, 2./3.*pi, pi};
+    std::vector<double> dataY = {0,        1,        1,  0};
 
     Plotypus::Report r;
 
@@ -74,6 +76,7 @@ void playground ()
 
     auto& sc = r.getStylesCollection();
     sc.addBoxStyle("cyan", true, "blue");
+    sc.addLineStyle("blue", 2.5, "..-", PointForm::Circle);
 
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");
@@ -91,7 +94,9 @@ void playground ()
     s3.addLabel("empty", .10, .50, true, 1);
 
     s4.addDataView(dataX, dataY, defaultDataSelector<double>);
-    std::cout << s4.dataView(0).complete() << std::endl;
+    s4.addDataView("[0:pi] sin(x)", "Sine Wave");
+    s4.addDataView("[0:pi] cos(x)", "Cosine Wave");
+    s4.dataView(2).setLineStyle(0);
 
     r.writeTxt();
     r.writePdf();

@@ -133,7 +133,7 @@ namespace Plotypus
         aspect = "ratio "s + std::to_string(ratio);
     }
 
-    void Plot::writePdfHead(std::ofstream& hFile)
+    void Plot::writePdfHead(std::ofstream& hFile) const
     {
         Sheet::writePdfHead(hFile);
 
@@ -142,7 +142,9 @@ namespace Plotypus
             hFile << "set size " << aspect << std::endl;
         }
         hFile << "set key " << (key ? "on" : "off") << std::endl;
-        hFile << (border ? "" : "un") << "set border" << std::endl;
+        hFile << (border        ? "" : "un") << "set border" << std::endl;
+        hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
+        hFile << (polar         ? "" : "un") << "set polar" << std::endl;
         hFile << std::endl;
 
         writeAxisDescriptor(hFile, "x", xAxis);

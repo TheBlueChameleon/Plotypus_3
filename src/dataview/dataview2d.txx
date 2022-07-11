@@ -1,7 +1,10 @@
+#include <iomanip>
 #include <iostream>
 #include <functional>
 
 #include "../definitions/types.h"
+
+#include "../plot/plot.h"
 
 #include "dataview2d.h"
 
@@ -116,5 +119,26 @@ namespace Plotypus
         // *INDENT-ON*
 
         return true;
+    }
+
+    // ====================================================================== //
+
+    template<class T>
+    void DataView2D<T>::writePdfData(std::ofstream& hFile) const
+    {
+        if (func.empty())
+        {
+            hFile << .5;
+        }
+        else
+        {
+            hFile << func << " with " << style;
+            // *INDENT-OFF*
+            if (!label.empty()) {hFile << " title " << std::quoted(label);}
+            const auto lineStyleID = lineStyle + 1;
+            if (lineStyleID)    {hFile << " linestyle " << std::to_string(lineStyleID);}
+            // *INDENT-ON*
+        }
+        hFile << " ";
     }
 }

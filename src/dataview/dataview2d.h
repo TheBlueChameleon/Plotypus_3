@@ -25,7 +25,7 @@ namespace Plotypus
             std::string             func;
 
             // both
-            int lineStyle;
+            int lineStyle = -1;
 
         public:
             DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
@@ -50,6 +50,9 @@ namespace Plotypus
             void                            setLineStyle(int newLineStyle);
 
             bool complete() const;
+
+            // writers
+            virtual void writePdfData   (std::ofstream& hFile) const;
     };
 }
 
