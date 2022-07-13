@@ -111,7 +111,7 @@ namespace Plotypus
     // ====================================================================== //
 
 
-    void StylesCollection::writeBoxStyles(std::ofstream& hFile) const
+    void StylesCollection::writeBoxStyles(std::ostream &hFile) const
     {
         if (boxStyles.size())
         {
@@ -150,7 +150,7 @@ namespace Plotypus
         }
     }
 
-    void StylesCollection::writeLineStyles(std::ofstream& hFile) const
+    void StylesCollection::writeLineStyles(std::ostream &hFile) const
     {
         if (lineStyles.size())
         {

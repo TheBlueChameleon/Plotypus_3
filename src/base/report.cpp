@@ -39,7 +39,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    void Report::writeCleanSheetCommands(std::ofstream& hFile)
+    void Report::writeCleanSheetCommands(std::ostream& hFile)
     {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# prepare empty page" << std::endl << std::endl;
@@ -305,6 +305,26 @@ namespace Plotypus
             throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
         }
 
+        writeTxt(hFile);
+    }
+
+    void Report::writePdf()
+    {
+        const std::string filenameGnu = getOutputFilename(extGnu);
+        std::ofstream hFile(filenameGnu);
+
+        // *INDENT-OFF*
+        if (!hFile.is_open()) {throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));}
+
+        writePdf(hFile);
+        hFile.close();
+
+        if (autoRunScript) {runGnuplot(filenameGnu);}
+        // *INDENT-ON*
+    }
+
+    void Report::writeTxt(std::ostream& hFile)
+    {
         for (size_t i = 1u; auto sheet : sheets)
         {
             sheet->writeTxtHead  (hFile);
@@ -320,18 +340,20 @@ namespace Plotypus
         }
     }
 
-    void Report::writePdf()
+    void Report::writeTex(std::ostream& hFile)
     {
-        const std::string filenameGnu = getOutputFilename(extGnu),
-                          filenamePdf = getOutputFilename(extPdf);
-        std::ofstream hFile(filenameGnu);
 
-        if (!hFile.is_open())
-        {
-            throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));
-        }
+    }
 
-        bool needCleanSheetCommands = true;
+    void Report::writeDat(std::ostream& hFile)
+    {
+
+    }
+
+    void Report::writePdf(std::ostream& hFile)
+    {
+        std::string filenamePdf = getOutputFilename(extPdf);
+        bool        needCleanSheetCommands = true;
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
@@ -356,13 +378,6 @@ namespace Plotypus
             sheet->writePdfLabels(hFile);
             sheet->writePdfFooter(hFile, i);
             ++i;
-        }
-
-        hFile.close();
-
-        if (autoRunScript)
-        {
-            runGnuplot(filenameGnu);
         }
     }
 }

@@ -83,7 +83,7 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void Plot2D<T>::writePdfData(std::ofstream& hFile) const
+    void Plot2D<T>::writePdfData(std::ostream &hFile) const
     {
         Plot::writePdfData(hFile);
 
@@ -102,7 +102,7 @@ namespace Plotypus
     }
 
     template<class T>
-    void Plot2D<T>::writePdfFooter(std::ofstream& hFile, int pageNum) const
+    void Plot2D<T>::writePdfFooter(std::ostream &hFile, int pageNum) const
     {
         hFile << std::endl;
     }

@@ -52,7 +52,7 @@ namespace Plotypus
             bool complete() const;
 
             // writers
-            virtual void writePdfData   (std::ofstream& hFile) const;
+            virtual void writePdfData (std::ostream& hFile) const;
     };
 }
 

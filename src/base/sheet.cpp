@@ -112,7 +112,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void Sheet::writeTxtHead(std::ofstream& hFile) const
+    void Sheet::writeTxtHead(std::ostream& hFile) const
     {
         if (title.size())
         {
@@ -121,12 +121,12 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeTxtData(std::ofstream& hFile) const
+    void Sheet::writeTxtData(std::ostream& hFile) const
     {
 
     }
 
-    void Sheet::writeTxtLabels(std::ofstream& hFile) const
+    void Sheet::writeTxtLabels(std::ostream& hFile) const
     {
         for (const auto& label : labels)
         {
@@ -134,7 +134,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeTxtFooter(std::ofstream& hFile, int pageNum) const
+    void Sheet::writeTxtFooter(std::ostream& hFile, int pageNum) const
     {
         const int lineWidth = 80;
         const int spaces = pageNum ?
@@ -143,7 +143,7 @@ namespace Plotypus
         hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
     }
 
-    void Sheet::writePdfHead(std::ofstream& hFile) const
+    void Sheet::writePdfHead(std::ostream& hFile) const
     {
         if (customScriptBegin.size())
         {
@@ -160,7 +160,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void Sheet::writePdfData(std::ofstream& hFile) const
+    void Sheet::writePdfData(std::ostream& hFile) const
     {
         if (customScriptEnd.size())
         {
@@ -170,7 +170,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writePdfLabels(std::ofstream& hFile) const
+    void Sheet::writePdfLabels(std::ostream& hFile) const
     {
         /* cf. gnuplot 5.4 documentation, p. 159
          *
@@ -234,7 +234,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writePdfFooter(std::ofstream& hFile, int pageNum) const
+    void Sheet::writePdfFooter(std::ostream& hFile, int pageNum) const
     {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# dummy plot for empty page" << std::endl << std::endl;

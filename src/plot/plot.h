@@ -24,7 +24,7 @@ namespace Plotypus
 
         protected:
             static std::string generateRangeString(double min, double max);
-            void writeAxisDescriptor(std::ofstream& hFile, const std::string& axis, const AxisDescriptor& label) const;
+            void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
 
         public:
             Plot(const std::string& title);
@@ -51,7 +51,7 @@ namespace Plotypus
             void                setAspectRatio (double ratio);
 
             // writers
-            virtual void writePdfHead(std::ofstream& hFile) const;
+            virtual void writePdfHead(std::ostream& hFile) const;
     };
 
 }

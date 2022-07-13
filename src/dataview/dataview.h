@@ -28,7 +28,7 @@ namespace Plotypus
             void                setDataColumnFormatPositive();                            // shortcut: set format such that only positive values are plotted.
 
             // writers
-            virtual void writePdfData   (std::ofstream& hFile) const = 0;
+            virtual void writePdfData   (std::ostream& hFile) const = 0;
     };
 }
 

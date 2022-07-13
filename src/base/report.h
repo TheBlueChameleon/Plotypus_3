@@ -45,7 +45,7 @@ namespace Plotypus
 
             void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
             void runGnuplot(const std::string& filename) const;
-            void writeCleanSheetCommands(std::ofstream& hFile);
+            void writeCleanSheetCommands(std::ostream& hFile);
 
         public:
             Report();
@@ -115,6 +115,11 @@ namespace Plotypus
             void writeTex();
             void writeDat();
             void writePdf();
+
+            void writeTxt(std::ostream& hFile);
+            void writeTex(std::ostream& hFile);
+            void writeDat(std::ostream& hFile);
+            void writePdf(std::ostream& hFile);
     };
 
 }

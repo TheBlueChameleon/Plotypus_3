@@ -17,7 +17,7 @@ namespace Plotypus
                "]";
     }
 
-    void Plot::writeAxisDescriptor(std::ofstream& hFile, const std::string& axis, const AxisDescriptor& label) const
+    void Plot::writeAxisDescriptor(std::ostream &hFile, const std::string& axis, const AxisDescriptor& label) const
     {
         const std::string alabel = axis + "label";
         const std::string atics  = axis + "tics";
@@ -133,7 +133,7 @@ namespace Plotypus
         aspect = "ratio "s + std::to_string(ratio);
     }
 
-    void Plot::writePdfHead(std::ofstream& hFile) const
+    void Plot::writePdfHead(std::ostream &hFile) const
     {
         Sheet::writePdfHead(hFile);
 
