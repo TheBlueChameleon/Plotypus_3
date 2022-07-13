@@ -45,7 +45,8 @@ namespace Plotypus
         clearFunctionMembers();
         clearNonFunctionMembers();
 
-        lineStyle = -1;
+        lineStyle  = -1;
+        pointStyle = -1;
     }
 
     template<class T>
@@ -203,16 +204,44 @@ namespace Plotypus
     }
 
     template<class T>
-    bool DataView2D<T>::complete() const
+    bool DataView2D<T>::isDummy() const
+    {
+        if (
+            dataX.empty() &&
+            dataY.empty() &&
+            dataErrorX.empty() &&
+            dataErrorY.empty() &&
+            selectorX == nullptr &&
+            selectorY == nullptr &&
+            selectorErrorX == nullptr &&
+            selectorErrorY == nullptr
+        )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    template<class T>
+    bool DataView2D<T>::isComplete() const
     {
         // *INDENT-OFF*
+        if (isDummy()) {return true;}
+
         if (func.empty()) {
             const auto sizeX = dataX.size();
             const auto sizeY = dataY.size();
+            const auto sizeEX = dataErrorX.size();
+            const auto sizeEY = dataErrorY.size();
 
-            if (!sizeY)                     {return false;}
-            if (sizeX && (sizeX != sizeY))  {return false;}
-            if (!selectorY)                 {return false;}
+            if (!sizeY)                         {return false;}
+            if (sizeX  && (sizeX  != sizeY))    {return false;}
+            if (sizeEX && (sizeEX != sizeY))    {return false;}
+            if (sizeEY && (sizeEY != sizeY))    {return false;}
+            if (!selectorY)                     {return false;}
         }
         // *INDENT-ON*
 
@@ -222,23 +251,22 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void DataView2D<T>::writeScriptData(std::ostream& hFile) const
+    void DataView2D<T>::writeScriptData(std::ostream& hFile, const std::string& dataFileName) const
     {
-        if (func.empty())
-        {
-            hFile << .5;
-        }
-        else
-        {
-            hFile << func << " with " << style;
-            // *INDENT-OFF*
-            if (!label.empty()) {hFile << " title " << std::quoted(label);}
-            const auto lineStyleID = lineStyle + 1;
-            if (lineStyleID)    {hFile << " linestyle " << std::to_string(lineStyleID);}
+        // *INDENT-OFF*
+        if (func.empty())   {hFile << std::quoted(dataFileName);}
+        else                {hFile << func;}
 
-            if (!options.empty()) {hFile << " " << options;}
-            // *INDENT-ON*
-        }
+        hFile << " with " << style;
+        if (!label.empty()) {hFile << " title " << std::quoted(label);}
+
+        const auto lineStyleID = lineStyle + 1;
+        if (lineStyleID)    {hFile << " linestyle " << std::to_string(lineStyleID);}
+
+        if (pointStyle + 1) {/* stylesCollection from report? */};
+
+        if (!options.empty()) {hFile << " " << options;}
         hFile << " ";
+        // *INDENT-ON*
     }
 }

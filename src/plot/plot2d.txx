@@ -83,15 +83,15 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void Plot2D<T>::writeScriptData(std::ostream& hFile) const
+    void Plot2D<T>::writeScriptData(std::ostream& hFile, const std::string& dataFileName) const
     {
-        Plot::writeScriptData(hFile);
+        Plot::writeScriptData(hFile, dataFileName);
 
         hFile << "plot ";
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const DataView2D<T>& dataView : dataViews)
         {
-            dataView.writeScriptData(hFile);
+            dataView.writeScriptData(hFile, dataFileName);
             ++i;
             if (i < viewCount)
             {

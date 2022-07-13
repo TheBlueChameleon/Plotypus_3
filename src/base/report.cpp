@@ -236,10 +236,11 @@ namespace Plotypus
         extGnu = newExtGNU;
     }
 
-    std::string Report::getOutputFilename(const std::string& extension) const
+    std::string Report::getOutputFilename(const std::string& extension, const std::string& infix) const
     {
         fs::path p(outputDirectory);
         p.append(filenameBase);
+        p.concat(infix);
         p.concat(".");
         p.concat(extension);
 
@@ -354,7 +355,7 @@ namespace Plotypus
         // *INDENT-OFF*
         if (!hFile.is_open()) {throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));}
 
-        writeScritp(hFile);
+        writeScript(hFile);
         hFile.close();
 
         if (autoRunScript) {runGnuplot(filenameGnu);}
@@ -388,21 +389,24 @@ namespace Plotypus
 
     }
 
-    void Report::writeScritp(std::ostream& hFile)
+    void Report::writeScript(std::ostream& hFile)
     {
-        std::string filenamePdf = getOutputFilename(extOut);
-        bool        needCleanSheetCommands = true;
+        const std::string   outputFilename  = getOutputFilename(extOut);
+        bool                needCleanSheetCommands = true;
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
         hFile << "set term " << terminal << std::endl;
-        hFile << "set output '" << filenamePdf << "'" << std::endl << std::endl;
+        hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
 
         stylesCollection.writeBoxStyles (hFile);
         stylesCollection.writeLineStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)
         {
+            const std::string infix = "_" + std::to_string(i);
+            const std::string dataFilename = getOutputFilename(extDat, infix);
+
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
 
@@ -412,7 +416,7 @@ namespace Plotypus
             // *INDENT-ON*
 
             sheet->writeScriptHead  (hFile);
-            sheet->writeScriptData  (hFile);
+            sheet->writeScriptData  (hFile, dataFilename);
             sheet->writeScriptLabels(hFile);
             sheet->writeScriptFooter(hFile, i);
             ++i;

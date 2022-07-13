@@ -10,10 +10,13 @@ namespace Plotypus
         protected:
             std::string label;
             std::string style;
-            std::string dataColumnFormat = "#"; //! @todo support dataColumnFormat
+            std::string dataColumnFormat = "#";
             std::string options = "";
 
+            bool binaryDataOutput = true;
+
         public:
+            DataView(const std::string& label, const PlotStyle2D& style, const std::string& dataColumnFormat = "#");
             DataView(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
 
             virtual void reset();
@@ -29,11 +32,14 @@ namespace Plotypus
             void                setDataColumnFormat(const std::string& newDataColumnFormat);
             void                setDataColumnFormatPositive();                            // shortcut: set format such that only positive values are plotted.
 
+            bool                getBinaryDataOutput() const;
+            void                setBinaryDataOutput(bool newBinaryDataOutput);
+
             const std::string&  getOptions() const;
             void                setOptions(const std::string& newOptions);
 
             // writers
-            virtual void writeScriptData(std::ostream& hFile) const = 0;
+            virtual void writeScriptData(std::ostream& hFile, const std::string& dataFileName) const = 0;
     };
 }
 

@@ -95,7 +95,7 @@ namespace Plotypus
             const std::string&  getExtGnu() const;
             void                setExtGnu(const std::string& newExtGNU);
 
-            std::string         getOutputFilename(const std::string& extension) const;
+            std::string         getOutputFilename(const std::string& extension, const std::string& infix = "") const;
 
             bool                getVerbose() const;
             void                setVerbose(bool newVerbose);
@@ -128,7 +128,7 @@ namespace Plotypus
             void writeTxt   (std::ostream& hFile);
             void writeTex   (std::ostream& hFile);
             void writeDat   (std::ostream& hFile);
-            void writeScritp(std::ostream& hFile);
+            void writeScript(std::ostream& hFile);
     };
 
 }

@@ -27,17 +27,23 @@ namespace Plotypus
             DataSelector<T>    selectorErrorX;
             DataSelector<T>    selectorErrorY;
 
+            // TODO: add columns 5+6 for method arrows
+
+            // TODO: using clause
+
             // function view
             std::string func;
 
             // both
-            int lineStyle = -1;
+            int lineStyle  = -1;
+            int pointStyle = -1;
 
             // internal
             void clearFunctionMembers();
             void clearNonFunctionMembers();
 
         public:
+            // TODO: PlotStyle2D CTor
             DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
 
             virtual void reset();
@@ -76,10 +82,11 @@ namespace Plotypus
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
 
-            bool complete() const;
+            bool isDummy() const;
+            bool isComplete() const; // TODO: update
 
             // writers
-            virtual void writeScriptData (std::ostream& hFile) const;
+            virtual void writeScriptData (std::ostream& hFile, const std::string& dataFileName) const;
     };
 }
 

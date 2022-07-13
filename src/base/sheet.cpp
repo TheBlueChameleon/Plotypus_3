@@ -134,7 +134,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeTxtFooter(std::ostream& hFile, int pageNum) const
+    void Sheet::writeTxtFooter(std::ostream& hFile, const int pageNum) const
     {
         const int lineWidth = 80;
         const int spaces = pageNum ?
@@ -161,7 +161,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeScriptData(std::ostream& hFile) const {}
+    void Sheet::writeScriptData(std::ostream& hFile, const std::string &dataFileName) const {}
 
     void Sheet::writeScriptLabels(std::ostream& hFile) const
     {
@@ -210,7 +210,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeScriptFooter(std::ostream& hFile, int pageNum) const
+    void Sheet::writeScriptFooter(std::ostream& hFile, const int pageNum) const
     {
         if (customScriptEnd.size())
         {

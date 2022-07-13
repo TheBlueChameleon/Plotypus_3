@@ -33,7 +33,7 @@ namespace Plotypus
             size_t          addDataView(const std::string& func, const std::string& label = "");
 
             // writers
-            virtual void writeScriptData   (std::ostream& hFile) const;
+            virtual void writeScriptData   (std::ostream& hFile, const std::string& dataFileName) const;
             virtual void writeScriptFooter (std::ostream& hFile, int pageNum) const;
     };
 }

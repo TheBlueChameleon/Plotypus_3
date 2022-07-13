@@ -55,12 +55,12 @@ namespace Plotypus
             virtual void writeTxtHead       (std::ostream& hFile) const;
             virtual void writeTxtData       (std::ostream& hFile) const;
             virtual void writeTxtLabels     (std::ostream& hFile) const;
-            virtual void writeTxtFooter     (std::ostream& hFile, int pageNum) const;
+            virtual void writeTxtFooter     (std::ostream& hFile, const int pageNum) const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
-            virtual void writeScriptData    (std::ostream& hFile) const;
+            virtual void writeScriptData    (std::ostream& hFile, const std::string& dataFileName) const;
             virtual void writeScriptLabels  (std::ostream& hFile) const;
-            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
+            virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };
 }
 

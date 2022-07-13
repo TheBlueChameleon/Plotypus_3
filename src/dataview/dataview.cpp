@@ -4,6 +4,44 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
+    DataView::DataView(const std::string& label, const PlotStyle2D& style, const std::string& dataColumnFormat) :
+        label(label), dataColumnFormat(dataColumnFormat)
+    {
+        switch (style)
+        {
+            case PlotStyle2D::Lines:
+                this->style = "lines";
+                break;
+            case PlotStyle2D::Points:
+                this->style = "points";
+                break;
+            case PlotStyle2D::LinesPoints:
+                this->style = "linespoints";
+                break;
+            case PlotStyle2D::Dots:
+                this->style = "dots";
+                break;
+            case PlotStyle2D::FilledCurves:
+                this->style = "filledcurves";
+                break;
+            case PlotStyle2D::Steps:
+                this->style = "steps";
+                break;
+            case PlotStyle2D::FSteps:
+                this->style = "fsteps";
+                break;
+            case PlotStyle2D::FillSteps:
+                this->style = "fillsteps";
+                break;
+            case PlotStyle2D::Boxes:
+                this->style = "boxes";
+                break;
+            case PlotStyle2D::Arrows:
+                this->style = "arrows";
+                break;
+        }
+    }
+
     DataView::DataView(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
         label(label), style(style), dataColumnFormat(dataColumnFormat)
     {}
@@ -14,6 +52,7 @@ namespace Plotypus
         style               = "";
         dataColumnFormat    = "#";
         options             = "";
+        binaryDataOutput    = true;
     }
 
     const std::string& DataView::getLabel() const
@@ -68,6 +107,16 @@ namespace Plotypus
     void DataView::setDataColumnFormatPositive()
     {
         dataColumnFormat = "($# >= 0 ? $# : 1/0)";
+    }
+
+    bool DataView::getBinaryDataOutput() const
+    {
+        return binaryDataOutput;
+    }
+
+    void DataView::setBinaryDataOutput(bool newBinaryDataOutput)
+    {
+        binaryDataOutput = newBinaryDataOutput;
     }
 
     const std::string& DataView::getOptions() const
