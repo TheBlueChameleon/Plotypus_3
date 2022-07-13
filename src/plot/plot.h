@@ -51,7 +51,7 @@ namespace Plotypus
             void                setAspectRatio (double ratio);
 
             // writers
-            virtual void writePdfHead(std::ostream& hFile) const;
+            virtual void writeScriptHead(std::ostream& hFile) const;
     };
 
 }

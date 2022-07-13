@@ -33,7 +33,7 @@ namespace Plotypus
             void                setOptions(const std::string& newOptions);
 
             // writers
-            virtual void writePdfData   (std::ostream& hFile) const = 0;
+            virtual void writeScriptData(std::ostream& hFile) const = 0;
     };
 }
 

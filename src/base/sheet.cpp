@@ -143,7 +143,7 @@ namespace Plotypus
         hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
     }
 
-    void Sheet::writePdfHead(std::ostream& hFile) const
+    void Sheet::writeScriptHead(std::ostream& hFile) const
     {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
@@ -161,9 +161,9 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writePdfData(std::ostream& hFile) const {}
+    void Sheet::writeScriptData(std::ostream& hFile) const {}
 
-    void Sheet::writePdfLabels(std::ostream& hFile) const
+    void Sheet::writeScriptLabels(std::ostream& hFile) const
     {
         if (labels.size())
         {
@@ -210,7 +210,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writePdfFooter(std::ostream& hFile, int pageNum) const
+    void Sheet::writeScriptFooter(std::ostream& hFile, int pageNum) const
     {
         if (customScriptEnd.size())
         {

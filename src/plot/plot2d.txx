@@ -83,9 +83,9 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void Plot2D<T>::writePdfData(std::ostream &hFile) const
+    void Plot2D<T>::writeScriptData(std::ostream &hFile) const
     {
-        Plot::writePdfData(hFile);
+        Plot::writeScriptData(hFile);
 
         hFile << "plot ";
         const auto viewCount = dataViews.size();
@@ -102,7 +102,7 @@ namespace Plotypus
     }
 
     template<class T>
-    void Plot2D<T>::writePdfFooter(std::ostream &hFile, int pageNum) const
+    void Plot2D<T>::writeScriptFooter(std::ostream &hFile, int pageNum) const
     {
         hFile << std::endl;
     }

@@ -52,15 +52,15 @@ namespace Plotypus
             void                            clearLabels();
 
             // writers
-            virtual void writeTxtHead   (std::ostream& hFile) const;
-            virtual void writeTxtData   (std::ostream& hFile) const;
-            virtual void writeTxtLabels (std::ostream& hFile) const;
-            virtual void writeTxtFooter (std::ostream& hFile, int pageNum) const;
+            virtual void writeTxtHead       (std::ostream& hFile) const;
+            virtual void writeTxtData       (std::ostream& hFile) const;
+            virtual void writeTxtLabels     (std::ostream& hFile) const;
+            virtual void writeTxtFooter     (std::ostream& hFile, int pageNum) const;
 
-            virtual void writePdfHead   (std::ostream& hFile) const;
-            virtual void writePdfData   (std::ostream& hFile) const;
-            virtual void writePdfLabels (std::ostream& hFile) const;
-            virtual void writePdfFooter (std::ostream& hFile, int pageNum) const;
+            virtual void writeScriptHead    (std::ostream& hFile) const;
+            virtual void writeScriptData    (std::ostream& hFile) const;
+            virtual void writeScriptLabels  (std::ostream& hFile) const;
+            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
     };
 }
 

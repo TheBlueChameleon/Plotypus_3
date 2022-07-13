@@ -99,7 +99,7 @@ void playground ()
     s4.dataView(2).setLineStyle(0);
 
     r.writeTxt();
-    r.writePdf();
+    r.writeScript();
 }
 
 // ========================================================================== //

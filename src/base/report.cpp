@@ -308,7 +308,7 @@ namespace Plotypus
         writeTxt(hFile);
     }
 
-    void Report::writePdf()
+    void Report::writeScript()
     {
         const std::string filenameGnu = getOutputFilename(extGnu);
         std::ofstream hFile(filenameGnu);
@@ -316,7 +316,7 @@ namespace Plotypus
         // *INDENT-OFF*
         if (!hFile.is_open()) {throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));}
 
-        writePdf(hFile);
+        writeScritp(hFile);
         hFile.close();
 
         if (autoRunScript) {runGnuplot(filenameGnu);}
@@ -350,7 +350,7 @@ namespace Plotypus
 
     }
 
-    void Report::writePdf(std::ostream& hFile)
+    void Report::writeScritp(std::ostream& hFile)
     {
         std::string filenamePdf = getOutputFilename(extPdf);
         bool        needCleanSheetCommands = true;
@@ -373,10 +373,10 @@ namespace Plotypus
             } else if                    (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
             // *INDENT-ON*
 
-            sheet->writePdfHead  (hFile);
-            sheet->writePdfData  (hFile);
-            sheet->writePdfLabels(hFile);
-            sheet->writePdfFooter(hFile, i);
+            sheet->writeScriptHead  (hFile);
+            sheet->writeScriptData  (hFile);
+            sheet->writeScriptLabels(hFile);
+            sheet->writeScriptFooter(hFile, i);
             ++i;
         }
     }

@@ -111,15 +111,15 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            void writeTxt();
-            void writeTex();
-            void writeDat();
-            void writePdf();
+            void writeTxt   ();
+            void writeTex   ();
+            void writeDat   ();
+            void writeScript();
 
-            void writeTxt(std::ostream& hFile);
-            void writeTex(std::ostream& hFile);
-            void writeDat(std::ostream& hFile);
-            void writePdf(std::ostream& hFile);
+            void writeTxt   (std::ostream& hFile);
+            void writeTex   (std::ostream& hFile);
+            void writeDat   (std::ostream& hFile);
+            void writeScritp(std::ostream& hFile);
     };
 
 }

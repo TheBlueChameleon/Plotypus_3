@@ -160,7 +160,7 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void DataView2D<T>::writePdfData(std::ostream& hFile) const
+    void DataView2D<T>::writeScriptData(std::ostream& hFile) const
     {
         if (func.empty())
         {
