@@ -45,14 +45,11 @@ bool unittest_report()
     UNITTEST_DOESNT_THROW(r.sheet(0),
                           std::exception,
                           "access existing sheet (positive index)");
-    UNITTEST_DOESNT_THROW(r.sheet(-1),
-                          std::exception,
-                          "access existing sheet (negative index)");
     UNITTEST_THROWS(r.sheet(2),
                     Plotypus::InvalidIndexError,
                     "prevent out of scope index access (positive index)"
                    );
-    UNITTEST_THROWS(r.sheet(-3),
+    UNITTEST_THROWS(r.sheet(-1),
                     Plotypus::InvalidIndexError,
                     "prevent out of scope index access (negative index)"
                    );
