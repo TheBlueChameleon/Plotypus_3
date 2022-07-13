@@ -17,48 +17,64 @@ namespace Plotypus
     {
         protected:
             // data view
-            std::span<const double> dataX;
-            std::span<const T>      dataY;
-            std::span<const T>      dataErrorX;
-            std::span<const T>      dataErrorY;
+            std::span<const T> dataX;
+            std::span<const T> dataY;
+            std::span<const T> dataErrorX;
+            std::span<const T> dataErrorY;
 
-            DataSelector<T>         selector;
+            DataSelector<T>    selectorX;
+            DataSelector<T>    selectorY;
+            DataSelector<T>    selectorErrorX;
+            DataSelector<T>    selectorErrorY;
 
             // function view
-            std::string             func;
+            std::string func;
 
             // both
             int lineStyle = -1;
+
+            // internal
+            void clearFunctionMembers();
+            void clearNonFunctionMembers();
 
         public:
             DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
 
             virtual void reset();
 
-            const std::span<const double>&  getDataX() const;
-            void                            setDataX(const std::span<const double>& newData);
-            void                            setDataX(const double* newData, size_t N);
+            const std::span<const T>&   getDataX() const;
+            void                        setDataX(const std::span<const T>& newData);
+            void                        setDataX(const T* newData, size_t N);
 
-            const std::span<const T>&       getDataY() const;
-            void                            setDataY(const std::span<const T>& newData);
-            void                            setDataY(const T* newData, size_t N);
+            const std::span<const T>&   getDataY() const;
+            void                        setDataY(const std::span<const T>& newData);
+            void                        setDataY(const T* newData, size_t N);
 
-            const std::span<const T>&       getDataErrorX() const;
-            void                            setDataErrorX(const std::span<const T>& newDataErrorX);
-            void                            setDataErrorX(const T* newData, size_t N);
+            const std::span<const T>&   getDataErrorX() const;
+            void                        setDataErrorX(const std::span<const T>& newDataErrorX);
+            void                        setDataErrorX(const T* newData, size_t N);
 
-            const std::span<const T>&       getDataErrorY() const;
-            void                            setDataErrorY(const std::span<const T>& newDataErrorY);
-            void                            setDataErrorY(const T* newData, size_t N);
+            const std::span<const T>&   getDataErrorY() const;
+            void                        setDataErrorY(const std::span<const T>& newDataErrorY);
+            void                        setDataErrorY(const T* newData, size_t N);
 
-            const DataSelector<T>&          getSelector() const;
-            void                            setSelector(const DataSelector<T>& newSelector);
+            const DataSelector<T>&      getSelectorX() const;
+            void                        setSelectorX(const DataSelector<T>& newSelector);
 
-            const std::string&              getFunc() const;
-            void                            setFunc(const std::string& newFunc);
+            const DataSelector<T>&      getSelectorY() const;
+            void                        setSelectorY(const DataSelector<T>& newSelector);
 
-            int                             getLineStyle() const;
-            void                            setLineStyle(int newLineStyle);
+            const DataSelector<T>&      getSelectorErrorX() const;
+            void                        setSelectorErrorX(const DataSelector<T>& newSelectorErrorX);
+
+            const DataSelector<T>&      getSelectorErrorY() const;
+            void                        setSelectorErrorY(const DataSelector<T>& newSelectorErrorY);
+
+            const std::string&          getFunc() const;
+            void                        setFunc(const std::string& newFunc);
+
+            int                         getLineStyle() const;
+            void                        setLineStyle(int newLineStyle);
 
             bool complete() const;
 

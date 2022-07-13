@@ -13,6 +13,26 @@ using namespace Plotypus;
 namespace Plotypus
 {
     template<class T>
+    void DataView2D<T>::clearFunctionMembers()
+    {
+        func = "";
+    }
+
+    template<class T>
+    void DataView2D<T>::clearNonFunctionMembers()
+    {
+        dataX      = std::span<T>();
+        dataY      = std::span<T>();
+        dataErrorX = std::span<T>();
+        dataErrorY = std::span<T>();
+
+        selectorX      = nullptr;
+        selectorY      = nullptr;
+        selectorErrorX = nullptr;
+        selectorErrorY = nullptr;
+    }
+
+    template<class T>
     DataView2D<T>::DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
         DataView(label, style, dataColumnFormat)
     {}
@@ -22,26 +42,27 @@ namespace Plotypus
     {
         DataView::reset();
 
-        dataY        = std::span<T>();
-        selector    = std::function<double (const T)>();
-        func        = "";
+        clearFunctionMembers();
+        clearNonFunctionMembers();
+
+        lineStyle = -1;
     }
 
     template<class T>
-    const std::span<const double>& DataView2D<T>::getDataX() const
+    const std::span<const T>& DataView2D<T>::getDataX() const
     {
         return dataX;
     }
 
     template<class T>
-    void DataView2D<T>::setDataX(const std::span<const double>& newData)
+    void DataView2D<T>::setDataX(const std::span<const T>& newData)
     {
         dataX = newData;
-        func = "";
+        clearFunctionMembers();
     }
 
     template<class T>
-    void DataView2D<T>::setDataX(const double* newData, size_t N)
+    void DataView2D<T>::setDataX(const T* newData, size_t N)
     {
         setDataX( std::span<const T>(newData, newData + N) );
     }
@@ -56,7 +77,7 @@ namespace Plotypus
     void DataView2D<T>::setDataY(const std::span<const T>& newData)
     {
         dataY = newData;
-        func = "";
+        clearFunctionMembers();
     }
 
     template<class T>
@@ -75,6 +96,7 @@ namespace Plotypus
     void DataView2D<T>::setDataErrorY(const std::span<const T>& newDataErrorY)
     {
         dataErrorY = newDataErrorY;
+        clearFunctionMembers();
     }
 
     template<class T>
@@ -93,6 +115,7 @@ namespace Plotypus
     inline void DataView2D<T>::setDataErrorX(const std::span<const T>& newDataErrorX)
     {
         dataErrorX = newDataErrorX;
+        clearFunctionMembers();
     }
 
     template<class T>
@@ -102,16 +125,56 @@ namespace Plotypus
     }
 
     template<class T>
-    const DataSelector<T>& DataView2D<T>::getSelector() const
+    const DataSelector<T>& DataView2D<T>::getSelectorX() const
     {
-        return selector;
+        return selectorX;
     }
 
     template<class T>
-    void DataView2D<T>::setSelector(const DataSelector<T>& newSelector)
+    void DataView2D<T>::setSelectorX(const DataSelector<T>& newSelector)
     {
-        selector    = newSelector;
-        func        = "";
+        selectorX   = newSelector;
+        clearFunctionMembers();
+    }
+
+    template<class T>
+    const DataSelector<T>& DataView2D<T>::getSelectorY() const
+    {
+        return selectorY;
+    }
+
+    template<class T>
+    void DataView2D<T>::setSelectorY(const DataSelector<T>& newSelector)
+    {
+        selectorY   = newSelector;
+        clearFunctionMembers();
+    }
+
+    template<class T>
+    const DataSelector<T>& DataView2D<T>::getSelectorErrorX() const
+    {
+        return selectorErrorX;
+    }
+
+
+    template<class T>
+    void DataView2D<T>::setSelectorErrorX(const DataSelector<T>& newSelectorErrorX)
+    {
+        selectorErrorX = newSelectorErrorX;
+        clearFunctionMembers();
+    }
+
+    template<class T>
+    const DataSelector<T>& DataView2D<T>::getSelectorErrorY() const
+    {
+        return selectorErrorY;
+    }
+
+    template<class T>
+    void DataView2D<T>::setSelectorErrorY(const DataSelector<T>& newSelectorErrorY)
+    {
+        selectorErrorY = newSelectorErrorY;
+        clearFunctionMembers();
     }
 
     template<class T>
@@ -124,8 +187,7 @@ namespace Plotypus
     void DataView2D<T>::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
-        dataY        = std::span<T>();
-        selector    = std::function<double (const T)>();
+        clearNonFunctionMembers();
     }
 
     template<class T>
@@ -150,7 +212,7 @@ namespace Plotypus
 
             if (!sizeY)                     {return false;}
             if (sizeX && (sizeX != sizeY))  {return false;}
-            if (!selector)                  {return false;}
+            if (!selectorY)                 {return false;}
         }
         // *INDENT-ON*
 

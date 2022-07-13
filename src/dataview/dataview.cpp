@@ -13,6 +13,7 @@ namespace Plotypus
         label               = "";
         style               = "";
         dataColumnFormat    = "#";
+        options             = "";
     }
 
     const std::string& DataView::getLabel() const

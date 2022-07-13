@@ -53,7 +53,7 @@ namespace Plotypus
         DataView2D<T> dataView(label, "lines");
 
         dataView.setDataY   (dataY);
-        dataView.setSelector(selector);
+        dataView.setSelectorY(selector);
 
         return addDataView(dataView);
     }
@@ -65,7 +65,7 @@ namespace Plotypus
 
         dataView.setDataX   (dataX);
         dataView.setDataY   (dataY);
-        dataView.setSelector(selector);
+        dataView.setSelectorY(selector);
 
         return addDataView(dataView);
     }

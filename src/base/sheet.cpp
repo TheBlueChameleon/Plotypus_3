@@ -26,7 +26,7 @@ namespace Plotypus
         customScriptBegin = "";
         customScriptEnd   = "";
 
-        labels   .clear();
+        labels.clear();
     }
 
     const std::string& Sheet::getTitle() const

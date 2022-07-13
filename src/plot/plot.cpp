@@ -17,7 +17,7 @@ namespace Plotypus
                "]";
     }
 
-    void Plot::writeAxisDescriptor(std::ostream &hFile, const std::string& axis, const AxisDescriptor& label) const
+    void Plot::writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const
     {
         const std::string alabel = axis + "label";
         const std::string atics  = axis + "tics";
@@ -45,12 +45,14 @@ namespace Plotypus
     {
         Sheet::reset();
 
-        xAxis = {"x"};
-        yAxis = {"y"};
+        xAxis       = {"x"};
+        yAxis       = {"y"};
 
-        key     = true;
-        border  = true;
-        aspect  = "ratio -1";
+        key         = true;
+        border      = true;
+        parametric  = false;
+        polar       = false;
+        aspect      = "ratio -1";
     }
 
     AxisDescriptor& Plot::getXAxis()
@@ -133,7 +135,7 @@ namespace Plotypus
         aspect = "ratio "s + std::to_string(ratio);
     }
 
-    void Plot::writeScriptHead(std::ostream &hFile) const
+    void Plot::writeScriptHead(std::ostream& hFile) const
     {
         Sheet::writeScriptHead(hFile);
 
