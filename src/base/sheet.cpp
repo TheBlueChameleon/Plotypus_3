@@ -145,48 +145,26 @@ namespace Plotypus
 
     void Sheet::writePdfHead(std::ostream& hFile) const
     {
-        if (customScriptBegin.size())
-        {
-            hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script I" << std::endl << std::endl;
-            hFile << customScriptBegin << std::endl;
-        }
-
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
 
         hFile << "set font \"" << defaultFont << "\"" << std::endl;
         hFile << "set title \"" << title << "\"" << std::endl;
         hFile << std::endl;
-    }
 
-    void Sheet::writePdfData(std::ostream& hFile) const
-    {
-        if (customScriptEnd.size())
+        if (customScriptBegin.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script II" << std::endl << std::endl;
-            hFile << customScriptEnd << std::endl;
+            hFile << "# custom setup script I" << std::endl << std::endl;
+            hFile << customScriptBegin << std::endl;
+            hFile << std::endl;
         }
     }
 
+    void Sheet::writePdfData(std::ostream& hFile) const {}
+
     void Sheet::writePdfLabels(std::ostream& hFile) const
     {
-        /* cf. gnuplot 5.4 documentation, p. 159
-         *
-         * set label {<tag>} {"<label text>"} {at <position>}
-         *           {left | center | right}
-         *           {norotate | rotate {by <degrees>}}
-         *           {font "<name>{,<size>}"}
-         *           {noenhanced}
-         *           {front | back}
-         *           {textcolor <colorspec>}
-         *           {point <pointstyle> | nopoint}
-         *           {offset <offset>}
-         *           {nobox} {boxed {bs <boxstyle>}}
-         *           {hypertext}
-         */
-
         if (labels.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
@@ -208,8 +186,6 @@ namespace Plotypus
                  *           {nobox} {boxed {bs <boxstyle>}}
                  *           {hypertext}
                  */
-
-
 
                 hFile << "set label ";
                 hFile << (label.ID               ? std::to_string(label.ID) + " "                     : ""s);
@@ -236,6 +212,14 @@ namespace Plotypus
 
     void Sheet::writePdfFooter(std::ostream& hFile, int pageNum) const
     {
+        if (customScriptEnd.size())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom setup script II" << std::endl << std::endl;
+            hFile << customScriptEnd << std::endl;
+            hFile << std::endl;
+        }
+
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# dummy plot for empty page" << std::endl << std::endl;
 
@@ -245,5 +229,4 @@ namespace Plotypus
     }
 
     // ====================================================================== //
-
 }
