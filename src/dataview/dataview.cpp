@@ -68,4 +68,15 @@ namespace Plotypus
     {
         dataColumnFormat = "($# >= 0 ? $# : 1/0)";
     }
+
+    const std::string& DataView::getOptions() const
+    {
+        return options;
+    }
+
+    void DataView::setOptions(const std::string& newOptions)
+    {
+        options = newOptions;
+    }
+
 }
