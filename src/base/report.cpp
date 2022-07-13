@@ -70,6 +70,9 @@ namespace Plotypus
 
     void Report::reset()
     {
+        fileType = FileType::Pdf;
+        terminal = "pdfcairo";
+
         for (auto ptr : sheets)
         {
             delete ptr;
@@ -82,7 +85,7 @@ namespace Plotypus
         extTxt = "txt";
         extDat = "dat";
         extTex = "tex";
-        extPdf = "pdf";
+        extOut = "pdf";
         extGnu = "gnuplot";
 
         verbose       = true;
@@ -120,6 +123,41 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    FileType Report::getFileType() const
+    {
+        return fileType;
+    }
+
+    void Report::setFileType(FileType newFileType)
+    {
+        fileType = newFileType;
+        switch (newFileType)
+        {
+            case FileType::Pdf:
+                terminal = "pdfcairo";
+                extOut = "pdf";
+                break;
+            case FileType::Png:
+                terminal = "pngcairo";
+                extOut = "png";
+                break;
+            case FileType::PostScript:
+                terminal = "epscairo";
+                extOut = "eps";
+                break;
+        }
+    }
+
+    const std::string& Report::getTerminal() const
+    {
+        return terminal;
+    }
+
+    void Report::setTerminal(const std::string& newTerminal)
+    {
+        terminal = newTerminal;
+    }
 
     const char* Report::getInvalidFilenameChars() const
     {
@@ -176,15 +214,15 @@ namespace Plotypus
         extTex = newExtTEX;
     }
 
-    const std::string& Report::getExtPdf() const
+    const std::string& Report::getExtOut() const
     {
-        return extPdf;
+        return extOut;
     }
 
-    void Report::setExtPdf(const std::string& newExtPDF)
+    void Report::setExtOut(const std::string& newExtPDF)
     {
         throwIfInvalidFilename("extension for PDF files", newExtPDF);
-        extPdf = newExtPDF;
+        extOut = newExtPDF;
     }
 
     const std::string& Report::getExtGnu() const
@@ -352,12 +390,12 @@ namespace Plotypus
 
     void Report::writeScritp(std::ostream& hFile)
     {
-        std::string filenamePdf = getOutputFilename(extPdf);
+        std::string filenamePdf = getOutputFilename(extOut);
         bool        needCleanSheetCommands = true;
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
-        hFile << "set term pdfcairo" << std::endl;
+        hFile << "set term " << terminal << std::endl;
         hFile << "set output '" << filenamePdf << "'" << std::endl << std::endl;
 
         stylesCollection.writeBoxStyles (hFile);

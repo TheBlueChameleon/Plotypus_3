@@ -10,6 +10,17 @@ namespace Plotypus
 //! @addtogroup Platypus_Definitions
 //! @{
 
+// ====================================================================== //
+    /**
+     * @brief specifies script output data type
+     */
+    enum class FileType
+    {
+        Pdf,
+        Png,
+        PostScript
+    };
+
     // ====================================================================== //
     /**
      * @brief internally used specifyer of data format

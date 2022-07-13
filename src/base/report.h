@@ -16,17 +16,20 @@ namespace Plotypus
     class Report
     {
         private:
+            FileType fileType = FileType::Pdf;
+            std::string terminal = "pdfcairo";
+
             std::vector<Plotypus::Sheet*> sheets;
 
             constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
 
-            std::string outputDirectory;
-            std::string filenameBase = "report";
+            std::string outputDirectory = "";
+            std::string filenameBase    = "report";
 
             std::string extTxt = "txt";
             std::string extDat = "dat";
             std::string extTex = "tex";
-            std::string extPdf = "pdf";
+            std::string extOut = "pdf";
             std::string extGnu = "gnuplot";
 
             bool verbose       = true;
@@ -68,6 +71,12 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // file output specs
 
+            FileType            getFileType() const;
+            void                setFileType(FileType newFileType);
+
+            const std::string&  getTerminal() const;
+            void                setTerminal(const std::string& newTerminal);
+
             const char*         getInvalidFilenameChars() const;
 
             const std::string&  getOutputDirectory() const;
@@ -81,8 +90,8 @@ namespace Plotypus
             void                setExtDat(const std::string& newExtDAT);
             const std::string&  getExtTex() const;
             void                setExtTex(const std::string& newExtTEX);
-            const std::string&  getExtPdf() const;
-            void                setExtPdf(const std::string& newExtPDF);
+            const std::string&  getExtOut() const;
+            void                setExtOut(const std::string& newExtPDF);
             const std::string&  getExtGnu() const;
             void                setExtGnu(const std::string& newExtGNU);
 
