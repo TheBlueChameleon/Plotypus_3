@@ -22,6 +22,7 @@ namespace Plotypus
 
             const std::string&  getStyle() const;
             void                setStyle(const std::string& newStyle);
+            void                setStyle(const PlotStyle2D& newStyle);
 
             const std::string&  getDataColumnFormat() const;
             void                setDataColumnFormat(const std::string& newDataColumnFormat);

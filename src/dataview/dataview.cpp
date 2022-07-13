@@ -35,6 +35,25 @@ namespace Plotypus
         style = newStyle;
     }
 
+    void DataView::setStyle(const PlotStyle2D& newStyle)
+    {
+        // *INDENT-OFF*
+        switch (newStyle)
+        {
+            case PlotStyle2D::Lines:        style = "lines"         ; break;
+            case PlotStyle2D::Points:       style = "points"        ; break;
+            case PlotStyle2D::LinesPoints:  style = "linespoints"   ; break;
+            case PlotStyle2D::Dots:         style = "dots"          ; break;
+            case PlotStyle2D::FilledCurves: style = "filledcurves"  ; break;
+            case PlotStyle2D::Steps:        style = "steps"         ; break;
+            case PlotStyle2D::FSteps:       style = "fsteps"        ; break;
+            case PlotStyle2D::FillSteps:    style = "fillsteps"     ; break;
+            case PlotStyle2D::Boxes:        style = "boxes"         ; break;
+            case PlotStyle2D::Arrows:       style = "arrows"        ; break;
+        }
+        // *INDENT-ON*
+    }
+
     const std::string& DataView::getDataColumnFormat() const
     {
         return dataColumnFormat;

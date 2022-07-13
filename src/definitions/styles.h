@@ -8,6 +8,37 @@ namespace Plotypus
 {
 //! @addtogroup Platypus_Definitions
 //! @{
+//!
+    // ========================================================================== //
+    /**
+     * @brief Sheet element: Plot Style for 2D plots
+     */
+    enum class PlotStyle2D
+    {
+        Lines,
+        Points,
+        LinesPoints,
+        Dots,
+        FilledCurves,
+        Steps,
+        FSteps,
+        FillSteps,
+        Boxes,
+        Arrows,
+    };
+
+
+    // ========================================================================== //
+    /**
+     * @brief Sheet element: Plot Style for 3D plots
+     */
+
+    enum class PlotStyle3D
+    {
+        Lines,
+        Surface,
+        Image
+    };
 
     // ========================================================================== //
     /**
