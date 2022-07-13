@@ -66,6 +66,42 @@ namespace Plotypus
     }
 
     template<class T>
+    const std::span<const T>& DataView2D<T>::getDataErrorY() const
+    {
+        return dataErrorY;
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataErrorY(const std::span<const T>& newDataErrorY)
+    {
+        dataErrorY = newDataErrorY;
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataErrorY(const T* newData, size_t N)
+    {
+        setDataErrorY( std::span<const T>(newData, newData + N) );
+    }
+
+    template<class T>
+    const std::span<const T>& DataView2D<T>::getDataErrorX() const
+    {
+        return dataErrorX;
+    }
+
+    template<class T>
+    inline void DataView2D<T>::setDataErrorX(const std::span<const T>& newDataErrorX)
+    {
+        dataErrorX = newDataErrorX;
+    }
+
+    template<class T>
+    void DataView2D<T>::setDataErrorX(const T* newData, size_t N)
+    {
+        setDataErrorX( std::span<const T>(newData, newData + N) );
+    }
+
+    template<class T>
     const DataSelector<T>& DataView2D<T>::getSelector() const
     {
         return selector;
@@ -137,6 +173,8 @@ namespace Plotypus
             if (!label.empty()) {hFile << " title " << std::quoted(label);}
             const auto lineStyleID = lineStyle + 1;
             if (lineStyleID)    {hFile << " linestyle " << std::to_string(lineStyleID);}
+
+            if (!options.empty()) {hFile << " " << options;}
             // *INDENT-ON*
         }
         hFile << " ";

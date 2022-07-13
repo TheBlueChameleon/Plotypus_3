@@ -19,6 +19,9 @@ namespace Plotypus
             // data view
             std::span<const double> dataX;
             std::span<const T>      dataY;
+            std::span<const T>      dataErrorX;
+            std::span<const T>      dataErrorY;
+
             DataSelector<T>         selector;
 
             // function view
@@ -39,6 +42,14 @@ namespace Plotypus
             const std::span<const T>&       getDataY() const;
             void                            setDataY(const std::span<const T>& newData);
             void                            setDataY(const T* newData, size_t N);
+
+            const std::span<const T>&       getDataErrorX() const;
+            void                            setDataErrorX(const std::span<const T>& newDataErrorX);
+            void                            setDataErrorX(const T* newData, size_t N);
+
+            const std::span<const T>&       getDataErrorY() const;
+            void                            setDataErrorY(const std::span<const T>& newDataErrorY);
+            void                            setDataErrorY(const T* newData, size_t N);
 
             const DataSelector<T>&          getSelector() const;
             void                            setSelector(const DataSelector<T>& newSelector);
