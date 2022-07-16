@@ -111,6 +111,9 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+    // writers
+
+    void Sheet::preprocessSheet(const std::string& autoDataFilename, const std::string &extension) const {}
 
     void Sheet::writeTxtHead(std::ostream& hFile) const
     {

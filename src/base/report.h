@@ -8,6 +8,7 @@
 #include "../definitions/types.h"
 #include "../plot/plot2d.h"
 
+#include "util.h"
 #include "sheet.h"
 #include "stylescollection.h"
 
@@ -21,14 +22,11 @@ namespace Plotypus
 
             std::vector<Plotypus::Sheet*> sheets;
 
-            constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
-
             std::string outputDirectory = "";
             std::string filenameBase    = "report";
 
             std::string extTxt = "txt";
             std::string extDat = "dat";
-            std::string extTex = "tex";
             std::string extOut = "pdf";
             std::string extGnu = "gnuplot";
 
@@ -36,7 +34,7 @@ namespace Plotypus
             bool autoRunScript = true;
             bool standaloneTex = true;
 
-            int  numberPrecision = 6;           // used only in txt and tex output
+            int  numberPrecision = 6;           // used only in txt output
 
             std::string columnSeparatorTxt = "\t";
             std::string columnSeparatorDat = "\t";
@@ -46,9 +44,7 @@ namespace Plotypus
 
             StylesCollection stylesCollection;
 
-            void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const;
-            void runGnuplot(const std::string& filename) const;
-            void writeCleanSheetCommands(std::ostream& hFile);
+            void writeCleanSheetCommands(std::ostream& hFile) const;
 
         public:
             Report();
@@ -77,8 +73,6 @@ namespace Plotypus
             const std::string&  getTerminal() const;
             void                setTerminal(const std::string& newTerminal);
 
-            const char*         getInvalidFilenameChars() const;
-
             const std::string&  getOutputDirectory() const;
             void                setOutputDirectory(const std::string& newOutputDirectory);
             const std::string&  getFilenameBase() const;
@@ -88,8 +82,6 @@ namespace Plotypus
             void                setExtTxt(const std::string& newExtTXT);
             const std::string&  getExtDat() const;
             void                setExtDat(const std::string& newExtDAT);
-            const std::string&  getExtTex() const;
-            void                setExtTex(const std::string& newExtTEX);
             const std::string&  getExtOut() const;
             void                setExtOut(const std::string& newExtPDF);
             const std::string&  getExtGnu() const;
@@ -120,13 +112,15 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            void writeTxt   ();
-            void writeDat   ();
-            void writeScript();
+            void preprocessSheets(const std::string& extension) const;
 
-            void writeTxt   (std::ostream& hFile);
-            void writeDat   (std::ostream& hFile);
-            void writeScript(std::ostream& hFile);
+            void writeTxt   () const;
+            void writeDat   () const;
+            void writeScript() const;
+
+            void writeTxt   (std::ostream& hFile) const;
+            void writeDat   (std::ostream& hFile) const;
+            void writeScript(std::ostream& hFile) const;
     };
 
 }

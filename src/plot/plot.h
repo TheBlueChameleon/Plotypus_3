@@ -50,7 +50,11 @@ namespace Plotypus
             void                setAspectEqual ();
             void                setAspectRatio (double ratio);
 
+            // -------------------------------------------------------------- //
             // writers
+
+            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const = 0;
+
             virtual void writeScriptHead(std::ostream& hFile) const;
     };
 

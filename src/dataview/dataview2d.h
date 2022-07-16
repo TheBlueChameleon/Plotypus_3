@@ -82,10 +82,12 @@ namespace Plotypus
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
 
-            bool isDummy() const;
-            bool isComplete() const; // TODO: update
+            virtual bool isDummy() const;
+            virtual bool isComplete() const; //! @todo update
 
+            // -------------------------------------------------------------- //
             // writers
+
             virtual void writeScriptData (std::ostream& hFile) const;
     };
 }

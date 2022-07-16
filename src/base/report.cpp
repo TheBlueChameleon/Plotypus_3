@@ -14,32 +14,7 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    void Report::throwIfInvalidFilename(const std::string& component, const std::string& stringToTest) const
-    {
-        if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
-        {
-            throw InvalidFilenameError(THROWTEXT("    Attempted to set invalid "s + component + ".\n" +
-                                                 "    value               : '" + stringToTest + "'\n" +
-                                                 "    forbidden characters: " + invalidFilenameChars
-                                                ));
-        }
-    }
-
-    void Report::runGnuplot(const std::string& filename) const
-    {
-        // *INDENT-OFF*
-        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
-
-        const auto error = std::system((std::string("gnuplot ") + filename).data());
-
-        if (verbose) {
-            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
-            else        {std::cout << "done." << std::endl;}
-        }
-        // *INDENT-ON*
-    }
-
-    void Report::writeCleanSheetCommands(std::ostream& hFile)
+    void Report::writeCleanSheetCommands(std::ostream& hFile) const
     {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# prepare empty page" << std::endl << std::endl;
@@ -84,7 +59,6 @@ namespace Plotypus
 
         extTxt = "txt";
         extDat = "dat";
-        extTex = "tex";
         extOut = "pdf";
         extGnu = "gnuplot";
 
@@ -159,11 +133,6 @@ namespace Plotypus
         terminal = newTerminal;
     }
 
-    const char* Report::getInvalidFilenameChars() const
-    {
-        return invalidFilenameChars;
-    }
-
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
     {
         throwIfInvalidFilename("output directory", newOutputDirectory);
@@ -203,17 +172,6 @@ namespace Plotypus
         extDat = newExtDAT;
     }
 
-    const std::string& Report::getExtTex() const
-    {
-        return extTex;
-    }
-
-    void Report::setExtTex(const std::string& newExtTEX)
-    {
-        throwIfInvalidFilename("extension for latex files", newExtTEX);
-        extTex = newExtTEX;
-    }
-
     const std::string& Report::getExtOut() const
     {
         return extOut;
@@ -240,9 +198,17 @@ namespace Plotypus
     {
         fs::path p(outputDirectory);
         p.append(filenameBase);
-        p.concat(infix);
-        p.concat(".");
-        p.concat(extension);
+
+        if (!infix.empty())
+        {
+            p.concat(infix);
+        }
+
+        if (!extension.empty())
+        {
+            p.concat(".");
+            p.concat(extension);
+        }
 
         return p;
     }
@@ -334,49 +300,48 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void Report::writeTxt()
+    void Report::preprocessSheets(const std::string& extension) const
+    {
+        for (size_t i = 1u; auto sheet : sheets)
+        {
+            const std::string autoOutputFilename = getOutputFilename("", "_" + std::to_string(i));
+            sheet->preprocessSheet(autoOutputFilename, extension);
+            ++i;
+        }
+    }
+
+    void Report::writeTxt() const
     {
         const std::string filename = getOutputFilename(extTxt);
-        std::ofstream hFile(filename);
-
-        if (!hFile.is_open())
-        {
-            throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
-        }
-
+        std::fstream hFile = openOrThrow(filename);
         writeTxt(hFile);
     }
 
-    void Report::writeDat()
+    void Report::writeDat() const
     {
         const std::string filename = getOutputFilename(extDat);
-        std::ofstream hFile(filename);
-
-        if (!hFile.is_open())
-        {
-            throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
-        }
-
+        std::fstream hFile = openOrThrow(filename);
         writeDat(hFile);
     }
 
-    void Report::writeScript()
+    void Report::writeScript() const
     {
         const std::string filenameGnu = getOutputFilename(extGnu);
-        std::ofstream hFile(filenameGnu);
-
-        // *INDENT-OFF*
-        if (!hFile.is_open()) {throw FileIOError(THROWTEXT("Could not open '"s + filenameGnu + "'"));}
+        std::fstream hFile = openOrThrow(filenameGnu);
 
         writeScript(hFile);
         hFile.close();
 
-        if (autoRunScript) {runGnuplot(filenameGnu);}
-        // *INDENT-ON*
+        if (autoRunScript)
+        {
+            runGnuplot(filenameGnu, verbose);
+        }
     }
 
-    void Report::writeTxt(std::ostream& hFile)
+    void Report::writeTxt(std::ostream& hFile) const
     {
+        preprocessSheets(extTxt);
+
         for (size_t i = 1u; auto sheet : sheets)
         {
             sheet->writeTxtHead  (hFile);
@@ -392,13 +357,17 @@ namespace Plotypus
         }
     }
 
-    void Report::writeDat(std::ostream& hFile)
+    void Report::writeDat(std::ostream& hFile) const
     {
+        preprocessSheets(extDat);
+
 
     }
 
-    void Report::writeScript(std::ostream& hFile)
+    void Report::writeScript(std::ostream& hFile) const
     {
+        preprocessSheets(extDat);
+
         const std::string   outputFilename  = getOutputFilename(extOut);
         bool                needCleanSheetCommands = true;
 

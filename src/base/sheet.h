@@ -54,7 +54,11 @@ namespace Plotypus
             /** @todo virtual std::vector<std::string> getDatafiles() const;
              *  returns names of all data files as produced by the added data views (empty list by default); null string for funcs */
 
+            // -------------------------------------------------------------- //
             // writers
+
+            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
+
             virtual void writeTxtHead       (std::ostream& hFile) const;
             virtual void writeTxtData       (std::ostream& hFile) const;
             virtual void writeTxtLabels     (std::ostream& hFile) const;

@@ -13,6 +13,7 @@
 #include "definitions/styles.h"
 #include "definitions/errors.h"
 
+#include "base/util.h"
 #include "base/report.h"
 #include "base/sheet.h"
 #include "base/stylescollection.h"

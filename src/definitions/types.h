@@ -81,6 +81,13 @@ namespace Plotypus
         return x;
     }
 
+    // ====================================================================== //
+    /**
+     * @brief used to assert filename valdity
+     */
+
+    constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
+
 //! @}
 }
 

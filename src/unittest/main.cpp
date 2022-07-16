@@ -95,7 +95,8 @@ void playground ()
     s4.addDataView("[0:pi] cos(x)", "Cosine Wave");
     s4.dataView(2).setLineStyle(0);
 
-    r.writeTxt();
+//    r.writeTxt();
+//    r.writeDat();
     r.writeScript();
 }
 

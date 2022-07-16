@@ -135,6 +135,9 @@ namespace Plotypus
         aspect = "ratio "s + std::to_string(ratio);
     }
 
+    // ====================================================================== //
+    // writers
+
     void Plot::writeScriptHead(std::ostream& hFile) const
     {
         Sheet::writeScriptHead(hFile);

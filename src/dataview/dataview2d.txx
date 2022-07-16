@@ -252,8 +252,7 @@ namespace Plotypus
     void DataView2D<T>::writeScriptData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
-        const std::string dataFileName = "foo_bar.dat";
-        if (func.empty())   {hFile << std::quoted(dataFileName);}
+        if (func.empty())   {hFile << std::quoted(dataFilename);}
         else                {hFile << func;}
 
         hFile << " with " << style;
