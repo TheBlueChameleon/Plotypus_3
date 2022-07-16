@@ -80,10 +80,10 @@ namespace Plotypus
      */
 
     template <typename T>
-    using DataSelector = std::function<double (const T)>;
+    using DataSelector = std::function<double (const T&)>;
 
     template <typename T>
-    static inline double defaultDataSelector(const T x)
+    static inline double defaultDataSelector(const T& x)
     {
         return x;
     }

@@ -20,6 +20,7 @@
 
 #include "dataview/dataview.h"
 #include "dataview/dataview2d.h"
+#include "dataview/dataview2dcompound.h"
 
 #include "plot/plot.h"
 #include "plot/plot2d.h"
