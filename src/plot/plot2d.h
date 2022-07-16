@@ -31,14 +31,15 @@ namespace Plotypus
 
         public:
             Plot2D(const std::string& title);
+            ~Plot2D();
 
             virtual void reset();
 
             const std::vector<DataView*>& getDataViews() const;
 
-            DataView&   dataView(const size_t i);
+            DataView *dataView(const size_t i);
             template<class T>
-            size_t      addDataViewCompound(const DataView2DCompound<T>& dataView);
+            size_t      addDataViewCompound(DataView2DCompound<T>* dataView);
             template<class T>
             size_t      addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>

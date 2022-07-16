@@ -7,6 +7,8 @@
 #include "unittest.h"
 #include "../plotypus.h"
 
+using namespace std::string_literals;
+
 // ========================================================================== //
 // convenience macro
 
@@ -67,7 +69,6 @@ void playground ()
     {
         double x, y, errX, errY;
     };
-    Plotypus::DataView2DCompound<compound_t> dv("foo", Plotypus::PlotStyle2D::Lines);
 
     const auto& pi = std::numbers::pi;
     std::vector<double> dataX = {0, 1./3.*pi, 2./3.*pi, pi};
@@ -108,11 +109,11 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-//    s4.addDataViewCompound(std::span<compound_t>(), compoundselector);
-    //s4.addDataViewCompound(data, compoundselector);
-//    s4.addDataViewCompound("[0:pi] sin(x)", "Sine Wave");
-//    s4.addDataViewCompound("[0:pi] cos(x)", "Cosine Wave");
-//    s4.dataView(2).setLineStyle(0);
+    s4.addDataViewCompound<compound_t>(data, compoundselector);
+    s4.addDataViewCompound<compound_t>("[0:pi] sin(x)"s, "Sine Wave"s);
+    s4.addDataViewCompound<compound_t>("[0:pi] cos(x)", "Cosine Wave");
+    Plotypus::DataView2DCompound<compound_t>& dv = *reinterpret_cast<Plotypus::DataView2DCompound<compound_t>*>(s4.dataView(2));
+    dv.setLineStyle(0);
 
 //    r.writeTxt();
     r.writeDat();

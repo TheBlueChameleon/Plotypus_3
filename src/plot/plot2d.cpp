@@ -8,11 +8,24 @@ namespace Plotypus
         type = PlotType::Plot2D;
     }
 
+    Plot2D::~Plot2D()
+    {
+        for (auto dataView : dataViews)
+        {
+            delete dataView;
+        }
+    }
+
     // ====================================================================== //
 
     void Plot2D::reset()
     {
         Plot::reset();
+
+        for (auto dataView : dataViews)
+        {
+            delete dataView;
+        }
 
         dataViews.clear();
     }
@@ -22,10 +35,10 @@ namespace Plotypus
         return dataViews;
     }
 
-    DataView& Plot2D::dataView(const size_t i)
+    DataView* Plot2D::dataView(const size_t i)
     {
         checkIndex("dataView index", i, dataViews);
-        return *dataViews[i];
+        return dataViews[i];
     }
 
     // ====================================================================== //

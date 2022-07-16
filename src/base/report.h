@@ -117,6 +117,5 @@ namespace Plotypus
     };
 
 }
-#include "report.txx"
 #endif // REPORT_H
 
