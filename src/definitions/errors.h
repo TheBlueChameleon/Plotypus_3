@@ -30,6 +30,7 @@ namespace Plotypus
 
     PLOTYPUS_ERROR(IncompleteDescritporError);
 
+    PLOTYPUS_ERROR(UnsupportedOperationError);
 //! @}
 }
 

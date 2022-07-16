@@ -24,16 +24,23 @@ namespace Plotypus
         Lines,
         LinesPoints,
         FilledCurves,
+        XErrorLines,
+        YErrorLines,
+        XYErrorLines,
 
         Steps,
         FSteps,
         FillSteps,
 
         Boxes,
+        HBoxes,
+        BoxErrorBars,
         BoxxyError,
 
         Arrows,
-        Vectors
+        Vectors,
+
+        Custom
     };
 
 

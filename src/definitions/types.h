@@ -10,7 +10,14 @@ namespace Plotypus
 //! @addtogroup Platypus_Definitions
 //! @{
 
-// ====================================================================== //
+    // ====================================================================== //
+    /**
+     * @brief used to assert filename valdity
+     */
+
+    constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
+
+    // ====================================================================== //
     /**
      * @brief specifies script output data type
      */
@@ -47,7 +54,7 @@ namespace Plotypus
      */
     constexpr double AUTO_RANGE = std::numeric_limits<double>::quiet_NaN();
 
-    // ====================================================================== //
+    // ---------------------------------------------------------------------- //
     /**
      * @brief used to compactly describe an axis of a plot
      */
@@ -83,10 +90,26 @@ namespace Plotypus
 
     // ====================================================================== //
     /**
-     * @brief used to assert filename valdity
+     * @brief foo bar
      */
+    enum class ColumnTypes
+    {
+        column1,
+        column2,
+        column3,
+        column4,
+        column5,
+        column6,
 
-    constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
+        X, Y, Z,
+        DeltaX, DeltaY, DeltaZ,
+        XLow, XHigh, YLow, YHigh,
+        Pointsize, Pointtype, Color,
+
+        Boxwidth,
+
+        Length, Angle
+    };
 
 //! @}
 }
