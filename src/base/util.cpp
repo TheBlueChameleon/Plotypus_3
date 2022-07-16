@@ -1,5 +1,7 @@
 #include "util.h"
 
+using namespace Plotypus;
+
 namespace Plotypus
 {
     void checkFilename(const std::string& component, const std::string& stringToTest)

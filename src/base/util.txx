@@ -11,6 +11,14 @@ namespace Plotypus
             throw Plotypus::InvalidIndexError("    Invalid " + indexName + ": " + std::to_string(i));
         }
     }
+
+    template<class T>
+    bool contains(const T& toFind, const std::span<T>& container)
+    {
+        const auto last = container.end();
+        const auto found = std::find(container.begin(), container.end(), toFind);
+        return found != last;
+    }
 }
 
 #endif // UTIL_TXX

@@ -1,7 +1,9 @@
 #ifndef UTIL_H
 #define UTIL_H
 
+#include <algorithm>
 #include <fstream>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -15,6 +17,9 @@ namespace Plotypus
     void runGnuplot(const std::string& filename, bool verbose = true);
 
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
+
+    template<class T>
+    bool contains(const T& toFind, const std::span<T>& container);
 };
 
 #include "util.txx"
