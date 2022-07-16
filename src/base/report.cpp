@@ -84,16 +84,23 @@ namespace Plotypus
         return sheets.size();
     }
 
+    Sheet& Report::sheet(const size_t i) const
+    {
+        checkIndex("sheet index", i, sheets);
+        return *(sheets[i]);
+    }
+
     Sheet& Report::addSheet(const std::string& title)
     {
         sheets.push_back(new Sheet(title));
         return *sheets.back();
     }
 
-    Sheet& Report::sheet(const size_t i) const
+    Plot2D& Report::addPlot2D(const std::string& title)
     {
-        checkIndex("sheet index", i, sheets);
-        return *(sheets[i]);
+        Plot2D* newPlot = new Plot2D(title);
+        sheets.push_back(newPlot);
+        return *newPlot;
     }
 
     // ====================================================================== //

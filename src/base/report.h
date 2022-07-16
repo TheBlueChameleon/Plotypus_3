@@ -56,12 +56,10 @@ namespace Plotypus
 
             size_t getReportSize() const;
 
-            Plotypus::Sheet& addSheet (const std::string& title = "");
-
-            template <class T>
-            Plotypus::Plot2D<T>& addPlot2D(const std::string& title = "");
-
             Plotypus::Sheet& sheet(const size_t i) const;
+
+            Plotypus::Sheet&  addSheet (const std::string& title = "");
+            Plotypus::Plot2D& addPlot2D(const std::string& title = "");
 
             // -------------------------------------------------------------- //
             // file output specs
@@ -119,6 +117,6 @@ namespace Plotypus
     };
 
 }
+#include "report.txx"
 #endif // REPORT_H
 
-#include "report.txx"

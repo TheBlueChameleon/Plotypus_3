@@ -63,9 +63,27 @@ bool unittest_report()
 
 void playground ()
 {
+    struct compound_t
+    {
+        double x, y, errX, errY;
+    };
+    Plotypus::DataView2DCompound<compound_t> dv("foo", Plotypus::PlotStyle2D::Lines);
+
     const auto& pi = std::numbers::pi;
     std::vector<double> dataX = {0, 1./3.*pi, 2./3.*pi, pi};
     std::vector<double> dataY = {0,        1,        1,  0};
+
+    std::vector<compound_t> data =
+    {
+        {       0, 0, 0, 0},
+        {1./3.*pi, 1, 0, 0},
+        {2./3.*pi, 1, 0, 0},
+        {      pi, 0, 0, 0}
+    };
+    Plotypus::DataSelector<compound_t> compoundselector = [] (const compound_t& data)
+    {
+        return data.y;
+    };
 
     Plotypus::Report r;
 
@@ -78,7 +96,7 @@ void playground ()
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");
     auto& s3 = r.addSheet();
-    auto& s4 = r.addPlot2D<double>("plot");
+    auto& s4 = r.addPlot2D("plot");
     auto& s5 = r.addSheet();
 
     s1.addLabel(" FOO ", .10, .10);
@@ -90,10 +108,11 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-    s4.addDataView(dataY, Plotypus::defaultDataSelector<double>);
-    s4.addDataView("[0:pi] sin(x)", "Sine Wave");
-    s4.addDataView("[0:pi] cos(x)", "Cosine Wave");
-    s4.dataView(2).setLineStyle(0);
+//    s4.addDataViewCompound(std::span<compound_t>(), compoundselector);
+    //s4.addDataViewCompound(data, compoundselector);
+//    s4.addDataViewCompound("[0:pi] sin(x)", "Sine Wave");
+//    s4.addDataViewCompound("[0:pi] cos(x)", "Cosine Wave");
+//    s4.dataView(2).setLineStyle(0);
 
 //    r.writeTxt();
     r.writeDat();

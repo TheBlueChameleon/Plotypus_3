@@ -6,35 +6,45 @@
 #include <string>
 #include <vector>
 
-#include "../dataview/dataview2d.h"
+#include "../dataview/dataview2dcompound.h"
 
 #include "plot.h"
 
 namespace Plotypus
 {
-    template<class T>
     class Plot2D : public Plot
     {
             /**
              * @todo appy point styles in script
              */
 
+            /**
+             * @todo rework as abstract non-template class
+             *      dataViews becomes vector<DataView*>
+             *      requires DTor which deallocates
+             *      requires adders instaintiate via new
+             *      requires hidden addDataViewCompound(const DataView2DCompound<T>& dataView) copies data into new'd object
+             */
+
         private:
-            std::vector<DataView2D<T>> dataViews;
+            std::vector<DataView*> dataViews;
 
         public:
             Plot2D(const std::string& title);
 
             virtual void reset();
 
-            const std::vector<DataView2D<T> >&  getDataViews() const;
-            void                                setDataViews(const std::vector<DataView2D<T> >& newDataViews);
+            const std::vector<DataView*>& getDataViews() const;
 
-            DataView2D<T>&  dataView(const size_t i);
-            size_t          addDataView(const DataView2D<T>& dataView);
-            size_t          addDataView(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
-            size_t          addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = ""); //! @todo implement with proper views in place
-            size_t          addDataView(const std::string& func, const std::string& label = "");
+            DataView&   dataView(const size_t i);
+            template<class T>
+            size_t      addDataViewCompound(const DataView2DCompound<T>& dataView);
+            template<class T>
+            size_t      addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            template<class T>
+            size_t      addDataViewCompound(const std::span<T>& data, const DataSelector<T>& selectorY, const std::string& label = ""); //! @todo deal with selector
+            template<class T>
+            size_t      addDataViewCompound(const std::string& func, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers
