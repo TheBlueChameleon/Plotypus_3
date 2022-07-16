@@ -43,6 +43,12 @@ namespace Plotypus
 
     // ====================================================================== //
     /**
+     * @brief convenience symbol to be used with setting data ranges
+     */
+    constexpr double AUTO_RANGE = std::numeric_limits<double>::quiet_NaN();
+
+    // ====================================================================== //
+    /**
      * @brief used to compactly describe an axis of a plot
      */
     struct AxisDescriptor
@@ -50,9 +56,12 @@ namespace Plotypus
         std::string label          = "";
         std::string labelOptions   = "";
         bool        tics           = true;
+        //! @todo std::vector<std::pair<std::string, double>> labels;
+        //! @todo std::string formatstring
+        //! @todo bool logscale
         std::string ticsOptions    = "";
         double      rangeMin       = 0;
-        double      rangeMax       = std::nan("inf");
+        double      rangeMax       = AUTO_RANGE;
         int         rangeStride    = 1;
         std::string rangeOptions   = "";
     };

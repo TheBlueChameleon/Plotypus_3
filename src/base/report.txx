@@ -3,7 +3,6 @@
 
 #include "../plot/plot2d.h"
 
-using namespace Plotypus;
 namespace Plotypus
 {
     template <class T>

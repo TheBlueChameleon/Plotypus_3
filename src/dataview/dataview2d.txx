@@ -8,8 +8,6 @@
 
 #include "dataview2d.h"
 
-using namespace Plotypus;
-
 namespace Plotypus
 {
     template<class T>
@@ -251,9 +249,10 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void DataView2D<T>::writeScriptData(std::ostream& hFile, const std::string& dataFileName) const
+    void DataView2D<T>::writeScriptData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
+        const std::string dataFileName = "foo_bar.dat";
         if (func.empty())   {hFile << std::quoted(dataFileName);}
         else                {hFile << func;}
 

@@ -347,6 +347,19 @@ namespace Plotypus
         writeTxt(hFile);
     }
 
+    void Report::writeDat()
+    {
+        const std::string filename = getOutputFilename(extDat);
+        std::ofstream hFile(filename);
+
+        if (!hFile.is_open())
+        {
+            throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
+        }
+
+        writeDat(hFile);
+    }
+
     void Report::writeScript()
     {
         const std::string filenameGnu = getOutputFilename(extGnu);
@@ -379,11 +392,6 @@ namespace Plotypus
         }
     }
 
-    void Report::writeTex(std::ostream& hFile)
-    {
-
-    }
-
     void Report::writeDat(std::ostream& hFile)
     {
 
@@ -404,9 +412,6 @@ namespace Plotypus
 
         for (size_t i = 1u; auto sheet : sheets)
         {
-            const std::string infix = "_" + std::to_string(i);
-            const std::string dataFilename = getOutputFilename(extDat, infix);
-
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
 
@@ -416,7 +421,7 @@ namespace Plotypus
             // *INDENT-ON*
 
             sheet->writeScriptHead  (hFile);
-            sheet->writeScriptData  (hFile, dataFilename);
+            sheet->writeScriptData  (hFile);
             sheet->writeScriptLabels(hFile);
             sheet->writeScriptFooter(hFile, i);
             ++i;

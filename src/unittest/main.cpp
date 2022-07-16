@@ -73,7 +73,7 @@ void playground ()
 
     auto& sc = r.getStylesCollection();
     sc.addBoxStyle("cyan", true, "blue");
-    sc.addLineStyle("blue", 2.5, "..-", PointForm::Circle);
+    sc.addLineStyle("blue", 2.5, "..-", Plotypus::PointForm::Circle);
 
     auto& s1 = r.addSheet("foo");
     auto& s2 = r.addSheet("bar");
@@ -90,7 +90,7 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-    s4.addDataView(dataX, dataY, defaultDataSelector<double>);
+    s4.addDataView(dataX, dataY, Plotypus::defaultDataSelector<double>);
     s4.addDataView("[0:pi] sin(x)", "Sine Wave");
     s4.addDataView("[0:pi] cos(x)", "Cosine Wave");
     s4.dataView(2).setLineStyle(0);

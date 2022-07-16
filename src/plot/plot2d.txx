@@ -2,8 +2,6 @@
 
 #include "plot2d.h"
 
-using namespace Plotypus;
-
 namespace Plotypus
 {
     template<class T>
@@ -83,15 +81,15 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    void Plot2D<T>::writeScriptData(std::ostream& hFile, const std::string& dataFileName) const
+    void Plot2D<T>::writeScriptData(std::ostream& hFile) const
     {
-        Plot::writeScriptData(hFile, dataFileName);
+        Plot::writeScriptData(hFile);
 
         hFile << "plot ";
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const DataView2D<T>& dataView : dataViews)
         {
-            dataView.writeScriptData(hFile, dataFileName);
+            dataView.writeScriptData(hFile);
             ++i;
             if (i < viewCount)
             {

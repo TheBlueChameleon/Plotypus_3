@@ -161,7 +161,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeScriptData(std::ostream& hFile, const std::string &dataFileName) const {}
+    void Sheet::writeScriptData(std::ostream& hFile) const {}
 
     void Sheet::writeScriptLabels(std::ostream& hFile) const
     {

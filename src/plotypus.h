@@ -15,6 +15,10 @@
 
 #include "base/report.h"
 #include "base/sheet.h"
+#include "base/stylescollection.h"
+
+#include "dataview/dataview.h"
+#include "dataview/dataview2d.h"
 
 #include "plot/plot.h"
 #include "plot/plot2d.h"

@@ -32,8 +32,12 @@ namespace Plotypus
             size_t          addDataView(const std::span<double> dataX, const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
             size_t          addDataView(const std::string& func, const std::string& label = "");
 
+
+            /** @todo virtual std::vector<std::string> getDatafiles() const;
+             *  returns names of all data files as produced by the added data views (empty list by default); null string for funcs */
+
             // writers
-            virtual void writeScriptData   (std::ostream& hFile, const std::string& dataFileName) const;
+            virtual void writeScriptData   (std::ostream& hFile) const;
             virtual void writeScriptFooter (std::ostream& hFile, int pageNum) const;
     };
 }

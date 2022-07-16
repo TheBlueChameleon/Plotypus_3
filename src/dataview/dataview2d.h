@@ -27,9 +27,9 @@ namespace Plotypus
             DataSelector<T>    selectorErrorX;
             DataSelector<T>    selectorErrorY;
 
-            // TODO: add columns 5+6 for method arrows
+            //! @todo add columns 5+6 for method arrows
 
-            // TODO: using clause
+            //! @todo using clause
 
             // function view
             std::string func;
@@ -86,7 +86,7 @@ namespace Plotypus
             bool isComplete() const; // TODO: update
 
             // writers
-            virtual void writeScriptData (std::ostream& hFile, const std::string& dataFileName) const;
+            virtual void writeScriptData (std::ostream& hFile) const;
     };
 }
 

@@ -121,12 +121,10 @@ namespace Plotypus
             // writers
 
             void writeTxt   ();
-            void writeTex   ();
             void writeDat   ();
             void writeScript();
 
             void writeTxt   (std::ostream& hFile);
-            void writeTex   (std::ostream& hFile);
             void writeDat   (std::ostream& hFile);
             void writeScript(std::ostream& hFile);
     };
