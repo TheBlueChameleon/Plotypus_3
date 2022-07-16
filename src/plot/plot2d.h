@@ -33,12 +33,8 @@ namespace Plotypus
             DataView2D<T>&  dataView(const size_t i);
             size_t          addDataView(const DataView2D<T>& dataView);
             size_t          addDataView(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
-            size_t          addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
+            size_t          addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = ""); //! @todo implement with proper views in place
             size_t          addDataView(const std::string& func, const std::string& label = "");
-
-
-            /** @todo virtual std::vector<std::string> getDatafiles() const;
-             *  returns names of all data files as produced by the added data views (empty list by default); null string for funcs */
 
             // -------------------------------------------------------------- //
             // writers

@@ -53,8 +53,8 @@ namespace Plotypus
     {
         DataView2D<T> dataView(label, PlotStyle2D::Lines);
 
-        dataView.setDataY   (dataY);
-        dataView.setSelectorY(selector);
+//        dataView.setDataY   (dataY);
+//        dataView.setSelectorY(selector);
 
         return addDataView(dataView);
     }
