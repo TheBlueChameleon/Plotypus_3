@@ -4,9 +4,6 @@
 
 #include "../definitions/errors.h"
 
-
-
-#include "localMacros.h"
 #include "report.h"
 
 namespace fs = std::filesystem;
@@ -38,6 +35,11 @@ namespace Plotypus
     Report::Report()
     {}
 
+    Report::Report(FileType fileType)
+    {
+        setFileType(fileType);
+    }
+
     Report::~Report()
     {
         reset();
@@ -45,7 +47,6 @@ namespace Plotypus
 
     void Report::reset()
     {
-        fileType = FileType::Pdf;
         terminal = "pdfcairo";
 
         for (auto ptr : sheets)
@@ -98,14 +99,8 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    FileType Report::getFileType() const
-    {
-        return fileType;
-    }
-
     void Report::setFileType(FileType newFileType)
     {
-        fileType = newFileType;
         switch (newFileType)
         {
             case FileType::Pdf:

@@ -17,7 +17,6 @@ namespace Plotypus
     class Report
     {
         private:
-            FileType fileType = FileType::Pdf;
             std::string terminal = "pdfcairo";
 
             std::vector<Plotypus::Sheet*> sheets;
@@ -48,6 +47,7 @@ namespace Plotypus
 
         public:
             Report();
+            Report(FileType fileType);
             ~Report();
 
             void reset();
@@ -67,7 +67,6 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // file output specs
 
-            FileType            getFileType() const;
             void                setFileType(FileType newFileType);
 
             const std::string&  getTerminal() const;

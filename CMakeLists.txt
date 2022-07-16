@@ -20,7 +20,6 @@ add_library(Plotypus-lib SHARED
     src/definitions/types.h
     src/definitions/styles.h
     src/definitions/errors.h
-    src/base/localMacros.h
     #
     src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/stylescollection.h src/base/stylescollection.cpp

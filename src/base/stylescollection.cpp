@@ -1,7 +1,7 @@
-#include "localMacros.h"
 #include "stylescollection.h"
 
 using namespace Plotypus;
+using namespace std::string_literals;
 
 namespace Plotypus
 {

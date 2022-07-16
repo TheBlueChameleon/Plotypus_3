@@ -1,8 +1,9 @@
 #include <cmath>
 #include <iostream>
 
-#include "localMacros.h"
 #include "sheet.h"
+
+using namespace std::string_literals;
 
 namespace Plotypus
 {

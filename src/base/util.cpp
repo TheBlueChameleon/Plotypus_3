@@ -1,5 +1,3 @@
-#include "../base/localMacros.h"
-
 #include "util.h"
 
 namespace Plotypus
@@ -8,10 +6,10 @@ namespace Plotypus
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
         {
-            throw InvalidFilenameError(THROWTEXT("    Attempted to set invalid "s + component + ".\n" +
-                                                 "    value               : '" + stringToTest + "'\n" +
-                                                 "    forbidden characters: " + invalidFilenameChars
-                                                ));
+            throw InvalidFilenameError("Attempted to set invalid " + component + ".\n" +
+                                       "   value               : '" + stringToTest + "'\n" +
+                                       "   forbidden characters: " + invalidFilenameChars
+                                      );
         }
     }
 
@@ -35,7 +33,7 @@ namespace Plotypus
 
         if (!hFile.is_open())
         {
-            throw FileIOError(THROWTEXT("Could not open '"s + filename + "'"));
+            throw FileIOError("Could not open '" + filename + "'");
         }
 
         return hFile;
