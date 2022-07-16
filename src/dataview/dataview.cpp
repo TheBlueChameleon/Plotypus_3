@@ -6,71 +6,21 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const std::string& label, const PlotStyle2D& style, const std::string& dataColumnFormat) :
+    DataView::DataView(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
         label(label), dataColumnFormat(dataColumnFormat)
     {
-        switch (style)
-        {
-            case PlotStyle2D::Dots:
-                this->style = "dots";
-                break;
-            case PlotStyle2D::Points:
-                this->style = "points";
-                break;
-            case PlotStyle2D::XErrorBars:
-                this->style = "xerrorbars";
-                break;
-            case PlotStyle2D::YErrorBars:
-                this->style = "yerrorbars";
-                break;
-            case PlotStyle2D::XYErrorBars:
-                this->style = "xyerrorbars";
-                break;
-
-            case PlotStyle2D::Lines:
-                this->style = "lines";
-                break;
-            case PlotStyle2D::LinesPoints:
-                this->style = "linespoints";
-                break;
-            case PlotStyle2D::FilledCurves:
-                this->style = "filledcurves";
-                break;
-
-            case PlotStyle2D::Steps:
-                this->style = "steps";
-                break;
-            case PlotStyle2D::FSteps:
-                this->style = "fsteps";
-                break;
-            case PlotStyle2D::FillSteps:
-                this->style = "fillsteps";
-                break;
-
-            case PlotStyle2D::Boxes:
-                this->style = "boxes";
-                break;
-            case PlotStyle2D::BoxxyError:
-                this->style = "boxxyerror";
-                break;
-
-            case PlotStyle2D::Arrows:
-                this->style = "arrows";
-                break;
-            case PlotStyle2D::Vectors:
-                this->style = "vectors";
-                break;
-        }
+        setStyleID(style);
     }
 
     DataView::DataView(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
-        label(label), style(style), dataColumnFormat(dataColumnFormat)
+        label(label), style(style), styleID(PlotStyle2D::Custom), dataColumnFormat(dataColumnFormat)
     {}
 
     void DataView::reset()
     {
+        styleID                     = PlotStyle2D::Custom;
         label                       = "";
-        style                       = "";
+        style                       = "lines";
         dataColumnFormat            = "#";
         options                     = "";
         dataFilename                = "";
@@ -98,23 +48,86 @@ namespace Plotypus
         style = newStyle;
     }
 
-    void DataView::setStyle(const PlotStyle2D& newStyle)
+    const PlotStyle2D DataView::getStyleID() const
     {
-        // *INDENT-OFF*
+        return styleID;
+    }
+
+    void DataView::setStyleID(const PlotStyle2D newStyle)
+    {
+        styleID = newStyle;
+
         switch (newStyle)
         {
-            case PlotStyle2D::Lines:        style = "lines"         ; break;
-            case PlotStyle2D::Points:       style = "points"        ; break;
-            case PlotStyle2D::LinesPoints:  style = "linespoints"   ; break;
-            case PlotStyle2D::Dots:         style = "dots"          ; break;
-            case PlotStyle2D::FilledCurves: style = "filledcurves"  ; break;
-            case PlotStyle2D::Steps:        style = "steps"         ; break;
-            case PlotStyle2D::FSteps:       style = "fsteps"        ; break;
-            case PlotStyle2D::FillSteps:    style = "fillsteps"     ; break;
-            case PlotStyle2D::Boxes:        style = "boxes"         ; break;
-            case PlotStyle2D::Arrows:       style = "arrows"        ; break;
+            case PlotStyle2D::Dots:
+                this->style = "dots";
+                break;
+            case PlotStyle2D::Points:
+                this->style = "points";
+                break;
+            case PlotStyle2D::XErrorBars:
+                this->style = "xerrorbars";
+                break;
+            case PlotStyle2D::YErrorBars:
+                this->style = "yerrorbars";
+                break;
+            case PlotStyle2D::XYErrorBars:
+                this->style = "xyerrorbars";
+                break;
+
+            case PlotStyle2D::Lines:
+                this->style = "lines";
+                break;
+            case PlotStyle2D::LinesPoints:
+                this->style = "linespoints";
+                break;
+            case PlotStyle2D::FilledCurves:
+                this->style = "filledcurves";
+                break;
+            case PlotStyle2D::XErrorLines:
+                this->style = "xerrorlines";
+                break;
+            case PlotStyle2D::YErrorLines:
+                this->style = "yerrorlines";
+                break;
+            case PlotStyle2D::XYErrorLines:
+                this->style = "xyerrorlines";
+                break;
+
+            case PlotStyle2D::Steps:
+                this->style = "steps";
+                break;
+            case PlotStyle2D::FSteps:
+                this->style = "fsteps";
+                break;
+            case PlotStyle2D::FillSteps:
+                this->style = "fillsteps";
+                break;
+
+            case PlotStyle2D::Boxes:
+                this->style = "boxes";
+                break;
+            case PlotStyle2D::HBoxes:
+                this->style = "boxxyerror";
+                break;
+            case PlotStyle2D::BoxErrorBars:
+                this->style = "boxerrorbars";
+                break;
+            case PlotStyle2D::BoxxyError:
+                this->style = "boxxyerror";
+                break;
+
+            case PlotStyle2D::Arrows:
+                this->style = "arrows";
+                break;
+            case PlotStyle2D::Vectors:
+                this->style = "vectors";
+                break;
+
+            case PlotStyle2D::Custom:
+                this->style = "lines";
+                break;
         }
-        // *INDENT-ON*
     }
 
     const std::string& DataView::getDataColumnFormat() const
