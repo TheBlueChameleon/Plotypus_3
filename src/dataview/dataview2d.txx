@@ -2,8 +2,8 @@
 #include <iostream>
 #include <functional>
 
+#include "../base/util.h"
 #include "../definitions/types.h"
-
 #include "../plot/plot.h"
 
 #include "dataview2d.h"
@@ -31,9 +31,25 @@ namespace Plotypus
     }
 
     template<class T>
+    void DataView2D<T>::writeDatDataAsc(std::ostream& hFile) const
+    {
+
+    }
+
+    template<class T>
+    void DataView2D<T>::writeDatDataBin(std::ostream& hFile) const
+    {
+
+    }
+
+    // ====================================================================== //
+
+    template<class T>
     DataView2D<T>::DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
         DataView(label, style, dataColumnFormat)
     {}
+
+    // ====================================================================== //
 
     template<class T>
     void DataView2D<T>::reset()
@@ -247,6 +263,17 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    template<class T>
+    void DataView2D<T>::writeDatData() const
+    {
+        std::fstream hFile = openOrThrow(dataFilename);
+
+        // *INDENT-OFF*
+        if (binaryDataOutput)   {writeDatDataBin(hFile);}
+        else                    {writeDatDataAsc(hFile);}
+        // *INDENT-ON*
+    }
 
     template<class T>
     void DataView2D<T>::writeScriptData(std::ostream& hFile) const

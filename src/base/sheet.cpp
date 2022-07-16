@@ -147,6 +147,8 @@ namespace Plotypus
         hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
     }
 
+    void Sheet::writeDatData() const {}
+
     void Sheet::writeScriptHead(std::ostream& hFile) const
     {
         hFile << "# " << std::string(76, '-') << " #\n";

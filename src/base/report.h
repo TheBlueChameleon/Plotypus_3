@@ -115,7 +115,6 @@ namespace Plotypus
             void writeScript() const;
 
             void writeTxt   (std::ostream& hFile) const;
-            void writeDat   (std::ostream& hFile) const;
             void writeScript(std::ostream& hFile) const;
     };
 

@@ -303,9 +303,12 @@ namespace Plotypus
 
     void Report::writeDat() const
     {
-        const std::string filename = getOutputFilename(extDat);
-        std::fstream hFile = openOrThrow(filename);
-        writeDat(hFile);
+        preprocessSheets(extDat);
+
+        for (auto sheet : sheets)
+        {
+            sheet->writeDatData();
+        }
     }
 
     void Report::writeScript() const
@@ -339,13 +342,6 @@ namespace Plotypus
             }
             ++i;
         }
-    }
-
-    void Report::writeDat(std::ostream& hFile) const
-    {
-        preprocessSheets(extDat);
-
-
     }
 
     void Report::writeScript(std::ostream& hFile) const

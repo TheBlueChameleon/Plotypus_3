@@ -45,6 +45,8 @@ namespace Plotypus
 
             virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
 
+            virtual void writeDatData() const;
+
             virtual void writeScriptData   (std::ostream& hFile) const;
             virtual void writeScriptFooter (std::ostream& hFile, int pageNum) const;
     };

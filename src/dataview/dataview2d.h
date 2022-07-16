@@ -47,6 +47,9 @@ namespace Plotypus
             void clearFunctionMembers();
             void clearNonFunctionMembers();
 
+            void writeDatDataAsc(std::ostream& hFile) const;
+            void writeDatDataBin(std::ostream& hFile) const;
+
         public:
             // TODO: PlotStyle2D CTor
             DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
@@ -93,6 +96,7 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
+            virtual void writeDatData () const;
             virtual void writeScriptData (std::ostream& hFile) const;
     };
 }

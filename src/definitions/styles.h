@@ -38,7 +38,9 @@ namespace Plotypus
     {
         Lines,
         Surface,
-        Image
+        Image,
+        Arrows,
+        Vectors
     };
 
     // ========================================================================== //
