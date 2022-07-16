@@ -42,24 +42,17 @@ namespace Plotypus
         dataViews.push_back(dataView);
         return dataViews.size() - 1;
     }
+    template<class T>
+    size_t Plot2D<T>::addDataView(const PlotStyle2D style, const std::string& label)
+    {
+        DataView2D<T> dataView(label, style);
+    }
 
     template<class T>
     size_t Plot2D<T>::addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label)
     {
-        DataView2D<T> dataView(label, "lines");
+        DataView2D<T> dataView(label, PlotStyle2D::Lines);
 
-        dataView.setDataY   (dataY);
-        dataView.setSelectorY(selector);
-
-        return addDataView(dataView);
-    }
-
-    template<class T>
-    size_t Plot2D<T>::addDataView(const std::span<double> dataX, const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label)
-    {
-        DataView2D<T> dataView(label, "lines");
-
-        dataView.setDataX   (dataX);
         dataView.setDataY   (dataY);
         dataView.setSelectorY(selector);
 
@@ -69,7 +62,7 @@ namespace Plotypus
     template<class T>
     size_t Plot2D<T>::addDataView(const std::string& func, const std::string& label)
     {
-        DataView2D<T> dataView(label, "lines");
+        DataView2D<T> dataView(label, PlotStyle2D::Lines);
 
         dataView.setFunc(func);
 

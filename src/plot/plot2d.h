@@ -32,8 +32,8 @@ namespace Plotypus
 
             DataView2D<T>&  dataView(const size_t i);
             size_t          addDataView(const DataView2D<T>& dataView);
-            size_t          addDataView(                               const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
-            size_t          addDataView(const std::span<double> dataX, const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
+            size_t          addDataView(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            size_t          addDataView(const std::span<T> dataY, const DataSelector<T>& selector, const std::string& label = "");
             size_t          addDataView(const std::string& func, const std::string& label = "");
 
 

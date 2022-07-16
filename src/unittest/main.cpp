@@ -90,7 +90,7 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-    s4.addDataView(dataX, dataY, Plotypus::defaultDataSelector<double>);
+    s4.addDataView(dataY, Plotypus::defaultDataSelector<double>);
     s4.addDataView("[0:pi] sin(x)", "Sine Wave");
     s4.addDataView("[0:pi] cos(x)", "Cosine Wave");
     s4.dataView(2).setLineStyle(0);
