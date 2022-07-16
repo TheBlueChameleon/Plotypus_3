@@ -18,6 +18,11 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
+    size_t StylesCollection::getBoxStyleCount() const
+    {
+        return boxStyles.size();
+    }
+
     const std::vector<BoxStyle>& StylesCollection::getBoxStyles() const
     {
         return boxStyles;
@@ -47,6 +52,11 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
+    size_t StylesCollection::getLineStyleCount() const
+    {
+        return lineStyles.size();
+    }
+
     const std::vector<LineStyle>& StylesCollection::getLineStyles() const
     {
         return lineStyles;
@@ -75,6 +85,11 @@ namespace Plotypus
     }
 
     // ---------------------------------------------------------------------- //
+
+    size_t StylesCollection::getPointStyleCount() const
+    {
+        return pointStyles.size();
+    }
 
     const std::vector<PointStyle>& StylesCollection::getPointStyles() const
     {

@@ -25,6 +25,7 @@ namespace Plotypus
         FillSteps,
         Boxes,
         Arrows,
+        Vectors
     };
 
 

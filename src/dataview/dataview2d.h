@@ -29,7 +29,12 @@ namespace Plotypus
 
             //! @todo add columns 5+6 for method arrows
 
-            //! @todo using clause
+            /*! @todo using clause
+             *      for that, use a std::array<size_t, N> columnAssignmentList and a new enum in types.h
+             *      enum gives named indices for columnAssignmentList
+             *      columnAssignmentList tells where in data file to look for respective content
+             *      requires constant for <not assigned> => magic constant = unsigned(-1)
+             */
 
             // function view
             std::string func;

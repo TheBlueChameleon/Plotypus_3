@@ -41,6 +41,9 @@ namespace Plotypus
             case PlotStyle2D::Arrows:
                 this->style = "arrows";
                 break;
+            case PlotStyle2D::Vectors:
+                this->style = "vectors";
+                break;
         }
     }
 

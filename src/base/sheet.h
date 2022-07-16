@@ -51,9 +51,6 @@ namespace Plotypus
             size_t                          addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
             void                            clearLabels();
 
-            /** @todo virtual std::vector<std::string> getDatafiles() const;
-             *  returns names of all data files as produced by the added data views (empty list by default); null string for funcs */
-
             // -------------------------------------------------------------- //
             // writers
 

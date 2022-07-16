@@ -65,7 +65,6 @@ namespace Plotypus
 
         verbose       = true;
         autoRunScript = true;
-        standaloneTex = true;
 
         numberPrecision = 6;           // used only in txt and tex output
 
@@ -226,16 +225,6 @@ namespace Plotypus
     void Report::setAutoRunScript(bool newAutoRunScript)
     {
         autoRunScript = newAutoRunScript;
-    }
-
-    bool Report::getStandaloneTex() const
-    {
-        return standaloneTex;
-    }
-
-    void Report::setStandaloneTex(bool newStandaloneTEX)
-    {
-        standaloneTex = newStandaloneTEX;
     }
 
     int Report::getNumberPrecision() const

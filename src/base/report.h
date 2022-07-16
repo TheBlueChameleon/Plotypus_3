@@ -31,7 +31,6 @@ namespace Plotypus
 
             bool verbose       = true;
             bool autoRunScript = true;
-            bool standaloneTex = true;
 
             int  numberPrecision = 6;           // used only in txt output
 
@@ -92,8 +91,6 @@ namespace Plotypus
             void                setVerbose(bool newVerbose);
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
-            bool                getStandaloneTex() const;
-            void                setStandaloneTex(bool newStandaloneTEX);
 
             int                 getNumberPrecision() const;
             void                setNumberPrecision(int newNumberPrecision);

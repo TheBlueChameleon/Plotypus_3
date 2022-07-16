@@ -15,6 +15,10 @@ namespace Plotypus
     template<class T>
     class Plot2D : public Plot
     {
+            /**
+             * @todo appy point styles in script
+             */
+
         private:
             std::vector<DataView2D<T>> dataViews;
 
