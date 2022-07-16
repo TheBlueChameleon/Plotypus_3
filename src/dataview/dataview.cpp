@@ -11,21 +11,32 @@ namespace Plotypus
     {
         switch (style)
         {
-            case PlotStyle2D::Lines:
-                this->style = "lines";
+            case PlotStyle2D::Dots:
+                this->style = "dots";
                 break;
             case PlotStyle2D::Points:
                 this->style = "points";
                 break;
+            case PlotStyle2D::XErrorBars:
+                this->style = "xerrorbars";
+                break;
+            case PlotStyle2D::YErrorBars:
+                this->style = "yerrorbars";
+                break;
+            case PlotStyle2D::XYErrorBars:
+                this->style = "xyerrorbars";
+                break;
+
+            case PlotStyle2D::Lines:
+                this->style = "lines";
+                break;
             case PlotStyle2D::LinesPoints:
                 this->style = "linespoints";
-                break;
-            case PlotStyle2D::Dots:
-                this->style = "dots";
                 break;
             case PlotStyle2D::FilledCurves:
                 this->style = "filledcurves";
                 break;
+
             case PlotStyle2D::Steps:
                 this->style = "steps";
                 break;
@@ -35,9 +46,14 @@ namespace Plotypus
             case PlotStyle2D::FillSteps:
                 this->style = "fillsteps";
                 break;
+
             case PlotStyle2D::Boxes:
                 this->style = "boxes";
                 break;
+            case PlotStyle2D::BoxxyError:
+                this->style = "boxxyerror";
+                break;
+
             case PlotStyle2D::Arrows:
                 this->style = "arrows";
                 break;

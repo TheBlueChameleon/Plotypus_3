@@ -15,15 +15,23 @@ namespace Plotypus
      */
     enum class PlotStyle2D
     {
-        Lines,
-        Points,
-        LinesPoints,
         Dots,
+        Points,
+        XErrorBars,
+        YErrorBars,
+        XYErrorBars,
+
+        Lines,
+        LinesPoints,
         FilledCurves,
+
         Steps,
         FSteps,
         FillSteps,
+
         Boxes,
+        BoxxyError,
+
         Arrows,
         Vectors
     };
