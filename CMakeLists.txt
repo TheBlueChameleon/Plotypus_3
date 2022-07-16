@@ -22,7 +22,7 @@ add_library(Plotypus-lib SHARED
     src/definitions/errors.h
     src/base/localMacros.h
     #
-    src/base/util.h src/base/util.cpp
+    src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/stylescollection.h src/base/stylescollection.cpp
     src/base/sheet.h src/base/sheet.cpp
     src/base/report.h src/base/report.cpp src/base/report.txx

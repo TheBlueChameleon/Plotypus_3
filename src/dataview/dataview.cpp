@@ -140,7 +140,7 @@ namespace Plotypus
 
     void DataView::setDataFilename(const std::string& newDataFilename) const
     {
-        throwIfInvalidFilename("data output filename", newDataFilename);
+        checkFilename("data output filename", newDataFilename);
         dataFilename = newDataFilename;
     }
 

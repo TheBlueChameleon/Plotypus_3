@@ -3,14 +3,20 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 namespace Plotypus
 {
-    void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest);
+    void checkFilename(const std::string& component, const std::string& stringToTest);
+
+    template<class T>
+    void checkIndex(const std::string& indexName, const size_t i, std::vector<T> vector);
 
     void runGnuplot(const std::string& filename, bool verbose = true);
 
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
 };
+
+#include "util.txx"
 
 #endif // UTIL_H

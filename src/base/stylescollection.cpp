@@ -25,7 +25,7 @@ namespace Plotypus
 
     BoxStyle& StylesCollection::getBoxStyle(const size_t i)
     {
-        CHECK_INDEX(i, boxStyles, "box style index");
+        checkIndex("box style index", i, boxStyles);
         return boxStyles[i];
     }
 
@@ -54,7 +54,7 @@ namespace Plotypus
 
     LineStyle& StylesCollection::getLineStyle(const size_t i)
     {
-        CHECK_INDEX(i, lineStyles, "box style index");
+        checkIndex("line style index", i, lineStyles);
         return lineStyles[i];
     }
 
@@ -83,7 +83,7 @@ namespace Plotypus
 
     PointStyle& StylesCollection::getPointStyle(const size_t i)
     {
-        CHECK_INDEX(i, pointStyles, "box style index");
+        checkIndex("point style index", i, pointStyles);
         return pointStyles[i];
     }
 
@@ -111,7 +111,7 @@ namespace Plotypus
     // ====================================================================== //
 
 
-    void StylesCollection::writeBoxStyles(std::ostream &hFile) const
+    void StylesCollection::writeBoxStyles(std::ostream& hFile) const
     {
         if (boxStyles.size())
         {
@@ -150,7 +150,7 @@ namespace Plotypus
         }
     }
 
-    void StylesCollection::writeLineStyles(std::ostream &hFile) const
+    void StylesCollection::writeLineStyles(std::ostream& hFile) const
     {
         if (lineStyles.size())
         {

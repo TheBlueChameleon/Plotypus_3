@@ -88,7 +88,7 @@ namespace Plotypus
 
     Label& Sheet::label(const size_t i)
     {
-        CHECK_INDEX(i, labels, "label index");
+        checkIndex("label index", i, labels);
         return labels[i];
     }
 
@@ -113,7 +113,7 @@ namespace Plotypus
     // ====================================================================== //
     // writers
 
-    void Sheet::preprocessSheet(const std::string& autoDataFilename, const std::string &extension) const {}
+    void Sheet::preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const {}
 
     void Sheet::writeTxtHead(std::ostream& hFile) const
     {

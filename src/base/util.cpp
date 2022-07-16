@@ -4,7 +4,7 @@
 
 namespace Plotypus
 {
-    void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest)
+    void checkFilename(const std::string& component, const std::string& stringToTest)
     {
         if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
         {
@@ -40,5 +40,4 @@ namespace Plotypus
 
         return hFile;
     }
-
 };
