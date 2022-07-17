@@ -12,7 +12,6 @@
 
 namespace Plotypus
 {
-    template<class T>
     class DataView2D : public DataView
     {
         protected:
@@ -64,5 +63,4 @@ namespace Plotypus
     };
 }
 
-#include "dataview2d.txx"
 #endif // DATAVIEW2D_H

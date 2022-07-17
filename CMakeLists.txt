@@ -30,7 +30,7 @@ add_library(Plotypus-lib SHARED
     src/plot/plot2d.h src/plot/plot2d.cpp src/plot/plot2d.txx
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
-    src/dataview/dataview2d.h src/dataview/dataview2d.txx
+    src/dataview/dataview2d.h src/dataview/dataview2d.cpp
     src/dataview/dataview2dcompound.h src/dataview/dataview2dcompound.txx
 )
 

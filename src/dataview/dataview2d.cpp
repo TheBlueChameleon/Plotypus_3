@@ -10,40 +10,34 @@
 
 namespace Plotypus
 {
-    template<class T>
-    void DataView2D<T>::clearFunctionMembers()
+    void DataView2D::clearFunctionMembers()
     {
         func = "";
     }
 
-    template<class T>
-    void DataView2D<T>::writeDatDataAsc(std::ostream& hFile) const
+    void DataView2D::writeDatDataAsc(std::ostream& hFile) const
     {
 
     }
 
-    template<class T>
-    void DataView2D<T>::writeDatDataBin(std::ostream& hFile) const
+    void DataView2D::writeDatDataBin(std::ostream& hFile) const
     {
 
     }
 
     // ====================================================================== //
 
-    template<class T>
-    DataView2D<T>::DataView2D(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
+    DataView2D::DataView2D(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
         DataView(label, style, dataColumnFormat)
     {}
 
-    template<class T>
-    DataView2D<T>::DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
+    DataView2D::DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
         DataView(label, style, dataColumnFormat)
     {}
 
     // ====================================================================== //
 
-    template<class T>
-    void DataView2D<T>::reset()
+    void DataView2D::reset()
     {
         DataView::reset();
 
@@ -54,33 +48,28 @@ namespace Plotypus
         pointStyle = -1;
     }
 
-    template<class T>
-    const std::string& DataView2D<T>::getFunc() const
+    const std::string& DataView2D::getFunc() const
     {
         return func;
     }
 
-    template<class T>
-    void DataView2D<T>::setFunc(const std::string& newFunc)
+    void DataView2D::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
         clearNonFunctionMembers();
     }
 
-    template<class T>
-    int DataView2D<T>::getLineStyle() const
+    int DataView2D::getLineStyle() const
     {
         return lineStyle;
     }
 
-    template<class T>
-    void DataView2D<T>::setLineStyle(int newLineStyle)
+    void DataView2D::setLineStyle(int newLineStyle)
     {
         lineStyle = newLineStyle;
     }
 
-    template<class T>
-    bool DataView2D<T>::isDummy() const
+    bool DataView2D::isDummy() const
     {
 //        if (
 //            dataX.empty() &&
@@ -102,8 +91,7 @@ namespace Plotypus
         return true;
     }
 
-    template<class T>
-    bool DataView2D<T>::isComplete() const
+    bool DataView2D::isComplete() const
     {
         // *INDENT-OFF*
         if (isDummy()) {return true;}
@@ -125,8 +113,7 @@ namespace Plotypus
         return true;
     }
 
-    template<class T>
-    size_t DataView2D<T>::getColumnID(const ColumnTypes columnType) const
+    size_t DataView2D::getColumnID(const ColumnTypes columnType) const
     {
         switch (columnType)
         {
@@ -366,8 +353,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    template<class T>
-    void DataView2D<T>::writeDatData() const
+    void DataView2D::writeDatData() const
     {
         std::fstream hFile = openOrThrow(dataFilename);
 
@@ -377,8 +363,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    template<class T>
-    void DataView2D<T>::writeScriptData(std::ostream& hFile) const
+    void DataView2D::writeScriptData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
         if (func.empty())   {hFile << std::quoted(dataFilename);}

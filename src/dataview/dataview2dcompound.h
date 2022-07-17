@@ -6,7 +6,7 @@
 namespace Plotypus
 {
     template<class T>
-    class DataView2DCompound : public DataView2D<T>
+    class DataView2DCompound : public DataView2D
     {
         protected:
             std::span<T>                 data;
