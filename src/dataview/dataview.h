@@ -47,7 +47,7 @@ namespace Plotypus
             virtual bool isDummy() const = 0;
             virtual bool isComplete() const = 0;
 
-            virtual size_t getColumnID(const ColumnTypes columnType) const = 0;
+            size_t getColumnID(const ColumnTypes columnType) const = 0;
 
             // -------------------------------------------------------------- //
             // writers

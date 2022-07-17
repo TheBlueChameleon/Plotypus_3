@@ -82,31 +82,26 @@ namespace Plotypus
         autoColumnAssignments = newAutoColumnAssignments;
     }
 
-    std::array<size_t, 6>& DataView2D::getColumnAssignments()
+    size_t& DataView2D::columnAssignment(size_t columnID)
     {
-        return columnAssignments;
-    }
-
-    void DataView2D::autoAssignColumns()
-    {
-        columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
+        return columnAssignments.at(columnID);
     }
 
     size_t DataView2D::getColumnID(const ColumnTypes columnType) const
     {
         switch (columnType)
         {
-            case ColumnTypes::column1:
+            case ColumnTypes::Column1:
                 return 1;
-            case ColumnTypes::column2:
+            case ColumnTypes::Column2:
                 return 2;
-            case ColumnTypes::column3:
+            case ColumnTypes::Column3:
                 return 3;
-            case ColumnTypes::column4:
+            case ColumnTypes::Column4:
                 return 4;
-            case ColumnTypes::column5:
+            case ColumnTypes::Column5:
                 return 5;
-            case ColumnTypes::column6:
+            case ColumnTypes::Column6:
                 return 6;
 
             case ColumnTypes::X:

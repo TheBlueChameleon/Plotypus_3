@@ -24,7 +24,8 @@ namespace Plotypus
             void                                    setData(const std::span<T>& newDataSource);
 
             const std::array<DataSelector<T>, 6>&   getSelectors() const;
-            void                                    setSelectors(const std::vector<DataSelector<T> >& newSelectors);
+            void                                    setSelectors(const std::array<DataSelector<T>, 6>& newSelectors);
+            void                                    setSelector (const ColumnTypes column, const DataSelector<T>& selector);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

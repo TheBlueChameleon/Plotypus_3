@@ -41,7 +41,7 @@ namespace Plotypus
             template<class T>
             T& dataViewAs(const size_t i);
             template<class T>
-            size_t      addDataViewCompound(DataView2DCompound<T>* dataView);
+            size_t      addDataViewCompound(DataView2DCompound<T>* dataView);   //! @todo: unify interface: addX returns ref to object in store
             template<class T>
             size_t      addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>

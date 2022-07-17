@@ -1,3 +1,6 @@
+#include <iomanip>
+#include <string>
+
 #include "dataview2dcompound.h"
 
 namespace Plotypus
@@ -50,9 +53,36 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelectors(const std::vector<DataSelector<T>>& newSelectors)
+    void DataView2DCompound<T>::setSelectors(const std::array<DataSelector<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
+        for (size_t i = 1u; const auto& selector : selectors)
+        {
+            if (selector)
+            {
+                columnAssignments[i-1] = i;
+            }
+            ++i;
+        }
+    }
+
+    template<class T>
+    void DataView2DCompound<T>::setSelector(const ColumnTypes column, const DataSelector<T>& selector)
+    {
+        const auto columnID = getColumnID(column);
+
+        if (columnID == UNSUPPORTED_COLUMN)
+        {
+            std::string errMsg = "Column type ";
+            errMsg += "\"" + getColumnIDName(column) + "\"";
+            errMsg += " not supported for plot type ";
+            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
+
+            throw UnsupportedOperationError( errMsg );
+        }
+
+        selectors        [columnID - 1] = selector;
+        columnAssignments[columnID - 1] = columnID;
     }
 
     template<class T>

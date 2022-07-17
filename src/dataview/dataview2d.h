@@ -52,8 +52,7 @@ namespace Plotypus
             bool getAutoColumnAssignments() const;
             void setAutoColumnAssignments(bool newAutoColumnAssignments);
 
-            std::array<size_t, 6>& getColumnAssignments();
-            void autoAssignColumns();
+            size_t& columnAssignment(size_t columnID);
 
             virtual size_t getColumnID(const ColumnTypes columnType) const;
 

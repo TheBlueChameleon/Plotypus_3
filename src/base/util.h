@@ -24,6 +24,9 @@ namespace Plotypus
 
     template<class T, class U>
     bool checkColumnList(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1 = false);
+
+    const std::string getColumnIDName(const ColumnTypes columnType);
+    const std::string getPlotStyleName(const PlotStyle2D styleID);
 };
 
 #include "util.txx"

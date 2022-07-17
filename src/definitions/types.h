@@ -95,12 +95,12 @@ namespace Plotypus
      */
     enum class ColumnTypes
     {
-        column1,
-        column2,
-        column3,
-        column4,
-        column5,
-        column6,
+        Column1,
+        Column2,
+        Column3,
+        Column4,
+        Column5,
+        Column6,
 
         X, Y, Y2, Z,
         DeltaX, DeltaY, DeltaZ,

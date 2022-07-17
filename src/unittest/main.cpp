@@ -81,10 +81,10 @@ void playground ()
         {2./3.*pi, 1, 0, 0},
         {      pi, 0, 0, 0}
     };
-    Plotypus::DataSelector<compound_t> compoundselector = [] (const compound_t& data)
-    {
-        return data.y;
-    };
+    // *INDENT-OFF*
+    Plotypus::DataSelector<compound_t> compoundSelectorX = [] (const compound_t& data) {return data.x;};
+    Plotypus::DataSelector<compound_t> compoundSelectorY = [] (const compound_t& data) {return data.y;};
+    // *INDENT-ON*
 
     Plotypus::Report r;
 
@@ -109,12 +109,25 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-    s4.addDataViewCompound<compound_t>(data, compoundselector);
+    s4.addDataViewCompound<compound_t>(data, compoundSelectorY);
     s4.addDataViewCompound<compound_t>("[0:pi] sin(x)"s, "Sine Wave"s);
     s4.addDataViewCompound<compound_t>("[0:pi] cos(x)", "Cosine Wave");
-    Plotypus::DataView2DCompound<compound_t>& dv = dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(s4.dataView(2));
+
+    dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(s4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
+
+    auto& dv = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
+    try
+    {
+        auto& errv = s4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);
+    }
+    catch (const std::bad_cast& e)
+    {
+        std::cout << "prevented misinterpretation of dataview object" << std::endl;
+    }
+
     dv.setLineStyle(0);
-    s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(1).setStyleID(Plotypus::PlotStyle2D::Dots);
+    dv.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
+
 
 //    r.writeTxt();
 //    r.writeDat();
