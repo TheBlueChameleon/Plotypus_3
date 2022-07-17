@@ -134,6 +134,11 @@ namespace Plotypus
                 return 1;
             case ColumnTypes::Y:
                 return 2;
+            case ColumnTypes::Y2:
+            // *INDENT-OFF*
+            if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
+            else                                        {return UNSUPPORTED_COLUMN;}
+            // *INDENT-ON*
 
             case ColumnTypes::DeltaX:
                 switch(styleID)
@@ -158,6 +163,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -188,6 +194,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -215,6 +222,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -243,6 +251,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -272,6 +281,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -301,6 +311,7 @@ namespace Plotypus
                     case PlotStyle2D::Steps:
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::FilledCurves:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:

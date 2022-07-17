@@ -102,7 +102,7 @@ namespace Plotypus
         column5,
         column6,
 
-        X, Y, Z,
+        X, Y, Y2, Z,
         DeltaX, DeltaY, DeltaZ,
         XLow, XHigh, YLow, YHigh,
         Pointsize, Pointtype, Color,
