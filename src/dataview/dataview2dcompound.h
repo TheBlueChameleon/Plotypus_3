@@ -9,8 +9,8 @@ namespace Plotypus
     class DataView2DCompound : public DataView2D
     {
         protected:
-            std::span<T>                 data;
-            std::vector<DataSelector<T>> selectors;
+            std::span<T>                    data;
+            std::array<DataSelector<T>, 6>  selectors;
 
             virtual void clearNonFunctionMembers();
 
@@ -21,8 +21,11 @@ namespace Plotypus
             const std::span<T>&                     getData() const;
             void                                    setData(const std::span<T>& newDataSource);
 
-            const std::vector<DataSelector<T> >&    getSelectors() const;
+            const std::array<DataSelector<T>, 6>&   getSelectors() const;
             void                                    setSelectors(const std::vector<DataSelector<T> >& newSelectors);
+
+            virtual bool isDummy() const;
+            virtual bool isComplete() const; //! @todo update
     };
 }
 

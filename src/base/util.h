@@ -2,6 +2,7 @@
 #define UTIL_H
 
 #include <algorithm>
+#include <array>
 #include <fstream>
 #include <span>
 #include <string>
@@ -20,8 +21,10 @@ namespace Plotypus
 
     template<class T>
     bool contains(const T& toFind, const std::span<T>& container);
+
+    template<class T, class U>
+    bool checkColumnList(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1 = false);
 };
 
 #include "util.txx"
-
 #endif // UTIL_H

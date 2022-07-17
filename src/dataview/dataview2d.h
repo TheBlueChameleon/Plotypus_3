@@ -15,9 +15,6 @@ namespace Plotypus
     class DataView2D : public DataView
     {
         protected:
-            /**
-             * @todo make non-template
-             */
             /*! @todo using clause
              *      for that, use a std::array<size_t, N> columnAssignmentList and a new enum in types.h
              *      enum gives named indices for columnAssignmentList
@@ -49,9 +46,6 @@ namespace Plotypus
 
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
-
-            virtual bool isDummy() const;
-            virtual bool isComplete() const; //! @todo update
 
             virtual size_t getColumnID(const ColumnTypes columnType) const;
 

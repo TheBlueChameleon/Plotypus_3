@@ -69,50 +69,6 @@ namespace Plotypus
         lineStyle = newLineStyle;
     }
 
-    bool DataView2D::isDummy() const
-    {
-//        if (
-//            dataX.empty() &&
-//            dataY.empty() &&
-//            dataErrorX.empty() &&
-//            dataErrorY.empty() &&
-//            selectorX == nullptr &&
-//            selectorY == nullptr &&
-//            selectorErrorX == nullptr &&
-//            selectorErrorY == nullptr
-//        )
-//        {
-//            return true;
-//        }
-//        else
-//        {
-//            return false;
-//        }
-        return true;
-    }
-
-    bool DataView2D::isComplete() const
-    {
-        // *INDENT-OFF*
-        if (isDummy()) {return true;}
-
-//        if (func.empty()) {
-//            const auto sizeX = dataX.size();
-//            const auto sizeY = dataY.size();
-//            const auto sizeEX = dataErrorX.size();
-//            const auto sizeEY = dataErrorY.size();
-
-//            if (!sizeY)                         {return false;}
-//            if (sizeX  && (sizeX  != sizeY))    {return false;}
-//            if (sizeEX && (sizeEX != sizeY))    {return false;}
-//            if (sizeEY && (sizeEY != sizeY))    {return false;}
-//            if (!selectorY)                     {return false;}
-//        }
-        // *INDENT-ON*
-
-        return true;
-    }
-
     size_t DataView2D::getColumnID(const ColumnTypes columnType) const
     {
         switch (columnType)
