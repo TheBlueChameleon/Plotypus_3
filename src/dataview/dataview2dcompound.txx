@@ -11,13 +11,13 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
-        DataView2D(label, style, dataColumnFormat)
+    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const PlotStyle2D style) :
+        DataView2D(label, style)
     {}
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
-        DataView2D(label, style, dataColumnFormat)
+    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const std::string& style) :
+        DataView2D(label, style)
     {}
 
     // ====================================================================== //
@@ -120,9 +120,12 @@ namespace Plotypus
             case PlotStyle2D::Vectors:
                 return checkColumnList(selectors, 4, 4, nullptr);
             case PlotStyle2D::Custom:
-                return true;
+                return checkColumnList(selectors, 1, 6, nullptr, true);
         }
 
         return false;
     }
+
+    template<class T>
+    void DataView2DCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID) const {}
 }

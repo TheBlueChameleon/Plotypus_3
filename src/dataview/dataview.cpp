@@ -6,14 +6,14 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
-        label(label), dataColumnFormat(dataColumnFormat)
+    DataView::DataView(const std::string& label, const PlotStyle2D style) :
+        label(label)
     {
         setStyleID(style);
     }
 
-    DataView::DataView(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
-        label(label), style(style), styleID(PlotStyle2D::Custom), dataColumnFormat(dataColumnFormat)
+    DataView::DataView(const std::string& label, const std::string& style) :
+        label(label), style(style), styleID(PlotStyle2D::Custom)
     {}
 
     void DataView::reset()
@@ -21,7 +21,6 @@ namespace Plotypus
         styleID                     = PlotStyle2D::Custom;
         label                       = "";
         style                       = "lines";
-        dataColumnFormat            = "#";
         options                     = "";
         dataFilename                = "";
         binaryDataOutput            = true;
@@ -128,21 +127,6 @@ namespace Plotypus
                 this->style = "lines";
                 break;
         }
-    }
-
-    const std::string& DataView::getDataColumnFormat() const
-    {
-        return dataColumnFormat;
-    }
-
-    void DataView::setDataColumnFormat(const std::string& newDataColumnFormat)
-    {
-        dataColumnFormat = newDataColumnFormat;
-    }
-
-    void DataView::setDataColumnFormatPositive()
-    {
-        dataColumnFormat = "($# >= 0 ? $# : 1/0)";
     }
 
     bool DataView::getBinaryDataOutput() const

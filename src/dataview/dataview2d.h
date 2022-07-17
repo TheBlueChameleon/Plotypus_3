@@ -30,14 +30,12 @@ namespace Plotypus
             virtual void clearFunctionMembers();
             virtual void clearNonFunctionMembers() = 0;
 
-            void fetchData(std::vector<double>& buffer, size_t recordID) const; //! @todo implement; consider making this public; probably virtual abstract
-
             void writeDatDataAsc(std::ostream& hFile) const;
             void writeDatDataBin(std::ostream& hFile) const;
 
         public:
-            DataView2D(const std::string& label, const PlotStyle2D  style, const std::string& dataColumnFormat = "#");
-            DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
+            DataView2D(const std::string& label, const PlotStyle2D  style);
+            DataView2D(const std::string& label, const std::string& style);
 
             virtual void reset();
 
@@ -48,6 +46,8 @@ namespace Plotypus
             void                        setLineStyle(int newLineStyle);
 
             virtual size_t getColumnID(const ColumnTypes columnType) const;
+
+            virtual void fetchData(std::vector<double>& buffer, size_t recordID) const = 0;
 
             // -------------------------------------------------------------- //
             // writers

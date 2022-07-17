@@ -27,12 +27,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataView2D::DataView2D(const std::string& label, const PlotStyle2D style, const std::string& dataColumnFormat) :
-        DataView(label, style, dataColumnFormat)
+    DataView2D::DataView2D(const std::string& label, const PlotStyle2D style) :
+        DataView(label, style)
     {}
 
-    DataView2D::DataView2D(const std::string& label, const std::string& style, const std::string& dataColumnFormat) :
-        DataView(label, style, dataColumnFormat)
+    DataView2D::DataView2D(const std::string& label, const std::string& style) :
+        DataView(label, style)
     {}
 
     // ====================================================================== //

@@ -15,8 +15,8 @@ namespace Plotypus
             virtual void clearNonFunctionMembers();
 
         public:
-            DataView2DCompound(const std::string& label, const PlotStyle2D  style, const std::string& dataColumnFormat = "#");
-            DataView2DCompound(const std::string& label, const std::string& style, const std::string& dataColumnFormat = "#");
+            DataView2DCompound(const std::string& label, const PlotStyle2D  style);
+            DataView2DCompound(const std::string& label, const std::string& style);
 
             const std::span<T>&                     getData() const;
             void                                    setData(const std::span<T>& newDataSource);
@@ -25,7 +25,9 @@ namespace Plotypus
             void                                    setSelectors(const std::vector<DataSelector<T> >& newSelectors);
 
             virtual bool isDummy() const;
-            virtual bool isComplete() const; //! @todo update
+            virtual bool isComplete() const;
+
+            virtual void fetchData(std::vector<double>& buffer, size_t recordID) const; //! @todo implement
     };
 }
 
