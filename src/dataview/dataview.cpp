@@ -6,13 +6,13 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const std::string& label, const PlotStyle2D style) :
+    DataView::DataView(const PlotStyle2D style, const std::string& label) :
         label(label)
     {
         setStyleID(style);
     }
 
-    DataView::DataView(const std::string& label, const std::string& style) :
+    DataView::DataView(const std::string& style, const std::string& label) :
         label(label), style(style), styleID(PlotStyle2D::Custom)
     {}
 

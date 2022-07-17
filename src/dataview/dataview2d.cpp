@@ -27,12 +27,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataView2D::DataView2D(const std::string& label, const PlotStyle2D style) :
-        DataView(label, style)
+    DataView2D::DataView2D(const PlotStyle2D style, const std::string& label) :
+        DataView(style, label)
     {}
 
-    DataView2D::DataView2D(const std::string& label, const std::string& style) :
-        DataView(label, style)
+    DataView2D::DataView2D(const std::string& style, const std::string& label) :
+        DataView(style, label)
     {}
 
     // ====================================================================== //
@@ -46,6 +46,9 @@ namespace Plotypus
 
         lineStyle  = -1;
         pointStyle = -1;
+
+        columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
+        autoColumnAssignments = true;
     }
 
     const std::string& DataView2D::getFunc() const
@@ -67,6 +70,26 @@ namespace Plotypus
     void DataView2D::setLineStyle(int newLineStyle)
     {
         lineStyle = newLineStyle;
+    }
+
+    bool DataView2D::getAutoColumnAssignments() const
+    {
+        return autoColumnAssignments;
+    }
+
+    void DataView2D::setAutoColumnAssignments(bool newAutoColumnAssignments)
+    {
+        autoColumnAssignments = newAutoColumnAssignments;
+    }
+
+    std::array<size_t, 6>& DataView2D::getColumnAssignments()
+    {
+        return columnAssignments;
+    }
+
+    void DataView2D::autoAssignColumns()
+    {
+        columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
     }
 
     size_t DataView2D::getColumnID(const ColumnTypes columnType) const

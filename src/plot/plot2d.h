@@ -52,7 +52,7 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
+            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const; //! @todo update (preprocess column assignments or forward to DataView::preprocess)
 
             virtual void writeDatData() const;
 

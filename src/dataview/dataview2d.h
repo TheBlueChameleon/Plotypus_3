@@ -1,6 +1,7 @@
 #ifndef DATAVIEW2D_H
 #define DATAVIEW2D_H
 
+#include <array>
 #include <concepts>
 #include <span>
 #include <string>
@@ -27,6 +28,10 @@ namespace Plotypus
             int lineStyle  = -1;
             int pointStyle = -1;
 
+            std::array<size_t, 6> columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
+
+            bool autoColumnAssignments = true;
+
             virtual void clearFunctionMembers();
             virtual void clearNonFunctionMembers() = 0;
 
@@ -34,8 +39,8 @@ namespace Plotypus
             void writeDatDataBin(std::ostream& hFile) const;
 
         public:
-            DataView2D(const std::string& label, const PlotStyle2D  style);
-            DataView2D(const std::string& label, const std::string& style);
+            DataView2D(const PlotStyle2D  style, const std::string& label = "");
+            DataView2D(const std::string& style, const std::string& label = "");
 
             virtual void reset();
 
@@ -44,6 +49,12 @@ namespace Plotypus
 
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
+
+            bool getAutoColumnAssignments() const;
+            void setAutoColumnAssignments(bool newAutoColumnAssignments);
+
+            std::array<size_t, 6>& getColumnAssignments();
+            void autoAssignColumns();
 
             virtual size_t getColumnID(const ColumnTypes columnType) const;
 

@@ -15,8 +15,8 @@ namespace Plotypus
             virtual void clearNonFunctionMembers();
 
         public:
-            DataView2DCompound(const std::string& label, const PlotStyle2D  style);
-            DataView2DCompound(const std::string& label, const std::string& style);
+            DataView2DCompound(const PlotStyle2D  style, const std::string& label = "");
+            DataView2DCompound(const std::string& style, const std::string& label = "");
 
             const std::span<T>&                     getData() const;
             void                                    setData(const std::span<T>& newDataSource);

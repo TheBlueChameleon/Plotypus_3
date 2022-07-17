@@ -11,13 +11,13 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const PlotStyle2D style) :
-        DataView2D(label, style)
+    DataView2DCompound<T>::DataView2DCompound(const PlotStyle2D style, const std::string& label) :
+        DataView2D(style, label)
     {}
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const std::string& label, const std::string& style) :
-        DataView2D(label, style)
+    DataView2DCompound<T>::DataView2DCompound(const std::string& style, const std::string& label) :
+        DataView2D(style, label)
     {}
 
     // ====================================================================== //
