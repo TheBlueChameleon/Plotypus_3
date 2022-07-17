@@ -29,7 +29,6 @@ namespace Plotypus
             int pointStyle = -1;
 
             std::array<size_t, 6> columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
-
             bool autoColumnAssignments = true;
 
             virtual void clearFunctionMembers();

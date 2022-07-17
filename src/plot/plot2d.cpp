@@ -53,8 +53,6 @@ namespace Plotypus
                 const auto fullOutputFilename = autoDataFilename + "_" + std::to_string(i) + "." + extension;
                 dataView->setDataFilename(fullOutputFilename);
             }
-
-
             ++i;
         }
     }

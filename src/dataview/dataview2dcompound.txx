@@ -23,6 +23,15 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
+    void DataView2DCompound<T>::reset()
+    {
+        DataView2D::reset();
+
+        data      = std::span<T>();
+        selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+    }
+
+    template<class T>
     const std::span<T>& DataView2DCompound<T>::getData() const
     {
         return data;
@@ -49,7 +58,13 @@ namespace Plotypus
     template<class T>
     bool DataView2DCompound<T>::isDummy() const
     {
-        return ((data.size() + selectors.size()) == 0) && func.empty();
+        bool result = func.empty();
+        result &= data.empty();
+        for (const auto& selector : selectors)
+        {
+            result &= static_cast<bool>(selector);
+        }
+        return result;
     }
 
     template<class T>
@@ -58,7 +73,7 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())      {return true;}
         if (data.empty())   {return false;}
-        if (selectors[1])   {return true;}      // require at least Y data
+        if (!selectors[1])  {return false;}      // require at least Y data
         // *INDENT-ON*
 
         bool result;

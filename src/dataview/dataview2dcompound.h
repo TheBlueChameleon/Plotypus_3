@@ -18,6 +18,8 @@ namespace Plotypus
             DataView2DCompound(const PlotStyle2D  style, const std::string& label = "");
             DataView2DCompound(const std::string& style, const std::string& label = "");
 
+            virtual void reset();
+
             const std::span<T>&                     getData() const;
             void                                    setData(const std::span<T>& newDataSource);
 
