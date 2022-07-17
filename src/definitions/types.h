@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include <functional>
+#include <limits>
 #include <string>
 
 namespace Plotypus
@@ -110,6 +111,11 @@ namespace Plotypus
 
         Length, Angle
     };
+
+    // ---------------------------------------------------------------------- //
+
+    constexpr size_t UNUSED_COLUMN = 0u;
+    constexpr size_t UNSUPPORTED_COLUMN = std::numeric_limits<size_t>::max();
 
 //! @}
 }

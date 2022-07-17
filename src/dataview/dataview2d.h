@@ -16,6 +16,9 @@ namespace Plotypus
     class DataView2D : public DataView
     {
         protected:
+            /**
+             * @todo make non-template
+             */
             /*! @todo using clause
              *      for that, use a std::array<size_t, N> columnAssignmentList and a new enum in types.h
              *      enum gives named indices for columnAssignmentList

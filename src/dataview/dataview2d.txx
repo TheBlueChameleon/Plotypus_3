@@ -146,27 +146,222 @@ namespace Plotypus
             case ColumnTypes::X:
                 return 1;
             case ColumnTypes::Y:
+                return 2;
 
             case ColumnTypes::DeltaX:
+                switch(styleID)
+                {
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::XYErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                    case PlotStyle2D::Vectors:
+                        return 3;
+
+                    case PlotStyle2D::BoxErrorBars:
+                        return 5;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::DeltaY:
+                switch(styleID)
+                {
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::BoxErrorBars:
+                        return 3;
+
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XYErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                    case PlotStyle2D::Vectors:
+                        return 4;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::XLow:
+                switch(styleID)
+                {
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                    case PlotStyle2D::XYErrorLines:
+                        return 3;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::BoxErrorBars:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::XHigh:
+                switch(styleID)
+                {
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::XYErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                        return 4;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::BoxErrorBars:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::YLow:
+                switch(styleID)
+                {
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::BoxErrorBars:
+                        return 3;
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XYErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                        return 5;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::YHigh:
+                switch(styleID)
+                {
+                    case PlotStyle2D::YErrorBars:
+                    case PlotStyle2D::YErrorLines:
+                    case PlotStyle2D::BoxErrorBars:
+                        return 4;
+                    case PlotStyle2D::XYErrorBars:
+                    case PlotStyle2D::XYErrorLines:
+                    case PlotStyle2D::BoxxyError:
+                        return 6;
+
+                    case PlotStyle2D::Dots:
+                    case PlotStyle2D::Points:
+                    case PlotStyle2D::Lines:
+                    case PlotStyle2D::LinesPoints:
+                    case PlotStyle2D::XErrorBars:
+                    case PlotStyle2D::XErrorLines:
+                    case PlotStyle2D::Steps:
+                    case PlotStyle2D::FSteps:
+                    case PlotStyle2D::FillSteps:
+                    case PlotStyle2D::Boxes:
+                    case PlotStyle2D::HBoxes:
+                    case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Custom:
+                        return UNSUPPORTED_COLUMN;
+                }
+
             case ColumnTypes::Pointsize:
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Points) {return 3;}
+                else                                {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
+
             case ColumnTypes::Pointtype:
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Points) {return 4;}
+                else                                {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
             case ColumnTypes::Color:
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Points) {return 5;}
+                else                                {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
 
             case ColumnTypes::Boxwidth:
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
+                else                                                                    {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
 
             case ColumnTypes::Length:
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Arrows) {return 3;}
+                else                                {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
             case ColumnTypes::Angle:
-                break;
+                // *INDENT-OFF*
+                if (styleID == PlotStyle2D::Arrows) {return 4;}
+                else                                {return UNSUPPORTED_COLUMN;}
+                // *INDENT-ON*
 
             case ColumnTypes::Z:
             case ColumnTypes::DeltaZ:
-                throw UnsupportedOperationError("Not supported for 2D plots");
+                return UNSUPPORTED_COLUMN;
         }
+
+        return UNSUPPORTED_COLUMN;
     }
 
     // ====================================================================== //
