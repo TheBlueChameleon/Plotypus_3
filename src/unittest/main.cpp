@@ -112,12 +112,13 @@ void playground ()
     s4.addDataViewCompound<compound_t>(data, compoundselector);
     s4.addDataViewCompound<compound_t>("[0:pi] sin(x)"s, "Sine Wave"s);
     s4.addDataViewCompound<compound_t>("[0:pi] cos(x)", "Cosine Wave");
-    Plotypus::DataView2DCompound<compound_t>& dv = *reinterpret_cast<Plotypus::DataView2DCompound<compound_t>*>(s4.dataView(2));
+    Plotypus::DataView2DCompound<compound_t>& dv = dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(s4.dataView(2));
     dv.setLineStyle(0);
+    s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(1).setStyleID(Plotypus::PlotStyle2D::Dots);
 
 //    r.writeTxt();
-    r.writeDat();
-//    r.writeScript();
+//    r.writeDat();
+    r.writeScript();
 }
 
 // ========================================================================== //

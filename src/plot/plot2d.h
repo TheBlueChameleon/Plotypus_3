@@ -37,7 +37,9 @@ namespace Plotypus
 
             const std::vector<DataView*>& getDataViews() const;
 
-            DataView *dataView(const size_t i);
+            DataView& dataView(const size_t i);
+            template<class T>
+            T& dataViewAs(const size_t i);
             template<class T>
             size_t      addDataViewCompound(DataView2DCompound<T>* dataView);
             template<class T>

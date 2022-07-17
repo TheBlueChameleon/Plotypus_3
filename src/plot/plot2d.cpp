@@ -35,10 +35,10 @@ namespace Plotypus
         return dataViews;
     }
 
-    DataView* Plot2D::dataView(const size_t i)
+    DataView& Plot2D::dataView(const size_t i)
     {
         checkIndex("dataView index", i, dataViews);
-        return dataViews[i];
+        return *dataViews[i];
     }
 
     // ====================================================================== //
