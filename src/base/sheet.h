@@ -18,7 +18,7 @@ namespace Plotypus
             PlotType type;
 
             std::string title = "";
-            std::string defaultFont = "arial,7";
+            std::string defaultFont = "arial,7";        //! @todo consider dropping "default" in var and related methods
 
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";

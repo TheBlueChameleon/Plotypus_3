@@ -3,8 +3,6 @@
 
 #include "dataview2dcompound.h"
 
-#include <iostream>
-
 namespace Plotypus
 {
     template<class T>
@@ -106,16 +104,8 @@ namespace Plotypus
             throw UnsupportedOperationError( errMsg );
         }
 
-        std::cout << "setting colID = " << columnID << std::endl;
-
         selectors        [columnID - 1] = selector;
         columnAssignments[columnID - 1] = columnID;
-
-        for (auto c : columnAssignments)
-        {
-            std::cout << c << ", ";
-        }
-        std::cout << std::endl;
     }
 
     template<class T>

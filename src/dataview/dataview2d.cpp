@@ -366,11 +366,6 @@ namespace Plotypus
         bool allowMissingX = (styleID != PlotStyle2D::Custom);
         bool missingXColumn = allowMissingX && (columnAssignments[0] == UNUSED_COLUMN);
 
-        for (auto c : columnAssignments) {
-            std::cout << c << ", ";
-        }
-        std::cout << std::endl;
-
         auto lineLength = getConsecutiveCountFromColumnList(columnAssignments, allowMissingX);
         if (!lineLength) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
 

@@ -1,67 +1,13 @@
-#include <functional>
 #include <iostream>
-#include <numbers>
-#include <string>
-#include <vector>
 
 #include "unittest.h"
+#include "unittest_procs.h"
 #include "../plotypus.h"
 
 using namespace std::string_literals;
 
 // ========================================================================== //
-// convenience macro
-
-#define ADD_UNITTEST(func) {unittests.emplace_back(std::make_pair(#func, func));}
-
-// ========================================================================== //
-// procs
-
-bool unittest_report()
-{
-    std::cout << "TESTING REPORT CLASS" << std::endl;
-
-    UNITTEST_VARS;
-
-    Plotypus::Report r;
-
-    // ...................................................................... //
-
-    UNITTEST_ASSERT(r.getReportSize() == 0,
-                    "initialize empty list of sheets");
-
-    UNITTEST_THROWS(r.sheet(0),
-                    Plotypus::InvalidIndexError,
-                    "prevent access to nonexistent sheets");
-
-    r.addSheet();
-    UNITTEST_ASSERT(r.getReportSize() == 1,
-                    "add sheet");
-
-    {
-        auto& s = r.addSheet();
-    }
-    UNITTEST_ASSERT(r.getReportSize() == 2,
-                    "add sheet in scope and persist thereafter");
-
-    UNITTEST_DOESNT_THROW(r.sheet(0),
-                          std::exception,
-                          "access existing sheet (positive index)");
-    UNITTEST_THROWS(r.sheet(2),
-                    Plotypus::InvalidIndexError,
-                    "prevent out of scope index access (positive index)"
-                   );
-    UNITTEST_THROWS(r.sheet(-1),
-                    Plotypus::InvalidIndexError,
-                    "prevent out of scope index access (negative index)"
-                   );
-
-    // ...................................................................... //
-
-    UNITTEST_FINALIZE;
-}
-
-// -------------------------------------------------------------------------- //
+// playground
 
 void playground ()
 {
@@ -117,21 +63,17 @@ void playground ()
 
     auto& dataViewData1 = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(0);
     auto& dataViewFunc2 = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
-    try
-    {
-        auto& errv = s4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);
-    }
-    catch (const std::bad_cast& e)
-    {
-        std::cout << "prevented misinterpretation of dataview object" << std::endl;
-    }
+    // *INDENT-OFF*
+    try                             {auto& errv = s4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);}
+    catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
+    // *INDENT-ON*
 
     dataViewData1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
     dataViewFunc2.setLineStyle(0);
 
 
 //    r.writeTxt();
-    r.writeDat();
+//    r.writeDat();
 //    r.writeScript();
 }
 
@@ -142,53 +84,37 @@ int main()
 {
     std::cout << "UNIT TEST MAIN" << std::endl;
 
-    std::vector<std::pair<std::string, std::function<bool()>>> unittests;
-    std::vector<std::string> failedTests;
+    UNITTEST_MAIN_VARS;
 
     // ...................................................................... //
 
     std::cout << "REGISTERING UNIT TESTS ... " << std::flush;
 
-    ADD_UNITTEST(unittest_report);
+//    ADD_UNITTEST(unittest_report_basicSheetManagement);
+//    ADD_UNITTEST(unittest_report_empty_scriptOutput);
+    ADD_UNITTEST(unittest_report_sheets_scriptOutput);
 
     std::cout << "DONE" << std::endl << std::endl;
 
     // ...................................................................... //
 
     std::cout << "ABOUT TO RUN UNIT TESTS" << std::endl;
-    for (auto & [name, func] : unittests)
-    {
-        std::cout << "### STARTING TEST '" << name << "' ..." << std::endl;
-        if (! func())
-        {
-            failedTests.push_back(name);
-            std::cout << "~~~ FAILED!" << std::endl;
-        }
-        else
-        {
-            std::cout << "~~~ PASSED!" << std::endl;
-        }
-    }
+
+    RUN_UNITTESTS;
+
     std::cout << "ALL REGISTERED UNIT TESTS DONE" << std::endl << std::endl;
 
     // ...................................................................... //
 
     std::cout << "UNIT TESTS SUMMARY" << std::endl;
-    std::cout << "Passed " << unittests.size() - failedTests.size() << "/" << unittests.size() << " tests"  << std::endl;
-    if (!failedTests.empty())
-    {
-        std::cout << "Failed Tests:" << std::endl;
-        for (auto& name : failedTests)
-        {
-            std::cout << "~~~ " << name << std::endl;
-        }
-    }
+
+    SUMMARIZE_UNITTESTS;
 
     // ...................................................................... //
 
     std::cout << std::endl;
     std::cout << "FREE RANGE CODE BEGINS HERE" << std::endl;
-    playground();
+//    playground();
 
     return 0;
 }

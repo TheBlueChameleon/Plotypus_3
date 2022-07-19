@@ -37,7 +37,44 @@ bool unittest_foobar()
 #include <vector>
 
 // ========================================================================== //
+// type defs
+
+using unittest_list_t = std::vector<std::pair<std::string, std::function<bool()>>>;
+
+// ========================================================================== //
 // macros
+
+// -------------------------------------------------------------------------- //
+// main module
+
+#define UNITTEST_MAIN_VARS \
+    unittest_list_t             unittest_list; \
+    std::vector<std::string>    unittest_fails;
+
+#define ADD_UNITTEST(func) {unittest_list.emplace_back(std::make_pair(#func, func));}
+
+#define RUN_UNITTESTS { \
+        for (auto & [name, func] : unittest_list) { \
+            std::cout << "### STARTING TEST '" << name << "' ..." << std::endl; \
+            if (! func()) { \
+                unittest_fails.push_back(name); \
+                std::cout << "~~~ FAILED!" << std::endl; \
+            } else { \
+                std::cout << "~~~ PASSED!" << std::endl; \
+            } \
+        } \
+    }
+
+#define SUMMARIZE_UNITTESTS {unittest_show_summary(unittest_list, unittest_fails);}
+
+//    std::cout << "Passed " << unittest_list.size() - unittest_fails.size() << "/" << unittest_list.size() << " tests"  << std::endl; \
+//    if (!unittest_fails.empty()) { \
+//        std::cout << "Failed Tests:" << std::endl; \
+//        for (auto& name : unittest_fails) {std::cout << "~~~ " << name << std::endl;} \
+//    }
+
+// -------------------------------------------------------------------------- //
+// unittest modules
 
 #define UNITTEST_VARS \
     bool              unittest_result      = true; \
@@ -129,5 +166,6 @@ using Unittest_RessorceList = std::vector<std::string>;
 
 void unittest_check_files_present(const Unittest_RessorceList& files);
 void unittest_check_directories  (const Unittest_RessorceList& directories);
+void unittest_show_summary(const unittest_list_t& unittest_list, const std::vector<std::string>& unittest_fails);
 
 #endif // UNITTESTMACROS_H
