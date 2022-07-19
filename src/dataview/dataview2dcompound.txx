@@ -3,12 +3,31 @@
 
 #include "dataview2dcompound.h"
 
+#include <iostream>
+
 namespace Plotypus
 {
     template<class T>
     void DataView2DCompound<T>::clearNonFunctionMembers()
     {
         data = std::span<T>();
+    }
+
+    template<class T>
+    void DataView2DCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
+    {
+        // *INDENT-OFF*
+        const T& datapoint = data[recordID];
+        for (auto i : columnAssignments) {
+            if (i == UNUSED_COLUMN) {continue;}         // ignore unused columns
+            --i;                                        // zero based indices
+
+            const auto& selector = selectors[i];        // fetch correct selector
+            i -= missingXColumn;                        // correct for maybe missing X column
+
+            buffer[i] = selector(datapoint);
+        }
+        // *INDENT-ON*
     }
 
     // ====================================================================== //
@@ -32,6 +51,12 @@ namespace Plotypus
 
         data      = std::span<T>();
         selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
+    }
+
+    template<class T>
+    size_t DataView2DCompound<T>::getArity() const
+    {
+        return data.size();
     }
 
     template<class T>
@@ -81,8 +106,16 @@ namespace Plotypus
             throw UnsupportedOperationError( errMsg );
         }
 
+        std::cout << "setting colID = " << columnID << std::endl;
+
         selectors        [columnID - 1] = selector;
         columnAssignments[columnID - 1] = columnID;
+
+        for (auto c : columnAssignments)
+        {
+            std::cout << c << ", ";
+        }
+        std::cout << std::endl;
     }
 
     template<class T>
@@ -110,67 +143,64 @@ namespace Plotypus
         switch (styleID)
         {
             case PlotStyle2D::Dots:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::Points:
-                return checkColumnList(selectors, 2, 5, nullptr);
+                return checkColumnListComplete(selectors, 2, 5, nullptr);
             case PlotStyle2D::XErrorBars:
-                return checkColumnList(selectors, 3, 4, nullptr);
+                return checkColumnListComplete(selectors, 3, 4, nullptr);
             case PlotStyle2D::YErrorBars:
-                return checkColumnList(selectors, 3, 4, nullptr);
+                return checkColumnListComplete(selectors, 3, 4, nullptr);
             case PlotStyle2D::XYErrorBars:
-                result = checkColumnList(selectors, 4, 6, nullptr);
+                result = checkColumnListComplete(selectors, 4, 6, nullptr);
                 if (result && selectors[5])
                 {
                     result &= static_cast<bool>(selectors[4]);
                 }
                 return result;
             case PlotStyle2D::Lines:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::LinesPoints:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::FilledCurves:
-                return checkColumnList(selectors, 2, 3, nullptr);
+                return checkColumnListComplete(selectors, 2, 3, nullptr);
             case PlotStyle2D::XErrorLines:
-                return checkColumnList(selectors, 3, 4, nullptr);
+                return checkColumnListComplete(selectors, 3, 4, nullptr);
             case PlotStyle2D::YErrorLines:
-                return checkColumnList(selectors, 3, 4, nullptr);
+                return checkColumnListComplete(selectors, 3, 4, nullptr);
             case PlotStyle2D::XYErrorLines:
-                result = checkColumnList(selectors, 4, 6, nullptr);
+                result = checkColumnListComplete(selectors, 4, 6, nullptr);
                 if (result && selectors[5])
                 {
                     result &= static_cast<bool>(selectors[4]);
                 }
                 return result;
             case PlotStyle2D::Steps:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::FSteps:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::FillSteps:
-                return checkColumnList(selectors, 2, 2, nullptr);
+                return checkColumnListComplete(selectors, 2, 2, nullptr);
             case PlotStyle2D::Boxes:
-                return checkColumnList(selectors, 2, 3, nullptr);
+                return checkColumnListComplete(selectors, 2, 3, nullptr);
             case PlotStyle2D::HBoxes:
-                return checkColumnList(selectors, 2, 3, nullptr);
+                return checkColumnListComplete(selectors, 2, 3, nullptr);
             case PlotStyle2D::BoxErrorBars:
-                return checkColumnList(selectors, 5, 5, nullptr);
+                return checkColumnListComplete(selectors, 5, 5, nullptr);
             case PlotStyle2D::BoxxyError:
-                result = checkColumnList(selectors, 4, 6, nullptr);
+                result = checkColumnListComplete(selectors, 4, 6, nullptr);
                 if (result && selectors[5])
                 {
                     result &= static_cast<bool>(selectors[4]);
                 }
                 return result;
             case PlotStyle2D::Arrows:
-                return checkColumnList(selectors, 4, 4, nullptr);
+                return checkColumnListComplete(selectors, 4, 4, nullptr);
             case PlotStyle2D::Vectors:
-                return checkColumnList(selectors, 4, 4, nullptr);
+                return checkColumnListComplete(selectors, 4, 4, nullptr);
             case PlotStyle2D::Custom:
-                return checkColumnList(selectors, 1, 6, nullptr, true);
+                return checkColumnListComplete(selectors, 1, 6, nullptr, true);
         }
 
         return false;
     }
-
-    template<class T>
-    void DataView2DCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID) const {}
 }

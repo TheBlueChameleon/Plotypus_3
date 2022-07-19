@@ -29,7 +29,7 @@ namespace Plotypus
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(PlotStyle2D::Lines, label);
 
         dataView->setData(data);
-//        dataView.setSelector(ColumnTypes::Y, selectorY);
+        dataView->setSelector(ColumnTypes::Y, selectorY);
 
         return addDataViewCompound(dataView);
     }

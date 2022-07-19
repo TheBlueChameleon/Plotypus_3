@@ -44,6 +44,7 @@ namespace Plotypus
             const std::string&  getDataFilename() const;
             void                setDataFilename(const std::string& newDataFilename) const;
 
+            virtual bool isFunction() const = 0;
             virtual bool isDummy() const = 0;
             virtual bool isComplete() const = 0;
 

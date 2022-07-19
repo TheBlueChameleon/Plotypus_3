@@ -28,20 +28,24 @@ namespace Plotypus
             int lineStyle  = -1;
             int pointStyle = -1;
 
-            std::array<size_t, 6> columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
+            columnAssignmentList_t columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
             bool autoColumnAssignments = true;
 
             virtual void clearFunctionMembers();
             virtual void clearNonFunctionMembers() = 0;
 
-            void writeDatDataAsc(std::ostream& hFile) const;
-            void writeDatDataBin(std::ostream& hFile) const;
+            virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
+
+            void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
+            void writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
 
         public:
             DataView2D(const PlotStyle2D  style, const std::string& label = "");
             DataView2D(const std::string& style, const std::string& label = "");
 
             virtual void reset();
+
+            virtual size_t              getArity() const = 0;
 
             const std::string&          getFunc() const;
             void                        setFunc(const std::string& newFunc);
@@ -54,9 +58,8 @@ namespace Plotypus
 
             size_t& columnAssignment(size_t columnID);
 
+            virtual bool isFunction() const;
             virtual size_t getColumnID(const ColumnTypes columnType) const;
-
-            virtual void fetchData(std::vector<double>& buffer, size_t recordID) const = 0;
 
             // -------------------------------------------------------------- //
             // writers

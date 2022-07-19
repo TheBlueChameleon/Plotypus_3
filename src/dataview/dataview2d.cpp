@@ -15,14 +15,28 @@ namespace Plotypus
         func = "";
     }
 
-    void DataView2D::writeDatDataAsc(std::ostream& hFile) const
+    void DataView2D::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
-
+//        for (size_t i = 0u; i < getArity(); ++i)
+//        {
+//            fetchData(lineBuffer, 0, missingXColumn);
+//            hFile.write(
+//                reinterpret_cast<char*>(lineBuffer.data()),
+//                (lineBuffer.size() - missingXColumn) * sizeof(double)
+//            );
+//        }
     }
 
-    void DataView2D::writeDatDataBin(std::ostream& hFile) const
+    void DataView2D::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
-
+        for (size_t i = 0u; i < getArity(); ++i)
+        {
+            fetchData(lineBuffer, i, missingXColumn);
+            hFile.write(
+                reinterpret_cast<char*>(lineBuffer.data()),
+                (lineBuffer.size() - missingXColumn) * sizeof(double)
+            );
+        }
     }
 
     // ====================================================================== //
@@ -85,6 +99,11 @@ namespace Plotypus
     size_t& DataView2D::columnAssignment(size_t columnID)
     {
         return columnAssignments.at(columnID);
+    }
+
+    bool DataView2D::isFunction() const
+    {
+        return !func.empty();
     }
 
     size_t DataView2D::getColumnID(const ColumnTypes columnType) const
@@ -340,11 +359,26 @@ namespace Plotypus
 
     void DataView2D::writeDatData() const
     {
+        // *INDENT-OFF*
+        if (isDummy())      {return;}
+        if (isFunction())   {return;}
+
+        bool allowMissingX = (styleID != PlotStyle2D::Custom);
+        bool missingXColumn = allowMissingX && (columnAssignments[0] == UNUSED_COLUMN);
+
+        for (auto c : columnAssignments) {
+            std::cout << c << ", ";
+        }
+        std::cout << std::endl;
+
+        auto lineLength = getConsecutiveCountFromColumnList(columnAssignments, allowMissingX);
+        if (!lineLength) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
+
+        std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);
 
-        // *INDENT-OFF*
-        if (binaryDataOutput)   {writeDatDataBin(hFile);}
-        else                    {writeDatDataAsc(hFile);}
+        if (binaryDataOutput)   {writeDatDataBin(hFile, lineBuffer, missingXColumn);}
+        else                    {writeDatDataAsc(hFile, lineBuffer, missingXColumn);}
         // *INDENT-ON*
     }
 

@@ -114,6 +114,7 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
+    using columnAssignmentList_t = std::array<size_t, 6>;
     constexpr size_t UNUSED_COLUMN = 0u;
     constexpr size_t UNSUPPORTED_COLUMN = std::numeric_limits<size_t>::max();
 

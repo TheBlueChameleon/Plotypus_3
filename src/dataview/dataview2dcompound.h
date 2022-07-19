@@ -14,11 +14,15 @@ namespace Plotypus
 
             virtual void clearNonFunctionMembers();
 
+            virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const; //! @todo implement
+
         public:
             DataView2DCompound(const PlotStyle2D  style, const std::string& label = "");
             DataView2DCompound(const std::string& style, const std::string& label = "");
 
             virtual void reset();
+
+            virtual size_t                          getArity() const;
 
             const std::span<T>&                     getData() const;
             void                                    setData(const std::span<T>& newDataSource);
@@ -29,8 +33,6 @@ namespace Plotypus
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;
-
-            virtual void fetchData(std::vector<double>& buffer, size_t recordID) const; //! @todo implement
     };
 }
 

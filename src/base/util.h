@@ -23,7 +23,9 @@ namespace Plotypus
     bool contains(const T& toFind, const std::span<T>& container);
 
     template<class T, class U>
-    bool checkColumnList(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1 = false);
+    bool checkColumnListComplete(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1 = false);
+
+    size_t getConsecutiveCountFromColumnList(const columnAssignmentList_t& columns, bool allowMissingX = false); //! @todo: leniency about missing X?
 
     const std::string getColumnIDName(const ColumnTypes columnType);
     const std::string getPlotStyleName(const PlotStyle2D styleID);

@@ -115,7 +115,8 @@ void playground ()
 
     dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(s4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
 
-    auto& dv = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
+    auto& dataViewData1 = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(0);
+    auto& dataViewFunc2 = s4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
     try
     {
         auto& errv = s4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);
@@ -125,12 +126,12 @@ void playground ()
         std::cout << "prevented misinterpretation of dataview object" << std::endl;
     }
 
-    dv.setLineStyle(0);
-    dv.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
+    dataViewData1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
+    dataViewFunc2.setLineStyle(0);
 
 
 //    r.writeTxt();
-//    r.writeDat();
+    r.writeDat();
 //    r.writeScript();
 }
 

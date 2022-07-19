@@ -21,7 +21,7 @@ namespace Plotypus
     }
 
     template<class T, class U>
-    bool checkColumnList(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1)
+    bool checkColumnListComplete(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1)
     {
         // *INDENT-OFF*
         if (requireColumn1 && columns[0] == null) {return false;}
