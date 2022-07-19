@@ -328,10 +328,43 @@ bool unittest_report_sheets_scriptOutput()
     sheet2.setCustomScriptEnd  ("# custom script end");
 
     report.writeScript(script);
-    UNITTEST_ASSERT(script.str() == expectedScript, "write script with two empty sheets without generating too much overhead");
+    UNITTEST_ASSERT(script.str() == expectedScript, "write script with two empty sheets without generating unset overhead");
 
-    std::cout << script.str();
-    std::cout << "----" << std::endl;
+    // ...................................................................... //
+
+    UNITTEST_FINALIZE;
+}
+
+bool unittest_sheets_labels()
+{
+    std::cout << "TESTING REPORT CLASS LABEL SCRIPT OUTPUT" << std::endl;
+
+    UNITTEST_VARS;
+
+    Plotypus::Report report;
+    std::stringstream script;
+    std::string expectedScript;
+
+    // ...................................................................... //
+
+//    auto& stylesCollection = report.getStylesCollection();
+//    stylesCollection.addBoxStyle("yellow", true, "blue");
+
+//    Plotypus::BoxStyle extendedBoxStyle = {false, "", true, "red", 2.5};
+//    stylesCollection.addBoxStyle(extendedBoxStyle);
+
+    auto& sheet = report.addSheet();
+
+    Plotypus::Label expectedLabel;
+    expectedLabel.text = "foo bar";
+    expectedLabel.coordinates = {0.5, 0.5};
+    expectedLabel.ID = 0;
+    expectedLabel.boxed = true;
+    expectedLabel.boxStyleID = 0;
+
+    auto& label1 = sheet.addLabel("foo bar", 0.5, 0.5, true);
+
+    UNITTEST_ASSERT(label1 == expectedLabel, "generate a box style");
 
     // ...................................................................... //
 

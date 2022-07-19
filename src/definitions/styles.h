@@ -102,14 +102,13 @@ namespace Plotypus
     struct LineStyle
     {
         std::string color       = "";
-        double      width       = 0;
+        double      width       = 0.0;
         std::string dashtype    = "";
         PointForm   pointForm   = PointForm::Point;
         double      pointsize   = 1.;
         std::string options     = "";
 
-        /*
-         */
+        bool operator== (const LineStyle&) const = default;
     };
 
     // ====================================================================== //
@@ -126,8 +125,10 @@ namespace Plotypus
         std::string fillcolor   = "";
         bool        border      = true;
         std::string bordercolor = "";
-        int         linewidth   = 0;
+        double      linewidth   = 0.0;
         std::string options     = "";
+
+        bool operator== (const BoxStyle&) const = default;
     };
 
     // ====================================================================== //
@@ -205,6 +206,8 @@ namespace Plotypus
          * added features I'm not aware of yet.
          */
         std::string                 options     = "";
+
+        bool operator== (const Label&) const = default;
     };
 
 //! @}

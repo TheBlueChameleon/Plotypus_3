@@ -92,7 +92,8 @@ int main()
 
 //    ADD_UNITTEST(unittest_report_basicSheetManagement);
 //    ADD_UNITTEST(unittest_report_empty_scriptOutput);
-    ADD_UNITTEST(unittest_report_sheets_scriptOutput);
+//    ADD_UNITTEST(unittest_report_sheets_scriptOutput);
+    ADD_UNITTEST(unittest_sheets_labels);
 
     std::cout << "DONE" << std::endl << std::endl;
 
@@ -114,7 +115,7 @@ int main()
 
     std::cout << std::endl;
     std::cout << "FREE RANGE CODE BEGINS HERE" << std::endl;
-//    playground();
+    playground();
 
     return 0;
 }
