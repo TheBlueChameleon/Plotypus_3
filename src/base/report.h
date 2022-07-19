@@ -32,11 +32,6 @@ namespace Plotypus
             bool verbose       = true;
             bool autoRunScript = true;
 
-            int  numberPrecision = 6;           // used only in txt output
-
-            std::string columnSeparatorTxt = "\t";
-            std::string columnSeparatorDat = "\t";
-
             std::string pageSeparatorTxt  = "================================================================================\n";
             std::string frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
 
@@ -90,13 +85,6 @@ namespace Plotypus
             bool                getAutoRunScript() const;
             void                setAutoRunScript(bool newAutoRunScript);
 
-            int                 getNumberPrecision() const;
-            void                setNumberPrecision(int newNumberPrecision);
-
-            const std::string&  getColumnSeparatorTxt() const;
-            void                setColumnSeparatorTxt(const std::string& newSeparatorTXT);
-            const std::string&  getColumnSeparatorDat() const;
-            void                setColumnSeparatorDat(const std::string& newSeparatorDAT);
             const std::string&  getPageSeparatorTxt() const;
             void                setPageSeparatorTxt(const std::string& newNewPageTXT);
 

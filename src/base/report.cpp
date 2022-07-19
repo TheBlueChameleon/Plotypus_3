@@ -66,11 +66,6 @@ namespace Plotypus
         verbose       = true;
         autoRunScript = true;
 
-        numberPrecision = 6;           // used only in txt and tex output
-
-        columnSeparatorTxt = "\t";
-        columnSeparatorDat = "\t";
-
         pageSeparatorTxt  = "================================================================================\n";
         frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
 
@@ -232,36 +227,6 @@ namespace Plotypus
     void Report::setAutoRunScript(bool newAutoRunScript)
     {
         autoRunScript = newAutoRunScript;
-    }
-
-    int Report::getNumberPrecision() const
-    {
-        return numberPrecision;
-    }
-
-    void Report::setNumberPrecision(int newNumberPrecision)
-    {
-        numberPrecision = newNumberPrecision;
-    }
-
-    const std::string& Report::getColumnSeparatorTxt() const
-    {
-        return columnSeparatorTxt;
-    }
-
-    void Report::setColumnSeparatorTxt(const std::string& newSeparatorTXT)
-    {
-        columnSeparatorTxt = newSeparatorTXT;
-    }
-
-    const std::string& Report::getColumnSeparatorDat() const
-    {
-        return columnSeparatorDat;
-    }
-
-    void Report::setColumnSeparatorDat(const std::string& newSeparatorDAT)
-    {
-        columnSeparatorDat = newSeparatorDAT;
     }
 
     const std::string& Report::getOutputDirectory() const

@@ -29,14 +29,13 @@ namespace Plotypus
             int pointStyle = -1;
 
             columnAssignmentList_t columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
-            bool autoColumnAssignments = true;
 
             virtual void clearFunctionMembers();
             virtual void clearNonFunctionMembers() = 0;
 
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
 
-            void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const; //! @todo use variable columnSeparatorDat. possibly move to dataview
+            void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
             void writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
 
         public:
@@ -52,9 +51,6 @@ namespace Plotypus
 
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
-
-            bool getAutoColumnAssignments() const;
-            void setAutoColumnAssignments(bool newAutoColumnAssignments);
 
             size_t& columnAssignment(size_t columnID);
 

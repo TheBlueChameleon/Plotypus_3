@@ -17,8 +17,6 @@ namespace Plotypus
 
     void DataView2D::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
-        const std::string columnSeparatorDat = "\t";
-
         for (size_t i = 0u; i < getArity(); ++i)
         {
             fetchData(lineBuffer, 0, missingXColumn);
@@ -27,10 +25,6 @@ namespace Plotypus
                 hFile << datapoint << columnSeparatorDat;
             }
             hFile << std::endl;
-//            hFile.write(
-//                reinterpret_cast<char*>(lineBuffer.data()),
-//                (lineBuffer.size() - missingXColumn) * sizeof(double)
-//            );
         }
     }
 
@@ -69,7 +63,6 @@ namespace Plotypus
         pointStyle = -1;
 
         columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
-        autoColumnAssignments = true;
     }
 
     const std::string& DataView2D::getFunc() const
@@ -91,16 +84,6 @@ namespace Plotypus
     void DataView2D::setLineStyle(int newLineStyle)
     {
         lineStyle = newLineStyle;
-    }
-
-    bool DataView2D::getAutoColumnAssignments() const
-    {
-        return autoColumnAssignments;
-    }
-
-    void DataView2D::setAutoColumnAssignments(bool newAutoColumnAssignments)
-    {
-        autoColumnAssignments = newAutoColumnAssignments;
     }
 
     size_t& DataView2D::columnAssignment(size_t columnID)
