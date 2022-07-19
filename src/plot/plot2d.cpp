@@ -87,4 +87,11 @@ namespace Plotypus
     {
         hFile << std::endl;
     }
+
+    template<class T>
+    DataView& Plot2D::addDataViewCompound(T* data, const size_t N, const DataSelector<Plotypus::Plot2D::T>& selectorY, const std::string& label)
+    {
+
+    }
+
 }

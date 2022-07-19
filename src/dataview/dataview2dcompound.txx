@@ -70,6 +70,12 @@ namespace Plotypus
     }
 
     template<class T>
+    void DataView2DCompound<T>::setData(const T* newDataSource, size_t N)
+    {
+        data = std::span<T>(newDataSource, newDataSource + N);
+    }
+
+    template<class T>
     const std::array<DataSelector<T>, 6>& DataView2DCompound<T>::getSelectors() const
     {
         return selectors;

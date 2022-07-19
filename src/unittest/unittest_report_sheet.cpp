@@ -347,6 +347,7 @@ bool unittest_sheets_labels()
 
     // ...................................................................... //
 
+    //! @todo most of this goes to a separate test file
 //    auto& stylesCollection = report.getStylesCollection();
 //    stylesCollection.addBoxStyle("yellow", true, "blue");
 

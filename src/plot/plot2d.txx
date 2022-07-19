@@ -35,6 +35,17 @@ namespace Plotypus
     }
 
     template<class T>
+    DataView& Plot2D::addDataViewCompound(T* data, const size_t N, const DataSelector<T>& selectorY, const std::string& label)
+    {
+        DataView2DCompound<T>* dataView = new DataView2DCompound<T>(PlotStyle2D::Lines, label);
+
+        dataView->setData(data, N);
+        dataView->setSelector(ColumnTypes::Y, selectorY);
+
+        return addDataViewCompound(dataView);
+    }
+
+    template<class T>
     DataView& Plot2D::addDataViewCompound(const std::string& func, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(PlotStyle2D::Lines, label);

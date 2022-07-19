@@ -17,14 +17,21 @@ namespace Plotypus
 
     void DataView2D::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
-//        for (size_t i = 0u; i < getArity(); ++i)
-//        {
-//            fetchData(lineBuffer, 0, missingXColumn);
+        const std::string columnSeparatorDat = "\t";
+
+        for (size_t i = 0u; i < getArity(); ++i)
+        {
+            fetchData(lineBuffer, 0, missingXColumn);
+            for (const auto datapoint : lineBuffer)
+            {
+                hFile << datapoint << columnSeparatorDat;
+            }
+            hFile << std::endl;
 //            hFile.write(
 //                reinterpret_cast<char*>(lineBuffer.data()),
 //                (lineBuffer.size() - missingXColumn) * sizeof(double)
 //            );
-//        }
+        }
     }
 
     void DataView2D::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
