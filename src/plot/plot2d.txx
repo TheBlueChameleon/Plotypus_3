@@ -10,21 +10,21 @@ namespace Plotypus
     }
 
     template<class T>
-    size_t Plot2D::addDataViewCompound(DataView2DCompound<T>* dataView)
+    DataView&  Plot2D::addDataViewCompound(DataView2DCompound<T>* dataView)
     {
         dataViews.push_back(dataView);
-        return dataViews.size() - 1;
+        return *dataViews.back();
     }
 
     template<class T>
-    size_t Plot2D::addDataViewCompound(const PlotStyle2D style, const std::string& label)
+    DataView& Plot2D::addDataViewCompound(const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    size_t Plot2D::addDataViewCompound(const std::span<T>& data, const DataSelector<T>& selectorY, const std::string& label)
+    DataView& Plot2D::addDataViewCompound(const std::span<T>& data, const DataSelector<T>& selectorY, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(PlotStyle2D::Lines, label);
 
@@ -35,7 +35,7 @@ namespace Plotypus
     }
 
     template<class T>
-    size_t Plot2D::addDataViewCompound(const std::string& func, const std::string& label)
+    DataView& Plot2D::addDataViewCompound(const std::string& func, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(PlotStyle2D::Lines, label);
 

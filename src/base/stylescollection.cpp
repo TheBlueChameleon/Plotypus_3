@@ -41,13 +41,13 @@ namespace Plotypus
         boxStyles = newBoxstyles;
     }
 
-    size_t StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
+    BoxStyle& StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
     {
         boxStyles.push_back(newBoxstyle);
-        return boxStyles.size();
+        return boxStyles.back();
     }
 
-    size_t StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
+    BoxStyle& StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
     {
         return addBoxStyle({true, fillcolor, border, bordercolor});
     }
@@ -75,13 +75,13 @@ namespace Plotypus
         lineStyles = newLineStyles;
     }
 
-    size_t StylesCollection::addLineStyle(const LineStyle& newLineStyle)
+    LineStyle& StylesCollection::addLineStyle(const LineStyle& newLineStyle)
     {
         lineStyles.push_back(newLineStyle);
-        return lineStyles.size();
+        return lineStyles.back();
     }
 
-    size_t StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
+    LineStyle& StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
     {
         return addLineStyle({color, width, dashtype, pointForm});
     }
@@ -109,13 +109,13 @@ namespace Plotypus
         pointStyles = newPointStyles;
     }
 
-    size_t StylesCollection::addPointStyle(const PointStyle& newPointStyle)
+    PointStyle& StylesCollection::addPointStyle(const PointStyle& newPointStyle)
     {
         pointStyles.push_back(newPointStyle);
-        return pointStyles.size();
+        return pointStyles.back();
     }
 
-    size_t StylesCollection::addPointStyle(PointForm form, double size, std::string color)
+    PointStyle &StylesCollection::addPointStyle(PointForm form, double size, std::string color)
     {
         return addPointStyle(
         {

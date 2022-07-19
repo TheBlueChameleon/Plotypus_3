@@ -47,8 +47,8 @@ namespace Plotypus
             const std::vector<Label>&       getLabels() const;
             void                            setLabels(const std::vector<Label>& newLabels);
             Label&                             label (const size_t i);
-            size_t                          addLabel (const Label& newLabel);   //! @todo: unify interface: addX returns ref to object in store
-            size_t                          addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
+            Label&                          addLabel (const Label& newLabel);
+            Label&                          addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
             void                            clearLabels();
 
             // -------------------------------------------------------------- //

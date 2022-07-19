@@ -93,13 +93,13 @@ namespace Plotypus
         return labels[i];
     }
 
-    size_t Sheet::addLabel(const Label& newLabel)
+    Label& Sheet::addLabel(const Label& newLabel)
     {
         labels.push_back(newLabel);
-        return labels.size() - 1;
+        return labels.back();
     }
 
-    size_t Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
+    Label &Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
     {
         Label l;     // use the default values, in case options and/or boxStyle are empty.
 
