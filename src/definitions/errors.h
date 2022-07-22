@@ -10,8 +10,9 @@
 
 namespace Plotypus
 {
-//! @addtogroup Platypus_Definitions
-//! @{
+    //! @addtogroup Plotypus_Definitions
+    //! @{
+
     /**
      * @brief thrown when trying to set an invalid file name
      */
@@ -31,7 +32,8 @@ namespace Plotypus
     PLOTYPUS_ERROR(IncompleteDescritporError);
 
     PLOTYPUS_ERROR(UnsupportedOperationError);
-//! @}
+
+    //! }
 }
 
 #endif // ERRORS_H

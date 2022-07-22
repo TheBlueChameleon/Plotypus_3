@@ -2,12 +2,17 @@
 #define PLOTYPUS_H
 
 /**
- * @defgroup Platypus_Definitions Platypus Definitions
+ * @defgroup Plotypus_Definitions Plotypus Definitions
  *
- * @brief Definitions shared between the components of the \em Platypus Package, as well as convenience functions to handle them.
- *
- * @todo Definitions: specify Platypus errors
+ * @brief Definitions shared between the components of the \em Plotypus Package, as well as convenience functions to handle them.
  */
+
+/**
+ * @defgroup Plotypus_Base Plotypus Plot Types
+ *
+ * @brief Plot Types
+ */
+
 
 #include "definitions/types.h"
 #include "definitions/styles.h"

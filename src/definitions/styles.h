@@ -6,9 +6,9 @@
 
 namespace Plotypus
 {
-//! @addtogroup Platypus_Definitions
-//! @{
-//!
+    //! @addtogroup Plotypus_Definitions
+    //! @{
+
     // ========================================================================== //
     /**
      * @brief Sheet element: Plot Style for 2D plots
@@ -210,7 +210,7 @@ namespace Plotypus
         bool operator== (const Label&) const = default;
     };
 
-//! @}
+    //! }
 }
 
 #endif // STYLES_H
