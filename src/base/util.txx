@@ -21,32 +21,6 @@ namespace Plotypus
     }
 
     template<class T, class U>
-    bool checkColumnListComplete(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1)
-    {
-        // *INDENT-OFF*
-        if (requireColumn1 && columns[0] == null) {return false;}
-
-        for (size_t i = 1; i < minColumnCount; ++i) {
-            if (columns[i] == null) {return false;}
-        }
-
-        for (size_t i = maxColumnCount; i < 6; ++i) {
-            if (columns[i] != null) {return false;}
-        }
-
-        bool lastColumnDetected = false;
-        for (size_t i = maxColumnCount; i > 0; --i) {
-            if                       (columns[i] != null) {lastColumnDetected = true;}
-            if (lastColumnDetected && columns[i] == null) {return false;}
-        }
-        // *INDENT-ON*
-
-        return true;
-    }
-
-
-
-    template<class T, class U>
     size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& null)
     {
         /* Returns the number of consecutively occupied colums, and checks whether columns obeys the following rules:

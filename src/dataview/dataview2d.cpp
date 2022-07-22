@@ -100,27 +100,19 @@ namespace Plotypus
     {
         switch (columnType)
         {
-            case ColumnTypes::Column1:
-                return 1;
-            case ColumnTypes::Column2:
-                return 2;
-            case ColumnTypes::Column3:
-                return 3;
-            case ColumnTypes::Column4:
-                return 4;
-            case ColumnTypes::Column5:
-                return 5;
-            case ColumnTypes::Column6:
-                return 6;
-
-            case ColumnTypes::X:
-                return 1;
-            case ColumnTypes::Y:
-                return 2;
-            case ColumnTypes::Y2:
             // *INDENT-OFF*
-            if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
-            else                                        {return UNSUPPORTED_COLUMN;}
+            case ColumnTypes::Column1: return 1;
+            case ColumnTypes::Column2: return 2;
+            case ColumnTypes::Column3: return 3;
+            case ColumnTypes::Column4: return 4;
+            case ColumnTypes::Column5: return 5;
+            case ColumnTypes::Column6: return 6;
+
+            case ColumnTypes::X: return 1;
+            case ColumnTypes::Y: return 2;
+            case ColumnTypes::Y2:
+                if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
+                else                                        {return UNSUPPORTED_COLUMN;}
             // *INDENT-ON*
 
             case ColumnTypes::DeltaX:
@@ -307,32 +299,24 @@ namespace Plotypus
                 // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 3;}
                 else                                {return UNSUPPORTED_COLUMN;}
-                // *INDENT-ON*
 
             case ColumnTypes::Pointtype:
-                // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 4;}
                 else                                {return UNSUPPORTED_COLUMN;}
-                // *INDENT-ON*
+
             case ColumnTypes::Color:
-                // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 5;}
                 else                                {return UNSUPPORTED_COLUMN;}
-                // *INDENT-ON*
 
             case ColumnTypes::Boxwidth:
-                // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
                 else                                                                    {return UNSUPPORTED_COLUMN;}
-                // *INDENT-ON*
 
             case ColumnTypes::Length:
-                // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Arrows) {return 3;}
                 else                                {return UNSUPPORTED_COLUMN;}
-                // *INDENT-ON*
+
             case ColumnTypes::Angle:
-                // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Arrows) {return 4;}
                 else                                {return UNSUPPORTED_COLUMN;}
                 // *INDENT-ON*
@@ -352,12 +336,10 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())      {return;}
         if (isFunction())   {return;}
+        if (!isComplete())  {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
 
-        bool allowMissingX = (styleID != PlotStyle2D::Custom);
-        bool missingXColumn = allowMissingX && (columnAssignments[0] == UNUSED_COLUMN);
-
-        auto lineLength = getConsecutiveCountFromColumnList(columnAssignments, allowMissingX);
-        if (!lineLength) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
+        bool missingXColumn = columnAssignments[0] == UNUSED_COLUMN;
+        auto lineLength = getConsecutiveEntriesCount(columnAssignments, UNUSED_COLUMN);
 
         std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);

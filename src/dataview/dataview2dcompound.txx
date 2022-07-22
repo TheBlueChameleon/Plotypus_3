@@ -1,3 +1,6 @@
+#ifndef DATAVIEW2DCOMPOUND_TXX
+#define DATAVIEW2DCOMPOUND_TXX
+
 #include <iomanip>
 #include <string>
 
@@ -132,10 +135,8 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())      {return true;}
         if (data.empty())   {return false;}
-        if (!selectors[1])  {return false;}      // require at least Y data
         // *INDENT-ON*
 
-        bool result;
         switch (styleID)
         {
             case PlotStyle2D::Dots:
@@ -185,3 +186,5 @@ namespace Plotypus
         return false;
     }
 }
+
+#endif // DATAVIEW2DCOMPOUND_TXX

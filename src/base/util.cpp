@@ -148,33 +148,4 @@ namespace Plotypus
 
         return "(undefined)";
     }
-
-    size_t getConsecutiveCountFromColumnList(const columnAssignmentList_t& columns, bool allowMissingX)
-    {
-        /* Checks whether 'columns' holds the consecutives values 1..n, any order, ignoring zeros.
-         * Returns number of consecutive columns, or zero if any gaps detected.
-         *
-         * Any occurrence of UNSUPPORTED_COLUMN triggers return 0
-         * Any occurrence of UNUSED_COLUMN is ignored (~> ignoring zeros)
-         *
-         * Naive approach (O(n²)), okay since n == 6:
-         *  find maximum and all its predecessors
-         */
-
-        // *INDENT-OFF*
-        size_t max = *std::max_element(columns.begin(), columns.end());
-        if (max == UNSUPPORTED_COLUMN) {return 0;}
-
-        for (auto i = max - 1; i > allowMissingX; --i) {
-            bool found = false;
-            for (auto j = 0u; j < columns.size(); ++j) {
-                if (columns[j] == i) {found = true; break;}
-            }
-
-            if (!found) {return 0;}
-        }
-        // *INDENT-ON*
-
-        return max;
-    }
 };

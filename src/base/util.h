@@ -23,12 +23,6 @@ namespace Plotypus
     bool contains(const T& toFind, const std::vector<T>& container);
 
     template<class T, class U>
-    bool checkColumnListComplete(const std::array<T, 6>& columns, size_t minColumnCount, size_t maxColumnCount, const U& null, bool requireColumn1 = false);
-
-    size_t getConsecutiveCountFromColumnList(const columnAssignmentList_t& columns, bool allowMissingX = false);
-
-
-    template<class T, class U>
     size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& null);
     template<class T, class U>
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null);
