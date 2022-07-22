@@ -139,62 +139,47 @@ namespace Plotypus
         switch (styleID)
         {
             case PlotStyle2D::Dots:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::Points:
-                return checkColumnListComplete(selectors, 2, 5, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5}, nullptr);
             case PlotStyle2D::XErrorBars:
-                return checkColumnListComplete(selectors, 3, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
             case PlotStyle2D::YErrorBars:
-                return checkColumnListComplete(selectors, 3, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
             case PlotStyle2D::XYErrorBars:
-                result = checkColumnListComplete(selectors, 4, 6, nullptr);
-                if (result && selectors[5])
-                {
-                    result &= static_cast<bool>(selectors[4]);
-                }
-                return result;
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
             case PlotStyle2D::Lines:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::LinesPoints:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::FilledCurves:
-                return checkColumnListComplete(selectors, 2, 3, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {2, 3}, nullptr);
             case PlotStyle2D::XErrorLines:
-                return checkColumnListComplete(selectors, 3, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
             case PlotStyle2D::YErrorLines:
-                return checkColumnListComplete(selectors, 3, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
             case PlotStyle2D::XYErrorLines:
-                result = checkColumnListComplete(selectors, 4, 6, nullptr);
-                if (result && selectors[5])
-                {
-                    result &= static_cast<bool>(selectors[4]);
-                }
-                return result;
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
             case PlotStyle2D::Steps:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::FSteps:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::FillSteps:
-                return checkColumnListComplete(selectors, 2, 2, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::Boxes:
-                return checkColumnListComplete(selectors, 2, 3, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
             case PlotStyle2D::HBoxes:
-                return checkColumnListComplete(selectors, 2, 3, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
             case PlotStyle2D::BoxErrorBars:
-                return checkColumnListComplete(selectors, 5, 5, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4, 5}, nullptr);
             case PlotStyle2D::BoxxyError:
-                result = checkColumnListComplete(selectors, 4, 6, nullptr);
-                if (result && selectors[5])
-                {
-                    result &= static_cast<bool>(selectors[4]);
-                }
-                return result;
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
             case PlotStyle2D::Arrows:
-                return checkColumnListComplete(selectors, 4, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4}, nullptr);
             case PlotStyle2D::Vectors:
-                return checkColumnListComplete(selectors, 4, 4, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4}, nullptr);
             case PlotStyle2D::Custom:
-                return checkColumnListComplete(selectors, 1, 6, nullptr, true);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, nullptr);
         }
 
         return false;

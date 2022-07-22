@@ -177,5 +177,4 @@ namespace Plotypus
 
         return max;
     }
-
 };

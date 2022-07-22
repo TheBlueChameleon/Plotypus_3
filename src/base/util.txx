@@ -13,7 +13,7 @@ namespace Plotypus
     }
 
     template<class T>
-    bool contains(const T& toFind, const std::span<T>& container)
+    bool contains(const T& toFind, const std::vector<T>& container)
     {
         const auto last = container.end();
         const auto found = std::find(container.begin(), container.end(), toFind);
@@ -42,6 +42,59 @@ namespace Plotypus
         // *INDENT-ON*
 
         return true;
+    }
+
+
+
+    template<class T, class U>
+    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& null)
+    {
+        /* Returns the number of consecutively occupied colums, and checks whether columns obeys the following rules:
+         * - columns[1] must always be occupied (i.e. non-null)
+         * - there may be only one occupied block (i.e. any occupied column after the first null invalidates the list)
+         * - exception: columns[0] may be unoccupied
+         * - if columns[0] is unoccupied, only columns[1] may be occupied
+         *
+         * The return value
+         * - is either the number of consecutive occupied columns
+         * - or INVALID_COLUMN_LIST if either of the above rules is violated
+         */
+
+        bool foundNull = columns[0] == null;
+        size_t result  = !foundNull;
+
+        // *INDENT-OFF*
+        if (columns[1] == null) {return INVALID_COLUMN_LIST;}
+        else                    {++result;}
+        // *INDENT-ON*
+
+        for (size_t i = 2u; i < columns.size(); ++i)
+        {
+            // *INDENT-OFF*
+            if (columns[i] == null) {foundNull = true;}
+            else                    {++result;}
+            // *INDENT-ON*
+
+            if (foundNull && columns[i] != null)
+            {
+                result = INVALID_COLUMN_LIST;
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    template<class T, class U>
+    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null)
+    {
+        auto cec = getConsecutiveEntriesCount(columns, null);
+        if (cec == INVALID_COLUMN_LIST)
+        {
+            return false;
+        }
+
+        return contains(cec, allowedOccupations);
     }
 }
 
