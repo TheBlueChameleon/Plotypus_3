@@ -17,8 +17,8 @@ namespace Plotypus
              */
 
         protected:
-            std::span<T>                    data;
-            std::array<DataSelector<T>, 6>  selectors;
+            std::span<T>                        data;
+            std::array<DataSelector_t<T>, 6>    selectors;
 
             virtual void clearNonFunctionMembers();
 
@@ -36,9 +36,9 @@ namespace Plotypus
             void                                    setData(const std::span<T>& newDataSource);
             void                                    setData(const T* newDataSource, size_t N);
 
-            const std::array<DataSelector<T>, 6>&   getSelectors() const;
-            void                                    setSelectors(const std::array<DataSelector<T>, 6>& newSelectors);
-            void                                    setSelector (const ColumnTypes column, const DataSelector<T>& selector);
+            const std::array<DataSelector_t<T>, 6>&   getSelectors() const;
+            void                                    setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
+            void                                    setSelector (const ColumnTypes column, const DataSelector_t<T>& selector);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

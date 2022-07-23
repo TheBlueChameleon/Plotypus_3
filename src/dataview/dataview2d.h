@@ -28,11 +28,7 @@ namespace Plotypus
             int lineStyle  = -1;
             int pointStyle = -1;
 
-            columnAssignmentList_t columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
-
             virtual void clearFunctionMembers();
-            virtual void clearNonFunctionMembers() = 0;
-
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
 
             void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
@@ -51,8 +47,6 @@ namespace Plotypus
 
             int                         getLineStyle() const;
             void                        setLineStyle(int newLineStyle);
-
-            size_t& columnAssignment(size_t columnID);
 
             virtual bool isFunction() const;
             virtual size_t getColumnID(const ColumnTypes columnType) const;

@@ -45,9 +45,9 @@ namespace Plotypus
             template<class T>
             DataView& addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(const std::span<T>& data, const DataSelector<T>& selectorY, const std::string& label = "");
+            DataView& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(T* data, const size_t N, const DataSelector<T>& selectorY, const std::string& label = "");
+            DataView& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const std::string& label = "");
             template<class T>
             DataView& addDataViewCompound(const std::string& func, const std::string& label = "");
 

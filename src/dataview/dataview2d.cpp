@@ -61,8 +61,6 @@ namespace Plotypus
 
         lineStyle  = -1;
         pointStyle = -1;
-
-        columnAssignments = {UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN, UNUSED_COLUMN};
     }
 
     const std::string& DataView2D::getFunc() const
@@ -86,11 +84,6 @@ namespace Plotypus
         lineStyle = newLineStyle;
     }
 
-    size_t& DataView2D::columnAssignment(size_t columnID)
-    {
-        return columnAssignments.at(columnID);
-    }
-
     bool DataView2D::isFunction() const
     {
         return !func.empty();
@@ -112,7 +105,7 @@ namespace Plotypus
             case ColumnTypes::Y: return 2;
             case ColumnTypes::Y2:
                 if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
-                else                                        {return UNSUPPORTED_COLUMN;}
+                else                                        {return COLUMN_UNSUPPORTED;}
             // *INDENT-ON*
 
             case ColumnTypes::DeltaX:
@@ -143,7 +136,7 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::DeltaY:
@@ -174,7 +167,7 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::XLow:
@@ -203,7 +196,7 @@ namespace Plotypus
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::XHigh:
@@ -232,7 +225,7 @@ namespace Plotypus
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::YLow:
@@ -262,7 +255,7 @@ namespace Plotypus
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::YHigh:
@@ -292,41 +285,41 @@ namespace Plotypus
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
                     case PlotStyle2D::Custom:
-                        return UNSUPPORTED_COLUMN;
+                        return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnTypes::Pointsize:
                 // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 3;}
-                else                                {return UNSUPPORTED_COLUMN;}
+                else                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnTypes::Pointtype:
                 if (styleID == PlotStyle2D::Points) {return 4;}
-                else                                {return UNSUPPORTED_COLUMN;}
+                else                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnTypes::Color:
                 if (styleID == PlotStyle2D::Points) {return 5;}
-                else                                {return UNSUPPORTED_COLUMN;}
+                else                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnTypes::Boxwidth:
                 if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
-                else                                                                    {return UNSUPPORTED_COLUMN;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnTypes::Length:
                 if (styleID == PlotStyle2D::Arrows) {return 3;}
-                else                                {return UNSUPPORTED_COLUMN;}
+                else                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnTypes::Angle:
                 if (styleID == PlotStyle2D::Arrows) {return 4;}
-                else                                {return UNSUPPORTED_COLUMN;}
+                else                                {return COLUMN_UNSUPPORTED;}
                 // *INDENT-ON*
 
             case ColumnTypes::Z:
             case ColumnTypes::DeltaZ:
-                return UNSUPPORTED_COLUMN;
+                return COLUMN_UNSUPPORTED;
         }
 
-        return UNSUPPORTED_COLUMN;
+        return COLUMN_UNSUPPORTED;
     }
 
     // ====================================================================== //
@@ -338,8 +331,8 @@ namespace Plotypus
         if (isFunction())   {return;}
         if (!isComplete())  {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
 
-        bool missingXColumn = columnAssignments[0] == UNUSED_COLUMN;
-        auto lineLength = getConsecutiveEntriesCount(columnAssignments, UNUSED_COLUMN);
+        bool missingXColumn = columnAssignments[0] == COLUMN_UNUSED;
+        auto lineLength = getConsecutiveEntriesCount(columnAssignments, COLUMN_UNUSED);
 
         std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);

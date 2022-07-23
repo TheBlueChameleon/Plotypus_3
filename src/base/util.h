@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 
+#include "../definitions/constants.h"
+
 namespace Plotypus
 {
     void checkFilename(const std::string& component, const std::string& stringToTest);
@@ -29,6 +31,8 @@ namespace Plotypus
 
     const std::string getColumnIDName(const ColumnTypes columnType);
     const std::string getPlotStyleName(const PlotStyle2D styleID);
+
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID);
 };
 
 #include "util.txx"

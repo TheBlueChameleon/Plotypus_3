@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 
 #include "util.h"
 
@@ -148,4 +149,19 @@ namespace Plotypus
 
         return "(undefined)";
     }
+
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID)
+    {
+        std::stringstream buffer;
+
+        // *INDENT-OFF*
+        for (auto chr : formatTemplate) {
+            if (chr == '#') {buffer << columnID;}
+            else            {buffer << chr;}
+        }
+        // *INDENT-ON*
+
+        return buffer.str();
+    }
+
 };

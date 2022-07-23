@@ -20,11 +20,12 @@ add_library(Plotypus-lib SHARED
     src/definitions/types.h
     src/definitions/styles.h
     src/definitions/errors.h
+    src/definitions/constants.h
     #
     src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/stylescollection.h src/base/stylescollection.cpp
+    src/base/report.h src/base/report.cpp src/base/report.txx
     src/base/sheet.h src/base/sheet.cpp
-    src/base/report.h src/base/report.cpp
     #
     src/plot/plot.h src/plot/plot.cpp
     src/plot/plot2d.h src/plot/plot2d.cpp src/plot/plot2d.txx

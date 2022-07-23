@@ -28,8 +28,8 @@ void playground ()
         {      pi, 0, 0, 0}
     };
     // *INDENT-OFF*
-    Plotypus::DataSelector<compound_t> compoundSelectorX = [] (const compound_t& data) {return data.x;};
-    Plotypus::DataSelector<compound_t> compoundSelectorY = [] (const compound_t& data) {return data.y;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorX = [] (const compound_t& data) {return data.x;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorY = [] (const compound_t& data) {return data.y;};
     // *INDENT-ON*
 
     Plotypus::Report r;

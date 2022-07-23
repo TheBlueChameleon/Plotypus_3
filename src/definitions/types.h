@@ -6,17 +6,12 @@
 #include <limits>
 #include <string>
 
+#include "constants.h"
+
 namespace Plotypus
 {
     //! @addtogroup Plotypus_Definitions
     //! @{
-
-    // ====================================================================== //
-    /**
-     * @brief used to assert filename valdity
-     */
-
-    constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
 
     // ====================================================================== //
     /**
@@ -49,12 +44,6 @@ namespace Plotypus
         Multiplot
     };
 
-    // ====================================================================== //
-    /**
-     * @brief convenience symbol to be used with setting data ranges
-     */
-    constexpr double AUTO_RANGE = std::numeric_limits<double>::quiet_NaN();
-
     // ---------------------------------------------------------------------- //
     /**
      * @brief used to compactly describe an axis of a plot
@@ -81,13 +70,7 @@ namespace Plotypus
      */
 
     template <typename T>
-    using DataSelector = std::function<double (const T&)>;
-
-    template <typename T>
-    static inline double defaultDataSelector(const T& x)
-    {
-        return x;
-    }
+    using DataSelector_t = std::function<double (const T&)>;
 
     // ====================================================================== //
     /**
@@ -114,10 +97,10 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
-    using columnAssignmentList_t = std::array<size_t, 6>;
-    constexpr size_t UNUSED_COLUMN          = 0u;
-    constexpr size_t UNSUPPORTED_COLUMN     = std::numeric_limits<size_t>::max();
-    constexpr size_t INVALID_COLUMN_LIST    = 0u;
+    template <typename T>
+    using columnSelectorList_t      = std::array<DataSelector_t<T>, 6>;
+    using columnAssignmentList_t    = std::array<size_t, 6>;
+    using columnFormatList_t        = std::array<std::string, 6>;
 
     //! }
 }

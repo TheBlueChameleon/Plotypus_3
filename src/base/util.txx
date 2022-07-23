@@ -31,14 +31,14 @@ namespace Plotypus
          *
          * The return value
          * - is either the number of consecutive occupied columns
-         * - or INVALID_COLUMN_LIST if either of the above rules is violated
+         * - or COLUMN_LIST_INVALID if either of the above rules is violated
          */
 
         bool foundNull = columns[0] == null;
         size_t result  = !foundNull;
 
         // *INDENT-OFF*
-        if (columns[1] == null) {return INVALID_COLUMN_LIST;}
+        if (columns[1] == null) {return COLUMN_LIST_INVALID;}
         else                    {++result;}
         // *INDENT-ON*
 
@@ -51,7 +51,7 @@ namespace Plotypus
 
             if (foundNull && columns[i] != null)
             {
-                result = INVALID_COLUMN_LIST;
+                result = COLUMN_LIST_INVALID;
                 break;
             }
         }
@@ -63,7 +63,7 @@ namespace Plotypus
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null)
     {
         auto cec = getConsecutiveEntriesCount(columns, null);
-        if (cec == INVALID_COLUMN_LIST)
+        if (cec == COLUMN_LIST_INVALID)
         {
             return false;
         }

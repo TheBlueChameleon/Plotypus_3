@@ -17,6 +17,7 @@
 #include "definitions/types.h"
 #include "definitions/styles.h"
 #include "definitions/errors.h"
+#include "definitions/constants.h"
 
 #include "base/util.h"
 #include "base/report.h"
@@ -29,5 +30,6 @@
 
 #include "plot/plot.h"
 #include "plot/plot2d.h"
+#include "plot/plot3d.h"
 
 #endif // PLOTYPUS_H

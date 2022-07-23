@@ -30,10 +30,28 @@ namespace Plotypus
         hFile << std::endl;
     }
 
+    std::string Report::getOutputFilename(const std::string& extension, const std::string& infix) const
+    {
+        fs::path p(outputDirectory);
+        p.append(filenameBase);
+
+        if (!infix.empty())
+        {
+            p.concat(infix);
+        }
+
+        if (!extension.empty())
+        {
+            p.concat(".");
+            p.concat(extension);
+        }
+
+        return p;
+    }
+
     // ====================================================================== //
 
-    Report::Report()
-    {}
+    Report::Report() {}
 
     Report::Report(FileType fileType)
     {
@@ -173,10 +191,10 @@ namespace Plotypus
         return extOut;
     }
 
-    void Report::setExtOut(const std::string& newExtPDF)
+    void Report::setExtOut(const std::string& newExtOUT)
     {
-        checkFilename("extension for PDF files", newExtPDF);
-        extOut = newExtPDF;
+        checkFilename("extension for PDF files", newExtOUT);
+        extOut = newExtOUT;
     }
 
     const std::string& Report::getExtGnu() const
@@ -188,25 +206,6 @@ namespace Plotypus
     {
         checkFilename("extension for gnuplot script files", newExtGNU);
         extGnu = newExtGNU;
-    }
-
-    std::string Report::getOutputFilename(const std::string& extension, const std::string& infix) const
-    {
-        fs::path p(outputDirectory);
-        p.append(filenameBase);
-
-        if (!infix.empty())
-        {
-            p.concat(infix);
-        }
-
-        if (!extension.empty())
-        {
-            p.concat(".");
-            p.concat(extension);
-        }
-
-        return p;
     }
 
     bool Report::getVerbose() const

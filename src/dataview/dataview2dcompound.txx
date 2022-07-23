@@ -20,7 +20,7 @@ namespace Plotypus
         // *INDENT-OFF*
         const T& datapoint = data[recordID];
         for (auto i : columnAssignments) {
-            if (i == UNUSED_COLUMN) {continue;}         // ignore unused columns
+            if (i == COLUMN_UNUSED) {continue;}         // ignore unused columns
             --i;                                        // zero based indices
 
             const auto& selector = selectors[i];        // fetch correct selector
@@ -79,13 +79,13 @@ namespace Plotypus
     }
 
     template<class T>
-    const std::array<DataSelector<T>, 6>& DataView2DCompound<T>::getSelectors() const
+    const std::array<DataSelector_t<T>, 6>& DataView2DCompound<T>::getSelectors() const
     {
         return selectors;
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelectors(const std::array<DataSelector<T>, 6>& newSelectors)
+    void DataView2DCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
         for (size_t i = 1u; const auto& selector : selectors)
@@ -99,11 +99,11 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelector(const ColumnTypes column, const DataSelector<T>& selector)
+    void DataView2DCompound<T>::setSelector(const ColumnTypes column, const DataSelector_t<T>& selector)
     {
         const auto columnID = getColumnID(column);
 
-        if (columnID == UNSUPPORTED_COLUMN)
+        if (columnID == COLUMN_UNSUPPORTED)
         {
             std::string errMsg = "Column type ";
             errMsg += "\"" + getColumnIDName(column) + "\"";
