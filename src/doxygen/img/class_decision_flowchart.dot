@@ -1,0 +1,36 @@
+# dot -Tpng:cairo:gd class_decision_flowchart.dot > class_decision_flowchart.png
+
+digraph G {
+    node [shape=ellipse];
+
+    root [label = "How many independent variables\n does your data have?"];
+
+    case2D [label = "Is all information for a single\n data point in a struct or class?"]
+    case3D [label = "Do you use one or two indices\n to access a data point?"]
+
+    case3DArray  [label = "Is all information for a single\n data point in a struct or class?"];
+    case3DMatrix [label = "Is all information for a single\n data point in a struct or class?"];
+
+    case2DCompound [label = "DataView2DCompound" shape=box, fontname = "Courier New"]
+    case2DSeparate [label = "DataView2DSeparate" shape=box, fontname = "Courier New"]
+
+    case3DArrayCompound  [label = "DataView3DArrayCompound"  shape=box, fontname = "Courier New"]
+    case3DArraySeparate  [label = "DataView3DArraySeparate"  shape=box, fontname = "Courier New"]
+    case3DMatrixCompound [label = "DataView3DMatrixCompound" shape=box, fontname = "Courier New"]
+    case3DMatrixSeparate [label = "DataView3DMatrixSeparate" shape=box, fontname = "Courier New"]
+
+    root -> case2D [label = " one"];
+    root -> case3D [label = " two"];
+
+    case2D -> case2DCompound [label = " yes"];
+    case2D -> case2DSeparate [label = " no"];
+
+    case3D -> case3DArray  [label = " one"];
+    case3D -> case3DMatrix [label = " two"];
+
+    case3DArray -> case3DArrayCompound [label = " yes"];
+    case3DArray -> case3DArraySeparate [label = " no"];
+
+    case3DMatrix -> case3DMatrixCompound [label = " yes"];
+    case3DMatrix -> case3DMatrixSeparate [label = " no"];
+}
