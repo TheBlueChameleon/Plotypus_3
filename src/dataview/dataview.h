@@ -10,14 +10,14 @@ namespace Plotypus
     class DataView
     {
         protected:
-            PlotStyle2D styleID;
+            PlotStyle2D styleID;        //! @todo maybe make this a union with PlotStyle3D?
 
             std::string label;
             std::string style;
             std::string options = "";
             mutable std::string dataFilename = "";
 
-            int  numberPrecision = 6;           // used only in txt output
+            int  numberPrecision = 6;           //! @todo used only in txt output
 
             std::string columnSeparatorTxt = "\t";
             std::string columnSeparatorDat = "\t";

@@ -49,6 +49,7 @@ namespace Plotypus
 
     void DataView::setStyle(const std::string& newStyle)
     {
+        styleID = PlotStyle2D::Custom;
         style = newStyle;
     }
 
@@ -60,77 +61,16 @@ namespace Plotypus
     void DataView::setStyleID(const PlotStyle2D newStyle)
     {
         styleID = newStyle;
+        style = getPlotStyleName(newStyle);
 
-        switch (newStyle)
+        if (newStyle == PlotStyle2D::HBoxes)
         {
-            case PlotStyle2D::Dots:
-                this->style = "dots";
-                break;
-            case PlotStyle2D::Points:
-                this->style = "points";
-                break;
-            case PlotStyle2D::XErrorBars:
-                this->style = "xerrorbars";
-                break;
-            case PlotStyle2D::YErrorBars:
-                this->style = "yerrorbars";
-                break;
-            case PlotStyle2D::XYErrorBars:
-                this->style = "xyerrorbars";
-                break;
-
-            case PlotStyle2D::Lines:
-                this->style = "lines";
-                break;
-            case PlotStyle2D::LinesPoints:
-                this->style = "linespoints";
-                break;
-            case PlotStyle2D::FilledCurves:
-                this->style = "filledcurves";
-                break;
-            case PlotStyle2D::XErrorLines:
-                this->style = "xerrorlines";
-                break;
-            case PlotStyle2D::YErrorLines:
-                this->style = "yerrorlines";
-                break;
-            case PlotStyle2D::XYErrorLines:
-                this->style = "xyerrorlines";
-                break;
-
-            case PlotStyle2D::Steps:
-                this->style = "steps";
-                break;
-            case PlotStyle2D::FSteps:
-                this->style = "fsteps";
-                break;
-            case PlotStyle2D::FillSteps:
-                this->style = "fillsteps";
-                break;
-
-            case PlotStyle2D::Boxes:
-                this->style = "boxes";
-                break;
-            case PlotStyle2D::HBoxes:
-                this->style = "boxxyerror";
-                break;
-            case PlotStyle2D::BoxErrorBars:
-                this->style = "boxerrorbars";
-                break;
-            case PlotStyle2D::BoxxyError:
-                this->style = "boxxyerror";
-                break;
-
-            case PlotStyle2D::Arrows:
-                this->style = "arrows";
-                break;
-            case PlotStyle2D::Vectors:
-                this->style = "vectors";
-                break;
-
-            case PlotStyle2D::Custom:
-                this->style = "lines";
-                break;
+            columnFormats[0] = "(0)";               // x     : constant zero
+            columnFormats[1] = "$!1";               // y     : x column
+            columnFormats[2] = "(0)";               // x_low : constant zero
+            columnFormats[3] = "$!2";               // x_high: y column
+            columnFormats[4] = "($!1 - $!3 / 2.)";  // y_low : x column minus boxwidth halves
+            columnFormats[5] = "($!1 - $!3 / 2.)";  // y_high: x column plus boxwidth halves
         }
     }
 

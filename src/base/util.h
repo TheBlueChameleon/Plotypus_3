@@ -32,7 +32,7 @@ namespace Plotypus
     const std::string getColumnIDName(const ColumnTypes columnType);
     const std::string getPlotStyleName(const PlotStyle2D styleID);
 
-    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID);
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t &columnAssignments);
 };
 
 #include "util.txx"

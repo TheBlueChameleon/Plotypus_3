@@ -36,7 +36,7 @@ namespace Plotypus
             void                                    setData(const std::span<T>& newDataSource);
             void                                    setData(const T* newDataSource, size_t N);
 
-            const std::array<DataSelector_t<T>, 6>&   getSelectors() const;
+            const std::array<DataSelector_t<T>, 6>& getSelectors() const;
             void                                    setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
             void                                    setSelector (const ColumnTypes column, const DataSelector_t<T>& selector);
 

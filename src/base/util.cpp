@@ -134,7 +134,7 @@ namespace Plotypus
             case PlotStyle2D::Boxes:
                 return "boxes";
             case PlotStyle2D::HBoxes:
-                return "horizontal boxes";
+                return "boxxyerror";
             case PlotStyle2D::BoxErrorBars:
                 return "boxerrorbars";
             case PlotStyle2D::BoxxyError:
@@ -150,14 +150,19 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID)
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const columnAssignmentList_t& columnAssignments)
     {
         std::stringstream buffer;
+        bool escape = false; // COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID ??
 
         // *INDENT-OFF*
         for (auto chr : formatTemplate) {
-            if (chr == '#') {buffer << columnID;}
-            else            {buffer << chr;}
+            if      (chr == COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER) {buffer << columnID;}
+            else if (chr == COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID) {escape = true;}
+            else {
+                if (escape) {buffer << columnAssignments.at(chr - '1');}
+                else        {buffer << chr;}
+            }
         }
         // *INDENT-ON*
 

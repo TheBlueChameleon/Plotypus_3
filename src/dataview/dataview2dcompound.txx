@@ -154,7 +154,7 @@ namespace Plotypus
             case PlotStyle2D::LinesPoints:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
             case PlotStyle2D::FilledCurves:
-                return checkColumnListOccupationIsFrom(selectors, {2, 3}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
             case PlotStyle2D::XErrorLines:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
             case PlotStyle2D::YErrorLines:

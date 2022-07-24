@@ -33,9 +33,12 @@ namespace Plotypus
     constexpr size_t COLUMN_UNSUPPORTED     = std::numeric_limits<size_t>::max();
     constexpr size_t COLUMN_LIST_INVALID    = 0u;
 
-    constexpr auto COLUMN_FORMAT_DEFAULT = "#";
-    constexpr auto COLUMN_FORMAT_FILTER_POSITIVE = "($# >= 0 ? $# : 1/0)";
-    constexpr auto COLUMN_FORMAT_FILTER_NEGATIVE = "($# <= 0 ? $# : 1/0)";
+    constexpr auto COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER = '_';
+    constexpr auto COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID = '!';
+
+    constexpr auto COLUMN_FORMAT_DEFAULT         = "_";
+    constexpr auto COLUMN_FORMAT_FILTER_POSITIVE = "($_ >= 0 ? $_ : 1/0)";
+    constexpr auto COLUMN_FORMAT_FILTER_NEGATIVE = "($_ <= 0 ? $_ : 1/0)";
 
 //! @}
 }
