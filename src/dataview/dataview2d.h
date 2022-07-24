@@ -34,6 +34,8 @@ namespace Plotypus
             void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
             void writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
 
+            void writeUsingSpecification(std::ostream& hFile) const;
+
         public:
             DataView2D(const PlotStyle2D  style, const std::string& label = "");
             DataView2D(const std::string& style, const std::string& label = "");

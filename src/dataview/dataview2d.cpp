@@ -40,6 +40,31 @@ namespace Plotypus
         }
     }
 
+    void DataView2D::writeUsingSpecification(std::ostream& hFile) const
+    {
+        // *INDENT-OFF*
+        if (isFunction()) {return;}
+        // *INDENT-ON*
+
+        bool firstValue = true;
+
+        hFile << "using ";
+        for (auto i = 0u; i < columnAssignments.size(); ++i)
+        {
+
+            if (columnAssignments[i] != COLUMN_UNUSED)
+            {
+                // *INDENT-OFF*
+                if (firstValue) {firstValue = false;}
+                else            {hFile << ":";}
+                // *INDENT-ON*
+
+                hFile << generateColumnFormat(columnFormats[i], columnAssignments[i], columnAssignments);
+            }
+        }
+        hFile << " ";
+    }
+
     // ====================================================================== //
 
     DataView2D::DataView2D(const PlotStyle2D style, const std::string& label) :
@@ -328,7 +353,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if      (isDummy())     {hFile << "(external input from " << dataFilename << ")"  << std::endl; return;}
-        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ")"  << std::endl; return;}
+        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(label) << ")"  << std::endl; return;}
         else if (!isComplete()) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
         // *INDENT-ON*
         else
@@ -384,11 +409,13 @@ namespace Plotypus
             hFile << std::quoted(dataFilename) << " ";
             if (binaryDataOutput) {hFile << "binary format=\"%float64\" ";}
         }
+        writeUsingSpecification(hFile);
 
         if (!options.empty()) {hFile << options << " ";}
         if (!label.  empty()) {hFile << "title " << std::quoted(label) << " ";}
 
-        hFile << " with " << style << " ";
+
+        hFile << "with " << style << " ";
 
         const auto lineStyleID = lineStyle + 1;
         if (lineStyleID)    {hFile << "linestyle " << std::to_string(lineStyleID) << " ";}
