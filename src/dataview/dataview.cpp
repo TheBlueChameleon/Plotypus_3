@@ -63,7 +63,7 @@ namespace Plotypus
     void DataView::setStyleID(const PlotStyle2D newStyle)
     {
         styleID = newStyle;
-        style = getPlotStyleName(newStyle);
+        style   = getPlotStyleName(newStyle);
 
         if (newStyle == PlotStyle2D::HBoxes)
         {

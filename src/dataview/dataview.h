@@ -5,6 +5,8 @@
 
 #include "../definitions/constants.h"
 
+#include "../base/stylescollection.h"
+
 namespace Plotypus
 {
     class DataView

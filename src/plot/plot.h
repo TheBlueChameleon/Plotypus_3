@@ -20,7 +20,7 @@ namespace Plotypus
             bool        border      = true;
             bool        parametric  = false;
             bool        polar       = false;
-            std::string aspect      = "ratio -1";
+            std::string aspect      = "noratio";
 
             static std::string generateRangeString(double min, double max);
             void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;

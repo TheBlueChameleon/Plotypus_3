@@ -379,19 +379,21 @@ namespace Plotypus
     void DataView2D::writeScriptData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
-        if (func.empty())   {hFile << std::quoted(dataFilename);}
-        else                {hFile << func;}
+        if (isFunction()) {hFile << func << " ";}
+        else {
+            hFile << std::quoted(dataFilename) << " ";
+            if (binaryDataOutput) {hFile << "binary format=\"%float64\" ";}
+        }
 
-        hFile << " with " << style;
-        if (!label.empty()) {hFile << " title " << std::quoted(label);}
+        if (!options.empty()) {hFile << options << " ";}
+        if (!label.  empty()) {hFile << "title " << std::quoted(label) << " ";}
+
+        hFile << " with " << style << " ";
 
         const auto lineStyleID = lineStyle + 1;
-        if (lineStyleID)    {hFile << " linestyle " << std::to_string(lineStyleID);}
+        if (lineStyleID)    {hFile << "linestyle " << std::to_string(lineStyleID) << " ";}
 
         if (pointStyle + 1) {/* stylesCollection from report? */};
-
-        if (!options.empty()) {hFile << " " << options;}
-        hFile << " ";
         // *INDENT-ON*
     }
 }

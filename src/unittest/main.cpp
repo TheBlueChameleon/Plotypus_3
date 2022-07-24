@@ -9,25 +9,44 @@ using namespace std::string_literals;
 // ========================================================================== //
 // playground
 
-void playground ()
-{
-    struct compound_t
-    {
-        double x, y, errX, errY;
-    };
+const auto& pi = std::numbers::pi;
 
-    const auto& pi = std::numbers::pi;
+struct compound_t
+{
+    double x, y, errX, errY;
+};
+
+std::vector<compound_t> generateCompoundData()
+{
+    const auto N = 50;
+    std::vector<compound_t> result(N);
+
+    // Taylor approximation of sine
+    for (double x = 0.; auto& datapoint : result)
+    {
+        datapoint.x    = x;
+        datapoint.y    = x - (x*x*x / 6.) + (x*x*x*x*x / 120.);
+        datapoint.errY = (1./120.) * (.1) * std::pow(x, 6.);
+
+        x += pi / N;
+    }
+
+    return result;
+}
+
+std::pair<std::vector<double>, std::vector<double>> generateSeparateData()
+{
     std::vector<double> dataX = {0, 1./3.*pi, 1./2.*pi, 2./3.*pi, pi};
     std::vector<double> dataY = {0,        1,      0.5,        1,  0};
 
-    std::vector<compound_t> data =
-    {
-        {       0, 0.0, .01, .05},
-        {1./3.*pi, 1.0, .02, .04},
-        {1./2.*pi, 0.5, .03, .03},
-        {2./3.*pi, 1.0, .04, .02},
-        {      pi, 0.0, .05, .01}
-    };
+    return std::make_pair(dataX, dataY);
+}
+
+void playground ()
+{
+    auto [dataX, dataY] = generateSeparateData();
+    std::vector<compound_t> data = generateCompoundData();
+
     // *INDENT-OFF*
     Plotypus::DataSelector_t<compound_t> compoundSelectorX    = [] (const compound_t& data) {return data.x;};
     Plotypus::DataSelector_t<compound_t> compoundSelectorY    = [] (const compound_t& data) {return data.y;};
@@ -73,12 +92,14 @@ void playground ()
 
     dataViewData1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
     dataViewData1.setSelector(Plotypus::ColumnTypes::DeltaY, compoundSelectorErrY);
+    dataViewData1.setLabel("Sine Approximation");
+    //dataViewData1.setBinaryDataOutput(false);
     dataViewFunc2.setLineStyle(0);
 
 
     r.writeTxt();
-//    r.writeDat();
-//    r.writeScript();
+    r.writeDat();
+    r.writeScript();
 }
 
 // ========================================================================== //
