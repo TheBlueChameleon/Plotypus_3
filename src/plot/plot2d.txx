@@ -10,21 +10,21 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView&  Plot2D::addDataViewCompound(DataView2DCompound<T>* dataView)
+    DataView2DCompound<T>& Plot2D::addDataViewCompound(DataView2DCompound<T>* dataView)
     {
         dataViews.push_back(dataView);
-        return *dataViews.back();
+        return *dataView;
     }
 
     template<class T>
-    DataView& Plot2D::addDataViewCompound(const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& Plot2D::addDataViewCompound(const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataView& Plot2D::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& Plot2D::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
@@ -35,7 +35,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView& Plot2D::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& Plot2D::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
@@ -46,7 +46,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView& Plot2D::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& Plot2D::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 

@@ -33,15 +33,15 @@ namespace Plotypus
             template<class T>
             T& dataViewAs(const size_t i);
             template<class T>
-            DataView& addDataViewCompound(DataView2DCompound<T>* dataView);
+            DataView2DCompound<T>& addDataViewCompound(DataView2DCompound<T>* dataView);
             template<class T>
-            DataView& addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>& addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(const std::string& func, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>& addDataViewCompound(const std::string& func, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers
