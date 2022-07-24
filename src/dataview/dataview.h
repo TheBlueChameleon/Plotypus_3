@@ -10,15 +10,15 @@ namespace Plotypus
     class DataView
     {
         protected:
-            PlotStyle2D styleID;        //! @todo maybe make this a union with PlotStyle3D?
+            PlotStyle2D styleID;        //! @todo maybe make this an union with PlotStyle3D?
 
             std::string label;
             std::string style;
             std::string options = "";
+
             mutable std::string dataFilename = "";
 
-            int  numberPrecision = 6;           //! @todo used only in txt output
-
+            int  numberPrecision = -1;
             std::string columnSeparatorTxt = "\t";
             std::string columnSeparatorDat = "\t";
 
@@ -27,8 +27,9 @@ namespace Plotypus
 
             columnAssignmentList_t columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
             columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
+            columnFormatList_t     columnHeadlines   = {};
 
-            virtual void clearFunctionMembers() = 0;
+            virtual void clearFunctionMembers   () = 0;
             virtual void clearNonFunctionMembers() = 0;
 
         public:
@@ -69,6 +70,8 @@ namespace Plotypus
             size_t&             columnAssignment(const ColumnTypes  columnType);
             std::string&        columnFormat    (const size_t       columnID);
             std::string&        columnFormat    (const ColumnTypes  columnType);
+            std::string&        columnHeadline  (const size_t       columnID);
+            std::string&        columnHeadline  (const ColumnTypes  columnType);
 
             virtual bool isFunction() const = 0;
             virtual bool isDummy() const = 0;
@@ -79,7 +82,8 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void writeDatData() const = 0;
+            virtual void writeTxtData   (std::ostream& hFile) const = 0;
+            virtual void writeDatData   ()                    const = 0;
             virtual void writeScriptData(std::ostream& hFile) const = 0;
     };
 }

@@ -39,8 +39,8 @@ namespace Plotypus
             bool verbose       = true;
             bool autoRunScript = true;
 
-            std::string pageSeparatorTxt  = "================================================================================\n";
-            std::string frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
+            std::string pageSeparatorTxt        = "================================================================================\n";
+            std::string frameSeparatorTxt       = "--------------------------------------------------------------------------------\n";
 
             StylesCollection stylesCollection;
 
@@ -91,6 +91,7 @@ namespace Plotypus
              * | `Pdf`        | pdfcairo        | pdf       |
              * | `Png`        | pngcairo        | png       |
              * | `PostScript` | epscairo        | eps       |
+             * | `Gif`        | gif animate     | gif       |
              */
             void                setFileType(FileType newFileType);
 

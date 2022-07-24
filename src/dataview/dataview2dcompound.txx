@@ -88,13 +88,11 @@ namespace Plotypus
     void DataView2DCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
-        for (size_t i = 1u; const auto& selector : selectors)
+        for (size_t i = 0u; const auto& selector : selectors)
         {
-            if (selector)
-            {
-                columnAssignments[i-1] = i;
-            }
-            ++i;
+            // *INDENT-OFF*
+            if (selector) {columnAssignments[i] = ++i;}         // columnAssignments[i] = i + 1 for i in range(size)
+            // *INDENT-ON*
         }
     }
 
@@ -115,6 +113,7 @@ namespace Plotypus
 
         selectors        [columnID - 1] = selector;
         columnAssignments[columnID - 1] = columnID;
+        columnHeadlines  [columnID - 1] = getColumnIDName(column);
     }
 
     template<class T>

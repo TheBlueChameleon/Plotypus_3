@@ -21,7 +21,8 @@ namespace Plotypus
     {
         Pdf,
         Png,
-        PostScript
+        PostScript,
+        Gif
     };
 
     // ====================================================================== //
@@ -40,8 +41,8 @@ namespace Plotypus
         //! @brief same, but renders the z data as coloured pixels
         PlotColormap,
 
-        //! @brief a sheet with multiple plots on it
-        Multiplot
+        //! @brief a sheet with multiple subsheets on it
+        FramesCollection
     };
 
     // ---------------------------------------------------------------------- //

@@ -18,32 +18,6 @@ namespace Plotypus
         }
     }
 
-    void runGnuplot(const std::string& filename, bool verbose)
-    {
-        // *INDENT-OFF*
-        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
-
-        const auto error = std::system((std::string("gnuplot ") + filename).data());
-
-        if (verbose) {
-            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
-            else        {std::cout << "done." << std::endl;}
-        }
-        // *INDENT-ON*
-    }
-
-    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
-    {
-        std::fstream hFile(filename, mode);
-
-        if (!hFile.is_open())
-        {
-            throw FileIOError("Could not open '" + filename + "'");
-        }
-
-        return hFile;
-    }
-
     const std::string getColumnIDName(const ColumnTypes columnType)
     {
         switch(columnType)
@@ -99,9 +73,9 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    const std::string getPlotStyleName(const PlotStyle2D styleID)
+    const std::string getPlotStyleName(const PlotStyle2D plotStyleID)
     {
-        switch(styleID)
+        switch(plotStyleID)
         {
             case PlotStyle2D::Dots:
                 return "dots";
@@ -169,4 +143,29 @@ namespace Plotypus
         return buffer.str();
     }
 
+    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
+    {
+        std::fstream hFile(filename, mode);
+
+        if (!hFile.is_open())
+        {
+            throw FileIOError("Could not open '" + filename + "'");
+        }
+
+        return hFile;
+    }
+
+    void runGnuplot(const std::string& filename, bool verbose)
+    {
+        // *INDENT-OFF*
+        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+
+        const auto error = std::system((std::string("gnuplot ") + filename).data());
+
+        if (verbose) {
+            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
+            else        {std::cout << "done." << std::endl;}
+        }
+        // *INDENT-ON*
+    }
 };

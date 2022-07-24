@@ -6,18 +6,18 @@ digraph G {
     root [label = "How many independent variables\n does your data have?"];
 
     case2D [label = "Is all information for a single\n data point in a struct or class?"]
-    case3D [label = "Do you use one or two indices\n to access a data point?"]
+    case3D [label = "Is all information for a single\n data point in a struct or class?"]
 
-    case3DArray  [label = "Is all information for a single\n data point in a struct or class?"];
-    case3DMatrix [label = "Is all information for a single\n data point in a struct or class?"];
+    case3DCompound  [label = "Do you use one or two indices\n to access a data point?"];
+    case3DSeparate [label = "Do you use one or two indices\n to access a data point?"];
 
     case2DCompound [label = "DataView2DCompound" shape=box, fontname = "Courier New"]
     case2DSeparate [label = "DataView2DSeparate" shape=box, fontname = "Courier New"]
 
-    case3DArrayCompound  [label = "DataView3DArrayCompound"  shape=box, fontname = "Courier New"]
-    case3DArraySeparate  [label = "DataView3DArraySeparate"  shape=box, fontname = "Courier New"]
-    case3DMatrixCompound [label = "DataView3DMatrixCompound" shape=box, fontname = "Courier New"]
-    case3DMatrixSeparate [label = "DataView3DMatrixSeparate" shape=box, fontname = "Courier New"]
+    case3DCompoundArray  [label = "DataView3DCompoundArray"  shape=box, fontname = "Courier New"]
+    case3DSeparateArray  [label = "DataView3DSeparateArray"  shape=box, fontname = "Courier New"]
+    case3DCompoundMatrix [label = "DataView3DCompoundMatrix" shape=box, fontname = "Courier New"]
+    case3DSeparateMatrix [label = "DataView3DSeparateMatrix" shape=box, fontname = "Courier New"]
 
     root -> case2D [label = " one"];
     root -> case3D [label = " two"];
@@ -25,12 +25,12 @@ digraph G {
     case2D -> case2DCompound [label = " yes"];
     case2D -> case2DSeparate [label = " no"];
 
-    case3D -> case3DArray  [label = " one"];
-    case3D -> case3DMatrix [label = " two"];
+    case3D -> case3DCompound [label = " yes"];
+    case3D -> case3DSeparate [label = " no"];
 
-    case3DArray -> case3DArrayCompound [label = " yes"];
-    case3DArray -> case3DArraySeparate [label = " no"];
+    case3DCompound -> case3DCompoundArray  [label = " one"];
+    case3DCompound -> case3DCompoundMatrix [label = " two"];
 
-    case3DMatrix -> case3DMatrixCompound [label = " yes"];
-    case3DMatrix -> case3DMatrixSeparate [label = " no"];
+    case3DSeparate -> case3DSeparateArray  [label = " one"];
+    case3DSeparate -> case3DSeparateMatrix [label = " two"];
 }

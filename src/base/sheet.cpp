@@ -27,6 +27,8 @@ namespace Plotypus
         customScriptBegin = "";
         customScriptEnd   = "";
 
+        datalineSeparatorTxt = "................................................................................\n";
+
         labels.clear();
     }
 
@@ -75,6 +77,16 @@ namespace Plotypus
         return labels.size();
     }
 
+    const std::string& Sheet::getDatalineSeparatorTxt() const
+    {
+        return datalineSeparatorTxt;
+    }
+
+    void Sheet::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
+    {
+        datalineSeparatorTxt = newDatalineSeparatorTxt;
+    }
+
     // ====================================================================== //
 
     const std::vector<Label>& Sheet::getLabels() const
@@ -99,7 +111,7 @@ namespace Plotypus
         return labels.back();
     }
 
-    Label &Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
+    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
     {
         Label l;     // use the default values, in case options and/or boxStyle are empty.
 
@@ -125,10 +137,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeTxtData(std::ostream& hFile) const
-    {
-
-    }
+    void Sheet::writeTxtData(std::ostream& hFile) const {}
 
     void Sheet::writeTxtLabels(std::ostream& hFile) const
     {
@@ -142,7 +151,7 @@ namespace Plotypus
     {
         const int lineWidth = 80;
         const int spaces = pageNum ?
-                           lineWidth - (std::log10(pageNum) + 1) :
+                           lineWidth - (std::log10(pageNum + 1) + 1) :
                            lineWidth - 1;
         hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
     }
@@ -226,10 +235,14 @@ namespace Plotypus
             hFile << std::endl;
         }
 
-        hFile << "# " << std::string(76, '-') << " #\n";
-        hFile << "# dummy plot for empty page" << std::endl << std::endl;
+        if (type == PlotType::Sheet)
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# dummy plot for empty page" << std::endl << std::endl;
 
-        hFile << "plot [][] 1/0 t\"\"" << std::endl;
+            hFile << "plot [][] 1/0 t\"\"" << std::endl;
+        }
+
         hFile << "unset label" << std::endl;
         hFile << std::endl;
     }

@@ -17,10 +17,6 @@ namespace Plotypus
     template<class T>
     void checkIndex(const std::string& indexName, const size_t i, std::vector<T> vector);
 
-    void runGnuplot(const std::string& filename, bool verbose = true);
-
-    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
-
     template<class T>
     bool contains(const T& toFind, const std::vector<T>& container);
 
@@ -30,9 +26,12 @@ namespace Plotypus
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null);
 
     const std::string getColumnIDName(const ColumnTypes columnType);
-    const std::string getPlotStyleName(const PlotStyle2D styleID);
+    const std::string getPlotStyleName(const PlotStyle2D plotStyleID);
 
-    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t &columnAssignments);
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
+
+    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
+    void runGnuplot(const std::string& filename, bool verbose = true);
 };
 
 #include "util.txx"

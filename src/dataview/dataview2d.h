@@ -54,8 +54,9 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void writeDatData () const;
-            virtual void writeScriptData (std::ostream& hFile) const;
+            virtual void writeTxtData   (std::ostream& hFile) const;
+            virtual void writeDatData   ()                    const;
+            virtual void writeScriptData(std::ostream& hFile) const;
     };
 }
 

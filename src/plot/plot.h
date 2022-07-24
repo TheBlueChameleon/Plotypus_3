@@ -12,7 +12,7 @@ namespace Plotypus
 {
     class Plot : public Sheet
     {
-        private:
+        protected:
             AxisDescriptor xAxis = {"x"};
             AxisDescriptor yAxis = {"y"};
 
@@ -20,9 +20,8 @@ namespace Plotypus
             bool        border      = true;
             bool        parametric  = false;
             bool        polar       = false;
-            std::string aspect  = "ratio -1";
+            std::string aspect      = "ratio -1";
 
-        protected:
             static std::string generateRangeString(double min, double max);
             void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
 
@@ -54,8 +53,6 @@ namespace Plotypus
             // writers
 
             virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const = 0;
-
-            virtual void writeDatData() const = 0;
 
             virtual void writeScriptHead(std::ostream& hFile) const;
     };

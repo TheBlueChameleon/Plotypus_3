@@ -17,19 +17,22 @@ void playground ()
     };
 
     const auto& pi = std::numbers::pi;
-    std::vector<double> dataX = {0, 1./3.*pi, 2./3.*pi, pi};
-    std::vector<double> dataY = {0,        1,        1,  0};
+    std::vector<double> dataX = {0, 1./3.*pi, 1./2.*pi, 2./3.*pi, pi};
+    std::vector<double> dataY = {0,        1,      0.5,        1,  0};
 
     std::vector<compound_t> data =
     {
-        {       0, 0, 0, 0},
-        {1./3.*pi, 1, 0, 0},
-        {2./3.*pi, 1, 0, 0},
-        {      pi, 0, 0, 0}
+        {       0, 0.0, .01, .05},
+        {1./3.*pi, 1.0, .02, .04},
+        {1./2.*pi, 0.5, .03, .03},
+        {2./3.*pi, 1.0, .04, .02},
+        {      pi, 0.0, .05, .01}
     };
     // *INDENT-OFF*
-    Plotypus::DataSelector_t<compound_t> compoundSelectorX = [] (const compound_t& data) {return data.x;};
-    Plotypus::DataSelector_t<compound_t> compoundSelectorY = [] (const compound_t& data) {return data.y;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorX    = [] (const compound_t& data) {return data.x;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorY    = [] (const compound_t& data) {return data.y;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorErrX = [] (const compound_t& data) {return data.errX;};
+    Plotypus::DataSelector_t<compound_t> compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
     // *INDENT-ON*
 
     Plotypus::Report r;
@@ -55,9 +58,9 @@ void playground ()
     s3.addLabel("empty", .10, .10, true, 1);
     s3.addLabel("empty", .10, .50, true, 1);
 
-    s4.addDataViewCompound<compound_t>(data, compoundSelectorY);
-    s4.addDataViewCompound<compound_t>("[0:pi] sin(x)"s, "Sine Wave"s);
-    s4.addDataViewCompound<compound_t>("[0:pi] cos(x)", "Cosine Wave");
+    s4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle2D::YErrorLines);
+    s4.addDataViewCompound<compound_t>("[0:pi] sin(x)", Plotypus::PlotStyle2D::Lines, "Sine Wave"s);
+    s4.addDataViewCompound<compound_t>("[0:pi] cos(x)", Plotypus::PlotStyle2D::Lines, "Cosine Wave");
 
     dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(s4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
 
@@ -69,10 +72,11 @@ void playground ()
     // *INDENT-ON*
 
     dataViewData1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
+    dataViewData1.setSelector(Plotypus::ColumnTypes::DeltaY, compoundSelectorErrY);
     dataViewFunc2.setLineStyle(0);
 
 
-//    r.writeTxt();
+    r.writeTxt();
 //    r.writeDat();
 //    r.writeScript();
 }
@@ -90,9 +94,9 @@ int main()
 
     std::cout << "REGISTERING UNIT TESTS ... " << std::flush;
 
-//    ADD_UNITTEST(unittest_report_basicSheetManagement);
-//    ADD_UNITTEST(unittest_report_empty_scriptOutput);
-//    ADD_UNITTEST(unittest_report_sheets_scriptOutput);
+    ADD_UNITTEST(unittest_report_basicSheetManagement);
+    ADD_UNITTEST(unittest_report_emptyScriptOutput);
+    ADD_UNITTEST(unittest_report_sheets_scriptOutput);
     ADD_UNITTEST(unittest_sheets_labels);
 
     std::cout << "DONE" << std::endl << std::endl;

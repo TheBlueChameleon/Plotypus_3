@@ -57,8 +57,19 @@ namespace Plotypus
         }
     }
 
+    void Plot2D::writeTxtData(std::ostream& hFile) const
+    {
+        Plot::writeTxtData(hFile);
+        for (const auto dataView : dataViews)
+        {
+            hFile << datalineSeparatorTxt;
+            dataView->writeTxtData(hFile);
+        }
+    }
+
     void Plot2D::writeDatData() const
     {
+        Plot::writeDatData();
         for (const auto dataView : dataViews)
         {
             dataView->writeDatData();
@@ -85,6 +96,7 @@ namespace Plotypus
 
     void Plot2D::writeScriptFooter(std::ostream& hFile, int pageNum) const
     {
+        Plot::writeScriptFooter(hFile, pageNum);
         hFile << std::endl;
     }
 }

@@ -19,7 +19,7 @@ namespace Plotypus
     {
         for (size_t i = 0u; i < getArity(); ++i)
         {
-            fetchData(lineBuffer, 0, missingXColumn);
+            fetchData(lineBuffer, i, missingXColumn);
             for (const auto datapoint : lineBuffer)
             {
                 hFile << datapoint << columnSeparatorDat;
@@ -323,6 +323,40 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    void DataView2D::writeTxtData(std::ostream& hFile) const
+    {
+        // *INDENT-OFF*
+        if      (isDummy())     {hFile << "(external input from " << dataFilename << ")"  << std::endl; return;}
+        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ")"  << std::endl; return;}
+        else if (!isComplete()) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
+        // *INDENT-ON*
+        else
+        {
+            bool missingXColumn = columnAssignments[0] == COLUMN_UNUSED;
+            auto lineLength = getConsecutiveEntriesCount(columnAssignments, COLUMN_UNUSED);
+
+            std::vector<double> lineBuffer(lineLength);
+
+            for (const auto& headline : columnHeadlines)
+            {
+                hFile << headline << columnSeparatorTxt;
+            }
+            hFile << std::endl;
+
+            //hFile << std::fixed;
+            hFile << std::setprecision(numberPrecision);
+            for (size_t i = 0u; i < getArity(); ++i)
+            {
+                fetchData(lineBuffer, i, missingXColumn);
+                for (const auto datapoint : lineBuffer)
+                {
+                    hFile << datapoint << columnSeparatorTxt;
+                }
+                hFile << std::endl;
+            }
+        }
+    }
 
     void DataView2D::writeDatData() const
     {

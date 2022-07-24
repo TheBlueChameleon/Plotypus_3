@@ -134,6 +134,10 @@ namespace Plotypus
                 terminal = "epscairo";
                 extOut = "eps";
                 break;
+            case FileType::Gif:
+                terminal = "gif animate";
+                extOut = "gif";
+                break;
         }
     }
 

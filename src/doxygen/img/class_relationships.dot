@@ -1,0 +1,63 @@
+# dot -Tpng:cairo:gd class_relationships.dot > class_relationships.png
+
+digraph G {
+    node [shape=box, style=bold, fontname="Courier New"];
+
+    root                        [label="Report"];
+    sheet                       [label="Sheet", color=blue];
+    framescollection            [label="FramesCollection", color=blue];
+    plot                        [label="Plot", color=blue, style=filled, fillcolor=lightblue];
+    stylescollection            [label="StylesCollection", color=gold];
+
+    plot2D                      [label="Plot2D", color=blue];
+    plot3D                      [label="Plot3D", color=blue];
+
+    dataview                    [label="DataView", style=filled, color=red, style=filled, fillcolor=pink];
+
+    dataview2d                  [label="DataView2D", color=red, style=filled, fillcolor=pink];
+    dataview2dcompound          [label="DataView2DCompound<T>", color=red];
+    dataview2dseparate          [label="DataView2DSeparate", color=red];
+
+    dataview3d                  [label="DataView3D", color=red, style=filled, fillcolor=pink];
+    dataview3dcompound          [label="DataView3DCompund", color=red, style=filled, fillcolor=pink];
+    dataview3dseparate          [label="DataView3DSeparate", color=red, style=filled, fillcolor=pink];
+    dataview3dcompoundmatrix    [label="DataView3DCompoundMatrix<T>", color=red];
+    dataview3dseparatematrix    [label="DataView3DSeparateMatrix", color=red];
+    dataview3dcompoundarray     [label="DataView3DCompoundArray<T>", color=red];
+    dataview3dseparatearray     [label="DataView3DSeparateArray", color=red];
+
+    { rank=same plot2D plot3D dataview }
+
+    root -> sheet [arrowhead=dot, style=dashed];
+    root -> stylescollection [arrowhead=dot, style=dashed];
+
+    sheet -> plot;
+    sheet -> framescollection;
+
+    framescollection -> sheet [arrowhead=dot, style=dashed]
+
+    plot -> plot2D;
+    plot -> plot3D;
+
+    plot2D -> dataview2dcompound [arrowhead=dot, style=dashed];
+    plot2D -> dataview2dseparate [arrowhead=dot, style=dashed];
+
+    plot3D -> dataview3dcompoundmatrix [arrowhead=dot, style=dashed];
+    plot3D -> dataview3dseparatematrix [arrowhead=dot, style=dashed];
+    plot3D -> dataview3dcompoundarray  [arrowhead=dot, style=dashed];
+    plot3D -> dataview3dseparatearray  [arrowhead=dot, style=dashed];
+
+    dataview -> dataview2d;
+    dataview -> dataview3d;
+
+    dataview2d -> dataview2dcompound;
+    dataview2d -> dataview2dseparate;
+
+    dataview3d -> dataview3dcompound;
+    dataview3d -> dataview3dseparate;
+
+    dataview3dcompound -> dataview3dcompoundmatrix;
+    dataview3dcompound -> dataview3dcompoundarray;
+    dataview3dseparate -> dataview3dseparatematrix;
+    dataview3dseparate -> dataview3dseparatearray;
+}

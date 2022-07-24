@@ -18,14 +18,6 @@ namespace Plotypus
              * @todo appy point styles in script
              */
 
-            /**
-             * @todo rework as abstract non-template class
-             *      dataViews becomes vector<DataView*>
-             *      requires DTor which deallocates
-             *      requires adders instaintiate via new
-             *      requires hidden addDataViewCompound(const DataView2DCompound<T>& dataView) copies data into new'd object
-             */
-
         private:
             std::vector<DataView*> dataViews;
 
@@ -45,21 +37,23 @@ namespace Plotypus
             template<class T>
             DataView& addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const std::string& label = "");
+            DataView& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const std::string& label = "");
+            DataView& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView& addDataViewCompound(const std::string& func, const std::string& label = "");
+            DataView& addDataViewCompound(const std::string& func, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const; //! @todo update (preprocess column assignments or forward to DataView::preprocess)
+            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
+
+            virtual void writeTxtData       (std::ostream& hFile) const;
 
             virtual void writeDatData() const;
 
-            virtual void writeScriptData   (std::ostream& hFile) const;
-            virtual void writeScriptFooter (std::ostream& hFile, int pageNum) const;
+            virtual void writeScriptData    (std::ostream& hFile) const;
+            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
     };
 }
 

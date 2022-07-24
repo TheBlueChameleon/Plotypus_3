@@ -18,10 +18,12 @@ namespace Plotypus
             PlotType type;
 
             std::string title = "";
-            std::string defaultFont = "arial,7";        //! @todo consider dropping "default" in var and related methods
+            std::string defaultFont = "arial,7";
 
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";
+
+            std::string datalineSeparatorTxt = "................................................................................\n";
 
             std::vector<Label> labels;
 
@@ -42,6 +44,9 @@ namespace Plotypus
             void                setCustomScriptBegin(const std::string& newCustomScriptBegin);
             const std::string&  getCustomScriptEnd() const;
             void                setCustomScriptEnd(const std::string& newCustomScriptEnd);
+
+            const std::string&  getDatalineSeparatorTxt() const;
+            void                setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
             size_t                          getLabelCount() const;
             const std::vector<Label>&       getLabels() const;
