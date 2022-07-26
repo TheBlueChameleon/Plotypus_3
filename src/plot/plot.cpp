@@ -135,6 +135,16 @@ namespace Plotypus
         aspect = "ratio "s + std::to_string(ratio);
     }
 
+    const std::string& Plot::getFill() const
+    {
+        return fill;
+    }
+
+    void Plot::setFill(const std::string& newFill)
+    {
+        fill = newFill;
+    }
+
     // ====================================================================== //
     // writers
 
@@ -142,10 +152,11 @@ namespace Plotypus
     {
         Sheet::writeScriptHead(hFile);
 
-        if (!aspect.empty())
-        {
-            hFile << "set size " << aspect << std::endl;
-        }
+        // *INDENT-OFF*
+        if (!aspect.empty()) {hFile << "set size " << aspect << std::endl;}
+        if (!fill.  empty()) {hFile << "set fill " << fill   << std::endl;}
+        // *INDENT-ON*
+
         hFile << "set key " << (key ? "on" : "off") << std::endl;
         hFile << (border        ? "" : "un") << "set border" << std::endl;
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;

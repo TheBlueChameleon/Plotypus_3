@@ -21,6 +21,7 @@ namespace Plotypus
             bool        parametric  = false;
             bool        polar       = false;
             std::string aspect      = "noratio";
+            std::string fill        = "solid";
 
             static std::string generateRangeString(double min, double max);
             void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
@@ -48,6 +49,8 @@ namespace Plotypus
             void                setAspectSquare();
             void                setAspectEqual ();
             void                setAspectRatio (double ratio);
+            const std::string&  getFill() const;
+            void                setFill(const std::string& newFill);
 
             // -------------------------------------------------------------- //
             // writers
