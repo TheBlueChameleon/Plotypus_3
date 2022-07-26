@@ -1,6 +1,5 @@
 #include <iomanip>
 #include <string>
-#include <iostream>
 
 #include "plot.h"
 
@@ -91,8 +90,8 @@ namespace Plotypus
     {
         Sheet::reset();
 
-        xAxis       = AxisDescriptor("x");
-        yAxis       = AxisDescriptor("y");
+        m_xAxis       = AxisDescriptor("x");
+        m_yAxis       = AxisDescriptor("y");
 
         key         = true;
         border      = true;
@@ -101,14 +100,14 @@ namespace Plotypus
         aspect      = "ratio -1";
     }
 
-    AxisDescriptor& Plot::getXAxis()
+    AxisDescriptor& Plot::xAxis()
     {
-        return xAxis;
+        return m_xAxis;
     }
 
-    AxisDescriptor& Plot::getYAxis()
+    AxisDescriptor& Plot::yAxis()
     {
-        return yAxis;
+        return m_yAxis;
     }
 
     bool Plot::getKey() const
@@ -203,9 +202,6 @@ namespace Plotypus
         const std::string ticsSequenceString = generateTicsSequence(label.ticsStart, label.ticsIncrement, label.ticsEnd, label.rangeMin, label.rangeMax);
         const std::string ticsListString     = generateTicsList    (label.ticsLabels, !ticsSequenceString.empty());
 
-        std::cout << "rMin: " << label.rangeMin << std::endl;
-        std::cout << "font: " << label.labelFont << std::endl;
-
         // *INDENT-OFF*
         if (label.label)    {hFile <<   "set " << alabel
                                                 << std::quoted(label.labelText) << " "
@@ -251,8 +247,8 @@ namespace Plotypus
         hFile << (polar         ? "" : "un") << "set polar" << std::endl;
         hFile << std::endl;
 
-        writeAxisDescriptor(hFile, "x", xAxis);
-        writeAxisDescriptor(hFile, "y", yAxis);
+        writeAxisDescriptor(hFile, "x", m_xAxis);
+        writeAxisDescriptor(hFile, "y", m_yAxis);
 
         hFile << std::endl;
     }

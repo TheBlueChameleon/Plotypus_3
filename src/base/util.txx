@@ -3,10 +3,10 @@
 
 namespace Plotypus
 {
-    template<class T>
-    void checkIndex(const std::string& indexName, const size_t i, std::vector<T> vector)
+    template<std::ranges::sized_range T>
+    void checkIndex(const std::string& indexName, const size_t i, T collection)
     {
-        if (i >= vector.size() || (i < 0))
+        if (i >= collection.size() || (i < 0))
         {
             throw Plotypus::InvalidIndexError("    Invalid " + indexName + ": " + std::to_string(i));
         }

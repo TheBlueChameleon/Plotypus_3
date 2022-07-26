@@ -1,10 +1,13 @@
 #ifndef REPORT_TXX
 #define REPORT_TXX
 
-template<class T>
-T& Plotypus::Report::sheetAs(const size_t i)
+namespace Plotypus
 {
-    return dynamic_cast<T&>(sheet(i));
+    template<SheetLike T>
+    T& Report::sheetAs(const size_t i)
+    {
+        return static_cast<T&>(sheet(i));
+    }
 }
 
 #endif // REPORT_TXX

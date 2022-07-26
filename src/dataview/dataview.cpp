@@ -149,7 +149,8 @@ namespace Plotypus
 
     size_t& DataView::columnAssignment(const size_t columnID)
     {
-        return columnAssignments.at(columnID);
+        checkIndex("column ID", columnID, columnAssignments);
+        return columnAssignments[columnID];
     }
 
     size_t& DataView::columnAssignment(const ColumnTypes columnType)
@@ -159,7 +160,8 @@ namespace Plotypus
 
     std::string& DataView::columnFormat(const size_t columnID)
     {
-        return columnFormats.at(columnID);
+        checkIndex("column ID", columnID, columnAssignments);
+        return columnFormats[columnID];
     }
 
     std::string& DataView::columnFormat(const ColumnTypes columnType)
@@ -169,7 +171,8 @@ namespace Plotypus
 
     std::string& DataView::columnHeadline(const size_t columnID)
     {
-        return columnHeadlines.at(columnID);
+        checkIndex("column ID", columnID, columnAssignments);
+        return columnHeadlines[columnID];
     }
 
     std::string& DataView::columnHeadline(const ColumnTypes columnType)

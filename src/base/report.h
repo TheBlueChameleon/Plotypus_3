@@ -73,7 +73,7 @@ namespace Plotypus
             Plotypus::Sheet& sheet(const size_t i) const;
 
             //! @brief returns a modifiable reference to the `i`<sup>th</sup> Sheet and applies a dynamic cast to class `T`.
-            template<class T>
+            template<SheetLike T>
             T& sheetAs(const size_t i);
 
             //! @brief adds an empty Sheet to the report and returns a modifiably reference to the newly created Sheet.

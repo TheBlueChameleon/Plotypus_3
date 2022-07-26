@@ -82,9 +82,13 @@ void playground ()
     dataView1.setLabel("Sine Approximation");
     //dataViewData1.setBinaryDataOutput(false);
 
-    sheet4.addDataViewCompound<compound_t>("[0:pi] sin(x)", Plotypus::PlotStyle2D::Lines,       "Sine Wave"s);
-    sheet4.addDataViewCompound<compound_t>("[0:pi] cos(x)", Plotypus::PlotStyle2D::LinesPoints, "Cosine Wave");
+    sheet4.setPolar(true);
+    const auto funcVar = (sheet4.getPolar() ? "t" : "x");
+    sheet4.addDataViewCompound<compound_t>("[0:pi] sin("s + funcVar + ")", Plotypus::PlotStyle2D::Lines,       "Sine Wave");
+    sheet4.addDataViewCompound<compound_t>("[0:pi] cos("s + funcVar + ")", Plotypus::PlotStyle2D::LinesPoints, "Cosine Wave");
+    //sheet4.yAxis().
     auto& funcView2 = sheet4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
+
 
     // *INDENT-OFF*
     try                             {auto& errv = sheet4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);}

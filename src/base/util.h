@@ -7,6 +7,7 @@
 #include <span>
 #include <string>
 #include <vector>
+#include <ranges>
 
 #include "../definitions/constants.h"
 
@@ -14,8 +15,8 @@ namespace Plotypus
 {
     void checkFilename(const std::string& component, const std::string& stringToTest);
 
-    template<class T>
-    void checkIndex(const std::string& indexName, const size_t i, std::vector<T> vector);
+    template<std::ranges::sized_range T>
+    void checkIndex(const std::string& indexName, const size_t i, T collection);
 
     template<class T>
     bool contains(const T& toFind, const std::vector<T>& container);

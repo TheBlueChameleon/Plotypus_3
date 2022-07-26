@@ -88,6 +88,13 @@ namespace Plotypus
             virtual void writeDatData   ()                    const = 0;
             virtual void writeScriptData(std::ostream& hFile) const = 0;
     };
+
+    // ====================================================================== //
+    /**
+     * @brief foo bar
+     */
+    template <typename T>
+    concept DataViewLike = std::is_base_of<DataView, T>::value;
 }
 
 #endif // DATAVIEW_H

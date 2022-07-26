@@ -77,6 +77,13 @@ namespace Plotypus
             virtual void writeScriptLabels  (std::ostream& hFile) const;
             virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };
+
+    // ====================================================================== //
+    /**
+     * @brief foo bar
+     */
+    template <typename T>
+    concept SheetLike = std::is_base_of<Sheet, T>::value;
 }
 
 #endif // SHEET_H

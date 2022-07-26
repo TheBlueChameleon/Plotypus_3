@@ -59,6 +59,8 @@ namespace Plotypus
         hFile << "unset ylabel" << std::endl;
         hFile << "unset ztics"  << std::endl;
         hFile << "unset zlabel" << std::endl;
+        hFile << "unset rlabel" << std::endl;
+        hFile << "unset rtics"  << std::endl;
 
         hFile << "set xrange[0:1]" << std::endl;
         hFile << "set yrange[1:0]" << std::endl;

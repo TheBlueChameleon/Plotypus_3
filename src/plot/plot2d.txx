@@ -3,10 +3,10 @@
 
 namespace Plotypus
 {
-    template<class T>
+    template<DataViewLike T>
     T& Plot2D::dataViewAs(const size_t i)
     {
-        return dynamic_cast<T&>(dataView(i));
+        return static_cast<T&>(dataView(i));
     }
 
     template<class T>

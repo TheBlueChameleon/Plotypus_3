@@ -13,8 +13,8 @@ namespace Plotypus
     class Plot : public Sheet
     {
         protected:
-            AxisDescriptor xAxis = AxisDescriptor("x");
-            AxisDescriptor yAxis = AxisDescriptor("y");
+            AxisDescriptor m_xAxis = AxisDescriptor("x");
+            AxisDescriptor m_yAxis = AxisDescriptor("y");
 
             bool        key         = true;
             bool        border      = true;
@@ -32,8 +32,8 @@ namespace Plotypus
 
             virtual void reset();
 
-            AxisDescriptor& getXAxis();
-            AxisDescriptor& getYAxis();
+            AxisDescriptor&     xAxis();
+            AxisDescriptor&     yAxis();
 
             bool                getKey() const;
             void                setKey(bool newKey);
