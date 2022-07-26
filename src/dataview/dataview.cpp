@@ -23,7 +23,7 @@ namespace Plotypus
         style                       = "lines";
         options                     = "";
         dataFilename                = "";
-        numberPrecision             = 6;
+        numberPrecision             = -1;
         columnSeparatorTxt          = "\t";
         columnSeparatorDat          = "\t";
         binaryDataOutput            = true;

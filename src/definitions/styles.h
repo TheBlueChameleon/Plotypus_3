@@ -147,10 +147,9 @@ namespace Plotypus
          * @brief ID is a constant that can be used for later reference in a
          *  custom code element.
          *
-         *  If zero, it will be ignored. May not be negative.
-         *  (gnuplot doesn't allow that.)
+         *  If zero, it will be ignored.
          */
-        int                         ID          = 0;
+        size_t                      ID          = 0;
 
         std::string                 text        = "label";
 
