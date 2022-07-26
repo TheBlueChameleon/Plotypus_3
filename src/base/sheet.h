@@ -26,6 +26,10 @@ namespace Plotypus
             std::string datalineSeparatorTxt = "................................................................................\n";
 
             std::vector<Label> labels;
+            /**
+             * @todo objects (rects, ellipses, ...)
+             *      arrows
+             */
 
         public:
             Sheet(const std::string& title);

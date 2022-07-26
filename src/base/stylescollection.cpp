@@ -115,7 +115,7 @@ namespace Plotypus
         return pointStyles.back();
     }
 
-    PointStyle &StylesCollection::addPointStyle(PointForm form, double size, std::string color)
+    PointStyle& StylesCollection::addPointStyle(PointForm form, double size, std::string color)
     {
         return addPointStyle(
         {
@@ -126,6 +126,12 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    void StylesCollection::writeStyles(std::ostream& hFile) const
+    {
+        writeBoxStyles (hFile);
+        writeLineStyles(hFile);
+    }
 
 
     void StylesCollection::writeBoxStyles(std::ostream& hFile) const

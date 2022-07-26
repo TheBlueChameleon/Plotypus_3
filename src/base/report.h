@@ -46,7 +46,7 @@ namespace Plotypus
 
             void writeCleanSheetCommands(std::ostream& hFile) const;
 
-            std::string         getOutputFilename(const std::string& extension, const std::string& infix = "") const;
+            std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;
 
         public:
             //! @brief Default CTor for setting up a PDF report with pdfcairo as terminal engine.

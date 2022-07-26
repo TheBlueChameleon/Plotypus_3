@@ -52,6 +52,7 @@ namespace Plotypus
             PointStyle&                     addPointStyle (PointForm form = PointForm::Point, double size = 1.0, std::string color = "");
 
             // writers
+            void writeStyles        (std::ostream& hFile) const;
             void writeBoxStyles     (std::ostream& hFile) const;
             void writeLineStyles    (std::ostream& hFile) const;
             void writePointStyleCode(std::ostream& hFile, const size_t i) const;

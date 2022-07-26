@@ -263,9 +263,15 @@ namespace Plotypus
     {
         for (size_t i = 1u; auto sheet : sheets)
         {
+            // *INDENT-OFF*
+            if (verbose) {std::cout << "preprocessing sheet #" << i << " ... ";}
+
             const std::string autoOutputFilename = getOutputFilename("", "_" + std::to_string(i));
             sheet->preprocessSheet(autoOutputFilename, extension);
             ++i;
+
+            if (verbose) {std::cout << "done." << std::endl;}
+            // *INDENT-ON*
         }
     }
 
@@ -321,34 +327,47 @@ namespace Plotypus
 
     void Report::writeScript(std::ostream& hFile) const
     {
-        preprocessSheets(extDat);
-
         const std::string   outputFilename  = getOutputFilename(extOut);
         bool                needCleanSheetCommands = true;
+
+        if (verbose)
+        {
+            std::cout << "about to write script for " << outputFilename << " ..." << std::endl;
+        }
+
+        preprocessSheets(extDat);
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
         hFile << "set term " << terminal << std::endl;
         hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
 
-        stylesCollection.writeBoxStyles (hFile);
-        stylesCollection.writeLineStyles(hFile);
+        stylesCollection.writeStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)
         {
+            // *INDENT-OFF*
+            if (verbose) {std::cout << "writing scrpt for sheet #" << i << " ... ";}
+
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
 
-            // *INDENT-OFF*
-            if (needCleanSheetCommands && sheet->getType() == PlotType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);
-            } else if                    (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
-            // *INDENT-ON*
+            if (needCleanSheetCommands && sheet->getType() == PlotType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
+            else if                      (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead  (hFile);
             sheet->writeScriptData  (hFile);
             sheet->writeScriptLabels(hFile);
             sheet->writeScriptFooter(hFile, i);
             ++i;
+
+            if (verbose) {std::cout << "done." << std::endl;}
+            // *INDENT-ON*
+        }
+
+        if (verbose)
+        {
+            std::cout << "script for " << outputFilename << " completed." << std::endl;
         }
     }
 }
