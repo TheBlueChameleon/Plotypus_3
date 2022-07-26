@@ -44,9 +44,10 @@ namespace Plotypus
 
             StylesCollection stylesCollection;
 
-            void writeCleanSheetCommands(std::ostream& hFile) const;
-
+            void preprocessSheets(const std::string& extension) const;
             std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;
+
+            void writeCleanSheetCommands(std::ostream& hFile) const;
 
         public:
             //! @brief Default CTor for setting up a PDF report with pdfcairo as terminal engine.
@@ -139,8 +140,6 @@ namespace Plotypus
 
             // -------------------------------------------------------------- //
             // writers
-
-            void preprocessSheets(const std::string& extension) const;
 
             void writeTxt   () const;
             void writeDat   () const;

@@ -49,19 +49,39 @@ namespace Plotypus
     /**
      * @brief used to compactly describe an axis of a plot
      */
+
+    using locatedTicsLabel_t = std::pair<std::string, double>;
+
     struct AxisDescriptor
     {
-        std::string label          = "";
-        std::string labelOptions   = "";
-        bool        tics           = true;
-        //! @todo std::vector<std::pair<std::string, double>> labels;
-        //! @todo std::string formatstring
-        //! @todo bool logscale
-        std::string ticsOptions    = "";
-        double      rangeMin       = 0;
-        double      rangeMax       = AUTO_RANGE;
-        int         rangeStride    = 1;
-        std::string rangeOptions   = "";
+        bool                            label               = true;
+        std::string                     labelText           = "";
+        std::string                     labelFont           = "";
+        std::string                     labelColor          = "";
+        std::string                     labelOptions        = "";
+        double                          rangeMin            = 0.;
+        double                          rangeMax            = AXIS_AUTO_RANGE;
+        std::string                     rangeOptions        = "";
+        bool                            tics                = true;
+        double                          ticsStart           = AXIS_AUTO_RANGE;
+        double                          ticsEnd             = AXIS_AUTO_RANGE;
+        double                          ticsIncrement       = AXIS_AUTO_RANGE;
+        std::string                     ticsFormatstring    = "";
+        std::vector<locatedTicsLabel_t> ticsLabels;
+        bool                            ticsLogscale        = false;
+        std::string                     ticsFont            = "";
+        std::string                     ticsTextColor       = "";
+        std::string                     ticsOptions         = "";
+        bool                            minorTics           = false;
+        size_t                          minorTicsIntervals  = AXIS_AUTO_MINOR_TICS;
+
+        AxisDescriptor(const std::string& label, double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE) :
+            label(true), labelText(label),
+            rangeMin(rangeMin), rangeMax(rangeMax)
+        {};
+        AxisDescriptor(double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE) :
+            label(false), rangeMin(rangeMin), rangeMax(rangeMax)
+        {};
     };
 
     // ====================================================================== //

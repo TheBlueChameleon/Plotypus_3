@@ -9,6 +9,7 @@ namespace Plotypus
     // ====================================================================== //
     /**
      * @brief used to assert filename valdity
+     * @todo apply CAPITAL_SNAKE_CASE
      */
 
     constexpr static auto invalidFilenameChars = "*~|:;<> '\"";
@@ -17,7 +18,9 @@ namespace Plotypus
     /**
      * @brief convenience symbol to be used with setting data ranges
      */
-    constexpr double AUTO_RANGE = std::numeric_limits<double>::quiet_NaN();
+    constexpr double AXIS_AUTO_RANGE        = std::numeric_limits<double>::quiet_NaN();
+    constexpr double AXIS_NO_AUTO_TICS      = std::numeric_limits<double>::infinity();
+    constexpr size_t AXIS_AUTO_MINOR_TICS   = std::numeric_limits<size_t>::max();
 
     // ====================================================================== //
 

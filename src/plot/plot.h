@@ -13,8 +13,8 @@ namespace Plotypus
     class Plot : public Sheet
     {
         protected:
-            AxisDescriptor xAxis = {"x"};
-            AxisDescriptor yAxis = {"y"};
+            AxisDescriptor xAxis = AxisDescriptor("x");
+            AxisDescriptor yAxis = AxisDescriptor("y");
 
             bool        key         = true;
             bool        border      = true;
@@ -23,8 +23,9 @@ namespace Plotypus
             std::string aspect      = "noratio";
             std::string fill        = "solid";
 
-            static std::string generateRangeString(double min, double max);
-            void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
+            static std::string generateRangeString (double min,                   double max);
+            static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
+            static std::string generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add);
 
         public:
             Plot(const std::string& title);
@@ -54,6 +55,8 @@ namespace Plotypus
 
             // -------------------------------------------------------------- //
             // writers
+
+            void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
 
             virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const = 0;
 

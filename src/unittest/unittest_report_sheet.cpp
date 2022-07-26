@@ -17,6 +17,7 @@ bool unittest_report_basicSheetManagement()
     UNITTEST_VARS;
 
     Plotypus::Report r;
+    r.setVerbose(false);
 
     // ...................................................................... //
 
@@ -65,6 +66,8 @@ bool unittest_report_emptyScriptOutput()
     Plotypus::Report r;
     std::stringstream s;
     std::string expectedScript;
+
+    r.setVerbose(false);
 
     // ...................................................................... //
 
@@ -151,6 +154,8 @@ bool unittest_report_sheets_scriptOutput()
     Plotypus::Report report;
     std::stringstream script;
     std::string expectedScript;
+
+    report.setVerbose(false);
 
     // ...................................................................... //
 
@@ -344,6 +349,8 @@ bool unittest_sheets_labels()
     Plotypus::Report report;
     std::stringstream script;
     std::string expectedScript;
+
+    report.setVerbose(false);
 
     // ...................................................................... //
 

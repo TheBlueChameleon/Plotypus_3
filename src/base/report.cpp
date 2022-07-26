@@ -11,23 +11,20 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    void Report::writeCleanSheetCommands(std::ostream& hFile) const
+    void Report::preprocessSheets(const std::string& extension) const
     {
-        hFile << "# " << std::string(76, '-') << " #\n";
-        hFile << "# prepare empty page" << std::endl << std::endl;
+        for (size_t i = 1u; auto sheet : sheets)
+        {
+            // *INDENT-OFF*
+            if (verbose) {std::cout << "preprocessing sheet #" << i << " ... ";}
 
-        hFile << "set key off"  << std::endl;
-        hFile << "unset border" << std::endl;
-        hFile << "unset xtics"  << std::endl;
-        hFile << "unset xlabel" << std::endl;
-        hFile << "unset ytics"  << std::endl;
-        hFile << "unset ylabel" << std::endl;
-        hFile << "unset ztics"  << std::endl;
-        hFile << "unset zlabel" << std::endl;
+            const std::string autoOutputFilename = getOutputFilename("", "_" + std::to_string(i));
+            sheet->preprocessSheet(autoOutputFilename, extension);
+            ++i;
 
-        hFile << "set xrange[0:1]" << std::endl;
-        hFile << "set yrange[1:0]" << std::endl;
-        hFile << std::endl;
+            if (verbose) {std::cout << "done." << std::endl;}
+            // *INDENT-ON*
+        }
     }
 
     std::string Report::getOutputFilename(const std::string& extension, const std::string& infix) const
@@ -47,6 +44,25 @@ namespace Plotypus
         }
 
         return p;
+    }
+
+    void Report::writeCleanSheetCommands(std::ostream& hFile) const
+    {
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# prepare empty page" << std::endl << std::endl;
+
+        hFile << "set key off"  << std::endl;
+        hFile << "unset border" << std::endl;
+        hFile << "unset xtics"  << std::endl;
+        hFile << "unset xlabel" << std::endl;
+        hFile << "unset ytics"  << std::endl;
+        hFile << "unset ylabel" << std::endl;
+        hFile << "unset ztics"  << std::endl;
+        hFile << "unset zlabel" << std::endl;
+
+        hFile << "set xrange[0:1]" << std::endl;
+        hFile << "set yrange[1:0]" << std::endl;
+        hFile << std::endl;
     }
 
     // ====================================================================== //
@@ -258,22 +274,6 @@ namespace Plotypus
     }
 
     // ====================================================================== //
-
-    void Report::preprocessSheets(const std::string& extension) const
-    {
-        for (size_t i = 1u; auto sheet : sheets)
-        {
-            // *INDENT-OFF*
-            if (verbose) {std::cout << "preprocessing sheet #" << i << " ... ";}
-
-            const std::string autoOutputFilename = getOutputFilename("", "_" + std::to_string(i));
-            sheet->preprocessSheet(autoOutputFilename, extension);
-            ++i;
-
-            if (verbose) {std::cout << "done." << std::endl;}
-            // *INDENT-ON*
-        }
-    }
 
     void Report::writeTxt() const
     {
