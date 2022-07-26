@@ -105,7 +105,7 @@ namespace Plotypus
         pageSeparatorTxt  = "================================================================================\n";
         frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
 
-        stylesCollection.reset();
+        m_stylesCollection.reset();
     }
 
     // ====================================================================== //
@@ -265,14 +265,9 @@ namespace Plotypus
         pageSeparatorTxt = newNewPageTXT;
     }
 
-    StylesCollection& Report::getStylesCollection()
+    StylesCollection& Report::stylesCollection()
     {
-        return stylesCollection;
-    }
-
-    void Report::setStylesCollection(const StylesCollection& newStylesCollection)
-    {
-        stylesCollection = newStylesCollection;
+        return m_stylesCollection;
     }
 
     // ====================================================================== //
@@ -344,7 +339,7 @@ namespace Plotypus
         hFile << "set term " << terminal << std::endl;
         hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
 
-        stylesCollection.writeStyles(hFile);
+        m_stylesCollection.writeStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)
         {
@@ -358,7 +353,7 @@ namespace Plotypus
             else if                      (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead  (hFile);
-            sheet->writeScriptData  (hFile);
+            sheet->writeScriptData  (hFile, m_stylesCollection);
             sheet->writeScriptLabels(hFile);
             sheet->writeScriptFooter(hFile, i);
             ++i;

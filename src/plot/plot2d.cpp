@@ -76,15 +76,15 @@ namespace Plotypus
         }
     }
 
-    void Plot2D::writeScriptData(std::ostream& hFile) const
+    void Plot2D::writeScriptData(std::ostream& hFile, const StylesCollection &stylesColloction) const
     {
-        Plot::writeScriptData(hFile);
+        Plot::writeScriptData(hFile, stylesColloction);
 
         hFile << "plot ";
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const auto dataView : dataViews)
         {
-            dataView->writeScriptData(hFile);
+            dataView->writeScriptData(hFile, stylesColloction);
             ++i;
             if (i < viewCount)
             {

@@ -49,14 +49,14 @@ void playground ()
 
     report.setOutputDirectory("TestOutput");
 
-    auto& stylesCollection = report.getStylesCollection();
+    auto& stylesCollection = report.stylesCollection();
     stylesCollection.addBoxStyle("cyan", true, "blue");
     stylesCollection.addLineStyle("blue", 2.5, "..-", Plotypus::PointForm::Circle);
 
     auto& sheet1 = report.addSheet("foo");
     auto& sheet2 = report.addSheet("bar");
     auto& sheet3 = report.addSheet();
-    auto& sheet4 = report.addPlot2D("plot");
+    auto& sheet4 = report.addPlot2D("plot \\U+1F648");
     auto& sheet5 = report.addSheet();
 
     sheet1.addLabel(" FOO ", .10, .10);

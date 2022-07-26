@@ -42,7 +42,7 @@ namespace Plotypus
             std::string pageSeparatorTxt        = "================================================================================\n";
             std::string frameSeparatorTxt       = "--------------------------------------------------------------------------------\n";
 
-            StylesCollection stylesCollection;
+            StylesCollection m_stylesCollection;
 
             void preprocessSheets(const std::string& extension) const;
             std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;
@@ -135,8 +135,7 @@ namespace Plotypus
             const std::string&  getPageSeparatorTxt() const;
             void                setPageSeparatorTxt(const std::string& newNewPageTXT);
 
-            StylesCollection&   getStylesCollection();
-            void                setStylesCollection(const StylesCollection& newStylesCollection);
+            StylesCollection&   stylesCollection();
 
             // -------------------------------------------------------------- //
             // writers
@@ -148,7 +147,6 @@ namespace Plotypus
             void writeTxt   (std::ostream& hFile) const;
             void writeScript(std::ostream& hFile) const;
     };
-
 }
 
 #include "report.txx"

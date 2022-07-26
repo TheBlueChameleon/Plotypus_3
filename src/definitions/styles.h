@@ -9,6 +9,10 @@ namespace Plotypus
     //! @addtogroup Plotypus_Definitions
     //! @{
 
+    /**
+     * @todo: set style arrow support - p. 199 -- expands LineStyle?
+     */
+
     // ========================================================================== //
     /**
      * @brief Sheet element: Plot Style for 2D plots
@@ -64,7 +68,6 @@ namespace Plotypus
      */
     enum class PointForm
     {
-        None = -1,
         Point,
         Plus,
         Cross,
@@ -80,14 +83,19 @@ namespace Plotypus
         Diamond,
         FilledDiamond,
         Pentagon,
-        FilledPentagon
+        FilledPentagon,
+        None = -1,
+        Custom = -2
     };
 
     struct PointStyle
     {
         PointForm   form = PointForm::Point;
+        std::string customSymbol = "\\U+2299";
         double      size = 1.0;
         std::string color = "";
+
+        bool operator== (const PointStyle&) const = default;
 
     };
 

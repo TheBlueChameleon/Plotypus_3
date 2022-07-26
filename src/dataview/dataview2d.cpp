@@ -401,7 +401,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    void DataView2D::writeScriptData(std::ostream& hFile) const
+    void DataView2D::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         // *INDENT-OFF*
         if (isFunction()) {hFile << func << " ";}
@@ -420,7 +420,20 @@ namespace Plotypus
         const auto lineStyleID = lineStyle + 1;
         if (lineStyleID)    {hFile << "linestyle " << std::to_string(lineStyleID) << " ";}
 
-        if (pointStyle + 1) {/* stylesCollection from report? */};
+        if (pointStyle + 1) {
+            bool skip = false;
+            const auto& psr = stylesColloction.getPointStyle(pointStyle);
+            const int pointStyleInt = static_cast<int>(psr.form);
+
+            if      (psr.form == PointForm::None)   {skip = true;}
+            else if (psr.form == PointForm::Custom) {hFile << "pointtype " << std::quoted(psr.customSymbol) << " ";}
+            else                                    {hFile << "pointtype " << std::to_string(pointStyleInt) << " ";}
+
+            if (!skip) {
+                hFile                           << "pointsize " << std::to_string(psr.size)  << " ";
+                if (!psr.color.empty()) {hFile  << "linecolor " << std::quoted   (psr.color) << " ";}       // sic: linecolor -- gnuplot does not allow different colors for line and point...
+            }
+        };
         // *INDENT-ON*
     }
 }

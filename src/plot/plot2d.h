@@ -52,7 +52,7 @@ namespace Plotypus
 
             virtual void writeDatData() const;
 
-            virtual void writeScriptData    (std::ostream& hFile) const;
+            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
             virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
     };
 }

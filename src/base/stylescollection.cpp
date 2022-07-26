@@ -30,7 +30,13 @@ namespace Plotypus
         return boxStyles;
     }
 
-    BoxStyle& StylesCollection::getBoxStyle(const size_t i)
+    BoxStyle& StylesCollection::boxStyle(const size_t i)
+    {
+        checkIndex("box style index", i, boxStyles);
+        return boxStyles[i];
+    }
+
+    const BoxStyle& StylesCollection::getBoxStyle(const size_t i) const
     {
         checkIndex("box style index", i, boxStyles);
         return boxStyles[i];
@@ -64,7 +70,13 @@ namespace Plotypus
         return lineStyles;
     }
 
-    LineStyle& StylesCollection::getLineStyle(const size_t i)
+    LineStyle& StylesCollection::lineStyle(const size_t i)
+    {
+        checkIndex("line style index", i, lineStyles);
+        return lineStyles[i];
+    }
+
+    const LineStyle& StylesCollection::getLineStyle(const size_t i) const
     {
         checkIndex("line style index", i, lineStyles);
         return lineStyles[i];
@@ -98,7 +110,13 @@ namespace Plotypus
         return pointStyles;
     }
 
-    PointStyle& StylesCollection::getPointStyle(const size_t i)
+    PointStyle& StylesCollection::pointStyle(const size_t i)
+    {
+        checkIndex("point style index", i, pointStyles);
+        return pointStyles[i];
+    }
+
+    const PointStyle& StylesCollection::getPointStyle(const size_t i) const
     {
         checkIndex("point style index", i, pointStyles);
         return pointStyles[i];
@@ -115,11 +133,12 @@ namespace Plotypus
         return pointStyles.back();
     }
 
-    PointStyle& StylesCollection::addPointStyle(PointForm form, double size, std::string color)
+    PointStyle& StylesCollection::addPointStyle(PointForm form, double size, std::string color, std::string customSymbol)
     {
         return addPointStyle(
         {
             form,
+            customSymbol,
             size,
             color
         });

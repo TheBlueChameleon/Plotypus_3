@@ -18,7 +18,8 @@ namespace Plotypus
             PlotType type;
 
             std::string title = "";
-            std::string defaultFont = "arial,7";
+            std::string defaultFont = "Arial,7";
+            std::string titleFont = "Arial:bold*2";
 
             std::string customScriptBegin = "";
             std::string customScriptEnd   = "";
@@ -43,6 +44,8 @@ namespace Plotypus
 
             const std::string&  getDefaultFont() const;
             void                setDefaultFont(const std::string& newDefaultFont);
+            const std::string&  getTitleFont() const;
+            void                setTitleFont(const std::string& newTitleFont);
 
             const std::string&  getCustomScriptBegin() const;
             void                setCustomScriptBegin(const std::string& newCustomScriptBegin);
@@ -73,7 +76,7 @@ namespace Plotypus
             virtual void writeDatData() const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
-            virtual void writeScriptData    (std::ostream& hFile) const;
+            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
             virtual void writeScriptLabels  (std::ostream& hFile) const;
             virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };

@@ -52,6 +52,16 @@ namespace Plotypus
         defaultFont = newDefaultFont;
     }
 
+    const std::string& Sheet::getTitleFont() const
+    {
+        return titleFont;
+    }
+
+    void Sheet::setTitleFont(const std::string& newTitleFont)
+    {
+        titleFont = newTitleFont;
+    }
+
     const std::string& Sheet::getCustomScriptBegin() const
     {
         return customScriptBegin;
@@ -163,8 +173,8 @@ namespace Plotypus
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
 
-        hFile << "set font \"" << defaultFont << "\"" << std::endl;
-        hFile << "set title \"" << title << "\"" << std::endl;
+        hFile << "set font " << std::quoted(defaultFont) << std::endl;
+        hFile << "set title " << std::quoted("{/" + titleFont + " " + title + "}") << std::endl;
         hFile << std::endl;
 
         if (customScriptBegin.size())
@@ -176,7 +186,7 @@ namespace Plotypus
         }
     }
 
-    void Sheet::writeScriptData(std::ostream& hFile) const {}
+    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const {}
 
     void Sheet::writeScriptLabels(std::ostream& hFile) const
     {

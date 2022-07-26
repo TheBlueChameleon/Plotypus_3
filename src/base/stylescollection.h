@@ -32,24 +32,27 @@ namespace Plotypus
 
             size_t                          getBoxStyleCount() const;
             const std::vector<BoxStyle>&    getBoxStyles() const;
-            BoxStyle&                       getBoxStyle (const size_t i);
+            BoxStyle&                       boxStyle (const size_t i);
+            const BoxStyle&                 getBoxStyle (const size_t i) const;
             void                            setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
             BoxStyle&                       addBoxStyle (const BoxStyle& newBoxstyle);
             BoxStyle&                       addBoxStyle (const std::string& fillcolor, bool border = true, const std::string& bordercolor = "");
 
             size_t                          getLineStyleCount() const;
             const std::vector<LineStyle>&   getLineStyles() const;
-            LineStyle&                      getLineStyle (const size_t i);
+            LineStyle&                      lineStyle (const size_t i);
+            const LineStyle&                getLineStyle (const size_t i) const;
             void                            setLineStyles(const std::vector<LineStyle>& newLineStyles);
             LineStyle&                      addLineStyle (const LineStyle& newLineStyle);
             LineStyle&                      addLineStyle (const std::string& color, double width = 1.0, std::string dashtype = "", PointForm pointForm = PointForm::Point);
 
             size_t                          getPointStyleCount() const;
             const std::vector<PointStyle>&  getPointStyles() const;
-            PointStyle&                     getPointStyle (const size_t i);
+            PointStyle&                     pointStyle (const size_t i);
+            const PointStyle&               getPointStyle (const size_t i) const;
             void                            setPointStyles(const std::vector<PointStyle>& newPointStyles);
             PointStyle&                     addPointStyle (const PointStyle& newPointStyle);
-            PointStyle&                     addPointStyle (PointForm form = PointForm::Point, double size = 1.0, std::string color = "");
+            PointStyle&                     addPointStyle (PointForm form = PointForm::Point, double size = 1.0, std::string color = "", std::string customSymbol = "");
 
             // writers
             void writeStyles        (std::ostream& hFile) const;
