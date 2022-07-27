@@ -181,14 +181,16 @@ bool unittest_report_sheets_scriptOutput()
         "unset ylabel\n"
         "unset ztics\n"
         "unset zlabel\n"
+        "unset rlabel\n"
+        "unset rtics\n"
         "set xrange[0:1]\n"
         "set yrange[1:0]\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# generated setup script\n"
         "\n"
-        "set font \"arial,7\"\n"
-        "set title \"\"\n"
+        "set font \"Arial,7\"\n"
+        "set title \"{/Arial:bold*2 }\"\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# dummy plot for empty page\n"
@@ -200,7 +202,7 @@ bool unittest_report_sheets_scriptOutput()
     auto& sheet1 = report.addSheet();
 
     report.writeScript(script);
-    UNITTEST_ASSERT(script.str() == expectedScript, "write script with one empty sheet");
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write script with one empty sheet")
 
     // ...................................................................... //
 
@@ -226,14 +228,16 @@ bool unittest_report_sheets_scriptOutput()
         "unset ylabel\n"
         "unset ztics\n"
         "unset zlabel\n"
+        "unset rlabel\n"
+        "unset rtics\n"
         "set xrange[0:1]\n"
         "set yrange[1:0]\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# generated setup script\n"
         "\n"
-        "set font \"arial,7\"\n"
-        "set title \"\"\n"
+        "set font \"Arial,7\"\n"
+        "set title \"{/Arial:bold*2 }\"\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# dummy plot for empty page\n"
@@ -247,8 +251,8 @@ bool unittest_report_sheets_scriptOutput()
         "# ---------------------------------------------------------------------------- #\n"
         "# generated setup script\n"
         "\n"
-        "set font \"arial,7\"\n"
-        "set title \"\"\n"
+        "set font \"Arial,7\"\n"
+        "set title \"{/Arial:bold*2 }\"\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# dummy plot for empty page\n"
@@ -260,7 +264,7 @@ bool unittest_report_sheets_scriptOutput()
     auto& sheet2 = report.addSheet();
 
     report.writeScript(script);
-    UNITTEST_ASSERT(script.str() == expectedScript, "write script with two empty sheets without generating too much overhead");
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write script with two empty sheets without generating too much overhead")
 
     // ...................................................................... //
 
@@ -286,6 +290,8 @@ bool unittest_report_sheets_scriptOutput()
         "unset ylabel\n"
         "unset ztics\n"
         "unset zlabel\n"
+        "unset rlabel\n"
+        "unset rtics\n"
         "set xrange[0:1]\n"
         "set yrange[1:0]\n"
         "\n"
@@ -293,7 +299,7 @@ bool unittest_report_sheets_scriptOutput()
         "# generated setup script\n"
         "\n"
         "set font \"courier,7\"\n"
-        "set title \"foo bar\"\n"
+        "set title \"{/Arial:bold*2 foo bar}\"\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# dummy plot for empty page\n"
@@ -307,8 +313,8 @@ bool unittest_report_sheets_scriptOutput()
         "# ---------------------------------------------------------------------------- #\n"
         "# generated setup script\n"
         "\n"
-        "set font \"arial,7\"\n"
-        "set title \"\"\n"
+        "set font \"Arial,7\"\n"
+        "set title \"{/Arial:bold*2 }\"\n"
         "\n"
         "# ---------------------------------------------------------------------------- #\n"
         "# custom setup script I\n"
@@ -333,7 +339,7 @@ bool unittest_report_sheets_scriptOutput()
     sheet2.setCustomScriptEnd  ("# custom script end");
 
     report.writeScript(script);
-    UNITTEST_ASSERT(script.str() == expectedScript, "write script with two empty sheets without generating unset overhead");
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write script with two empty sheets without generating unset overhead")
 
     // ...................................................................... //
 

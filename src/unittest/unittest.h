@@ -67,12 +67,6 @@ using unittest_list_t = std::vector<std::pair<std::string, std::function<bool()>
 
 #define SUMMARIZE_UNITTESTS {unittest_show_summary(unittest_list, unittest_fails);}
 
-//    std::cout << "Passed " << unittest_list.size() - unittest_fails.size() << "/" << unittest_list.size() << " tests"  << std::endl; \
-//    if (!unittest_fails.empty()) { \
-//        std::cout << "Failed Tests:" << std::endl; \
-//        for (auto& name : unittest_fails) {std::cout << "~~~ " << name << std::endl;} \
-//    }
-
 // -------------------------------------------------------------------------- //
 // unittest modules
 
@@ -94,6 +88,12 @@ using unittest_list_t = std::vector<std::pair<std::string, std::function<bool()>
 
 #define UNITTEST_ASSERT(expr, taskDescription) \
     unittest_last_result = expr; \
+    if (unittest_last_result) {std::cout << "  succeeded to " << taskDescription << std::endl;} \
+    else                      {std::cout << "  failed to " << taskDescription << std::endl;} \
+    unittest_result &= unittest_last_result;
+
+#define UNITTEST_STRING_COMPARE(expr, expected, taskDescription) \
+    unittest_last_result = unittest_string_compare_by_lines(expr, expected); \
     if (unittest_last_result) {std::cout << "  succeeded to " << taskDescription << std::endl;} \
     else                      {std::cout << "  failed to " << taskDescription << std::endl;} \
     unittest_result &= unittest_last_result;
@@ -167,5 +167,7 @@ using Unittest_RessorceList = std::vector<std::string>;
 void unittest_check_files_present(const Unittest_RessorceList& files);
 void unittest_check_directories  (const Unittest_RessorceList& directories);
 void unittest_show_summary(const unittest_list_t& unittest_list, const std::vector<std::string>& unittest_fails);
+
+bool unittest_string_compare_by_lines(const std::string& lhs, const std::string& rhs);
 
 #endif // UNITTESTMACROS_H
