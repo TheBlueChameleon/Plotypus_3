@@ -20,8 +20,8 @@ namespace Plotypus
         return found != last;
     }
 
-    template<class T, class U>
-    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& null)
+    template<class T, UnaryPredicate<T> U>
+    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn)
     {
         /* Returns the number of consecutively occupied colums, and checks whether columns obeys the following rules:
          * - columns[1] must always be occupied (i.e. non-null)
@@ -34,41 +34,37 @@ namespace Plotypus
          * - or COLUMN_LIST_INVALID if either of the above rules is violated
          */
 
-        bool foundNull = columns[0] == null;
+        // *INDENT-OFF*
+
+        bool foundNull = isNullColumn(columns[0]);
         size_t result  = !foundNull;
 
-        // *INDENT-OFF*
-        if (columns[1] == null) {return COLUMN_LIST_INVALID;}
-        else                    {++result;}
-        // *INDENT-ON*
+        if (isNullColumn(columns[1]))   {return COLUMN_LIST_INVALID;}
+        else                            {++result;}
 
         for (size_t i = 2u; i < columns.size(); ++i)
         {
-            // *INDENT-OFF*
-            if (columns[i] == null) {foundNull = true;}
-            else                    {++result;}
-            // *INDENT-ON*
+            if (isNullColumn(columns[i]))   {foundNull = true;}
+            else                            {++result;}
 
-            if (foundNull && columns[i] != null)
-            {
-                result = COLUMN_LIST_INVALID;
-                break;
-            }
+            if (foundNull && !isNullColumn(columns[i])) {return COLUMN_LIST_INVALID;}
         }
+
+        // *INDENT-ON*
 
         return result;
     }
 
-    template<class T, class U>
-    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null)
+    //template<class T, class U>
+    template<class T, UnaryPredicate<T> U>
+    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn)
     {
-        auto cec = getConsecutiveEntriesCount(columns, null);
-        if (cec == COLUMN_LIST_INVALID)
-        {
-            return false;
-        }
+        auto consecutiveEntriesCount = getConsecutiveEntriesCount(columns, isNullColumn);
 
-        return contains(cec, allowedOccupations);
+        // *INDENT-OFF*
+        if (consecutiveEntriesCount == COLUMN_LIST_INVALID) {return false;}
+        else                                                {return contains(consecutiveEntriesCount, allowedOccupations);}
+        // *INDENT-ON*
     }
 }
 

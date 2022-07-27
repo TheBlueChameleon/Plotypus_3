@@ -24,23 +24,23 @@ namespace Plotypus
     class Report
     {
         private:
-            std::string terminal = "pdfcairo";
-
             std::vector<Plotypus::Sheet*> sheets;
 
-            std::string outputDirectory = "";
-            std::string filenameBase    = "report";
+            std::string terminal            = "pdfcairo";
 
-            std::string extTxt = "txt";
-            std::string extDat = "dat";
-            std::string extOut = "pdf";
-            std::string extGnu = "gnuplot";
+            std::string outputDirectory     = "";
+            std::string filenameBase        = "report";
 
-            bool verbose       = true;
-            bool autoRunScript = true;
+            std::string extTxt              = "txt";
+            std::string extDat              = "dat";
+            std::string extOut              = "pdf";
+            std::string extGnu              = "gnuplot";
 
-            std::string pageSeparatorTxt        = "================================================================================\n";
-            std::string frameSeparatorTxt       = "--------------------------------------------------------------------------------\n";
+            bool verbose                    = true;
+            bool autoRunScript              = true;
+
+            std::string pageSeparatorTxt    = "================================================================================\n";
+            std::string frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
             StylesCollection m_stylesCollection;
 
@@ -80,6 +80,8 @@ namespace Plotypus
             Plotypus::Sheet&  addSheet (const std::string& title = "");
             //! @brief adds an empty Plot2D to the report and returns a modifiably reference to the newly created Plot2D.
             Plotypus::Plot2D& addPlot2D(const std::string& title = "");
+
+            void clearSheets();
 
             // -------------------------------------------------------------- //
             // file output specs

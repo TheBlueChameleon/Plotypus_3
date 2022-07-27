@@ -133,6 +133,11 @@ namespace Plotypus
         return addLabel(l);
     }
 
+    void Sheet::clearLabels()
+    {
+        labels.clear();
+    }
+
     // ====================================================================== //
     // writers
 

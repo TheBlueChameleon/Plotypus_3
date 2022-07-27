@@ -4,6 +4,7 @@
 #include <cmath>
 #include <functional>
 #include <limits>
+#include <span>
 #include <string>
 
 #include "constants.h"
@@ -120,6 +121,7 @@ namespace Plotypus
 
     template <typename T>
     using columnSelectorList_t      = std::array<DataSelector_t<T>, 6>;
+    using columnViewList_t          = std::array<std::span<double>, 6>;
     using columnAssignmentList_t    = std::array<size_t, 6>;
     using columnFormatList_t        = std::array<std::string, 6>;
 

@@ -358,8 +358,13 @@ namespace Plotypus
         // *INDENT-ON*
         else
         {
-            bool missingXColumn = columnAssignments[0] == COLUMN_UNUSED;
-            auto lineLength = getConsecutiveEntriesCount(columnAssignments, COLUMN_UNUSED);
+            const auto isUnusedColumn = [] (const size_t assignment)
+            {
+                return assignment == COLUMN_UNUSED;
+            };
+
+            bool missingXColumn =                           (columnAssignments[0] == COLUMN_UNUSED);
+            auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
 
             std::vector<double> lineBuffer(lineLength);
 
@@ -369,7 +374,6 @@ namespace Plotypus
             }
             hFile << std::endl;
 
-            //hFile << std::fixed;
             hFile << std::setprecision(numberPrecision);
             for (size_t i = 0u; i < getArity(); ++i)
             {
@@ -390,8 +394,10 @@ namespace Plotypus
         if (isFunction())   {return;}
         if (!isComplete())  {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
 
-        bool missingXColumn = columnAssignments[0] == COLUMN_UNUSED;
-        auto lineLength = getConsecutiveEntriesCount(columnAssignments, COLUMN_UNUSED);
+        const auto isUnusedColumn = [] (const size_t assignment) {return assignment == COLUMN_UNUSED;};
+
+        bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
+        auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
 
         std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);

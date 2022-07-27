@@ -16,13 +16,6 @@ namespace Plotypus
     class DataView2D : public DataView
     {
         protected:
-            /*! @todo using clause
-             *      for that, use a std::array<size_t, N> columnAssignmentList and a new enum in types.h
-             *      enum gives named indices for columnAssignmentList
-             *      columnAssignmentList tells where in data file to look for respective content
-             *      requires constant for <not assigned> => magic constant = unsigned(-1)
-             */
-
             std::string func;
 
             int lineStyle  = -1;

@@ -8,14 +8,6 @@ namespace Plotypus
     template<class T>
     class DataView2DCompound : public DataView2D
     {
-            /**
-             * @todo consider making T require iterable, and make data simply an iterable.
-             *      if doing that change, make sure this does not require lots of copying.
-             *      would probably require to internally store iterators and make the code a lot harder on the eyes...
-             *      would require fetchData to take a T::iterator instead of size_t recordID
-             *      has issues with permanence (end need not remain the last element, for example)
-             */
-
         protected:
             std::span<T>                        data;
             std::array<DataSelector_t<T>, 6>    selectors;
@@ -28,7 +20,7 @@ namespace Plotypus
             DataView2DCompound(const PlotStyle2D  style, const std::string& label = "");
             DataView2DCompound(const std::string& style, const std::string& label = "");
 
-            virtual void reset();
+            // all functionality of "reset" already in dataview2d
 
             virtual size_t                          getArity() const;
 

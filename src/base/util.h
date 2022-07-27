@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <array>
+#include <concepts>
 #include <fstream>
 #include <span>
 #include <string>
@@ -22,9 +23,12 @@ namespace Plotypus
     bool contains(const T& toFind, const std::vector<T>& container);
 
     template<class T, class U>
-    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& null);
-    template<class T, class U>
-    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& null);
+    concept UnaryPredicate = std::predicate<T, U>; // T(U) -> bool.
+
+    template<class T, UnaryPredicate<T> U>
+    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn);
+    template<class T, UnaryPredicate<T> U>
+    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn);
 
     const std::string getColumnIDName(const ColumnTypes columnType);
     const std::string getPlotStyleName(const PlotStyle2D plotStyleID);

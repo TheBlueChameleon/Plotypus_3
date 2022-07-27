@@ -78,32 +78,28 @@ namespace Plotypus
 
     Report::~Report()
     {
-        reset();
+        clearSheets();
     }
 
     void Report::reset()
     {
-        terminal = "pdfcairo";
+        clearSheets();
 
-        for (auto ptr : sheets)
-        {
-            delete ptr;
-        }
-        sheets.clear();
+        terminal            = "pdfcairo";
 
-        outputDirectory = "";
-        filenameBase = "report";
+        outputDirectory     = "";
+        filenameBase        = "report";
 
-        extTxt = "txt";
-        extDat = "dat";
-        extOut = "pdf";
-        extGnu = "gnuplot";
+        extTxt              = "txt";
+        extDat              = "dat";
+        extOut              = "pdf";
+        extGnu              = "gnuplot";
 
-        verbose       = true;
-        autoRunScript = true;
+        verbose             = true;
+        autoRunScript       = true;
 
-        pageSeparatorTxt  = "================================================================================\n";
-        frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
+        pageSeparatorTxt    = "================================================================================\n";
+        frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
         m_stylesCollection.reset();
     }
@@ -132,6 +128,15 @@ namespace Plotypus
         Plot2D* newPlot = new Plot2D(title);
         sheets.push_back(newPlot);
         return *newPlot;
+    }
+
+    void Report::clearSheets()
+    {
+        for (auto ptr : sheets)
+        {
+            delete ptr;
+        }
+        sheets.clear();
     }
 
     // ====================================================================== //

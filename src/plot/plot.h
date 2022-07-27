@@ -12,6 +12,12 @@ namespace Plotypus
 {
     class Plot : public Sheet
     {
+            /**
+             * @todo: upgrade border from boolean to int, as specified on p.136.
+             * use set border 0 as "no border" option.
+             * maybe also add lt, lw, lc, dt (ignored if border == 0)
+             */
+
         protected:
             AxisDescriptor m_xAxis = AxisDescriptor("x");
             AxisDescriptor m_yAxis = AxisDescriptor("y");

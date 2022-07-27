@@ -39,29 +39,29 @@ namespace Plotypus
 
             virtual void reset();
 
-            const std::string&  getTitle() const;
-            void                setTitle(const std::string& newTitle);
+            const std::string&          getTitle() const;
+            void                        setTitle(const std::string& newTitle);
 
-            const std::string&  getDefaultFont() const;
-            void                setDefaultFont(const std::string& newDefaultFont);
-            const std::string&  getTitleFont() const;
-            void                setTitleFont(const std::string& newTitleFont);
+            const std::string&          getDefaultFont() const;
+            void                        setDefaultFont(const std::string& newDefaultFont);
+            const std::string&          getTitleFont() const;
+            void                        setTitleFont(const std::string& newTitleFont);
 
-            const std::string&  getCustomScriptBegin() const;
-            void                setCustomScriptBegin(const std::string& newCustomScriptBegin);
-            const std::string&  getCustomScriptEnd() const;
-            void                setCustomScriptEnd(const std::string& newCustomScriptEnd);
+            const std::string&          getCustomScriptBegin() const;
+            void                        setCustomScriptBegin(const std::string& newCustomScriptBegin);
+            const std::string&          getCustomScriptEnd() const;
+            void                        setCustomScriptEnd(const std::string& newCustomScriptEnd);
 
-            const std::string&  getDatalineSeparatorTxt() const;
-            void                setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
+            const std::string&          getDatalineSeparatorTxt() const;
+            void                        setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
-            size_t                          getLabelCount() const;
-            const std::vector<Label>&       getLabels() const;
-            void                            setLabels(const std::vector<Label>& newLabels);
-            Label&                             label (const size_t i);
-            Label&                          addLabel (const Label& newLabel);
-            Label&                          addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
-            void                            clearLabels();
+            size_t                      getLabelCount() const;
+            const std::vector<Label>&   getLabels() const;
+            void                        setLabels(const std::vector<Label>& newLabels);
+            Label&                         label (const size_t i);
+            Label&                      addLabel (const Label& newLabel);
+            Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = 0);
+            void                        clearLabels();
 
             // -------------------------------------------------------------- //
             // writers

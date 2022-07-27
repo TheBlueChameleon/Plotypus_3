@@ -12,6 +12,7 @@ namespace Plotypus
     void DataView2DCompound<T>::clearNonFunctionMembers()
     {
         data = std::span<T>();
+        selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
     }
 
     template<class T>
@@ -44,15 +45,6 @@ namespace Plotypus
     {}
 
     // ====================================================================== //
-
-    template<class T>
-    void DataView2DCompound<T>::reset()
-    {
-        DataView2D::reset();
-
-        data      = std::span<T>();
-        selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
-    }
 
     template<class T>
     size_t DataView2DCompound<T>::getArity() const
@@ -134,52 +126,54 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())      {return true;}
         if (data.empty())   {return false;}
+
+        const auto isNullSelector = [] (const DataSelector_t<T>& selector) {return selector == nullptr;};
         // *INDENT-ON*
 
         switch (styleID)
         {
             case PlotStyle2D::Dots:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::Points:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5}, isNullSelector);
             case PlotStyle2D::XErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
             case PlotStyle2D::YErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
             case PlotStyle2D::XYErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
             case PlotStyle2D::Lines:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::LinesPoints:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::FilledCurves:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
             case PlotStyle2D::XErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
             case PlotStyle2D::YErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
             case PlotStyle2D::XYErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
             case PlotStyle2D::Steps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::FSteps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::FillSteps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
             case PlotStyle2D::Boxes:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
             case PlotStyle2D::HBoxes:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
             case PlotStyle2D::BoxErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4, 5}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {3, 4, 5}, isNullSelector);
             case PlotStyle2D::BoxxyError:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
             case PlotStyle2D::Arrows:
-                return checkColumnListOccupationIsFrom(selectors, {4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
             case PlotStyle2D::Vectors:
-                return checkColumnListOccupationIsFrom(selectors, {4}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
             case PlotStyle2D::Custom:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, nullptr);
+                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, isNullSelector);
         }
 
         return false;
