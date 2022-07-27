@@ -34,6 +34,7 @@ add_library(Plotypus-lib SHARED
     src/dataview/dataview.h src/dataview/dataview.cpp
     src/dataview/dataview2d.h src/dataview/dataview2d.cpp
     src/dataview/dataview2dcompound.h src/dataview/dataview2dcompound.txx
+    src/dataview/dataview2dseparate.h src/dataview/dataview2dseparate.cpp
 )
 
 set_target_properties(Plotypus-lib PROPERTIES
