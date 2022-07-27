@@ -6,7 +6,7 @@ namespace Plotypus
     template<std::ranges::sized_range T>
     void checkIndex(const std::string& indexName, const size_t i, T collection)
     {
-        if (i >= collection.size() || (i < 0))
+        if (i >= collection.size())
         {
             throw Plotypus::InvalidIndexError("    Invalid " + indexName + ": " + std::to_string(i));
         }

@@ -79,7 +79,7 @@ void playground ()
     auto& dataView1 = sheet4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle2D::YErrorLines);
     dataView1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
     dataView1.setSelector(Plotypus::ColumnTypes::DeltaY, compoundSelectorErrY);
-    dataView1.setLabel("Sine Approximation");
+    dataView1.setTitle("Sine Approximation");
     //dataViewData1.setBinaryDataOutput(false);
 
     sheet4.setPolar(true);
@@ -146,7 +146,7 @@ int main()
 
     std::cout << std::endl;
     std::cout << "FREE RANGE CODE BEGINS HERE" << std::endl;
-    //playground();
+    playground();
 
     return 0;
 }

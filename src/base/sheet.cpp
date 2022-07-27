@@ -82,11 +82,6 @@ namespace Plotypus
         customScriptEnd = newCustomScriptEnd;
     }
 
-    size_t Sheet::getLabelCount() const
-    {
-        return labels.size();
-    }
-
     const std::string& Sheet::getDatalineSeparatorTxt() const
     {
         return datalineSeparatorTxt;
@@ -98,6 +93,11 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    size_t Sheet::getLabelCount() const
+    {
+        return labels.size();
+    }
 
     const std::vector<Label>& Sheet::getLabels() const
     {
@@ -123,7 +123,7 @@ namespace Plotypus
 
     Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
     {
-        Label l;     // use the default values, in case options and/or boxStyle are empty.
+        Label l;
 
         l.text        = text;
         l.coordinates = std::make_pair(x, y);
@@ -165,7 +165,7 @@ namespace Plotypus
     void Sheet::writeTxtFooter(std::ostream& hFile, const int pageNum) const
     {
         const int lineWidth = 80;
-        const int spaces = pageNum ?
+        const int spaces = pageNum > 0 ?
                            lineWidth - (std::log10(pageNum + 1) + 1) :
                            lineWidth - 1;
         hFile << std::string(spaces, ' ') << std::to_string(pageNum) << std::endl;
@@ -182,7 +182,7 @@ namespace Plotypus
         hFile << "set title " << std::quoted("{/" + titleFont + " " + title + "}") << std::endl;
         hFile << std::endl;
 
-        if (customScriptBegin.size())
+        if (!customScriptBegin.empty())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# custom setup script I" << std::endl << std::endl;
@@ -202,36 +202,21 @@ namespace Plotypus
 
             for (auto& label : labels)
             {
-                /* cf. gnuplot 5.4 documentation, p. 164
-                 *
-                 * set label {<tag>} {"<label text>"} {at <position>}
-                 *           {left | center | right}
-                 *           {norotate | rotate {by <degrees>}}
-                 *           {font "<name>{,<size>}"}
-                 *           {noenhanced}
-                 *           {front | back}
-                 *           {textcolor <colorspec>}
-                 *           {point <pointstyle> | nopoint}
-                 *           {offset <offset>}
-                 *           {nobox} {boxed {bs <boxstyle>}}
-                 *           {hypertext}
-                 */
+                /* cf. gnuplot 5.4 documentation, p. 164 */
 
                 hFile << "set label ";
-                hFile << (label.ID               ? std::to_string(label.ID) + " "                     : ""s);
-                hFile << "\"" << label.text << "\" ";
-                hFile << "at ";
-                hFile << (label.screenCS         ? "screen "                                          : "") ;
-                hFile <<  label.coordinates.first << ", " << label.coordinates.second << " ";
-                hFile << (label.alignment.size() ? label.alignment + " "                              : ""s);
-                hFile << (label.rotate           ? "rotate by "s + std::to_string(label.rotate) + " " : "");
-                hFile << (label.font.size()      ? "font \""s + label.font + "\" "                    : ""s);
+                hFile << std::quoted(label.text) << " ";
+                hFile << "at " << (label.screenCS ? "screen " : "") <<  label.coordinates.first << ", " << label.coordinates.second << " ";
                 hFile << "front ";
-                hFile << (label.textcolor.size() ? "textcolor \""s + label.textcolor+ "\" "           : ""s);
+
+                hFile << (label.alignment.size() ? label.alignment + " " : ""s);
+                hFile << optionalNumber          ("rotate by", label.rotate);
+
+                hFile << optionalQuotedTextString("font", label.font);
+                hFile << optionalQuotedTextString("textcolor", label.textcolor);
                 if (label.boxed)
                 {
-                    hFile << "boxed ";
-                    hFile << (label.boxStyleID     ? "bs "s + std::to_string(label.boxStyleID) + " "  : "");
+                    hFile << "boxed " << optionalStyleString("bs", label.boxStyleID);
                 }
                 hFile << label.options;
                 hFile << std::endl;
@@ -242,7 +227,7 @@ namespace Plotypus
 
     void Sheet::writeScriptFooter(std::ostream& hFile, const int pageNum) const
     {
-        if (customScriptEnd.size())
+        if (!customScriptEnd.empty())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# custom setup script II" << std::endl << std::endl;

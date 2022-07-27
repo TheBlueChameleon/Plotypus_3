@@ -99,12 +99,12 @@ namespace Plotypus
         clearNonFunctionMembers();
     }
 
-    int DataView2D::getLineStyle() const
+    size_t DataView2D::getLineStyle() const
     {
         return lineStyle;
     }
 
-    void DataView2D::setLineStyle(int newLineStyle)
+    void DataView2D::setLineStyle(size_t newLineStyle)
     {
         lineStyle = newLineStyle;
     }
@@ -352,8 +352,8 @@ namespace Plotypus
     void DataView2D::writeTxtData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
-        if      (isDummy())     {hFile << "(external input from " << dataFilename << ")"  << std::endl; return;}
-        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(label) << ")"  << std::endl; return;}
+        if      (isDummy())     {hFile << "(external input from " << std::quoted(dataFilename) << ")"  << std::endl; return;}
+        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(title) << ")"  << std::endl; return;}
         else if (!isComplete()) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
         // *INDENT-ON*
         else
@@ -363,7 +363,7 @@ namespace Plotypus
                 return assignment == COLUMN_UNUSED;
             };
 
-            bool missingXColumn =                           (columnAssignments[0] == COLUMN_UNUSED);
+            bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
             auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
 
             std::vector<double> lineBuffer(lineLength);
@@ -411,35 +411,20 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if (isFunction()) {hFile << func << " ";}
-        else {
+        else
+        {
             hFile << std::quoted(dataFilename) << " ";
             if (binaryDataOutput) {hFile << "binary format=\"%float64\" ";}
         }
         writeUsingSpecification(hFile);
 
         if (!options.empty()) {hFile << options << " ";}
-        if (!label.  empty()) {hFile << "title " << std::quoted(label) << " ";}
-
+        hFile << optionalQuotedTextString("title", title);
 
         hFile << "with " << style << " ";
+        hFile << optionalStyleString("linestyle", lineStyle);
 
-        const auto lineStyleID = lineStyle + 1;
-        if (lineStyleID)    {hFile << "linestyle " << std::to_string(lineStyleID) << " ";}
-
-        if (pointStyle + 1) {
-            bool skip = false;
-            const auto& psr = stylesColloction.getPointStyle(pointStyle);
-            const int pointStyleInt = static_cast<int>(psr.form);
-
-            if      (psr.form == PointForm::None)   {skip = true;}
-            else if (psr.form == PointForm::Custom) {hFile << "pointtype " << std::quoted(psr.customSymbol) << " ";}
-            else                                    {hFile << "pointtype " << std::to_string(pointStyleInt) << " ";}
-
-            if (!skip) {
-                hFile                           << "pointsize " << std::to_string(psr.size)  << " ";
-                if (!psr.color.empty()) {hFile  << "linecolor " << std::quoted   (psr.color) << " ";}       // sic: linecolor -- gnuplot does not allow different colors for line and point...
-            }
-        };
+        stylesColloction.writePointStyleCode(hFile, pointStyle);
         // *INDENT-ON*
     }
 }

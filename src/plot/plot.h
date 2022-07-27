@@ -22,8 +22,10 @@ namespace Plotypus
             AxisDescriptor m_xAxis = AxisDescriptor("x");
             AxisDescriptor m_yAxis = AxisDescriptor("y");
 
+            size_t      border          = true;
+            size_t      borderLineStyle = STYLE_ID_DEFAULT;
+
             bool        key         = true;
-            bool        border      = true;
             bool        parametric  = false;
             bool        polar       = false;
             std::string aspect      = "noratio";
@@ -41,10 +43,13 @@ namespace Plotypus
             AxisDescriptor&     xAxis();
             AxisDescriptor&     yAxis();
 
+            size_t              getBorder() const;
+            void                setBorder(size_t newBorder);
+            size_t              getBorderLineStyle() const;
+            void                setBorderLineStyle(size_t newBorderLineStyle);
+
             bool                getKey() const;
             void                setKey(bool newKey);
-            bool                getBorder() const;
-            void                setBorder(bool newBorder);
             bool                getParametric() const;
             void                setParametric(bool newParametric);
             bool                getPolar() const;

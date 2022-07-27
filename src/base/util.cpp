@@ -168,4 +168,38 @@ namespace Plotypus
         }
         // *INDENT-ON*
     }
+
+    std::string optionalStyleString(const std::string& optionName, const size_t styleID)
+    {
+        // *INDENT-OFF*
+        if (styleID == STYLE_ID_DEFAULT)    {return "";}
+        else                                {return optionName + " " + std::to_string(styleID + 1) + " ";}
+        // *INDENT-ON*
+    }
+
+    std::string optionalQuotedTextString(const std::string& optionName, const std::string& option)
+    {
+        // *INDENT-OFF*
+        std::stringstream buffer;
+        if (option.empty()) {return "";}
+        else                {buffer << optionName << " " << std::quoted(option) << " ";
+                             return buffer.str();}
+        // *INDENT-ON*
+    }
+
+    std::string optionalNumber(const std::string& optionName, const double number, bool turnOn)
+    {
+        // *INDENT-OFF*
+        std::stringstream buffer;
+        if (turnOn) {buffer << optionName << " " << number << " ";
+                     return buffer.str();}
+        else        {return "";}
+        // *INDENT-ON*
+    }
+
+    std::string optionalNumber(const std::string& optionName, const double number)
+    {
+        return optionalNumber(optionName, number, number != 0.);
+    }
+
 };

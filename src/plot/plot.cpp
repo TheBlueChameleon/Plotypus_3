@@ -110,6 +110,26 @@ namespace Plotypus
         return m_yAxis;
     }
 
+    size_t Plot::getBorder() const
+    {
+        return border;
+    }
+
+    void Plot::setBorder(size_t newBorder)
+    {
+        border = newBorder;
+    }
+
+    size_t Plot::getBorderLineStyle() const
+    {
+        return borderLineStyle;
+    }
+
+    void Plot::setBorderLineStyle(size_t newBorderLineStyle)
+    {
+        borderLineStyle = newBorderLineStyle;
+    }
+
     bool Plot::getKey() const
     {
         return key;
@@ -118,16 +138,6 @@ namespace Plotypus
     void Plot::setKey(bool newKey)
     {
         key = newKey;
-    }
-
-    bool Plot::getBorder() const
-    {
-        return border;
-    }
-
-    void Plot::setBorder(bool newBorder)
-    {
-        border = newBorder;
     }
 
     bool Plot::getParametric() const
@@ -238,11 +248,15 @@ namespace Plotypus
 
         // *INDENT-OFF*
         if (!aspect.empty()) {hFile << "set size " << aspect << std::endl;}
-        if (!fill.  empty()) {hFile << "set style fill " << fill   << std::endl;}
+        if (!fill.  empty()) {hFile << "set style fill " << fill << std::endl;}
+
+        if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
+        else                        {hFile <<   "set border " << border;
+                                     hFile << optionalStyleString("linestyle", borderLineStyle);
+                                     hFile << std::endl;}
         // *INDENT-ON*
 
         hFile << "set key " << (key ? "on" : "off") << std::endl;
-        hFile << (border        ? "" : "un") << "set border" << std::endl;
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
         hFile << (polar         ? "" : "un") << "set polar" << std::endl;
         hFile << std::endl;

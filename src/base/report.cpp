@@ -329,13 +329,12 @@ namespace Plotypus
 
     void Report::writeScript(std::ostream& hFile) const
     {
-        const std::string   outputFilename  = getOutputFilename(extOut);
-        bool                needCleanSheetCommands = true;
+        // *INDENT-OFF*
 
-        if (verbose)
-        {
-            std::cout << "about to write script for " << outputFilename << " ..." << std::endl;
-        }
+        const std::string outputFilename = getOutputFilename(extOut);
+        bool              needCleanSheetCommands = true;
+
+        if (verbose) {std::cout << "about to write script for " << outputFilename << " ..." << std::endl;}
 
         preprocessSheets(extDat);
 
@@ -348,7 +347,6 @@ namespace Plotypus
 
         for (size_t i = 1u; auto sheet : sheets)
         {
-            // *INDENT-OFF*
             if (verbose) {std::cout << "writing scrpt for sheet #" << i << " ... ";}
 
             hFile << "# " << std::string(76, '=') << " #\n";
@@ -364,12 +362,10 @@ namespace Plotypus
             ++i;
 
             if (verbose) {std::cout << "done." << std::endl;}
-            // *INDENT-ON*
         }
 
-        if (verbose)
-        {
-            std::cout << "script for " << outputFilename << " completed." << std::endl;
-        }
+        if (verbose) {std::cout << "script for " << outputFilename << " completed." << std::endl;}
+
+        // *INDENT-ON*
     }
 }

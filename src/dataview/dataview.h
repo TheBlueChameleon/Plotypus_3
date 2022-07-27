@@ -14,13 +14,13 @@ namespace Plotypus
         protected:
             PlotStyle2D styleID;        //! @todo maybe make this an union with PlotStyle3D?
 
-            std::string label;
+            std::string title;
             std::string style;
             std::string options = "";
 
             mutable std::string dataFilename = "";
 
-            int  numberPrecision = -1;
+            int         numberPrecision = -1;
             std::string columnSeparatorTxt = "\t";
             std::string columnSeparatorDat = "\t";
 
@@ -40,8 +40,8 @@ namespace Plotypus
 
             virtual void reset();
 
-            const std::string&  getLabel() const;
-            void                setLabel(const std::string& newLabel);
+            const std::string&  getTitle() const;
+            void                setTitle(const std::string& newTitle);
 
             const std::string&  getStyle() const;
             void                setStyle(const std::string& newStyle);

@@ -372,7 +372,6 @@ bool unittest_sheets_labels()
     Plotypus::Label expectedLabel;
     expectedLabel.text = "foo bar";
     expectedLabel.coordinates = {0.5, 0.5};
-    expectedLabel.ID = 0;
     expectedLabel.boxed = true;
     expectedLabel.boxStyleID = 0;
 

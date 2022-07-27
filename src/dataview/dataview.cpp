@@ -7,19 +7,19 @@ using namespace Plotypus;
 namespace Plotypus
 {
     DataView::DataView(const PlotStyle2D style, const std::string& label) :
-        label(label)
+        title(label)
     {
         setStyleID(style);
     }
 
     DataView::DataView(const std::string& style, const std::string& label) :
-        label(label), style(style), styleID(PlotStyle2D::Custom)
+        title(label), style(style), styleID(PlotStyle2D::Custom)
     {}
 
     void DataView::reset()
     {
         styleID                     = PlotStyle2D::Custom;
-        label                       = "";
+        title                       = "";
         style                       = "lines";
         options                     = "";
         dataFilename                = "";
@@ -34,14 +34,14 @@ namespace Plotypus
         columnHeadlines   = {};
     }
 
-    const std::string& DataView::getLabel() const
+    const std::string& DataView::getTitle() const
     {
-        return label;
+        return title;
     }
 
-    void DataView::setLabel(const std::string& newLabel)
+    void DataView::setTitle(const std::string& newTitle)
     {
-        label = newLabel;
+        title = newTitle;
     }
 
     const std::string& DataView::getStyle() const

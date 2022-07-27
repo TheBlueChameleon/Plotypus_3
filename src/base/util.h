@@ -37,6 +37,11 @@ namespace Plotypus
 
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
     void runGnuplot(const std::string& filename, bool verbose = true);
+
+    std::string optionalStyleString     (const std::string& optionName, const size_t styleID);
+    std::string optionalQuotedTextString(const std::string& optionName, const std::string& option);
+    std::string optionalNumber          (const std::string& optionName, const double number, bool turnOn);
+    std::string optionalNumber          (const std::string& optionName, const double number);
 };
 
 #include "util.txx"

@@ -18,8 +18,8 @@ namespace Plotypus
         protected:
             std::string func;
 
-            int lineStyle  = -1;
-            int pointStyle = -1;
+            size_t lineStyle  = STYLE_ID_DEFAULT;
+            size_t pointStyle = STYLE_ID_DEFAULT;
 
             virtual void clearFunctionMembers();
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
@@ -40,8 +40,8 @@ namespace Plotypus
             const std::string&          getFunc() const;
             void                        setFunc(const std::string& newFunc);
 
-            int                         getLineStyle() const;
-            void                        setLineStyle(int newLineStyle);
+            size_t                      getLineStyle() const;
+            void                        setLineStyle(size_t newLineStyle);
 
             virtual bool isFunction() const;
             virtual size_t getColumnID(const ColumnTypes columnType) const;
