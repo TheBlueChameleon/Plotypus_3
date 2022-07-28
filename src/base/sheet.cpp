@@ -210,7 +210,7 @@ namespace Plotypus
                 hFile << "front ";
 
                 hFile << (label.alignment.size() ? label.alignment + " " : ""s);
-                hFile << optionalNumber          ("rotate by", label.rotate);
+                hFile << optionalNumberString          ("rotate by", label.rotate);
 
                 hFile << optionalQuotedTextString("font", label.font);
                 hFile << optionalQuotedTextString("textcolor", label.textcolor);

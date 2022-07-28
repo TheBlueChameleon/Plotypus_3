@@ -22,7 +22,7 @@ namespace Plotypus
             AxisDescriptor m_xAxis = AxisDescriptor("x");
             AxisDescriptor m_yAxis = AxisDescriptor("y");
 
-            size_t      border          = true;
+            size_t      border          = BORDERS_2D_DEFAULT;
             size_t      borderLineStyle = STYLE_ID_DEFAULT;
 
             bool        key         = true;

@@ -173,7 +173,7 @@ namespace Plotypus
                 {
                     hFile << "border ";
                     hFile << optionalQuotedTextString("bordercolor", style.bordercolor);
-                    hFile << optionalNumber          ("linewidth", style.linewidth);
+                    hFile << optionalNumberString          ("linewidth", style.linewidth);
                 }
                 else
                 {
@@ -202,7 +202,7 @@ namespace Plotypus
                 hFile << std::to_string(ID) + " ";
 
                 hFile << optionalQuotedTextString("linecolor", style.color);
-                hFile << optionalNumber          ("linewidth", style.width);
+                hFile << optionalNumberString          ("linewidth", style.width);
 
                 if (style.pointStyle.form != PointForm::None)
                 {
@@ -210,7 +210,7 @@ namespace Plotypus
                     const auto& ps = style.pointStyle;
                     if (ps.form == PointForm::Custom)   {hFile << optionalQuotedTextString("pointtype", ps.customSymbol);}
                     else                                {hFile << "pointtype " + std::to_string(static_cast<unsigned>(ps.form)) + " ";}
-                    hFile << optionalNumber("pointsize", ps.size);
+                    hFile << optionalNumberString("pointsize", ps.size);
                     // *INDENT-ON*
                 }
 
@@ -234,7 +234,7 @@ namespace Plotypus
         else if (psr.form == PointForm::Custom) {hFile << "pointtype " << std::quoted(psr.customSymbol) << " ";}
         else                                    {hFile << "pointtype " << std::to_string(pointStyleInt) << " ";}
 
-        hFile << optionalNumber("pointsize", psr.size);
+        hFile << optionalNumberString("pointsize", psr.size);
         hFile << optionalQuotedTextString("linecolor", psr.color);
         // *INDENT-ON*
     }

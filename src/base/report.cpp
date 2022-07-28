@@ -145,6 +145,18 @@ namespace Plotypus
     {
         switch (newFileType)
         {
+            case FileType::Ascii:
+                terminal = "dumb";
+                extOut = "txt";
+                break;
+            case FileType::Gif:
+                terminal = "gif animate";
+                extOut = "gif";
+                break;
+            case FileType::Jpeg:
+                terminal = "jpeg";
+                extOut = "jpg";
+                break;
             case FileType::Pdf:
                 terminal = "pdfcairo";
                 extOut = "pdf";
@@ -157,9 +169,9 @@ namespace Plotypus
                 terminal = "epscairo";
                 extOut = "eps";
                 break;
-            case FileType::Gif:
-                terminal = "gif animate";
-                extOut = "gif";
+            case FileType::Screen:
+                terminal = "qt";
+                extOut = "";
                 break;
         }
     }

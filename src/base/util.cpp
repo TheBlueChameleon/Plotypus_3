@@ -9,11 +9,11 @@ namespace Plotypus
 {
     void checkFilename(const std::string& component, const std::string& stringToTest)
     {
-        if (stringToTest.find_first_of(invalidFilenameChars) != std::string::npos)
+        if (stringToTest.find_first_of(INVALID_FILENAME_CHARS) != std::string::npos)
         {
             throw InvalidFilenameError("Attempted to set invalid " + component + ".\n" +
                                        "   value               : '" + stringToTest + "'\n" +
-                                       "   forbidden characters: " + invalidFilenameChars
+                                       "   forbidden characters: " + INVALID_FILENAME_CHARS
                                       );
         }
     }
@@ -187,7 +187,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalNumber(const std::string& optionName, const double number, bool turnOn)
+    std::string optionalNumberString(const std::string& optionName, const double number, bool turnOn)
     {
         // *INDENT-OFF*
         std::stringstream buffer;
@@ -197,9 +197,9 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalNumber(const std::string& optionName, const double number)
+    std::string optionalNumberString(const std::string& optionName, const double number)
     {
-        return optionalNumber(optionName, number, number != 0.);
+        return optionalNumberString(optionName, number, number != 0.);
     }
 
 };

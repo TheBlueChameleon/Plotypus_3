@@ -22,9 +22,6 @@ namespace Plotypus
     template<class T>
     bool contains(const T& toFind, const std::vector<T>& container);
 
-    template<class T, class U>
-    concept UnaryPredicate = std::predicate<T, U>; // T(U) -> bool.
-
     template<class T, UnaryPredicate<T> U>
     size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn);
     template<class T, UnaryPredicate<T> U>
@@ -40,8 +37,8 @@ namespace Plotypus
 
     std::string optionalStyleString     (const std::string& optionName, const size_t styleID);
     std::string optionalQuotedTextString(const std::string& optionName, const std::string& option);
-    std::string optionalNumber          (const std::string& optionName, const double number, bool turnOn);
-    std::string optionalNumber          (const std::string& optionName, const double number);
+    std::string optionalNumberString    (const std::string& optionName, const double number, bool turnOn);
+    std::string optionalNumberString    (const std::string& optionName, const double number);
 };
 
 #include "util.txx"

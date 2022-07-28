@@ -19,6 +19,8 @@ namespace Plotypus
      *
      * A Plotypus::Report represents a collection of instances of Sheet and provides an interface to create
      * Sheets and write all related output to files.
+     *
+     * @todo better support for Filetype Screen
      */
 
     class Report

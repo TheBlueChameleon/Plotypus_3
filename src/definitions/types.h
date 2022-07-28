@@ -14,6 +14,9 @@ namespace Plotypus
     //! @addtogroup Plotypus_Definitions
     //! @{
 
+    template<class T, class U>
+    concept UnaryPredicate = std::predicate<T, U>; // T(U) -> bool.
+
     // ====================================================================== //
     /**
      * @brief data selector: takes an object of type T and extracts the

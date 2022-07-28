@@ -56,14 +56,30 @@ void playground ()
     auto& sheet1 = report.addSheet("foo");
     auto& sheet2 = report.addSheet("bar");
     auto& sheet3 = report.addSheet();
-    auto& sheet4 = report.addPlot2D("plot \\U+1F648");
+    auto& sheet4 = report.addPlot2D("plot {\134U+221E}");
     auto& sheet5 = report.addSheet();
 
     sheet1.addLabel(" FOO ", .10, .10);
     sheet1.addLabel("(foo)", .10, .50);
 
-    sheet2.addLabel(" BAR ", .10, .10, true);
-    sheet2.addLabel("(bar)", .10, .50, true);
+    sheet2.addLabel(         "abcdefghijklmnopqrstuvwxyz01234567890  ", .10, .10, true);
+    sheet2.addLabel("{/symbol abcdefghijklmnopqrstuvwxyz01234567890} ", .10, .20, true);
+    sheet2.addLabel(         "ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()= ", .10, .40, true);
+    sheet2.addLabel("{/symbol ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()=}", .10, .50, true);
+    sheet2.addLabel("{/zapfdingbats p @p3 @p7}", .10, .70, true);
+
+    sheet2.addLabel(""s + Plotypus::SYMBOL_FORALL + Plotypus::SYMBOL_ALPHA + Plotypus::SYMBOL_DOT + "5" + Plotypus::SYMBOL_HBAR, .70, .10, true);
+    sheet2.addLabel("{/zapfdingbats abcdefg} €\\100", .70, .20, true);
+    sheet2.addLabel("{/script abcdefg} €\\100", .70, .30, true);
+
+//    sheet2.addLabel("~a /a \a &a @ax {a}"s, .70, .40, true);
+    sheet2.addLabel(""s
+                    + Plotypus::SYMBOL_TILDE + "a"
+                    + Plotypus::SYMBOL_FORWARD_SLASH + "a"
+                    + Plotypus::SYMBOL_BACKWARD_SLASH + "a"
+                    + Plotypus::SYMBOL_AMPERSAND + "a"
+                    + Plotypus::SYMBOL_AT + "ax"
+                    + Plotypus::SYMBOL_CURLY_BRACE_OPEN + "a" + Plotypus::SYMBOL_CURLY_BRACE_CLOSE, .70, .40, true);
 
     sheet3.addLabel("empty", .10, .10, true, 1);
     sheet3.addLabel("empty", .10, .50, true, 1);

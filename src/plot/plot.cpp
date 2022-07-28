@@ -200,8 +200,9 @@ namespace Plotypus
         fill = newFill;
     }
 
-// ====================================================================== //
-// writers
+    // ====================================================================== //
+    // writers
+
     void Plot::writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const
     {
         const std::string alabel = axis + "label ";
@@ -215,8 +216,8 @@ namespace Plotypus
         // *INDENT-OFF*
         if (label.label)    {hFile <<   "set " << alabel
                                                 << std::quoted(label.labelText) << " "
-                                                << (label.labelFont. empty() ? "" : "font \""      + label.labelFont  + "\" ")
-                                                << (label.labelColor.empty() ? "" : "textcolor \"" + label.labelColor + "\" ")
+                                                << optionalQuotedTextString("font"     , label.labelFont)
+                                                << optionalQuotedTextString("textcolor", label.labelColor)
                                                 << label.labelOptions
                                                 << std::endl;}
         else                {hFile << "unset " << alabel << std::endl;}
@@ -227,8 +228,8 @@ namespace Plotypus
                                 << ticsSequenceString
                                 << ticsListString
                                 << (label.ticsLogscale ? "logscale " : "nologscale ")
-                                << (label.ticsFont.     empty() ? "" : "font \""      + label.ticsFont      + "\" ")
-                                << (label.ticsTextColor.empty() ? "" : "textcolor \"" + label.ticsTextColor + "\" ")
+                                << optionalQuotedTextString("font"     , label.ticsFont)
+                                << optionalQuotedTextString("textcolor", label.ticsTextColor)
                                 << label.ticsOptions
                                 << std::endl;}
         else            {hFile << "unset " << atics << std::endl;}
