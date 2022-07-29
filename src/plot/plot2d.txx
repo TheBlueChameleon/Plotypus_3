@@ -29,7 +29,7 @@ namespace Plotypus
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
         dataView->setData(data);
-        dataView->setSelector(ColumnTypes::Y, selectorY);
+        dataView->setSelector(ColumnType::Y, selectorY);
 
         return addDataViewCompound(dataView);
     }
@@ -40,7 +40,7 @@ namespace Plotypus
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
         dataView->setData(data, N);
-        dataView->setSelector(ColumnTypes::Y, selectorY);
+        dataView->setSelector(ColumnType::Y, selectorY);
 
         return addDataViewCompound(dataView);
     }

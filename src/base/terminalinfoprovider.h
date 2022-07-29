@@ -36,6 +36,7 @@ namespace Plotypus
             std::optional<LineEnds>             lineEnds;
             std::optional<bool>                 transparent;
 
+            std::optional<bool>                 animate;
             std::optional<int>                  delay;
             std::optional<int>                  loopCount;
 
@@ -45,11 +46,11 @@ namespace Plotypus
             std::optional<std::string>          options;
 
             bool                                outputToFile;
-            bool                                animate;
 
             static std::string getDimensionTypeName(const std::optional<dimensions_t>& dimensions);
 
             void throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i);
+            void throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals);
 
         public:
             TerminalInfoProvider();
@@ -69,12 +70,26 @@ namespace Plotypus
             void                        setDimensions(const dimensions_t& newDimensions);
             void                        setDimensions(const dimensions_pixels_t& newDimensions);
             void                        setDimensions(const dimensions_length_t& newDimensions);
-            void                        setDimensions(const dimensions_length_t& newDimensions, const LengthUnits lengthUnit);
+            void                        setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
             void                        setDimensions(const dimensions_length_with_unit_t& newDimensions);
             void                        setDimensions(const int width, const int height);
             void                        setDimensions(const double width, const double height);
-            void                        setDimensions(const double width, const double height, const LengthUnits lengthUnit);
+            void                        setDimensions(const double width, const double height, const LengthUnit lengthUnit);
             void                        clearDimensions();
+
+            std::optional<dimensions_pixels_t>  getPosition() const;
+            void                                setPosition(const dimensions_pixels_t& newPosition);
+            void                                clearPosition();
+
+            std::optional<std::string>          getBackgroundColor() const;
+            void                                setBackgroundColor(const std::string& newBackgroundColor);
+            void                                clearBackgroundColor();
+            std::optional<LineEnds>             getLineEnds() const;
+            void                                setLineEnds(const LineEnds newLineEnds);
+            void                                clearLineEnds();
+            std::optional<bool>                 getTransparent() const;
+            void                                setTransparent(bool newTransparent);
+            void                                clearTransparent();
     };
 }
 

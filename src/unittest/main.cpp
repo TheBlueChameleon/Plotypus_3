@@ -93,8 +93,8 @@ void playground ()
     // *INDENT-ON*
 
     auto& dataView1 = sheet4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle2D::YErrorLines);
-    dataView1.setSelector(Plotypus::ColumnTypes::X, compoundSelectorX);
-    dataView1.setSelector(Plotypus::ColumnTypes::DeltaY, compoundSelectorErrY);
+    dataView1.setSelector(Plotypus::ColumnType::X, compoundSelectorX);
+    dataView1.setSelector(Plotypus::ColumnType::DeltaY, compoundSelectorErrY);
     dataView1.setTitle("Sine Approximation");
     //dataViewData1.setBinaryDataOutput(false);
 

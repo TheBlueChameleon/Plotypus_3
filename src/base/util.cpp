@@ -27,6 +27,7 @@ namespace Plotypus
             case FileType::Ascii:       return "Ascii";
             case FileType::Gif:         return "gif";
             case FileType::Jpeg:        return "Jpeg";
+            case FileType::LaTeX:       return "LaTeX";
             case FileType::Pdf:         return "Pdf";
             case FileType::Png:         return "Png";
             case FileType::PostScript:  return "PostScript";
@@ -37,47 +38,47 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getLengthUnitName(LengthUnits lengthUnit)
+    std::string getLengthUnitName(LengthUnit lengthUnit)
     {
         // *INDENT-OFF*
         switch(lengthUnit)
         {
-            case LengthUnits::Centimeter: return "cm";
-            case LengthUnits::Inch:       return "in";
+            case LengthUnit::Centimeter: return "cm";
+            case LengthUnit::Inch:       return "in";
         }
         // *INDENT-ON*
 
         return "(undefined)";
     }
 
-    std::string getColumnIDName(const ColumnTypes columnType)
+    std::string getColumnIDName(const ColumnType columnType)
     {
         // *INDENT-OFF*
         switch(columnType)
         {
-            case ColumnTypes::Column1:      return "column 1";
-            case ColumnTypes::Column2:      return "column 2";
-            case ColumnTypes::Column3:      return "column 3";
-            case ColumnTypes::Column4:      return "column 4";
-            case ColumnTypes::Column5:      return "column 5";
-            case ColumnTypes::Column6:      return "column 6";
-            case ColumnTypes::X:            return "X";
-            case ColumnTypes::Y:            return "Y";
-            case ColumnTypes::Y2:           return "Y2";
-            case ColumnTypes::Z:            return "Z";
-            case ColumnTypes::DeltaX:       return "Delta X";
-            case ColumnTypes::DeltaY:       return "Delta Y";
-            case ColumnTypes::DeltaZ:       return "Delta Z";
-            case ColumnTypes::XLow:         return "X_low";
-            case ColumnTypes::XHigh:        return "X_high";
-            case ColumnTypes::YLow:         return "Y_low";
-            case ColumnTypes::YHigh:        return "Y_high";
-            case ColumnTypes::Pointsize:    return "Pointsize";
-            case ColumnTypes::Pointtype:    return "Pointtype";
-            case ColumnTypes::Color:        return "Color";
-            case ColumnTypes::Boxwidth:     return "Boxwidth";
-            case ColumnTypes::Length:       return "Length";
-            case ColumnTypes::Angle:        return "angle";
+            case ColumnType::Column1:      return "column 1";
+            case ColumnType::Column2:      return "column 2";
+            case ColumnType::Column3:      return "column 3";
+            case ColumnType::Column4:      return "column 4";
+            case ColumnType::Column5:      return "column 5";
+            case ColumnType::Column6:      return "column 6";
+            case ColumnType::X:            return "X";
+            case ColumnType::Y:            return "Y";
+            case ColumnType::Y2:           return "Y2";
+            case ColumnType::Z:            return "Z";
+            case ColumnType::DeltaX:       return "Delta X";
+            case ColumnType::DeltaY:       return "Delta Y";
+            case ColumnType::DeltaZ:       return "Delta Z";
+            case ColumnType::XLow:         return "X_low";
+            case ColumnType::XHigh:        return "X_high";
+            case ColumnType::YLow:         return "Y_low";
+            case ColumnType::YHigh:        return "Y_high";
+            case ColumnType::Pointsize:    return "Pointsize";
+            case ColumnType::Pointtype:    return "Pointtype";
+            case ColumnType::Color:        return "Color";
+            case ColumnType::Boxwidth:     return "Boxwidth";
+            case ColumnType::Length:       return "Length";
+            case ColumnType::Angle:        return "angle";
         }
         // *INDENT-ON*
 

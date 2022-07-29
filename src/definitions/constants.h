@@ -15,6 +15,7 @@ namespace Plotypus
         Ascii,
         Gif,
         Jpeg,
+        LaTeX,
         Pdf,
         Png,
         PostScript,
@@ -25,7 +26,7 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
-    enum class LengthUnits
+    enum class LengthUnit
     {
         Inch,
         Centimeter,
@@ -61,7 +62,7 @@ namespace Plotypus
     /**
      * @brief foo bar
      */
-    enum class ColumnTypes
+    enum class ColumnType
     {
         Column1,
         Column2,
@@ -84,7 +85,7 @@ namespace Plotypus
     /**
      * @brief Sheet border lines
      */
-    enum BorderLines
+    enum BorderLine
     {
         Bottom = 1,
         Left = 2,
@@ -221,13 +222,13 @@ namespace Plotypus
 
     constexpr size_t BORDERS_NONE = 0u;
 
-    constexpr size_t BORDERS_2D_DEFAULT = BorderLines::Bottom + BorderLines::Top + BorderLines::Left + BorderLines::Right;
-    constexpr size_t BORDERS_2D_BOTTOM_LEFT = BorderLines::Bottom + BorderLines::Left;
+    constexpr size_t BORDERS_2D_DEFAULT = BorderLine::Bottom + BorderLine::Top + BorderLine::Left + BorderLine::Right;
+    constexpr size_t BORDERS_2D_BOTTOM_LEFT = BorderLine::Bottom + BorderLine::Left;
 
-    constexpr size_t BORDERS_3D_DEFAULT = BorderLines::BottomLeftBack + BorderLines::BottomLeftFront + BorderLines::BottomRightBack + BorderLines::BottomRightFront + BorderLines::LeftVertial;
-    constexpr size_t BORDERS_3D_TRIPLE_FRONT = BorderLines::BottomLeftFront + BorderLines::BottomRightFront + BorderLines::LeftVertial;
-    constexpr size_t BORDERS_3D_TRIPLE_BACK = BorderLines::BottomLeftBack + BorderLines::BottomRightBack + BorderLines::LeftVertial;
-    constexpr size_t BORDERS_ALL = BorderLines::Polar - 1u;
+    constexpr size_t BORDERS_3D_DEFAULT = BorderLine::BottomLeftBack + BorderLine::BottomLeftFront + BorderLine::BottomRightBack + BorderLine::BottomRightFront + BorderLine::LeftVertial;
+    constexpr size_t BORDERS_3D_TRIPLE_FRONT = BorderLine::BottomLeftFront + BorderLine::BottomRightFront + BorderLine::LeftVertial;
+    constexpr size_t BORDERS_3D_TRIPLE_BACK = BorderLine::BottomLeftBack + BorderLine::BottomRightBack + BorderLine::LeftVertial;
+    constexpr size_t BORDERS_ALL = BorderLine::Polar - 1u;
 
     constexpr size_t BORDERS_DEFAULT = BORDERS_3D_DEFAULT;
 

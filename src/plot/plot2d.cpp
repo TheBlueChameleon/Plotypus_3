@@ -76,7 +76,7 @@ namespace Plotypus
         }
     }
 
-    void Plot2D::writeScriptData(std::ostream& hFile, const StylesCollection &stylesColloction) const
+    void Plot2D::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         Plot::writeScriptData(hFile, stylesColloction);
 

@@ -24,7 +24,7 @@ namespace Plotypus
 
             virtual size_t          getArity() const;       //! @todo: maybe do check: isComplete?
 
-            std::span<double>&         data(ColumnTypes columnType);
+            std::span<double>&         data(ColumnType columnType);
             const columnViewList_t& getData() const;
             void                    setData(const columnViewList_t& newData);
 

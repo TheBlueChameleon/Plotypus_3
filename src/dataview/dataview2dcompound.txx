@@ -89,7 +89,7 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelector(const ColumnTypes column, const DataSelector_t<T>& selector)
+    void DataView2DCompound<T>::setSelector(const ColumnType column, const DataSelector_t<T>& selector)
     {
         const auto columnID = getColumnID(column);
 

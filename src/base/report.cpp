@@ -145,6 +145,8 @@ namespace Plotypus
     {
         switch (newFileType)
         {
+            case FileType::Custom:
+                break;
             case FileType::Ascii:
                 terminal = "dumb";
                 extOut = "txt";
@@ -156,6 +158,10 @@ namespace Plotypus
             case FileType::Jpeg:
                 terminal = "jpeg";
                 extOut = "jpg";
+                break;
+            case FileType::LaTeX:
+                terminal = "lua tikz";
+                extOut = "tex";
                 break;
             case FileType::Pdf:
                 terminal = "pdfcairo";

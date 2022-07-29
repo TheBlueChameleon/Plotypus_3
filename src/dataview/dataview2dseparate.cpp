@@ -30,7 +30,7 @@ namespace Plotypus
         return m_data[1].size();          // quick solution: return arity of Y column
     }
 
-    std::span<double>& DataView2DSeparate::data(ColumnTypes columnType)
+    std::span<double>& DataView2DSeparate::data(ColumnType columnType)
     {
         const auto columnID = getColumnID(columnType);
         checkIndex("foo bar", columnID, m_data);

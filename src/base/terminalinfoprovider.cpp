@@ -36,6 +36,21 @@ namespace Plotypus
         }
     }
 
+    void TerminalInfoProvider::throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals)
+    {
+        if (fileType == FileType::Custom)
+        {
+            return;
+        }
+
+        if (!contains(fileType, supportedTerminals))
+        {
+            throw InvalidArgumentError("    Feature not supported for this type of terminal.\n"
+                                       "      feature : "s + feature + "\n"
+                                       "      terminal: "s + getTerminalName(fileType));
+        }
+    }
+
     // ====================================================================== //
 
     TerminalInfoProvider::TerminalInfoProvider()
@@ -103,6 +118,11 @@ namespace Plotypus
                 extOut   = "jpg";
                 break;
 
+            case FileType::LaTeX:
+                terminal = "lua tikz";
+                extOut   = "tex";
+                break;
+
             case FileType::Pdf:
                 terminal = "pdfcairo";
                 extOut   = "pdf";
@@ -165,6 +185,7 @@ namespace Plotypus
             case FileType::Ascii:       throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Pixels); break;
             case FileType::Gif:         throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Pixels); break;
             case FileType::Jpeg:        throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Pixels); break;
+            case FileType::LaTeX:       throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Length); break;
             case FileType::Pdf:         throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Length); break;
             case FileType::Png:         break;
             case FileType::PostScript:  throwIfDimensionsNotOfType(newDimensions, DimensionsTypeIndex::Length); break;
@@ -182,12 +203,12 @@ namespace Plotypus
 
     void TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions)
     {
-        const std::string lengthUnitString = getLengthUnitName(LengthUnits::Inch);
+        const std::string lengthUnitString = getLengthUnitName(LengthUnit::Inch);
         dimensions_length_with_unit_t fullySpecifiedDimensions = std::make_pair(newDimensions, lengthUnitString);
         setDimensions(dimensions_t(fullySpecifiedDimensions));
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions, const LengthUnits lengthUnit)
+    void TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit)
     {
         const std::string lengthUnitString = getLengthUnitName(lengthUnit);
         dimensions_length_with_unit_t fullySpecifiedDimensions = std::make_pair(newDimensions, lengthUnitString);
@@ -209,7 +230,7 @@ namespace Plotypus
         setDimensions(std::make_pair(width, height));
     }
 
-    void TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnits lengthUnit)
+    void TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnit lengthUnit)
     {
         setDimensions(std::make_pair(width, height), lengthUnit);
     }
@@ -218,4 +239,73 @@ namespace Plotypus
     {
         dimensions.reset();
     }
+
+    // ---------------------------------------------------------------------- //
+
+    std::optional<TerminalInfoProvider::dimensions_pixels_t> TerminalInfoProvider::getPosition() const
+    {
+        return position;
+    }
+
+    void TerminalInfoProvider::setPosition(const dimensions_pixels_t& newPosition)
+    {
+        throwIfUnsupportedFeature("position", {FileType::Screen});
+        position = newPosition;
+    }
+
+    void TerminalInfoProvider::clearPosition()
+    {
+        position.reset();
+    }
+
+    std::optional<std::string> TerminalInfoProvider::getBackgroundColor() const
+    {
+        return backgroundColor;
+    }
+
+    void TerminalInfoProvider::setBackgroundColor(const std::string& newBackgroundColor)
+    {
+        throwIfUnsupportedFeature("background color", {FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript});
+        backgroundColor = newBackgroundColor;
+    }
+
+    void TerminalInfoProvider::clearBackgroundColor()
+    {
+        backgroundColor.reset();
+    }
+
+    std::optional<LineEnds> TerminalInfoProvider::getLineEnds() const
+    {
+        return lineEnds;
+    }
+
+    void TerminalInfoProvider::setLineEnds(const LineEnds newLineEnds)
+    {
+        throwIfUnsupportedFeature("line ends", {FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript});
+        lineEnds = newLineEnds;
+    }
+
+    void TerminalInfoProvider::clearLineEnds()
+    {
+        lineEnds.reset();
+    }
+
+    std::optional<bool> TerminalInfoProvider::getTransparent() const
+    {
+        return transparent;
+    }
+
+    void TerminalInfoProvider::setTransparent(bool newTransparent)
+    {
+        throwIfUnsupportedFeature("transparent background", {FileType::Gif, FileType::Png});
+        transparent = newTransparent;
+    }
+
+    void TerminalInfoProvider::clearTransparent()
+    {
+        transparent.reset();
+    }
+
+    // throwIfUnsupportedFeature("FOO BAR", {FileType::Ascii, FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript, FileType::Screen});
+
 }

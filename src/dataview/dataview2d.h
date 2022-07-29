@@ -44,7 +44,7 @@ namespace Plotypus
             void                        setLineStyle(size_t newLineStyle);
 
             virtual bool isFunction() const;
-            virtual size_t getColumnID(const ColumnTypes columnType) const;
+            virtual size_t getColumnID(const ColumnType columnType) const;
 
             // -------------------------------------------------------------- //
             // writers

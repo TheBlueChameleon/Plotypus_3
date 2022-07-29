@@ -114,26 +114,26 @@ namespace Plotypus
         return !func.empty();
     }
 
-    size_t DataView2D::getColumnID(const ColumnTypes columnType) const
+    size_t DataView2D::getColumnID(const ColumnType columnType) const
     {
         switch (columnType)
         {
             // *INDENT-OFF*
-            case ColumnTypes::Column1: return 1;
-            case ColumnTypes::Column2: return 2;
-            case ColumnTypes::Column3: return 3;
-            case ColumnTypes::Column4: return 4;
-            case ColumnTypes::Column5: return 5;
-            case ColumnTypes::Column6: return 6;
+            case ColumnType::Column1: return 1;
+            case ColumnType::Column2: return 2;
+            case ColumnType::Column3: return 3;
+            case ColumnType::Column4: return 4;
+            case ColumnType::Column5: return 5;
+            case ColumnType::Column6: return 6;
 
-            case ColumnTypes::X: return 1;
-            case ColumnTypes::Y: return 2;
-            case ColumnTypes::Y2:
+            case ColumnType::X: return 1;
+            case ColumnType::Y: return 2;
+            case ColumnType::Y2:
                 if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
                 else                                        {return COLUMN_UNSUPPORTED;}
             // *INDENT-ON*
 
-            case ColumnTypes::DeltaX:
+            case ColumnType::DeltaX:
                 switch(styleID)
                 {
                     case PlotStyle2D::XErrorBars:
@@ -164,7 +164,7 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::DeltaY:
+            case ColumnType::DeltaY:
                 switch(styleID)
                 {
                     case PlotStyle2D::YErrorBars:
@@ -195,7 +195,7 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::XLow:
+            case ColumnType::XLow:
                 switch(styleID)
                 {
                     case PlotStyle2D::XErrorBars:
@@ -224,7 +224,7 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::XHigh:
+            case ColumnType::XHigh:
                 switch(styleID)
                 {
                     case PlotStyle2D::XErrorBars:
@@ -253,7 +253,7 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::YLow:
+            case ColumnType::YLow:
                 switch(styleID)
                 {
                     case PlotStyle2D::YErrorBars:
@@ -283,7 +283,7 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::YHigh:
+            case ColumnType::YHigh:
                 switch(styleID)
                 {
                     case PlotStyle2D::YErrorBars:
@@ -313,34 +313,34 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnTypes::Pointsize:
+            case ColumnType::Pointsize:
                 // *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 3;}
                 else                                {return COLUMN_UNSUPPORTED;}
 
-            case ColumnTypes::Pointtype:
+            case ColumnType::Pointtype:
                 if (styleID == PlotStyle2D::Points) {return 4;}
                 else                                {return COLUMN_UNSUPPORTED;}
 
-            case ColumnTypes::Color:
+            case ColumnType::Color:
                 if (styleID == PlotStyle2D::Points) {return 5;}
                 else                                {return COLUMN_UNSUPPORTED;}
 
-            case ColumnTypes::Boxwidth:
+            case ColumnType::Boxwidth:
                 if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
                 else                                                                    {return COLUMN_UNSUPPORTED;}
 
-            case ColumnTypes::Length:
+            case ColumnType::Length:
                 if (styleID == PlotStyle2D::Arrows) {return 3;}
                 else                                {return COLUMN_UNSUPPORTED;}
 
-            case ColumnTypes::Angle:
+            case ColumnType::Angle:
                 if (styleID == PlotStyle2D::Arrows) {return 4;}
                 else                                {return COLUMN_UNSUPPORTED;}
                 // *INDENT-ON*
 
-            case ColumnTypes::Z:
-            case ColumnTypes::DeltaZ:
+            case ColumnType::Z:
+            case ColumnType::DeltaZ:
                 return COLUMN_UNSUPPORTED;
         }
 

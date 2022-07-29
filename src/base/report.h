@@ -21,6 +21,7 @@ namespace Plotypus
      * Sheets and write all related output to files.
      *
      * @todo better support for Filetype Screen
+     * @todo move responsibility for "tidy up code" to individual sheets
      */
 
     class Report

@@ -30,7 +30,7 @@ namespace Plotypus
 
             const std::array<DataSelector_t<T>, 6>& getSelectors() const;
             void                                    setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
-            void                                    setSelector (const ColumnTypes column, const DataSelector_t<T>& selector);
+            void                                    setSelector (const ColumnType column, const DataSelector_t<T>& selector);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

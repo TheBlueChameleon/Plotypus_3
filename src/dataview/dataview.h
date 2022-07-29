@@ -69,17 +69,17 @@ namespace Plotypus
             void                setColumnSeparatorDat(const std::string& newSeparatorDAT);
 
             size_t&             columnAssignment(const size_t       columnID);
-            size_t&             columnAssignment(const ColumnTypes  columnType);
+            size_t&             columnAssignment(const ColumnType  columnType);
             std::string&        columnFormat    (const size_t       columnID);
-            std::string&        columnFormat    (const ColumnTypes  columnType);
+            std::string&        columnFormat    (const ColumnType  columnType);
             std::string&        columnHeadline  (const size_t       columnID);
-            std::string&        columnHeadline  (const ColumnTypes  columnType);
+            std::string&        columnHeadline  (const ColumnType  columnType);
 
             virtual bool isFunction() const = 0;
             virtual bool isDummy() const = 0;
             virtual bool isComplete() const = 0;
 
-            virtual size_t getColumnID(const ColumnTypes columnType) const = 0;
+            virtual size_t getColumnID(const ColumnType columnType) const = 0;
 
             // -------------------------------------------------------------- //
             // writers
