@@ -25,6 +25,7 @@ add_library(Plotypus-lib SHARED
     src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/stylescollection.h src/base/stylescollection.cpp
     src/base/report.h src/base/report.cpp src/base/report.txx
+    src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
     src/base/sheet.h src/base/sheet.cpp
     #
     src/plot/plot.h src/plot/plot.cpp

@@ -18,108 +18,96 @@ namespace Plotypus
         }
     }
 
-    const std::string getColumnIDName(const ColumnTypes columnType)
+    std::string getTerminalName(FileType fileType)
     {
+        // *INDENT-OFF*
+        switch(fileType)
+        {
+            case FileType::Custom:      return "Custom";
+            case FileType::Ascii:       return "Ascii";
+            case FileType::Gif:         return "gif";
+            case FileType::Jpeg:        return "Jpeg";
+            case FileType::Pdf:         return "Pdf";
+            case FileType::Png:         return "Png";
+            case FileType::PostScript:  return "PostScript";
+            case FileType::Screen:      return "Screen";
+        }
+        // *INDENT-ON*
+    }
+
+    std::string getLengthUnitName(LengthUnits lengthUnit)
+    {
+        // *INDENT-OFF*
+        switch(lengthUnit)
+        {
+            case LengthUnits::Centimeter: return "cm";
+            case LengthUnits::Inch:       return "in";
+        }
+        // *INDENT-ON*
+    }
+
+    std::string getColumnIDName(const ColumnTypes columnType)
+    {
+        // *INDENT-OFF*
         switch(columnType)
         {
-            case ColumnTypes::Column1:
-                return "column 1";
-            case ColumnTypes::Column2:
-                return "column 2";
-            case ColumnTypes::Column3:
-                return "column 3";
-            case ColumnTypes::Column4:
-                return "column 4";
-            case ColumnTypes::Column5:
-                return "column 5";
-            case ColumnTypes::Column6:
-                return "column 6";
-            case ColumnTypes::X:
-                return "X";
-            case ColumnTypes::Y:
-                return "Y";
-            case ColumnTypes::Y2:
-                return "Y2";
-            case ColumnTypes::Z:
-                return "Z";
-            case ColumnTypes::DeltaX:
-                return "Delta X";
-            case ColumnTypes::DeltaY:
-                return "Delta Y";
-            case ColumnTypes::DeltaZ:
-                return "Delta Z";
-            case ColumnTypes::XLow:
-                return "X_low";
-            case ColumnTypes::XHigh:
-                return "X_high";
-            case ColumnTypes::YLow:
-                return "Y_low";
-            case ColumnTypes::YHigh:
-                return "Y_high";
-            case ColumnTypes::Pointsize:
-                return "Pointsize";
-            case ColumnTypes::Pointtype:
-                return "Pointtype";
-            case ColumnTypes::Color:
-                return "Color";
-            case ColumnTypes::Boxwidth:
-                return "Boxwidth";
-            case ColumnTypes::Length:
-                return "Length";
-            case ColumnTypes::Angle:
-                return "angle";
+            case ColumnTypes::Column1:      return "column 1";
+            case ColumnTypes::Column2:      return "column 2";
+            case ColumnTypes::Column3:      return "column 3";
+            case ColumnTypes::Column4:      return "column 4";
+            case ColumnTypes::Column5:      return "column 5";
+            case ColumnTypes::Column6:      return "column 6";
+            case ColumnTypes::X:            return "X";
+            case ColumnTypes::Y:            return "Y";
+            case ColumnTypes::Y2:           return "Y2";
+            case ColumnTypes::Z:            return "Z";
+            case ColumnTypes::DeltaX:       return "Delta X";
+            case ColumnTypes::DeltaY:       return "Delta Y";
+            case ColumnTypes::DeltaZ:       return "Delta Z";
+            case ColumnTypes::XLow:         return "X_low";
+            case ColumnTypes::XHigh:        return "X_high";
+            case ColumnTypes::YLow:         return "Y_low";
+            case ColumnTypes::YHigh:        return "Y_high";
+            case ColumnTypes::Pointsize:    return "Pointsize";
+            case ColumnTypes::Pointtype:    return "Pointtype";
+            case ColumnTypes::Color:        return "Color";
+            case ColumnTypes::Boxwidth:     return "Boxwidth";
+            case ColumnTypes::Length:       return "Length";
+            case ColumnTypes::Angle:        return "angle";
         }
+        // *INDENT-ON*
 
         return "(undefined)";
     }
 
-    const std::string getPlotStyleName(const PlotStyle2D plotStyleID)
+    std::string getPlotStyleName(const PlotStyle2D plotStyleID)
     {
+        // *INDENT-OFF*
         switch(plotStyleID)
         {
-            case PlotStyle2D::Dots:
-                return "dots";
-            case PlotStyle2D::Points:
-                return "points";
-            case PlotStyle2D::XErrorBars:
-                return "xerrorbars";
-            case PlotStyle2D::YErrorBars:
-                return "yerrorbars";
-            case PlotStyle2D::XYErrorBars:
-                return "xyerrorbars";
-            case PlotStyle2D::Lines:
-                return "lines";
-            case PlotStyle2D::LinesPoints:
-                return "linespoints";
-            case PlotStyle2D::FilledCurves:
-                return "filledcurves";
-            case PlotStyle2D::XErrorLines:
-                return "xerrorlines";
-            case PlotStyle2D::YErrorLines:
-                return "yerrorlines";
-            case PlotStyle2D::XYErrorLines:
-                return "xyerrorlines";
-            case PlotStyle2D::Steps:
-                return "steps";
-            case PlotStyle2D::FSteps:
-                return "fsteps";
-            case PlotStyle2D::FillSteps:
-                return "fillsteps";
-            case PlotStyle2D::Boxes:
-                return "boxes";
-            case PlotStyle2D::HBoxes:
-                return "boxxyerror";
-            case PlotStyle2D::BoxErrorBars:
-                return "boxerrorbars";
-            case PlotStyle2D::BoxxyError:
-                return "boxxyerror";
-            case PlotStyle2D::Arrows:
-                return "arrows";
-            case PlotStyle2D::Vectors:
-                return "vectors";
-            case PlotStyle2D::Custom:
-                return "custom";
+            case PlotStyle2D::Dots:         return "dots";
+            case PlotStyle2D::Points:       return "points";
+            case PlotStyle2D::XErrorBars:   return "xerrorbars";
+            case PlotStyle2D::YErrorBars:   return "yerrorbars";
+            case PlotStyle2D::XYErrorBars:  return "xyerrorbars";
+            case PlotStyle2D::Lines:        return "lines";
+            case PlotStyle2D::LinesPoints:  return "linespoints";
+            case PlotStyle2D::FilledCurves: return "filledcurves";
+            case PlotStyle2D::XErrorLines:  return "xerrorlines";
+            case PlotStyle2D::YErrorLines:  return "yerrorlines";
+            case PlotStyle2D::XYErrorLines: return "xyerrorlines";
+            case PlotStyle2D::Steps:        return "steps";
+            case PlotStyle2D::FSteps:       return "fsteps";
+            case PlotStyle2D::FillSteps:    return "fillsteps";
+            case PlotStyle2D::Boxes:        return "boxes";
+            case PlotStyle2D::HBoxes:       return "boxxyerror";
+            case PlotStyle2D::BoxErrorBars: return "boxerrorbars";
+            case PlotStyle2D::BoxxyError:   return "boxxyerror";
+            case PlotStyle2D::Arrows:       return "arrows";
+            case PlotStyle2D::Vectors:      return "vectors";
+            case PlotStyle2D::Custom:       return "custom";
         }
+        // *INDENT-ON*
 
         return "(undefined)";
     }

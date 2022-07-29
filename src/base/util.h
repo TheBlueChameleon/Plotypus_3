@@ -27,8 +27,10 @@ namespace Plotypus
     template<class T, UnaryPredicate<T> U>
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn);
 
-    const std::string getColumnIDName(const ColumnTypes columnType);
-    const std::string getPlotStyleName(const PlotStyle2D plotStyleID);
+    std::string getTerminalName(FileType fileType);
+    std::string getLengthUnitName(LengthUnits lengthUnit);
+    std::string getColumnIDName(const ColumnTypes columnType);
+    std::string getPlotStyleName(const PlotStyle2D plotStyleID);
 
     const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
 

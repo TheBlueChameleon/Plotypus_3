@@ -18,7 +18,23 @@ namespace Plotypus
         Pdf,
         Png,
         PostScript,
-        Screen
+        Screen,
+
+        Custom
+    };
+
+    // ---------------------------------------------------------------------- //
+
+    enum class LengthUnits
+    {
+        Inch,
+        Centimeter,
+    };
+
+    enum class LineEnds
+    {
+        Rounded,
+        Butt,
     };
 
     // ====================================================================== //
@@ -216,6 +232,7 @@ namespace Plotypus
     constexpr size_t BORDERS_DEFAULT = BORDERS_3D_DEFAULT;
 
     // ====================================================================== //
+    // source: https://ayapin-film.sakura.ne.jp/Gnuplot/Docs/ps_guide.pdf
 
     constexpr auto SYMBOL_ALPHA                 = "{/symbol a}";
     constexpr auto SYMBOL_BETA                  = "{/symbol b}";
