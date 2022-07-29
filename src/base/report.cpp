@@ -74,6 +74,7 @@ namespace Plotypus
     Report::Report(FileType fileType)
     {
         setFileType(fileType);
+        m_terminalInfoProvider.setFileType(fileType);
     }
 
     Report::~Report()
@@ -85,14 +86,11 @@ namespace Plotypus
     {
         clearSheets();
 
-        terminal            = "pdfcairo";
-
         outputDirectory     = "";
         filenameBase        = "report";
 
         extTxt              = "txt";
         extDat              = "dat";
-        extOut              = "pdf";
         extGnu              = "gnuplot";
 
         verbose             = true;
@@ -102,6 +100,12 @@ namespace Plotypus
         frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
         m_stylesCollection.reset();
+        m_terminalInfoProvider.reset();
+    }
+
+    TerminalInfoProvider& Report::terminalInfoProvider()
+    {
+        return m_terminalInfoProvider;
     }
 
     // ====================================================================== //
@@ -143,53 +147,17 @@ namespace Plotypus
 
     void Report::setFileType(FileType newFileType)
     {
-        switch (newFileType)
-        {
-            case FileType::Custom:
-                break;
-            case FileType::Ascii:
-                terminal = "dumb";
-                extOut = "txt";
-                break;
-            case FileType::Gif:
-                terminal = "gif animate";
-                extOut = "gif";
-                break;
-            case FileType::Jpeg:
-                terminal = "jpeg";
-                extOut = "jpg";
-                break;
-            case FileType::LaTeX:
-                terminal = "lua tikz";
-                extOut = "tex";
-                break;
-            case FileType::Pdf:
-                terminal = "pdfcairo";
-                extOut = "pdf";
-                break;
-            case FileType::Png:
-                terminal = "pngcairo";
-                extOut = "png";
-                break;
-            case FileType::PostScript:
-                terminal = "epscairo";
-                extOut = "eps";
-                break;
-            case FileType::Screen:
-                terminal = "qt";
-                extOut = "";
-                break;
-        }
+        m_terminalInfoProvider.setFileType(newFileType);
     }
 
     const std::string& Report::getTerminal() const
     {
-        return terminal;
+        return m_terminalInfoProvider.getTerminal();
     }
 
     void Report::setTerminal(const std::string& newTerminal)
     {
-        terminal = newTerminal;
+        m_terminalInfoProvider.setTerminal(newTerminal);
     }
 
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
@@ -214,10 +182,10 @@ namespace Plotypus
         return extTxt;
     }
 
-    void Report::setExtTxt(const std::string& newExtTXT)
+    void Report::setExtTxt(const std::string& newExtTxt)
     {
-        checkFilename("extension for text files", newExtTXT);
-        extTxt = newExtTXT;
+        checkFilename("extension for text files", newExtTxt);
+        extTxt = newExtTxt;
     }
 
     const std::string& Report::getExtDat() const
@@ -225,21 +193,20 @@ namespace Plotypus
         return extDat;
     }
 
-    void Report::setExtDat(const std::string& newExtDAT)
+    void Report::setExtDat(const std::string& newExtDat)
     {
-        checkFilename("extension for gnuplot data files", newExtDAT);
-        extDat = newExtDAT;
+        checkFilename("extension for gnuplot data files", newExtDat);
+        extDat = newExtDat;
     }
 
     const std::string& Report::getExtOut() const
     {
-        return extOut;
+        return m_terminalInfoProvider.getExtOut();
     }
 
-    void Report::setExtOut(const std::string& newExtOUT)
+    void Report::setExtOut(const std::string& newExtOut)
     {
-        checkFilename("extension for PDF files", newExtOUT);
-        extOut = newExtOUT;
+        m_terminalInfoProvider.setExtOut(newExtOut);
     }
 
     const std::string& Report::getExtGnu() const
@@ -247,10 +214,10 @@ namespace Plotypus
         return extGnu;
     }
 
-    void Report::setExtGnu(const std::string& newExtGNU)
+    void Report::setExtGnu(const std::string& newExtGnu)
     {
-        checkFilename("extension for gnuplot script files", newExtGNU);
-        extGnu = newExtGNU;
+        checkFilename("extension for gnuplot script files", newExtGnu);
+        extGnu = newExtGnu;
     }
 
     bool Report::getVerbose() const
@@ -349,7 +316,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
 
-        const std::string outputFilename = getOutputFilename(extOut);
+        const std::string outputFilename = getOutputFilename(m_terminalInfoProvider.getExtOut());
         bool              needCleanSheetCommands = true;
 
         if (verbose) {std::cout << "about to write script for " << outputFilename << " ..." << std::endl;}
@@ -358,8 +325,13 @@ namespace Plotypus
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# output setup" << std::endl << std::endl;
-        hFile << "set term " << terminal << std::endl;
-        hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
+
+        m_terminalInfoProvider.writeTerminalInfo(hFile);
+
+        if (m_terminalInfoProvider.getOutputToFile()) {
+            hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
+        }
+
 
         m_stylesCollection.writeStyles(hFile);
 

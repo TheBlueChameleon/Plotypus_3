@@ -321,6 +321,8 @@ namespace Plotypus
     constexpr auto SYMBOL_CURLY_BRACE_CLOSE     = "{\\175}";
     constexpr auto SYMBOL_AMPERSAND             = "{\\046}";
     constexpr auto SYMBOL_TILDE                 = "{\\176}";
+    constexpr auto SYMBOL_CARET                 = "{\\136}";
+    constexpr auto SYMBOL_UNDERSCORE            = "{\\137}";
     constexpr auto SYMBOL_EURO                  = "{/symbol \240}";
     constexpr auto SYMBOL_INFINITY              = "{/symbol \245}";
     constexpr auto SYMBOL_DEGREE                = "{/symbol \260}";

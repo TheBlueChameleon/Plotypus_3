@@ -16,6 +16,16 @@ namespace Plotypus
              *      Canvas alias JavaScript
              */
 
+            /* @brief changes the default values for terminal engine and output filename extension associated with the new FileType
+             *
+             * | FileType     | Terminal Engine | Extension |
+             * |--------------|-----------------|-----------|
+             * | `Pdf`        | pdfcairo        | pdf       |
+             * | `Png`        | pngcairo        | png       |
+             * | `PostScript` | epscairo        | eps       |
+             * | `Gif`        | gif animate     | gif       |
+             */
+
         public:
             using dimensions_pixels_t           = std::pair<int, int>;
             using dimensions_length_t           = std::pair<double, double>;

@@ -63,15 +63,15 @@ bool unittest_report_emptyScriptOutput()
 
     UNITTEST_VARS;
 
-    Plotypus::Report r;
-    std::stringstream s;
+    Plotypus::Report report;
+    std::stringstream script;
     std::string expectedScript;
 
-    r.setVerbose(false);
+    report.setVerbose(false);
 
     // ...................................................................... //
 
-    UNITTEST_ASSERT(s.str() == "", "initialize empty string buffer");
+    UNITTEST_ASSERT(script.str() == "", "initialize empty string buffer");
     UNITTEST_CRITICAL_BARRIER;
 
     // ...................................................................... //
@@ -80,63 +80,63 @@ bool unittest_report_emptyScriptOutput()
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pdfcairo\n"
+        "set term pdfcairo \n"
         "set output 'report.pdf'\n"
         "\n";
 
     UNITTEST_DOESNT_THROW(
-        r.writeScript(s),
+        report.writeScript(script),
         std::exception,
         "allow write of empty PDF script"
     );
-    UNITTEST_ASSERT(s.str() == expectedScript, "write empty script");
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write empty script");
 
     // ...................................................................... //
 
-    s.str("");
+    script.str("");
     expectedScript =
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pngcairo\n"
+        "set term pngcairo \n"
         "set output 'report.png'\n"
         "\n";
 
-    r.setFileType(Plotypus::FileType::Png);
-    r.writeScript(s);
-    UNITTEST_ASSERT(s.str() == expectedScript, "write empty script with defaults from other filetype");
+    report.setFileType(Plotypus::FileType::Png);
+    report.writeScript(script);
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write empty script with defaults from other filetype");
 
     // ...................................................................... //
 
-    s.str("");
+    script.str("");
     expectedScript =
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term svg\n"
-        "set output '././foo/bar/unittest.svg'\n"
+        "set term debug \n"
+        "set output '././foo/bar/unittest.debug'\n"
         "\n";
 
-    r.setTerminal("svg");
-    r.setExtOut("svg");
-    r.setFilenameBase("unittest");
-    r.setOutputDirectory("././foo/bar/");
-    r.writeScript(s);
-    UNITTEST_ASSERT(s.str() == expectedScript, "write empty script with manually chosen strings");
+    report.setTerminal("debug");
+    report.setExtOut("debug");
+    report.setFilenameBase("unittest");
+    report.setOutputDirectory("././foo/bar/");
+    report.writeScript(script);
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write empty script with manually chosen terminal and extension");
 
     // ...................................................................... //
 
-    s.str("");
+    script.str("");
     expectedScript =
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pdfcairo\n"
+        "set term pdfcairo \n"
         "set output 'report.pdf'\n"
         "\n";
-    r.reset();
-    r.writeScript(s);
-    UNITTEST_ASSERT(s.str() == expectedScript, "write empty script after reset");
+    report.reset();
+    report.writeScript(script);
+    UNITTEST_STRING_COMPARE(script.str(), expectedScript, "write empty script after reset");
 
     // ...................................................................... //
 
@@ -164,7 +164,7 @@ bool unittest_report_sheets_scriptOutput()
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pdfcairo\n"
+        "set term pdfcairo \n"
         "set output 'report.pdf'\n"
         "\n"
         "# ============================================================================ #\n"
@@ -211,7 +211,7 @@ bool unittest_report_sheets_scriptOutput()
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pdfcairo\n"
+        "set term pdfcairo \n"
         "set output 'report.pdf'\n"
         "\n"
         "# ============================================================================ #\n"
@@ -273,7 +273,7 @@ bool unittest_report_sheets_scriptOutput()
         "# ============================================================================ #\n"
         "# output setup\n"
         "\n"
-        "set term pdfcairo\n"
+        "set term pdfcairo \n"
         "set output 'report.pdf'\n"
         "\n"
         "# ============================================================================ #\n"

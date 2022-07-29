@@ -64,26 +64,34 @@ bool unittest_string_compare_by_lines(const std::string& lhs, const std::string&
     size_t lhs_lineStart = 0u, rhs_lineStart = 0u;
     size_t lhs_lineEnd   = 0u, rhs_lineEnd   = 0u;
 
-    for (size_t i = 0; i < maxLen; ++i) {
-        if (lhs[i] == '\n') {++lhs_line; lhs_lineStart = i + 1;}
-        if (rhs[i] == '\n') {++rhs_line; rhs_lineStart = i + 1;}
+    bool linebreak  = false;
+    bool trigger    = false;
 
-        if (lhs[i] != rhs[i]) {
+    for (size_t i = 0; i < maxLen; ++i) {
+        if (lhs[i] == '\n') {++lhs_line; linebreak = true;}
+        if (rhs[i] == '\n') {++rhs_line; linebreak = true;}
+
+        trigger  = (lhs_line != rhs_line);
+        trigger |= (lhs[i]   != rhs[i]);
+        if (linebreak  && !trigger) {
+            lhs_lineStart = i + 1;
+            rhs_lineStart = i + 1;
+            linebreak = false;
+        }
+
+        if (trigger) {
             std::cout << "    Discrepancy detected in LHS line "<< lhs_line << " (RHS line " << rhs_line << "), index " << i << ":" << std::endl;
 
-            lhs_lineEnd = lhs.find('\n', i); if (lhs_lineEnd == std::string::npos) {lhs_lineEnd = lhs.length() -1;}
-            rhs_lineEnd = rhs.find('\n', i); if (rhs_lineEnd == std::string::npos) {rhs_lineEnd = lhs.length() -1;}
+            lhs_lineEnd = lhs.find('\n', i); if (lhs_lineEnd == std::string::npos) {lhs_lineEnd = lhs.length() - 1;}
+            rhs_lineEnd = rhs.find('\n', i); if (rhs_lineEnd == std::string::npos) {rhs_lineEnd = rhs.length() - 1;}
 
             std::string_view lhs_view(lhs.begin() + lhs_lineStart, lhs.begin() + lhs_lineEnd);
             std::string_view rhs_view(rhs.begin() + rhs_lineStart, rhs.begin() + rhs_lineEnd);
 
-            std::cout << "    LHS:" << std::endl;
-            std::cout << "    " << std::quoted(lhs_view) << std::endl;
-
-            std::cout << "    RHS:" << std::endl;
-            std::cout << "    " << std::quoted(rhs_view) << std::endl;
-
+            std::cout << "    LHS: " << std::quoted(lhs_view) << std::endl;
+            std::cout << "    RHS: " << std::quoted(rhs_view) << std::endl;
             std::cout << std::endl;
+
             return false;
         }
     }

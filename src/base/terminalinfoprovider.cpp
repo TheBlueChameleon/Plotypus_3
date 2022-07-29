@@ -191,9 +191,9 @@ namespace Plotypus
 
     void TerminalInfoProvider::reset()
     {
-        fileType        = FileType::Custom;
-        terminal        = "";
-        extOut          = "";
+        fileType        = FileType::Pdf;
+        terminal        = "pdfcairo";
+        extOut          = "pdf";
         outputToFile    = true;
         dimensions      .reset();
         position        .reset();
@@ -222,6 +222,8 @@ namespace Plotypus
         switch(newFileType)
         {
             case FileType::Custom:
+                terminal = "";
+                extOut   = "";
                 break;
 
             case FileType::Ascii:
@@ -287,6 +289,7 @@ namespace Plotypus
 
     void TerminalInfoProvider::setExtOut(const std::string& newExtOut)
     {
+        checkFilename("extension for script output", newExtOut);
         extOut = newExtOut;
     }
 
@@ -550,5 +553,6 @@ namespace Plotypus
         writeWindowTitle (hFile);
         writeWindowNumber(hFile);
         writeOptions     (hFile);
+        hFile << std::endl;
     }
 }
