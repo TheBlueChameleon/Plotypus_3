@@ -28,6 +28,7 @@ namespace Plotypus
             FileType                            fileType;
             std::string                         terminal;
             std::string                         extOut;
+            bool                                outputToFile;
 
             std::optional<dimensions_t>         dimensions;
             std::optional<dimensions_pixels_t>  position;
@@ -45,7 +46,6 @@ namespace Plotypus
 
             std::optional<std::string>          options;
 
-            bool                                outputToFile;
 
             static std::string getDimensionTypeName(const std::optional<dimensions_t>& dimensions);
 
@@ -65,6 +65,8 @@ namespace Plotypus
             void                setTerminal(const std::string& newTerminal);
             const std::string&  getExtOut() const;
             void                setExtOut(const std::string& newExtOut);
+            bool                getOutputToFile() const;
+            void                setOutputToFile(bool newOutputToFile);
 
             std::optional<dimensions_t> getDimensions() const;
             void                        setDimensions(const dimensions_t& newDimensions);
@@ -84,12 +86,38 @@ namespace Plotypus
             std::optional<std::string>          getBackgroundColor() const;
             void                                setBackgroundColor(const std::string& newBackgroundColor);
             void                                clearBackgroundColor();
+
             std::optional<LineEnds>             getLineEnds() const;
             void                                setLineEnds(const LineEnds newLineEnds);
             void                                clearLineEnds();
+
             std::optional<bool>                 getTransparent() const;
             void                                setTransparent(bool newTransparent);
             void                                clearTransparent();
+
+            std::optional<bool>                 getAnimate() const;
+            void                                setAnimate(bool newAnimate);
+            void                                clearAnimate();
+
+            std::optional<int>                  getDelay() const;
+            void                                setDelay(int newDelay);
+            void                                clearDelay();
+
+            std::optional<int>                  getLoopCount() const;
+            void                                setLoopCount(int newLoopCount);
+            void                                clearLoopCount();
+
+            std::optional<std::string>          getWindowTitle() const;
+            void                                setWindowTitle(const std::string& newWindowTitle);
+            void                                clearWindowTitle();
+
+            std::optional<int>                  getWindowNumber() const;
+            void                                setWindowNumber(int newWindowNumber);
+            void                                clearWindowNumber();
+
+            std::optional<std::string>          getOptions() const;
+            void                                setOptions(const std::string& newOptions);
+            void                                clearOptions();
     };
 }
 

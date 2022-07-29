@@ -169,6 +169,16 @@ namespace Plotypus
         extOut = newExtOut;
     }
 
+    bool TerminalInfoProvider::getOutputToFile() const
+    {
+        return outputToFile;
+    }
+
+    void TerminalInfoProvider::setOutputToFile(bool newOutputToFile)
+    {
+        outputToFile = newOutputToFile;
+    }
+
     // ---------------------------------------------------------------------- //
 
     std::optional<TerminalInfoProvider::dimensions_t> TerminalInfoProvider::getDimensions() const
@@ -306,6 +316,100 @@ namespace Plotypus
         transparent.reset();
     }
 
-    // throwIfUnsupportedFeature("FOO BAR", {FileType::Ascii, FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript, FileType::Screen});
+    std::optional<bool> TerminalInfoProvider::getAnimate() const
+    {
+        return animate;
+    }
 
+    void TerminalInfoProvider::setAnimate(bool newAnimate)
+    {
+        throwIfUnsupportedFeature("animation", {FileType::Gif});
+        animate = newAnimate;
+    }
+
+    void TerminalInfoProvider::clearAnimate()
+    {
+        animate.reset();
+    }
+
+    std::optional<int> TerminalInfoProvider::getDelay() const
+    {
+        return delay;
+    }
+
+    void TerminalInfoProvider::setDelay(int newDelay)
+    {
+        throwIfUnsupportedFeature("animation delay", {FileType::Gif});
+        animate = true;
+        delay = newDelay;
+    }
+
+    void TerminalInfoProvider::clearDelay()
+    {
+        delay.reset();
+    }
+
+    std::optional<int> TerminalInfoProvider::getLoopCount() const
+    {
+        return loopCount;
+    }
+
+    void TerminalInfoProvider::setLoopCount(int newLoopCount)
+    {
+        throwIfUnsupportedFeature("animation loop count", {FileType::Gif});
+        animate = true;
+        loopCount = newLoopCount;
+    }
+
+    void TerminalInfoProvider::clearLoopCount()
+    {
+        loopCount.reset();
+    }
+
+    std::optional<std::string> TerminalInfoProvider::getWindowTitle() const
+    {
+        return windowTitle;
+    }
+
+    void TerminalInfoProvider::setWindowTitle(const std::string& newWindowTitle)
+    {
+        throwIfUnsupportedFeature("window title", {FileType::Screen});
+        windowTitle = newWindowTitle;
+    }
+
+    void TerminalInfoProvider::clearWindowTitle()
+    {
+        windowTitle.reset();
+    }
+
+    std::optional<int> TerminalInfoProvider::getWindowNumber() const
+    {
+        return windowNumber;
+    }
+
+    void TerminalInfoProvider::setWindowNumber(int newWindowNumber)
+    {
+        throwIfUnsupportedFeature("window number", {FileType::Screen});
+        windowNumber = newWindowNumber;
+    }
+
+    void TerminalInfoProvider::clearWindowNumber()
+    {
+        windowNumber.reset();
+    }
+
+    std::optional<std::string> TerminalInfoProvider::getOptions() const
+    {
+        return options;
+    }
+
+    void TerminalInfoProvider::setOptions(const std::string& newOptions)
+    {
+        options = newOptions;
+    }
+
+    void TerminalInfoProvider::clearOptions()
+    {
+        options.reset();
+    }
 }
