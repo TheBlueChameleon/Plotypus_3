@@ -8,25 +8,22 @@ namespace Plotypus
 {
     std::string TerminalInfoProvider::getDimensionTypeName(const std::optional<dimensions_t>& dimensions)
     {
-        // *INDENT-OFF*
         if (dimensions.has_value())
         {
             const auto& dimensionsVariant = dimensions.value();
             switch (dimensionsVariant.index())
             {
-                case DimensionsTypeIndex::Pixels:    return "pixels";
+                case DimensionsTypeIndex::Pixels:
+                    return "pixels";
 
                 case DimensionsTypeIndex::Length:
-                    const dimensions_length_t&          dimensionsWithOptionalUnit = std::get<DimensionsTypeIndex::Length>(dimensionsVariant);
-                    const std::optional<std::string>&   optionalUnit = dimensionsWithOptionalUnit.second;
-
-                    if (optionalUnit.has_value())   {return "length with unit "s + optionalUnit.value();}
-                    else                            {return "length without unit";}
+                    const dimensions_length_with_unit_t&    dimensionsWithUnit = std::get<DimensionsTypeIndex::Length>(dimensionsVariant);
+                    const std::string&                      dimensionsUnit = dimensionsWithUnit.second;
+                    return "length with unit "s + dimensionsUnit;
             }
         }
 
         return "terminal default specification";
-        // *INDENT-ON*
     }
 
     void TerminalInfoProvider::throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i)
@@ -214,7 +211,7 @@ namespace Plotypus
 
     void TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnits lengthUnit)
     {
-
+        setDimensions(std::make_pair(width, height), lengthUnit);
     }
 
     void TerminalInfoProvider::clearDimensions()

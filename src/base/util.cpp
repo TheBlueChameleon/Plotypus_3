@@ -33,6 +33,8 @@ namespace Plotypus
             case FileType::Screen:      return "Screen";
         }
         // *INDENT-ON*
+
+        return "(undefined)";
     }
 
     std::string getLengthUnitName(LengthUnits lengthUnit)
@@ -44,6 +46,8 @@ namespace Plotypus
             case LengthUnits::Inch:       return "in";
         }
         // *INDENT-ON*
+
+        return "(undefined)";
     }
 
     std::string getColumnIDName(const ColumnTypes columnType)

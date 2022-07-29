@@ -48,6 +48,7 @@ namespace Plotypus
             bool                                animate;
 
             static std::string getDimensionTypeName(const std::optional<dimensions_t>& dimensions);
+
             void throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i);
 
         public:
