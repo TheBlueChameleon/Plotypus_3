@@ -5,10 +5,11 @@
 #include <array>
 #include <concepts>
 #include <fstream>
+#include <optional>
+#include <ranges>
 #include <span>
 #include <string>
 #include <vector>
-#include <ranges>
 
 #include "../definitions/constants.h"
 
@@ -39,6 +40,7 @@ namespace Plotypus
 
     std::string optionalStyleString     (const std::string& optionName, const size_t styleID);
     std::string optionalQuotedTextString(const std::string& optionName, const std::string& option);
+    std::string optionalQuotedTextString(const std::string& optionName, const std::optional<std::string>& option);
     std::string optionalNumberString    (const std::string& optionName, const double number, bool turnOn);
     std::string optionalNumberString    (const std::string& optionName, const double number);
 };

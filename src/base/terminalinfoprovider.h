@@ -49,8 +49,18 @@ namespace Plotypus
 
             static std::string getDimensionTypeName(const std::optional<dimensions_t>& dimensions);
 
-            void throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i);
-            void throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals);
+            void throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i) const;
+            void throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals) const;
+
+            void writeDimensions    (std::ostream& hFile) const;
+            void writePosition      (std::ostream& hFile) const;
+            void writeBackground    (std::ostream& hFile) const;
+            void writeLineEnds      (std::ostream& hFile) const;
+            void writeTransparent   (std::ostream& hFile) const;
+            void writeAnimateX      (std::ostream& hFile) const;
+            void writeWindowTitle   (std::ostream& hFile) const;
+            void writeWindowNumber  (std::ostream& hFile) const;
+            void writeOptions       (std::ostream& hFile) const;
 
         public:
             TerminalInfoProvider();
@@ -118,6 +128,10 @@ namespace Plotypus
             std::optional<std::string>          getOptions() const;
             void                                setOptions(const std::string& newOptions);
             void                                clearOptions();
+
+            // writer
+
+            void writeTerminalInfo(std::ostream& hFile) const;
     };
 }
 

@@ -26,7 +26,7 @@ namespace Plotypus
         return "terminal default specification";
     }
 
-    void TerminalInfoProvider::throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i)
+    void TerminalInfoProvider::throwIfDimensionsNotOfType(const dimensions_t& dimensions, size_t i) const
     {
         if (dimensions.index() != i)
         {
@@ -36,7 +36,7 @@ namespace Plotypus
         }
     }
 
-    void TerminalInfoProvider::throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals)
+    void TerminalInfoProvider::throwIfUnsupportedFeature(const std::string& feature, const std::vector<FileType>& supportedTerminals) const
     {
         if (fileType == FileType::Custom)
         {
@@ -48,6 +48,125 @@ namespace Plotypus
             throw InvalidArgumentError("    Feature not supported for this type of terminal.\n"
                                        "      feature : "s + feature + "\n"
                                        "      terminal: "s + getTerminalName(fileType));
+        }
+    }
+
+    void TerminalInfoProvider::writeDimensions(std::ostream& hFile) const
+    {
+        if (dimensions.has_value())
+        {
+            hFile << "size ";
+
+            std::visit(
+                [&hFile](auto&& arg)
+            {
+                using T = std::decay_t<decltype(arg)>;
+                if constexpr (std::is_same_v<T, dimensions_pixels_t>)
+                {
+                    hFile << arg.first << ", " << arg.second;
+                }
+                else if constexpr (std::is_same_v<T, dimensions_length_with_unit_t>)
+                {
+                    const dimensions_length_t&  numbers = arg.first;
+                    const std::string&          unit    = arg.second;
+
+                    hFile << numbers.first << unit << ", " << numbers.second << unit;
+                }
+
+            }, dimensions.value());
+
+            hFile << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writePosition(std::ostream& hFile) const
+    {
+        if (position.has_value())
+        {
+            const auto& value = position.value();
+            hFile << "position " << value.first << ", " << value.second << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writeBackground(std::ostream& hFile) const
+    {
+        if (backgroundColor.has_value())
+        {
+            const auto& value = backgroundColor.value();
+            hFile << "background " << std::quoted(value) << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writeLineEnds(std::ostream& hFile) const
+    {
+        if (lineEnds.has_value())
+        {
+            const auto& value = lineEnds.value();
+            switch (value)
+            {
+                case LineEnds::Butt:
+                    hFile << "butt";
+                    break;
+                case LineEnds::Rounded:
+                    hFile << (fileType == FileType::LaTeX ? "" : "rounded");
+                    break;
+            }
+            hFile << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writeTransparent(std::ostream& hFile) const
+    {
+        if (transparent.has_value())
+        {
+            const auto& value = transparent.value();
+            if (!value)
+            {
+                hFile << "no";
+            }
+            hFile << "transparent ";
+        }
+    }
+
+    void TerminalInfoProvider::writeAnimateX(std::ostream& hFile) const
+    {
+        // *INDENT-OFF*
+        if (animate.has_value())
+        {
+            const auto& value = animate.value();
+            if (value)                  {hFile << "animate ";}
+            else                        {return;}
+
+            if (delay    .has_value())  {hFile << "delay " << delay    .value() << " ";}
+            if (loopCount.has_value())  {hFile << "loop "  << loopCount.value() << " ";}
+        }
+        // *INDENT-ON*
+    }
+
+    void TerminalInfoProvider::writeWindowTitle(std::ostream& hFile) const
+    {
+        if (windowTitle.has_value())
+        {
+            const auto& value = windowTitle.value();
+            hFile << "title " << std::quoted(value) << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writeWindowNumber(std::ostream& hFile) const
+    {
+        if (windowNumber.has_value())
+        {
+            const auto& value = windowNumber.value();
+            hFile << value << " ";
+        }
+    }
+
+    void TerminalInfoProvider::writeOptions(std::ostream& hFile) const
+    {
+        if (options.has_value())
+        {
+            const auto& value = options.value();
+            hFile << value << " ";
         }
     }
 
@@ -75,16 +194,18 @@ namespace Plotypus
         fileType        = FileType::Custom;
         terminal        = "";
         extOut          = "";
+        outputToFile    = true;
         dimensions      .reset();
         position        .reset();
         backgroundColor .reset();
         lineEnds        .reset();
         transparent     .reset();
+        animate         .reset();
         delay           .reset();
         loopCount       .reset();
+        windowTitle     .reset();
+        windowNumber    .reset();
         options         .reset();
-        outputToFile    = true;
-        animate         = true;
     }
 
     // ---------------------------------------------------------------------- //
@@ -329,7 +450,9 @@ namespace Plotypus
 
     void TerminalInfoProvider::clearAnimate()
     {
-        animate.reset();
+        animate  .reset();
+        delay    .reset();
+        loopCount.reset();
     }
 
     std::optional<int> TerminalInfoProvider::getDelay() const
@@ -411,5 +534,21 @@ namespace Plotypus
     void TerminalInfoProvider::clearOptions()
     {
         options.reset();
+    }
+
+    // ====================================================================== //
+
+    void TerminalInfoProvider::writeTerminalInfo(std::ostream& hFile) const
+    {
+        hFile << "set term " << terminal << " ";
+        writeDimensions  (hFile);
+        writePosition    (hFile);
+        writeBackground  (hFile);
+        writeLineEnds    (hFile);
+        writeTransparent (hFile);
+        writeAnimateX    (hFile);
+        writeWindowTitle (hFile);
+        writeWindowNumber(hFile);
+        writeOptions     (hFile);
     }
 }

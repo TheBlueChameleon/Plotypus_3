@@ -180,6 +180,16 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
+    std::string optionalQuotedTextString(const std::string& optionName, const std::optional<std::string>& option)
+    {
+        // *INDENT-OFF*
+        std::stringstream buffer;
+        if (option.has_value()) {return "";}
+        else                    {buffer << optionName << " " << std::quoted(option.value()) << " ";
+                                 return buffer.str();}
+        // *INDENT-ON*
+    }
+
     std::string optionalNumberString(const std::string& optionName, const double number, bool turnOn)
     {
         // *INDENT-OFF*
