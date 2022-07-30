@@ -69,9 +69,11 @@ namespace Plotypus
         std::optional<std::string>      labelFont;
         std::optional<std::string>      labelColor;
         std::optional<std::string>      labelOptions;
+
         double                          rangeMin            = 0.;
         double                          rangeMax            = AXIS_AUTO_RANGE;
         std::optional<std::string>      rangeOptions;
+
         bool                            tics                = true;
         double                          ticsStart           = AXIS_AUTO_RANGE;
         double                          ticsEnd             = AXIS_AUTO_RANGE;
@@ -82,6 +84,7 @@ namespace Plotypus
         std::optional<std::string>      ticsFont;
         std::optional<std::string>      ticsTextColor;
         std::optional<std::string>      ticsOptions;
+
         bool                            minorTics           = false;
         size_t                          minorTicsIntervals  = AXIS_AUTO_MINOR_TICS;
 

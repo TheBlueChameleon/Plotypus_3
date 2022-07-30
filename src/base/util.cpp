@@ -180,7 +180,7 @@ namespace Plotypus
         {
             case AxisType::Azimuthal:   return "t";
             case AxisType::Colourbar:   return "cb";
-            case AxisType::Radius:      return "r";
+            case AxisType::Radial:      return "r";
             case AxisType::X:           return "x";
             case AxisType::X2:          return "x2";
             case AxisType::Y:           return "y";
@@ -199,7 +199,7 @@ namespace Plotypus
         {
             case AxisType::Azimuthal:   return false;
             case AxisType::Colourbar:   return true;
-            case AxisType::Radius:      return true;
+            case AxisType::Radial:      return true;
             case AxisType::X:           return true;
             case AxisType::X2:          return true;
             case AxisType::Y:           return true;

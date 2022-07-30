@@ -90,8 +90,7 @@ namespace Plotypus
         X, X2,
         Y, Y2,
         Z,
-        Radius,
-        Azimuthal,
+        Radial, Azimuthal,
         Colourbar,
     };
 

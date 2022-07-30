@@ -10,9 +10,12 @@ namespace Plotypus
         type(type), labelText(label),
         rangeMin(rangeMin), rangeMax(rangeMax)
     {
-        if (type == AxisType::Azimuthal && std::isnan(rangeMax))
+        if (type == AxisType::Azimuthal)
         {
-            this->rangeMax = 360;
+            // *INDENT-OFF*
+            if (std::isnan(rangeMin)) {this->rangeMin =   0.;}
+            if (std::isnan(rangeMax)) {this->rangeMax = 360.;}
+            // *INDENT-ON*
         }
     }
 
@@ -22,15 +25,15 @@ namespace Plotypus
         switch (type)
         {
             case AxisType::Azimuthal:
-                if (std::isnan(rangeMax))
-                {
-                    this->rangeMax = 360;
-                }
+                // *INDENT-OFF*
+                if (std::isnan(rangeMin)) {this->rangeMin =   0.;}
+                if (std::isnan(rangeMax)) {this->rangeMax = 360.;}
+                // *INDENT-ON*
                 break;
             case AxisType::Colourbar:
                 labelText = "z";
                 break;
-            case AxisType::Radius:
+            case AxisType::Radial:
                 labelText = "z";
                 break;
             case AxisType::X:

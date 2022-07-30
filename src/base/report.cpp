@@ -50,16 +50,11 @@ namespace Plotypus
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# prepare empty page" << std::endl << std::endl;
 
-        hFile << "set key off"  << std::endl;
         hFile << "unset border" << std::endl;
         hFile << "unset xtics"  << std::endl;
         hFile << "unset xlabel" << std::endl;
         hFile << "unset ytics"  << std::endl;
         hFile << "unset ylabel" << std::endl;
-        hFile << "unset ztics"  << std::endl;
-        hFile << "unset zlabel" << std::endl;
-        hFile << "unset rlabel" << std::endl;
-        hFile << "unset rtics"  << std::endl;
 
         hFile << "set xrange[0:1]" << std::endl;
         hFile << "set yrange[1:0]" << std::endl;

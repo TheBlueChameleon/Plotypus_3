@@ -20,7 +20,7 @@ namespace Plotypus
         protected:
             std::unordered_map<AxisType, AxisDescriptor> axes;
 
-            bool            polar = false;
+            bool polar = false;
 
             static std::string generateRangeString (double min,                   double max);
             static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
@@ -34,12 +34,12 @@ namespace Plotypus
             PlotWithAxes(const std::string& title);
             ~PlotWithAxes();
 
-            virtual void            reset();
+            virtual void reset();
 
             const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
             void                                                setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
 
-            AxisDescriptor&      axis(const AxisType axisID);          //! @todo enum like access or supported type check
+            AxisDescriptor&      axis(const AxisType axisID);
             void            clearAxes();
             void            clearAxis(const AxisType axisID);
 
@@ -70,8 +70,8 @@ namespace Plotypus
             virtual void writeDatData() const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
-            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
-            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
+            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;  //! @todo detect 3d mode: plot ~> splot
+            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;               //! @todo tidy up axes
 
             void writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const;
     };

@@ -123,19 +123,11 @@ namespace Plotypus
                   << axis.ticsOptions.value_or("")
                   << std::endl;
         }
-        else
-        {
-            hFile << "unset " << axisCommand << std::endl;
-        }
 
         if (axis.minorTics)
         {
             hFile << "set m" << axisCommand
                   << (axis.minorTicsIntervals == AXIS_AUTO_MINOR_TICS ? "" : " " + std::to_string(axis.minorTicsIntervals));
-        }
-        else
-        {
-            hFile << "unset m" << axisCommand << std::endl;
         }
 
         hFile << std::endl;
@@ -230,7 +222,7 @@ namespace Plotypus
             if (axes.contains(AxisType::Y)) {axes.erase(AxisType::X);}
             // *INDENT-ON*
 
-            axes[AxisType::Radius]                      = AxisDescriptor(AxisType::Radius);
+            axes[AxisType::Radial]                      = AxisDescriptor(AxisType::Radial);
             auto& thetaAxes = axes[AxisType::Azimuthal] = AxisDescriptor(AxisType::Azimuthal);
             thetaAxes.ticsIncrement = 30;
             border = BorderLine::Polar;
@@ -306,12 +298,23 @@ namespace Plotypus
                 hFile << ", \\\n\t";
             }
         }
-        hFile << std::endl;
+        hFile << std::endl << std::endl;
     }
 
     void PlotWithAxes::writeScriptFooter(std::ostream& hFile, int pageNum) const
     {
         Plot::writeScriptFooter(hFile, pageNum);
+
+        for (const auto& [axisID, axis] : axes)
+        {
+            const auto axisName = getAxisName(axisID);
+            // *INDENT-OFF*
+            if (hasAxisLabel(axisID))   {hFile << "unset " << axisName << "label" << std::endl;}
+            if (axis.tics)              {hFile << "unset " << axisName << "tics"  << std::endl;}
+            if (axis.minorTics)         {hFile << "unset " << axisName << "mtics" << std::endl;}
+            // *INDENT-ON*
+        }
+
         hFile << std::endl;
     }
 
