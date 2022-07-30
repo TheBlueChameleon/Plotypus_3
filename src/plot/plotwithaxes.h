@@ -3,6 +3,7 @@
 
 #include <span>
 #include <string>
+#include <unordered_map>
 
 #include "../dataview/dataview2dcompound.h"
 
@@ -10,11 +11,14 @@
 
 namespace Plotypus
 {
+    /**
+     * @todo set equal xy / xyz
+     */
+
     class PlotWithAxes : public Plot
     {
         protected:
-            AxisDescriptor  m_xAxis = AxisDescriptor("x");
-            AxisDescriptor  m_yAxis = AxisDescriptor("y");
+            std::unordered_map<AxisType, AxisDescriptor> axes;
 
             bool            polar = false;
 
@@ -22,11 +26,22 @@ namespace Plotypus
             static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
             static std::string generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add);
 
+            static void writeAxisLabel(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
+            static void writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
+            static void writeAxisTics (std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
+
         public:
             PlotWithAxes(const std::string& title);
             ~PlotWithAxes();
 
             virtual void            reset();
+
+            const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
+            void                                                setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
+
+            AxisDescriptor&      axis(const AxisType axisID);          //! @todo enum like access or supported type check
+            void            clearAxes();
+            void            clearAxis(const AxisType axisID);
 
             AxisDescriptor&         xAxis();
             AxisDescriptor&         yAxis();
@@ -58,7 +73,7 @@ namespace Plotypus
             virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
             virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
 
-            void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
+            void writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const;
     };
 }
 

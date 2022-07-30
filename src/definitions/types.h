@@ -4,6 +4,7 @@
 #include <cmath>
 #include <functional>
 #include <limits>
+#include <optional>
 #include <span>
 #include <string>
 
@@ -62,34 +63,31 @@ namespace Plotypus
 
     struct AxisDescriptor
     {
-        bool                            label               = true;
-        std::string                     labelText           = "";
-        std::string                     labelFont           = "";
-        std::string                     labelColor          = "";
-        std::string                     labelOptions        = "";
+        AxisType                        type;
+
+        std::optional<std::string>      labelText;
+        std::optional<std::string>      labelFont;
+        std::optional<std::string>      labelColor;
+        std::optional<std::string>      labelOptions;
         double                          rangeMin            = 0.;
         double                          rangeMax            = AXIS_AUTO_RANGE;
-        std::string                     rangeOptions        = "";
+        std::optional<std::string>      rangeOptions;
         bool                            tics                = true;
         double                          ticsStart           = AXIS_AUTO_RANGE;
         double                          ticsEnd             = AXIS_AUTO_RANGE;
         double                          ticsIncrement       = AXIS_AUTO_RANGE;
-        std::string                     ticsFormatstring    = "";
+        std::optional<std::string>      ticsFormatstring;
         std::vector<locatedTicsLabel_t> ticsLabels;
         bool                            ticsLogscale        = false;
-        std::string                     ticsFont            = "";
-        std::string                     ticsTextColor       = "";
-        std::string                     ticsOptions         = "";
+        std::optional<std::string>      ticsFont;
+        std::optional<std::string>      ticsTextColor;
+        std::optional<std::string>      ticsOptions;
         bool                            minorTics           = false;
         size_t                          minorTicsIntervals  = AXIS_AUTO_MINOR_TICS;
 
-        AxisDescriptor(const std::string& label, double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE) :
-            label(true), labelText(label),
-            rangeMin(rangeMin), rangeMax(rangeMax)
-        {};
-        AxisDescriptor(double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE) :
-            label(false), rangeMin(rangeMin), rangeMax(rangeMax)
-        {};
+        AxisDescriptor();
+        AxisDescriptor(const AxisType type,                           double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE);
+        AxisDescriptor(const AxisType type, const std::string& label, double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE);
     };
 
     // ====================================================================== //

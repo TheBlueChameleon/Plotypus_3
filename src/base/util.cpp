@@ -173,6 +173,47 @@ namespace Plotypus
         return "(undefined)";
     }
 
+    std::string getAxisName(const AxisType axis)
+    {
+        // *INDENT-OFF*
+        switch (axis)
+        {
+            case AxisType::Azimuthal:   return "t";
+            case AxisType::Colourbar:   return "cb";
+            case AxisType::Radius:      return "r";
+            case AxisType::X:           return "x";
+            case AxisType::X2:          return "x2";
+            case AxisType::Y:           return "y";
+            case AxisType::Y2:          return "y2";
+            case AxisType::Z:           return "z";
+        }
+        // *INDENT-ON*
+
+        return "(undefined)";
+    }
+
+    bool hasAxisLabel(const AxisType axis)
+    {
+        // *INDENT-OFF*
+        switch (axis)
+        {
+            case AxisType::Azimuthal:   return false;
+            case AxisType::Colourbar:   return true;
+            case AxisType::Radius:      return true;
+            case AxisType::X:           return true;
+            case AxisType::X2:          return true;
+            case AxisType::Y:           return true;
+            case AxisType::Y2:          return true;
+            case AxisType::Z:           return true;
+        }
+        // *INDENT-ON*
+
+        return false;
+    }
+
+    // ---------------------------------------------------------------------- //
+    // strings from optional parameters
+
     std::string optionalStyleString(const std::string& optionName, const size_t styleID)
     {
         // *INDENT-OFF*
@@ -195,9 +236,9 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         std::stringstream buffer;
-        if (option.has_value()) {return "";}
-        else                    {buffer << optionName << " " << std::quoted(option.value()) << " ";
-                                 return buffer.str();}
+        if (!option.has_value()) {return "";}
+        else                     {buffer << optionName << " " << std::quoted(option.value()) << " ";
+                                  return buffer.str();}
         // *INDENT-ON*
     }
 
@@ -215,5 +256,4 @@ namespace Plotypus
     {
         return optionalNumberString(optionName, number, number != 0.);
     }
-
 };

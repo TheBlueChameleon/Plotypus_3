@@ -81,6 +81,20 @@ namespace Plotypus
         Length, Angle
     };
 
+    // ====================================================================== //
+    /**
+     * @brief foo bar
+     */
+    enum class AxisType
+    {
+        X, X2,
+        Y, Y2,
+        Z,
+        Radius,
+        Azimuthal,
+        Colourbar,
+    };
+
     // ========================================================================== //
     /**
      * @brief Sheet border lines

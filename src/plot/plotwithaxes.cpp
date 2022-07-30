@@ -2,6 +2,7 @@
 
 namespace Plotypus
 {
+
     std::string PlotWithAxes::generateRangeString(double min, double max)
     {
         return "[" +
@@ -49,7 +50,7 @@ namespace Plotypus
         {
             case 1  : return " " +                              std::to_string(increment)                             + " ";
             case 2  : return " " + std::to_string(min) + ", " + std::to_string(increment)                             + " ";
-            case 3  : return " " + std::to_string(min) + ", " + std::to_string(increment) + "+" + std::to_string(max) + " ";
+            case 3  : return " " + std::to_string(min) + ", " + std::to_string(increment) + ", " + std::to_string(max) + " ";
             default : return "";
         }
 
@@ -76,12 +77,79 @@ namespace Plotypus
         return result;
     }
 
+    void PlotWithAxes::writeAxisLabel(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    {
+        if (!hasAxisLabel(axis.type))
+        {
+            return;
+        }
+
+        const std::string axisCommand = axisName  + "label ";
+
+        if (axis.labelText.has_value())
+        {
+            hFile << "set " << axisCommand
+                  << std::quoted(axis.labelText.value()) << " "
+                  << optionalQuotedTextString("font", axis.labelFont)
+                  << optionalQuotedTextString("textcolor", axis.labelColor)
+                  << axis.labelOptions.value_or("")
+                  << std::endl;
+        }
+    }
+
+    void PlotWithAxes::writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    {
+        const std::string axisCommand = axisName + "range ";
+        const std::string rangeString = generateRangeString (axis.rangeMin, axis.rangeMax);
+
+        hFile << "set " << axisCommand << " " << rangeString << axis.rangeOptions.value_or("") << std::endl;
+    }
+
+    void PlotWithAxes::writeAxisTics(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    {
+        const std::string axisCommand  = axisName + "tics ";
+
+        const std::string ticsSequenceString = generateTicsSequence(axis.ticsStart, axis.ticsIncrement, axis.ticsEnd, axis.rangeMin, axis.rangeMax);
+        const std::string ticsListString     = generateTicsList    (axis.ticsLabels, !ticsSequenceString.empty());
+
+        if (axis.tics)
+        {
+            hFile << "set " << axisCommand
+                  << ticsSequenceString
+                  << ticsListString
+                  << (axis.ticsLogscale ? "logscale " : "nologscale ")
+                  << optionalQuotedTextString("font", axis.ticsFont)
+                  << optionalQuotedTextString("textcolor", axis.ticsTextColor)
+                  << axis.ticsOptions.value_or("")
+                  << std::endl;
+        }
+        else
+        {
+            hFile << "unset " << axisCommand << std::endl;
+        }
+
+        if (axis.minorTics)
+        {
+            hFile << "set m" << axisCommand
+                  << (axis.minorTicsIntervals == AXIS_AUTO_MINOR_TICS ? "" : " " + std::to_string(axis.minorTicsIntervals));
+        }
+        else
+        {
+            hFile << "unset m" << axisCommand << std::endl;
+        }
+
+        hFile << std::endl;
+    }
+
     // ====================================================================== //
 
     PlotWithAxes::PlotWithAxes(const std::string& title) :
         Plot(title)
     {
         type = PlotType::Plot2D;
+
+        axes[AxisType::X] = AxisDescriptor(AxisType::X);
+        axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
     PlotWithAxes::~PlotWithAxes()
@@ -98,21 +166,53 @@ namespace Plotypus
     {
         Plot::reset();
 
-        m_xAxis = AxisDescriptor("x");
-        m_yAxis = AxisDescriptor("y");
+        axes.clear();
+        polar = false;
+    }
 
-        polar   = false;
+    // ====================================================================== //
+
+    const std::unordered_map<AxisType, AxisDescriptor>& PlotWithAxes::getAxes() const
+    {
+        return axes;
+    }
+
+    void PlotWithAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
+    {
+        axes = newAxes;
+    }
+
+    AxisDescriptor& PlotWithAxes::axis(const AxisType axisID)
+    {
+        if (!axes.contains(axisID))
+        {
+            axes[axisID] = AxisDescriptor(axisID);
+        }
+
+        return axes[axisID];
+    }
+
+    void PlotWithAxes::clearAxes()
+    {
+        axes.clear();
+    }
+
+    void PlotWithAxes::clearAxis(const AxisType axisID)
+    {
+        axes.erase(axisID);
     }
 
     AxisDescriptor& PlotWithAxes::xAxis()
     {
-        return m_xAxis;
+        return axis(AxisType::X);
     }
 
     AxisDescriptor& PlotWithAxes::yAxis()
     {
-        return m_yAxis;
+        return axis(AxisType::Y);
     }
+
+    // ====================================================================== //
 
     bool PlotWithAxes::getPolar() const
     {
@@ -122,6 +222,23 @@ namespace Plotypus
     void PlotWithAxes::setPolar(bool newPolar)
     {
         polar = newPolar;
+
+        if (polar)
+        {
+            // *INDENT-OFF*
+            if (axes.contains(AxisType::X)) {axes.erase(AxisType::Y);}
+            if (axes.contains(AxisType::Y)) {axes.erase(AxisType::X);}
+            // *INDENT-ON*
+
+            axes[AxisType::Radius]                      = AxisDescriptor(AxisType::Radius);
+            auto& thetaAxes = axes[AxisType::Azimuthal] = AxisDescriptor(AxisType::Azimuthal);
+            thetaAxes.ticsIncrement = 30;
+            border = BorderLine::Polar;
+        }
+        else
+        {
+
+        }
     }
 
     // ====================================================================== //
@@ -163,11 +280,13 @@ namespace Plotypus
     {
         Plot::writeScriptHead(hFile);
 
-        hFile << (polar         ? "" : "un") << "set polar" << std::endl;
+        hFile << (polar ? "" : "un") << "set polar" << std::endl;
         hFile << std::endl;
 
-        writeAxisDescriptor(hFile, "x", m_xAxis);
-        writeAxisDescriptor(hFile, "y", m_yAxis);
+        for (const auto& [axisID, axisDescriptor] : axes)
+        {
+            writeAxisDescriptor(hFile, axisDescriptor);
+        }
 
         hFile << std::endl;
     }
@@ -196,43 +315,11 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotWithAxes::writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const
+    void PlotWithAxes::writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const
     {
-        const std::string alabel = axis + "label ";
-        const std::string arange = axis + "range ";
-        const std::string atics  = axis + "tics ";
-
-        const std::string rangeString        = generateRangeString (label.rangeMin, label.rangeMax);
-        const std::string ticsSequenceString = generateTicsSequence(label.ticsStart, label.ticsIncrement, label.ticsEnd, label.rangeMin, label.rangeMax);
-        const std::string ticsListString     = generateTicsList    (label.ticsLabels, !ticsSequenceString.empty());
-
-        // *INDENT-OFF*
-        if (label.label)    {hFile <<   "set " << alabel
-                                                << std::quoted(label.labelText) << " "
-                                                << optionalQuotedTextString("font"     , label.labelFont)
-                                                << optionalQuotedTextString("textcolor", label.labelColor)
-                                                << label.labelOptions
-                                                << std::endl;}
-        else                {hFile << "unset " << alabel << std::endl;}
-
-        hFile << "set " << arange << " " << rangeString << label.rangeOptions << std::endl;
-
-        if (label.tics) {hFile << "set " << atics
-                                << ticsSequenceString
-                                << ticsListString
-                                << (label.ticsLogscale ? "logscale " : "nologscale ")
-                                << optionalQuotedTextString("font"     , label.ticsFont)
-                                << optionalQuotedTextString("textcolor", label.ticsTextColor)
-                                << label.ticsOptions
-                                << std::endl;}
-        else            {hFile << "unset " << atics << std::endl;}
-
-        if (label.minorTics) {hFile << "set m" << atics
-                                    << (label.minorTicsIntervals == AXIS_AUTO_MINOR_TICS ? "" : " " + std::to_string(label.minorTicsIntervals));}
-        else                 {hFile << "unset m" << atics << std::endl;}
-
-        hFile << std::endl;
-
-        // *INDENT-ON*
+        const std::string axisName = getAxisName(axis.type);
+        writeAxisLabel(hFile, axisName, axis);
+        writeAxisRange(hFile, axisName, axis);
+        writeAxisTics (hFile, axisName, axis);
     }
 }

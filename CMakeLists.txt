@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(Plotypus-lib SHARED
     src/plotypus.h src/plotypus.cpp
     #
-    src/definitions/types.h
+    src/definitions/types.h src/definitions/types.cpp
     src/definitions/styles.h
     src/definitions/errors.h
     src/definitions/constants.h
