@@ -1,15 +1,11 @@
 #ifndef REPORT_H
 #define REPORT_H
 
-#include <fstream>
 #include <string>
 #include <vector>
 
-#include "../definitions/types.h"
-#include "../plot/plotwithaxes.h"
-
 #include "util.h"
-#include "sheet.h"
+
 #include "stylescollection.h"
 #include "terminalinfoprovider.h"
 
@@ -24,6 +20,11 @@ namespace Plotypus
      * @todo better support for Filetype Screen
      * @todo move responsibility for "tidy up code" to individual sheets
      */
+
+    class PlotWithAxes;
+    class Sheet;
+    class StylesCollection;
+    class TerminalInfoProvider;
 
     class Report
     {

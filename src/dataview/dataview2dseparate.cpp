@@ -1,5 +1,3 @@
-#include <ranges>
-
 #include "dataview2dseparate.h"
 
 namespace Plotypus
@@ -33,7 +31,7 @@ namespace Plotypus
     std::span<double>& DataView2DSeparate::data(ColumnType columnType)
     {
         const auto columnID = getColumnID(columnType);
-        checkIndex("foo bar", columnID, m_data);
+        throwIfInvalidIndex("column index", columnID, m_data);
         return m_data[columnID];
     }
 

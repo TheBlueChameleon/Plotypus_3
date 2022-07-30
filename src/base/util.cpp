@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 
 #include "util.h"
 
@@ -7,7 +6,39 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    void checkFilename(const std::string& component, const std::string& stringToTest)
+    // ---------------------------------------------------------------------- //
+    // general purpose
+
+    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
+    {
+        std::fstream hFile(filename, mode);
+
+        if (!hFile.is_open())
+        {
+            throw FileIOError("Could not open '" + filename + "'");
+        }
+
+        return hFile;
+    }
+
+    void runGnuplot(const std::string& filename, bool verbose)
+    {
+        // *INDENT-OFF*
+        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+
+        const auto error = std::system((std::string("gnuplot ") + filename).data());
+
+        if (verbose) {
+            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
+            else        {std::cout << "done." << std::endl;}
+        }
+        // *INDENT-ON*
+    }
+
+    // ---------------------------------------------------------------------- //
+    // throw if ...
+
+    void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest)
     {
         if (stringToTest.find_first_of(INVALID_FILENAME_CHARS) != std::string::npos)
         {
@@ -17,6 +48,31 @@ namespace Plotypus
                                       );
         }
     }
+
+    // ---------------------------------------------------------------------- //
+    // column assignment magic
+
+    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const columnAssignmentList_t& columnAssignments)
+    {
+        std::stringstream buffer;
+        bool escape = false; // COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID ??
+
+        // *INDENT-OFF*
+        for (auto chr : formatTemplate) {
+            if      (chr == COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER) {buffer << columnID;}
+            else if (chr == COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID) {escape = true;}
+            else {
+                if (escape) {buffer << columnAssignments.at(chr - '1');}
+                else        {buffer << chr;}
+            }
+        }
+        // *INDENT-ON*
+
+        return buffer.str();
+    }
+
+    // ---------------------------------------------------------------------- //
+    // enum name lookups
 
     std::string getTerminalName(FileType fileType)
     {
@@ -115,51 +171,6 @@ namespace Plotypus
         // *INDENT-ON*
 
         return "(undefined)";
-    }
-
-    const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const columnAssignmentList_t& columnAssignments)
-    {
-        std::stringstream buffer;
-        bool escape = false; // COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID ??
-
-        // *INDENT-OFF*
-        for (auto chr : formatTemplate) {
-            if      (chr == COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER) {buffer << columnID;}
-            else if (chr == COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID) {escape = true;}
-            else {
-                if (escape) {buffer << columnAssignments.at(chr - '1');}
-                else        {buffer << chr;}
-            }
-        }
-        // *INDENT-ON*
-
-        return buffer.str();
-    }
-
-    std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
-    {
-        std::fstream hFile(filename, mode);
-
-        if (!hFile.is_open())
-        {
-            throw FileIOError("Could not open '" + filename + "'");
-        }
-
-        return hFile;
-    }
-
-    void runGnuplot(const std::string& filename, bool verbose)
-    {
-        // *INDENT-OFF*
-        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
-
-        const auto error = std::system((std::string("gnuplot ") + filename).data());
-
-        if (verbose) {
-            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
-            else        {std::cout << "done." << std::endl;}
-        }
-        // *INDENT-ON*
     }
 
     std::string optionalStyleString(const std::string& optionName, const size_t styleID)

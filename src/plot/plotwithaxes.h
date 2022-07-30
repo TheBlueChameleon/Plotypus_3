@@ -1,10 +1,8 @@
 #ifndef PLOT_WITH_AXES_H
 #define PLOT_WITH_AXES_H
 
-#include <fstream>
 #include <span>
 #include <string>
-#include <vector>
 
 #include "../dataview/dataview2dcompound.h"
 
@@ -15,10 +13,10 @@ namespace Plotypus
     class PlotWithAxes : public Plot
     {
         protected:
-            AxisDescriptor          m_xAxis = AxisDescriptor("x");
-            AxisDescriptor          m_yAxis = AxisDescriptor("y");
+            AxisDescriptor  m_xAxis = AxisDescriptor("x");
+            AxisDescriptor  m_yAxis = AxisDescriptor("y");
 
-            bool                    polar = false;
+            bool            polar = false;
 
             static std::string generateRangeString (double min,                   double max);
             static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
@@ -28,24 +26,24 @@ namespace Plotypus
             PlotWithAxes(const std::string& title);
             ~PlotWithAxes();
 
-            virtual void reset();
+            virtual void            reset();
 
-            AxisDescriptor&     xAxis();
-            AxisDescriptor&     yAxis();
+            AxisDescriptor&         xAxis();
+            AxisDescriptor&         yAxis();
 
-            bool                getPolar() const;
-            void                setPolar(bool newPolar);
+            bool                    getPolar() const;
+            void                    setPolar(bool newPolar);
 
             template<class T>
-            DataView2DCompound<T>& addDataViewCompound(DataView2DCompound<T>* dataView);
+            DataView2DCompound<T>&  addDataViewCompound(DataView2DCompound<T>* dataView);
             template<class T>
-            DataView2DCompound<T>& addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>&  addDataViewCompound(const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView2DCompound<T>& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>&  addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView2DCompound<T>& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>&  addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
             template<class T>
-            DataView2DCompound<T>& addDataViewCompound(const std::string& func, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
+            DataView2DCompound<T>&  addDataViewCompound(const std::string& func, const PlotStyle2D style = PlotStyle2D::Lines, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers

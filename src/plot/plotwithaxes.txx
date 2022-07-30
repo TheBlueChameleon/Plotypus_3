@@ -3,7 +3,6 @@
 
 namespace Plotypus
 {
-
     template<class T>
     DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(DataView2DCompound<T>* dataView)
     {

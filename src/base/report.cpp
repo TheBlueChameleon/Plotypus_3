@@ -1,4 +1,3 @@
-#include <cstdlib>
 #include <filesystem>
 #include <iostream>
 
@@ -117,7 +116,7 @@ namespace Plotypus
 
     Sheet& Report::sheet(const size_t i) const
     {
-        checkIndex("sheet index", i, sheets);
+        throwIfInvalidIndex("sheet index", i, sheets);
         return *(sheets[i]);
     }
 
@@ -162,7 +161,7 @@ namespace Plotypus
 
     void Report::setOutputDirectory(const std::string& newOutputDirectory)
     {
-        checkFilename("output directory", newOutputDirectory);
+        throwIfInvalidFilename("output directory", newOutputDirectory);
         outputDirectory = newOutputDirectory;
     }
 
@@ -173,7 +172,7 @@ namespace Plotypus
 
     void Report::setFilenameBase(const std::string& newFilenameBase)
     {
-        checkFilename("filename base", newFilenameBase);
+        throwIfInvalidFilename("filename base", newFilenameBase);
         filenameBase = newFilenameBase;
     }
 
@@ -184,7 +183,7 @@ namespace Plotypus
 
     void Report::setExtTxt(const std::string& newExtTxt)
     {
-        checkFilename("extension for text files", newExtTxt);
+        throwIfInvalidFilename("extension for text files", newExtTxt);
         extTxt = newExtTxt;
     }
 
@@ -195,7 +194,7 @@ namespace Plotypus
 
     void Report::setExtDat(const std::string& newExtDat)
     {
-        checkFilename("extension for gnuplot data files", newExtDat);
+        throwIfInvalidFilename("extension for gnuplot data files", newExtDat);
         extDat = newExtDat;
     }
 
@@ -216,7 +215,7 @@ namespace Plotypus
 
     void Report::setExtGnu(const std::string& newExtGnu)
     {
-        checkFilename("extension for gnuplot script files", newExtGnu);
+        throwIfInvalidFilename("extension for gnuplot script files", newExtGnu);
         extGnu = newExtGnu;
     }
 

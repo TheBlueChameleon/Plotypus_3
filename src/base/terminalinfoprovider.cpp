@@ -289,7 +289,7 @@ namespace Plotypus
 
     void TerminalInfoProvider::setExtOut(const std::string& newExtOut)
     {
-        checkFilename("extension for script output", newExtOut);
+        throwIfInvalidFilename("extension for script output", newExtOut);
         extOut = newExtOut;
     }
 

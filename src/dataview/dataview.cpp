@@ -1,5 +1,3 @@
-#include "../base/util.h"
-
 #include "dataview.h"
 
 using namespace Plotypus;
@@ -103,7 +101,7 @@ namespace Plotypus
 
     void DataView::setDataFilename(const std::string& newDataFilename) const
     {
-        checkFilename("data output filename", newDataFilename);
+        throwIfInvalidFilename("data output filename", newDataFilename);
         dataFilename = newDataFilename;
     }
 
@@ -149,7 +147,7 @@ namespace Plotypus
 
     size_t& DataView::columnAssignment(const size_t columnID)
     {
-        checkIndex("column ID", columnID, columnAssignments);
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnAssignments[columnID];
     }
 
@@ -160,7 +158,7 @@ namespace Plotypus
 
     std::string& DataView::columnFormat(const size_t columnID)
     {
-        checkIndex("column ID", columnID, columnAssignments);
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnFormats[columnID];
     }
 
@@ -171,7 +169,7 @@ namespace Plotypus
 
     std::string& DataView::columnHeadline(const size_t columnID)
     {
-        checkIndex("column ID", columnID, columnAssignments);
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnHeadlines[columnID];
     }
 

@@ -1,8 +1,6 @@
 #ifndef DATAVIEW2DSEPARATE_H
 #define DATAVIEW2DSEPARATE_H
 
-#include "../definitions/types.h"
-
 #include "dataview2d.h"
 
 namespace Plotypus

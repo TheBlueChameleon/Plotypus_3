@@ -1,9 +1,6 @@
 #ifndef DATAVIEW2DCOMPOUND_TXX
 #define DATAVIEW2DCOMPOUND_TXX
 
-#include <iomanip>
-#include <string>
-
 #include "dataview2dcompound.h"
 
 namespace Plotypus

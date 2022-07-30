@@ -11,6 +11,23 @@
 
 namespace Plotypus
 {
+    //! {
+
+    // ====================================================================== //
+    /**
+     * @brief foo bar
+     */
+    class Sheet;
+    template <typename T>
+    concept SheetLike = std::is_base_of<Sheet, T>::value;
+
+    /**
+     * @brief foo bar
+     */
+    class DataView;
+    template <typename T>
+    concept DataViewLike = std::is_base_of<DataView, T>::value;
+
     //! @addtogroup Plotypus_Definitions
     //! @{
 

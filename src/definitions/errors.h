@@ -3,11 +3,6 @@
 
 #include <stdexcept>
 
-#define PLOTYPUS_ERROR(ErrorClassName) \
-    class ErrorClassName : public PlotypusError { \
-        public : ErrorClassName (const std::string & m) : PlotypusError(m) {} \
-    }
-
 namespace Plotypus
 {
     //! @addtogroup Plotypus_Definitions
@@ -16,12 +11,16 @@ namespace Plotypus
     /**
      * @brief thrown when trying to set an invalid file name
      */
-
     // *INDENT-OFF*
     class PlotypusError : public std::runtime_error {
         public : PlotypusError (const std::string& m) : std::runtime_error(m) {};
     };
     // *INDENT-ON*
+
+#define PLOTYPUS_ERROR(ErrorClassName) \
+    class ErrorClassName : public PlotypusError { \
+        public : ErrorClassName (const std::string & m) : PlotypusError(m) {} \
+    }
 
     PLOTYPUS_ERROR(InvalidFilenameError);
     PLOTYPUS_ERROR(InvalidIndexError);

@@ -1,11 +1,8 @@
 #ifndef PLOT_H
 #define PLOT_H
 
-#include <cmath>
 #include <vector>
 
-#include "../definitions/types.h"
-#include "../definitions/styles.h"
 #include "../base/sheet.h"
 
 namespace Plotypus

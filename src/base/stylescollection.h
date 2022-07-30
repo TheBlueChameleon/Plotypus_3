@@ -1,7 +1,6 @@
 #ifndef STYLESCOLLECTION_H
 #define STYLESCOLLECTION_H
 
-#include <fstream>
 #include <vector>
 
 #include "../definitions/styles.h"

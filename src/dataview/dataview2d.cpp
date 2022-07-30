@@ -1,11 +1,3 @@
-#include <iomanip>
-#include <iostream>
-#include <functional>
-
-#include "../base/util.h"
-#include "../definitions/types.h"
-#include "../plot/plot.h"
-
 #include "dataview2d.h"
 
 namespace Plotypus

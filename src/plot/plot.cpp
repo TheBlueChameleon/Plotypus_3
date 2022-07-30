@@ -1,6 +1,3 @@
-#include <iomanip>
-#include <string>
-
 #include "plot.h"
 
 using namespace std::string_literals;
@@ -39,7 +36,7 @@ namespace Plotypus
 
     DataView& Plot::dataView(const size_t i)
     {
-        checkIndex("dataView index", i, dataViews);
+        throwIfInvalidIndex("dataView index", i, dataViews);
         return *dataViews[i];
     }
 

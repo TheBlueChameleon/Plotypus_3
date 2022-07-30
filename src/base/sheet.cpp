@@ -1,6 +1,3 @@
-#include <cmath>
-#include <iostream>
-
 #include "sheet.h"
 
 using namespace std::string_literals;
@@ -111,7 +108,7 @@ namespace Plotypus
 
     Label& Sheet::label(const size_t i)
     {
-        checkIndex("label index", i, labels);
+        throwIfInvalidIndex("label index", i, labels);
         return labels[i];
     }
 

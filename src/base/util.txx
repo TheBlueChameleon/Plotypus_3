@@ -3,14 +3,8 @@
 
 namespace Plotypus
 {
-    template<std::ranges::sized_range T>
-    void checkIndex(const std::string& indexName, const size_t i, T collection)
-    {
-        if (i >= collection.size())
-        {
-            throw Plotypus::InvalidIndexError("    Invalid " + indexName + ": " + std::to_string(i));
-        }
-    }
+    // ---------------------------------------------------------------------- //
+    // general purpose
 
     template<class T>
     bool contains(const T& toFind, const std::vector<T>& container)
@@ -19,6 +13,21 @@ namespace Plotypus
         const auto found = std::find(container.begin(), container.end(), toFind);
         return found != last;
     }
+
+    // ---------------------------------------------------------------------- //
+    // throw if ...
+
+    template<std::ranges::sized_range T>
+    void throwIfInvalidIndex(const std::string& indexName, const size_t i, T collection)
+    {
+        if (i >= collection.size())
+        {
+            throw Plotypus::InvalidIndexError("    Invalid " + indexName + ": " + std::to_string(i));
+        }
+    }
+
+    // ---------------------------------------------------------------------- //
+    // column assignment magic
 
     template<class T, UnaryPredicate<T> U>
     size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn)
@@ -55,7 +64,6 @@ namespace Plotypus
         return result;
     }
 
-    //template<class T, class U>
     template<class T, UnaryPredicate<T> U>
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn)
     {

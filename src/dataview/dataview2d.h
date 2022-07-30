@@ -7,8 +7,6 @@
 #include <string>
 #include <vector>
 
-#include "../definitions/types.h"
-
 #include "dataview.h"
 
 namespace Plotypus
