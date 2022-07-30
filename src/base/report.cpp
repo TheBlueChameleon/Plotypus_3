@@ -127,9 +127,9 @@ namespace Plotypus
         return *sheets.back();
     }
 
-    Plot2D& Report::addPlot2D(const std::string& title)
+    PlotWithAxes& Report::addPlotWithAxes(const std::string& title)
     {
-        Plot2D* newPlot = new Plot2D(title);
+        PlotWithAxes* newPlot = new PlotWithAxes(title);
         sheets.push_back(newPlot);
         return *newPlot;
     }

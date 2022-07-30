@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "../definitions/types.h"
-#include "../plot/plot2d.h"
+#include "../plot/plotwithaxes.h"
 
 #include "util.h"
 #include "sheet.h"
@@ -82,8 +82,8 @@ namespace Plotypus
 
             //! @brief adds an empty Sheet to the report and returns a modifiably reference to the newly created Sheet.
             Plotypus::Sheet&  addSheet (const std::string& title = "");
-            //! @brief adds an empty Plot2D to the report and returns a modifiably reference to the newly created Plot2D.
-            Plotypus::Plot2D& addPlot2D(const std::string& title = "");
+            //! @brief adds an empty PlotWithAxes to the report and returns a modifiably reference to the newly created PlotWithAxes.
+            Plotypus::PlotWithAxes& addPlotWithAxes(const std::string& title = "");
 
             void clearSheets();
 

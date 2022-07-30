@@ -30,7 +30,7 @@
 #include "dataview/dataview2dseparate.h"
 
 #include "plot/plot.h"
-#include "plot/plot2d.h"
-#include "plot/plot3d.h"
+#include "plot/plotwithaxes.h"
+#include "plot/plotradial.h"
 
 #endif // PLOTYPUS_H

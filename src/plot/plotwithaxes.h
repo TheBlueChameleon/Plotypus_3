@@ -1,5 +1,5 @@
-#ifndef PLOT2D_H
-#define PLOT2D_H
+#ifndef PLOT_WITH_AXES_H
+#define PLOT_WITH_AXES_H
 
 #include <fstream>
 #include <span>
@@ -12,26 +12,30 @@
 
 namespace Plotypus
 {
-    class Plot2D : public Plot
+    class PlotWithAxes : public Plot
     {
-            /**
-             * @todo appy point styles in script
-             */
+        protected:
+            AxisDescriptor          m_xAxis = AxisDescriptor("x");
+            AxisDescriptor          m_yAxis = AxisDescriptor("y");
 
-        private:
-            std::vector<DataView*> dataViews;
+            bool                    polar = false;
+
+            static std::string generateRangeString (double min,                   double max);
+            static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
+            static std::string generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add);
 
         public:
-            Plot2D(const std::string& title);
-            ~Plot2D();
+            PlotWithAxes(const std::string& title);
+            ~PlotWithAxes();
 
             virtual void reset();
 
-            const std::vector<DataView*>& getDataViews() const;
+            AxisDescriptor&     xAxis();
+            AxisDescriptor&     yAxis();
 
-            DataView& dataView(const size_t i);
-            template<DataViewLike T>
-            T& dataViewAs(const size_t i);
+            bool                getPolar() const;
+            void                setPolar(bool newPolar);
+
             template<class T>
             DataView2DCompound<T>& addDataViewCompound(DataView2DCompound<T>* dataView);
             template<class T>
@@ -52,10 +56,13 @@ namespace Plotypus
 
             virtual void writeDatData() const;
 
+            virtual void writeScriptHead    (std::ostream& hFile) const;
             virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
             virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
+
+            void writeAxisDescriptor(std::ostream& hFile, const std::string& axis, const AxisDescriptor& label) const;
     };
 }
 
-#include "plot2d.txx"
-#endif // PLOT2D_H
+#include "plotwithaxes.txx"
+#endif // PLOT_WITH_AXES_H

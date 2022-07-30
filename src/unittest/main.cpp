@@ -56,7 +56,7 @@ void playground ()
     auto& sheet1 = report.addSheet("foo");
     auto& sheet2 = report.addSheet("bar");
     auto& sheet3 = report.addSheet();
-    auto& sheet4 = report.addPlot2D("plot {\134U+221E}");
+    auto& sheet4 = report.addPlotWithAxes("plot {\134U+221E}");
     auto& sheet5 = report.addSheet();
 
     sheet1.addLabel(" FOO ", .10, .10);
@@ -162,7 +162,7 @@ int main()
 
     std::cout << std::endl;
     std::cout << "FREE RANGE CODE BEGINS HERE" << std::endl;
-    //playground();
+    playground();
 
     return 0;
 }

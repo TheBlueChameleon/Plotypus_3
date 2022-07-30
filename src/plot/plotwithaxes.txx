@@ -1,30 +1,25 @@
-#ifndef PLOT2D_TXX
-#define PLOT2D_TXX
+#ifndef PLOT_WITH_AXES_TXX
+#define PLOT_WITH_AXES_TXX
 
 namespace Plotypus
 {
-    template<DataViewLike T>
-    T& Plot2D::dataViewAs(const size_t i)
-    {
-        return static_cast<T&>(dataView(i));
-    }
 
     template<class T>
-    DataView2DCompound<T>& Plot2D::addDataViewCompound(DataView2DCompound<T>* dataView)
+    DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(DataView2DCompound<T>* dataView)
     {
         dataViews.push_back(dataView);
         return *dataView;
     }
 
     template<class T>
-    DataView2DCompound<T>& Plot2D::addDataViewCompound(const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataView2DCompound<T>& Plot2D::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
@@ -35,7 +30,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView2DCompound<T>& Plot2D::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
@@ -46,7 +41,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataView2DCompound<T>& Plot2D::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
+    DataView2DCompound<T>& PlotWithAxes::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
     {
         DataView2DCompound<T>* dataView = new DataView2DCompound<T>(style, label);
 
@@ -56,4 +51,4 @@ namespace Plotypus
     }
 }
 
-#endif // PLOT2D_TXX
+#endif // PLOT_WITH_AXES_TXX

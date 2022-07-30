@@ -28,9 +28,9 @@ add_library(Plotypus-lib SHARED
     src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
     src/base/sheet.h src/base/sheet.cpp
     #
-    src/plot/plot.h src/plot/plot.cpp
-    src/plot/plot2d.h src/plot/plot2d.cpp src/plot/plot2d.txx
-    src/plot/plot3d.h src/plot/plot3d.cpp
+    src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
+    src/plot/plotwithaxes.h src/plot/plotwithaxes.cpp src/plot/plotwithaxes.txx
+    src/plot/plotradial.h src/plot/plotradial.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
     src/dataview/dataview2d.h src/dataview/dataview2d.cpp
