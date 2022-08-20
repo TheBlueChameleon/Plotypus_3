@@ -142,6 +142,7 @@ namespace Plotypus
         FSteps,
         FillSteps,
 
+        Impulses,
         Boxes,
         HBoxes,
         BoxErrorBars,
@@ -164,11 +165,21 @@ namespace Plotypus
 
     enum class PlotStyle3D
     {
+        Dots,
+        Points,
+
         Lines,
+        LinesPoints,
+
+        Impulses,
+        Boxes,
+
         Surface,
-        Arrows,
+
+        Vectors,
         Image,
-        Vectors
+
+        Custom
     };
 
     // ========================================================================== //

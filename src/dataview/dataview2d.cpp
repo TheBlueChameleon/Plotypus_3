@@ -149,6 +149,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -181,6 +182,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -210,6 +212,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -240,6 +243,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -271,6 +275,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -302,6 +307,7 @@ namespace Plotypus
                     case PlotStyle2D::FSteps:
                     case PlotStyle2D::FillSteps:
                     case PlotStyle2D::FilledCurves:
+                    case PlotStyle2D::Impulses:
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
@@ -311,31 +317,31 @@ namespace Plotypus
                         return COLUMN_UNSUPPORTED;
                 }
 
-            case ColumnType::Pointsize:
 // *INDENT-OFF*
-                if (styleID == PlotStyle2D::Points) {return 3;}
-                else                                {return COLUMN_UNSUPPORTED;}
+            case ColumnType::Pointsize:
+                if (styleID == PlotStyle2D::Points)                                     {return 3;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Pointtype:
-                if (styleID == PlotStyle2D::Points) {return 4;}
-                else                                {return COLUMN_UNSUPPORTED;}
+                if (styleID == PlotStyle2D::Points)                                     {return 4;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Color:
-                if      (styleID == PlotStyle2D::Points)    {return 5;}
-                else if (styleID == PlotStyle2D::Image)     {return 3;}
-                else                                        {return COLUMN_UNSUPPORTED;}
+                if      (styleID == PlotStyle2D::Points)                                {return 5;}
+                else if (styleID == PlotStyle2D::Image)                                 {return 3;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Boxwidth:
                 if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
                 else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Length:
-                if (styleID == PlotStyle2D::Arrows) {return 3;}
-                else                                {return COLUMN_UNSUPPORTED;}
+                if (styleID == PlotStyle2D::Arrows)                                     {return 3;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Angle:
-                if (styleID == PlotStyle2D::Arrows) {return 4;}
-                else                                {return COLUMN_UNSUPPORTED;}
+                if (styleID == PlotStyle2D::Arrows)                                     {return 4;}
+                else                                                                    {return COLUMN_UNSUPPORTED;}
 // *INDENT-ON*
 
             case ColumnType::Z:

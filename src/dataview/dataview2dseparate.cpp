@@ -95,6 +95,8 @@ namespace Plotypus
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
             case PlotStyle2D::FillSteps:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+            case PlotStyle2D::Impulses:
+                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
             case PlotStyle2D::Boxes:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
             case PlotStyle2D::HBoxes:

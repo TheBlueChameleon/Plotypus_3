@@ -160,6 +160,7 @@ namespace Plotypus
             case PlotStyle2D::Steps:        return "steps";
             case PlotStyle2D::FSteps:       return "fsteps";
             case PlotStyle2D::FillSteps:    return "fillsteps";
+            case PlotStyle2D::Impulses:     return "impulses";
             case PlotStyle2D::Boxes:        return "boxes";
             case PlotStyle2D::HBoxes:       return "boxxyerror";
             case PlotStyle2D::BoxErrorBars: return "boxerrorbars";
