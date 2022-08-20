@@ -166,6 +166,7 @@ namespace Plotypus
             case PlotStyle2D::BoxxyError:   return "boxxyerror";
             case PlotStyle2D::Arrows:       return "arrows";
             case PlotStyle2D::Vectors:      return "vectors";
+            case PlotStyle2D::Image:        return "image pixels";
             case PlotStyle2D::Custom:       return "custom";
         }
         // *INDENT-ON*

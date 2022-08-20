@@ -110,7 +110,7 @@ namespace Plotypus
     {
         switch (columnType)
         {
-            // *INDENT-OFF*
+// *INDENT-OFF*
             case ColumnType::Column1: return 1;
             case ColumnType::Column2: return 2;
             case ColumnType::Column3: return 3;
@@ -123,7 +123,7 @@ namespace Plotypus
             case ColumnType::Y2:
                 if (styleID == PlotStyle2D::FilledCurves)   {return 3;}
                 else                                        {return COLUMN_UNSUPPORTED;}
-            // *INDENT-ON*
+// *INDENT-ON*
 
             case ColumnType::DeltaX:
                 switch(styleID)
@@ -152,6 +152,7 @@ namespace Plotypus
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
@@ -183,6 +184,7 @@ namespace Plotypus
                     case PlotStyle2D::Boxes:
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
@@ -212,6 +214,7 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
@@ -241,6 +244,7 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
@@ -271,6 +275,7 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
@@ -301,12 +306,13 @@ namespace Plotypus
                     case PlotStyle2D::HBoxes:
                     case PlotStyle2D::Arrows:
                     case PlotStyle2D::Vectors:
+                    case PlotStyle2D::Image:
                     case PlotStyle2D::Custom:
                         return COLUMN_UNSUPPORTED;
                 }
 
             case ColumnType::Pointsize:
-                // *INDENT-OFF*
+// *INDENT-OFF*
                 if (styleID == PlotStyle2D::Points) {return 3;}
                 else                                {return COLUMN_UNSUPPORTED;}
 
@@ -315,8 +321,9 @@ namespace Plotypus
                 else                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Color:
-                if (styleID == PlotStyle2D::Points) {return 5;}
-                else                                {return COLUMN_UNSUPPORTED;}
+                if      (styleID == PlotStyle2D::Points)    {return 5;}
+                else if (styleID == PlotStyle2D::Image)     {return 3;}
+                else                                        {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Boxwidth:
                 if (styleID == PlotStyle2D::Boxes || styleID == PlotStyle2D::HBoxes)    {return 3;}
@@ -329,7 +336,7 @@ namespace Plotypus
             case ColumnType::Angle:
                 if (styleID == PlotStyle2D::Arrows) {return 4;}
                 else                                {return COLUMN_UNSUPPORTED;}
-                // *INDENT-ON*
+// *INDENT-ON*
 
             case ColumnType::Z:
             case ColumnType::DeltaZ:

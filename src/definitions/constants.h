@@ -47,12 +47,11 @@ namespace Plotypus
         //! @brief an empty sheet, optionally with title. Ready to be populated with overlays
         Sheet,
 
-        //! @brief functionality of sheet, together with frame formatting and capacity to accept 2D data sequences
-        Plot2D,
-        //! @brief same, but accepts 3D data sequences
-        Plot3D,
-        //! @brief same, but renders the z data as coloured pixels
-        PlotColormap,
+        //! @brief functionality of sheet, together with capacity to render 2D/3D plots with orthogonal axes
+        PlotOrthogonalAxis,
+
+        //! @brief same, but renders pie charts and spiderplots
+        PlotRadialAxes,
 
         //! @brief a sheet with multiple subsheets on it
         FramesCollection
@@ -151,6 +150,9 @@ namespace Plotypus
         Arrows,
         Vectors,
 
+        Image,
+        // RgbImage -- cool, but requires three more ColumnTypes... see manual, p.75
+
         Custom
     };
 
@@ -164,8 +166,8 @@ namespace Plotypus
     {
         Lines,
         Surface,
-        Image,
         Arrows,
+        Image,
         Vectors
     };
 

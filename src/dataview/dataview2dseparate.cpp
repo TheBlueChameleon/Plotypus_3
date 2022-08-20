@@ -107,6 +107,8 @@ namespace Plotypus
                 return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
             case PlotStyle2D::Vectors:
                 return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
+            case PlotStyle2D::Image:
+                return checkColumnListOccupationIsFrom(m_data, {3}, isNullSpan);
             case PlotStyle2D::Custom:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3, 4, 5, 6}, isNullSpan);
         }

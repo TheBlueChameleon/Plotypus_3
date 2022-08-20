@@ -138,7 +138,7 @@ namespace Plotypus
     PlotWithAxes::PlotWithAxes(const std::string& title) :
         Plot(title)
     {
-        type = PlotType::Plot2D;
+        type = PlotType::PlotOrthogonalAxis;
 
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);

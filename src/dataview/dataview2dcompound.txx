@@ -169,6 +169,8 @@ namespace Plotypus
                 return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
             case PlotStyle2D::Vectors:
                 return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
+            case PlotStyle2D::Image:
+                return checkColumnListOccupationIsFrom(selectors, {3}, isNullSelector);
             case PlotStyle2D::Custom:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, isNullSelector);
         }
