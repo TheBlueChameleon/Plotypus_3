@@ -16,11 +16,11 @@ namespace Plotypus
     }
 
     DataView2DSeparate::DataView2DSeparate(const PlotStyle2D style, const std::string& label) :
-        DataView2D(style, label)
+        DataViewDefault(style, label)
     {}
 
     DataView2DSeparate::DataView2DSeparate(const std::string& style, const std::string& label) :
-        DataView2D(style, label)
+        DataViewDefault(style, label)
     {}
 
     size_t DataView2DSeparate::getArity() const

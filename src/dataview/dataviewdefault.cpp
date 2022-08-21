@@ -1,13 +1,13 @@
-#include "dataview2d.h"
+#include "dataviewdefault.h"
 
 namespace Plotypus
 {
-    void DataView2D::clearFunctionMembers()
+    void DataViewDefault::clearFunctionMembers()
     {
         func = "";
     }
 
-    void DataView2D::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
+    void DataViewDefault::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
         for (size_t i = 0u; i < getArity(); ++i)
         {
@@ -20,7 +20,7 @@ namespace Plotypus
         }
     }
 
-    void DataView2D::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
+    void DataViewDefault::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
         for (size_t i = 0u; i < getArity(); ++i)
         {
@@ -32,7 +32,7 @@ namespace Plotypus
         }
     }
 
-    void DataView2D::writeUsingSpecification(std::ostream& hFile) const
+    void DataViewDefault::writeUsingSpecification(std::ostream& hFile) const
     {
         // *INDENT-OFF*
         if (isFunction()) {return;}
@@ -59,17 +59,17 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataView2D::DataView2D(const PlotStyle2D style, const std::string& label) :
+    DataViewDefault::DataViewDefault(const PlotStyle2D style, const std::string& label) :
         DataView(style, label)
     {}
 
-    DataView2D::DataView2D(const std::string& style, const std::string& label) :
+    DataViewDefault::DataViewDefault(const std::string& style, const std::string& label) :
         DataView(style, label)
     {}
 
     // ====================================================================== //
 
-    void DataView2D::reset()
+    void DataViewDefault::reset()
     {
         DataView::reset();
 
@@ -80,33 +80,33 @@ namespace Plotypus
         pointStyle = -1;
     }
 
-    const std::string& DataView2D::getFunc() const
+    const std::string& DataViewDefault::getFunc() const
     {
         return func;
     }
 
-    void DataView2D::setFunc(const std::string& newFunc)
+    void DataViewDefault::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
         clearNonFunctionMembers();
     }
 
-    size_t DataView2D::getLineStyle() const
+    size_t DataViewDefault::getLineStyle() const
     {
         return lineStyle;
     }
 
-    void DataView2D::setLineStyle(size_t newLineStyle)
+    void DataViewDefault::setLineStyle(size_t newLineStyle)
     {
         lineStyle = newLineStyle;
     }
 
-    bool DataView2D::isFunction() const
+    bool DataViewDefault::isFunction() const
     {
         return !func.empty();
     }
 
-    size_t DataView2D::getColumnID(const ColumnType columnType) const
+    size_t DataViewDefault::getColumnID(const ColumnType columnType) const
     {
         switch (columnType)
         {
@@ -354,7 +354,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void DataView2D::writeTxtData(std::ostream& hFile) const
+    void DataViewDefault::writeTxtData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
         if      (isDummy())     {hFile << "(external input from " << std::quoted(dataFilename) << ")"  << std::endl; return;}
@@ -392,7 +392,7 @@ namespace Plotypus
         }
     }
 
-    void DataView2D::writeDatData() const
+    void DataViewDefault::writeDatData() const
     {
         // *INDENT-OFF*
         if (isDummy())      {return;}
@@ -412,7 +412,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    void DataView2D::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    void DataViewDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         // *INDENT-OFF*
         if (isFunction()) {hFile << func << " ";}

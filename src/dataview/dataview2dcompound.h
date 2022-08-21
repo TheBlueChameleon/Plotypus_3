@@ -3,12 +3,12 @@
 
 #include <iomanip>
 
-#include "dataview2d.h"
+#include "dataviewdefault.h"
 
 namespace Plotypus
 {
     template<class T>
-    class DataView2DCompound : public DataView2D
+    class DataView2DCompound : public DataViewDefault
     {
         protected:
             std::span<T>                        data;

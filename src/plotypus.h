@@ -25,7 +25,7 @@
 #include "base/stylescollection.h"
 
 #include "dataview/dataview.h"
-#include "dataview/dataview2d.h"
+#include "dataview/dataviewdefault.h"
 #include "dataview/dataview2dcompound.h"
 #include "dataview/dataview2dseparate.h"
 

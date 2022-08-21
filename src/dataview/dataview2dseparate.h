@@ -1,11 +1,11 @@
 #ifndef DATAVIEW2DSEPARATE_H
 #define DATAVIEW2DSEPARATE_H
 
-#include "dataview2d.h"
+#include "dataviewdefault.h"
 
 namespace Plotypus
 {
-    class DataView2DSeparate : public DataView2D
+    class DataView2DSeparate : public DataViewDefault
     {
         protected:
             columnViewList_t m_data;

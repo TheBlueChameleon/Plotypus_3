@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.5)
 # lanugage definition
 
 project(Plotypus
-    VERSION 0.0.1
+    VERSION 3.0.1
     LANGUAGES CXX
 )
 
@@ -33,7 +33,7 @@ add_library(Plotypus-lib SHARED
     src/plot/plotradial.h src/plot/plotradial.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
-    src/dataview/dataview2d.h src/dataview/dataview2d.cpp
+    src/dataview/dataviewdefault.h src/dataview/dataviewdefault.cpp
     src/dataview/dataview2dcompound.h src/dataview/dataview2dcompound.txx
     src/dataview/dataview2dseparate.h src/dataview/dataview2dseparate.cpp
 )

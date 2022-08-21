@@ -1,5 +1,5 @@
-#ifndef DATAVIEW2D_H
-#define DATAVIEW2D_H
+#ifndef DATAVIEWDEFAULT_H
+#define DATAVIEWDEFAULT_H
 
 #include <array>
 #include <concepts>
@@ -11,7 +11,7 @@
 
 namespace Plotypus
 {
-    class DataView2D : public DataView
+    class DataViewDefault : public DataView
     {
         protected:
             std::string func;
@@ -28,8 +28,8 @@ namespace Plotypus
             void writeUsingSpecification(std::ostream& hFile) const;
 
         public:
-            DataView2D(const PlotStyle2D  style, const std::string& label = "");
-            DataView2D(const std::string& style, const std::string& label = "");
+            DataViewDefault(const PlotStyle2D  style, const std::string& label = "");
+            DataViewDefault(const std::string& style, const std::string& label = "");
 
             virtual void reset();
 
@@ -53,4 +53,4 @@ namespace Plotypus
     };
 }
 
-#endif // DATAVIEW2D_H
+#endif // DATAVIEWDEFAULT_H

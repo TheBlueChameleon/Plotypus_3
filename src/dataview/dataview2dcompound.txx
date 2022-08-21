@@ -33,12 +33,12 @@ namespace Plotypus
 
     template<class T>
     DataView2DCompound<T>::DataView2DCompound(const PlotStyle2D style, const std::string& label) :
-        DataView2D(style, label)
+        DataViewDefault(style, label)
     {}
 
     template<class T>
     DataView2DCompound<T>::DataView2DCompound(const std::string& style, const std::string& label) :
-        DataView2D(style, label)
+        DataViewDefault(style, label)
     {}
 
     // ====================================================================== //
