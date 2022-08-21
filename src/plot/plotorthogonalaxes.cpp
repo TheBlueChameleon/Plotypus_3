@@ -1,9 +1,9 @@
-#include "plotwithaxes.h"
+#include "plotorthogonalaxes.h"
 
 namespace Plotypus
 {
 
-    std::string PlotWithAxes::generateRangeString(double min, double max)
+    std::string PlotOrthogonalAxes::generateRangeString(double min, double max)
     {
         return "[" +
                (std::isnan(min) ? "*" : std::to_string(min)) +
@@ -12,7 +12,7 @@ namespace Plotypus
                "] ";
     }
 
-    std::string PlotWithAxes::generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax)
+    std::string PlotOrthogonalAxes::generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax)
     {
         size_t argForm = 3;
 
@@ -57,7 +57,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string PlotWithAxes::generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add)
+    std::string PlotOrthogonalAxes::generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add)
     {
         std::string result = (add ? "add " : "");
 
@@ -77,7 +77,7 @@ namespace Plotypus
         return result;
     }
 
-    void PlotWithAxes::writeAxisLabel(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    void PlotOrthogonalAxes::writeAxisLabel(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
     {
         if (!hasAxisLabel(axis.type))
         {
@@ -97,7 +97,7 @@ namespace Plotypus
         }
     }
 
-    void PlotWithAxes::writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    void PlotOrthogonalAxes::writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
     {
         const std::string axisCommand = axisName + "range ";
         const std::string rangeString = generateRangeString (axis.rangeMin, axis.rangeMax);
@@ -105,7 +105,7 @@ namespace Plotypus
         hFile << "set " << axisCommand << " " << rangeString << axis.rangeOptions.value_or("") << std::endl;
     }
 
-    void PlotWithAxes::writeAxisTics(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
+    void PlotOrthogonalAxes::writeAxisTics(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
     {
         const std::string axisCommand  = axisName + "tics ";
 
@@ -135,7 +135,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    PlotWithAxes::PlotWithAxes(const std::string& title) :
+    PlotOrthogonalAxes::PlotOrthogonalAxes(const std::string& title) :
         Plot(title)
     {
         type = PlotType::PlotOrthogonalAxis;
@@ -144,7 +144,7 @@ namespace Plotypus
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
-    PlotWithAxes::~PlotWithAxes()
+    PlotOrthogonalAxes::~PlotOrthogonalAxes()
     {
         for (auto dataView : dataViews)
         {
@@ -154,7 +154,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void PlotWithAxes::reset()
+    void PlotOrthogonalAxes::reset()
     {
         Plot::reset();
 
@@ -164,17 +164,17 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    const std::unordered_map<AxisType, AxisDescriptor>& PlotWithAxes::getAxes() const
+    const std::unordered_map<AxisType, AxisDescriptor>& PlotOrthogonalAxes::getAxes() const
     {
         return axes;
     }
 
-    void PlotWithAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
+    void PlotOrthogonalAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
     {
         axes = newAxes;
     }
 
-    AxisDescriptor& PlotWithAxes::axis(const AxisType axisID)
+    AxisDescriptor& PlotOrthogonalAxes::axis(const AxisType axisID)
     {
         if (!axes.contains(axisID))
         {
@@ -184,34 +184,34 @@ namespace Plotypus
         return axes[axisID];
     }
 
-    void PlotWithAxes::clearAxes()
+    void PlotOrthogonalAxes::clearAxes()
     {
         axes.clear();
     }
 
-    void PlotWithAxes::clearAxis(const AxisType axisID)
+    void PlotOrthogonalAxes::clearAxis(const AxisType axisID)
     {
         axes.erase(axisID);
     }
 
-    AxisDescriptor& PlotWithAxes::xAxis()
+    AxisDescriptor& PlotOrthogonalAxes::xAxis()
     {
         return axis(AxisType::X);
     }
 
-    AxisDescriptor& PlotWithAxes::yAxis()
+    AxisDescriptor& PlotOrthogonalAxes::yAxis()
     {
         return axis(AxisType::Y);
     }
 
     // ====================================================================== //
 
-    bool PlotWithAxes::getPolar() const
+    bool PlotOrthogonalAxes::getPolar() const
     {
         return polar;
     }
 
-    void PlotWithAxes::setPolar(bool newPolar)
+    void PlotOrthogonalAxes::setPolar(bool newPolar)
     {
         polar = newPolar;
 
@@ -236,7 +236,7 @@ namespace Plotypus
     // ====================================================================== //
     // writers
 
-    void PlotWithAxes::preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const
+    void PlotOrthogonalAxes::preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const
     {
         for (size_t i = 1u; const auto dataView : dataViews)
         {
@@ -249,7 +249,7 @@ namespace Plotypus
         }
     }
 
-    void PlotWithAxes::writeTxtData(std::ostream& hFile) const
+    void PlotOrthogonalAxes::writeTxtData(std::ostream& hFile) const
     {
         Plot::writeTxtData(hFile);
         for (const auto dataView : dataViews)
@@ -259,7 +259,7 @@ namespace Plotypus
         }
     }
 
-    void PlotWithAxes::writeDatData() const
+    void PlotOrthogonalAxes::writeDatData() const
     {
         Plot::writeDatData();
         for (const auto dataView : dataViews)
@@ -268,7 +268,7 @@ namespace Plotypus
         }
     }
 
-    void PlotWithAxes::writeScriptHead(std::ostream& hFile) const
+    void PlotOrthogonalAxes::writeScriptHead(std::ostream& hFile) const
     {
         Plot::writeScriptHead(hFile);
 
@@ -283,7 +283,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotWithAxes::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    void PlotOrthogonalAxes::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         Plot::writeScriptData(hFile, stylesColloction);
 
@@ -301,7 +301,7 @@ namespace Plotypus
         hFile << std::endl << std::endl;
     }
 
-    void PlotWithAxes::writeScriptFooter(std::ostream& hFile, int pageNum) const
+    void PlotOrthogonalAxes::writeScriptFooter(std::ostream& hFile, int pageNum) const
     {
         Plot::writeScriptFooter(hFile, pageNum);
 
@@ -318,7 +318,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotWithAxes::writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const
+    void PlotOrthogonalAxes::writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const
     {
         const std::string axisName = getAxisName(axis.type);
         writeAxisLabel(hFile, axisName, axis);

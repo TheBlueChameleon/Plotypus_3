@@ -1,5 +1,5 @@
-#ifndef PLOT_WITH_AXES_H
-#define PLOT_WITH_AXES_H
+#ifndef PLOTORTHOGONALAXES_H
+#define PLOTORTHOGONALAXES_H
 
 #include <span>
 #include <string>
@@ -15,7 +15,7 @@ namespace Plotypus
      * @todo set equal xy / xyz
      */
 
-    class PlotWithAxes : public Plot
+    class PlotOrthogonalAxes : public Plot
     {
         protected:
             std::unordered_map<AxisType, AxisDescriptor> axes;
@@ -31,8 +31,8 @@ namespace Plotypus
             static void writeAxisTics (std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
 
         public:
-            PlotWithAxes(const std::string& title);
-            ~PlotWithAxes();
+            PlotOrthogonalAxes(const std::string& title);
+            ~PlotOrthogonalAxes();
 
             virtual void reset();
 
@@ -77,5 +77,5 @@ namespace Plotypus
     };
 }
 
-#include "plotwithaxes.txx"
-#endif // PLOT_WITH_AXES_H
+#include "plotorthogonalaxes.txx"
+#endif // PLOTORTHOGONALAXES_H

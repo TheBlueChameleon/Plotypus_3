@@ -29,7 +29,7 @@ add_library(Plotypus-lib SHARED
     src/base/sheet.h src/base/sheet.cpp
     #
     src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
-    src/plot/plotwithaxes.h src/plot/plotwithaxes.cpp src/plot/plotwithaxes.txx
+    src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
     src/plot/plotradial.h src/plot/plotradial.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp

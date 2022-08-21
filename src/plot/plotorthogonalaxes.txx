@@ -4,21 +4,21 @@
 namespace Plotypus
 {
     template<class T>
-    DataViewDefaultCompound<T>& PlotWithAxes::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
     {
         dataViews.push_back(dataView);
         return *dataView;
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotWithAxes::addDataViewCompound(const PlotStyle2D style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const PlotStyle2D style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotWithAxes::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
@@ -29,7 +29,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotWithAxes::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle2D style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
@@ -40,7 +40,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotWithAxes::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::string& func, const PlotStyle2D style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 

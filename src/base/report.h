@@ -21,7 +21,7 @@ namespace Plotypus
      * @todo move responsibility for "tidy up code" to individual sheets
      */
 
-    class PlotWithAxes;
+    class PlotOrthogonalAxes;
     class Sheet;
     class StylesCollection;
     class TerminalInfoProvider;
@@ -84,7 +84,7 @@ namespace Plotypus
             //! @brief adds an empty Sheet to the report and returns a modifiably reference to the newly created Sheet.
             Plotypus::Sheet&  addSheet (const std::string& title = "");
             //! @brief adds an empty PlotWithAxes to the report and returns a modifiably reference to the newly created PlotWithAxes.
-            Plotypus::PlotWithAxes& addPlotWithAxes(const std::string& title = "");
+            Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title = "");
 
             void clearSheets();
 
