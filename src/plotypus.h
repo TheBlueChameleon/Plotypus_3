@@ -26,7 +26,7 @@
 
 #include "dataview/dataview.h"
 #include "dataview/dataviewdefault.h"
-#include "dataview/dataview2dcompound.h"
+#include "dataview/dataviewdefaultcompound.h"
 #include "dataview/dataview2dseparate.h"
 
 #include "plot/plot.h"

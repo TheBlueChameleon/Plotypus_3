@@ -103,16 +103,16 @@ void playground ()
     sheet4.addDataViewCompound<compound_t>("[0:pi] sin("s + funcVar + ")", Plotypus::PlotStyle2D::Lines,       "Sine Wave");
     sheet4.addDataViewCompound<compound_t>("[0:pi] cos("s + funcVar + ")", Plotypus::PlotStyle2D::LinesPoints, "Cosine Wave");
     //sheet4.yAxis().
-    auto& funcView2 = sheet4.dataViewAs<Plotypus::DataView2DCompound<compound_t>>(2);
+    auto& funcView2 = sheet4.dataViewAs<Plotypus::DataViewDefaultCompound<compound_t>>(2);
 
 
     // *INDENT-OFF*
-    try                             {auto& errv = sheet4.dataViewAs<Plotypus::DataView2DCompound<double>>(2);}
+    try                             {auto& errv = sheet4.dataViewAs<Plotypus::DataViewDefaultCompound<double>>(2);}
     catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
     // *INDENT-ON*
 
     funcView2.setLineStyle(0);
-    dynamic_cast<Plotypus::DataView2DCompound<compound_t>&>(sheet4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
+    dynamic_cast<Plotypus::DataViewDefaultCompound<compound_t>&>(sheet4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
 
 
     auto [dataX, dataY] = generateSeparateData();

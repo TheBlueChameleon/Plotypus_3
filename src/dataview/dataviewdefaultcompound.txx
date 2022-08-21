@@ -1,19 +1,19 @@
 #ifndef DATAVIEW2DCOMPOUND_TXX
 #define DATAVIEW2DCOMPOUND_TXX
 
-#include "dataview2dcompound.h"
+#include "dataviewdefaultcompound.h"
 
 namespace Plotypus
 {
     template<class T>
-    void DataView2DCompound<T>::clearNonFunctionMembers()
+    void DataViewDefaultCompound<T>::clearNonFunctionMembers()
     {
         data = std::span<T>();
         selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
     }
 
     template<class T>
-    void DataView2DCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
+    void DataViewDefaultCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
         // *INDENT-OFF*
         const T& datapoint = data[recordID];
@@ -32,49 +32,49 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const PlotStyle2D style, const std::string& label) :
+    DataViewDefaultCompound<T>::DataViewDefaultCompound(const PlotStyle2D style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
     template<class T>
-    DataView2DCompound<T>::DataView2DCompound(const std::string& style, const std::string& label) :
+    DataViewDefaultCompound<T>::DataViewDefaultCompound(const std::string& style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
     // ====================================================================== //
 
     template<class T>
-    size_t DataView2DCompound<T>::getArity() const
+    size_t DataViewDefaultCompound<T>::getArity() const
     {
         return data.size();
     }
 
     template<class T>
-    const std::span<T>& DataView2DCompound<T>::getData() const
+    const std::span<T>& DataViewDefaultCompound<T>::getData() const
     {
         return data;
     }
 
     template<class T>
-    void DataView2DCompound<T>::setData(const std::span<T>& newDataSource)
+    void DataViewDefaultCompound<T>::setData(const std::span<T>& newDataSource)
     {
         data = newDataSource;
     }
 
     template<class T>
-    void DataView2DCompound<T>::setData(const T* newDataSource, size_t N)
+    void DataViewDefaultCompound<T>::setData(const T* newDataSource, size_t N)
     {
         data = std::span<T>(newDataSource, newDataSource + N);
     }
 
     template<class T>
-    const std::array<DataSelector_t<T>, 6>& DataView2DCompound<T>::getSelectors() const
+    const std::array<DataSelector_t<T>, 6>& DataViewDefaultCompound<T>::getSelectors() const
     {
         return selectors;
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
+    void DataViewDefaultCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
         for (size_t i = 0u; const auto& selector : selectors)
@@ -86,7 +86,7 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataView2DCompound<T>::setSelector(const ColumnType column, const DataSelector_t<T>& selector)
+    void DataViewDefaultCompound<T>::setSelector(const ColumnType column, const DataSelector_t<T>& selector)
     {
         const auto columnID = getColumnID(column);
 
@@ -106,7 +106,7 @@ namespace Plotypus
     }
 
     template<class T>
-    bool DataView2DCompound<T>::isDummy() const
+    bool DataViewDefaultCompound<T>::isDummy() const
     {
         bool result = func.empty();
         result &= data.empty();
@@ -118,7 +118,7 @@ namespace Plotypus
     }
 
     template<class T>
-    bool DataView2DCompound<T>::isComplete() const
+    bool DataViewDefaultCompound<T>::isComplete() const
     {
         // *INDENT-OFF*
         if (isDummy())      {return true;}

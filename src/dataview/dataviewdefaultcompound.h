@@ -1,5 +1,5 @@
-#ifndef DATAVIEW2DCOMPOUND_H
-#define DATAVIEW2DCOMPOUND_H
+#ifndef DATAVIEWDEFAULTCOMPOUND_H
+#define DATAVIEWDEFAULTCOMPOUND_H
 
 #include <iomanip>
 
@@ -8,7 +8,7 @@
 namespace Plotypus
 {
     template<class T>
-    class DataView2DCompound : public DataViewDefault
+    class DataViewDefaultCompound : public DataViewDefault
     {
         protected:
             std::span<T>                        data;
@@ -19,8 +19,8 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataView2DCompound(const PlotStyle2D  style, const std::string& label = "");
-            DataView2DCompound(const std::string& style, const std::string& label = "");
+            DataViewDefaultCompound(const PlotStyle2D  style, const std::string& label = "");
+            DataViewDefaultCompound(const std::string& style, const std::string& label = "");
 
             // all functionality of "reset" already in dataview2d
 
@@ -39,5 +39,5 @@ namespace Plotypus
     };
 }
 
-#include "dataview2dcompound.txx"
-#endif // DATAVIEW2DCOMPOUND_H
+#include "dataviewdefaultcompound.txx"
+#endif // DATAVIEWDEFAULTCOMPOUND_H
