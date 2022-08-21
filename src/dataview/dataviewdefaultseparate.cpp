@@ -1,8 +1,8 @@
-#include "dataview2dseparate.h"
+#include "dataviewdefaultseparate.h"
 
 namespace Plotypus
 {
-    void DataView2DSeparate::clearNonFunctionMembers()
+    void DataViewDefaultSeparate::clearNonFunctionMembers()
     {
         for (auto& component : m_data)
         {
@@ -10,42 +10,42 @@ namespace Plotypus
         }
     }
 
-    void DataView2DSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
+    void DataViewDefaultSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
 
     }
 
-    DataView2DSeparate::DataView2DSeparate(const PlotStyle2D style, const std::string& label) :
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle2D style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
-    DataView2DSeparate::DataView2DSeparate(const std::string& style, const std::string& label) :
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
-    size_t DataView2DSeparate::getArity() const
+    size_t DataViewDefaultSeparate::getArity() const
     {
         return m_data[1].size();          // quick solution: return arity of Y column
     }
 
-    std::span<double>& DataView2DSeparate::data(ColumnType columnType)
+    std::span<double>& DataViewDefaultSeparate::data(ColumnType columnType)
     {
         const auto columnID = getColumnID(columnType);
         throwIfInvalidIndex("column index", columnID, m_data);
         return m_data[columnID];
     }
 
-    const columnViewList_t& DataView2DSeparate::getData() const
+    const columnViewList_t& DataViewDefaultSeparate::getData() const
     {
         return m_data;
     }
 
-    void DataView2DSeparate::setData(const columnViewList_t& newData)
+    void DataViewDefaultSeparate::setData(const columnViewList_t& newData)
     {
         m_data = newData;
     }
 
-    bool DataView2DSeparate::isDummy() const
+    bool DataViewDefaultSeparate::isDummy() const
     {
         bool result = func.empty();
         for (const auto& component : m_data)
@@ -55,7 +55,7 @@ namespace Plotypus
         return result;
     }
 
-    bool DataView2DSeparate::isComplete() const
+    bool DataViewDefaultSeparate::isComplete() const
     {
 
         // *INDENT-OFF*

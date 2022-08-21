@@ -27,7 +27,7 @@
 #include "dataview/dataview.h"
 #include "dataview/dataviewdefault.h"
 #include "dataview/dataviewdefaultcompound.h"
-#include "dataview/dataview2dseparate.h"
+#include "dataview/dataviewdefaultseparate.h"
 
 #include "plot/plot.h"
 #include "plot/plotwithaxes.h"

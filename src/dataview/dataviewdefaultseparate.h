@@ -1,11 +1,11 @@
-#ifndef DATAVIEW2DSEPARATE_H
-#define DATAVIEW2DSEPARATE_H
+#ifndef DATAVIEWDEFAULTSEPARATE_H
+#define DATAVIEWDEFAULTSEPARATE_H
 
 #include "dataviewdefault.h"
 
 namespace Plotypus
 {
-    class DataView2DSeparate : public DataViewDefault
+    class DataViewDefaultSeparate : public DataViewDefault
     {
         protected:
             columnViewList_t m_data;
@@ -15,8 +15,8 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataView2DSeparate(const PlotStyle2D  style, const std::string& label = "");
-            DataView2DSeparate(const std::string& style, const std::string& label = "");
+            DataViewDefaultSeparate(const PlotStyle2D  style, const std::string& label = "");
+            DataViewDefaultSeparate(const std::string& style, const std::string& label = "");
 
             // all functionality of "reset" already in dataview2d
 
@@ -31,4 +31,4 @@ namespace Plotypus
     };
 }
 
-#endif // DATAVIEW2DSEPARATE_H
+#endif // DATAVIEWDEFAULTSEPARATE_H
