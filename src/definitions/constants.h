@@ -163,8 +163,6 @@ namespace Plotypus
         Impulses3D,
         Boxes3D,
 
-        Surface3D,
-
         Vectors3D,
         Image3D,
 

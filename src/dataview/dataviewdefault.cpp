@@ -172,258 +172,77 @@ namespace Plotypus
 
             case ColumnType::X: return 1;
             case ColumnType::Y: return 2;
+
             case ColumnType::Y2:
-                if (styleID == PlotStyle::FilledCurves)   {return 3;}
-                else                                        {return COLUMN_UNSUPPORTED;}
-// *INDENT-ON*
+                if (styleID == PlotStyle::FilledCurves)                             {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Z:
+                if (contains(styleID, {
+                             PlotStyle::Dots3D, PlotStyle::Points3D,
+                             PlotStyle::Lines3D, PlotStyle::LinesPoints3D,
+                             PlotStyle::Impulses3D, PlotStyle::Vectors3D, PlotStyle::Image3D
+                }))                                                                 {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::DeltaX:
-                switch(styleID)
-                {
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::XYErrorLines:
-                    case PlotStyle::BoxxyError:
-                    case PlotStyle::Vectors:
-                        return 3;
-
-                    case PlotStyle::BoxErrorBars:
-                        return 5;
-
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError, PlotStyle::Vectors
+                }))                                                                 {return 3;}
+                else if (contains(styleID, {PlotStyle::Vectors3D}))                 {return 4;}
+                else if (contains(styleID, {PlotStyle::BoxErrorBars}))              {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::DeltaY:
-                switch(styleID)
-                {
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::BoxErrorBars:
-                        return 3;
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                }))                                                                 {return 3;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError, PlotStyle::Vectors
+                }))                                                                 {return 4;}
+                else if (styleID == PlotStyle::Vectors3D)                           {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XYErrorLines:
-                    case PlotStyle::BoxxyError:
-                    case PlotStyle::Vectors:
-                        return 4;
-
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
+            case ColumnType::DeltaZ:
+                if (styleID == PlotStyle::Vectors3D)                                {return 6;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::XLow:
-                switch(styleID)
-                {
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::BoxxyError:
-                    case PlotStyle::XYErrorLines:
-                        return 3;
-
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::BoxErrorBars:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Vectors:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError
+                }))                                                                 {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::XHigh:
-                switch(styleID)
-                {
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::XYErrorLines:
-                    case PlotStyle::BoxxyError:
-                        return 4;
-
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::BoxErrorBars:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Vectors:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError
+                }))                                                                 {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::YLow:
-                switch(styleID)
-                {
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::BoxErrorBars:
-                        return 3;
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XYErrorLines:
-                    case PlotStyle::BoxxyError:
-                        return 5;
-
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Vectors:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                }))                                                                 {return 3;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError
+                }))                                                                 {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::YHigh:
-                switch(styleID)
-                {
-                    case PlotStyle::YErrorBars:
-                    case PlotStyle::YErrorLines:
-                    case PlotStyle::BoxErrorBars:
-                        return 4;
-                    case PlotStyle::XYErrorBars:
-                    case PlotStyle::XYErrorLines:
-                    case PlotStyle::BoxxyError:
-                        return 6;
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                }))                                                                 {return 4;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError
+                }))                                                                 {return 6;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
 
-                    case PlotStyle::Dots:
-                    case PlotStyle::Points:
-                    case PlotStyle::Lines:
-                    case PlotStyle::LinesPoints:
-                    case PlotStyle::XErrorBars:
-                    case PlotStyle::XErrorLines:
-                    case PlotStyle::Steps:
-                    case PlotStyle::FSteps:
-                    case PlotStyle::FillSteps:
-                    case PlotStyle::FilledCurves:
-                    case PlotStyle::Impulses:
-                    case PlotStyle::Boxes:
-                    case PlotStyle::HBoxes:
-                    case PlotStyle::Arrows:
-                    case PlotStyle::Vectors:
-                    case PlotStyle::Image:
-                    case PlotStyle::Dots3D:
-                    case PlotStyle::Points3D:
-                    case PlotStyle::Lines3D:
-                    case PlotStyle::LinesPoints3D:
-                    case PlotStyle::Impulses3D:
-                    case PlotStyle::Boxes3D:
-                    case PlotStyle::Surface3D:
-                    case PlotStyle::Vectors3D:
-                    case PlotStyle::Image3D:
-                    case PlotStyle::Custom:
-                        return COLUMN_UNSUPPORTED;
-                }
-
-// *INDENT-OFF*
             case ColumnType::Pointsize:
                 if (styleID == PlotStyle::Points)                                   {return 3;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
@@ -435,6 +254,7 @@ namespace Plotypus
             case ColumnType::Color:
                 if      (styleID == PlotStyle::Points)                              {return 5;}
                 else if (styleID == PlotStyle::Image)                               {return 3;}
+                else if (styleID == PlotStyle::Image3D)                             {return 4;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Boxwidth:
@@ -449,16 +269,12 @@ namespace Plotypus
                 if (styleID == PlotStyle::Arrows)                                   {return 4;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 // *INDENT-ON*
-
-            case ColumnType::Z:
-            case ColumnType::DeltaZ:
-                return COLUMN_UNSUPPORTED;
         }
 
         return COLUMN_UNSUPPORTED;
     }
 
-    // ====================================================================== //
+// ====================================================================== //
 
     void DataViewDefault::writeTxtData(std::ostream& hFile) const
     {
