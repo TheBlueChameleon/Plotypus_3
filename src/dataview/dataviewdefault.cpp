@@ -78,6 +78,25 @@ namespace Plotypus
 
         lineStyle  = -1;
         pointStyle = -1;
+
+        columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
+        columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
+        columnHeadlines   = {};
+    }
+
+    void DataViewDefault::setStyleID(const PlotStyle2D newStyle)
+    {
+        DataView::setStyleID(newStyle);
+
+        if (newStyle == PlotStyle2D::HBoxes)
+        {
+            columnFormats[0] = "(0)";               // x     : constant zero
+            columnFormats[1] = "$!1";               // y     : x column
+            columnFormats[2] = "(0)";               // x_low : constant zero
+            columnFormats[3] = "$!2";               // x_high: y column
+            columnFormats[4] = "($!1 - $!3 / 2.)";  // y_low : x column minus boxwidth halves
+            columnFormats[5] = "($!1 - $!3 / 2.)";  // y_high: x column plus boxwidth halves
+        }
     }
 
     const std::string& DataViewDefault::getFunc() const
@@ -99,6 +118,39 @@ namespace Plotypus
     void DataViewDefault::setLineStyle(size_t newLineStyle)
     {
         lineStyle = newLineStyle;
+    }
+
+    size_t& DataViewDefault::columnAssignment(const size_t columnID)
+    {
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
+        return columnAssignments[columnID];
+    }
+
+    size_t& DataViewDefault::columnAssignment(const ColumnType columnType)
+    {
+        return columnAssignment(getColumnID(columnType) - 1);
+    }
+
+    std::string& DataViewDefault::columnFormat(const size_t columnID)
+    {
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
+        return columnFormats[columnID];
+    }
+
+    std::string& DataViewDefault::columnFormat(const ColumnType columnType)
+    {
+        return columnFormat(getColumnID(columnType) - 1);
+    }
+
+    std::string& DataViewDefault::columnHeadline(const size_t columnID)
+    {
+        throwIfInvalidIndex("column ID", columnID, columnAssignments);
+        return columnHeadlines[columnID];
+    }
+
+    std::string& DataViewDefault::columnHeadline(const ColumnType columnType)
+    {
+        return columnHeadline(getColumnID(columnType) - 1);
     }
 
     bool DataViewDefault::isFunction() const

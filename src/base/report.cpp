@@ -121,7 +121,7 @@ namespace Plotypus
         return *sheets.back();
     }
 
-    PlotOrthogonalAxes& ReaddPlotOrthogonalAxesthAxes(const std::string& title)
+    PlotOrthogonalAxes& Report::addPlotOrthogonalAxes(const std::string& title)
     {
         PlotOrthogonalAxes* newPlot = new PlotOrthogonalAxes(title);
         sheets.push_back(newPlot);
