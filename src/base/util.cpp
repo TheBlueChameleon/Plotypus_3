@@ -74,7 +74,7 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // enum name lookups
 
-    std::string getTerminalName(FileType fileType)
+    std::string getTerminalName(const FileType fileType)
     {
         // *INDENT-OFF*
         switch(fileType)
@@ -94,7 +94,7 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getLengthUnitName(LengthUnit lengthUnit)
+    std::string getLengthUnitName(const LengthUnit lengthUnit)
     {
         // *INDENT-OFF*
         switch(lengthUnit)
@@ -146,29 +146,37 @@ namespace Plotypus
         // *INDENT-OFF*
         switch(plotStyleID)
         {
-            case PlotStyle::Dots:         return "dots";
-            case PlotStyle::Points:       return "points";
-            case PlotStyle::XErrorBars:   return "xerrorbars";
-            case PlotStyle::YErrorBars:   return "yerrorbars";
-            case PlotStyle::XYErrorBars:  return "xyerrorbars";
-            case PlotStyle::Lines:        return "lines";
-            case PlotStyle::LinesPoints:  return "linespoints";
-            case PlotStyle::FilledCurves: return "filledcurves";
-            case PlotStyle::XErrorLines:  return "xerrorlines";
-            case PlotStyle::YErrorLines:  return "yerrorlines";
-            case PlotStyle::XYErrorLines: return "xyerrorlines";
-            case PlotStyle::Steps:        return "steps";
-            case PlotStyle::FSteps:       return "fsteps";
-            case PlotStyle::FillSteps:    return "fillsteps";
-            case PlotStyle::Impulses:     return "impulses";
-            case PlotStyle::Boxes:        return "boxes";
-            case PlotStyle::HBoxes:       return "boxxyerror";
-            case PlotStyle::BoxErrorBars: return "boxerrorbars";
-            case PlotStyle::BoxxyError:   return "boxxyerror";
-            case PlotStyle::Arrows:       return "arrows";
-            case PlotStyle::Vectors:      return "vectors";
-            case PlotStyle::Image:        return "image pixels";
-            case PlotStyle::Custom:       return "custom";
+            case PlotStyle::Dots:           return "dots";
+            case PlotStyle::Points:         return "points";
+            case PlotStyle::XErrorBars:     return "xerrorbars";
+            case PlotStyle::YErrorBars:     return "yerrorbars";
+            case PlotStyle::XYErrorBars:    return "xyerrorbars";
+            case PlotStyle::Lines:          return "lines";
+            case PlotStyle::LinesPoints:    return "linespoints";
+            case PlotStyle::FilledCurves:   return "filledcurves";
+            case PlotStyle::XErrorLines:    return "xerrorlines";
+            case PlotStyle::YErrorLines:    return "yerrorlines";
+            case PlotStyle::XYErrorLines:   return "xyerrorlines";
+            case PlotStyle::Steps:          return "steps";
+            case PlotStyle::FSteps:         return "fsteps";
+            case PlotStyle::FillSteps:      return "fillsteps";
+            case PlotStyle::Impulses:       return "impulses";
+            case PlotStyle::Boxes:          return "boxes";
+            case PlotStyle::HBoxes:         return "boxxyerror";
+            case PlotStyle::BoxErrorBars:   return "boxerrorbars";
+            case PlotStyle::BoxxyError:     return "boxxyerror";
+            case PlotStyle::Arrows:         return "arrows";
+            case PlotStyle::Vectors:        return "vectors";
+            case PlotStyle::Image:          return "image pixels";
+            case PlotStyle::Dots3D:         return "dots";
+            case PlotStyle::Points3D:       return "points";
+            case PlotStyle::Lines3D:        return "lines";
+            case PlotStyle::LinesPoints3D:  return "linespoints";
+            case PlotStyle::Impulses3D:     return "impulses";
+            case PlotStyle::Boxes3D:        return "boxes";
+            case PlotStyle::Vectors3D:      return "vectors";
+            case PlotStyle::Image3D:        return "image";
+            case PlotStyle::Custom:         return "custom";
         }
         // *INDENT-ON*
 
@@ -192,6 +200,50 @@ namespace Plotypus
         // *INDENT-ON*
 
         return "(undefined)";
+    }
+
+    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID)
+    {
+        // *INDENT-OFF*
+        switch(plotStyleID)
+        {
+            case PlotStyle::Dots:           return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Points:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XErrorBars:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::YErrorBars:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XYErrorBars:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Lines:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::LinesPoints:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FilledCurves:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XErrorLines:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::YErrorLines:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XYErrorLines:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Steps:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FSteps:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FillSteps:      return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Impulses:       return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Boxes:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::HBoxes:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::BoxErrorBars:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::BoxxyError:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Arrows:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Vectors:        return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Image:          return PlotStyleFamily::Orthogonal2D;
+
+            case PlotStyle::Dots3D:         return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Points3D:       return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Lines3D:        return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::LinesPoints3D:  return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Impulses3D:     return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Boxes3D:        return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Vectors3D:      return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Image3D:        return PlotStyleFamily::Orthogonal3D;
+
+            case PlotStyle::Custom:         return PlotStyleFamily::Custom;
+        }
+        // *INDENT-ON*
+
+        return PlotStyleFamily::Undefined;
     }
 
     bool hasAxisLabel(const AxisType axis)

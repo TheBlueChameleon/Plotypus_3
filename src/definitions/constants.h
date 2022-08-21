@@ -169,6 +169,19 @@ namespace Plotypus
         Custom
     };
 
+    // ---------------------------------------------------------------------- //
+    /**
+     * @brief used internally to distinguish between mechanisms for plot command generation
+     */
+    enum class PlotStyleFamily
+    {
+        Undefined,
+        Orthogonal2D,
+        Orthogonal3D,
+        Radial,
+        Custom
+    };
+
     // ========================================================================== //
     /**
      * @brief Sheet element: Point Style (used with plots)

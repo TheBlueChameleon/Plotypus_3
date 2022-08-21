@@ -43,13 +43,15 @@ namespace Plotypus
     const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
 
     // ---------------------------------------------------------------------- //
-    // enum name lookups
+    // enum lookups
 
-    std::string getTerminalName(FileType fileType);
-    std::string getLengthUnitName(LengthUnit lengthUnit);
+    std::string getTerminalName(const FileType fileType);
+    std::string getLengthUnitName(const LengthUnit lengthUnit);
     std::string getColumnIDName(const ColumnType columnType);
     std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
+
+    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 
     bool hasAxisLabel(const AxisType axis);
 
