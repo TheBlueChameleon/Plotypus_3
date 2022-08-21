@@ -15,7 +15,7 @@ namespace Plotypus
 
     }
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle2D style, const std::string& label) :
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
@@ -67,51 +67,51 @@ namespace Plotypus
 
         switch (styleID)
         {
-            case PlotStyle2D::Dots:
+            case PlotStyle::Dots:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::Points:
+            case PlotStyle::Points:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3, 4, 5}, isNullSpan);
-            case PlotStyle2D::XErrorBars:
+            case PlotStyle::XErrorBars:
                 return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
-            case PlotStyle2D::YErrorBars:
+            case PlotStyle::YErrorBars:
                 return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
-            case PlotStyle2D::XYErrorBars:
+            case PlotStyle::XYErrorBars:
                 return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
-            case PlotStyle2D::Lines:
+            case PlotStyle::Lines:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::LinesPoints:
+            case PlotStyle::LinesPoints:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::FilledCurves:
+            case PlotStyle::FilledCurves:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
-            case PlotStyle2D::XErrorLines:
+            case PlotStyle::XErrorLines:
                 return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
-            case PlotStyle2D::YErrorLines:
+            case PlotStyle::YErrorLines:
                 return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
-            case PlotStyle2D::XYErrorLines:
+            case PlotStyle::XYErrorLines:
                 return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
-            case PlotStyle2D::Steps:
+            case PlotStyle::Steps:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::FSteps:
+            case PlotStyle::FSteps:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::FillSteps:
+            case PlotStyle::FillSteps:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::Impulses:
+            case PlotStyle::Impulses:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
-            case PlotStyle2D::Boxes:
+            case PlotStyle::Boxes:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
-            case PlotStyle2D::HBoxes:
+            case PlotStyle::HBoxes:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
-            case PlotStyle2D::BoxErrorBars:
+            case PlotStyle::BoxErrorBars:
                 return checkColumnListOccupationIsFrom(m_data, {3, 4, 5}, isNullSpan);
-            case PlotStyle2D::BoxxyError:
+            case PlotStyle::BoxxyError:
                 return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
-            case PlotStyle2D::Arrows:
+            case PlotStyle::Arrows:
                 return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
-            case PlotStyle2D::Vectors:
+            case PlotStyle::Vectors:
                 return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
-            case PlotStyle2D::Image:
+            case PlotStyle::Image:
                 return checkColumnListOccupationIsFrom(m_data, {3}, isNullSpan);
-            case PlotStyle2D::Custom:
+            case PlotStyle::Custom:
                 return checkColumnListOccupationIsFrom(m_data, {1, 2, 3, 4, 5, 6}, isNullSpan);
         }
 

@@ -48,7 +48,7 @@ namespace Plotypus
     std::string getTerminalName(FileType fileType);
     std::string getLengthUnitName(LengthUnit lengthUnit);
     std::string getColumnIDName(const ColumnType columnType);
-    std::string getPlotStyleName(const PlotStyle2D plotStyleID);
+    std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
 
     bool hasAxisLabel(const AxisType axis);

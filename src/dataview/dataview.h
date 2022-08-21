@@ -9,10 +9,14 @@ namespace Plotypus
 {
     class StylesCollection;
 
+    /**
+     * @todo introduce subtypes:
+     *  DataViewMatrixFlat, DataViewMatrix2D; with 2nd level subtypes for compound/separate?
+     */
     class DataView
     {
         protected:
-            PlotStyle2D styleID;        //! @todo maybe make this an union with PlotStyle3D?
+            PlotStyle styleID;
 
             std::string title;
             std::string style;
@@ -31,7 +35,7 @@ namespace Plotypus
             virtual void clearNonFunctionMembers() = 0;
 
         public:
-            DataView(const PlotStyle2D  style, const std::string& label = "");
+            DataView(const PlotStyle    style, const std::string& label = "");
             DataView(const std::string& style, const std::string& label = "");
 
             virtual void reset();
@@ -42,8 +46,8 @@ namespace Plotypus
             const std::string&  getStyle() const;
             void                setStyle(const std::string& newStyle);
 
-            const PlotStyle2D   getStyleID() const;
-            virtual void        setStyleID(const PlotStyle2D newStyle);
+            const PlotStyle     getStyleID() const;
+            virtual void        setStyleID(const PlotStyle newStyle);
 
             bool                getBinaryDataOutput() const;
             void                setBinaryDataOutput(bool newBinaryDataOutput);

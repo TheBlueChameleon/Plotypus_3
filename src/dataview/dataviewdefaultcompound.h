@@ -19,7 +19,7 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataViewDefaultCompound(const PlotStyle2D  style, const std::string& label = "");
+            DataViewDefaultCompound(const PlotStyle  style, const std::string& label = "");
             DataViewDefaultCompound(const std::string& style, const std::string& label = "");
 
             // all functionality of "reset" already in dataview2d

@@ -92,7 +92,7 @@ void playground ()
     Plotypus::DataSelector_t<compound_t> compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
     // *INDENT-ON*
 
-    auto& dataView1 = sheet4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle2D::YErrorLines);
+    auto& dataView1 = sheet4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle::YErrorLines);
     dataView1.setSelector(Plotypus::ColumnType::X, compoundSelectorX);
     dataView1.setSelector(Plotypus::ColumnType::DeltaY, compoundSelectorErrY);
     dataView1.setTitle("Sine Approximation");
@@ -100,8 +100,8 @@ void playground ()
 
     sheet4.setPolar(true);
     const auto funcVar = (sheet4.getPolar() ? "t" : "x");
-    sheet4.addDataViewCompound<compound_t>("[0:pi] sin("s + funcVar + ")", Plotypus::PlotStyle2D::Lines,       "Sine Wave");
-    sheet4.addDataViewCompound<compound_t>("[0:pi] cos("s + funcVar + ")", Plotypus::PlotStyle2D::LinesPoints, "Cosine Wave");
+    sheet4.addDataViewCompound<compound_t>("[0:pi] sin("s + funcVar + ")", Plotypus::PlotStyle::Lines,       "Sine Wave");
+    sheet4.addDataViewCompound<compound_t>("[0:pi] cos("s + funcVar + ")", Plotypus::PlotStyle::LinesPoints, "Cosine Wave");
     //sheet4.yAxis().
     auto& funcView2 = sheet4.dataViewAs<Plotypus::DataViewDefaultCompound<compound_t>>(2);
 
@@ -112,7 +112,7 @@ void playground ()
     // *INDENT-ON*
 
     funcView2.setLineStyle(0);
-    dynamic_cast<Plotypus::DataViewDefaultCompound<compound_t>&>(sheet4.dataView(1)).setStyleID(Plotypus::PlotStyle2D::Dots);
+    dynamic_cast<Plotypus::DataViewDefaultCompound<compound_t>&>(sheet4.dataView(1)).setStyleID(Plotypus::PlotStyle::Dots);
 
 
     auto [dataX, dataY] = generateSeparateData();

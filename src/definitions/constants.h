@@ -121,9 +121,9 @@ namespace Plotypus
 
     // ========================================================================== //
     /**
-     * @brief Sheet element: Plot Style for 2D plots
+     * @brief Sheet element: Plot Styles
      */
-    enum class PlotStyle2D
+    enum class PlotStyle
     {
         Dots,
         Points,
@@ -154,30 +154,19 @@ namespace Plotypus
         Image,
         // RgbImage -- cool, but requires three more ColumnTypes... see manual, p.75
 
-        Custom
-    };
+        Dots3D,
+        Points3D,
 
+        Lines3D,
+        LinesPoints3D,
 
-    // ========================================================================== //
-    /**
-     * @brief Sheet element: Plot Style for 3D plots
-     */
+        Impulses3D,
+        Boxes3D,
 
-    enum class PlotStyle3D
-    {
-        Dots,
-        Points,
+        Surface3D,
 
-        Lines,
-        LinesPoints,
-
-        Impulses,
-        Boxes,
-
-        Surface,
-
-        Vectors,
-        Image,
+        Vectors3D,
+        Image3D,
 
         Custom
     };

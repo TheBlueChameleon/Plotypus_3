@@ -141,34 +141,34 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getPlotStyleName(const PlotStyle2D plotStyleID)
+    std::string getPlotStyleName(const PlotStyle plotStyleID)
     {
         // *INDENT-OFF*
         switch(plotStyleID)
         {
-            case PlotStyle2D::Dots:         return "dots";
-            case PlotStyle2D::Points:       return "points";
-            case PlotStyle2D::XErrorBars:   return "xerrorbars";
-            case PlotStyle2D::YErrorBars:   return "yerrorbars";
-            case PlotStyle2D::XYErrorBars:  return "xyerrorbars";
-            case PlotStyle2D::Lines:        return "lines";
-            case PlotStyle2D::LinesPoints:  return "linespoints";
-            case PlotStyle2D::FilledCurves: return "filledcurves";
-            case PlotStyle2D::XErrorLines:  return "xerrorlines";
-            case PlotStyle2D::YErrorLines:  return "yerrorlines";
-            case PlotStyle2D::XYErrorLines: return "xyerrorlines";
-            case PlotStyle2D::Steps:        return "steps";
-            case PlotStyle2D::FSteps:       return "fsteps";
-            case PlotStyle2D::FillSteps:    return "fillsteps";
-            case PlotStyle2D::Impulses:     return "impulses";
-            case PlotStyle2D::Boxes:        return "boxes";
-            case PlotStyle2D::HBoxes:       return "boxxyerror";
-            case PlotStyle2D::BoxErrorBars: return "boxerrorbars";
-            case PlotStyle2D::BoxxyError:   return "boxxyerror";
-            case PlotStyle2D::Arrows:       return "arrows";
-            case PlotStyle2D::Vectors:      return "vectors";
-            case PlotStyle2D::Image:        return "image pixels";
-            case PlotStyle2D::Custom:       return "custom";
+            case PlotStyle::Dots:         return "dots";
+            case PlotStyle::Points:       return "points";
+            case PlotStyle::XErrorBars:   return "xerrorbars";
+            case PlotStyle::YErrorBars:   return "yerrorbars";
+            case PlotStyle::XYErrorBars:  return "xyerrorbars";
+            case PlotStyle::Lines:        return "lines";
+            case PlotStyle::LinesPoints:  return "linespoints";
+            case PlotStyle::FilledCurves: return "filledcurves";
+            case PlotStyle::XErrorLines:  return "xerrorlines";
+            case PlotStyle::YErrorLines:  return "yerrorlines";
+            case PlotStyle::XYErrorLines: return "xyerrorlines";
+            case PlotStyle::Steps:        return "steps";
+            case PlotStyle::FSteps:       return "fsteps";
+            case PlotStyle::FillSteps:    return "fillsteps";
+            case PlotStyle::Impulses:     return "impulses";
+            case PlotStyle::Boxes:        return "boxes";
+            case PlotStyle::HBoxes:       return "boxxyerror";
+            case PlotStyle::BoxErrorBars: return "boxerrorbars";
+            case PlotStyle::BoxxyError:   return "boxxyerror";
+            case PlotStyle::Arrows:       return "arrows";
+            case PlotStyle::Vectors:      return "vectors";
+            case PlotStyle::Image:        return "image pixels";
+            case PlotStyle::Custom:       return "custom";
         }
         // *INDENT-ON*
 

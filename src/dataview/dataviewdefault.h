@@ -32,26 +32,26 @@ namespace Plotypus
             void writeUsingSpecification(std::ostream& hFile) const;
 
         public:
-            DataViewDefault(const PlotStyle2D  style, const std::string& label = "");
+            DataViewDefault(const PlotStyle    style, const std::string& label = "");
             DataViewDefault(const std::string& style, const std::string& label = "");
 
             virtual void reset();
-            virtual void setStyleID(const PlotStyle2D newStyle);
+            virtual void setStyleID(const PlotStyle newStyle);
 
-            virtual size_t              getArity() const = 0;
+            virtual size_t      getArity() const = 0;
 
-            const std::string&          getFunc() const;
-            void                        setFunc(const std::string& newFunc);
+            const std::string&  getFunc() const;
+            void                setFunc(const std::string& newFunc);
 
-            size_t                      getLineStyle() const;
-            void                        setLineStyle(size_t newLineStyle);
+            size_t              getLineStyle() const;
+            void                setLineStyle(size_t newLineStyle);
 
             size_t&             columnAssignment(const size_t       columnID);
-            size_t&             columnAssignment(const ColumnType  columnType);
+            size_t&             columnAssignment(const ColumnType   columnType);
             std::string&        columnFormat    (const size_t       columnID);
-            std::string&        columnFormat    (const ColumnType  columnType);
+            std::string&        columnFormat    (const ColumnType   columnType);
             std::string&        columnHeadline  (const size_t       columnID);
-            std::string&        columnHeadline  (const ColumnType  columnType);
+            std::string&        columnHeadline  (const ColumnType   columnType);
 
             virtual bool isFunction() const;
             virtual size_t getColumnID(const ColumnType columnType) const;

@@ -4,19 +4,19 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const PlotStyle2D style, const std::string& label) :
+    DataView::DataView(const PlotStyle style, const std::string& label) :
         title(label)
     {
         setStyleID(style);
     }
 
     DataView::DataView(const std::string& style, const std::string& label) :
-        title(label), style(style), styleID(PlotStyle2D::Custom)
+        title(label), style(style), styleID(PlotStyle::Custom)
     {}
 
     void DataView::reset()
     {
-        styleID                     = PlotStyle2D::Custom;
+        styleID                     = PlotStyle::Custom;
         title                       = "";
         style                       = "lines";
         options                     = "";
@@ -45,16 +45,16 @@ namespace Plotypus
 
     void DataView::setStyle(const std::string& newStyle)
     {
-        styleID = PlotStyle2D::Custom;
+        styleID = PlotStyle::Custom;
         style = newStyle;
     }
 
-    const PlotStyle2D DataView::getStyleID() const
+    const PlotStyle DataView::getStyleID() const
     {
         return styleID;
     }
 
-    void DataView::setStyleID(const PlotStyle2D newStyle)
+    void DataView::setStyleID(const PlotStyle newStyle)
     {
         styleID = newStyle;
         style   = getPlotStyleName(newStyle);

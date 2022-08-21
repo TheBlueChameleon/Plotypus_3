@@ -32,7 +32,7 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    DataViewDefaultCompound<T>::DataViewDefaultCompound(const PlotStyle2D style, const std::string& label) :
+    DataViewDefaultCompound<T>::DataViewDefaultCompound(const PlotStyle style, const std::string& label) :
         DataViewDefault(style, label)
     {}
 
@@ -129,51 +129,51 @@ namespace Plotypus
 
         switch (styleID)
         {
-            case PlotStyle2D::Dots:
+            case PlotStyle::Dots:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::Points:
+            case PlotStyle::Points:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5}, isNullSelector);
-            case PlotStyle2D::XErrorBars:
+            case PlotStyle::XErrorBars:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle2D::YErrorBars:
+            case PlotStyle::YErrorBars:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle2D::XYErrorBars:
+            case PlotStyle::XYErrorBars:
                 return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle2D::Lines:
+            case PlotStyle::Lines:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::LinesPoints:
+            case PlotStyle::LinesPoints:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::FilledCurves:
+            case PlotStyle::FilledCurves:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle2D::XErrorLines:
+            case PlotStyle::XErrorLines:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle2D::YErrorLines:
+            case PlotStyle::YErrorLines:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle2D::XYErrorLines:
+            case PlotStyle::XYErrorLines:
                 return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle2D::Steps:
+            case PlotStyle::Steps:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::FSteps:
+            case PlotStyle::FSteps:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::FillSteps:
+            case PlotStyle::FillSteps:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::Impulses:
+            case PlotStyle::Impulses:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle2D::Boxes:
+            case PlotStyle::Boxes:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle2D::HBoxes:
+            case PlotStyle::HBoxes:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle2D::BoxErrorBars:
+            case PlotStyle::BoxErrorBars:
                 return checkColumnListOccupationIsFrom(selectors, {3, 4, 5}, isNullSelector);
-            case PlotStyle2D::BoxxyError:
+            case PlotStyle::BoxxyError:
                 return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle2D::Arrows:
+            case PlotStyle::Arrows:
                 return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
-            case PlotStyle2D::Vectors:
+            case PlotStyle::Vectors:
                 return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
-            case PlotStyle2D::Image:
+            case PlotStyle::Image:
                 return checkColumnListOccupationIsFrom(selectors, {3}, isNullSelector);
-            case PlotStyle2D::Custom:
+            case PlotStyle::Custom:
                 return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, isNullSelector);
         }
 
