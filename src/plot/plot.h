@@ -29,6 +29,9 @@ namespace Plotypus
 
             virtual void reset();
 
+            PlotStyleFamily     getStyleFamily() const;
+            void                setStyleFamily(PlotStyleFamily newStyleFamily);
+
             const std::vector<DataView*>& getDataViews() const;
             DataView&           dataView(const size_t i);
             template<DataViewLike T>
@@ -56,7 +59,7 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
+            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
 
             virtual void writeScriptHead(std::ostream& hFile) const;
     };
