@@ -63,11 +63,9 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
-
             virtual void writeTxtData       (std::ostream& hFile) const;
 
-            virtual void writeDatData() const;
+            virtual void writeDatData       () const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
             virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;  //! @todo detect 3d mode: plot ~> splot

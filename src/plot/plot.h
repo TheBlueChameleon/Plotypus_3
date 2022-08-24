@@ -10,16 +10,19 @@ namespace Plotypus
     class Plot : public Sheet
     {
         protected:
+            PlotStyleFamily         styleFamily = PlotStyleFamily::Undefined;
+            std::vector<DataView*>  dataViews;
+
             size_t      border          = BORDERS_2D_DEFAULT;
             size_t      borderLineStyle = STYLE_ID_DEFAULT;
-
-            bool        key         = true;
-            bool        parametric  = false;
 
             std::string aspect      = "noratio";
             std::string fill        = "solid";
 
-            std::vector<DataView*>  dataViews;
+            bool        key         = true;
+            bool        parametric  = false;
+
+            void checkStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
 
         public:
             Plot(const std::string& title);
@@ -36,11 +39,6 @@ namespace Plotypus
             size_t              getBorderLineStyle() const;
             void                setBorderLineStyle(size_t newBorderLineStyle);
 
-            bool                getKey() const;
-            void                setKey(bool newKey);
-            bool                getParametric() const;
-            void                setParametric(bool newParametric);
-
             const std::string&  getAspect      () const;
             void                setAspect      (const std::string& newAspect);
             void                setAspectNone  ();
@@ -50,10 +48,15 @@ namespace Plotypus
             const std::string&  getFill() const;
             void                setFill(const std::string& newFill);
 
+            bool                getKey() const;
+            void                setKey(bool newKey);
+            bool                getParametric() const;
+            void                setParametric(bool newParametric);
+
             // -------------------------------------------------------------- //
             // writers
 
-            virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const = 0;
+            void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
 
             virtual void writeScriptHead(std::ostream& hFile) const;
     };

@@ -6,6 +6,7 @@ namespace Plotypus
     template<class T>
     DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
     {
+        checkStyleFamily(dataView->styleFamily, {PlotStyleFamily::Orthogonal2D, PlotStyleFamily::Orthogonal3D, PlotStyleFamily::Custom});
         dataViews.push_back(dataView);
         return *dataView;
     }
