@@ -17,6 +17,7 @@ namespace Plotypus
     void DataView::reset()
     {
         styleID                     = PlotStyle::Custom;
+        styleFamily                 = PlotStyleFamily::Undefined;
         title                       = "";
         style                       = "lines";
         options                     = "";
@@ -45,8 +46,9 @@ namespace Plotypus
 
     void DataView::setStyle(const std::string& newStyle)
     {
-        styleID = PlotStyle::Custom;
-        style = newStyle;
+        styleID     = PlotStyle::Custom;
+        styleFamily = PlotStyleFamily::Custom;
+        style       = newStyle;
     }
 
     const PlotStyle DataView::getStyleID() const
@@ -56,8 +58,9 @@ namespace Plotypus
 
     void DataView::setStyleID(const PlotStyle newStyle)
     {
-        styleID = newStyle;
-        style   = getPlotStyleName(newStyle);
+        styleID     = newStyle;
+        styleFamily = getPlotStyleFamily(newStyle);
+        style       = getPlotStyleName(newStyle);
     }
 
     bool DataView::getBinaryDataOutput() const
