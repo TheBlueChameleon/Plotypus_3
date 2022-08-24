@@ -336,8 +336,8 @@ namespace Plotypus
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
 
-            if (needCleanSheetCommands && sheet->getType() == PlotType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
-            else if                      (sheet->getType() != PlotType::Sheet) {needCleanSheetCommands = true ;}
+            if (needCleanSheetCommands && sheet->getType() == SheetType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
+            else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead  (hFile);
             sheet->writeScriptData  (hFile, m_stylesCollection);

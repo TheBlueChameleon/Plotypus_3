@@ -92,6 +92,7 @@ void playground ()
     Plotypus::DataSelector_t<compound_t> compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
     // *INDENT-ON*
 
+    sheet4.setAspectEqual();
     auto& dataView1 = sheet4.addDataViewCompound<compound_t>(data, compoundSelectorY, Plotypus::PlotStyle::YErrorLines);
     dataView1.setSelector(Plotypus::ColumnType::X, compoundSelectorX);
     dataView1.setSelector(Plotypus::ColumnType::DeltaY, compoundSelectorErrY);

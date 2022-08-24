@@ -42,7 +42,7 @@ namespace Plotypus
     /**
      * @brief internally used specifyer of data format
      */
-    enum class PlotType
+    enum class SheetType
     {
         //! @brief an empty sheet, optionally with title. Ready to be populated with overlays
         Sheet,
@@ -54,7 +54,7 @@ namespace Plotypus
         PlotRadialAxes,
 
         //! @brief a sheet with multiple subsheets on it
-        FramesCollection
+        Multiplot
     };
 
     // ====================================================================== //

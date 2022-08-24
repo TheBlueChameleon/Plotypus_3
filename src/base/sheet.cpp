@@ -6,12 +6,12 @@ namespace Plotypus
 {
     Sheet::Sheet(const std::string& title) :
         title(title),
-        type(PlotType::Sheet)
+        type(SheetType::Sheet)
     {}
 
     // ====================================================================== //
 
-    PlotType Sheet::getType() const
+    SheetType Sheet::getType() const
     {
         return type;
     }
@@ -232,7 +232,7 @@ namespace Plotypus
             hFile << std::endl;
         }
 
-        if (type == PlotType::Sheet)
+        if (type == SheetType::Sheet)
         {
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# dummy plot for empty page" << std::endl << std::endl;

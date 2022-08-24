@@ -14,9 +14,12 @@ namespace Plotypus
              *      Lua/Tikz alias LaTeX
              *      Svg
              *      Canvas alias JavaScript
+             *
+             * @todo update the supported types table in docs
              */
 
-            /* @brief changes the default values for terminal engine and output filename extension associated with the new FileType
+            /**
+             *  @brief changes the default values for terminal engine and output filename extension associated with the new FileType
              *
              * | FileType     | Terminal Engine | Extension |
              * |--------------|-----------------|-----------|

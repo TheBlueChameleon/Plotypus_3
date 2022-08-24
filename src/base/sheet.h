@@ -14,7 +14,7 @@ namespace Plotypus
             // .............................................................. //
             // behaviour objects
 
-            PlotType type;
+            SheetType type;
 
             std::string title = "";
             std::string defaultFont = "Arial,7";
@@ -34,7 +34,7 @@ namespace Plotypus
         public:
             Sheet(const std::string& title);
 
-            PlotType getType() const;
+            SheetType getType() const;
 
             virtual void reset();
 

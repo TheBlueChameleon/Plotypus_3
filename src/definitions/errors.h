@@ -32,6 +32,8 @@ namespace Plotypus
 
     PLOTYPUS_ERROR(UnsupportedOperationError);
 
+    PLOTYPUS_ERROR(IncompatiblePlotStyle);
+
     //! }
 }
 
