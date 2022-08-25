@@ -42,9 +42,9 @@ namespace Plotypus
             const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
             void                                                setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
 
-            AxisDescriptor&      axis(const AxisType axisID);
-            void            clearAxes();
-            void            clearAxis(const AxisType axisID);
+            AxisDescriptor&              axis(const AxisType axisID);
+            void                    clearAxes();
+            void                    clearAxis(const AxisType axisID);
 
             AxisDescriptor&         xAxis();
             AxisDescriptor&         yAxis();
