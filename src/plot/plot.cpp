@@ -13,7 +13,7 @@ namespace Plotypus
 
     void Plot::checkStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
     {
-        if      (styleFamily != PlotStyleFamily::Custom)
+        if      (styleFamily == PlotStyleFamily::Custom)
         {
             return;
         }
@@ -64,7 +64,14 @@ namespace Plotypus
 
     void Plot::setStyleFamily(PlotStyleFamily newStyleFamily)
     {
-        styleFamily = newStyleFamily;
+        if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))
+        {
+            styleFamily = newStyleFamily;
+        }
+        else
+        {
+            throw IncompatiblePlotStyle("Cannot override plot style family");
+        }
     }
 
     const std::vector<DataView*>& Plot::getDataViews() const
