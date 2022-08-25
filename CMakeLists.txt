@@ -27,6 +27,7 @@ add_library(Plotypus-lib SHARED
     src/base/report.h src/base/report.cpp src/base/report.txx
     src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
     src/base/sheet.h src/base/sheet.cpp
+    src/base/mulitplot.h src/base/mulitplot.cpp
     #
     src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
     src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
