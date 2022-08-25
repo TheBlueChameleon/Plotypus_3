@@ -34,7 +34,7 @@ namespace Plotypus
                 labelText = "z";
                 break;
             case AxisType::Radial:
-                labelText = "z";
+                labelText = "r";
                 break;
             case AxisType::X:
                 labelText = "x";
