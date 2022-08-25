@@ -4,6 +4,7 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
+
     DataView::DataView(const PlotStyle style, const std::string& label) :
         title(label)
     {
@@ -49,6 +50,23 @@ namespace Plotypus
         styleID     = PlotStyle::Custom;
         styleFamily = PlotStyleFamily::Custom;
         style       = newStyle;
+    }
+
+    PlotStyleFamily DataView::getStyleFamily() const
+    {
+        return styleFamily;
+    }
+
+    void DataView::setStyleFamily(PlotStyleFamily newStyleFamily)
+    {
+        if (styleID == PlotStyle::Custom)
+        {
+            styleFamily = newStyleFamily;
+        }
+        else
+        {
+            throw UnsupportedOperationError("Cannot override style family for non-custom plot style.");
+        }
     }
 
     const PlotStyle DataView::getStyleID() const

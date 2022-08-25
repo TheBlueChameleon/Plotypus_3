@@ -47,6 +47,9 @@ namespace Plotypus
             const std::string&  getStyle() const;
             void                setStyle(const std::string& newStyle);
 
+            PlotStyleFamily     getStyleFamily() const;
+            void                setStyleFamily(PlotStyleFamily newStyleFamily);
+
             const PlotStyle     getStyleID() const;
             virtual void        setStyleID(const PlotStyle newStyle);
 
