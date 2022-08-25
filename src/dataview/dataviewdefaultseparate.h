@@ -27,7 +27,10 @@ namespace Plotypus
             void                    setData(const columnViewList_t& newData);
 
             virtual bool isDummy() const;
-            virtual bool isComplete() const; //! @todo move implementation to dataview2d as template with param nullObjectChecker
+            virtual bool isComplete() const; /** @todo move implementation to dataview2d as template with param nullObjectChecker
+                                              *  @todo complete switch case
+                                              *  @bug reports spurious false on Lines
+                                              */
     };
 }
 

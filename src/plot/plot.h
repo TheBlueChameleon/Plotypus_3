@@ -7,6 +7,11 @@
 
 namespace Plotypus
 {
+    /**
+     * @brief foo bar
+     *
+     * @todo legend position
+     */
     class Plot : public Sheet
     {
         protected:
