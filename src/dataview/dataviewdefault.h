@@ -46,6 +46,9 @@ namespace Plotypus
             size_t              getLineStyle() const;
             void                setLineStyle(size_t newLineStyle);
 
+            size_t              getPointStyle() const;
+            void                setPointStyle(size_t newPointStyle);
+
             size_t&             columnAssignment(const size_t       columnID);
             size_t&             columnAssignment(const ColumnType   columnType);
             std::string&        columnFormat    (const size_t       columnID);

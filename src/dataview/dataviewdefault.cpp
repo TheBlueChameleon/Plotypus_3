@@ -120,6 +120,16 @@ namespace Plotypus
         lineStyle = newLineStyle;
     }
 
+    size_t DataViewDefault::getPointStyle() const
+    {
+        return pointStyle;
+    }
+
+    void DataViewDefault::setPointStyle(size_t newPointStyle)
+    {
+        pointStyle = newPointStyle;
+    }
+
     size_t& DataViewDefault::columnAssignment(const size_t columnID)
     {
         throwIfInvalidIndex("column ID", columnID, columnAssignments);
