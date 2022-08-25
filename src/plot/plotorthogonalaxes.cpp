@@ -286,7 +286,7 @@ namespace Plotypus
     {
         Plot::writeScriptData(hFile, stylesColloction);
 
-        hFile << "plot ";
+        hFile << (&"splot ")[!mode3D];              // nicer form of (mode3D ? "splot" : "plot")
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const auto dataView : dataViews)
         {
