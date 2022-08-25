@@ -2,7 +2,6 @@
 
 namespace Plotypus
 {
-
     std::string PlotOrthogonalAxes::generateRangeString(double min, double max)
     {
         return "[" +
@@ -205,6 +204,24 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    bool PlotOrthogonalAxes::getMode3D() const
+    {
+        return mode3D;
+    }
+
+    void PlotOrthogonalAxes::setMode3D(bool newMode3D)
+    {
+        // *INDENT-OFF*
+        if (newMode3D) {
+            if (styleFamily == PlotStyleFamily::Orthogonal2D) {throw IncompatiblePlotStyle("Cannot activate 3D mode: plot already configured for 2D plots.");}
+        } else {
+            if (styleFamily == PlotStyleFamily::Orthogonal3D) {throw IncompatiblePlotStyle("Cannot activate 2D mode: plot already configured for 3D plots.");}
+        }
+        // *INDENT-ON*
+
+        mode3D = newMode3D;
+    }
 
     bool PlotOrthogonalAxes::getPolar() const
     {

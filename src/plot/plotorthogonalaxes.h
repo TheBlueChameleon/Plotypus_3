@@ -18,9 +18,12 @@ namespace Plotypus
     class PlotOrthogonalAxes : public Plot
     {
         protected:
+            static constexpr auto allowedStyleFamiles = {PlotStyleFamily::Orthogonal2D, PlotStyleFamily::Orthogonal3D, PlotStyleFamily::Custom};
+
             std::unordered_map<AxisType, AxisDescriptor> axes;
 
-            bool polar = false;
+            bool mode3D = false;
+            bool polar  = false;
 
             static std::string generateRangeString (double min,                   double max);
             static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
@@ -45,6 +48,9 @@ namespace Plotypus
 
             AxisDescriptor&         xAxis();
             AxisDescriptor&         yAxis();
+
+            bool                    getMode3D() const;
+            void                    setMode3D(bool newMode3D);
 
             bool                    getPolar() const;
             void                    setPolar(bool newPolar);
