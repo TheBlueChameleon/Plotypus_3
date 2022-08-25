@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "plotorthogonalaxes.h"
 
 namespace Plotypus
@@ -230,8 +232,8 @@ namespace Plotypus
         if (polar)
         {
             // *INDENT-OFF*
-            if (axes.contains(AxisType::X)) {axes.erase(AxisType::Y);}
-            if (axes.contains(AxisType::Y)) {axes.erase(AxisType::X);}
+            if (axes.contains(AxisType::X)) {axes.erase(AxisType::X);}
+            if (axes.contains(AxisType::Y)) {axes.erase(AxisType::Y);}
             // *INDENT-ON*
 
             axes[AxisType::Radial]                      = AxisDescriptor(AxisType::Radial);
@@ -243,6 +245,47 @@ namespace Plotypus
         {
 
         }
+    }
+
+    // ====================================================================== //
+    // dataview adders
+
+    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(DataViewDefaultSeparate* dataView)
+    {
+        checkAndSetStyleFamily(dataView->getStyleFamily(), allowedStyleFamiles);
+
+        // *INDENT-OFF*
+        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {mode3D = false;}
+        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {mode3D = true;}
+        // *INDENT-ON*
+
+        dataViews.push_back(dataView);
+        return *dataView;
+    }
+
+    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const PlotStyle style, const std::string& label)
+    {
+        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+        return addDataViewSeparate(dataView);
+    }
+
+    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    {
+        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+
+        dataView->data(ColumnType::Y) = dataY;
+
+        return addDataViewSeparate(dataView);
+    }
+
+    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    {
+        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+
+        dataView->data(ColumnType::X) = dataX;
+        dataView->data(ColumnType::Y) = dataY;
+
+        return addDataViewSeparate(dataView);
     }
 
     // ====================================================================== //
@@ -286,7 +329,8 @@ namespace Plotypus
     {
         Plot::writeScriptData(hFile, stylesColloction);
 
-        hFile << (&"splot ")[!mode3D];              // nicer form of (mode3D ? "splot" : "plot")
+        hFile << (mode3D ? "splot " : "plot ");
+
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const auto dataView : dataViews)
         {

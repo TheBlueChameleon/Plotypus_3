@@ -57,7 +57,6 @@ namespace Plotypus
 
     bool DataViewDefaultSeparate::isComplete() const
     {
-
         // *INDENT-OFF*
         if (isDummy())                                                              {return true;}
         if (std::ranges::all_of(m_data, [] (const auto& s) {return s.empty();}))    {return false;}
