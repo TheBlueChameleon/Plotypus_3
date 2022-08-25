@@ -53,9 +53,13 @@ target_precompile_headers(Plotypus-lib PUBLIC
 
 add_executable(Plotypus-unittest
     src/unittest/main.cpp
+
     src/unittest/unittest_procs.h
     src/unittest/unittest_report_sheet.cpp
     src/unittest/unittest.h src/unittest/unittest.cpp
+
+    src/unittest/showcase.h
+    src/unittest/showcase.cpp
 )
 
 target_link_libraries(Plotypus-unittest
