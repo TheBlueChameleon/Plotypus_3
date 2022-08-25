@@ -22,7 +22,7 @@ namespace Plotypus
             bool        key         = true;
             bool        parametric  = false;
 
-            void checkStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
+            void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
 
         public:
             Plot(const std::string& title);
@@ -30,7 +30,7 @@ namespace Plotypus
             virtual void reset();
 
             PlotStyleFamily     getStyleFamily() const;
-            void                setStyleFamily(PlotStyleFamily newStyleFamily);
+            void                setStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
 
             const std::vector<DataView*>& getDataViews() const;
             DataView&           dataView(const size_t i);

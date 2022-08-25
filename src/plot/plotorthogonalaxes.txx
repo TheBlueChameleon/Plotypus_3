@@ -6,7 +6,13 @@ namespace Plotypus
     template<class T>
     DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
     {
-        checkStyleFamily(dataView->getStyleFamily(), this->allowedStyleFamiles);
+        checkAndSetStyleFamily(dataView->getStyleFamily(), allowedStyleFamiles);
+
+        // *INDENT-OFF*
+        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {mode3D = false;}
+        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {mode3D = true;}
+        // *INDENT-ON*
+
         dataViews.push_back(dataView);
         return *dataView;
     }

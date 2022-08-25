@@ -11,7 +11,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void Plot::checkStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
+    void Plot::checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
     {
         if      (styleFamily == PlotStyleFamily::Custom)
         {
@@ -64,14 +64,12 @@ namespace Plotypus
 
     void Plot::setStyleFamily(PlotStyleFamily newStyleFamily)
     {
-        if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))
-        {
-            styleFamily = newStyleFamily;
-        }
-        else
-        {
-            throw IncompatiblePlotStyle("Cannot override plot style family");
-        }
+        // *INDENT-OFF*
+        if (styleFamily == newStyleFamily)                                                  {return;}
+
+        if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {styleFamily = newStyleFamily;}
+        else                                                                                {throw IncompatiblePlotStyle("Cannot override plot style family");}
+        // *INDENT-ON*
     }
 
     const std::vector<DataView*>& Plot::getDataViews() const
