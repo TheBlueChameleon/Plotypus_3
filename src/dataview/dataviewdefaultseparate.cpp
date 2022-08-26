@@ -30,7 +30,7 @@ namespace Plotypus
 
     std::span<double>& DataViewDefaultSeparate::data(ColumnType columnType)
     {
-        const auto columnID = getColumnID(columnType);
+        const auto columnID = getColumnID(columnType) - 1;
         throwIfInvalidIndex("column index", columnID, m_data);
         return m_data[columnID];
     }

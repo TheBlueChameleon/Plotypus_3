@@ -163,8 +163,8 @@ void showcase_2D_plots()
     dataViewCompound.setTitle("Sine Approximation");
     dataViewCompound.setBinaryDataOutput(false);
 
-//    auto& dataViewSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y);
-//    dataViewSeparate.setPointStyle(pointStyleOffset);
+    auto& dataViewSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y);
+    dataViewSeparate.setPointStyle(pointStyleOffset);
 
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines,       "Sine Wave");
     sheet1.addDataViewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::LinesPoints, "Cosine Wave");
@@ -180,7 +180,7 @@ void showcase_2D_plots()
     sheet2.setAspectEqual();
 
     sheet2.addDataViewCompound(&dataViewCompound);
-    sheet2.addDataViewCompound<compound_t>("[0:pi] sin(t)", PlotStyle::Lines,       "Sine Wave");
+    sheet2.addDataViewCompound<compound_t>("[0:pi] sin(t)", PlotStyle::Lines, "Sine Wave");
 
     sheet2.dataViewAs<compound_view_t>(1).setStyleID(PlotStyle::Dots);
     // or:
