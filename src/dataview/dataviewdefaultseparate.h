@@ -8,7 +8,7 @@ namespace Plotypus
     class DataViewDefaultSeparate : public DataViewDefault
     {
         protected:
-            columnViewList_t m_data;
+            columnViewList_t data;
 
             virtual void clearNonFunctionMembers();
 
@@ -22,9 +22,10 @@ namespace Plotypus
 
             virtual size_t          getArity() const;       //! @todo: maybe do check: isComplete?
 
-            std::span<double>&         data(ColumnType columnType);
-            const columnViewList_t& getData() const;
-            void                    setData(const columnViewList_t& newData);
+            //std::span<double>&         data(ColumnType columnType);
+            const columnViewList_t&     getData() const;
+            const std::span<double>&    getData(ColumnType columnType) const;
+            void                        setData(ColumnType columnType, const std::span<double>& newdata);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const; /** @todo move implementation to dataview2d as template with param nullObjectChecker

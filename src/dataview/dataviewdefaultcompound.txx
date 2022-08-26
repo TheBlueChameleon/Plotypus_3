@@ -88,7 +88,7 @@ namespace Plotypus
     template<class T>
     void DataViewDefaultCompound<T>::setSelector(const ColumnType column, const DataSelector_t<T>& selector)
     {
-        const auto columnID = getColumnID(column);
+        auto columnID = getColumnID(column);
 
         if (columnID == COLUMN_UNSUPPORTED)
         {
@@ -100,9 +100,11 @@ namespace Plotypus
             throw UnsupportedOperationError( errMsg );
         }
 
-        selectors        [columnID - 1] = selector;
-        columnAssignments[columnID - 1] = columnID;
-        columnHeadlines  [columnID - 1] = getColumnIDName(column);
+        // column IDs are 1-based...
+        --columnID;
+        selectors        [columnID] = selector;
+        columnAssignments[columnID] = columnID + 1;
+        columnHeadlines  [columnID] = getColumnIDName(column);
     }
 
     template<class T>

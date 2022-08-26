@@ -43,7 +43,6 @@ namespace Plotypus
         hFile << "using ";
         for (auto i = 0u; i < columnAssignments.size(); ++i)
         {
-
             if (columnAssignments[i] != COLUMN_UNUSED)
             {
                 // *INDENT-OFF*

@@ -4,7 +4,7 @@ namespace Plotypus
 {
     void DataViewDefaultSeparate::clearNonFunctionMembers()
     {
-        for (auto& component : m_data)
+        for (auto& component : data)
         {
             component = std::span<double>();
         }
@@ -12,7 +12,11 @@ namespace Plotypus
 
     void DataViewDefaultSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
-
+        const auto width = buffer.size();
+        for (int columnIndex = missingXColumn; columnIndex < width; ++columnIndex)
+        {
+            buffer[columnIndex] = data[columnIndex][recordID];
+        }
     }
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& label) :
@@ -25,30 +29,54 @@ namespace Plotypus
 
     size_t DataViewDefaultSeparate::getArity() const
     {
-        return m_data[1].size();          // quick solution: return arity of Y column
+        return data[1].size();          // quick solution: return arity of Y column
     }
 
-    std::span<double>& DataViewDefaultSeparate::data(ColumnType columnType)
-    {
-        const auto columnID = getColumnID(columnType) - 1;
-        throwIfInvalidIndex("column index", columnID, m_data);
-        return m_data[columnID];
-    }
+//    std::span<double>& DataViewDefaultSeparate::data(ColumnType columnType)
+//    {
+//        const auto columnID = getColumnID(columnType) - 1;
+//        throwIfInvalidIndex("column index", columnID, m_data);
+//        return m_data[columnID];
+//    }
 
     const columnViewList_t& DataViewDefaultSeparate::getData() const
     {
-        return m_data;
+        return data;
     }
 
-    void DataViewDefaultSeparate::setData(const columnViewList_t& newData)
+    const std::span<double>& DataViewDefaultSeparate::getData(ColumnType columnType) const
     {
-        m_data = newData;
+        const auto columnID = getColumnID(columnType) - 1;
+        throwIfInvalidIndex("column index", columnID, data);
+
+        return data[columnID];
+    }
+
+    void DataViewDefaultSeparate::setData(ColumnType columnType, const std::span<double>& newdata)
+    {
+        auto columnID = getColumnID(columnType);
+
+        if (columnID == COLUMN_UNSUPPORTED)
+        {
+            std::string errMsg = "Column type ";
+            errMsg += "\"" + getColumnIDName(columnType) + "\"";
+            errMsg += " not supported for plot type ";
+            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
+
+            throw UnsupportedOperationError( errMsg );
+        }
+
+
+        --columnID;
+        data             [columnID] = newdata;
+        columnAssignments[columnID] = columnID + 1;
+        columnHeadlines  [columnID] = getColumnIDName(columnType);
     }
 
     bool DataViewDefaultSeparate::isDummy() const
     {
         bool result = func.empty();
-        for (const auto& component : m_data)
+        for (const auto& component : data)
         {
             result &= component.empty();
         }
@@ -59,7 +87,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if (isDummy())                                                              {return true;}
-        if (std::ranges::all_of(m_data, [] (const auto& s) {return s.empty();}))    {return false;}
+        if (std::ranges::all_of(data, [] (const auto& s) {return s.empty();}))    {return false;}
 
         constexpr auto isNullSpan = [] (const std::span<double>& span) {return span.empty();};
         // *INDENT-ON*
@@ -67,51 +95,51 @@ namespace Plotypus
         switch (styleID)
         {
             case PlotStyle::Dots:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::Points:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2, 3, 4, 5}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3, 4, 5}, isNullSpan);
             case PlotStyle::XErrorBars:
-                return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullSpan);
             case PlotStyle::YErrorBars:
-                return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullSpan);
             case PlotStyle::XYErrorBars:
-                return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullSpan);
             case PlotStyle::Lines:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::LinesPoints:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::FilledCurves:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullSpan);
             case PlotStyle::XErrorLines:
-                return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullSpan);
             case PlotStyle::YErrorLines:
-                return checkColumnListOccupationIsFrom(m_data, {3, 4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullSpan);
             case PlotStyle::XYErrorLines:
-                return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullSpan);
             case PlotStyle::Steps:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::FSteps:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::FillSteps:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::Impulses:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullSpan);
             case PlotStyle::Boxes:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullSpan);
             case PlotStyle::HBoxes:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2, 3}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullSpan);
             case PlotStyle::BoxErrorBars:
-                return checkColumnListOccupationIsFrom(m_data, {3, 4, 5}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3, 4, 5}, isNullSpan);
             case PlotStyle::BoxxyError:
-                return checkColumnListOccupationIsFrom(m_data, {4, 6}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullSpan);
             case PlotStyle::Arrows:
-                return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {4}, isNullSpan);
             case PlotStyle::Vectors:
-                return checkColumnListOccupationIsFrom(m_data, {4}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {4}, isNullSpan);
             case PlotStyle::Image:
-                return checkColumnListOccupationIsFrom(m_data, {3}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {3}, isNullSpan);
             case PlotStyle::Custom:
-                return checkColumnListOccupationIsFrom(m_data, {1, 2, 3, 4, 5, 6}, isNullSpan);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3, 4, 5, 6}, isNullSpan);
         }
 
         return true;

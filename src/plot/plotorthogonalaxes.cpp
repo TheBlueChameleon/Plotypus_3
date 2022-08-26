@@ -271,7 +271,7 @@ namespace Plotypus
     {
         DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
 
-        dataView->data(ColumnType::Y) = dataY;
+        dataView->setData(ColumnType::Y, dataY);
 
         return addDataViewSeparate(dataView);
     }
@@ -280,8 +280,8 @@ namespace Plotypus
     {
         DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
 
-        dataView->data(ColumnType::X) = dataX;
-        dataView->data(ColumnType::Y) = dataY;
+        dataView->setData(ColumnType::X, dataX);
+        dataView->setData(ColumnType::Y, dataY);
 
         return addDataViewSeparate(dataView);
     }
