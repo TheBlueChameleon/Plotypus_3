@@ -140,7 +140,7 @@ void showcase_2D_plots()
     int pointStyleOffset = stylesCollection.getPointStyleCount();
 
     stylesCollection.addLineStyle("blue", 2.5, "..-", PointForm::Circle);
-    stylesCollection.addPointStyle(PointForm::Diamond, 2.0, "gold");
+    stylesCollection.addPointStyle(PointForm::Diamond, 0.5, "gold");
 
     using compound_selector_t = DataSelector_t<compound_t>;
     using compound_view_t = DataViewDefaultCompound<compound_t>;
@@ -163,7 +163,7 @@ void showcase_2D_plots()
     dataViewCompound.setTitle("Sine Approximation");
     dataViewCompound.setBinaryDataOutput(false);
 
-    auto& dataViewSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y);
+    auto& dataViewSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y, PlotStyle::LinesPoints);
     dataViewSeparate.setPointStyle(pointStyleOffset);
 
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines,       "Sine Wave");

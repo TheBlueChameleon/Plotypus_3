@@ -31,6 +31,8 @@ namespace Plotypus
 
             void writeUsingSpecification(std::ostream& hFile) const;
 
+            size_t getColumnIDOrThrow(const ColumnType columnType);
+
         public:
             DataViewDefault(const PlotStyle    style, const std::string& label = "");
             DataViewDefault(const std::string& style, const std::string& label = "");

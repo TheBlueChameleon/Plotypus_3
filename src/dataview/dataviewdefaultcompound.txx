@@ -86,25 +86,13 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::setSelector(const ColumnType column, const DataSelector_t<T>& selector)
+    void DataViewDefaultCompound<T>::setSelector(const ColumnType columnType, const DataSelector_t<T>& selector)
     {
-        auto columnID = getColumnID(column);
+        const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
-        if (columnID == COLUMN_UNSUPPORTED)
-        {
-            std::string errMsg = "Column type ";
-            errMsg += "\"" + getColumnIDName(column) + "\"";
-            errMsg += " not supported for plot type ";
-            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
-
-            throw UnsupportedOperationError( errMsg );
-        }
-
-        // column IDs are 1-based...
-        --columnID;
         selectors        [columnID] = selector;
         columnAssignments[columnID] = columnID + 1;
-        columnHeadlines  [columnID] = getColumnIDName(column);
+        columnHeadlines  [columnID] = getColumnIDName(columnType);
     }
 
     template<class T>

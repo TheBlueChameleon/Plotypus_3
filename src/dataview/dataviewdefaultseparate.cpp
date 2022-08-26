@@ -54,20 +54,8 @@ namespace Plotypus
 
     void DataViewDefaultSeparate::setData(ColumnType columnType, const std::span<double>& newdata)
     {
-        auto columnID = getColumnID(columnType);
+        const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
-        if (columnID == COLUMN_UNSUPPORTED)
-        {
-            std::string errMsg = "Column type ";
-            errMsg += "\"" + getColumnIDName(columnType) + "\"";
-            errMsg += " not supported for plot type ";
-            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
-
-            throw UnsupportedOperationError( errMsg );
-        }
-
-
-        --columnID;
         data             [columnID] = newdata;
         columnAssignments[columnID] = columnID + 1;
         columnHeadlines  [columnID] = getColumnIDName(columnType);

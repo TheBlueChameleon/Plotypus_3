@@ -56,6 +56,23 @@ namespace Plotypus
         hFile << " ";
     }
 
+    size_t DataViewDefault::getColumnIDOrThrow(const ColumnType columnType)
+    {
+        auto columnID = getColumnID(columnType);
+
+        if (columnID == COLUMN_UNSUPPORTED)
+        {
+            std::string errMsg = "Column type ";
+            errMsg += "\"" + getColumnIDName(columnType) + "\"";
+            errMsg += " not supported for plot type ";
+            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
+
+            throw UnsupportedOperationError( errMsg );
+        }
+
+        return columnID;
+    }
+
     // ====================================================================== //
 
     DataViewDefault::DataViewDefault(const PlotStyle style, const std::string& label) :
