@@ -27,7 +27,7 @@ namespace Plotypus
              * ==> first call sets default, subsequent calls set user styles.
              */
 
-            void reset();
+            StylesCollection& reset();
 
             size_t                          getBoxStyleCount() const;
             const std::vector<BoxStyle>&    getBoxStyles() const;

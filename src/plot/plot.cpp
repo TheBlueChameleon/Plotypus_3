@@ -34,7 +34,7 @@ namespace Plotypus
         }
     }
 
-    void Plot::reset()
+    Plot& Plot::reset()
     {
         Sheet::reset();
 
@@ -53,6 +53,8 @@ namespace Plotypus
 
         key             = true;
         parametric      = false;
+
+        return *this;
     }
 
     // ====================================================================== //

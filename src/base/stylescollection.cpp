@@ -9,11 +9,13 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void StylesCollection::reset()
+    StylesCollection& StylesCollection::reset()
     {
         boxStyles  .clear();
         lineStyles .clear();
         pointStyles.clear();
+
+        return *this;
     }
 
     // ---------------------------------------------------------------------- //

@@ -40,7 +40,7 @@ namespace Plotypus
             DataView(const PlotStyle    style, const std::string& label = "");      //! @bug call of virtual method
             DataView(const std::string& style, const std::string& label = "");
 
-            virtual void reset();
+            virtual DataView& reset();
 
             const std::string&  getTitle() const;
             DataView&           setTitle(const std::string& newTitle);

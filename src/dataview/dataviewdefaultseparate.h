@@ -18,9 +18,7 @@ namespace Plotypus
             DataViewDefaultSeparate(const PlotStyle  style, const std::string& label = "");
             DataViewDefaultSeparate(const std::string& style, const std::string& label = "");
 
-            // all functionality of "reset" already in dataview2d
-
-            virtual size_t          getArity() const;       //! @todo: maybe do check: isComplete?
+            virtual size_t              getArity() const;       //! @todo: maybe do check: isComplete?
 
             //std::span<double>&         data(ColumnType columnType);
             const columnViewList_t&     getData() const;

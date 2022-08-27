@@ -22,8 +22,6 @@ namespace Plotypus
             DataViewDefaultCompound(const PlotStyle  style, const std::string& label = "");
             DataViewDefaultCompound(const std::string& style, const std::string& label = "");
 
-            // all functionality of "reset" already in dataview2d
-
             virtual size_t                          getArity() const;
 
             const std::span<T>&                     getData() const;

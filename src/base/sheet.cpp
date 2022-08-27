@@ -16,7 +16,7 @@ namespace Plotypus
         return type;
     }
 
-    void Sheet::reset()
+    Sheet& Sheet::reset()
     {
         title = "";
         defaultFont = "arial,7";
@@ -27,6 +27,8 @@ namespace Plotypus
         datalineSeparatorTxt = "................................................................................\n";
 
         labels.clear();
+
+        return *this;
     }
 
     const std::string& Sheet::getTitle() const

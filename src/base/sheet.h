@@ -36,7 +36,7 @@ namespace Plotypus
 
             SheetType getType() const;
 
-            virtual void reset();
+            virtual Sheet& reset();
 
             const std::string&          getTitle() const;
             Sheet&                      setTitle(const std::string& newTitle);

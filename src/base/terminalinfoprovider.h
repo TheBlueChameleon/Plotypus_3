@@ -80,7 +80,7 @@ namespace Plotypus
             TerminalInfoProvider(FileType fileType);
             TerminalInfoProvider(const std::string& terminal);
 
-            void reset();
+            TerminalInfoProvider& reset();
 
             FileType                    getFileType() const;
             TerminalInfoProvider&       setFileType(FileType newFileType);

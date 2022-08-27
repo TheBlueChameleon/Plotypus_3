@@ -76,7 +76,7 @@ namespace Plotypus
         clearSheets();
     }
 
-    void Report::reset()
+    Report& Report::reset()
     {
         clearSheets();
 
@@ -95,6 +95,8 @@ namespace Plotypus
 
         m_stylesCollection.reset();
         m_terminalInfoProvider.reset();
+
+        return *this;
     }
 
     TerminalInfoProvider& Report::terminalInfoProvider()

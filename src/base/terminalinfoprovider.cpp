@@ -189,7 +189,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void TerminalInfoProvider::reset()
+    TerminalInfoProvider& TerminalInfoProvider::reset()
     {
         fileType        = FileType::Pdf;
         terminal        = "pdfcairo";
@@ -206,6 +206,8 @@ namespace Plotypus
         windowTitle     .reset();
         windowNumber    .reset();
         options         .reset();
+
+        return *this;
     }
 
     // ---------------------------------------------------------------------- //

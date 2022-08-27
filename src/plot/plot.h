@@ -32,7 +32,7 @@ namespace Plotypus
         public:
             Plot(const std::string& title);
 
-            virtual void reset();
+            virtual Plot& reset();
 
             PlotStyleFamily     getStyleFamily() const;
             Plot&               setStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?

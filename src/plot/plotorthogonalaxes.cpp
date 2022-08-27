@@ -153,12 +153,14 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void PlotOrthogonalAxes::reset()
+    PlotOrthogonalAxes& PlotOrthogonalAxes::reset()
     {
         Plot::reset();
 
         axes.clear();
         polar = false;
+
+        return *this;
     }
 
     // ====================================================================== //

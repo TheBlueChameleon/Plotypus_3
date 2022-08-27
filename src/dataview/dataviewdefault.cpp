@@ -87,7 +87,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void DataViewDefault::reset()
+    DataViewDefault& DataViewDefault::reset()
     {
         DataView::reset();
 
@@ -100,6 +100,8 @@ namespace Plotypus
         columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
         columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
         columnHeadlines   = {};
+
+        return *this;
     }
 
     DataViewDefault& DataViewDefault::setStyleID(const PlotStyle newStyle)

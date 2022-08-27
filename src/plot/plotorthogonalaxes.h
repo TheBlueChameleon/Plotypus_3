@@ -37,7 +37,7 @@ namespace Plotypus
             PlotOrthogonalAxes(const std::string& title);
             ~PlotOrthogonalAxes();
 
-            virtual void reset();
+            virtual PlotOrthogonalAxes& reset();
 
             const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
             PlotOrthogonalAxes&                                 setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);

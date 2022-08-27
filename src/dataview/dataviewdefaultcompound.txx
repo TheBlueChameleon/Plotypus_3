@@ -8,7 +8,7 @@ namespace Plotypus
     template<class T>
     void DataViewDefaultCompound<T>::clearNonFunctionMembers()
     {
-        data = std::span<T>();
+        data      = std::span<T>();
         selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
     }
 
