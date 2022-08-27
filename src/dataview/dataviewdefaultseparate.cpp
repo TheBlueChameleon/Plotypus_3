@@ -45,13 +45,15 @@ namespace Plotypus
         return data[columnID];
     }
 
-    void DataViewDefaultSeparate::setData(ColumnType columnType, const std::span<double>& newdata)
+    DataViewDefaultSeparate& DataViewDefaultSeparate::setData(ColumnType columnType, const std::span<double>& newdata)
     {
         const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
         data             [columnID] = newdata;
         columnAssignments[columnID] = columnID + 1;
         columnHeadlines  [columnID] = getColumnIDName(columnType);
+
+        return *this;
     }
 
     bool DataViewDefaultSeparate::isDummy() const

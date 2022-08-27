@@ -126,10 +126,11 @@ namespace Plotypus
         return func;
     }
 
-    void DataViewDefault::setFunc(const std::string& newFunc)
+    DataViewDefault& DataViewDefault::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
         clearNonFunctionMembers();
+        return *this;
     }
 
     size_t DataViewDefault::getLineStyle() const
@@ -137,9 +138,10 @@ namespace Plotypus
         return lineStyle;
     }
 
-    void DataViewDefault::setLineStyle(size_t newLineStyle)
+    DataViewDefault& DataViewDefault::setLineStyle(size_t newLineStyle)
     {
         lineStyle = newLineStyle;
+        return *this;
     }
 
     size_t DataViewDefault::getPointStyle() const
@@ -147,9 +149,10 @@ namespace Plotypus
         return pointStyle;
     }
 
-    void DataViewDefault::setPointStyle(size_t newPointStyle)
+    DataViewDefault& DataViewDefault::setPointStyle(size_t newPointStyle)
     {
         pointStyle = newPointStyle;
+        return *this;
     }
 
     size_t& DataViewDefault::columnAssignment(const size_t columnID)

@@ -23,7 +23,7 @@ namespace Plotypus
             //std::span<double>&         data(ColumnType columnType);
             const columnViewList_t&     getData() const;
             const std::span<double>&    getData(ColumnType columnType) const;
-            void                        setData(ColumnType columnType, const std::span<double>& newdata);
+            DataViewDefaultSeparate&    setData(ColumnType columnType, const std::span<double>& newdata);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

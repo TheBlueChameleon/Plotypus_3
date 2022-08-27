@@ -25,12 +25,12 @@ namespace Plotypus
             virtual size_t                          getArity() const;
 
             const std::span<T>&                     getData() const;
-            void                                    setData(const std::span<T>& newDataSource);
-            void                                    setData(const T* newDataSource, size_t N);
+            DataViewDefaultCompound&                setData(const std::span<T>& newDataSource);
+            DataViewDefaultCompound&                setData(const T* newDataSource, size_t N);
 
             const std::array<DataSelector_t<T>, 6>& getSelectors() const;
-            void                                    setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
-            void                                    setSelector (const ColumnType columnType, const DataSelector_t<T>& selector);
+            DataViewDefaultCompound&                setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
+            DataViewDefaultCompound&                setSelector (const ColumnType columnType, const DataSelector_t<T>& selector);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

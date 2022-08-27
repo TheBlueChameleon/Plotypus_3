@@ -46,13 +46,13 @@ namespace Plotypus
             virtual size_t      getArity() const = 0;
 
             const std::string&  getFunc() const;
-            void                setFunc(const std::string& newFunc);
+            DataViewDefault&    setFunc(const std::string& newFunc);
 
             size_t              getLineStyle() const;
-            void                setLineStyle(size_t newLineStyle);
+            DataViewDefault&    setLineStyle(size_t newLineStyle);
 
             size_t              getPointStyle() const;
-            void                setPointStyle(size_t newPointStyle);
+            DataViewDefault&    setPointStyle(size_t newPointStyle);
 
             size_t&             columnAssignment(const size_t       columnID);
             size_t&             columnAssignment(const ColumnType   columnType);

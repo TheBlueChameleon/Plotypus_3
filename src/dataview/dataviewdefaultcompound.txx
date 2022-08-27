@@ -56,15 +56,17 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::setData(const std::span<T>& newDataSource)
+    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setData(const std::span<T>& newDataSource)
     {
         data = newDataSource;
+        return *this;
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::setData(const T* newDataSource, size_t N)
+    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setData(const T* newDataSource, size_t N)
     {
         data = std::span<T>(newDataSource, newDataSource + N);
+        return *this;
     }
 
     template<class T>
@@ -74,7 +76,7 @@ namespace Plotypus
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
+    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
         for (size_t i = 0u; const auto& selector : selectors)
@@ -83,16 +85,18 @@ namespace Plotypus
             if (selector) {columnAssignments[i] = ++i;}         // columnAssignments[i] = i + 1 for i in range(size)
             // *INDENT-ON*
         }
+        return *this;
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::setSelector(const ColumnType columnType, const DataSelector_t<T>& selector)
+    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setSelector(const ColumnType columnType, const DataSelector_t<T>& selector)
     {
         const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
         selectors        [columnID] = selector;
         columnAssignments[columnID] = columnID + 1;
         columnHeadlines  [columnID] = getColumnIDName(columnType);
+        return *this;
     }
 
     template<class T>
