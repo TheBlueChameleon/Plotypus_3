@@ -215,7 +215,7 @@ namespace Plotypus
         return fileType;
     }
 
-    void TerminalInfoProvider::setFileType(FileType newFileType)
+    TerminalInfoProvider& TerminalInfoProvider::setFileType(FileType newFileType)
     {
         reset();
 
@@ -269,6 +269,7 @@ namespace Plotypus
         }
 
         fileType = newFileType;
+        return *this;
     }
 
     const std::string& TerminalInfoProvider::getTerminal() const
@@ -276,10 +277,11 @@ namespace Plotypus
         return terminal;
     }
 
-    void TerminalInfoProvider::setTerminal(const std::string& newTerminal)
+    TerminalInfoProvider& TerminalInfoProvider::setTerminal(const std::string& newTerminal)
     {
         setFileType(FileType::Custom);
         terminal = newTerminal;
+        return *this;
     }
 
     const std::string& TerminalInfoProvider::getExtOut() const
@@ -287,10 +289,11 @@ namespace Plotypus
         return extOut;
     }
 
-    void TerminalInfoProvider::setExtOut(const std::string& newExtOut)
+    TerminalInfoProvider& TerminalInfoProvider::setExtOut(const std::string& newExtOut)
     {
         throwIfInvalidFilename("extension for script output", newExtOut);
         extOut = newExtOut;
+        return *this;
     }
 
     bool TerminalInfoProvider::getOutputToFile() const
@@ -298,9 +301,10 @@ namespace Plotypus
         return outputToFile;
     }
 
-    void TerminalInfoProvider::setOutputToFile(bool newOutputToFile)
+    TerminalInfoProvider& TerminalInfoProvider::setOutputToFile(bool newOutputToFile)
     {
         outputToFile = newOutputToFile;
+        return *this;
     }
 
     // ---------------------------------------------------------------------- //
@@ -310,7 +314,7 @@ namespace Plotypus
         return dimensions;
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_t& newDimensions)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const dimensions_t& newDimensions)
     {
         // *INDENT-OFF*
         switch(fileType)
@@ -328,50 +332,52 @@ namespace Plotypus
         // *INDENT-ON*
 
         dimensions = newDimensions;
+        return *this;
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_pixels_t& newDimensions)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const dimensions_pixels_t& newDimensions)
     {
-        setDimensions(dimensions_t(newDimensions));
+        return setDimensions(dimensions_t(newDimensions));
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions)
     {
         const std::string lengthUnitString = getLengthUnitName(LengthUnit::Inch);
         dimensions_length_with_unit_t fullySpecifiedDimensions = std::make_pair(newDimensions, lengthUnitString);
-        setDimensions(dimensions_t(fullySpecifiedDimensions));
+        return setDimensions(dimensions_t(fullySpecifiedDimensions));
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit)
     {
         const std::string lengthUnitString = getLengthUnitName(lengthUnit);
         dimensions_length_with_unit_t fullySpecifiedDimensions = std::make_pair(newDimensions, lengthUnitString);
-        setDimensions(dimensions_t(fullySpecifiedDimensions));
+        return setDimensions(dimensions_t(fullySpecifiedDimensions));
     }
 
-    void TerminalInfoProvider::setDimensions(const dimensions_length_with_unit_t& newDimensions)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const dimensions_length_with_unit_t& newDimensions)
     {
-        setDimensions(dimensions_t(newDimensions));
+        return setDimensions(dimensions_t(newDimensions));
     }
 
-    void TerminalInfoProvider::setDimensions(const int width, const int height)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const int width, const int height)
     {
-        setDimensions(std::make_pair(width, height));
+        return setDimensions(std::make_pair(width, height));
     }
 
-    void TerminalInfoProvider::setDimensions(const double width, const double height)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const double width, const double height)
     {
-        setDimensions(std::make_pair(width, height));
+        return setDimensions(std::make_pair(width, height));
     }
 
-    void TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnit lengthUnit)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnit lengthUnit)
     {
-        setDimensions(std::make_pair(width, height), lengthUnit);
+        return setDimensions(std::make_pair(width, height), lengthUnit);
     }
 
-    void TerminalInfoProvider::clearDimensions()
+    TerminalInfoProvider& TerminalInfoProvider::clearDimensions()
     {
         dimensions.reset();
+        return *this;
     }
 
     // ---------------------------------------------------------------------- //
@@ -381,15 +387,17 @@ namespace Plotypus
         return position;
     }
 
-    void TerminalInfoProvider::setPosition(const dimensions_pixels_t& newPosition)
+    TerminalInfoProvider& TerminalInfoProvider::setPosition(const dimensions_pixels_t& newPosition)
     {
         throwIfUnsupportedFeature("position", {FileType::Screen});
         position = newPosition;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearPosition()
+    TerminalInfoProvider& TerminalInfoProvider::clearPosition()
     {
         position.reset();
+        return *this;
     }
 
     std::optional<std::string> TerminalInfoProvider::getBackgroundColor() const
@@ -397,15 +405,17 @@ namespace Plotypus
         return backgroundColor;
     }
 
-    void TerminalInfoProvider::setBackgroundColor(const std::string& newBackgroundColor)
+    TerminalInfoProvider& TerminalInfoProvider::setBackgroundColor(const std::string& newBackgroundColor)
     {
         throwIfUnsupportedFeature("background color", {FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript});
         backgroundColor = newBackgroundColor;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearBackgroundColor()
+    TerminalInfoProvider& TerminalInfoProvider::clearBackgroundColor()
     {
         backgroundColor.reset();
+        return *this;
     }
 
     std::optional<LineEnds> TerminalInfoProvider::getLineEnds() const
@@ -413,15 +423,17 @@ namespace Plotypus
         return lineEnds;
     }
 
-    void TerminalInfoProvider::setLineEnds(const LineEnds newLineEnds)
+    TerminalInfoProvider& TerminalInfoProvider::setLineEnds(const LineEnds newLineEnds)
     {
         throwIfUnsupportedFeature("line ends", {FileType::Gif, FileType::Jpeg, FileType::LaTeX, FileType::Pdf, FileType::Png, FileType::PostScript});
         lineEnds = newLineEnds;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearLineEnds()
+    TerminalInfoProvider& TerminalInfoProvider::clearLineEnds()
     {
         lineEnds.reset();
+        return *this;
     }
 
     std::optional<bool> TerminalInfoProvider::getTransparent() const
@@ -429,15 +441,17 @@ namespace Plotypus
         return transparent;
     }
 
-    void TerminalInfoProvider::setTransparent(bool newTransparent)
+    TerminalInfoProvider& TerminalInfoProvider::setTransparent(bool newTransparent)
     {
         throwIfUnsupportedFeature("transparent background", {FileType::Gif, FileType::Png});
         transparent = newTransparent;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearTransparent()
+    TerminalInfoProvider& TerminalInfoProvider::clearTransparent()
     {
         transparent.reset();
+        return *this;
     }
 
     std::optional<bool> TerminalInfoProvider::getAnimate() const
@@ -445,17 +459,19 @@ namespace Plotypus
         return animate;
     }
 
-    void TerminalInfoProvider::setAnimate(bool newAnimate)
+    TerminalInfoProvider& TerminalInfoProvider::setAnimate(bool newAnimate)
     {
         throwIfUnsupportedFeature("animation", {FileType::Gif});
         animate = newAnimate;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearAnimate()
+    TerminalInfoProvider& TerminalInfoProvider::clearAnimate()
     {
         animate  .reset();
         delay    .reset();
         loopCount.reset();
+        return *this;
     }
 
     std::optional<int> TerminalInfoProvider::getDelay() const
@@ -463,16 +479,18 @@ namespace Plotypus
         return delay;
     }
 
-    void TerminalInfoProvider::setDelay(int newDelay)
+    TerminalInfoProvider& TerminalInfoProvider::setDelay(int newDelay)
     {
         throwIfUnsupportedFeature("animation delay", {FileType::Gif});
         animate = true;
         delay = newDelay;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearDelay()
+    TerminalInfoProvider& TerminalInfoProvider::clearDelay()
     {
         delay.reset();
+        return *this;
     }
 
     std::optional<int> TerminalInfoProvider::getLoopCount() const
@@ -480,16 +498,18 @@ namespace Plotypus
         return loopCount;
     }
 
-    void TerminalInfoProvider::setLoopCount(int newLoopCount)
+    TerminalInfoProvider& TerminalInfoProvider::setLoopCount(int newLoopCount)
     {
         throwIfUnsupportedFeature("animation loop count", {FileType::Gif});
         animate = true;
         loopCount = newLoopCount;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearLoopCount()
+    TerminalInfoProvider& TerminalInfoProvider::clearLoopCount()
     {
         loopCount.reset();
+        return *this;
     }
 
     std::optional<std::string> TerminalInfoProvider::getWindowTitle() const
@@ -497,15 +517,17 @@ namespace Plotypus
         return windowTitle;
     }
 
-    void TerminalInfoProvider::setWindowTitle(const std::string& newWindowTitle)
+    TerminalInfoProvider& TerminalInfoProvider::setWindowTitle(const std::string& newWindowTitle)
     {
         throwIfUnsupportedFeature("window title", {FileType::Screen});
         windowTitle = newWindowTitle;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearWindowTitle()
+    TerminalInfoProvider& TerminalInfoProvider::clearWindowTitle()
     {
         windowTitle.reset();
+        return *this;
     }
 
     std::optional<int> TerminalInfoProvider::getWindowNumber() const
@@ -513,15 +535,17 @@ namespace Plotypus
         return windowNumber;
     }
 
-    void TerminalInfoProvider::setWindowNumber(int newWindowNumber)
+    TerminalInfoProvider& TerminalInfoProvider::setWindowNumber(int newWindowNumber)
     {
         throwIfUnsupportedFeature("window number", {FileType::Screen});
         windowNumber = newWindowNumber;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearWindowNumber()
+    TerminalInfoProvider& TerminalInfoProvider::clearWindowNumber()
     {
         windowNumber.reset();
+        return *this;
     }
 
     std::optional<std::string> TerminalInfoProvider::getOptions() const
@@ -529,14 +553,16 @@ namespace Plotypus
         return options;
     }
 
-    void TerminalInfoProvider::setOptions(const std::string& newOptions)
+    TerminalInfoProvider& TerminalInfoProvider::setOptions(const std::string& newOptions)
     {
         options = newOptions;
+        return *this;
     }
 
-    void TerminalInfoProvider::clearOptions()
+    TerminalInfoProvider& TerminalInfoProvider::clearOptions()
     {
         options.reset();
+        return *this;
     }
 
     // ====================================================================== //
@@ -553,6 +579,7 @@ namespace Plotypus
         writeWindowTitle (hFile);
         writeWindowNumber(hFile);
         writeOptions     (hFile);
+
         hFile << std::endl;
     }
 }

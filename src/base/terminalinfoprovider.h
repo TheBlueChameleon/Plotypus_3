@@ -82,65 +82,65 @@ namespace Plotypus
 
             void reset();
 
-            FileType            getFileType() const;
-            void                setFileType(FileType newFileType);
-            const std::string&  getTerminal() const;
-            void                setTerminal(const std::string& newTerminal);
-            const std::string&  getExtOut() const;
-            void                setExtOut(const std::string& newExtOut);
-            bool                getOutputToFile() const;
-            void                setOutputToFile(bool newOutputToFile);
+            FileType                    getFileType() const;
+            TerminalInfoProvider&       setFileType(FileType newFileType);
+            const std::string&          getTerminal() const;
+            TerminalInfoProvider&       setTerminal(const std::string& newTerminal);
+            const std::string&          getExtOut() const;
+            TerminalInfoProvider&       setExtOut(const std::string& newExtOut);
+            bool                        getOutputToFile() const;
+            TerminalInfoProvider&       setOutputToFile(bool newOutputToFile);
 
             std::optional<dimensions_t> getDimensions() const;
-            void                        setDimensions(const dimensions_t& newDimensions);
-            void                        setDimensions(const dimensions_pixels_t& newDimensions);
-            void                        setDimensions(const dimensions_length_t& newDimensions);
-            void                        setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
-            void                        setDimensions(const dimensions_length_with_unit_t& newDimensions);
-            void                        setDimensions(const int width, const int height);
-            void                        setDimensions(const double width, const double height);
-            void                        setDimensions(const double width, const double height, const LengthUnit lengthUnit);
-            void                        clearDimensions();
+            TerminalInfoProvider&       setDimensions(const dimensions_t& newDimensions);
+            TerminalInfoProvider&       setDimensions(const dimensions_pixels_t& newDimensions);
+            TerminalInfoProvider&       setDimensions(const dimensions_length_t& newDimensions);
+            TerminalInfoProvider&       setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
+            TerminalInfoProvider&       setDimensions(const dimensions_length_with_unit_t& newDimensions);
+            TerminalInfoProvider&       setDimensions(const int width, const int height);
+            TerminalInfoProvider&       setDimensions(const double width, const double height);
+            TerminalInfoProvider&       setDimensions(const double width, const double height, const LengthUnit lengthUnit);
+            TerminalInfoProvider&       clearDimensions();
 
             std::optional<dimensions_pixels_t>  getPosition() const;
-            void                                setPosition(const dimensions_pixels_t& newPosition);
-            void                                clearPosition();
+            TerminalInfoProvider&               setPosition(const dimensions_pixels_t& newPosition);
+            TerminalInfoProvider&               clearPosition();
 
             std::optional<std::string>          getBackgroundColor() const;
-            void                                setBackgroundColor(const std::string& newBackgroundColor);
-            void                                clearBackgroundColor();
+            TerminalInfoProvider&               setBackgroundColor(const std::string& newBackgroundColor);
+            TerminalInfoProvider&               clearBackgroundColor();
 
             std::optional<LineEnds>             getLineEnds() const;
-            void                                setLineEnds(const LineEnds newLineEnds);
-            void                                clearLineEnds();
+            TerminalInfoProvider&               setLineEnds(const LineEnds newLineEnds);
+            TerminalInfoProvider&               clearLineEnds();
 
             std::optional<bool>                 getTransparent() const;
-            void                                setTransparent(bool newTransparent);
-            void                                clearTransparent();
+            TerminalInfoProvider&               setTransparent(bool newTransparent);
+            TerminalInfoProvider&               clearTransparent();
 
             std::optional<bool>                 getAnimate() const;
-            void                                setAnimate(bool newAnimate);
-            void                                clearAnimate();
+            TerminalInfoProvider&               setAnimate(bool newAnimate);
+            TerminalInfoProvider&               clearAnimate();
 
             std::optional<int>                  getDelay() const;
-            void                                setDelay(int newDelay);
-            void                                clearDelay();
+            TerminalInfoProvider&               setDelay(int newDelay);
+            TerminalInfoProvider&               clearDelay();
 
             std::optional<int>                  getLoopCount() const;
-            void                                setLoopCount(int newLoopCount);
-            void                                clearLoopCount();
+            TerminalInfoProvider&               setLoopCount(int newLoopCount);
+            TerminalInfoProvider&               clearLoopCount();
 
             std::optional<std::string>          getWindowTitle() const;
-            void                                setWindowTitle(const std::string& newWindowTitle);
-            void                                clearWindowTitle();
+            TerminalInfoProvider&               setWindowTitle(const std::string& newWindowTitle);
+            TerminalInfoProvider&               clearWindowTitle();
 
             std::optional<int>                  getWindowNumber() const;
-            void                                setWindowNumber(int newWindowNumber);
-            void                                clearWindowNumber();
+            TerminalInfoProvider&               setWindowNumber(int newWindowNumber);
+            TerminalInfoProvider&               clearWindowNumber();
 
             std::optional<std::string>          getOptions() const;
-            void                                setOptions(const std::string& newOptions);
-            void                                clearOptions();
+            TerminalInfoProvider&               setOptions(const std::string& newOptions);
+            TerminalInfoProvider&               clearOptions();
 
             // writer
 
