@@ -263,6 +263,11 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     auto& sheet4 = report.addPlotOrthogonalAxes("filled curves");
 
+    sheet4.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::FilledCurves, "Error")
+    .setSelector(ColumnType::X,      compoundSelectorX)
+    .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
+    .setOptions("lc rgb \"#AACCFF\"");
+
     sheet4
     .addDataViewCompound<compound_t>()
     .setData(compound_data)
@@ -270,10 +275,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setTitle("Sine approximation");
 
-    sheet4.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::FilledCurves, "Error")
-    .setSelector(ColumnType::X,      compoundSelectorX)
-    .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
-    .setOptions("lc rgb \"#AACCFF\"");
+    sheet4.dataViewAs<compound_view_t>(0).makePlusMinusFormat();
 
     // ---------------------------------------------------------------------- //
     // ill-typed references cause a catch-able exception

@@ -75,6 +75,45 @@ namespace Plotypus
         return columnID;
     }
 
+    void DataViewDefault::makePlusMinusFormat()
+    {
+        /* check prerequisites:
+         * - is PlotStyle::FilledCurve
+         * - has Y column
+         * - has DeltaY column
+         * - more?
+         */
+
+        // *INDENT-OFF*
+        const auto id_data  = getColumnID(PlotStyle::FilledCurves, ColumnType::Y);
+        const auto id_delta = getColumnID(PlotStyle::FilledCurves, ColumnType::DeltaY);
+
+        const auto index_data  = id_data  - 1;
+        const auto index_delta = id_delta - 1;
+
+        if (plotStyleID != PlotStyle::FilledCurves)          {throw UnsupportedOperationError("PlusMinusFormat can only be set for FilledCurves");}
+        if (columnAssignments[index_data]  == COLUMN_UNUSED) {throw UnsupportedOperationError("PlusMinusFormat can only be set if Y values are present");}
+        if (columnAssignments[index_delta] == COLUMN_UNUSED) {throw UnsupportedOperationError("PlusMinusFormat can only be set if delta Y values are present");}
+        // *INDENT-ON*
+
+
+        /* write format:
+         * - for ColID::YLow : "(!2 - !3)"
+         * - for ColID::YHigh: "(!2 + !3)"
+         * - use symbol COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID for "!"
+         * - use appropriate getters for "2", "3"
+         */
+
+        const auto index_yLow  = getColumnID(PlotStyle::FilledCurves, ColumnType::YLow ) - 1;
+        const auto index_yHigh = getColumnID(PlotStyle::FilledCurves, ColumnType::YHigh) - 1;
+
+        const std::string element_data  = "!" + std::to_string(id_data);
+        const std::string element_delta = "!" + std::to_string(id_delta);
+
+        columnFormats[index_yLow ] = "(" + element_data + " - " + element_delta + ")";
+        columnFormats[index_yHigh] = "(" + element_data + " + " + element_delta + ")";
+    }
+
     // ====================================================================== //
 
     DataViewDefault::DataViewDefault(const PlotStyle plotStyleID, const std::string& label) :
