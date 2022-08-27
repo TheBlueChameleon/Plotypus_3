@@ -18,6 +18,25 @@ struct compound_t
 // ========================================================================== //
 // data generators
 
+std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
+{
+    // non-uniform sampling of the x domain, resulting in a sigmoid
+
+    std::vector<double> dataX, dataY;
+
+    size_t i = -1;
+    for (double x = -1.; x < 1.;)
+    {
+        x += 0.1 * std::sqrt( std::abs(x) );
+        ++i;
+
+        dataX.push_back((x + 1.) * .5 * pi);
+        dataY.push_back(.05 * i - 1);
+    }
+
+    return std::make_pair(dataX, dataY);
+}
+
 std::vector<compound_t> generateCompoundData2D()
 {
     const auto N = 50;
@@ -38,70 +57,61 @@ std::vector<compound_t> generateCompoundData2D()
     return result;
 }
 
-std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
+// ========================================================================== //
+// internal showcase procs
+
+void showcase_run_overlays(Plotypus::Report& report);
+void showcase_run_plots2d (Plotypus::Report& report,
+                           std::pair<std::vector<double>, std::vector<double>>& separate_data,
+                           std::vector<compound_t>& compound_data);
+
+// ========================================================================== //
+// exposed interface
+
+void showcase_run(Showcases selection)
 {
-    // non-uniform sampling of the x domain, resulting in a sigmoid
+    // ---------------------------------------------------------------------- //
+    // prepare report, i.e. the primary object
 
-    std::vector<double> dataX, dataY;
+    Plotypus::Report report = Plotypus::Report(Plotypus::FileType::Pdf);
+    report.setOutputDirectory("TestOutput");
 
-    size_t i = -1;
-    for (double x = -1.; x < 1.;)
+    // ---------------------------------------------------------------------- //
+    // prepare some data (so they persist in memory until we write the report)
+
+    std::pair<std::vector<double>, std::vector<double>> separate_data;
+    std::vector<compound_t>                             compound_data;
+
+    // ---------------------------------------------------------------------- //
+    // run desired showcase options; this invokes generation of data as well.
+
+    if (selection & Showcases::Overlays)
     {
-        x += 0.1 * std::sqrt( std::abs(x) );
-        ++i;
-
-        dataX.push_back((x + 1.) * .5 * pi);
-        dataY.push_back(.05 * i - 1);
+        showcase_run_overlays(report);
+    }
+    if (selection & Showcases::Plots_2D)
+    {
+        separate_data = generateSeparateData2D();
+        compound_data = generateCompoundData2D();
+        showcase_run_plots2d (report, separate_data, compound_data);
     }
 
-    return std::make_pair(dataX, dataY);
+    // ---------------------------------------------------------------------- //
+    // write the report
+
+    report.writeTxt();
+    report.writeDat();
+    report.writeScript();
 }
 
 // ========================================================================== //
-// showcase utility
+// showcases
 
-Plotypus::Report showcase_report = Plotypus::Report(Plotypus::FileType::Pdf);
-bool             showcase_RunAutoActions = true;
-
-void showcase_init()
+void showcase_run_overlays(Plotypus::Report& report)
 {
-    if (showcase_RunAutoActions)
-    {
-        showcase_report.setOutputDirectory("TestOutput");
-    }
-}
-
-void showcase_exit()
-{
-    if (showcase_RunAutoActions)
-    {
-        showcase_report.writeTxt();
-        showcase_report.writeDat();
-        showcase_report.writeScript();
-    }
-}
-
-// ========================================================================== //
-// exposed procs
-
-void showcase_all()
-{
-    showcase_init();
-    showcase_RunAutoActions = false;
-
-    showcase_overlays();
-    showcase_2D_plots();
-
-    showcase_RunAutoActions = true;
-    showcase_exit();
-}
-
-void showcase_overlays()
-{
-    showcase_init();
     using namespace Plotypus;
 
-    auto& stylesCollection = showcase_report.stylesCollection();
+    auto& stylesCollection = report.stylesCollection();
 
     int boxStyleOffset = stylesCollection.getBoxStyleCount();
 
@@ -111,7 +121,7 @@ void showcase_overlays()
     // ---------------------------------------------------------------------- //
     // Sheet 1: text boxes
 
-    auto& sheet1 = showcase_report.addSheet("text overlay features");
+    auto& sheet1 = report.addSheet("text overlay features");
 
     sheet1.addLabel("FOO BAR", .10, .10);
     sheet1.addLabel("auto-boxed", .30, .10, true);
@@ -142,19 +152,18 @@ void showcase_overlays()
                     + SYMBOL_AT + "ax"
                     + SYMBOL_CURLY_BRACE_OPEN + "a" + SYMBOL_CURLY_BRACE_CLOSE,
                     .70, .51, true);
-
-    showcase_exit();
 }
 
-void showcase_2D_plots()
+void showcase_run_plots2d(Plotypus::Report& report,
+                          std::pair<std::vector<double>, std::vector<double> >& separate_data,
+                          std::vector<compound_t>& compound_data)
 {
-    showcase_init();
     using namespace Plotypus;
 
     // ---------------------------------------------------------------------- //
     // set up some styles
 
-    auto& stylesCollection = showcase_report.stylesCollection();
+    auto& stylesCollection = report.stylesCollection();
     int linesStyleOffset = stylesCollection.getLineStyleCount();
     int pointStyleOffset = stylesCollection.getPointStyleCount();
 
@@ -164,11 +173,9 @@ void showcase_2D_plots()
     stylesCollection.addPointStyle(PointForm::Diamond, 0.5, "gold");
 
     // ---------------------------------------------------------------------- //
-    // fetch data (run your simulation)
+    // normally, we would get separate data in individual std::vector<double>s
 
-    auto [sepData_X, sepData_Y]           = generateSeparateData2D();
-    std::vector<compound_t> compound_data = generateCompoundData2D();
-
+    auto [sepData_X, sepData_Y] = separate_data;
 
     // ---------------------------------------------------------------------- //
     // for compound data: prepare selectors
@@ -176,18 +183,18 @@ void showcase_2D_plots()
     using compound_selector_t = DataSelector_t<compound_t>;
     using compound_view_t     = DataViewDefaultCompound<compound_t>;
 
-    // *INDENT-OFF*
-    compound_selector_t compoundSelectorX    = [] (const compound_t& data) {return data.x;};
-    compound_selector_t compoundSelectorY    = [] (const compound_t& data) {return data.y;};
-    compound_selector_t compoundSelectorErrX = [] (const compound_t& data) {return data.errX;};
-    compound_selector_t compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
-    // *INDENT-ON*
+        // *INDENT-OFF*
+        compound_selector_t compoundSelectorX    = [] (const compound_t& data) {return data.x;};
+        compound_selector_t compoundSelectorY    = [] (const compound_t& data) {return data.y;};
+        compound_selector_t compoundSelectorErrX = [] (const compound_t& data) {return data.errX;};
+        compound_selector_t compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
+        // *INDENT-ON*
 
 
     // ---------------------------------------------------------------------- //
     // Sheet 1: cartesian line plots
 
-    auto& sheet1 = showcase_report.addPlotOrthogonalAxes("line plot (cartesian)");
+    auto& sheet1 = report.addPlotOrthogonalAxes("line plot (cartesian)");
 
     sheet1.setCustomScriptBegin("# put here setup code that should be executed BEFORE the code generated by Plotypus");
     sheet1.setCustomScriptEnd  ("# put here setup code that should be executed AFTER the code generated by Plotypus");
@@ -199,7 +206,7 @@ void showcase_2D_plots()
     viewLineCompound.setBinaryDataOutput(false);
 
     auto& viewLineSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y, PlotStyle::LinesPoints);
-    viewLineSeparate.setPointStyle(pointStyleOffset);
+//    viewLineSeparate.setPointStyle(pointStyleOffset);
 
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines, "Sine Wave");
     sheet1.addDataViewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::Steps, "Cosine Wave");
@@ -213,7 +220,7 @@ void showcase_2D_plots()
     // ---------------------------------------------------------------------- //
     // Sheet 2: polar line plots
 
-    auto& sheet2 = showcase_report.addPlotOrthogonalAxes("line plot (polar)");
+    auto& sheet2 = report.addPlotOrthogonalAxes("line plot (polar)");
     sheet2.setPolar(true);
     sheet2.setAspectEqual();
 
@@ -230,7 +237,7 @@ void showcase_2D_plots()
     // ---------------------------------------------------------------------- //
     // Sheet 3: bar plots
 
-    auto& sheet3 = showcase_report.addPlotOrthogonalAxes("bar plots");
+    auto& sheet3 = report.addPlotOrthogonalAxes("bar plots");
     sheet3.setAspectSquare();
 
     sheet3.axis(AxisType::X).rangeMin = 0.;
@@ -247,7 +254,7 @@ void showcase_2D_plots()
     // ---------------------------------------------------------------------- //
     // Sheet 4: filled curve
 
-    auto& sheet4 = showcase_report.addPlotOrthogonalAxes("filled curves");
+    auto& sheet4 = report.addPlotOrthogonalAxes("filled curves");
 
     sheet4.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::Lines, "Sine approximation").setSelector(ColumnType::X, compoundSelectorX);
 
@@ -263,9 +270,6 @@ void showcase_2D_plots()
     try                             {auto& ill_typed_reference = sheet1.dataViewAs<DataViewDefaultCompound<double>>(2);}
     catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
     // *INDENT-ON*
-
-
-    showcase_exit();
 }
 
 // ========================================================================== //
