@@ -50,6 +50,7 @@ namespace Plotypus
     using columnSelectorList_t      = std::array<DataSelector_t<T>, 6>;
     using columnViewList_t          = std::array<std::span<double>, 6>;
     using columnAssignmentList_t    = std::array<size_t, 6>;
+    using columnTypeList_t          = std::array<ColumnType, 6>;
     using columnFormatList_t        = std::array<std::string, 6>;
 
     // ---------------------------------------------------------------------- //

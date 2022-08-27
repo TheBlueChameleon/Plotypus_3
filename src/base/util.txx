@@ -74,6 +74,80 @@ namespace Plotypus
         else                                                {return contains(consecutiveEntriesCount, allowedOccupations);}
         // *INDENT-ON*
     }
+
+    template<class T, UnaryPredicate<T> U>
+    bool checkColumnListOccupationVsPlotType(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData)
+    {
+        switch (styleID)
+        {
+            case PlotStyle::Dots:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::Points:
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3, 4, 5}, isNullData);
+            case PlotStyle::XErrorBars:
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullData);
+            case PlotStyle::YErrorBars:
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullData);
+            case PlotStyle::XYErrorBars:
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullData);
+            case PlotStyle::Lines:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::LinesPoints:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::FilledCurves:
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullData);
+            case PlotStyle::XErrorLines:
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullData);
+            case PlotStyle::YErrorLines:
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullData);
+            case PlotStyle::XYErrorLines:
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullData);
+            case PlotStyle::Steps:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::FSteps:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::FillSteps:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::Impulses:
+                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+            case PlotStyle::Boxes:
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullData);
+            case PlotStyle::HBoxes:
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullData);
+            case PlotStyle::BoxErrorBars:
+                return checkColumnListOccupationIsFrom(data, {3, 4, 5}, isNullData);
+            case PlotStyle::BoxxyError:
+                return checkColumnListOccupationIsFrom(data, {4, 6}, isNullData);
+            case PlotStyle::Arrows:
+                return checkColumnListOccupationIsFrom(data, {4}, isNullData);
+            case PlotStyle::Vectors:
+                return checkColumnListOccupationIsFrom(data, {4}, isNullData);
+            case PlotStyle::Image:
+                return checkColumnListOccupationIsFrom(data, {3}, isNullData);
+
+            case PlotStyle::Dots3D:
+                return checkColumnListOccupationIsFrom(data, {3}, isNullData);
+            case PlotStyle::Points3D:
+                return checkColumnListOccupationIsFrom(data, {3, 4, 5, 6}, isNullData);
+            case PlotStyle::Lines3D:
+                return checkColumnListOccupationIsFrom(data, {1, 3}, isNullData);
+            case PlotStyle::LinesPoints3D:
+                return checkColumnListOccupationIsFrom(data, {1, 3}, isNullData);
+            case PlotStyle::Boxes3D:
+                return checkColumnListOccupationIsFrom(data, {3, 4, 5}, isNullData);
+            case PlotStyle::Impulses3D:
+                return checkColumnListOccupationIsFrom(data, {3}, isNullData);
+            case PlotStyle::Image3D:
+                return checkColumnListOccupationIsFrom(data, {4}, isNullData);
+            case PlotStyle::Vectors3D:
+                return checkColumnListOccupationIsFrom(data, {6}, isNullData);
+
+            case PlotStyle::Custom:
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3, 4, 5, 6}, isNullData);
+        }
+
+        return false;
+    }
 }
 
 #endif // UTIL_TXX

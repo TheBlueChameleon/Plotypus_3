@@ -179,6 +179,34 @@ namespace Plotypus
         return columnHeadline(getColumnID(columnType) - 1);
     }
 
+    void DataViewDefault::makePlusMinusErrorFormat()
+    {
+        // determine column assignment format
+        auto columnListLength = getConsecutiveEntriesCount(columnAssignments, [] (size_t columnID)
+        {
+            return (columnID != COLUMN_UNUSED) && (columnID != COLUMN_UNSUPPORTED);
+        });
+
+        if (columnListLength == COLUMN_LIST_INVALID)
+        {
+            throw UnsupportedOperationError("Cannot set column formats based on incomplete column assignment!");
+        }
+
+        // locate Delta columns
+        std::vector<ColumnType> columnsToAdjust;
+
+//        for (const auto column : columnAssignments)
+//        {
+//            if (column == ColumnType::DeltaX)
+//            {
+//                columnsToAdjust.push_back(ColumnType::X);
+//            }
+//        }
+
+        // locate columns to adjust
+        // set formats
+    }
+
     bool DataViewDefault::isFunction() const
     {
         return !func.empty();
@@ -223,7 +251,7 @@ namespace Plotypus
 
             case ColumnType::DeltaY:
                 if (contains(styleID, {
-                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars, PlotStyle::FilledCurves
                 }))                                                                 {return 3;}
                 else if (contains(styleID, {
                     PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError, PlotStyle::Vectors
@@ -253,7 +281,7 @@ namespace Plotypus
 
             case ColumnType::YLow:
                 if (contains(styleID, {
-                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars, PlotStyle::FilledCurves
                 }))                                                                 {return 3;}
                 else if (contains(styleID, {
                     PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError

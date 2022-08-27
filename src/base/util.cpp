@@ -71,6 +71,13 @@ namespace Plotypus
         return buffer.str();
     }
 
+    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t ColumnListLength)
+    {
+        columnTypeList_t result;
+
+        return result;
+    }
+
     // ---------------------------------------------------------------------- //
     // enum name lookups
 

@@ -58,6 +58,8 @@ namespace Plotypus
             std::string&        columnHeadline  (const size_t       columnID);
             std::string&        columnHeadline  (const ColumnType   columnType);
 
+            void makePlusMinusErrorFormat();
+
             virtual bool isFunction() const;
             virtual size_t getColumnID(const ColumnType columnType) const;
 

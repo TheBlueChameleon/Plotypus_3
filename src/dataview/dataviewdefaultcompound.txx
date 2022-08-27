@@ -115,59 +115,9 @@ namespace Plotypus
         if (data.empty())   {return false;}
 
         const auto isNullSelector = [] (const DataSelector_t<T>& selector) {return selector == nullptr;};
+
+        return checkColumnListOccupationVsPlotType(styleID, selectors, isNullSelector);
         // *INDENT-ON*
-
-        switch (styleID)
-        {
-            case PlotStyle::Dots:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::Points:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5}, isNullSelector);
-            case PlotStyle::XErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle::YErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle::XYErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle::Lines:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::LinesPoints:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::FilledCurves:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle::XErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle::YErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4}, isNullSelector);
-            case PlotStyle::XYErrorLines:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle::Steps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::FSteps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::FillSteps:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::Impulses:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2}, isNullSelector);
-            case PlotStyle::Boxes:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle::HBoxes:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3}, isNullSelector);
-            case PlotStyle::BoxErrorBars:
-                return checkColumnListOccupationIsFrom(selectors, {3, 4, 5}, isNullSelector);
-            case PlotStyle::BoxxyError:
-                return checkColumnListOccupationIsFrom(selectors, {4, 6}, isNullSelector);
-            case PlotStyle::Arrows:
-                return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
-            case PlotStyle::Vectors:
-                return checkColumnListOccupationIsFrom(selectors, {4}, isNullSelector);
-            case PlotStyle::Image:
-                return checkColumnListOccupationIsFrom(selectors, {3}, isNullSelector);
-            case PlotStyle::Custom:
-                return checkColumnListOccupationIsFrom(selectors, {1, 2, 3, 4, 5, 6}, isNullSelector);
-        }
-
-        return false;
     }
 }
 
