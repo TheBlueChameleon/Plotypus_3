@@ -40,20 +40,20 @@ namespace Plotypus
             virtual void reset();
 
             const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
-            void                                                setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
+            PlotOrthogonalAxes&                                 setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
 
             AxisDescriptor&                  axis(const AxisType axisID);
-            void                        clearAxes();
-            void                        clearAxis(const AxisType axisID);
+            PlotOrthogonalAxes&         clearAxes();
+            PlotOrthogonalAxes&         clearAxis(const AxisType axisID);
 
             AxisDescriptor&             xAxis();
             AxisDescriptor&             yAxis();
 
             bool                        getMode3D() const;
-            void                        setMode3D(bool newMode3D);
+            PlotOrthogonalAxes&         setMode3D(bool newMode3D);
 
             bool                        getPolar() const;
-            void                        setPolar(bool newPolar);
+            PlotOrthogonalAxes&         setPolar(bool newPolar);
 
             DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
             DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");

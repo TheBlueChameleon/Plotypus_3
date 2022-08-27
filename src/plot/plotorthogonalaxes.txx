@@ -9,8 +9,8 @@ namespace Plotypus
         checkAndSetStyleFamily(dataView->getStyleFamily(), allowedStyleFamiles);
 
         // *INDENT-OFF*
-        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {mode3D = false;}
-        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {mode3D = true;}
+        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {setMode3D(false);}
+        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
         dataViews.push_back(dataView);

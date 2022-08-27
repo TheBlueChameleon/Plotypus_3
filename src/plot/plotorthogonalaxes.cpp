@@ -168,9 +168,10 @@ namespace Plotypus
         return axes;
     }
 
-    void PlotOrthogonalAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
+    PlotOrthogonalAxes& PlotOrthogonalAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
     {
         axes = newAxes;
+        return *this;
     }
 
     AxisDescriptor& PlotOrthogonalAxes::axis(const AxisType axisID)
@@ -183,14 +184,16 @@ namespace Plotypus
         return axes[axisID];
     }
 
-    void PlotOrthogonalAxes::clearAxes()
+    PlotOrthogonalAxes& PlotOrthogonalAxes::clearAxes()
     {
         axes.clear();
+        return *this;
     }
 
-    void PlotOrthogonalAxes::clearAxis(const AxisType axisID)
+    PlotOrthogonalAxes& PlotOrthogonalAxes::clearAxis(const AxisType axisID)
     {
         axes.erase(axisID);
+        return *this;
     }
 
     AxisDescriptor& PlotOrthogonalAxes::xAxis()
@@ -210,12 +213,19 @@ namespace Plotypus
         return mode3D;
     }
 
-    void PlotOrthogonalAxes::setMode3D(bool newMode3D)
+    PlotOrthogonalAxes& PlotOrthogonalAxes::setMode3D(bool newMode3D)
     {
-        // *INDENT-OFF*
-        if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {mode3D = newMode3D;}
-        else                                                                                {throw IncompatiblePlotStyle("Cannot override 3D mode: not a custom plot style");}
-        // *INDENT-ON*
+        if (mode3D != newMode3D)
+        {
+            // *INDENT-OFF*
+            if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {mode3D = newMode3D;}
+            else                                                                                {throw IncompatiblePlotStyle("Cannot override 3D mode: not a custom plot style");}
+            // *INDENT-ON*
+
+            border = (mode3D ? BORDERS_2D_DEFAULT : BORDERS_3D_DEFAULT);
+        }
+
+        return *this;
     }
 
     bool PlotOrthogonalAxes::getPolar() const
@@ -223,7 +233,7 @@ namespace Plotypus
         return polar;
     }
 
-    void PlotOrthogonalAxes::setPolar(bool newPolar)
+    PlotOrthogonalAxes& PlotOrthogonalAxes::setPolar(bool newPolar)
     {
         polar = newPolar;
 
@@ -241,8 +251,18 @@ namespace Plotypus
         }
         else
         {
+            // *INDENT-OFF*
+            if (axes.contains(AxisType::Radial))    {axes.erase(AxisType::Radial);}
+            if (axes.contains(AxisType::Azimuthal)) {axes.erase(AxisType::Azimuthal);}
+            // *INDENT-ON*
 
+            axes[AxisType::X] = AxisDescriptor(AxisType::X);
+            axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
+
+            border = (mode3D ? BORDERS_2D_DEFAULT : BORDERS_3D_DEFAULT);
         }
+
+        return *this;
     }
 
     // ====================================================================== //
@@ -253,8 +273,8 @@ namespace Plotypus
         checkAndSetStyleFamily(dataView->getStyleFamily(), allowedStyleFamiles);
 
         // *INDENT-OFF*
-        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {mode3D = false;}
-        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {mode3D = true;}
+        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {setMode3D(false);}
+        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
         dataViews.push_back(dataView);
