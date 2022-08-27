@@ -76,7 +76,7 @@ namespace Plotypus
         clearSheets();
     }
 
-    void Report::reset()
+    Report& Report::reset()
     {
         clearSheets();
 
@@ -95,6 +95,8 @@ namespace Plotypus
 
         m_stylesCollection.reset();
         m_terminalInfoProvider.reset();
+
+        return *this;
     }
 
     TerminalInfoProvider& Report::terminalInfoProvider()
@@ -128,20 +130,23 @@ namespace Plotypus
         return *newPlot;
     }
 
-    void Report::clearSheets()
+    Report& Report::clearSheets()
     {
         for (auto ptr : sheets)
         {
             delete ptr;
         }
         sheets.clear();
+
+        return *this;
     }
 
     // ====================================================================== //
 
-    void Report::setFileType(FileType newFileType)
+    Report& Report::setFileType(FileType newFileType)
     {
         m_terminalInfoProvider.setFileType(newFileType);
+        return *this;
     }
 
     const std::string& Report::getTerminal() const
@@ -149,15 +154,17 @@ namespace Plotypus
         return m_terminalInfoProvider.getTerminal();
     }
 
-    void Report::setTerminal(const std::string& newTerminal)
+    Report& Report::setTerminal(const std::string& newTerminal)
     {
         m_terminalInfoProvider.setTerminal(newTerminal);
+        return *this;
     }
 
-    void Report::setOutputDirectory(const std::string& newOutputDirectory)
+    Report& Report::setOutputDirectory(const std::string& newOutputDirectory)
     {
         throwIfInvalidFilename("output directory", newOutputDirectory);
         outputDirectory = newOutputDirectory;
+        return *this;
     }
 
     const std::string& Report::getFilenameBase() const
@@ -165,10 +172,11 @@ namespace Plotypus
         return filenameBase;
     }
 
-    void Report::setFilenameBase(const std::string& newFilenameBase)
+    Report& Report::setFilenameBase(const std::string& newFilenameBase)
     {
         throwIfInvalidFilename("filename base", newFilenameBase);
         filenameBase = newFilenameBase;
+        return *this;
     }
 
     const std::string& Report::getExtTxt() const
@@ -176,10 +184,11 @@ namespace Plotypus
         return extTxt;
     }
 
-    void Report::setExtTxt(const std::string& newExtTxt)
+    Report& Report::setExtTxt(const std::string& newExtTxt)
     {
         throwIfInvalidFilename("extension for text files", newExtTxt);
         extTxt = newExtTxt;
+        return *this;
     }
 
     const std::string& Report::getExtDat() const
@@ -187,10 +196,11 @@ namespace Plotypus
         return extDat;
     }
 
-    void Report::setExtDat(const std::string& newExtDat)
+    Report& Report::setExtDat(const std::string& newExtDat)
     {
         throwIfInvalidFilename("extension for gnuplot data files", newExtDat);
         extDat = newExtDat;
+        return *this;
     }
 
     const std::string& Report::getExtOut() const
@@ -198,9 +208,10 @@ namespace Plotypus
         return m_terminalInfoProvider.getExtOut();
     }
 
-    void Report::setExtOut(const std::string& newExtOut)
+    Report& Report::setExtOut(const std::string& newExtOut)
     {
         m_terminalInfoProvider.setExtOut(newExtOut);
+        return *this;
     }
 
     const std::string& Report::getExtGnu() const
@@ -208,10 +219,11 @@ namespace Plotypus
         return extGnu;
     }
 
-    void Report::setExtGnu(const std::string& newExtGnu)
+    Report& Report::setExtGnu(const std::string& newExtGnu)
     {
         throwIfInvalidFilename("extension for gnuplot script files", newExtGnu);
         extGnu = newExtGnu;
+        return *this;
     }
 
     bool Report::getVerbose() const
@@ -219,9 +231,10 @@ namespace Plotypus
         return verbose;
     }
 
-    void Report::setVerbose(bool newVerbose)
+    Report& Report::setVerbose(bool newVerbose)
     {
         verbose = newVerbose;
+        return *this;
     }
 
     bool Report::getAutoRunScript() const
@@ -229,9 +242,10 @@ namespace Plotypus
         return autoRunScript;
     }
 
-    void Report::setAutoRunScript(bool newAutoRunScript)
+    Report& Report::setAutoRunScript(bool newAutoRunScript)
     {
         autoRunScript = newAutoRunScript;
+        return *this;
     }
 
     const std::string& Report::getOutputDirectory() const
@@ -244,9 +258,10 @@ namespace Plotypus
         return pageSeparatorTxt;
     }
 
-    void Report::setPageSeparatorTxt(const std::string& newNewPageTXT)
+    Report& Report::setPageSeparatorTxt(const std::string& newNewPageTXT)
     {
         pageSeparatorTxt = newNewPageTXT;
+        return *this;
     }
 
     StylesCollection& Report::stylesCollection()
@@ -256,14 +271,14 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    void Report::writeTxt() const
+    Report& Report::writeTxt()
     {
         const std::string filename = getOutputFilename(extTxt);
         std::fstream hFile = openOrThrow(filename);
-        writeTxt(hFile);
+        return writeTxt(hFile);
     }
 
-    void Report::writeDat() const
+    Report& Report::writeDat()
     {
         preprocessSheets(extDat);
 
@@ -271,9 +286,11 @@ namespace Plotypus
         {
             sheet->writeDatData();
         }
+
+        return *this;
     }
 
-    void Report::writeScript() const
+    Report& Report::writeScript()
     {
         const std::string filenameGnu = getOutputFilename(extGnu);
         std::fstream hFile = openOrThrow(filenameGnu);
@@ -285,9 +302,11 @@ namespace Plotypus
         {
             runGnuplot(filenameGnu, verbose);
         }
+
+        return *this;
     }
 
-    void Report::writeTxt(std::ostream& hFile) const
+    Report& Report::writeTxt(std::ostream& hFile)
     {
         preprocessSheets(extTxt);
 
@@ -304,15 +323,16 @@ namespace Plotypus
             }
             ++i;
         }
+
+        return *this;
     }
 
-    void Report::writeScript(std::ostream& hFile) const
+    Report& Report::writeScript(std::ostream& hFile)
     {
-        // *INDENT-OFF*
-
         const std::string outputFilename = getOutputFilename(m_terminalInfoProvider.getExtOut());
         bool              needCleanSheetCommands = true;
 
+        // *INDENT-OFF*
         if (verbose) {std::cout << "about to write script for " << outputFilename << " ..." << std::endl;}
 
         preprocessSheets(extDat);
@@ -348,7 +368,8 @@ namespace Plotypus
         }
 
         if (verbose) {std::cout << "script for " << outputFilename << " completed." << std::endl;}
-
         // *INDENT-ON*
+
+        return *this;
     }
 }
