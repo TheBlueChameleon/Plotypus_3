@@ -76,7 +76,7 @@ namespace Plotypus
         clearSheets();
     }
 
-    Report& Report::reset()
+    void Report::reset()
     {
         clearSheets();
 
@@ -95,8 +95,6 @@ namespace Plotypus
 
         m_stylesCollection.reset();
         m_terminalInfoProvider.reset();
-
-        return *this;
     }
 
     TerminalInfoProvider& Report::terminalInfoProvider()
@@ -271,14 +269,14 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    Report& Report::writeTxt()
+    void Report::writeTxt() const
     {
         const std::string filename = getOutputFilename(extTxt);
         std::fstream hFile = openOrThrow(filename);
-        return writeTxt(hFile);
+        writeTxt(hFile);
     }
 
-    Report& Report::writeDat()
+    void Report::writeDat() const
     {
         preprocessSheets(extDat);
 
@@ -286,11 +284,9 @@ namespace Plotypus
         {
             sheet->writeDatData();
         }
-
-        return *this;
     }
 
-    Report& Report::writeScript()
+    void Report::writeScript() const
     {
         const std::string filenameGnu = getOutputFilename(extGnu);
         std::fstream hFile = openOrThrow(filenameGnu);
@@ -302,11 +298,9 @@ namespace Plotypus
         {
             runGnuplot(filenameGnu, verbose);
         }
-
-        return *this;
     }
 
-    Report& Report::writeTxt(std::ostream& hFile)
+    void Report::writeTxt(std::ostream& hFile) const
     {
         preprocessSheets(extTxt);
 
@@ -323,11 +317,9 @@ namespace Plotypus
             }
             ++i;
         }
-
-        return *this;
     }
 
-    Report& Report::writeScript(std::ostream& hFile)
+    void Report::writeScript(std::ostream& hFile) const
     {
         const std::string outputFilename = getOutputFilename(m_terminalInfoProvider.getExtOut());
         bool              needCleanSheetCommands = true;
@@ -369,7 +361,5 @@ namespace Plotypus
 
         if (verbose) {std::cout << "script for " << outputFilename << " completed." << std::endl;}
         // *INDENT-ON*
-
-        return *this;
     }
 }

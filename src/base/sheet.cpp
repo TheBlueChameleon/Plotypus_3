@@ -34,9 +34,10 @@ namespace Plotypus
         return title;
     }
 
-    void Sheet::setTitle(const std::string& newTitle)
+    Sheet& Sheet::setTitle(const std::string& newTitle)
     {
         title = newTitle;
+        return *this;
     }
 
     const std::string& Sheet::getDefaultFont() const
@@ -44,9 +45,10 @@ namespace Plotypus
         return defaultFont;
     }
 
-    void Sheet::setDefaultFont(const std::string& newDefaultFont)
+    Sheet& Sheet::setDefaultFont(const std::string& newDefaultFont)
     {
         defaultFont = newDefaultFont;
+        return *this;
     }
 
     const std::string& Sheet::getTitleFont() const
@@ -54,9 +56,10 @@ namespace Plotypus
         return titleFont;
     }
 
-    void Sheet::setTitleFont(const std::string& newTitleFont)
+    Sheet& Sheet::setTitleFont(const std::string& newTitleFont)
     {
         titleFont = newTitleFont;
+        return *this;
     }
 
     const std::string& Sheet::getCustomScriptBegin() const
@@ -64,9 +67,10 @@ namespace Plotypus
         return customScriptBegin;
     }
 
-    void Sheet::setCustomScriptBegin(const std::string& newCustomScriptBegin)
+    Sheet& Sheet::setCustomScriptBegin(const std::string& newCustomScriptBegin)
     {
         customScriptBegin = newCustomScriptBegin;
+        return *this;
     }
 
     const std::string& Sheet::getCustomScriptEnd() const
@@ -74,9 +78,10 @@ namespace Plotypus
         return customScriptEnd;
     }
 
-    void Sheet::setCustomScriptEnd(const std::string& newCustomScriptEnd)
+    Sheet& Sheet::setCustomScriptEnd(const std::string& newCustomScriptEnd)
     {
         customScriptEnd = newCustomScriptEnd;
+        return *this;
     }
 
     const std::string& Sheet::getDatalineSeparatorTxt() const
@@ -84,9 +89,10 @@ namespace Plotypus
         return datalineSeparatorTxt;
     }
 
-    void Sheet::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
+    Sheet& Sheet::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
     {
         datalineSeparatorTxt = newDatalineSeparatorTxt;
+        return *this;
     }
 
     // ====================================================================== //
@@ -101,9 +107,10 @@ namespace Plotypus
         return labels;
     }
 
-    void Sheet::setLabels(const std::vector<Label>& newLabels)
+    Sheet& Sheet::setLabels(const std::vector<Label>& newLabels)
     {
         labels = newLabels;
+        return *this;
     }
 
     Label& Sheet::label(const size_t i)
