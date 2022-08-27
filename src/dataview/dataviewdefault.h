@@ -40,7 +40,7 @@ namespace Plotypus
             DataViewDefault(const std::string& style, const std::string& label = "");
 
             virtual void reset();
-            virtual void setStyleID(const PlotStyle newStyle);
+            virtual DataViewDefault& setStyleID(const PlotStyle newStyle);
 
             virtual size_t      getArity() const = 0;
 

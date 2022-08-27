@@ -102,7 +102,7 @@ namespace Plotypus
         columnHeadlines   = {};
     }
 
-    void DataViewDefault::setStyleID(const PlotStyle newStyle)
+    DataViewDefault& DataViewDefault::setStyleID(const PlotStyle newStyle)
     {
         DataView::setStyleID(newStyle);
 
@@ -115,6 +115,8 @@ namespace Plotypus
             columnFormats[4] = "($!1 - $!3 / 2.)";  // y_low : x column minus boxwidth halves
             columnFormats[5] = "($!1 - $!3 / 2.)";  // y_high: x column plus boxwidth halves
         }
+
+        return *this;
     }
 
     const std::string& DataViewDefault::getFunc() const
