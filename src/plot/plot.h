@@ -10,7 +10,7 @@ namespace Plotypus
     /**
      * @brief foo bar
      *
-     * @todo legend position
+     * @todo key descriptor (cf. p.160)
      */
     class Plot : public Sheet
     {
@@ -24,7 +24,7 @@ namespace Plotypus
             std::string aspect      = "noratio";
             std::string fill        = "solid";
 
-            bool        key         = true;         //! @todo introduce key descriptor (cf. p.160)
+            bool        key         = true;
             bool        parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
@@ -35,7 +35,8 @@ namespace Plotypus
             virtual Plot& reset();
 
             PlotStyleFamily     getPlotStyleFamily() const;
-            Plot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
+            //! @todo couple with mode3D in ortho-axes..? virtual?
+            Plot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
             const std::vector<DataView*>& getDataViews() const;
             DataView&           dataView(const size_t i);

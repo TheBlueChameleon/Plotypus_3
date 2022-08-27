@@ -43,16 +43,15 @@ namespace Plotypus
 
     // ========================================================================== //
     /**
-     * @todo: set style arrow support - p. 199 -- expands LineStyle?
+     * @todo set style arrow support - p. 199 -- expands LineStyle?
      */
+    struct ArrowStyle {};
 
     // ====================================================================== //
     /**
      * @brief Sheet element: BoxStyle (used with Text overlays)
      *
      * Cf. page 201 gnuplot 5.4 documentation (section set style textbox)
-     *
-     * @todo add negative ID: auto register as custom
      */
     struct BoxStyle
     {

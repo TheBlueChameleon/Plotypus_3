@@ -8,6 +8,10 @@
 
 namespace Plotypus
 {
+    /**
+     * @todo objects (rects, ellipses, ...), arrows
+     * @todo introduce customScriptInter, before plot, after generated.
+     */
     class Sheet
     {
         protected:
@@ -21,16 +25,11 @@ namespace Plotypus
             std::string titleFont = "Arial:bold*2";
 
             std::string customScriptBegin = "";
-            //! @todo introduce customScriptInter, before plot, after generated.
             std::string customScriptEnd   = "";
 
             std::string datalineSeparatorTxt = "................................................................................\n";
 
             std::vector<Label> labels;
-            /**
-             * @todo objects (rects, ellipses, ...)
-             *      arrows
-             */
 
         public:
             Sheet(const std::string& title);

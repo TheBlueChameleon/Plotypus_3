@@ -7,29 +7,30 @@
 
 namespace Plotypus
 {
+    /**
+     * @todo provide support for
+     *      Lua/Tikz alias LaTeX
+     *      Svg
+     *      Canvas alias JavaScript
+     *
+     * @todo update the supported types table in docs
+     *
+     * @todo add quick setup for A4, portrait/landscape, ...
+     */
+
+    /**
+     *  @todo re-introduce this brief: changes the default values for terminal engine and output filename extension associated with the new FileType
+     *
+     * | FileType     | Terminal Engine | Extension |
+     * |--------------|-----------------|-----------|
+     * | `Pdf`        | pdfcairo        | pdf       |
+     * | `Png`        | pngcairo        | png       |
+     * | `PostScript` | epscairo        | eps       |
+     * | `Gif`        | gif animate     | gif       |
+     */
+
     class TerminalInfoProvider
     {
-            /**
-             * @todo provide support for
-             *      Lua/Tikz alias LaTeX
-             *      Svg
-             *      Canvas alias JavaScript
-             *
-             * @todo update the supported types table in docs
-             *
-             * @todo add quick setup for A4, portrait/landscape, ...
-             */
-
-            /**
-             *  @brief changes the default values for terminal engine and output filename extension associated with the new FileType
-             *
-             * | FileType     | Terminal Engine | Extension |
-             * |--------------|-----------------|-----------|
-             * | `Pdf`        | pdfcairo        | pdf       |
-             * | `Png`        | pngcairo        | png       |
-             * | `PostScript` | epscairo        | eps       |
-             * | `Gif`        | gif animate     | gif       |
-             */
 
         public:
             using dimensions_pixels_t           = std::pair<int, int>;

@@ -18,7 +18,8 @@ namespace Plotypus
             DataViewDefaultSeparate(const PlotStyle  style, const std::string& label = "");
             DataViewDefaultSeparate(const std::string& style, const std::string& label = "");
 
-            virtual size_t              getArity() const;       //! @todo: maybe do check: isComplete?
+            //! @todo maybe do check: isComplete?
+            virtual size_t              getArity() const;
 
             //std::span<double>&         data(ColumnType columnType);
             const columnViewList_t&     getData() const;
