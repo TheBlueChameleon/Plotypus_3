@@ -272,7 +272,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     sheet4.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::FilledCurves, "Error")
     .setSelector(ColumnType::X,      compoundSelectorX)
-    .setSelector(ColumnType::DeltaY, compoundSelectorErrY);
+    .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
+    .setOptions("lc rgb \"#AACCFF\"");
 
     // ---------------------------------------------------------------------- //
     // ill-typed references cause a catch-able exception
