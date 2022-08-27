@@ -60,9 +60,9 @@ namespace Plotypus
         // *INDENT-OFF*
         for (auto chr : formatTemplate) {
             if      (chr == COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER) {buffer << columnID;}
-            else if (chr == COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID) {escape = true;}
+            else if (chr == COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID) {buffer << "$"; escape = true;}
             else {
-                if (escape) {buffer << columnAssignments.at(chr - '1');}
+                if (escape) {buffer << columnAssignments.at(chr - '1'); escape = false;}
                 else        {buffer << chr;}
             }
         }
@@ -85,11 +85,6 @@ namespace Plotypus
 
             case ColumnType::X: return 1;
             case ColumnType::Y: return 2;
-
-            case ColumnType::Y2:
-                if (styleID == PlotStyle::FilledCurves)                             {return 3;}
-                else                                                                {return COLUMN_UNSUPPORTED;}
-
             case ColumnType::Z:
                 if (contains(styleID, {
                              PlotStyle::Dots3D, PlotStyle::Points3D,
@@ -140,7 +135,8 @@ namespace Plotypus
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::YLow:
-                if (contains(styleID, {
+                if      (styleID == PlotStyle::FilledCurves)                        {return 2;}
+                else if (contains(styleID, {
                     PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars, PlotStyle::FilledCurves
                 }))                                                                 {return 3;}
                 else if (contains(styleID, {
@@ -149,7 +145,8 @@ namespace Plotypus
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::YHigh:
-                if (contains(styleID, {
+                if      (styleID == PlotStyle::FilledCurves)                        {return 3;}
+                else if (contains(styleID, {
                     PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
                 }))                                                                 {return 4;}
                 else if (contains(styleID, {
@@ -257,7 +254,7 @@ namespace Plotypus
                 switch (columnListLength) {
                     case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
                     case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
-                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Y2, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::YLow, ColumnType::YHigh, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
                 }
                 break;
             case PlotStyle::XErrorLines:
@@ -439,7 +436,6 @@ namespace Plotypus
             case ColumnType::Column6:      return "column 6";
             case ColumnType::X:            return "X";
             case ColumnType::Y:            return "Y";
-            case ColumnType::Y2:           return "Y2";
             case ColumnType::Z:            return "Z";
             case ColumnType::DeltaX:       return "Delta X";
             case ColumnType::DeltaY:       return "Delta Y";

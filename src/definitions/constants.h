@@ -70,7 +70,7 @@ namespace Plotypus
         Column5,
         Column6,
 
-        X, Y, Y2, Z,
+        X, Y, Z,
         DeltaX, DeltaY, DeltaZ,
         XLow, XHigh, YLow, YHigh,
         Pointsize, Pointtype, Color,
