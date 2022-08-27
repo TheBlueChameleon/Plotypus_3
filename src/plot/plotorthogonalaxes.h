@@ -55,6 +55,8 @@ namespace Plotypus
             bool                        getPolar() const;
             PlotOrthogonalAxes&         setPolar(bool newPolar);
 
+            //! @todo consider dropping some adders, now that monadic setters exist
+
             DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
             DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");

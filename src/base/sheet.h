@@ -21,6 +21,7 @@ namespace Plotypus
             std::string titleFont = "Arial:bold*2";
 
             std::string customScriptBegin = "";
+            //! @todo introduce customScriptInter, before plot, after generated.
             std::string customScriptEnd   = "";
 
             std::string datalineSeparatorTxt = "................................................................................\n";

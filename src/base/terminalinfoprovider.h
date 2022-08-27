@@ -16,6 +16,8 @@ namespace Plotypus
              *      Canvas alias JavaScript
              *
              * @todo update the supported types table in docs
+             *
+             * @todo add quick setup for A4, portrait/landscape, ...
              */
 
             /**
