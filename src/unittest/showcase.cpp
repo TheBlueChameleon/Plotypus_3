@@ -175,7 +175,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     // ---------------------------------------------------------------------- //
     // normally, we would get separate data in individual std::vector<double>s
 
-    auto [sepData_X, sepData_Y] = separate_data;
+    auto& [sepData_X, sepData_Y] = separate_data;
 
     // ---------------------------------------------------------------------- //
     // for compound data: prepare selectors
@@ -216,6 +216,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     sheet1.xAxis().labelText = "abscissa";
     sheet1.yAxis().labelText = "ordinate";
+
+    //return;
 
     // ---------------------------------------------------------------------- //
     // Sheet 2: polar line plots
