@@ -206,7 +206,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     viewLineCompound.setBinaryDataOutput(false);
 
     auto& viewLineSeparate = sheet1.addDataViewSeparate(sepData_X, sepData_Y, PlotStyle::LinesPoints);
-//    viewLineSeparate.setPointStyle(pointStyleOffset);
+    viewLineSeparate.setPointStyle(pointStyleOffset);
 
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines, "Sine Wave");
     sheet1.addDataViewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::Steps, "Cosine Wave");

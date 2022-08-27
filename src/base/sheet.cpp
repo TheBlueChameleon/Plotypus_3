@@ -118,7 +118,7 @@ namespace Plotypus
         return labels.back();
     }
 
-    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, int boxStyleID)
+    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
     {
         Label l;
 
@@ -211,7 +211,7 @@ namespace Plotypus
                 hFile << "front ";
 
                 hFile << (label.alignment.size() ? label.alignment + " " : ""s);
-                hFile << optionalNumberString          ("rotate by", label.rotate);
+                hFile << optionalNumberString("rotate by", label.rotate);
 
                 hFile << optionalQuotedTextString("font", label.font);
                 hFile << optionalQuotedTextString("textcolor", label.textcolor);

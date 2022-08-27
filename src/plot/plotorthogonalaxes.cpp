@@ -368,7 +368,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotOrthogonalAxes::writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const
+    void PlotOrthogonalAxes::writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis)
     {
         const std::string axisName = getAxisName(axis.type);
         writeAxisLabel(hFile, axisName, axis);

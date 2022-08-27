@@ -33,6 +33,8 @@ namespace Plotypus
 
             size_t getColumnIDOrThrow(const ColumnType columnType);
 
+            void makePlusMinusFormat(); //! @todo implement
+
         public:
             DataViewDefault(const PlotStyle    style, const std::string& label = "");
             DataViewDefault(const std::string& style, const std::string& label = "");
@@ -57,8 +59,6 @@ namespace Plotypus
             std::string&        columnFormat    (const ColumnType   columnType);
             std::string&        columnHeadline  (const size_t       columnID);
             std::string&        columnHeadline  (const ColumnType   columnType);
-
-            void makePlusMinusErrorFormat();
 
             virtual bool isFunction() const;
 

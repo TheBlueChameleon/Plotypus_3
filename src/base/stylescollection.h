@@ -31,7 +31,7 @@ namespace Plotypus
 
             size_t                          getBoxStyleCount() const;
             const std::vector<BoxStyle>&    getBoxStyles() const;
-            BoxStyle&                       boxStyle (const size_t i);
+            BoxStyle&                       boxStyle    (const size_t i);
             const BoxStyle&                 getBoxStyle (const size_t i) const;
             void                            setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
             BoxStyle&                       addBoxStyle (const BoxStyle& newBoxstyle);

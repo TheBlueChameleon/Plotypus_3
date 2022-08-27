@@ -80,10 +80,10 @@ namespace Plotypus
             virtual void writeDatData       () const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
-            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;  //! @todo detect 3d mode: plot ~> splot
-            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;               //! @todo tidy up axes
+            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
+            virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
 
-            void writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis) const;
+            static void writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis);
     };
 }
 

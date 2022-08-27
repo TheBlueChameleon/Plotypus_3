@@ -59,7 +59,7 @@ namespace Plotypus
             void                        setLabels(const std::vector<Label>& newLabels);
             Label&                         label (const size_t i);
             Label&                      addLabel (const Label& newLabel);
-            Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, int boxStyleID = -1);
+            Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, size_t boxStyleID = STYLE_ID_DEFAULT);
             void                        clearLabels();
 
             // -------------------------------------------------------------- //

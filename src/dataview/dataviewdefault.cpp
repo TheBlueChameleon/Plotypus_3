@@ -181,34 +181,6 @@ namespace Plotypus
         return columnHeadline(getColumnID(styleID, columnType) - 1);
     }
 
-    void DataViewDefault::makePlusMinusErrorFormat()
-    {
-        // determine column assignment format
-        auto columnListLength = getConsecutiveEntriesCount(columnAssignments, [] (size_t columnID)
-        {
-            return (columnID != COLUMN_UNUSED) && (columnID != COLUMN_UNSUPPORTED);
-        });
-
-        if (columnListLength == COLUMN_LIST_INVALID)
-        {
-            throw UnsupportedOperationError("Cannot set column formats based on incomplete column assignment!");
-        }
-
-        // locate Delta columns
-        std::vector<ColumnType> columnsToAdjust;
-
-//        for (const auto column : columnAssignments)
-//        {
-//            if (column == ColumnType::DeltaX)
-//            {
-//                columnsToAdjust.push_back(ColumnType::X);
-//            }
-//        }
-
-        // locate columns to adjust
-        // set formats
-    }
-
     bool DataViewDefault::isFunction() const
     {
         return !func.empty();
