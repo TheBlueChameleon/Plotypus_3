@@ -16,11 +16,11 @@ namespace Plotypus
     class DataView
     {
         protected:
-            PlotStyle       styleID;
-            PlotStyleFamily styleFamily;
+            PlotStyle       plotStyleID;
+            PlotStyleFamily plotStyleFamily;
 
             std::string title;
-            std::string style;
+            std::string plotStyle;
             std::string options = "";
 
             mutable std::string dataFilename = "";
@@ -37,22 +37,22 @@ namespace Plotypus
             virtual void clearNonFunctionMembers() = 0;
 
         public:
-            DataView(const PlotStyle    style, const std::string& label = "");      //! @bug call of virtual method
-            DataView(const std::string& style, const std::string& label = "");
+            DataView(const PlotStyle    plotStyleID, const std::string& label = "");      //! @bug call of virtual method
+            DataView(const std::string& plotStyle, const std::string& label = "");
 
             virtual DataView& reset();
 
             const std::string&  getTitle() const;
             DataView&           setTitle(const std::string& newTitle);
 
-            const std::string&  getStyle() const;
-            DataView&           setStyle(const std::string& newStyle);
+            const std::string&  getPlotStyle() const;
+            DataView&           setPlotStyle(const std::string& newPlotStyle);
 
-            PlotStyleFamily     getStyleFamily() const;
-            DataView&           setStyleFamily(PlotStyleFamily newStyleFamily);
+            PlotStyleFamily     getPlotStyleFamily() const;
+            DataView&           setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
-            const PlotStyle     getStyleID() const;
-            virtual DataView&   setStyleID(const PlotStyle newStyle);
+            const PlotStyle     getPlotStyleID() const;
+            virtual DataView&   setPlotStyleID(const PlotStyle newStyle);
 
             bool                getBinaryDataOutput() const;
             DataView&           setBinaryDataOutput(bool newBinaryDataOutput);

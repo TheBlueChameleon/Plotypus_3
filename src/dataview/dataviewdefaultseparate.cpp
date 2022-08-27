@@ -39,7 +39,7 @@ namespace Plotypus
 
     const std::span<double>& DataViewDefaultSeparate::getData(ColumnType columnType) const
     {
-        const auto columnID = getColumnID(styleID, columnType) - 1;
+        const auto columnID = getColumnID(plotStyleID, columnType) - 1;
         throwIfInvalidIndex("column index", columnID, data);
 
         return data[columnID];
@@ -74,7 +74,7 @@ namespace Plotypus
 
         constexpr auto isNullSpan = [] (const std::span<double>& span) {return span.empty();};
 
-        return checkColumnListOccupationVsPlotType(styleID, data, isNullSpan);
+        return checkColumnListOccupationVsPlotType(plotStyleID, data, isNullSpan);
         // *INDENT-ON*
     }
 }

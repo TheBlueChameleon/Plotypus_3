@@ -4,22 +4,22 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const PlotStyle style, const std::string& label) :
+    DataView::DataView(const PlotStyle plotStyleID, const std::string& label) :
         title(label)
     {
-        setStyleID(style);
+        setPlotStyleID(plotStyleID);
     }
 
-    DataView::DataView(const std::string& style, const std::string& label) :
-        title(label), style(style), styleID(PlotStyle::Custom)
+    DataView::DataView(const std::string& plotStyle, const std::string& label) :
+        title(label), plotStyle(plotStyle), plotStyleID(PlotStyle::Custom)
     {}
 
     DataView& DataView::reset()
     {
-        styleID                     = PlotStyle::Custom;
-        styleFamily                 = PlotStyleFamily::Undefined;
+        plotStyleID                     = PlotStyle::Custom;
+        plotStyleFamily                 = PlotStyleFamily::Undefined;
         title                       = "";
-        style                       = "lines";
+        plotStyle                       = "lines";
         options                     = "";
         dataFilename                = "";
         numberPrecision             = -1;
@@ -42,29 +42,29 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& DataView::getStyle() const
+    const std::string& DataView::getPlotStyle() const
     {
-        return style;
+        return plotStyle;
     }
 
-    DataView& DataView::setStyle(const std::string& newStyle)
+    DataView& DataView::setPlotStyle(const std::string& newPlotStyle)
     {
-        styleID     = PlotStyle::Custom;
-        styleFamily = PlotStyleFamily::Custom;
-        style       = newStyle;
+        plotStyleID     = PlotStyle::Custom;
+        plotStyleFamily = PlotStyleFamily::Custom;
+        plotStyle       = newPlotStyle;
         return *this;
     }
 
-    PlotStyleFamily DataView::getStyleFamily() const
+    PlotStyleFamily DataView::getPlotStyleFamily() const
     {
-        return styleFamily;
+        return plotStyleFamily;
     }
 
-    DataView& DataView::setStyleFamily(PlotStyleFamily newStyleFamily)
+    DataView& DataView::setPlotStyleFamily(PlotStyleFamily newStyleFamily)
     {
-        if (styleID == PlotStyle::Custom)
+        if (plotStyleID == PlotStyle::Custom)
         {
-            styleFamily = newStyleFamily;
+            plotStyleFamily = newStyleFamily;
         }
         else
         {
@@ -74,16 +74,16 @@ namespace Plotypus
         return *this;
     }
 
-    const PlotStyle DataView::getStyleID() const
+    const PlotStyle DataView::getPlotStyleID() const
     {
-        return styleID;
+        return plotStyleID;
     }
 
-    DataView& DataView::setStyleID(const PlotStyle newStyle)
+    DataView& DataView::setPlotStyleID(const PlotStyle newStyle)
     {
-        styleID     = newStyle;
-        styleFamily = getPlotStyleFamily(newStyle);
-        style       = getPlotStyleName(newStyle);
+        plotStyleID     = newStyle;
+        plotStyleFamily = ::Plotypus::getPlotStyleFamily(newStyle);
+        plotStyle       = getPlotStyleName(newStyle);
         return *this;
     }
 

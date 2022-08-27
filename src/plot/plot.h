@@ -15,7 +15,7 @@ namespace Plotypus
     class Plot : public Sheet
     {
         protected:
-            PlotStyleFamily         styleFamily = PlotStyleFamily::Undefined;
+            PlotStyleFamily         plotStyleFamily = PlotStyleFamily::Undefined;
             std::vector<DataView*>  dataViews;
 
             size_t      border          = BORDERS_2D_DEFAULT;
@@ -34,8 +34,8 @@ namespace Plotypus
 
             virtual Plot& reset();
 
-            PlotStyleFamily     getStyleFamily() const;
-            Plot&               setStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
+            PlotStyleFamily     getPlotStyleFamily() const;
+            Plot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
 
             const std::vector<DataView*>& getDataViews() const;
             DataView&           dataView(const size_t i);

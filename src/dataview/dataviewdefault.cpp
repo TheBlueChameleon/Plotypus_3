@@ -60,14 +60,14 @@ namespace Plotypus
 
     size_t DataViewDefault::getColumnIDOrThrow(const ColumnType columnType)
     {
-        auto columnID = getColumnID(styleID, columnType);
+        auto columnID = getColumnID(plotStyleID, columnType);
 
         if (columnID == COLUMN_UNSUPPORTED)
         {
             std::string errMsg = "Column type ";
             errMsg += "\"" + getColumnIDName(columnType) + "\"";
             errMsg += " not supported for plot type ";
-            errMsg += "\"" + getPlotStyleName(styleID) + "\"";
+            errMsg += "\"" + getPlotStyleName(plotStyleID) + "\"";
 
             throw UnsupportedOperationError( errMsg );
         }
@@ -77,12 +77,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataViewDefault::DataViewDefault(const PlotStyle style, const std::string& label) :
-        DataView(style, label)
+    DataViewDefault::DataViewDefault(const PlotStyle plotStyleID, const std::string& label) :
+        DataView(plotStyleID, label)
     {}
 
-    DataViewDefault::DataViewDefault(const std::string& style, const std::string& label) :
-        DataView(style, label)
+    DataViewDefault::DataViewDefault(const std::string& plotStyle, const std::string& label) :
+        DataView(plotStyle, label)
     {}
 
     // ====================================================================== //
@@ -104,11 +104,11 @@ namespace Plotypus
         return *this;
     }
 
-    DataViewDefault& DataViewDefault::setStyleID(const PlotStyle newStyle)
+    DataViewDefault& DataViewDefault::setPlotStyleID(const PlotStyle newPlotStyle)
     {
-        DataView::setStyleID(newStyle);
+        DataView::setPlotStyleID(newPlotStyle);
 
-        if (newStyle == PlotStyle::HBoxes)
+        if (newPlotStyle == PlotStyle::HBoxes)
         {
             columnFormats[0] = "(0)";               // x     : constant zero
             columnFormats[1] = "$!1";               // y     : x column
@@ -163,7 +163,7 @@ namespace Plotypus
 
     size_t& DataViewDefault::columnAssignment(const ColumnType columnType)
     {
-        return columnAssignment(getColumnID(styleID, columnType) - 1);
+        return columnAssignment(getColumnID(plotStyleID, columnType) - 1);
     }
 
     std::string& DataViewDefault::columnFormat(const size_t columnID)
@@ -174,7 +174,7 @@ namespace Plotypus
 
     std::string& DataViewDefault::columnFormat(const ColumnType columnType)
     {
-        return columnFormat(getColumnID(styleID, columnType) - 1);
+        return columnFormat(getColumnID(plotStyleID, columnType) - 1);
     }
 
     std::string& DataViewDefault::columnHeadline(const size_t columnID)
@@ -185,7 +185,7 @@ namespace Plotypus
 
     std::string& DataViewDefault::columnHeadline(const ColumnType columnType)
     {
-        return columnHeadline(getColumnID(styleID, columnType) - 1);
+        return columnHeadline(getColumnID(plotStyleID, columnType) - 1);
     }
 
     bool DataViewDefault::isFunction() const
@@ -267,7 +267,7 @@ namespace Plotypus
         if (!options.empty()) {hFile << options << " ";}
         hFile << optionalQuotedTextString("title", title);
 
-        hFile << "with " << style << " ";
+        hFile << "with " << plotStyle << " ";
         hFile << optionalStyleString("linestyle", lineStyle);
 
         stylesColloction.writePointStyleCode(hFile, pointStyle);

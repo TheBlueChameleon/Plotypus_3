@@ -11,6 +11,7 @@
 
 namespace Plotypus
 {
+    //! @todo cannot splot in polar coordinate system
     class DataViewDefault : public DataView
     {
         protected:
@@ -36,12 +37,12 @@ namespace Plotypus
             void makePlusMinusFormat(); //! @todo implement
 
         public:
-            DataViewDefault(const PlotStyle    style, const std::string& label = "");
-            DataViewDefault(const std::string& style, const std::string& label = "");
+            DataViewDefault(const PlotStyle    plotStyleID, const std::string& label = "");
+            DataViewDefault(const std::string& plotStyle, const std::string& label = "");
 
             virtual DataViewDefault& reset();
 
-            virtual DataViewDefault& setStyleID(const PlotStyle newStyle);
+            virtual DataViewDefault& setPlotStyleID(const PlotStyle newPlotStyle);
 
             virtual size_t      getArity() const = 0;
 

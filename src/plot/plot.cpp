@@ -13,22 +13,22 @@ namespace Plotypus
 
     void Plot::checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
     {
-        if      (styleFamily == PlotStyleFamily::Custom)
+        if      (plotStyleFamily == PlotStyleFamily::Custom)
         {
             return;
         }
-        else if (styleFamily == PlotStyleFamily::Undefined)
+        else if (plotStyleFamily == PlotStyleFamily::Undefined)
         {
             if (contains(newDataViewFamily, allowedFamilies))
             {
-                styleFamily = newDataViewFamily;
+                plotStyleFamily = newDataViewFamily;
             }
             else
             {
                 throw IncompatiblePlotStyle("Cannot add DataView to Plot: plot style not supported by sheet type");
             }
         }
-        else if (styleFamily != newDataViewFamily)
+        else if (plotStyleFamily != newDataViewFamily)
         {
             throw IncompatiblePlotStyle("Cannot add DataView to Plot: plot style not compatible with already present plots");
         }
@@ -38,7 +38,7 @@ namespace Plotypus
     {
         Sheet::reset();
 
-        styleFamily = PlotStyleFamily::Undefined;
+        plotStyleFamily = PlotStyleFamily::Undefined;
         for (auto dataView : dataViews)
         {
             delete dataView;
@@ -59,17 +59,17 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    PlotStyleFamily Plot::getStyleFamily() const
+    PlotStyleFamily Plot::getPlotStyleFamily() const
     {
-        return styleFamily;
+        return plotStyleFamily;
     }
 
-    Plot& Plot::setStyleFamily(PlotStyleFamily newStyleFamily)
+    Plot& Plot::setPlotStyleFamily(PlotStyleFamily newStyleFamily)
     {
-        if (styleFamily != newStyleFamily)
+        if (plotStyleFamily != newStyleFamily)
         {
             // *INDENT-OFF*
-            if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {styleFamily = newStyleFamily;}
+            if (contains(plotStyleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {plotStyleFamily = newStyleFamily;}
             else                                                                                {throw IncompatiblePlotStyle("Cannot override plot style family");}
             // *INDENT-ON*
         }

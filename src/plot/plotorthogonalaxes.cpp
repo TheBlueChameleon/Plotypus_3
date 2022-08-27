@@ -220,7 +220,7 @@ namespace Plotypus
         if (mode3D != newMode3D)
         {
             // *INDENT-OFF*
-            if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {mode3D = newMode3D;}
+            if (contains(plotStyleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {mode3D = newMode3D;}
             else                                                                                {throw IncompatiblePlotStyle("Cannot override 3D mode: not a custom plot style");}
             // *INDENT-ON*
 
@@ -272,11 +272,11 @@ namespace Plotypus
 
     DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(DataViewDefaultSeparate* dataView)
     {
-        checkAndSetStyleFamily(dataView->getStyleFamily(), allowedStyleFamiles);
+        checkAndSetStyleFamily(dataView->getPlotStyleFamily(), allowedStyleFamiles);
 
         // *INDENT-OFF*
-        if      (styleFamily == PlotStyleFamily::Orthogonal2D) {setMode3D(false);}
-        else if (styleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
+        if      (plotStyleFamily == PlotStyleFamily::Orthogonal2D) {setMode3D(false);}
+        else if (plotStyleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
         dataViews.push_back(dataView);
