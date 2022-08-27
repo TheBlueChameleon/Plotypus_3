@@ -32,13 +32,6 @@ namespace Plotypus
         return data[1].size();          // quick solution: return arity of Y column
     }
 
-//    std::span<double>& DataViewDefaultSeparate::data(ColumnType columnType)
-//    {
-//        const auto columnID = getColumnID(columnType) - 1;
-//        throwIfInvalidIndex("column index", columnID, m_data);
-//        return m_data[columnID];
-//    }
-
     const columnViewList_t& DataViewDefaultSeparate::getData() const
     {
         return data;

@@ -37,7 +37,7 @@ namespace Plotypus
             virtual void clearNonFunctionMembers() = 0;
 
         public:
-            DataView(const PlotStyle    style, const std::string& label = "");
+            DataView(const PlotStyle    style, const std::string& label = "");      //! @bug call of virtual method
             DataView(const std::string& style, const std::string& label = "");
 
             virtual void reset();

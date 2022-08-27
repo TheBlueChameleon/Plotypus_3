@@ -4,7 +4,6 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-
     DataView::DataView(const PlotStyle style, const std::string& label) :
         title(label)
     {
