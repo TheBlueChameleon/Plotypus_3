@@ -71,7 +71,136 @@ namespace Plotypus
         return buffer.str();
     }
 
-    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t columnListLength)
+    size_t getColumnID(const PlotStyle styleID, const ColumnType columnType)
+    {
+        switch (columnType)
+        {
+// *INDENT-OFF*
+            case ColumnType::Column1: return 1;
+            case ColumnType::Column2: return 2;
+            case ColumnType::Column3: return 3;
+            case ColumnType::Column4: return 4;
+            case ColumnType::Column5: return 5;
+            case ColumnType::Column6: return 6;
+
+            case ColumnType::X: return 1;
+            case ColumnType::Y: return 2;
+
+            case ColumnType::Y2:
+                if (styleID == PlotStyle::FilledCurves)                             {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Z:
+                if (contains(styleID, {
+                             PlotStyle::Dots3D, PlotStyle::Points3D,
+                             PlotStyle::Lines3D, PlotStyle::LinesPoints3D,
+                             PlotStyle::Impulses3D, PlotStyle::Boxes3D,
+                             PlotStyle::Vectors3D, PlotStyle::Image3D
+                }))                                                                 {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::DeltaX:
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError, PlotStyle::Vectors
+                }))                                                                 {return 3;}
+                else if (styleID == PlotStyle::Vectors3D)                           {return 4;}
+                else if (styleID == PlotStyle::BoxErrorBars)                        {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::DeltaY:
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars, PlotStyle::FilledCurves
+                }))                                                                 {return 3;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError, PlotStyle::Vectors
+                }))                                                                 {return 4;}
+                else if (styleID == PlotStyle::Vectors3D)                           {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::DeltaZ:
+                if (styleID == PlotStyle::Vectors3D)                                {return 6;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::XLow:
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError
+                }))                                                                 {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::XHigh:
+                if (contains(styleID, {
+                    PlotStyle::XErrorBars, PlotStyle::XYErrorBars,
+                    PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
+                    PlotStyle::BoxxyError
+                }))                                                                 {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::YLow:
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars, PlotStyle::FilledCurves
+                }))                                                                 {return 3;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError
+                }))                                                                 {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::YHigh:
+                if (contains(styleID, {
+                    PlotStyle::YErrorBars, PlotStyle::YErrorLines, PlotStyle::BoxErrorBars,
+                }))                                                                 {return 4;}
+                else if (contains(styleID, {
+                    PlotStyle::XYErrorBars, PlotStyle::XYErrorLines, PlotStyle::BoxxyError
+                }))                                                                 {return 6;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Pointsize:
+                if      (styleID == PlotStyle::Points)                              {return 3;}
+                else if (styleID == PlotStyle::Points3D)                            {return 4;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 3;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Pointtype:
+                if      (styleID == PlotStyle::Points)                              {return 4;}
+                else if (styleID == PlotStyle::Points3D)                            {return 5;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 4;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 5;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Color:
+                if      (styleID == PlotStyle::Points)                              {return 5;}
+                else if (styleID == PlotStyle::Points3D)                            {return 6;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 5;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 6;}
+                else if (styleID == PlotStyle::Boxes3D)                             {return 5;}
+                else if (styleID == PlotStyle::Image)                               {return 3;}
+                else if (styleID == PlotStyle::Image3D)                             {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Boxwidth:
+                if      (styleID == PlotStyle::Boxes)                               {return 3;}
+                else if (styleID == PlotStyle::HBoxes)                              {return 3;}
+                else if (styleID == PlotStyle::Boxes3D)                             {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Length:
+                if (styleID == PlotStyle::Arrows)                                   {return 3;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+
+            case ColumnType::Angle:
+                if (styleID == PlotStyle::Arrows)                                   {return 4;}
+                else                                                                {return COLUMN_UNSUPPORTED;}
+// *INDENT-ON*
+        }
+
+        return COLUMN_UNSUPPORTED;
+    }
+
+    columnTypeList_t getColumnTypeList(const PlotStyle styleID, const size_t columnListLength)
     {
         // *INDENT-OFF*
         switch (styleID) {

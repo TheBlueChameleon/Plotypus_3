@@ -61,7 +61,6 @@ namespace Plotypus
             void makePlusMinusErrorFormat();
 
             virtual bool isFunction() const;
-            virtual size_t getColumnID(const ColumnType columnType) const;          //! @todo move this to util
 
             // -------------------------------------------------------------- //
             // writers
