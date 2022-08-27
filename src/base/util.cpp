@@ -71,11 +71,194 @@ namespace Plotypus
         return buffer.str();
     }
 
-    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t ColumnListLength)
+    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t columnListLength)
     {
-        columnTypeList_t result;
+        // *INDENT-OFF*
+        switch (styleID) {
+            case PlotStyle::Dots:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::Points:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Color, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::XErrorBars:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaX, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::XLow, ColumnType::XHigh, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::YErrorBars:
+                switch (columnListLength) {
+                    case 2: return {ColumnType::Y, ColumnType::DeltaY, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaY, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::YLow, ColumnType::YHigh, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::XYErrorBars:
+                switch (columnListLength) {
+                    case 4: return {ColumnType::Y, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 6: return {ColumnType::X, ColumnType::Y, ColumnType::XLow, ColumnType::XHigh, ColumnType::YLow, ColumnType::YHigh};
+                }
+                break;
+            case PlotStyle::Lines:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::LinesPoints:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Color, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::FilledCurves:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Y2, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::XErrorLines:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaX, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::XLow, ColumnType::XHigh, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::YErrorLines:
+                switch (columnListLength) {
+                    case 2: return {ColumnType::Y, ColumnType::DeltaY, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaY, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::YLow, ColumnType::YHigh, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::XYErrorLines:
+                switch (columnListLength) {
+                    case 4: return {ColumnType::Y, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 6: return {ColumnType::X, ColumnType::Y, ColumnType::XLow, ColumnType::XHigh, ColumnType::YLow, ColumnType::YHigh};
+                }
+                break;
+            case PlotStyle::Steps:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::FSteps:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::FillSteps:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::Impulses:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::Boxes:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Boxwidth, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::HBoxes:
+                switch (columnListLength) {
+                    case 1: return {ColumnType::Y, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 2: return {ColumnType::X, ColumnType::Y, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Boxwidth, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::BoxErrorBars:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaY, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::YLow, ColumnType::YHigh, ColumnType::DeltaX, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::BoxxyError:
+                switch (columnListLength) {
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::Column5, ColumnType::Column6};
+                    case 6: return {ColumnType::X, ColumnType::Y, ColumnType::XLow, ColumnType::XHigh, ColumnType::YLow, ColumnType::YHigh};
+                }
+                break;
+            case PlotStyle::Arrows:
+                if (columnListLength == 4) {return {ColumnType::X, ColumnType::Y, ColumnType::Length, ColumnType::Angle, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::Vectors:
+                if (columnListLength == 4) {return {ColumnType::X, ColumnType::Y, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::Image:
+                if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Color, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};}
+                break;
 
-        return result;
+            case PlotStyle::Dots3D:
+                if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column3, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::Points3D:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Column6};
+                    case 6: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Color};
+                }
+                break;
+            case PlotStyle::Lines3D:
+                if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column3, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::LinesPoints3D:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Column6};
+                    case 6: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Pointsize, ColumnType::Pointtype, ColumnType::Color};
+                }
+                break;
+            case PlotStyle::Boxes3D:
+                switch (columnListLength) {
+                    case 3: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+                    case 4: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Boxwidth, ColumnType::Column5, ColumnType::Column6};
+                    case 5: return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Boxwidth, ColumnType::Color, ColumnType::Column6};
+                }
+                break;
+            case PlotStyle::Impulses3D:
+                if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::Image3D:
+                if (columnListLength == 4) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Color, ColumnType::Column5, ColumnType::Column6};}
+                break;
+            case PlotStyle::Vectors3D:
+                if (columnListLength == 6) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::DeltaZ};}
+                break;
+
+            case PlotStyle::Custom:
+                return {ColumnType::Column1, ColumnType::Column2, ColumnType::Column3, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};
+        }
+        // *INDENT-ON*
+
+        std::string msg = "Invalid argument count for plot type\n"
+                          "  argument count: " + std::to_string(columnListLength) + "\n"
+                          "  plot type     : " + getPlotStyleName(styleID);
+        throw InvalidArgumentError(msg);
     }
 
     // ---------------------------------------------------------------------- //

@@ -235,7 +235,8 @@ namespace Plotypus
                 if (contains(styleID, {
                              PlotStyle::Dots3D, PlotStyle::Points3D,
                              PlotStyle::Lines3D, PlotStyle::LinesPoints3D,
-                             PlotStyle::Impulses3D, PlotStyle::Vectors3D, PlotStyle::Image3D
+                             PlotStyle::Impulses3D, PlotStyle::Boxes3D,
+                             PlotStyle::Vectors3D, PlotStyle::Image3D
                 }))                                                                 {return 3;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
@@ -245,8 +246,8 @@ namespace Plotypus
                     PlotStyle::XErrorLines, PlotStyle::XYErrorLines,
                     PlotStyle::BoxxyError, PlotStyle::Vectors
                 }))                                                                 {return 3;}
-                else if (contains(styleID, {PlotStyle::Vectors3D}))                 {return 4;}
-                else if (contains(styleID, {PlotStyle::BoxErrorBars}))              {return 5;}
+                else if (styleID == PlotStyle::Vectors3D)                           {return 4;}
+                else if (styleID == PlotStyle::BoxErrorBars)                        {return 5;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::DeltaY:
@@ -298,21 +299,33 @@ namespace Plotypus
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Pointsize:
-                if (styleID == PlotStyle::Points)                                   {return 3;}
+                if      (styleID == PlotStyle::Points)                              {return 3;}
+                else if (styleID == PlotStyle::Points3D)                            {return 4;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 3;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 4;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Pointtype:
-                if (styleID == PlotStyle::Points)                                   {return 4;}
+                if      (styleID == PlotStyle::Points)                              {return 4;}
+                else if (styleID == PlotStyle::Points3D)                            {return 5;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 4;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 5;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Color:
                 if      (styleID == PlotStyle::Points)                              {return 5;}
+                else if (styleID == PlotStyle::Points3D)                            {return 6;}
+                else if (styleID == PlotStyle::LinesPoints)                         {return 5;}
+                else if (styleID == PlotStyle::LinesPoints3D)                       {return 6;}
+                else if (styleID == PlotStyle::Boxes3D)                             {return 5;}
                 else if (styleID == PlotStyle::Image)                               {return 3;}
                 else if (styleID == PlotStyle::Image3D)                             {return 4;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Boxwidth:
-                if (styleID == PlotStyle::Boxes || styleID == PlotStyle::HBoxes)    {return 3;}
+                if      (styleID == PlotStyle::Boxes)                               {return 3;}
+                else if (styleID == PlotStyle::HBoxes)                              {return 3;}
+                else if (styleID == PlotStyle::Boxes3D)                             {return 4;}
                 else                                                                {return COLUMN_UNSUPPORTED;}
 
             case ColumnType::Length:

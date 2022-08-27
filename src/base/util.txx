@@ -93,7 +93,7 @@ namespace Plotypus
             case PlotStyle::Lines:
                 return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
             case PlotStyle::LinesPoints:
-                return checkColumnListOccupationIsFrom(data, {1, 2}, isNullData);
+                return checkColumnListOccupationIsFrom(data, {1, 2, 3, 4, 5}, isNullData);
             case PlotStyle::FilledCurves:
                 return checkColumnListOccupationIsFrom(data, {1, 2, 3}, isNullData);
             case PlotStyle::XErrorLines:
@@ -130,9 +130,9 @@ namespace Plotypus
             case PlotStyle::Points3D:
                 return checkColumnListOccupationIsFrom(data, {3, 4, 5, 6}, isNullData);
             case PlotStyle::Lines3D:
-                return checkColumnListOccupationIsFrom(data, {1, 3}, isNullData);
+                return checkColumnListOccupationIsFrom(data, {3}, isNullData);
             case PlotStyle::LinesPoints3D:
-                return checkColumnListOccupationIsFrom(data, {1, 3}, isNullData);
+                return checkColumnListOccupationIsFrom(data, {3, 4, 5, 6}, isNullData);
             case PlotStyle::Boxes3D:
                 return checkColumnListOccupationIsFrom(data, {3, 4, 5}, isNullData);
             case PlotStyle::Impulses3D:

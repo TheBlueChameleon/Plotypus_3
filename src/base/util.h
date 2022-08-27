@@ -44,7 +44,7 @@ namespace Plotypus
 
     const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
 
-    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t ColumnListLength);
+    columnTypeList_t getAssignmentsForType(const PlotStyle styleID, const size_t columnListLength);
 
     // ---------------------------------------------------------------------- //
     // enum lookups
