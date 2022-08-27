@@ -30,7 +30,7 @@ namespace Plotypus
         }
         else if (styleFamily != newDataViewFamily)
         {
-            throw IncompatiblePlotStyle("Cannot add DataView to Plot: incompatible plot styles");
+            throw IncompatiblePlotStyle("Cannot add DataView to Plot: plot style not compatible with already present plots");
         }
     }
 

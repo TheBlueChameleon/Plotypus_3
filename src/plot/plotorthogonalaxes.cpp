@@ -99,9 +99,9 @@ namespace Plotypus
     void PlotOrthogonalAxes::writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
     {
         const std::string axisCommand = axisName + "range ";
-        const std::string rangeString = generateRangeString (axis.rangeMin, axis.rangeMax);
+        const std::string rangeString = generateRangeString(axis.rangeMin, axis.rangeMax);
 
-        hFile << "set " << axisCommand << " " << rangeString << axis.rangeOptions.value_or("") << std::endl;
+        hFile << "set " << axisCommand << rangeString << axis.rangeOptions.value_or("") << std::endl;
     }
 
     void PlotOrthogonalAxes::writeAxisTics(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis)
@@ -282,6 +282,15 @@ namespace Plotypus
 
         dataView->setData(ColumnType::X, dataX);
         dataView->setData(ColumnType::Y, dataY);
+
+        return addDataViewSeparate(dataView);
+    }
+
+    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
+    {
+        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+
+        dataView->setFunc(func);
 
         return addDataViewSeparate(dataView);
     }

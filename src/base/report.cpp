@@ -326,7 +326,6 @@ namespace Plotypus
             hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
         }
 
-
         m_stylesCollection.writeStyles(hFile);
 
         for (size_t i = 1u; auto sheet : sheets)

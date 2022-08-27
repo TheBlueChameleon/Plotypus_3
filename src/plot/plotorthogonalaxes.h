@@ -56,20 +56,21 @@ namespace Plotypus
             void                        setPolar(bool newPolar);
 
             DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
-            DataViewDefaultSeparate&    addDataViewSeparate(const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultSeparate&    addDataViewSeparate(const std::string& func,                                        const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
 
             template<class T>
             DataViewDefaultCompound<T>& addDataViewCompound(DataViewDefaultCompound<T>* dataView);
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultCompound<T>& addDataViewCompound(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultCompound<T>& addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY,   const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultCompound<T>& addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY,    const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(const std::string& func, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataViewDefaultCompound<T>& addDataViewCompound(const std::string& func,                                        const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers

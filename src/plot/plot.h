@@ -24,7 +24,7 @@ namespace Plotypus
             std::string aspect      = "noratio";
             std::string fill        = "solid";
 
-            bool        key         = true;
+            bool        key         = true;         //! @todo introduce key descriptor (cf. p.160)
             bool        parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);

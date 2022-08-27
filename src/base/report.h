@@ -19,6 +19,7 @@ namespace Plotypus
      *
      * @todo better support for Filetype Screen
      * @todo move responsibility for "tidy up code" to individual sheets
+     * @todo monadic design: setters return ref to self
      */
 
     class PlotOrthogonalAxes;

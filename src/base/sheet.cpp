@@ -172,13 +172,6 @@ namespace Plotypus
 
     void Sheet::writeScriptHead(std::ostream& hFile) const
     {
-        hFile << "# " << std::string(76, '-') << " #\n";
-        hFile << "# generated setup script" << std::endl << std::endl;
-
-        hFile << "set font " << std::quoted(defaultFont) << std::endl;
-        hFile << "set title " << std::quoted("{/" + titleFont + " " + title + "}") << std::endl;
-        hFile << std::endl;
-
         if (!customScriptBegin.empty())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
@@ -186,9 +179,20 @@ namespace Plotypus
             hFile << customScriptBegin << std::endl;
             hFile << std::endl;
         }
+
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# generated setup script" << std::endl << std::endl;
+
+        hFile << "set font " << std::quoted(defaultFont) << std::endl;
+        hFile << "set title " << std::quoted("{/" + titleFont + " " + title + "}") << std::endl;
+        hFile << std::endl;
     }
 
-    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const {}
+    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    {
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# plot commands" << std::endl << std::endl;
+    }
 
     void Sheet::writeScriptLabels(std::ostream& hFile) const
     {
@@ -231,6 +235,9 @@ namespace Plotypus
             hFile << customScriptEnd << std::endl;
             hFile << std::endl;
         }
+
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# tidy up code" << std::endl << std::endl;
 
         if (type == SheetType::Sheet)
         {
