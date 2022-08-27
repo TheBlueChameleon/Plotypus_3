@@ -47,8 +47,8 @@ namespace Plotypus
 
         switch (argForm)
         {
-            case 1  : return " " +                              std::to_string(increment)                             + " ";
-            case 2  : return " " + std::to_string(min) + ", " + std::to_string(increment)                             + " ";
+            case 1  : return " " +                              std::to_string(increment)                              + " ";
+            case 2  : return " " + std::to_string(min) + ", " + std::to_string(increment)                              + " ";
             case 3  : return " " + std::to_string(min) + ", " + std::to_string(increment) + ", " + std::to_string(max) + " ";
             default : return "";
         }

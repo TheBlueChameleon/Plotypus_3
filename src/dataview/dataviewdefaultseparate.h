@@ -28,10 +28,7 @@ namespace Plotypus
             void                        setData(ColumnType columnType, const std::span<double>& newdata);
 
             virtual bool isDummy() const;
-            virtual bool isComplete() const; /** @todo move implementation to dataview2d as template with param nullObjectChecker
-                                              *  @todo complete switch case
-                                              *  @bug reports spurious false on Lines
-                                              */
+            virtual bool isComplete() const;
     };
 }
 
