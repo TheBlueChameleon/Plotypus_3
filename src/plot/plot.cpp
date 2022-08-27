@@ -62,14 +62,17 @@ namespace Plotypus
         return styleFamily;
     }
 
-    void Plot::setStyleFamily(PlotStyleFamily newStyleFamily)
+    Plot& Plot::setStyleFamily(PlotStyleFamily newStyleFamily)
     {
-        // *INDENT-OFF*
-        if (styleFamily == newStyleFamily)                                                  {return;}
+        if (styleFamily != newStyleFamily)
+        {
+            // *INDENT-OFF*
+            if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {styleFamily = newStyleFamily;}
+            else                                                                                {throw IncompatiblePlotStyle("Cannot override plot style family");}
+            // *INDENT-ON*
+        }
 
-        if (contains(styleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {styleFamily = newStyleFamily;}
-        else                                                                                {throw IncompatiblePlotStyle("Cannot override plot style family");}
-        // *INDENT-ON*
+        return *this;
     }
 
     const std::vector<DataView*>& Plot::getDataViews() const
@@ -90,9 +93,10 @@ namespace Plotypus
         return border;
     }
 
-    void Plot::setBorder(size_t newBorder)
+    Plot& Plot::setBorder(size_t newBorder)
     {
         border = newBorder;
+        return *this;
     }
 
     size_t Plot::getBorderLineStyle() const
@@ -100,9 +104,10 @@ namespace Plotypus
         return borderLineStyle;
     }
 
-    void Plot::setBorderLineStyle(size_t newBorderLineStyle)
+    Plot& Plot::setBorderLineStyle(size_t newBorderLineStyle)
     {
         borderLineStyle = newBorderLineStyle;
+        return *this;
     }
 
     bool Plot::getKey() const
@@ -110,9 +115,10 @@ namespace Plotypus
         return key;
     }
 
-    void Plot::setKey(bool newKey)
+    Plot& Plot::setKey(bool newKey)
     {
         key = newKey;
+        return *this;
     }
 
     bool Plot::getParametric() const
@@ -120,9 +126,10 @@ namespace Plotypus
         return parametric;
     }
 
-    void Plot::setParametric(bool newParametric)
+    Plot& Plot::setParametric(bool newParametric)
     {
         parametric = newParametric;
+        return *this;
     }
 
     const std::string& Plot::getAspect() const
@@ -130,29 +137,34 @@ namespace Plotypus
         return aspect;
     }
 
-    void Plot::setAspect(const std::string& newAspect)
+    Plot& Plot::setAspect(const std::string& newAspect)
     {
         aspect = newAspect;
+        return *this;
     }
 
-    void Plot::setAspectNone()
+    Plot& Plot::setAspectNone()
     {
         aspect = "noratio";
+        return *this;
     }
 
-    void Plot::setAspectSquare()
+    Plot& Plot::setAspectSquare()
     {
         aspect = "square";
+        return *this;
     }
 
-    void Plot::setAspectEqual()
+    Plot& Plot::setAspectEqual()
     {
         aspect = "ratio -1";
+        return *this;
     }
 
-    void Plot::setAspectRatio(double ratio)
+    Plot& Plot::setAspectRatio(double ratio)
     {
         aspect = "ratio "s + std::to_string(ratio);
+        return *this;
     }
 
     const std::string& Plot::getFill() const
@@ -160,9 +172,10 @@ namespace Plotypus
         return fill;
     }
 
-    void Plot::setFill(const std::string& newFill)
+    Plot& Plot::setFill(const std::string& newFill)
     {
         fill = newFill;
+        return *this;
     }
 
     // ====================================================================== //

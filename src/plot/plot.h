@@ -35,7 +35,7 @@ namespace Plotypus
             virtual void reset();
 
             PlotStyleFamily     getStyleFamily() const;
-            void                setStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
+            Plot&               setStyleFamily(PlotStyleFamily newStyleFamily);     //! @todo: couple with mode3D in ortho-axes..? virtual?
 
             const std::vector<DataView*>& getDataViews() const;
             DataView&           dataView(const size_t i);
@@ -43,23 +43,23 @@ namespace Plotypus
             T&                  dataViewAs(const size_t i);
 
             size_t              getBorder() const;
-            void                setBorder(size_t newBorder);
+            Plot&               setBorder(size_t newBorder);
             size_t              getBorderLineStyle() const;
-            void                setBorderLineStyle(size_t newBorderLineStyle);
+            Plot&               setBorderLineStyle(size_t newBorderLineStyle);
 
             const std::string&  getAspect      () const;
-            void                setAspect      (const std::string& newAspect);
-            void                setAspectNone  ();
-            void                setAspectSquare();
-            void                setAspectEqual ();
-            void                setAspectRatio (double ratio);
+            Plot&               setAspect      (const std::string& newAspect);
+            Plot&               setAspectNone  ();
+            Plot&               setAspectSquare();
+            Plot&               setAspectEqual ();
+            Plot&               setAspectRatio (double ratio);
             const std::string&  getFill() const;
-            void                setFill(const std::string& newFill);
+            Plot&               setFill(const std::string& newFill);
 
             bool                getKey() const;
-            void                setKey(bool newKey);
+            Plot&               setKey(bool newKey);
             bool                getParametric() const;
-            void                setParametric(bool newParametric);
+            Plot&               setParametric(bool newParametric);
 
             // -------------------------------------------------------------- //
             // writers
