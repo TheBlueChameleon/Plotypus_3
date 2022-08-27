@@ -40,9 +40,10 @@ namespace Plotypus
         return boxStyles[i];
     }
 
-    void StylesCollection::setBoxStyles(const std::vector<BoxStyle>& newBoxstyles)
+    StylesCollection& StylesCollection::setBoxStyles(const std::vector<BoxStyle>& newBoxstyles)
     {
         boxStyles = newBoxstyles;
+        return *this;
     }
 
     BoxStyle& StylesCollection::addBoxStyle(const BoxStyle& newBoxstyle)
@@ -80,9 +81,10 @@ namespace Plotypus
         return lineStyles[i];
     }
 
-    void StylesCollection::setLineStyles(const std::vector<LineStyle>& newLineStyles)
+    StylesCollection& StylesCollection::setLineStyles(const std::vector<LineStyle>& newLineStyles)
     {
         lineStyles = newLineStyles;
+        return *this;
     }
 
     LineStyle& StylesCollection::addLineStyle(const LineStyle& newLineStyle)
@@ -120,9 +122,10 @@ namespace Plotypus
         return pointStyles[i];
     }
 
-    void StylesCollection::setPointStyles(const std::vector<PointStyle>& newPointStyles)
+    StylesCollection& StylesCollection::setPointStyles(const std::vector<PointStyle>& newPointStyles)
     {
         pointStyles = newPointStyles;
+        return *this;
     }
 
     PointStyle& StylesCollection::addPointStyle(const PointStyle& newPointStyle)
