@@ -24,6 +24,10 @@ namespace Plotypus
             columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
             columnFormatList_t     columnHeadlines   = {};
 
+            bool variablePointSize  = false;
+            bool variablePointType  = false;
+            bool variablePointColor = false;
+
             virtual void clearFunctionMembers();
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
 
@@ -34,6 +38,7 @@ namespace Plotypus
 
             size_t getColumnIDOrThrow(const ColumnType columnType);
 
+            void postSetColumnActions(const ColumnType columnType);
             void makePlusMinusFormat();
 
         public:
@@ -61,6 +66,13 @@ namespace Plotypus
             std::string&        columnFormat    (const ColumnType   columnType);
             std::string&        columnHeadline  (const size_t       columnID);
             std::string&        columnHeadline  (const ColumnType   columnType);
+
+            bool                getVariablePointSize() const;
+            DataViewDefault&    setVariablePointSize(bool newVariablePointSize);
+            bool                getVariablePointType() const;
+            DataViewDefault&    setVariablePointType(bool newVariablePointType);
+            bool                getVariablePointColor() const;
+            DataViewDefault&    setVariablePointColor(bool newVariablePointColor);
 
             virtual bool isFunction() const;
 

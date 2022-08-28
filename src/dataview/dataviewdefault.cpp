@@ -75,6 +75,24 @@ namespace Plotypus
         return columnID;
     }
 
+    void DataViewDefault::postSetColumnActions(const ColumnType columnType)
+    {
+        if (plotStyleID == PlotStyle::FilledCurves && columnType == ColumnType::DeltaY)
+        {
+            makePlusMinusFormat();
+        }
+        else if (contains(plotStyleID, {PlotStyle::Points, PlotStyle::Points3D,
+                                        PlotStyle::LinesPoints, PlotStyle::LinesPoints3D
+                                       }))
+        {
+            // *INDENT-OFF*
+            if (columnType == ColumnType::Pointtype) {variablePointType  = true;}
+            if (columnType == ColumnType::Pointsize) {variablePointSize  = true;}
+            if (columnType == ColumnType::Color    ) {variablePointColor = true;}
+            // *INDENT-ON*
+        }
+    }
+
     void DataViewDefault::makePlusMinusFormat()
     {
         /* check prerequisites:
@@ -227,6 +245,39 @@ namespace Plotypus
         return columnHeadline(getColumnID(plotStyleID, columnType) - 1);
     }
 
+    bool DataViewDefault::getVariablePointSize() const
+    {
+        return variablePointSize;
+    }
+
+    DataViewDefault& DataViewDefault::setVariablePointSize(bool newVariablePointSize)
+    {
+        variablePointSize = newVariablePointSize;
+        return *this;
+    }
+
+    bool DataViewDefault::getVariablePointType() const
+    {
+        return variablePointType;
+    }
+
+    DataViewDefault& DataViewDefault::setVariablePointType(bool newVariablePointType)
+    {
+        variablePointType = newVariablePointType;
+        return *this;
+    }
+
+    bool DataViewDefault::getVariablePointColor() const
+    {
+        return variablePointColor;
+    }
+
+    DataViewDefault& DataViewDefault::setVariablePointColor(bool newVariablePointColor)
+    {
+        variablePointColor = newVariablePointColor;
+        return *this;
+    }
+
     bool DataViewDefault::isFunction() const
     {
         return !func.empty();
@@ -239,7 +290,7 @@ namespace Plotypus
         // *INDENT-OFF*
         if      (isDummy())     {hFile << "(external input from " << std::quoted(dataFilename) << ")"  << std::endl; return;}
         else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(title) << ")"  << std::endl; return;}
-        else if (!isComplete()) {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
+        else if (!isComplete()) {throw UnsupportedOperationError("Incomplete or non-consecutive list of columns or unsupported column type or detected");}
         // *INDENT-ON*
         else
         {
@@ -278,7 +329,7 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())      {return;}
         if (isFunction())   {return;}
-        if (!isComplete())  {throw UnsupportedOperationError("Unsupported column type or non-consecutive list of columns detected");}
+        if (!isComplete())  {throw UnsupportedOperationError("Incomplete or non-consecutive list of columns or unsupported column type or detected");}
 
         const auto isUnusedColumn = [] (const size_t assignment) {return assignment == COLUMN_UNUSED;};
 
@@ -304,13 +355,18 @@ namespace Plotypus
         }
         writeUsingSpecification(hFile);
 
-        if (!options.empty()) {hFile << options << " ";}
         hFile << optionalQuotedTextString("title", title);
 
         hFile << "with " << plotStyle << " ";
-        hFile << optionalStyleString("linestyle", lineStyle);
 
+        hFile << optionalStyleString("linestyle", lineStyle);
         stylesColloction.writePointStyleCode(hFile, pointStyle);
+
+        if (variablePointSize ) {hFile << "pointsize variable ";}
+        if (variablePointType ) {hFile << "pointtype variable ";}
+        if (variablePointColor) {hFile << "linecolor variable ";}
+
+        if (!options.empty()) {hFile << options;}
         // *INDENT-ON*
     }
 }

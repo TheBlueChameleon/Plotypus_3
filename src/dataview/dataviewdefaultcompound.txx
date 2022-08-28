@@ -97,10 +97,7 @@ namespace Plotypus
         columnAssignments[columnID] = columnID + 1;
         columnHeadlines  [columnID] = getColumnIDName(columnType);
 
-        if (plotStyleID == PlotStyle::FilledCurves && columnType == ColumnType::DeltaY)
-        {
-            makePlusMinusFormat();
-        }
+        postSetColumnActions(columnType);
 
         return *this;
     }
