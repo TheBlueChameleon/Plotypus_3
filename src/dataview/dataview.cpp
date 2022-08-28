@@ -87,17 +87,6 @@ namespace Plotypus
         return *this;
     }
 
-    bool DataView::getBinaryDataOutput() const
-    {
-        return binaryDataOutput;
-    }
-
-    DataView& DataView::setBinaryDataOutput(bool newBinaryDataOutput)
-    {
-        binaryDataOutput = newBinaryDataOutput;
-        return *this;
-    }
-
     const std::string& DataView::getOptions() const
     {
         return options;
@@ -162,6 +151,17 @@ namespace Plotypus
     DataView& DataView::setColumnSeparatorDat(const std::string& newSeparatorDAT)
     {
         columnSeparatorDat = newSeparatorDAT;
+        return *this;
+    }
+
+    bool DataView::getBinaryDataOutput() const
+    {
+        return binaryDataOutput;
+    }
+
+    DataView& DataView::setBinaryDataOutput(bool newBinaryDataOutput)
+    {
+        binaryDataOutput = newBinaryDataOutput;
         return *this;
     }
 }

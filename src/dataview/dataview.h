@@ -58,9 +58,6 @@ namespace Plotypus
             const PlotStyle     getPlotStyleID() const;
             virtual DataView&   setPlotStyleID(const PlotStyle newStyle);
 
-            bool                getBinaryDataOutput() const;
-            DataView&           setBinaryDataOutput(bool newBinaryDataOutput);
-
             const std::string&  getOptions() const;
             DataView&           setOptions(const std::string& newOptions);
 
@@ -76,6 +73,9 @@ namespace Plotypus
             DataView&           setColumnSeparatorTxt(const std::string& newSeparatorTXT);
             const std::string&  getColumnSeparatorDat() const;
             DataView&           setColumnSeparatorDat(const std::string& newSeparatorDAT);
+
+            bool                getBinaryDataOutput() const;
+            DataView&           setBinaryDataOutput(bool newBinaryDataOutput);
 
             virtual bool isFunction() const = 0;
             virtual bool isDummy   () const = 0;
