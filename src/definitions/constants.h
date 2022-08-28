@@ -316,8 +316,8 @@ namespace Plotypus
     constexpr auto SYMBOL_CAPITAL_ZETA          = "{/symbol Z}";
 
     constexpr auto SYMBOL_ALEPH                 = "{/symbol \300}";
-    constexpr auto SYMBOL_REAL_PART             = "{/symbol \301}";
-    constexpr auto SYMBOL_IMAGINARY_PART        = "{/symbol \302}";
+    constexpr auto SYMBOL_REAL_PART             = "{/symbol \302}";
+    constexpr auto SYMBOL_IMAGINARY_PART        = "{/symbol \301}";
 
     constexpr auto SYMBOL_LESS_OR_EQUAL         = "{/symbol \243}";
     constexpr auto SYMBOL_GREATER_OR_EQUAL      = "{/symbol \263}";

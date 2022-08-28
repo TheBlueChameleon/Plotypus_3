@@ -353,8 +353,8 @@ namespace Plotypus
             else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead  (hFile);
-            sheet->writeScriptData  (hFile, m_stylesCollection);
             sheet->writeScriptLabels(hFile);
+            sheet->writeScriptData  (hFile, m_stylesCollection);
             sheet->writeScriptFooter(hFile, i);
             ++i;
 

@@ -407,8 +407,10 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
 
     sheet1.axis(AxisType::X).rangeMin = -1.5;
     sheet1.axis(AxisType::X).rangeMax = +1.5;
+    sheet1.axis(AxisType::X).labelText = SYMBOL_REAL_PART;
     sheet1.axis(AxisType::Y).rangeMin = -1.5;
     sheet1.axis(AxisType::Y).rangeMax = +1.5;
+    sheet1.axis(AxisType::Y).labelText = SYMBOL_IMAGINARY_PART;
     sheet1.setAspectSquare();
 
     sheet1.addDataViewCompound<compound_complex_t>(PlotStyle::Vectors, "vortex")
@@ -433,6 +435,9 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
     .setData(ColumnType::Color, sepData_Z);
+
+    sheet2.addLabel("Rendering of", -1.7, 0.6);
+    sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
 }
 
 // ========================================================================== //
