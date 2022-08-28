@@ -275,8 +275,6 @@ void showcase_run_plots2d(Plotypus::Report& report,
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setTitle("Sine approximation");
 
-    sheet4.dataViewAs<compound_view_t>(0).makePlusMinusFormat();
-
     // ---------------------------------------------------------------------- //
     // ill-typed references cause a catch-able exception
 

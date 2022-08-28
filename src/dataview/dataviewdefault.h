@@ -34,10 +34,9 @@ namespace Plotypus
 
             size_t getColumnIDOrThrow(const ColumnType columnType);
 
+            void makePlusMinusFormat();
 
         public:
-            //! @todo make private; trigger automatically by setting selector/data
-            void makePlusMinusFormat();
             DataViewDefault(const PlotStyle    plotStyleID, const std::string& label = "");
             DataViewDefault(const std::string& plotStyle, const std::string& label = "");
 
