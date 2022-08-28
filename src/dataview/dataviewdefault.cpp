@@ -274,6 +274,7 @@ namespace Plotypus
 
     void DataViewDefault::writeDatData() const
     {
+
         // *INDENT-OFF*
         if (isDummy())      {return;}
         if (isFunction())   {return;}

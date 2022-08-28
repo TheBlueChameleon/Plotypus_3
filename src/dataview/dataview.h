@@ -14,6 +14,8 @@ namespace Plotypus
      *  DataViewMatrixFlat, DataViewMatrix2D; with 2nd level subtypes for compound/separate?
      *
      * @todo notitle option (suppresses key entry)
+     *
+     * @todo abstract autoFormat (clip to nan); quickForm only positive
      */
     class DataView
     {
