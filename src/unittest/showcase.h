@@ -3,16 +3,13 @@
 
 enum Showcases
 {
-    Overlays = 1 << 0,
-    Plots_2D = 1 << 1,
+    Overlays        = 1 << 0,
+    Plots_2D        = 1 << 1,
+    Plots_2D_maps   = 1 << 2,
 
-    All = -1,
+    All             = -1,
 };
 
 void showcase_run(Showcases selection);
-
-void showcase_all();
-void showcase_overlays();
-void showcase_2D_plots();
 
 #endif // SHOWCASE_H

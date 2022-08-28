@@ -1,18 +1,28 @@
+#include <complex>
 #include <iostream>
 
 #include "showcase.h"
 #include "../plotypus.h"
 
+using namespace std::complex_literals;
 using namespace std::string_literals;
 
 // ========================================================================== //
 // data types and constants
 
-const auto pi = std::numbers::pi;
+constexpr auto pi = std::numbers::pi;
 
 struct compound_t
 {
-    double x, y, z, errX, errY;
+    double x, y, errX, errY;
+};
+
+using complex_t = std::complex<double>;
+
+struct compound_complex_t
+{
+    complex_t coordinate;
+    complex_t value;
 };
 
 // ========================================================================== //
@@ -39,8 +49,8 @@ std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
 
 std::vector<compound_t> generateCompoundData2D()
 {
-    const auto N = 50;
-    const auto xIncrement = pi / N;
+    constexpr auto N = 50;
+    constexpr auto xIncrement = pi / N;
     std::vector<compound_t> result(N);
 
     // Taylor approximation of sine
@@ -57,6 +67,67 @@ std::vector<compound_t> generateCompoundData2D()
     return result;
 }
 
+std::vector<compound_complex_t> generateVectorField()
+{
+    // creates a vortex field around origin, domain is [-1, +1) x [-1, +1)
+
+    constexpr auto Nx = 25;
+    constexpr auto Ny = 25;
+
+    constexpr auto dx = 2. / Nx;
+    constexpr auto dy = 2. / Nx;
+
+    std::vector<compound_complex_t> result(Nx * Ny);
+
+    double x = -1., y = -1.;
+    for     (size_t iy = 0u; iy < Nx; ++iy)
+    {
+        x = -1.;
+        for (size_t ix = 0u; ix < Nx; ++ix)
+        {
+            x += dx;
+            const auto coordinate = complex_t(x, y);
+            const auto value      = complex_t(0, 1) * coordinate * .1;
+
+            auto& thisArrow = result[iy * Nx + ix];
+            thisArrow.coordinate = coordinate;
+            thisArrow.value      = value;
+        }
+        y += dy;
+    }
+
+    return result;
+}
+
+std::array<std::vector<double>, 3> generateScalarField()
+{
+    // non-uniform sampling of the domain {which is [-1, 1) x [-1, 1)}
+    // z = sin( 1/r ) with r = sqrt(x² + y²)
+
+    std::vector<double> points, dataX, dataY, dataZ;
+
+    for (double q = -1.; q < 1.;)
+    {
+        q += 0.02 * std::sqrt( std::abs(q) );
+        points.push_back(q);
+    }
+
+    for     (auto y : points)
+    {
+        for (auto x : points)
+        {
+            double r = std::sqrt(x*x + y*y);
+            double z = std::sin(2. / r);
+
+            dataX.push_back(x);
+            dataY.push_back(y);
+            dataZ.push_back(z);
+        }
+    }
+
+    return {dataX, dataY, dataZ};
+}
+
 // ========================================================================== //
 // internal showcase procs
 
@@ -64,6 +135,9 @@ void showcase_run_overlays(Plotypus::Report& report);
 void showcase_run_plots2d (Plotypus::Report& report,
                            std::pair<std::vector<double>, std::vector<double>>& separate_data,
                            std::vector<compound_t>& compound_data);
+void showcase_run_plots2d_maps(Plotypus::Report& report,
+                               std::vector<compound_complex_t>& compound_complex,
+                               std::array<std::vector<double>, 3>& separate_data);
 
 // ========================================================================== //
 // exposed interface
@@ -81,6 +155,8 @@ void showcase_run(Showcases selection)
 
     std::pair<std::vector<double>, std::vector<double>> separate_data;
     std::vector<compound_t>                             compound_data;
+    std::vector<compound_complex_t>                     compound_complex;
+    std::array<std::vector<double>, 3>                  separate_filed;
 
     // ---------------------------------------------------------------------- //
     // run desired showcase options; this invokes generation of data as well.
@@ -95,6 +171,13 @@ void showcase_run(Showcases selection)
         compound_data = generateCompoundData2D();
         showcase_run_plots2d (report, separate_data, compound_data);
     }
+    if (selection & Showcases::Plots_2D_maps)
+    {
+        compound_complex = generateVectorField();
+        separate_filed   = generateScalarField();
+        showcase_run_plots2d_maps(report, compound_complex, separate_filed);
+    }
+
 
     // ---------------------------------------------------------------------- //
     // write the report
@@ -153,6 +236,8 @@ void showcase_run_overlays(Plotypus::Report& report)
                     + SYMBOL_CURLY_BRACE_OPEN + "a" + SYMBOL_CURLY_BRACE_CLOSE,
                     .70, .51, true);
 }
+
+// -------------------------------------------------------------------------- //
 
 void showcase_run_plots2d(Plotypus::Report& report,
                           std::pair<std::vector<double>, std::vector<double> >& separate_data,
@@ -282,6 +367,72 @@ void showcase_run_plots2d(Plotypus::Report& report,
     try                             {auto& ill_typed_reference = sheet1.dataViewAs<DataViewDefaultCompound<double>>(2);}
     catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
     // *INDENT-ON*
+}
+
+// -------------------------------------------------------------------------- //
+
+void showcase_run_plots2d_maps(Plotypus::Report& report,
+                               std::vector<compound_complex_t>& compound_complex,
+                               std::array<std::vector<double>, 3>& separate_data)
+{
+    using namespace Plotypus;
+
+    // ---------------------------------------------------------------------- //
+    // set up some styles
+
+    auto& stylesCollection = report.stylesCollection();
+
+    // ---------------------------------------------------------------------- //
+    // separate data as before
+
+    auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
+
+    // ---------------------------------------------------------------------- //
+    // for compound data: prepare selectors
+
+    using compound_selector_t = DataSelector_t<compound_complex_t>;
+    using compound_view_t     = DataViewDefaultCompound<compound_complex_t>;
+
+    // *INDENT-OFF*
+    compound_selector_t compoundSelectorX      = [] (const compound_complex_t& data) {return data.coordinate.real();};
+    compound_selector_t compoundSelectorY      = [] (const compound_complex_t& data) {return data.coordinate.imag();};
+    compound_selector_t compoundSelectorDeltaX = [] (const compound_complex_t& data) {return data.value     .real();};
+    compound_selector_t compoundSelectorDeltaY = [] (const compound_complex_t& data) {return data.value     .imag();};
+    // *INDENT-ON*
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 1: vector field
+
+    auto& sheet1 = report.addPlotOrthogonalAxes("vector field");
+
+    sheet1.axis(AxisType::X).rangeMin = -1.5;
+    sheet1.axis(AxisType::X).rangeMax = +1.5;
+    sheet1.axis(AxisType::Y).rangeMin = -1.5;
+    sheet1.axis(AxisType::Y).rangeMax = +1.5;
+    sheet1.setAspectSquare();
+
+    sheet1.addDataViewCompound<compound_complex_t>(PlotStyle::Vectors, "vortex")
+    .setData(compound_complex)
+    .setSelector(ColumnType::X, compoundSelectorX)
+    .setSelector(ColumnType::Y, compoundSelectorY)
+    .setSelector(ColumnType::DeltaX, compoundSelectorDeltaX)
+    .setSelector(ColumnType::DeltaY, compoundSelectorDeltaY);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 2: scalar field
+
+    auto& sheet2 = report.addPlotOrthogonalAxes("scalar field");
+
+    sheet2.axis(AxisType::X).rangeMin = -1.0;
+    sheet2.axis(AxisType::X).rangeMax = +1.0;
+    sheet2.axis(AxisType::Y).rangeMin = -1.0;
+    sheet2.axis(AxisType::Y).rangeMax = +1.0;
+    sheet2.setAspectEqual();
+
+    sheet2.addDataViewSeparate(PlotStyle::Image, "sin(1/r)")
+    .setData(ColumnType::X, sepData_X)
+    .setData(ColumnType::Y, sepData_Y)
+    .setData(ColumnType::Color, sepData_Z);
 }
 
 // ========================================================================== //

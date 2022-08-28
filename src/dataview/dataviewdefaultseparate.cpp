@@ -63,12 +63,12 @@ namespace Plotypus
 
     bool DataViewDefaultSeparate::isDummy() const
     {
-        bool result = func.empty();
-        for (const auto& component : data)
+        auto isEmpty = [] (const std::span<double>& component)
         {
-            result &= component.empty();
-        }
-        return result;
+            return component.empty();
+        };
+
+        return std::ranges::all_of(data, isEmpty) && func.empty();
     }
 
     bool DataViewDefaultSeparate::isComplete() const
