@@ -52,7 +52,7 @@ namespace Plotypus
             void writeAxisLabel (std::ostream& hFile, const std::string& axisName) const;
             void writeAxisRange (std::ostream& hFile, const std::string& axisName) const;
             void writeAxisTics  (std::ostream& hFile, const std::string& axisName) const;
-            void writeAxisGrid  (std::ostream& hFile, const std::string& axisName) const;
+            void writeAxisGrid  (std::ostream& hFile, const std::string& axisName, bool off = false) const;
 
         public:
             AxisDescriptor();       //! @todo make construct undefined axis

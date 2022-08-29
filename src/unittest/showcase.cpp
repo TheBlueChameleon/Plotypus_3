@@ -335,8 +335,9 @@ void showcase_run_plots2d(Plotypus::Report& report,
     .setRangeMax(pi);
     sheet3.axis(AxisType::Y).setRangeMax(1.5);
 
-    sheet3.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::Boxes, "compound data series")
+    sheet3.addDataViewCompound<compound_t>(compound_data, PlotStyle::Boxes, "compound data series")
     .setSelector(ColumnType::X, compoundSelectorX)
+    .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::Boxwidth, compoundSelectorErrX)
     .setLineStyle(linesStyleOffset + 1);
 
@@ -349,8 +350,9 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     auto& sheet4 = report.addPlotOrthogonalAxes("filled curves");
 
-    sheet4.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::FilledCurves, "Error")
-    .setSelector(ColumnType::X,      compoundSelectorX)
+    sheet4.addDataViewCompound<compound_t>(compound_data, PlotStyle::FilledCurves, "Error")
+    .setSelector(ColumnType::X, compoundSelectorX)
+    .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
     .setOptions("lc rgb \"#AACCFF\"");
 

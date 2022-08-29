@@ -121,17 +121,20 @@ namespace Plotypus
             hFile << "set m" << axisCommand
                   << (minorTicsIntervals.has_value() ? std::to_string(minorTicsIntervals.value()) : "");
         }
-
-        hFile << std::endl;
     }
 
-    void AxisDescriptor::writeAxisGrid(std::ostream& hFile, const std::string& axisName) const
+    void AxisDescriptor::writeAxisGrid(std::ostream& hFile, const std::string& axisName, bool off) const
     {
+        if (!contains(axisName, {"x", "x2", "y", "y2", "z", "r", "cb"}))
+        {
+            return;
+        }
+
         const std::string gridCommand  = axisName + "tics ";
 
         // *INDENT-OFF*
-        if (gridMajor) {hFile << "set grid "  << axisName << gridMajorOptions.value_or("") << std::endl;}
-        if (gridMinor) {hFile << "set grid m" << axisName << gridMinorOptions.value_or("") << std::endl;}
+        if (gridMajor) {hFile << "set grid " << (off ? "no" : "") <<        gridCommand << gridMajorOptions.value_or("") << std::endl;}
+        if (gridMinor) {hFile << "set grid " << (off ? "no" : "") << "m" << gridCommand << gridMinorOptions.value_or("") << std::endl;}
         // *INDENT-ON*
     }
 
@@ -565,6 +568,8 @@ namespace Plotypus
         writeAxisRange(hFile, axisName);
         writeAxisTics (hFile, axisName);
         writeAxisGrid (hFile, axisName);
+
+        hFile << std::endl;
     }
 
     void AxisDescriptor::writeUnsetCommands(std::ostream& hFile) const
@@ -575,8 +580,8 @@ namespace Plotypus
         if (hasAxisLabel(type)) {hFile << "unset " << axisName << "label" << std::endl;}
         if (tics)               {hFile << "unset " << axisName << "tics"  << std::endl;}
         if (minorTics)          {hFile << "unset " << axisName << "mtics" << std::endl;}
-        if (gridMajor)          {hFile << "unset grid "  << axisName      << std::endl;}
-        if (gridMinor)          {hFile << "unset grid m" << axisName      << std::endl;}
+
+        writeAxisGrid (hFile, axisName, true);
         // *INDENT-ON*
     }
 }
