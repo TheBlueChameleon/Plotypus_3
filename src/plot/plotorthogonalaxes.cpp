@@ -46,10 +46,10 @@ namespace Plotypus
 
     AxisDescriptor& PlotOrthogonalAxes::axis(const AxisType axisID)
     {
-        if (!axes.contains(axisID))
-        {
-            axes[axisID] = AxisDescriptor(axisID);
-        }
+        // *INDENT-OFF*
+        if (axisID == AxisType::Undefined) {throw UnsupportedOperationError("Cannot operate on undefined axis");}
+        if (!axes.contains(axisID)) {axes[axisID] = AxisDescriptor(axisID);}
+        // *INDENT-ON*
 
         return axes[axisID];
     }

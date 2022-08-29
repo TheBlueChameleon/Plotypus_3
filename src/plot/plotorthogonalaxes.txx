@@ -25,23 +25,21 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::span<T>& data, const DataSelector_t<T>& selectorY, const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::span<T>& data, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
         dataView->setData(data);
-        dataView->setSelector(ColumnType::Y, selectorY);
 
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(T* data, const size_t N, const DataSelector_t<T>& selectorY, const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(T* data, const size_t N, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
         dataView->setData(data, N);
-        dataView->setSelector(ColumnType::Y, selectorY);
 
         return addDataViewCompound(dataView);
     }
