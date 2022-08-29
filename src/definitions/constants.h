@@ -346,6 +346,7 @@ namespace Plotypus
     constexpr auto SYMBOL_EURO                  = "{/symbol \240}";
     constexpr auto SYMBOL_INFINITY              = "{/symbol \245}";
     constexpr auto SYMBOL_DEGREE                = "{/symbol \260}";
+    //! @todo replace by enconding-safe expression
     constexpr auto SYMBOL_HBAR                  = "ħ";
 
     constexpr auto SYMBOL_CLUB                  = "{/symbol \247}";
