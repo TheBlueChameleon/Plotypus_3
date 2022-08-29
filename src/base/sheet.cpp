@@ -18,7 +18,7 @@ namespace Plotypus
 
     Sheet& Sheet::reset()
     {
-        title = "";
+        title.reset();
         defaultFont = "arial,7";
 
         customScriptBegin = "";

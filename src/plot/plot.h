@@ -11,6 +11,8 @@ namespace Plotypus
      * @brief foo bar
      *
      * @todo key descriptor (cf. p.160)
+     *
+     * @todo strings as std::optional
      */
     class Plot : public Sheet
     {

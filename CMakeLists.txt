@@ -35,6 +35,7 @@ add_library(Plotypus-lib SHARED
     src/plot/keydescriptor.h src/plot/keydescriptor.cpp
     #
     src/elements/axisdescriptor.h src/elements/axisdescriptor.cpp
+    src/elements/overlay.h src/elements/overlay.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
     src/dataview/dataviewdefault.h src/dataview/dataviewdefault.cpp
