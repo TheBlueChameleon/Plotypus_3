@@ -39,9 +39,9 @@ namespace Plotypus
             bool                            minorTics           = false;
             std::optional<size_t>           minorTicsIntervals;
 
-            bool                            gridMajor;
+            bool                            gridMajor           = false;
             std::optional<std::string>      gridMajorOptions;
-            bool                            gridMinor;
+            bool                            gridMinor           = false;
             std::optional<std::string>      gridMinorOptions;
 
             std::string generateRangeString (const std::optional<double>& min, const std::optional<double>& max) const;
