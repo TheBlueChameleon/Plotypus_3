@@ -24,16 +24,14 @@ namespace Plotypus
         customScriptBegin = "";
         customScriptEnd   = "";
 
-        datalineSeparatorTxt = "................................................................................\n";
-
         labels.clear();
 
         return *this;
     }
 
-    const std::string& Sheet::getTitle() const
+    const std::string Sheet::getTitle() const
     {
-        return title;
+        return title.value_or("");
     }
 
     Sheet& Sheet::setTitle(const std::string& newTitle)
@@ -42,9 +40,15 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Sheet::getDefaultFont() const
+    Sheet& Sheet::clearTitle()
     {
-        return defaultFont;
+        title.reset();
+        return *this;
+    }
+
+    const std::string Sheet::getDefaultFont() const
+    {
+        return defaultFont.value_or("");
     }
 
     Sheet& Sheet::setDefaultFont(const std::string& newDefaultFont)
@@ -53,9 +57,15 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Sheet::getTitleFont() const
+    Sheet& Sheet::clearDefaultFont()
     {
-        return titleFont;
+        defaultFont.reset();
+        return *this;
+    }
+
+    const std::string Sheet::getTitleFont() const
+    {
+        return titleFont.value_or("");
     }
 
     Sheet& Sheet::setTitleFont(const std::string& newTitleFont)
@@ -64,9 +74,15 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Sheet::getCustomScriptBegin() const
+    Sheet& Sheet::clearTitleFont()
     {
-        return customScriptBegin;
+        titleFont.reset();
+        return *this;
+    }
+
+    const std::string Sheet::getCustomScriptBegin() const
+    {
+        return customScriptBegin.value_or("");
     }
 
     Sheet& Sheet::setCustomScriptBegin(const std::string& newCustomScriptBegin)
@@ -75,9 +91,32 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Sheet::getCustomScriptEnd() const
+    Sheet& Sheet::clearCustomScriptBegin()
     {
-        return customScriptEnd;
+        customScriptBegin.reset();
+        return *this;
+    }
+
+    const std::string Sheet::getCustomScriptInter() const
+    {
+        return customScriptInter.value_or("");
+    }
+
+    Sheet& Sheet::setCustomScriptInter(const std::string& newCustomScriptInter)
+    {
+        customScriptInter = newCustomScriptInter;
+        return *this;
+    }
+
+    Sheet& Sheet::clearCustomScriptInter()
+    {
+        customScriptInter.reset();
+        return *this;
+    }
+
+    const std::string Sheet::getCustomScriptEnd() const
+    {
+        return customScriptEnd.value_or("");
     }
 
     Sheet& Sheet::setCustomScriptEnd(const std::string& newCustomScriptEnd)
@@ -86,14 +125,9 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Sheet::getDatalineSeparatorTxt() const
+    Sheet& Sheet::clearCustomScriptEnd()
     {
-        return datalineSeparatorTxt;
-    }
-
-    Sheet& Sheet::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
-    {
-        datalineSeparatorTxt = newDatalineSeparatorTxt;
+        customScriptEnd.reset();
         return *this;
     }
 
@@ -104,32 +138,32 @@ namespace Plotypus
         return labels.size();
     }
 
-    const std::vector<Label>& Sheet::getLabels() const
+    const std::vector<Label_deprecated>& Sheet::getLabels() const
     {
         return labels;
     }
 
-    Sheet& Sheet::setLabels(const std::vector<Label>& newLabels)
+    Sheet& Sheet::setLabels(const std::vector<Label_deprecated>& newLabels)
     {
         labels = newLabels;
         return *this;
     }
 
-    Label& Sheet::label(const size_t i)
+    Label_deprecated& Sheet::label(const size_t i)
     {
         throwIfInvalidIndex("label index", i, labels);
         return labels[i];
     }
 
-    Label& Sheet::addLabel(const Label& newLabel)
+    Label_deprecated& Sheet::addLabel(const Label_deprecated& newLabel)
     {
         labels.push_back(newLabel);
         return labels.back();
     }
 
-    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
+    Label_deprecated& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
     {
-        Label l;
+        Label_deprecated l;
 
         l.text        = text;
         l.coordinates = std::make_pair(x, y);
@@ -151,10 +185,10 @@ namespace Plotypus
 
     void Sheet::writeTxtHead(std::ostream& hFile) const
     {
-        if (title.size())
+        if (title.has_value())
         {
-            hFile << title << std::endl;
-            hFile << std::string(title.size(), '~') << std::endl;
+            hFile << title.value() << std::endl;
+            hFile << std::string(title.value().size(), '~') << std::endl;
         }
     }
 
@@ -181,20 +215,35 @@ namespace Plotypus
 
     void Sheet::writeScriptHead(std::ostream& hFile) const
     {
-        if (!customScriptBegin.empty())
+        if (customScriptBegin.has_value())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# custom setup script I" << std::endl << std::endl;
-            hFile << customScriptBegin << std::endl;
+            hFile << customScriptBegin.value() << std::endl;
             hFile << std::endl;
         }
 
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
 
-        hFile << "set font " << std::quoted(defaultFont) << std::endl;
-        hFile << "set title " << std::quoted("{/" + titleFont + " " + title + "}") << std::endl;
+        if (defaultFont.has_value())
+        {
+            hFile << "set font " << std::quoted(defaultFont.value()) << std::endl;
+        }
+
+        if (title.has_value())
+        {
+            hFile << "set title " << std::quoted("{/" + titleFont.value_or("") + " " + title.value() + "}") << std::endl;
+        }
         hFile << std::endl;
+
+        if (customScriptInter.has_value())
+        {
+            hFile << "# " << std::string(76, '-') << " #\n";
+            hFile << "# custom setup script II" << std::endl << std::endl;
+            hFile << customScriptInter.value() << std::endl;
+            hFile << std::endl;
+        }
     }
 
     void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
@@ -237,11 +286,11 @@ namespace Plotypus
 
     void Sheet::writeScriptFooter(std::ostream& hFile, const int pageNum) const
     {
-        if (!customScriptEnd.empty())
+        if (customScriptEnd.has_value())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script II" << std::endl << std::endl;
-            hFile << customScriptEnd << std::endl;
+            hFile << "# custom setup script III" << std::endl << std::endl;
+            hFile << customScriptEnd.value() << std::endl;
             hFile << std::endl;
         }
 

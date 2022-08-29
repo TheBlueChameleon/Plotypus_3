@@ -51,6 +51,8 @@ namespace Plotypus
         aspect          = "noratio";
         fill            = "solid";
 
+        datalineSeparatorTxt = "................................................................................\n";
+
         key             = true;
         parametric      = false;
 
@@ -177,6 +179,17 @@ namespace Plotypus
     Plot& Plot::setFill(const std::string& newFill)
     {
         fill = newFill;
+        return *this;
+    }
+
+    const std::string& Plot::getDatalineSeparatorTxt() const
+    {
+        return datalineSeparatorTxt;
+    }
+
+    Plot& Plot::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
+    {
+        datalineSeparatorTxt = newDatalineSeparatorTxt;
         return *this;
     }
 

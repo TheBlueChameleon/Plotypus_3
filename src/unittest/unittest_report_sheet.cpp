@@ -354,7 +354,7 @@ bool unittest_sheets_labels()
 
     auto& sheet = report.addSheet();
 
-    Plotypus::Label expectedLabel;
+    Plotypus::Label_deprecated expectedLabel;
     expectedLabel.text = "foo bar";
     expectedLabel.coordinates = {0.5, 0.5};
     expectedLabel.boxed = true;

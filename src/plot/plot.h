@@ -24,6 +24,8 @@ namespace Plotypus
             std::string aspect      = "noratio";
             std::string fill        = "solid";
 
+            std::string datalineSeparatorTxt = "................................................................................\n";
+
             bool        key         = true;
             bool        parametric  = false;
 
@@ -56,6 +58,9 @@ namespace Plotypus
             Plot&               setAspectRatio (double ratio);
             const std::string&  getFill() const;
             Plot&               setFill(const std::string& newFill);
+
+            const std::string&  getDatalineSeparatorTxt() const;
+            Plot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
             bool                getKey() const;
             Plot&               setKey(bool newKey);

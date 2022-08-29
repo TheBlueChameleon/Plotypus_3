@@ -71,7 +71,7 @@ namespace Plotypus
      * In general, empty std::string elements are ignored.
      */
 
-    struct Label
+    struct Label_deprecated
     {
         std::string                 text        = "label";
 
@@ -128,7 +128,7 @@ namespace Plotypus
          */
         std::string                 options     = "";
 
-        bool operator== (const Label&) const = default;
+        bool operator== (const Label_deprecated&) const = default;
     };
 
     //! }
