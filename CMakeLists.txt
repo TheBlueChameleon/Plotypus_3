@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_library(Plotypus-lib SHARED
     src/plotypus.h src/plotypus.cpp
     #
-    src/definitions/types.h src/definitions/types.cpp
+    src/definitions/types.h
     src/definitions/styles.h
     src/definitions/errors.h
     src/definitions/constants.h
@@ -32,6 +32,9 @@ add_library(Plotypus-lib SHARED
     src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
     src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
     src/plot/plotradial.h src/plot/plotradial.cpp
+    src/plot/keydescriptor.h src/plot/keydescriptor.cpp
+    #
+    src/elements/axisdescriptor.h src/elements/axisdescriptor.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
     src/dataview/dataviewdefault.h src/dataview/dataviewdefault.cpp

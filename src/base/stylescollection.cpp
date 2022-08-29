@@ -228,7 +228,7 @@ namespace Plotypus
     void StylesCollection::writePointStyleCode(std::ostream& hFile, const size_t i) const
     {
         // *INDENT-OFF*
-        if (i == STYLE_ID_DEFAULT) {return;}
+        if (i == OPTIONAL_SIZE_T_DEFAULT) {return;}
 
         const auto& psr = pointStyles[i];
         const int pointStyleInt = static_cast<int>(psr.form);

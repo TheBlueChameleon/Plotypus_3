@@ -46,7 +46,7 @@ namespace Plotypus
         dataViews.clear();
 
         border          = BORDERS_2D_DEFAULT;
-        borderLineStyle = STYLE_ID_DEFAULT;
+        borderLineStyle = OPTIONAL_SIZE_T_DEFAULT;
 
         aspect          = "noratio";
         fill            = "solid";

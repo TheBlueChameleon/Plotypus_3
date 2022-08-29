@@ -19,7 +19,7 @@ namespace Plotypus
             std::vector<DataView*>  dataViews;
 
             size_t      border          = BORDERS_2D_DEFAULT;
-            size_t      borderLineStyle = STYLE_ID_DEFAULT;
+            size_t      borderLineStyle = OPTIONAL_SIZE_T_DEFAULT;
 
             std::string aspect      = "noratio";
             std::string fill        = "solid";

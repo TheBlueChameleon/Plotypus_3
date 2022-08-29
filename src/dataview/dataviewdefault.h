@@ -17,8 +17,8 @@ namespace Plotypus
         protected:
             std::string func;
 
-            size_t lineStyle  = STYLE_ID_DEFAULT;
-            size_t pointStyle = STYLE_ID_DEFAULT;
+            size_t lineStyle  = OPTIONAL_SIZE_T_DEFAULT;
+            size_t pointStyle = OPTIONAL_SIZE_T_DEFAULT;
 
             columnAssignmentList_t columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
             columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};

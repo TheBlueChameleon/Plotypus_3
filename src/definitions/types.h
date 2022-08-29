@@ -55,44 +55,10 @@ namespace Plotypus
 
     // ---------------------------------------------------------------------- //
 
-    using locatedTicsLabel_t = std::pair<std::string, double>;
+
 
     // ====================================================================== //
-    /**
-     * @brief used to compactly describe an axis of a plot
-     */
 
-    struct AxisDescriptor
-    {
-        AxisType                        type;
-
-        std::optional<std::string>      labelText;
-        std::optional<std::string>      labelFont;
-        std::optional<std::string>      labelColor;
-        std::optional<std::string>      labelOptions;
-
-        double                          rangeMin            = 0.;
-        double                          rangeMax            = AXIS_AUTO_RANGE;
-        std::optional<std::string>      rangeOptions;
-
-        bool                            tics                = true;
-        double                          ticsStart           = AXIS_AUTO_RANGE;
-        double                          ticsEnd             = AXIS_AUTO_RANGE;
-        double                          ticsIncrement       = AXIS_AUTO_RANGE;
-        std::optional<std::string>      ticsFormatstring;
-        std::vector<locatedTicsLabel_t> ticsLabels;
-        bool                            ticsLogscale        = false;
-        std::optional<std::string>      ticsFont;
-        std::optional<std::string>      ticsTextColor;
-        std::optional<std::string>      ticsOptions;
-
-        bool                            minorTics           = false;
-        size_t                          minorTicsIntervals  = AXIS_AUTO_MINOR_TICS;
-
-        AxisDescriptor();
-        AxisDescriptor(const AxisType type,                           double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE);
-        AxisDescriptor(const AxisType type, const std::string& label, double rangeMin = AXIS_AUTO_RANGE, double rangeMax = AXIS_AUTO_RANGE);
-    };
 
     // ====================================================================== //
 
@@ -146,7 +112,7 @@ namespace Plotypus
          *
          * If bool boxed == false, the boxStyleID will be ignored.
          */
-        size_t                      boxStyleID  = STYLE_ID_DEFAULT;
+        size_t                      boxStyleID  = OPTIONAL_SIZE_T_DEFAULT;
         /** @brief rotation of text in degrees wrt. to horizontal */
 
         int                         rotate      = 0;

@@ -148,7 +148,7 @@ void showcase_run(Showcases selection)
     // prepare report, i.e. the primary object
 
     Plotypus::Report report = Plotypus::Report(Plotypus::FileType::Pdf);
-    report.setOutputDirectory("TestOutput");
+    report.setOutputDirectory("../TestOutput");
 
     // ---------------------------------------------------------------------- //
     // prepare some data (so they persist in memory until we write the report)
@@ -301,8 +301,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     sheet1.dataViewAs<compound_view_t>(2).setLineStyle(linesStyleOffset);
 
-    sheet1.xAxis().labelText = "abscissa";
-    sheet1.yAxis().labelText = "ordinate";
+    sheet1.axis(AxisType::X).setLabelText("abscissa");
+    sheet1.axis(AxisType::Y).setLabelText("ordinate");
 
     // ---------------------------------------------------------------------- //
     // Sheet 2: polar line plots
@@ -314,8 +314,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
     .setAspectEqual()
     .setBorder(BorderLine::Polar);
 
-    sheet2.axis(AxisType::Radial).rangeMax = 1.5;
-    sheet2.axis(AxisType::Azimuthal).rangeMax = 180;
+    sheet2.axis(AxisType::Radial).setRangeMax(1.5);
+    sheet2.axis(AxisType::Azimuthal).setRangeMax(180);
 
     sheet2.addDataViewCompound(&viewLineCompound);
     sheet2.addDataViewCompound<compound_t>("[0:pi] sin(t)", PlotStyle::Lines, "Sine Wave");
@@ -330,9 +330,10 @@ void showcase_run_plots2d(Plotypus::Report& report,
     auto& sheet3 = report.addPlotOrthogonalAxes("bar plots");
     sheet3.setAspectSquare();
 
-    sheet3.axis(AxisType::X).rangeMin = 0.;
-    sheet3.axis(AxisType::X).rangeMax = pi;
-    sheet3.axis(AxisType::Y).rangeMax = 1.5;
+    sheet3.axis(AxisType::X)
+    .setRangeMin(0)
+    .setRangeMax(pi);
+    sheet3.axis(AxisType::Y).setRangeMax(1.5);
 
     sheet3.addDataViewCompound<compound_t>(compound_data, compoundSelectorY, PlotStyle::Boxes, "compound data series")
     .setSelector(ColumnType::X, compoundSelectorX)
@@ -405,12 +406,14 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
 
     auto& sheet1 = report.addPlotOrthogonalAxes("vector field");
 
-    sheet1.axis(AxisType::X).rangeMin = -1.5;
-    sheet1.axis(AxisType::X).rangeMax = +1.5;
-    sheet1.axis(AxisType::X).labelText = SYMBOL_REAL_PART;
-    sheet1.axis(AxisType::Y).rangeMin = -1.5;
-    sheet1.axis(AxisType::Y).rangeMax = +1.5;
-    sheet1.axis(AxisType::Y).labelText = SYMBOL_IMAGINARY_PART;
+    sheet1.axis(AxisType::X)
+    .setRangeMin (-1.5)
+    .setRangeMax (+1.5)
+    .setLabelText(SYMBOL_REAL_PART);
+    sheet1.axis(AxisType::Y)
+    .setRangeMin (-1.5)
+    .setRangeMax (+1.5)
+    .setLabelText(SYMBOL_IMAGINARY_PART);
     sheet1.setAspectSquare();
 
     sheet1.addDataViewCompound<compound_complex_t>(PlotStyle::Vectors, "vortex")
@@ -425,10 +428,12 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
 
     auto& sheet2 = report.addPlotOrthogonalAxes("scalar field");
 
-    sheet2.axis(AxisType::X).rangeMin = -1.0;
-    sheet2.axis(AxisType::X).rangeMax = +1.0;
-    sheet2.axis(AxisType::Y).rangeMin = -1.0;
-    sheet2.axis(AxisType::Y).rangeMax = +1.0;
+    sheet2.axis(AxisType::X)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet2.axis(AxisType::Y)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
     sheet2.setAspectEqual();
 
     sheet2.addDataViewSeparate(PlotStyle::Image, "sin(1/r)")

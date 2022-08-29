@@ -61,13 +61,18 @@ namespace Plotypus
     bool hasAxisLabel(const AxisType axis);
 
     // ---------------------------------------------------------------------- //
-    // strings from optional parameters
+    // optional parameters handling
 
     std::string optionalStyleString     (const std::string& optionName, const size_t styleID);
     std::string optionalQuotedTextString(const std::string& optionName, const std::string& option);
     std::string optionalQuotedTextString(const std::string& optionName, const std::optional<std::string>& option);
     std::string optionalNumberString    (const std::string& optionName, const double number, bool turnOn);
     std::string optionalNumberString    (const std::string& optionName, const double number);
+
+    std::string optionalNumberAsString  (const std::optional<double>& option, const std::string& alternative);
+
+    void setOptionalDoubleOrClearIfNan   (std::optional<double>& option, double value);
+    void setOptionalSizeTOrClearIfDefault(std::optional<size_t>& option, size_t value);
 };
 
 #include "util.txx"

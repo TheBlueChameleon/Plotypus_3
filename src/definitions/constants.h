@@ -91,6 +91,8 @@ namespace Plotypus
         Z,
         Radial, Azimuthal,
         Colourbar,
+
+        Undefined
     };
 
     // ========================================================================== //
@@ -210,26 +212,18 @@ namespace Plotypus
 
     // ========================================================================== //
     /**
-     * @brief boo bar
+     * @brief convenience symbols, demarking "use default values"
      */
 
-    constexpr size_t STYLE_ID_DEFAULT = std::numeric_limits<size_t>::max();
+    constexpr double OPTIONAL_DOUBLE_DEFAULT = std::numeric_limits<double>::quiet_NaN();
+    constexpr size_t OPTIONAL_SIZE_T_DEFAULT = std::numeric_limits<size_t>::max();
 
     // ====================================================================== //
     /**
      * @brief used to assert filename valdity
-     * @todo apply CAPITAL_SNAKE_CASE
      */
 
     constexpr static auto INVALID_FILENAME_CHARS = "*~|:;<> '\"";
-
-    // ====================================================================== //
-    /**
-     * @brief convenience symbol to be used with setting data ranges
-     */
-    constexpr double AXIS_AUTO_RANGE        = std::numeric_limits<double>::quiet_NaN();
-    constexpr double AXIS_NO_AUTO_TICS      = std::numeric_limits<double>::infinity();
-    constexpr size_t AXIS_AUTO_MINOR_TICS   = std::numeric_limits<size_t>::max();
 
     // ====================================================================== //
 
@@ -315,9 +309,9 @@ namespace Plotypus
     constexpr auto SYMBOL_CAPITAL_PSI           = "{/symbol Y}";
     constexpr auto SYMBOL_CAPITAL_ZETA          = "{/symbol Z}";
 
-    constexpr auto SYMBOL_ALEPH                 = "{/symbol \300}";
-    constexpr auto SYMBOL_REAL_PART             = "{/symbol \302}";
-    constexpr auto SYMBOL_IMAGINARY_PART        = "{/symbol \301}";
+    constexpr auto SYMBOL_ALEPH                 = "{/symbol \\300}";
+    constexpr auto SYMBOL_REAL_PART             = "{/symbol \\302}";
+    constexpr auto SYMBOL_IMAGINARY_PART        = "{/symbol \\301}";
 
     constexpr auto SYMBOL_LESS_OR_EQUAL         = "{/symbol \243}";
     constexpr auto SYMBOL_GREATER_OR_EQUAL      = "{/symbol \263}";

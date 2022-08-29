@@ -511,6 +511,7 @@ namespace Plotypus
             case AxisType::Y:           return "y";
             case AxisType::Y2:          return "y2";
             case AxisType::Z:           return "z";
+            case AxisType::Undefined:   return "undefined";
         }
         // *INDENT-ON*
 
@@ -574,6 +575,7 @@ namespace Plotypus
             case AxisType::Y:           return true;
             case AxisType::Y2:          return true;
             case AxisType::Z:           return true;
+            case AxisType::Undefined:   return false;
         }
         // *INDENT-ON*
 
@@ -581,13 +583,13 @@ namespace Plotypus
     }
 
     // ---------------------------------------------------------------------- //
-    // strings from optional parameters
+    // optional parameters handling
 
     std::string optionalStyleString(const std::string& optionName, const size_t styleID)
     {
         // *INDENT-OFF*
-        if (styleID == STYLE_ID_DEFAULT)    {return "";}
-        else                                {return optionName + " " + std::to_string(styleID + 1) + " ";}
+        if (styleID == OPTIONAL_SIZE_T_DEFAULT) {return "";}
+        else                                    {return optionName + " " + std::to_string(styleID + 1) + " ";}
         // *INDENT-ON*
     }
 
@@ -625,4 +627,29 @@ namespace Plotypus
     {
         return optionalNumberString(optionName, number, number != 0.);
     }
+
+    std::string optionalNumberAsString(const std::optional<double>& option, const std::string& alternative)
+    {
+        // *INDENT-OFF*
+        if (option.has_value()) {return std::to_string(option.value());}
+        else                    {return alternative;}
+        // *INDENT-ON*
+    }
+
+    void setOptionalDoubleOrClearIfNan(std::optional<double>& option, double value)
+    {
+        // *INDENT-OFF*
+        if (std::isnan(value))  {option.reset();}
+        else                    {option = value;}
+        // *INDENT-ON*
+    }
+
+    void setOptionalSizeTOrClearIfDefault(std::optional<size_t>& option, size_t value)
+    {
+        // *INDENT-OFF*
+        if (value == OPTIONAL_SIZE_T_DEFAULT)   {option.reset();}
+        else                                    {option = value;}
+        // *INDENT-ON*
+    }
+
 };

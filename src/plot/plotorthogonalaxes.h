@@ -5,6 +5,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "../elements/axisdescriptor.h"
 #include "../dataview/dataviewdefaultcompound.h"
 
 #include "plot.h"
@@ -25,14 +26,6 @@ namespace Plotypus
             bool mode3D = false;
             bool polar  = false;
 
-            static std::string generateRangeString (double min,                   double max);
-            static std::string generateTicsSequence(double min, double increment, double max, double rangeMin, double rangeMax);
-            static std::string generateTicsList(const std::vector<locatedTicsLabel_t>& tics, bool add);
-
-            static void writeAxisLabel(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
-            static void writeAxisRange(std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
-            static void writeAxisTics (std::ostream& hFile, const std::string& axisName, const AxisDescriptor& axis);
-
         public:
             PlotOrthogonalAxes(const std::string& title);
             ~PlotOrthogonalAxes();
@@ -45,9 +38,6 @@ namespace Plotypus
             AxisDescriptor&                  axis(const AxisType axisID);
             PlotOrthogonalAxes&         clearAxes();
             PlotOrthogonalAxes&         clearAxis(const AxisType axisID);
-
-            AxisDescriptor&             xAxis();
-            AxisDescriptor&             yAxis();
 
             bool                        getMode3D() const;
             PlotOrthogonalAxes&         setMode3D(bool newMode3D);
@@ -84,8 +74,6 @@ namespace Plotypus
             virtual void writeScriptHead    (std::ostream& hFile) const;
             virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
             virtual void writeScriptFooter  (std::ostream& hFile, int pageNum) const;
-
-            static void writeAxisDescriptor(std::ostream& hFile, const AxisDescriptor& axis);
     };
 }
 
