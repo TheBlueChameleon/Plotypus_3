@@ -313,26 +313,26 @@ namespace Plotypus
     constexpr auto SYMBOL_REAL_PART             = "{/symbol \\302}";
     constexpr auto SYMBOL_IMAGINARY_PART        = "{/symbol \\301}";
 
-    constexpr auto SYMBOL_LESS_OR_EQUAL         = "{/symbol \243}";
-    constexpr auto SYMBOL_GREATER_OR_EQUAL      = "{/symbol \263}";
-    constexpr auto SYMBOL_APPROXIMATELY         = "{/symbol \273}";
-    constexpr auto SYMBOL_NOT_EQUAL             = "{/symbol \271}";
-    constexpr auto SYMBOL_PROPORTIONAL          = "{/symbol \265}";
-    constexpr auto SYMBOL_PLUSMINUS             = "{/symbol \261}";
-    constexpr auto SYMBOL_SQUAREROOT            = "{/symbol \326}";
+    constexpr auto SYMBOL_LESS_OR_EQUAL         = "{/symbol \\243}";
+    constexpr auto SYMBOL_GREATER_OR_EQUAL      = "{/symbol \\263}";
+    constexpr auto SYMBOL_APPROXIMATELY         = "{/symbol \\273}";
+    constexpr auto SYMBOL_NOT_EQUAL             = "{/symbol \\271}";
+    constexpr auto SYMBOL_PROPORTIONAL          = "{/symbol \\265}";
+    constexpr auto SYMBOL_PLUSMINUS             = "{/symbol \\261}";
+    constexpr auto SYMBOL_SQUAREROOT            = "{/symbol \\326}";
     constexpr auto SYMBOL_DOT                   = "·";
-    constexpr auto SYMBOL_TIMES                 = "{/symbol \264}";
-    constexpr auto SYMBOL_DIVISION              = "{/symbol \270}";
-    constexpr auto SYMBOL_PARTIAL_DERIVATIVE    = "{/symbol \266}";
-    constexpr auto SYMBOL_INTEGRAL              = "{/symbol \362}";
-    constexpr auto SYMBOL_NABLA                 = "{/symbol \321}";
-    constexpr auto SYMBOL_OTIMES                = "{/symbol \304}";
-    constexpr auto SYMBOL_OPLUS                 = "{/symbol \305}";
+    constexpr auto SYMBOL_TIMES                 = "{/symbol \\264}";
+    constexpr auto SYMBOL_DIVISION              = "{/symbol \\270}";
+    constexpr auto SYMBOL_PARTIAL_DERIVATIVE    = "{/symbol \\266}";
+    constexpr auto SYMBOL_INTEGRAL              = "{/symbol \\362}";
+    constexpr auto SYMBOL_NABLA                 = "{/symbol \\321}";
+    constexpr auto SYMBOL_OTIMES                = "{/symbol \\304}";
+    constexpr auto SYMBOL_OPLUS                 = "{/symbol \\305}";
 
-    constexpr auto SYMBOL_ELEMENT               = "{/symbol \316}";
-    constexpr auto SYMBOL_NOT_ELEMENT           = "{/symbol \317}";
-    constexpr auto SYMBOL_FORALL                = "{/symbol \042}";
-    constexpr auto SYMBOL_EXISTS                = "{/symbol \044}";
+    constexpr auto SYMBOL_ELEMENT               = "{/symbol \\316}";
+    constexpr auto SYMBOL_NOT_ELEMENT           = "{/symbol \\317}";
+    constexpr auto SYMBOL_FORALL                = "{/symbol \\042}";
+    constexpr auto SYMBOL_EXISTS                = "{/symbol \\044}";
 
     constexpr auto SYMBOL_AT                    = "{\\100}";
     constexpr auto SYMBOL_FORWARD_SLASH         = "{\\057}";
@@ -343,22 +343,22 @@ namespace Plotypus
     constexpr auto SYMBOL_TILDE                 = "{\\176}";
     constexpr auto SYMBOL_CARET                 = "{\\136}";
     constexpr auto SYMBOL_UNDERSCORE            = "{\\137}";
-    constexpr auto SYMBOL_EURO                  = "{/symbol \240}";
-    constexpr auto SYMBOL_INFINITY              = "{/symbol \245}";
-    constexpr auto SYMBOL_DEGREE                = "{/symbol \260}";
+    constexpr auto SYMBOL_EURO                  = "{/symbol \\240}";
+    constexpr auto SYMBOL_INFINITY              = "{/symbol \\245}";
+    constexpr auto SYMBOL_DEGREE                = "{/symbol \\260}";
     //! @todo replace by enconding-safe expression
     constexpr auto SYMBOL_HBAR                  = "ħ";
 
-    constexpr auto SYMBOL_CLUB                  = "{/symbol \247}";
-    constexpr auto SYMBOL_SPADES                = "{/symbol \250}";
-    constexpr auto SYMBOL_HEARTS                = "{/symbol \241}";
-    constexpr auto SYMBOL_DIAMONDS              = "{/symbol \242}";
+    constexpr auto SYMBOL_CLUB                  = "{/symbol \\247}";
+    constexpr auto SYMBOL_SPADES                = "{/symbol \\250}";
+    constexpr auto SYMBOL_HEARTS                = "{/symbol \\241}";
+    constexpr auto SYMBOL_DIAMONDS              = "{/symbol \\242}";
 
-    constexpr auto SYMBOL_ARROW_LEFTRIGHT       = "{/symbol \253}";
-    constexpr auto SYMBOL_ARROW_LEFT            = "{/symbol \254}";
-    constexpr auto SYMBOL_ARROW_UP              = "{/symbol \255}";
-    constexpr auto SYMBOL_ARROW_RIGHT           = "{/symbol \256}";
-    constexpr auto SYMBOL_ARROW_DOWN            = "{/symbol \257}";
+    constexpr auto SYMBOL_ARROW_LEFTRIGHT       = "{/symbol \\253}";
+    constexpr auto SYMBOL_ARROW_LEFT            = "{/symbol \\254}";
+    constexpr auto SYMBOL_ARROW_UP              = "{/symbol \\255}";
+    constexpr auto SYMBOL_ARROW_RIGHT           = "{/symbol \\256}";
+    constexpr auto SYMBOL_ARROW_DOWN            = "{/symbol \\257}";
 
     constexpr auto SYMBOL_CHECKED               = "{/zapfdingbats 3}";
     constexpr auto SYMBOL_CROSSED               = "{/zapfdingbats 7}";
