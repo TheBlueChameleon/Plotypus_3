@@ -42,7 +42,7 @@ namespace Plotypus
 
         bool firstValue = true;
 
-        hFile << "using ";
+        hFile << " using ";
         for (auto i = 0u; i < columnAssignments.size(); ++i)
         {
             if (columnAssignments[i] != COLUMN_UNUSED)
@@ -55,7 +55,6 @@ namespace Plotypus
                 hFile << generateColumnFormat(columnFormats[i], columnAssignments[i], columnAssignments);
             }
         }
-        hFile << " ";
     }
 
     size_t DataViewDefault::getColumnIDOrThrow(const ColumnType columnType)
@@ -355,9 +354,9 @@ namespace Plotypus
         }
         writeUsingSpecification(hFile);
 
-        hFile << optionalQuotedStringArgument(" title", title);
+        hFile << optionalQuotedStringArgument("title", title);
 
-        hFile << " with " << plotStyle << " ";
+        hFile << " with " << plotStyle;
 
         hFile << optionalSizeTArgument("linestyle", lineStyle);
         stylesColloction.writePointStyleCode(hFile, pointStyle);
@@ -366,7 +365,7 @@ namespace Plotypus
         if (variablePointType ) {hFile << " pointtype variable";}
         if (variablePointColor) {hFile << " linecolor variable";}
 
-        if (!options.empty()) {hFile << options;}
+        if (!options.empty()) {hFile << " " << options;}
         // *INDENT-ON*
     }
 }

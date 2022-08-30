@@ -101,8 +101,8 @@ namespace Plotypus
     Label& Label::setBoxStyleID(size_t newBoxStyleID)
     {
         // *INDENT-OFF*
-        if (boxStyleID != OPTIONAL_SIZE_T_DEFAULT) {boxStyleID = newBoxStyleID;}
-        else                                       {boxStyleID.reset();}
+        if (newBoxStyleID != OPTIONAL_SIZE_T_DEFAULT)   {boxStyleID = newBoxStyleID;}
+        else                                            {boxStyleID.reset();}
         // *INDENT-ON*
 
         return *this;

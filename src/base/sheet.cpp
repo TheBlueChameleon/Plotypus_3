@@ -227,7 +227,10 @@ namespace Plotypus
             hFile << "set title " << std::quoted("{/" + titleFont.value_or("") + " " + title.value() + "}") << std::endl;
         }
         hFile << std::endl;
+    }
 
+    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    {
         if (customScriptInter.has_value())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
@@ -235,10 +238,7 @@ namespace Plotypus
             hFile << customScriptInter.value() << std::endl;
             hFile << std::endl;
         }
-    }
 
-    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
-    {
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# plot commands" << std::endl << std::endl;
     }
