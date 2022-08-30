@@ -7,13 +7,13 @@ namespace Plotypus
     {}
 
     Label::Label(const std::string& text, double x, double y, bool boxed, size_t boxStyleID) :
-        Overlay({x, y, std::optional<double>()}), boxed(boxed)
+        Overlay({x, y, std::optional<double>()}), text(text), boxed(boxed)
     {
         setBoxStyleID(boxStyleID);
     }
 
     Label::Label(const std::string& text, double x, double y, double z, bool boxed, size_t boxStyleID) :
-        Overlay({x, y, z}), boxed(boxed)
+        Overlay({x, y, z}), text(text), boxed(boxed)
     {
         setBoxStyleID(boxStyleID);
     }
@@ -147,7 +147,7 @@ namespace Plotypus
 
         if (position.has_value())
         {
-            hFile << " ";
+            hFile << " at ";
             writePosition(hFile);
         }
 

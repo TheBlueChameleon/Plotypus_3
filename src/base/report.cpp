@@ -310,7 +310,7 @@ namespace Plotypus
         {
             sheet->writeTxtHead  (hFile);
             sheet->writeTxtData  (hFile);
-            sheet->writeTxtLabels(hFile);
+            sheet->writeTxtOverlays(hFile);
             sheet->writeTxtFooter(hFile, i);
 
             if (i != sheets.size())
@@ -353,7 +353,7 @@ namespace Plotypus
             else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead  (hFile);
-            sheet->writeScriptLabels(hFile);
+            sheet->writeScriptOverlays(hFile);
             sheet->writeScriptData  (hFile, m_stylesCollection);
             sheet->writeScriptFooter(hFile, i);
             ++i;

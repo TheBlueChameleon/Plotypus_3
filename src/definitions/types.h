@@ -31,6 +31,13 @@ namespace Plotypus
     template <typename T>
     concept DataViewLike = std::is_base_of<DataView, T>::value;
 
+    /**
+     * @brief foo bar
+     */
+    class Overlay;
+    template <typename T>
+    concept OverlayLike = std::is_base_of<Overlay, T>::value;
+
     //! @addtogroup Plotypus_Definitions
     //! @{
 

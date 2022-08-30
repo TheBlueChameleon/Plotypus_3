@@ -57,6 +57,8 @@ namespace Plotypus
 
             virtual void writeTxt   (std::ostream& hFile) const;
             virtual void writeScript(std::ostream& hFile) const;
+
+            bool operator== (const Label&) const = default;
     };
 }
 

@@ -211,22 +211,22 @@ void showcase_run_overlays(Plotypus::Report& report)
     sheet1.addLabel("explicitly boxed", .50, .10, true, boxStyleOffset);
 
 
-    sheet1.addLabel("normal text", .10, .20).textcolor = "blue";
+    sheet1.addLabel("normal text", .10, .20).setTextcolor("blue");
     sheet1.addLabel("abcdefghijklmnopqrstuvwxyz01234567890  ", .10, .26, true);
     sheet1.addLabel("ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()= ", .10, .32, true);
 
-    sheet1.addLabel("greek font", .10, .45).textcolor = "blue";
+    sheet1.addLabel("greek font", .10, .45).setTextcolor("blue");
     sheet1.addLabel("{/symbol abcdefghijklmnopqrstuvwxyz01234567890} ", .10, .51, true);
     sheet1.addLabel("{/symbol ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()=}", .10, .57, true);
 
-    sheet1.addLabel("dingbats font", .10, .70).textcolor = "blue";
+    sheet1.addLabel("dingbats font", .10, .70).setTextcolor("blue");
     sheet1.addLabel("{/zapfdingbats abcdefghijklmnopqrstuvwxyz01234567890}", .10, .76, true);
     sheet1.addLabel("{/zapfdingbats ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()=}", .10, .82, true);
 
-    sheet1.addLabel("some special symbols", .70, .20).textcolor = "blue";
+    sheet1.addLabel("some special symbols", .70, .20).setTextcolor("blue");
     sheet1.addLabel(""s + SYMBOL_FORALL + SYMBOL_ALPHA + SYMBOL_DOT + "5" + SYMBOL_HBAR, .70, .26, true);
 
-    sheet1.addLabel("implicitly escaping symbols", .70, .45).textcolor = "blue";
+    sheet1.addLabel("implicitly escaping symbols", .70, .45).setTextcolor("blue");
     sheet1.addLabel(""s
                     + SYMBOL_TILDE + "a"
                     + SYMBOL_FORWARD_SLASH + "a"

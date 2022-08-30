@@ -9,6 +9,11 @@ namespace Plotypus
         type(SheetType::Sheet)
     {}
 
+    Sheet::~Sheet()
+    {
+        clearOverlays();
+    }
+
     // ====================================================================== //
 
     SheetType Sheet::getType() const
@@ -24,7 +29,7 @@ namespace Plotypus
         customScriptBegin = "";
         customScriptEnd   = "";
 
-        labels.clear();
+        clearOverlays();
 
         return *this;
     }
@@ -133,49 +138,35 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    size_t Sheet::getLabelCount() const
+    size_t Sheet::getOverlayCount() const
     {
-        return labels.size();
+        return overlays.size();
     }
 
-    const std::vector<Label_deprecated>& Sheet::getLabels() const
+    Overlay& Sheet::overlay(const size_t i)
     {
-        return labels;
+        throwIfInvalidIndex("label index", i, overlays);
+        return *overlays[i];
     }
 
-    Sheet& Sheet::setLabels(const std::vector<Label_deprecated>& newLabels)
+    void Sheet::clearOverlays()
     {
-        labels = newLabels;
-        return *this;
+        for (auto overlay : overlays)
+        {
+            delete overlay;
+        }
+        overlays.clear();
     }
 
-    Label_deprecated& Sheet::label(const size_t i)
+    Overlay& Sheet::addOverlay(Overlay* newOverlay)
     {
-        throwIfInvalidIndex("label index", i, labels);
-        return labels[i];
+        overlays.push_back(newOverlay);
+        return *overlays.back();
     }
 
-    Label_deprecated& Sheet::addLabel(const Label_deprecated& newLabel)
+    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
     {
-        labels.push_back(newLabel);
-        return labels.back();
-    }
-
-    Label_deprecated& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
-    {
-        Label_deprecated l;
-
-        l.text        = text;
-        l.coordinates = std::make_pair(x, y);
-        l.boxed       = boxed;
-        l.boxStyleID  = boxStyleID;
-
-        return addLabel(l);
-    }
-
-    void Sheet::clearLabels()
-    {
-        labels.clear();
+        return reinterpret_cast<Label&>(addOverlay( new Label(text, x, y, boxed, boxStyleID) ));
     }
 
     // ====================================================================== //
@@ -194,11 +185,11 @@ namespace Plotypus
 
     void Sheet::writeTxtData(std::ostream& hFile) const {}
 
-    void Sheet::writeTxtLabels(std::ostream& hFile) const
+    void Sheet::writeTxtOverlays(std::ostream& hFile) const
     {
-        for (const auto& label : labels)
+        for (const auto& overlay : overlays)
         {
-            hFile << label.text << std::endl;
+            overlay->writeTxt(hFile);
         }
     }
 
@@ -252,33 +243,16 @@ namespace Plotypus
         hFile << "# plot commands" << std::endl << std::endl;
     }
 
-    void Sheet::writeScriptLabels(std::ostream& hFile) const
+    void Sheet::writeScriptOverlays(std::ostream& hFile) const
     {
-        if (labels.size())
+        if (overlays.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# overlays" << std::endl << std::endl;
 
-            for (auto& label : labels)
+            for (auto& overlay : overlays)
             {
-                /* cf. gnuplot 5.4 documentation, p. 164 */
-
-                hFile << "set label ";
-                hFile << std::quoted(label.text) << " ";
-                hFile << "at " << (label.screenCS ? "screen " : "") <<  label.coordinates.first << ", " << label.coordinates.second << " ";
-                hFile << "front ";
-
-                hFile << (label.alignment.size() ? label.alignment + " " : ""s);
-                hFile << optionalNumberArgument("rotate by", label.rotate);
-
-                hFile << optionalQuotedStringArgument("font", label.font);
-                hFile << optionalQuotedStringArgument("textcolor", label.textcolor);
-                if (label.boxed)
-                {
-                    hFile << "boxed " << optionalSizeTArgument("bs", label.boxStyleID);
-                }
-                hFile << label.options;
-                hFile << std::endl;
+                overlay->writeScript(hFile);
             }
             hFile << std::endl;
         }

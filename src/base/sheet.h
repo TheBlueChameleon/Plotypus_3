@@ -6,6 +6,9 @@
 
 #include "../definitions/types.h"
 
+#include "../elements/overlay.h"
+#include "../elements/label.h"
+
 namespace Plotypus
 {
     /**
@@ -28,10 +31,11 @@ namespace Plotypus
             std::optional<std::string> customScriptInter;
             std::optional<std::string> customScriptEnd;
 
-            std::vector<Label_deprecated> labels;
+            std::vector<Overlay*> overlays;
 
         public:
             Sheet(const std::string& title);
+            ~Sheet();
 
             SheetType getType() const;
 
@@ -61,13 +65,16 @@ namespace Plotypus
             Sheet&                      setCustomScriptEnd(const std::string& newCustomScriptEnd);
             Sheet&                      clearCustomScriptEnd();
 
-            size_t                      getLabelCount() const;
-            const std::vector<Label_deprecated>&   getLabels() const;
-            Sheet&                      setLabels(const std::vector<Label_deprecated>& newLabels);
-            Label_deprecated&                         label (const size_t i);
-            Label_deprecated&                      addLabel (const Label_deprecated& newLabel);
-            Label_deprecated&                      addLabel (const std::string& text, double x, double y, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
-            void                        clearLabels();
+            size_t                      getOverlayCount() const;
+
+            Overlay&                    overlay (const size_t i);
+            template<OverlayLike T>
+            T&                          overlayAs(const size_t i);
+
+            Overlay&                    addOverlay (Overlay* newOverlay);
+            void                        clearOverlays();
+
+            Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
 
             // -------------------------------------------------------------- //
             // writers
@@ -76,16 +83,17 @@ namespace Plotypus
 
             virtual void writeTxtHead       (std::ostream& hFile) const;
             virtual void writeTxtData       (std::ostream& hFile) const;
-            virtual void writeTxtLabels     (std::ostream& hFile) const;
+            virtual void writeTxtOverlays   (std::ostream& hFile) const;
             virtual void writeTxtFooter     (std::ostream& hFile, const int pageNum) const;
 
             virtual void writeDatData() const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
             virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
-            virtual void writeScriptLabels  (std::ostream& hFile) const;
+            virtual void writeScriptOverlays(std::ostream& hFile) const;
             virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };
 }
 
+#include "sheet.txx"
 #endif // SHEET_H
