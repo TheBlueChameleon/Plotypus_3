@@ -656,8 +656,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (ps) {
-            case PositionSystem::First:     return "first";
-            case PositionSystem::Second:    return "second";
+            case PositionSystem::Default:   return "";
             case PositionSystem::Polar:     return "polar";
             case PositionSystem::Graph:     return "graph";
             case PositionSystem::Screen:    return "screen";

@@ -13,7 +13,7 @@ namespace Plotypus
             size_t                              tag;
 
             std::optional<OverlayPosition_t>    position;
-            std::optional<PositionSystem>       positionSystem;
+            PositionSystem                      positionSystem = PositionSystem::Default;
 
             // front/back
 
@@ -23,6 +23,8 @@ namespace Plotypus
 
         public:
             Overlay();
+
+            Overlay&            reset();
 
             size_t              getTag() const;
 
@@ -34,7 +36,6 @@ namespace Plotypus
 
             PositionSystem      getPositionSystem() const;
             Overlay&            setPositionSystem(const PositionSystem newPositionSystem);
-            Overlay&            clearPositionSystem();
 
             std::string         getOptions() const;
             Overlay&            setOptions(const std::string& newOptions);

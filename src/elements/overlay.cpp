@@ -8,21 +8,16 @@ namespace Plotypus
     {
         if (position.has_value())
         {
-            const std::string systemPrefix = positionSystem.has_value() ?
-                                             getPositionSystemName(positionSystem.value()) + " " :
-                                             "";
-
             const auto& posValues = position.value();
             const double x = std::get<0>(posValues);
             const double y = std::get<1>(posValues);
             const auto&  z = std::get<2>(posValues);
 
-            hFile << systemPrefix << x << ", ";
-            hFile << systemPrefix << y;
+            hFile << getPositionSystemName(positionSystem);
+            hFile << x << ", " << y;
             if (z.has_value())
             {
-                hFile << ", ";
-                hFile << systemPrefix << z.value() << " ";
+                hFile << ", " << z.value();
             }
         }
     }
@@ -32,6 +27,15 @@ namespace Plotypus
     Overlay::Overlay()
     {
         tag = ++lastTag;
+    }
+
+    Overlay& Overlay::reset()
+    {
+        position.reset();
+        positionSystem = PositionSystem::Default;
+        options.reset();
+
+        return *this;
     }
 
     // ====================================================================== //
@@ -54,33 +58,13 @@ namespace Plotypus
 
     Overlay& Overlay::setPosition(const double x, const double y)
     {
-        if (position.has_value())
-        {
-            auto& posRef = position.value();
-            std::get<0>(posRef) = x;
-            std::get<1>(posRef) = y;
-        }
-        else
-        {
-            position = {x, y, std::optional<double>()};
-        }
+        position = {x, y, std::optional<double>()};
         return *this;
     }
 
     Overlay& Overlay::setPosition(const double x, const double y, double z)
     {
-        if (position.has_value())
-        {
-            auto& posRef = position.value();
-            std::get<0>(posRef) = x;
-            std::get<1>(posRef) = y;
-            std::get<2>(posRef) = z;
-        }
-        else
-        {
-            position = {x, y, z};
-        }
-
+        position = {x, y, z};
         return *this;
     }
 
@@ -92,18 +76,12 @@ namespace Plotypus
 
     PositionSystem Overlay::getPositionSystem() const
     {
-        return positionSystem.value_or(PositionSystem::First);
+        return positionSystem;
     }
 
     Overlay& Overlay::setPositionSystem(const PositionSystem newPositionSystem)
     {
         positionSystem = newPositionSystem;
-        return *this;
-    }
-
-    Overlay& Overlay::clearPositionSystem()
-    {
-        positionSystem.reset();
         return *this;
     }
 

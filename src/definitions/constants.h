@@ -30,14 +30,12 @@ namespace Plotypus
 
     enum class LengthUnit
     {
-        Inch,
-        Centimeter,
+        Inch, Centimeter,
     };
 
     enum class LineEnds
     {
-        Rounded,
-        Butt,
+        Rounded, Butt,
     };
 
     // ====================================================================== //
@@ -48,7 +46,7 @@ namespace Plotypus
      */
     enum class PositionSystem
     {
-        First, Second, Polar, Graph, Screen, Character
+        Default, Polar, Graph, Screen, Character
     };
 
     // ---------------------------------------------------------------------- //
