@@ -652,4 +652,18 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
+    std::string getPositionSystemName(const PositionSystem ps)
+    {
+        // *INDENT-OFF*
+        switch (ps) {
+            case PositionSystem::First:     return "first";
+            case PositionSystem::Second:    return "second";
+            case PositionSystem::Polar:     return "polar";
+            case PositionSystem::Graph:     return "graph";
+            case PositionSystem::Screen:    return "screen";
+            case PositionSystem::Character: return "character";
+        }
+        // *INDENT-ON*
+    }
+
 };

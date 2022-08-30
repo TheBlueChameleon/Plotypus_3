@@ -15,6 +15,8 @@ namespace Plotypus
     //! {
 
     // ====================================================================== //
+    // concepts
+
     /**
      * @brief foo bar
      */
@@ -36,6 +38,8 @@ namespace Plotypus
     concept UnaryPredicate = std::predicate<T, U>; // T(U) -> bool.
 
     // ====================================================================== //
+    // selectors and column mechanics
+
     /**
      * @brief data selector: takes an object of type T and extracts the
      *  plottable quantity of type double
@@ -53,12 +57,11 @@ namespace Plotypus
     using columnTypeList_t          = std::array<ColumnType, 6>;
     using columnFormatList_t        = std::array<std::string, 6>;
 
-    // ---------------------------------------------------------------------- //
-
-
-
     // ====================================================================== //
+    // overlays
 
+    using OverlayPosition_t = std::tuple<double, double, std::optional<double>>;
+    constexpr OverlayPosition_t POSITION_ORIGIN = {0, 0, std::optional<double>()};
 
     // ====================================================================== //
 

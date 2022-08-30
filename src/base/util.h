@@ -55,6 +55,7 @@ namespace Plotypus
     std::string getColumnIDName(const ColumnType columnType);
     std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
+    std::string getPositionSystemName(const PositionSystem ps);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 

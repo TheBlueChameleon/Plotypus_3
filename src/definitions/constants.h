@@ -7,6 +7,8 @@ namespace Plotypus
 //! @{
 
     // ====================================================================== //
+    // TerminalInfoProvider
+
     /**
      * @brief specifies script output data type
      */
@@ -39,6 +41,45 @@ namespace Plotypus
     };
 
     // ====================================================================== //
+    // Overlays
+
+    /**
+     * @brief foo bar
+     */
+    enum class PositionSystem
+    {
+        First, Second, Polar, Graph, Screen, Character
+    };
+
+    // ---------------------------------------------------------------------- //
+    /**
+     * @brief Sheet element: Point Style (used with plots)
+     */
+    enum class PointForm
+    {
+        Point,
+        Plus,
+        Cross,
+        Asterisk,
+        Box,
+        FilledBox,
+        Circle,
+        FilledCircle,
+        TriangleUp,
+        FilledTriangleUp,
+        TriangleDown,
+        FilledTriangleDown,
+        Diamond,
+        FilledDiamond,
+        Pentagon,
+        FilledPentagon,
+        None = -1,
+        Custom = -2
+    };
+
+    // ====================================================================== //
+    // Sheet
+
     /**
      * @brief internally used specifyer of data format
      */
@@ -57,71 +98,9 @@ namespace Plotypus
         Multiplot
     };
 
-    // ====================================================================== //
-    /**
-     * @brief foo bar
-     */
-    enum class ColumnType
-    {
-        Column1,
-        Column2,
-        Column3,
-        Column4,
-        Column5,
-        Column6,
-
-        X, Y, Z,
-        DeltaX, DeltaY, DeltaZ,
-        XLow, XHigh, YLow, YHigh,
-        Pointsize, Pointtype, Color,
-
-        Boxwidth,
-
-        Length, Angle
-    };
-
-    // ====================================================================== //
-    /**
-     * @brief foo bar
-     */
-    enum class AxisType
-    {
-        X, X2,
-        Y, Y2,
-        Z,
-        Radial, Azimuthal,
-        Colourbar,
-
-        Undefined
-    };
-
     // ========================================================================== //
-    /**
-     * @brief Sheet border lines
-     */
-    enum BorderLine
-    {
-        Bottom = 1,
-        Left = 2,
-        Top = 4,
-        Right = 8,
-        Polar = 4096,
+    // Plot
 
-        BottomLeftFront = 1,
-        BottomLeftBack = 2,
-        BottomRightFront = 4,
-        BottomRightBack = 8,
-        LeftVertial = 16,
-        BackVertical = 32,
-        RightVertical = 64,
-        FrontVertical = 128,
-        TopLeftBack = 256,
-        TopRightBack = 512,
-        TopLeftFront = 1024,
-        TopRightFront = 2048
-    };
-
-    // ========================================================================== //
     /**
      * @brief Sheet element: Plot Styles
      */
@@ -184,30 +163,74 @@ namespace Plotypus
         Custom
     };
 
-    // ========================================================================== //
+    // ====================================================================== //
+    // PlotOrthogonalAxes
+
     /**
-     * @brief Sheet element: Point Style (used with plots)
+     * @brief Sheet border lines
      */
-    enum class PointForm
+    enum BorderLine
     {
-        Point,
-        Plus,
-        Cross,
-        Asterisk,
-        Box,
-        FilledBox,
-        Circle,
-        FilledCircle,
-        TriangleUp,
-        FilledTriangleUp,
-        TriangleDown,
-        FilledTriangleDown,
-        Diamond,
-        FilledDiamond,
-        Pentagon,
-        FilledPentagon,
-        None = -1,
-        Custom = -2
+        Bottom = 1,
+        Left = 2,
+        Top = 4,
+        Right = 8,
+        Polar = 4096,
+
+        BottomLeftFront = 1,
+        BottomLeftBack = 2,
+        BottomRightFront = 4,
+        BottomRightBack = 8,
+        LeftVertial = 16,
+        BackVertical = 32,
+        RightVertical = 64,
+        FrontVertical = 128,
+        TopLeftBack = 256,
+        TopRightBack = 512,
+        TopLeftFront = 1024,
+        TopRightFront = 2048
+    };
+
+    // ====================================================================== //
+    // AxisDescriptor
+
+    /**
+     * @brief foo bar
+     */
+    enum class AxisType
+    {
+        X, X2,
+        Y, Y2,
+        Z,
+        Radial, Azimuthal,
+        Colourbar,
+
+        Undefined
+    };
+
+    // ====================================================================== //
+    // Columns
+
+    /**
+     * @brief foo bar
+     */
+    enum class ColumnType
+    {
+        Column1,
+        Column2,
+        Column3,
+        Column4,
+        Column5,
+        Column6,
+
+        X, Y, Z,
+        DeltaX, DeltaY, DeltaZ,
+        XLow, XHigh, YLow, YHigh,
+        Pointsize, Pointtype, Color,
+
+        Boxwidth,
+
+        Length, Angle
     };
 
     // ========================================================================== //
