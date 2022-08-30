@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "../base/sheet.h"
+#include "../elements/keydescriptor.h"
 
 namespace Plotypus
 {
@@ -21,7 +22,7 @@ namespace Plotypus
             PlotStyleFamily         plotStyleFamily = PlotStyleFamily::Undefined;
             std::vector<DataView*>  dataViews;
 
-            std::optional<size_t>   border;
+            size_t                  border = BORDERS_DEFAULT;
             std::optional<size_t>   borderLineStyle;
 
             std::string aspect      = "noratio";
@@ -29,7 +30,7 @@ namespace Plotypus
 
             std::string datalineSeparatorTxt = "................................................................................\n";
 
-            bool        key         = true;
+            KeyDescriptor m_key;
             bool        parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
@@ -50,7 +51,6 @@ namespace Plotypus
 
             size_t              getBorder() const;
             Plot&               setBorder(size_t newBorder);
-            Plot&               clearBorder();
 
             size_t              getBorderLineStyle() const;
             Plot&               setBorderLineStyle(size_t newBorderLineStyle);
@@ -68,8 +68,8 @@ namespace Plotypus
             const std::string&  getDatalineSeparatorTxt() const;
             Plot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
-            bool                getKey() const;
-            Plot&               setKey(bool newKey);
+            KeyDescriptor&      key();
+
             bool                getParametric() const;
             Plot&               setParametric(bool newParametric);
 

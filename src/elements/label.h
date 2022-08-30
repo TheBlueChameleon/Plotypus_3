@@ -15,7 +15,7 @@ namespace Plotypus
 
             std::optional<std::string>          font;
             std::optional<std::string>          textcolor;
-            std::optional<HorizontalAlignment>  alignment;
+            HorizontalAlignment                 alignment = HorizontalAlignment::Default;
 
             bool                                boxed = false;
             std::optional<size_t>               boxStyleID;
@@ -26,6 +26,8 @@ namespace Plotypus
             Label();
             Label(const std::string& text, double x, double y,           bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
             Label(const std::string& text, double x, double y, double z, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
+
+            Label&                  reset();
 
             virtual Label&          setLayer(const Layer newLayer);
 
@@ -42,7 +44,6 @@ namespace Plotypus
 
             HorizontalAlignment     getAlignment() const;
             Label&                  setAlignment(const HorizontalAlignment newHorizontalAlignment);
-            Label&                  clearAlignment();
 
             bool                    getBoxed() const;
             Label&                  setBoxed(bool newBoxed);

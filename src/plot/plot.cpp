@@ -45,7 +45,7 @@ namespace Plotypus
         }
         dataViews.clear();
 
-        border.reset();
+        border = BORDERS_DEFAULT;
         borderLineStyle.reset();
 
         aspect          = "noratio";
@@ -53,7 +53,7 @@ namespace Plotypus
 
         datalineSeparatorTxt = "................................................................................\n";
 
-        key             = true;
+        m_key.reset();
         parametric      = false;
 
         return *this;
@@ -94,18 +94,12 @@ namespace Plotypus
 
     size_t Plot::getBorder() const
     {
-        return border.value_or(BORDERS_2D_DEFAULT);
+        return border;
     }
 
     Plot& Plot::setBorder(size_t newBorder)
     {
         border = newBorder;
-        return *this;
-    }
-
-    Plot& Plot::clearBorder()
-    {
-        border.reset();
         return *this;
     }
 
@@ -126,15 +120,9 @@ namespace Plotypus
         return *this;
     }
 
-    bool Plot::getKey() const
+    KeyDescriptor& Plot::key()
     {
-        return key;
-    }
-
-    Plot& Plot::setKey(bool newKey)
-    {
-        key = newKey;
-        return *this;
+        return m_key;
     }
 
     bool Plot::getParametric() const
@@ -231,15 +219,14 @@ namespace Plotypus
         if (!aspect.empty()) {hFile << "set size " << aspect << std::endl;}
         if (!fill.  empty()) {hFile << "set style fill " << fill << std::endl;}
 
-        if (border.has_value()) {
-            if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
-            else                        {hFile <<   "set border " << border.value();
-                                         hFile << optionalSizeTArgument("linestyle", borderLineStyle);
-                                         hFile << std::endl;}
-        }
+
+        if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
+        else                        {hFile <<   "set border " << border;
+                                     hFile << optionalSizeTArgument("linestyle", borderLineStyle);
+                                     hFile << std::endl;}
         // *INDENT-ON*
 
-        hFile << "set key " << (key ? "on" : "off") << std::endl;
+        hFile << "set key " << (m_key.getOn() ? "on" : "off") << std::endl;
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
         hFile << std::endl;
     }

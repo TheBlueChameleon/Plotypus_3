@@ -100,25 +100,25 @@ namespace Plotypus
             // *INDENT-OFF*
             if (axes.contains(AxisType::X)) {axes.erase(AxisType::X);}
             if (axes.contains(AxisType::Y)) {axes.erase(AxisType::Y);}
-
-            if (border.has_value()) {border = BorderLine::Polar;}
             // *INDENT-ON*
 
             axes[AxisType::Radial]                      = AxisDescriptor(AxisType::Radial);
             auto& thetaAxes = axes[AxisType::Azimuthal] = AxisDescriptor(AxisType::Azimuthal);
             thetaAxes.setTicsIncrement(30);
+
+            border = BorderLine::Polar;
         }
         else
         {
             // *INDENT-OFF*
             if (axes.contains(AxisType::Radial))    {axes.erase(AxisType::Radial);}
             if (axes.contains(AxisType::Azimuthal)) {axes.erase(AxisType::Azimuthal);}
-
-            if (border.has_value()) {border = (mode3D ? BORDERS_2D_DEFAULT : BORDERS_3D_DEFAULT);}
             // *INDENT-ON*
 
             axes[AxisType::X] = AxisDescriptor(AxisType::X);
             axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
+
+            border = (mode3D ? BORDERS_2D_DEFAULT : BORDERS_3D_DEFAULT);
         }
 
         return *this;

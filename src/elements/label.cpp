@@ -20,6 +20,21 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    Label& Label::reset()
+    {
+        text = "label";
+
+        font.reset();
+        textcolor.reset();
+        alignment = HorizontalAlignment::Default;
+
+        boxed = false;
+        boxStyleID.reset();
+        rotateBy.reset();
+
+        return *this;
+    }
+
     Label& Label::setLayer(const Layer newLayer)
     {
         // *INDENT-OFF*
@@ -77,18 +92,12 @@ namespace Plotypus
 
     HorizontalAlignment Label::getAlignment() const
     {
-        return alignment.value_or(HorizontalAlignment::Left);
+        return alignment;
     }
 
     Label& Label::setAlignment(const HorizontalAlignment newHorizontalAlignment)
     {
         alignment = newHorizontalAlignment;
-        return *this;
-    }
-
-    Label& Label::clearAlignment()
-    {
-        alignment.reset();
         return *this;
     }
 
@@ -163,9 +172,9 @@ namespace Plotypus
 
         hFile << " " << getLayerName(layer);
 
-        if (alignment.has_value())
+        if (alignment != HorizontalAlignment::Default)
         {
-            hFile << " " << getAlignmentName(alignment.value());
+            hFile << " " << getAlignmentName(alignment);
         }
 
         hFile << optionalNumberArgument("rotate by", rotateBy);
