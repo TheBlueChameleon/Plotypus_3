@@ -696,6 +696,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (alignment) {
+            case HorizontalAlignment::Default:  return "";
             case HorizontalAlignment::Left:     return "left";
             case HorizontalAlignment::Center:   return "center";
             case HorizontalAlignment::Right:    return "right";
@@ -709,6 +710,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (alignment) {
+            case VerticalAlignment::Default:  return "";
             case VerticalAlignment::Top:    return "top";
             case VerticalAlignment::Center: return "center";
             case VerticalAlignment::Bottom: return "bottom";
