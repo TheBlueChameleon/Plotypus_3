@@ -45,8 +45,8 @@ namespace Plotypus
         }
         dataViews.clear();
 
-        border          = BORDERS_2D_DEFAULT;
-        borderLineStyle = OPTIONAL_SIZE_T_DEFAULT;
+        border.reset();
+        borderLineStyle.reset();
 
         aspect          = "noratio";
         fill            = "solid";
@@ -94,7 +94,7 @@ namespace Plotypus
 
     size_t Plot::getBorder() const
     {
-        return border;
+        return border.value_or(BORDERS_2D_DEFAULT);
     }
 
     Plot& Plot::setBorder(size_t newBorder)
@@ -103,14 +103,26 @@ namespace Plotypus
         return *this;
     }
 
+    Plot& Plot::clearBorder()
+    {
+        border.reset();
+        return *this;
+    }
+
     size_t Plot::getBorderLineStyle() const
     {
-        return borderLineStyle;
+        return borderLineStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
     Plot& Plot::setBorderLineStyle(size_t newBorderLineStyle)
     {
         borderLineStyle = newBorderLineStyle;
+        return *this;
+    }
+
+    Plot& Plot::clearBorderLineStyle()
+    {
+        borderLineStyle.reset();
         return *this;
     }
 
@@ -219,10 +231,12 @@ namespace Plotypus
         if (!aspect.empty()) {hFile << "set size " << aspect << std::endl;}
         if (!fill.  empty()) {hFile << "set style fill " << fill << std::endl;}
 
-        if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
-        else                        {hFile <<   "set border " << border;
-                                     hFile << optionalSizeTArgument("linestyle", borderLineStyle);
-                                     hFile << std::endl;}
+        if (border.has_value()) {
+            if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
+            else                        {hFile <<   "set border " << border.value();
+                                         hFile << optionalSizeTArgument("linestyle", borderLineStyle);
+                                         hFile << std::endl;}
+        }
         // *INDENT-ON*
 
         hFile << "set key " << (key ? "on" : "off") << std::endl;

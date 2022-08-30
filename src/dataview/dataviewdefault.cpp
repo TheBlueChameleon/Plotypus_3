@@ -150,8 +150,8 @@ namespace Plotypus
         clearFunctionMembers();
         clearNonFunctionMembers();
 
-        lineStyle  = -1;
-        pointStyle = -1;
+        lineStyle.reset();
+        pointStyle.reset();
 
         columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
         columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
@@ -191,7 +191,7 @@ namespace Plotypus
 
     size_t DataViewDefault::getLineStyle() const
     {
-        return lineStyle;
+        return lineStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
     DataViewDefault& DataViewDefault::setLineStyle(size_t newLineStyle)
@@ -200,14 +200,26 @@ namespace Plotypus
         return *this;
     }
 
+    DataViewDefault& DataViewDefault::clearLineStyle()
+    {
+        lineStyle.reset();
+        return *this;
+    }
+
     size_t DataViewDefault::getPointStyle() const
     {
-        return pointStyle;
+        return pointStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
     DataViewDefault& DataViewDefault::setPointStyle(size_t newPointStyle)
     {
         pointStyle = newPointStyle;
+        return *this;
+    }
+
+    DataViewDefault& DataViewDefault::clearPointStyle()
+    {
+        pointStyle.reset();
         return *this;
     }
 
@@ -359,7 +371,7 @@ namespace Plotypus
         hFile << " with " << plotStyle;
 
         hFile << optionalSizeTArgument("linestyle", lineStyle);
-        stylesColloction.writePointStyleCode(hFile, pointStyle);
+        stylesColloction.writePointStyleCode(hFile, pointStyle.value_or(OPTIONAL_SIZE_T_DEFAULT));
 
         if (variablePointSize ) {hFile << " pointsize variable";}
         if (variablePointType ) {hFile << " pointtype variable";}

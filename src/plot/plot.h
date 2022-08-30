@@ -1,6 +1,7 @@
 #ifndef PLOT_H
 #define PLOT_H
 
+#include <optional>
 #include <vector>
 
 #include "../base/sheet.h"
@@ -20,8 +21,8 @@ namespace Plotypus
             PlotStyleFamily         plotStyleFamily = PlotStyleFamily::Undefined;
             std::vector<DataView*>  dataViews;
 
-            size_t      border          = BORDERS_2D_DEFAULT;
-            size_t      borderLineStyle = OPTIONAL_SIZE_T_DEFAULT;
+            std::optional<size_t>   border;
+            std::optional<size_t>   borderLineStyle;
 
             std::string aspect      = "noratio";
             std::string fill        = "solid";
@@ -49,8 +50,11 @@ namespace Plotypus
 
             size_t              getBorder() const;
             Plot&               setBorder(size_t newBorder);
+            Plot&               clearBorder();
+
             size_t              getBorderLineStyle() const;
             Plot&               setBorderLineStyle(size_t newBorderLineStyle);
+            Plot&               clearBorderLineStyle();
 
             const std::string&  getAspect      () const;
             Plot&               setAspect      (const std::string& newAspect);

@@ -585,14 +585,6 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 
-    std::string optionalSizeTArgument(const std::string& optionName, const size_t styleID)
-    {
-        // *INDENT-OFF*
-        if (styleID == OPTIONAL_SIZE_T_DEFAULT) {return "";}
-        else                                    {return " " + optionName + " " + std::to_string(styleID + 1);}
-        // *INDENT-ON*
-    }
-
     std::string optionalSizeTArgument(const std::string& optionName, const std::optional<size_t>& styleID)
     {
         // *INDENT-OFF*

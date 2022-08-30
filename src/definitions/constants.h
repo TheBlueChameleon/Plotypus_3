@@ -35,7 +35,7 @@ namespace Plotypus
 
     enum class LineEnds
     {
-        Rounded, Butt,
+        Rounded, Butt, Default
     };
 
     // ====================================================================== //
@@ -64,6 +64,16 @@ namespace Plotypus
     enum class VerticalAlignment
     {
         Top, Center, Bottom
+    };
+
+    enum class MarginAlignment
+    {
+        Left, Right, Top, Bottom
+    };
+
+    enum class StackingOrder
+    {
+        Vertical, Horizontal
     };
 
     // ---------------------------------------------------------------------- //

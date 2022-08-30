@@ -50,15 +50,15 @@ namespace Plotypus
             std::optional<dimensions_pixels_t>  position;
 
             std::optional<std::string>          backgroundColor;
-            std::optional<LineEnds>             lineEnds;
+            LineEnds                            lineEnds;
             std::optional<bool>                 transparent;
 
             std::optional<bool>                 animate;
-            std::optional<int>                  delay;
-            std::optional<int>                  loopCount;
+            std::optional<size_t>               delay;
+            std::optional<size_t>               loopCount;
 
             std::optional<std::string>          windowTitle;
-            std::optional<int>                  windowNumber;
+            std::optional<size_t>               windowNumber;
 
             std::optional<std::string>          options;
 
@@ -85,63 +85,65 @@ namespace Plotypus
 
             TerminalInfoProvider& reset();
 
-            FileType                    getFileType() const;
-            TerminalInfoProvider&       setFileType(FileType newFileType);
-            const std::string&          getTerminal() const;
-            TerminalInfoProvider&       setTerminal(const std::string& newTerminal);
-            const std::string&          getExtOut() const;
-            TerminalInfoProvider&       setExtOut(const std::string& newExtOut);
-            bool                        getOutputToFile() const;
-            TerminalInfoProvider&       setOutputToFile(bool newOutputToFile);
+            FileType                            getFileType() const;
+            TerminalInfoProvider&               setFileType(FileType newFileType);
 
-            std::optional<dimensions_t> getDimensions() const;
-            TerminalInfoProvider&       setDimensions(const dimensions_t& newDimensions);
-            TerminalInfoProvider&       setDimensions(const dimensions_pixels_t& newDimensions);
-            TerminalInfoProvider&       setDimensions(const dimensions_length_t& newDimensions);
-            TerminalInfoProvider&       setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
-            TerminalInfoProvider&       setDimensions(const dimensions_length_with_unit_t& newDimensions);
-            TerminalInfoProvider&       setDimensions(const int width, const int height);
-            TerminalInfoProvider&       setDimensions(const double width, const double height);
-            TerminalInfoProvider&       setDimensions(const double width, const double height, const LengthUnit lengthUnit);
-            TerminalInfoProvider&       clearDimensions();
+            const std::string&                  getTerminal() const;
+            TerminalInfoProvider&               setTerminal(const std::string& newTerminal);
 
-            std::optional<dimensions_pixels_t>  getPosition() const;
+            const std::string&                  getExtOut() const;
+            TerminalInfoProvider&               setExtOut(const std::string& newExtOut);
+
+            bool                                getOutputToFile() const;
+            TerminalInfoProvider&               setOutputToFile(bool newOutputToFile);
+
+            dimensions_t                        getDimensions() const;
+            TerminalInfoProvider&               setDimensions(const dimensions_t& newDimensions);
+            TerminalInfoProvider&               setDimensions(const dimensions_pixels_t& newDimensions);
+            TerminalInfoProvider&               setDimensions(const dimensions_length_t& newDimensions);
+            TerminalInfoProvider&               setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
+            TerminalInfoProvider&               setDimensions(const dimensions_length_with_unit_t& newDimensions);
+            TerminalInfoProvider&               setDimensions(const int width, const int height);
+            TerminalInfoProvider&               setDimensions(const double width, const double height);
+            TerminalInfoProvider&               setDimensions(const double width, const double height, const LengthUnit lengthUnit);
+            TerminalInfoProvider&               clearDimensions();
+
+            dimensions_pixels_t                 getPosition() const;
             TerminalInfoProvider&               setPosition(const dimensions_pixels_t& newPosition);
             TerminalInfoProvider&               clearPosition();
 
-            std::optional<std::string>          getBackgroundColor() const;
+            std::string                         getBackgroundColor() const;
             TerminalInfoProvider&               setBackgroundColor(const std::string& newBackgroundColor);
             TerminalInfoProvider&               clearBackgroundColor();
 
-            std::optional<LineEnds>             getLineEnds() const;
+            LineEnds                            getLineEnds() const;
             TerminalInfoProvider&               setLineEnds(const LineEnds newLineEnds);
-            TerminalInfoProvider&               clearLineEnds();
 
-            std::optional<bool>                 getTransparent() const;
+            bool                                getTransparent() const;
             TerminalInfoProvider&               setTransparent(bool newTransparent);
             TerminalInfoProvider&               clearTransparent();
 
-            std::optional<bool>                 getAnimate() const;
+            bool                                getAnimate() const;
             TerminalInfoProvider&               setAnimate(bool newAnimate);
             TerminalInfoProvider&               clearAnimate();
 
-            std::optional<int>                  getDelay() const;
-            TerminalInfoProvider&               setDelay(int newDelay);
+            size_t                              getDelay() const;
+            TerminalInfoProvider&               setDelay(const size_t newDelay);
             TerminalInfoProvider&               clearDelay();
 
-            std::optional<int>                  getLoopCount() const;
-            TerminalInfoProvider&               setLoopCount(int newLoopCount);
+            size_t                              getLoopCount() const;
+            TerminalInfoProvider&               setLoopCount(const size_t newLoopCount);
             TerminalInfoProvider&               clearLoopCount();
 
-            std::optional<std::string>          getWindowTitle() const;
+            std::string                         getWindowTitle() const;
             TerminalInfoProvider&               setWindowTitle(const std::string& newWindowTitle);
             TerminalInfoProvider&               clearWindowTitle();
 
-            std::optional<int>                  getWindowNumber() const;
-            TerminalInfoProvider&               setWindowNumber(int newWindowNumber);
+            size_t                              getWindowNumber() const;
+            TerminalInfoProvider&               setWindowNumber(const size_t newWindowNumber);
             TerminalInfoProvider&               clearWindowNumber();
 
-            std::optional<std::string>          getOptions() const;
+            std::string                         getOptions() const;
             TerminalInfoProvider&               setOptions(const std::string& newOptions);
             TerminalInfoProvider&               clearOptions();
 

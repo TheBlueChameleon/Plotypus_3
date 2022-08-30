@@ -3,6 +3,7 @@
 
 #include <array>
 #include <concepts>
+#include <optional>
 #include <span>
 #include <string>
 #include <vector>
@@ -17,8 +18,9 @@ namespace Plotypus
         protected:
             std::string func;
 
-            size_t lineStyle  = OPTIONAL_SIZE_T_DEFAULT;
-            size_t pointStyle = OPTIONAL_SIZE_T_DEFAULT;
+            std::optional<size_t> lineStyle;
+            std::optional<size_t> pointStyle;
+            //= OPTIONAL_SIZE_T_DEFAULT;
 
             columnAssignmentList_t columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
             columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
@@ -56,9 +58,11 @@ namespace Plotypus
 
             size_t              getLineStyle() const;
             DataViewDefault&    setLineStyle(size_t newLineStyle);
+            DataViewDefault&    clearLineStyle();
 
             size_t              getPointStyle() const;
             DataViewDefault&    setPointStyle(size_t newPointStyle);
+            DataViewDefault&    clearPointStyle();
 
             size_t&             columnAssignment(const size_t       columnID);
             size_t&             columnAssignment(const ColumnType   columnType);

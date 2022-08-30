@@ -67,7 +67,6 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 
-    std::string optionalSizeTArgument       (const std::string& optionName, const size_t styleID);
     std::string optionalSizeTArgument       (const std::string& optionName, const std::optional<size_t>& styleID);
 
     std::string optionalQuotedStringArgument(const std::string& optionName, const std::string& option);

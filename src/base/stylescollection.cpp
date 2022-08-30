@@ -176,7 +176,7 @@ namespace Plotypus
                 {
                     hFile << " border";
                     hFile << optionalQuotedStringArgument("bordercolor", style.bordercolor);
-                    hFile << optionalNumberArgument    ("linewidth",   style.linewidth);
+                    hFile << optionalNumberArgument      ("linewidth",   style.linewidth);
                 }
                 else
                 {
@@ -229,6 +229,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if (i == OPTIONAL_SIZE_T_DEFAULT) {return;}
+        throwIfInvalidIndex("point style index", i, pointStyles);
 
         const auto& psr = pointStyles[i];
         const int pointStyleInt = static_cast<int>(psr.form);

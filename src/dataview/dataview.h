@@ -25,9 +25,9 @@ namespace Plotypus
 
             std::string title;
             std::string plotStyle;
-            std::string options = "";
+            std::string options;
 
-            mutable std::string dataFilename = "";
+            mutable std::string dataFilename;
 
             int         numberPrecision      = -1;
             std::string columnSeparatorTxt   = "\t";
