@@ -377,7 +377,7 @@ namespace Plotypus
         if (variablePointType ) {hFile << " pointtype variable";}
         if (variablePointColor) {hFile << " linecolor variable";}
 
-        if (!options.has_value()) {hFile << " " << options.value();}
+        if (options.has_value()) {hFile << " " << options.value();}
         // *INDENT-ON*
     }
 }
