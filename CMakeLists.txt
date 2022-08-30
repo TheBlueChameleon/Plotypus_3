@@ -32,9 +32,9 @@ add_library(Plotypus-lib SHARED
     src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
     src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
     src/plot/plotradial.h src/plot/plotradial.cpp
-    src/plot/keydescriptor.h src/plot/keydescriptor.cpp
     #
     src/elements/axisdescriptor.h src/elements/axisdescriptor.cpp
+    src/elements/keydescriptor.h src/elements/keydescriptor.cpp
     src/elements/overlay.h src/elements/overlay.cpp
     src/elements/label.h src/elements/label.cpp
     #
