@@ -51,7 +51,19 @@ namespace Plotypus
 
     enum class Layer
     {
-        Front, Back, Behind
+        Default, Front, Back, Behind
+    };
+
+    // ---------------------------------------------------------------------- //
+
+    enum class HorizontalAlignment
+    {
+        Left, Center, Right
+    };
+
+    enum class VerticalAlignment
+    {
+        Top, Center, Bottom
     };
 
     // ---------------------------------------------------------------------- //

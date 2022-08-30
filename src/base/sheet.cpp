@@ -257,7 +257,7 @@ namespace Plotypus
         if (labels.size())
         {
             hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# labels" << std::endl << std::endl;
+            hFile << "# overlays" << std::endl << std::endl;
 
             for (auto& label : labels)
             {

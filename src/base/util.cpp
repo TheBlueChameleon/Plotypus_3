@@ -593,6 +593,14 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
+    std::string optionalSizeTArgument(const std::string& optionName, const std::optional<size_t>& styleID)
+    {
+        // *INDENT-OFF*
+        if (styleID.has_value()) {return " " + optionName + " " + std::to_string(styleID.value() + 1);}
+        else                     {return "";}
+        // *INDENT-ON*
+    }
+
     std::string optionalQuotedStringArgument(const std::string& optionName, const std::string& option)
     {
         // *INDENT-OFF*
@@ -626,6 +634,17 @@ namespace Plotypus
     std::string optionalNumberArgument(const std::string& optionName, const double number)
     {
         return optionalNumberArgument(optionName, number, number != 0.);
+    }
+
+    std::string optionalNumberArgument(const std::string& optionName, const std::optional<double>& number)
+    {
+        // *INDENT-OFF*
+        std::stringstream buffer;
+
+        if (number.has_value()) {buffer << " " << optionName << " " << number.value();
+                                 return buffer.str();}
+        else                    {return "";}
+        // *INDENT-ON*
     }
 
     std::string optionalNumberAsString(const std::optional<double>& option, const std::string& alternative)
@@ -671,13 +690,39 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (layer) {
-            case Layer::Front:  return "front";
-            case Layer::Back:   return "back";
-            case Layer::Behind: return "behind";
+            case Layer::Default:    return "";
+            case Layer::Front:      return "front";
+            case Layer::Back:       return "back";
+            case Layer::Behind:     return "behind";
         }
         // *INDENT-ON*
 
         return "undefined";
     }
 
+    std::string getAlignmentName(const HorizontalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case HorizontalAlignment::Left:     return "left";
+            case HorizontalAlignment::Center:   return "center";
+            case HorizontalAlignment::Right:    return "right";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getAlignmentName(const VerticalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case VerticalAlignment::Top:    return "top";
+            case VerticalAlignment::Center: return "center";
+            case VerticalAlignment::Bottom: return "bottom";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
 };

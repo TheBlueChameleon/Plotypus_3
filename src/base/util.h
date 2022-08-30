@@ -57,6 +57,8 @@ namespace Plotypus
     std::string getAxisName(const AxisType axis);
     std::string getPositionSystemName(const PositionSystem ps);
     std::string getLayerName(const Layer layer);
+    std::string getAlignmentName(const HorizontalAlignment alignment);
+    std::string getAlignmentName(const VerticalAlignment alignment);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 
@@ -66,10 +68,14 @@ namespace Plotypus
     // optional parameters handling
 
     std::string optionalSizeTArgument       (const std::string& optionName, const size_t styleID);
+    std::string optionalSizeTArgument       (const std::string& optionName, const std::optional<size_t>& styleID);
+
     std::string optionalQuotedStringArgument(const std::string& optionName, const std::string& option);
     std::string optionalQuotedStringArgument(const std::string& optionName, const std::optional<std::string>& option);
+
     std::string optionalNumberArgument      (const std::string& optionName, const double number, bool turnOn);
     std::string optionalNumberArgument      (const std::string& optionName, const double number);
+    std::string optionalNumberArgument      (const std::string& optionName, const std::optional<double>& number);
 
     std::string optionalNumberAsString      (const std::optional<double>& option, const std::string& alternative);
 

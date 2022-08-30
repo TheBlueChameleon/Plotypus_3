@@ -9,20 +9,19 @@ namespace Plotypus
 {
     class Overlay
     {
-        private:
+        protected:
             size_t                              tag;
 
             std::optional<OverlayPosition_t>    position;
             PositionSystem                      positionSystem = PositionSystem::Default;
-
-            // front/back
+            Layer                               layer          = Layer::Default;
 
             std::optional<std::string>          options;
 
             void writePosition(std::ostream& hFile) const;
 
         public:
-            Overlay();
+            Overlay(const OverlayPosition_t& position);
 
             Overlay&            reset();
 
@@ -36,6 +35,9 @@ namespace Plotypus
 
             PositionSystem      getPositionSystem() const;
             Overlay&            setPositionSystem(const PositionSystem newPositionSystem);
+
+            Layer               getLayer() const;
+            virtual Overlay&    setLayer(const Layer newLayer);
 
             std::string         getOptions() const;
             Overlay&            setOptions(const std::string& newOptions);

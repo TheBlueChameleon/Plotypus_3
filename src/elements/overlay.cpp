@@ -24,7 +24,8 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    Overlay::Overlay()
+    Overlay::Overlay(const OverlayPosition_t& position) :
+        position(position)
     {
         tag = ++lastTag;
     }
@@ -82,6 +83,17 @@ namespace Plotypus
     Overlay& Overlay::setPositionSystem(const PositionSystem newPositionSystem)
     {
         positionSystem = newPositionSystem;
+        return *this;
+    }
+
+    Layer Overlay::getLayer() const
+    {
+        return layer;
+    }
+
+    Overlay& Overlay::setLayer(const Layer newLayer)
+    {
+        layer = newLayer;
         return *this;
     }
 
