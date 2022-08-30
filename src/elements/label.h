@@ -27,6 +27,8 @@ namespace Plotypus
             Label(const std::string& text, double x, double y,           bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
             Label(const std::string& text, double x, double y, double z, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
 
+            virtual Label&          setLayer(const Layer newLayer);
+
             const std::string&      getText() const;
             Label&                  setText(const std::string& newText);
 

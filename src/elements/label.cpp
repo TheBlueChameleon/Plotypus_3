@@ -20,6 +20,16 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    Label& Label::setLayer(const Layer newLayer)
+    {
+        // *INDENT-OFF*
+        if (contains(newLayer, {Layer::Behind})) {throw UnsupportedOperationError("Layer 'behind' not defined for labels.");}
+        else {Overlay::setLayer(newLayer);}
+        // *INDENT-ON*
+
+        return *this;
+    }
+
     const std::string& Label::getText() const
     {
         return text;
