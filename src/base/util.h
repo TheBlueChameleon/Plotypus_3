@@ -59,6 +59,7 @@ namespace Plotypus
     std::string getLayerName(const Layer layer);
     std::string getAlignmentName(const HorizontalAlignment alignment);
     std::string getAlignmentName(const VerticalAlignment alignment);
+    std::string getAlignmentName(const MarginAlignment alignment);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 

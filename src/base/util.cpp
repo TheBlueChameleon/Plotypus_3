@@ -710,13 +710,28 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (alignment) {
-            case VerticalAlignment::Default:  return "";
-            case VerticalAlignment::Top:    return "top";
-            case VerticalAlignment::Center: return "center";
-            case VerticalAlignment::Bottom: return "bottom";
+            case VerticalAlignment::Default:    return "";
+            case VerticalAlignment::Top:        return "top";
+            case VerticalAlignment::Center:     return "center";
+            case VerticalAlignment::Bottom:     return "bottom";
         }
         // *INDENT-ON*
 
         return "undefined";
     }
+
+    std::string getAlignmentName(const MarginAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case MarginAlignment::Top:      return "tmargin";
+            case MarginAlignment::Bottom:   return "bmargin";
+            case MarginAlignment::Left:     return "lmargin";
+            case MarginAlignment::Right:    return "rmargin";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
 };

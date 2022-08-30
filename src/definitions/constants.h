@@ -63,7 +63,7 @@ namespace Plotypus
 
     enum class VerticalAlignment
     {
-        Default, Top, Center, Bottom
+        Default, Bottom, Center, Top
     };
 
     enum class MarginAlignment

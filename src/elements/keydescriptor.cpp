@@ -2,7 +2,129 @@
 
 namespace Plotypus
 {
-    KeyDescriptor::KeyDescriptor() {}
+    StackingOrder getMarginAlignmentSense(MarginAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment)
+        {
+            case MarginAlignment::Left:     return StackingOrder::Horizontal;
+            case MarginAlignment::Right:    return StackingOrder::Horizontal;
+            case MarginAlignment::Top:      return StackingOrder::Vertical;
+            case MarginAlignment::Bottom:   return StackingOrder::Vertical;
+        }
+        // *INDENT-ON*
+
+        return StackingOrder::Default;
+    }
+
+    KeyDescriptor::AbstractAlignment convertToAbstractAlignment(HorizontalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment)
+        {
+            case HorizontalAlignment::Default: return KeyDescriptor::AbstractAlignment::Default;
+            case HorizontalAlignment::Left:    return KeyDescriptor::AbstractAlignment::Minimal;
+            case HorizontalAlignment::Center:  return KeyDescriptor::AbstractAlignment::Central;
+            case HorizontalAlignment::Right:   return KeyDescriptor::AbstractAlignment::Maximal;
+        }
+        // *INDENT-ON*
+
+        return KeyDescriptor::AbstractAlignment::Default;
+    }
+
+    KeyDescriptor::AbstractAlignment convertToAbstractAlignment(VerticalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment)
+        {
+            case VerticalAlignment::Default:    return KeyDescriptor::AbstractAlignment::Default;
+            case VerticalAlignment::Bottom:     return KeyDescriptor::AbstractAlignment::Minimal;
+            case VerticalAlignment::Center:     return KeyDescriptor::AbstractAlignment::Central;
+            case VerticalAlignment::Top:        return KeyDescriptor::AbstractAlignment::Maximal;
+        }
+        // *INDENT-ON*
+
+        return KeyDescriptor::AbstractAlignment::Default;
+    }
+
+    VerticalAlignment convertToVerticalAlignment(KeyDescriptor::AbstractAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment)
+        {
+            case KeyDescriptor::AbstractAlignment::Default: return  VerticalAlignment::Default;
+            case KeyDescriptor::AbstractAlignment::Minimal: return  VerticalAlignment::Bottom;
+            case KeyDescriptor::AbstractAlignment::Central: return  VerticalAlignment::Center;
+            case KeyDescriptor::AbstractAlignment::Maximal: return  VerticalAlignment::Top;
+        }
+        // *INDENT-ON*
+
+        return VerticalAlignment::Default;
+    }
+
+    HorizontalAlignment convertToHorizontalAlignment(KeyDescriptor::AbstractAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment)
+        {
+            case KeyDescriptor::AbstractAlignment::Default: return  HorizontalAlignment::Default;
+            case KeyDescriptor::AbstractAlignment::Minimal: return  HorizontalAlignment::Left;
+            case KeyDescriptor::AbstractAlignment::Central: return  HorizontalAlignment::Center;
+            case KeyDescriptor::AbstractAlignment::Maximal: return  HorizontalAlignment::Right;
+        }
+        // *INDENT-ON*
+
+        return HorizontalAlignment::Default;
+    }
+
+    void KeyDescriptor::writePosition(std::ostream& hFile) const
+    {
+        // *INDENT-OFF*
+        if (!position.has_value())  {return;}
+        else                        {hFile << " ";}
+        // *INDENT-ON*
+
+        std::visit(
+            [&hFile](auto&& arg)
+        {
+            using T = std::decay_t<decltype(arg)>;
+            if      constexpr (std::is_same_v<T, explicitPosition_t>)
+            {
+                const auto& [fixed, coordinates] = arg;
+                const auto [x, y, z] = coordinates;
+
+                // *INDENT-OFF*
+                if (fixed) {hFile << " fixed";}
+                hFile << " at " << x << ", " << y;
+                if (z.has_value()) {hFile << ", " << z.value();}
+                // *INDENT-ON*
+            }
+            else if constexpr (std::is_same_v<T, marginPosition_t>)
+            {
+                const auto [marginAlignment, abstractAlignment] = arg;
+
+                hFile << getAlignmentName(marginAlignment) << ", ";
+
+                auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
+                if (marginAlignmentSense == StackingOrder::Horizontal)
+                {
+                    VerticalAlignment verticalAlignment = convertToVerticalAlignment(abstractAlignment);
+                    hFile << getAlignmentName(verticalAlignment);
+                }
+                else
+                {
+                    HorizontalAlignment horizontalAlignment = convertToHorizontalAlignment(abstractAlignment);
+                    hFile << getAlignmentName(horizontalAlignment);
+                }
+            }
+            else if constexpr (std::is_same_v<T, insidePosition_t>)
+            {
+                const auto [horizontalAlignment, verticalAlignment] = arg;
+                hFile << getAlignmentName(horizontalAlignment) << ", " << getAlignmentName(verticalAlignment);
+            }
+
+        }, position.value());
+    }
 
     // ====================================================================== //
 
@@ -39,9 +161,41 @@ namespace Plotypus
         return position.value_or(explicitPosition_t(true, POSITION_ORIGIN));
     }
 
-    KeyDescriptor& KeyDescriptor::setPosition(const keyPosition_t& newPosition)
+    KeyDescriptor& KeyDescriptor::setPosition(const bool fixed, const OverlayPosition_t& coordinates)
     {
-        position = newPosition;
+        position = explicitPosition_t{fixed, coordinates};
+        return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment, const HorizontalAlignment horizontalAlignment)
+    {
+        auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
+
+        if (marginAlignmentSense != StackingOrder::Vertical)
+        {
+            throw InvalidArgumentError("Horizontal margin specification must be paired with vertical alignment");
+        }
+
+        position = marginPosition_t{marginAlignment, convertToAbstractAlignment(horizontalAlignment)};
+        return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment, const VerticalAlignment verticalAlignment)
+    {
+        auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
+
+        if (marginAlignmentSense != StackingOrder::Horizontal)
+        {
+            throw InvalidArgumentError("Vertical margin specification must be paired with horizontal alignment");
+        }
+
+        position = marginPosition_t{marginAlignment, convertToAbstractAlignment(verticalAlignment)};
+        return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment)
+    {
+        position = insidePosition_t{horizontalAlignment, verticalAlignment};
         return *this;
     }
 
@@ -176,7 +330,7 @@ namespace Plotypus
     // ====================================================================== //
     // writer
 
-    void KeyDescriptor::writeKeyDescriptor(std::ostream& hFile)
+    void KeyDescriptor::writeKeyDescriptor(std::ostream& hFile) const
     {
 
     }

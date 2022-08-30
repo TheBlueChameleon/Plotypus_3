@@ -9,7 +9,7 @@ namespace Plotypus
     class KeyDescriptor
     {
         public:
-            enum class AbstractAlignment {Minimal, Central, Maximal};
+            enum class AbstractAlignment {Default, Minimal, Central, Maximal};
 
             using explicitPosition_t = std::pair<bool, OverlayPosition_t>;
             using marginPosition_t   = std::pair<MarginAlignment, AbstractAlignment>;
@@ -35,8 +35,10 @@ namespace Plotypus
             std::optional<size_t>               lineStyle;
             std::optional<size_t>               maxGroupSize;
 
+            void writePosition(std::ostream& hFile) const;
+
         public:
-            KeyDescriptor();
+            KeyDescriptor() = default;
 
             KeyDescriptor&      reset();
 
@@ -44,7 +46,10 @@ namespace Plotypus
             KeyDescriptor&      setOn(bool newOn);
 
             keyPosition_t       getPosition() const;
-            KeyDescriptor&      setPosition(const keyPosition_t& newPosition);
+            KeyDescriptor&      setPosition(const bool fixed, const OverlayPosition_t& coordinates);
+            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const HorizontalAlignment horizontalAlignment);
+            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const VerticalAlignment verticalAlignment);
+            KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment);
             KeyDescriptor&      clearPosition();
 
             StackingOrder       getStackingOrder() const;
@@ -77,7 +82,7 @@ namespace Plotypus
             KeyDescriptor&      setMaxGroupSize(std::optional<size_t> newMaxGroupSize);
             KeyDescriptor&      clearMaxGroupSize();
 
-            void writeKeyDescriptor(std::ostream& hFile);
+            void writeKeyDescriptor(std::ostream& hFile) const;
     };
 }
 
