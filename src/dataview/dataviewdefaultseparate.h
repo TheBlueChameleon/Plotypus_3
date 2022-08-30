@@ -11,7 +11,6 @@ namespace Plotypus
             columnViewList_t data;
 
             virtual void clearNonFunctionMembers();
-
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:

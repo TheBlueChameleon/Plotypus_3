@@ -15,7 +15,6 @@ namespace Plotypus
             std::array<DataSelector_t<T>, 6>    selectors;
 
             virtual void clearNonFunctionMembers();
-
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:

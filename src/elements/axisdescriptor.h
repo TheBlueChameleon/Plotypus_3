@@ -15,6 +15,13 @@ namespace Plotypus
         private:
             AxisType                        type;
 
+            bool                            tics                = true;
+            bool                            ticsAuto            = true;
+            bool                            ticsLogscale        = false;
+            bool                            minorTics           = false;
+            bool                            gridMajor           = false;
+            bool                            gridMinor           = false;
+
             std::optional<std::string>      labelText;
             std::optional<std::string>      labelFont;
             std::optional<std::string>      labelColor;
@@ -24,24 +31,18 @@ namespace Plotypus
             std::optional<double>           rangeMax;
             std::optional<std::string>      rangeOptions;
 
-            bool                            tics                = true;
-            bool                            ticsAuto            = true;
             std::optional<double>           ticsStart;
             std::optional<double>           ticsEnd;
             std::optional<double>           ticsIncrement;
             std::optional<std::string>      ticsFormatstring;
             std::vector<locatedTicsLabel_t> ticsLabels;
-            bool                            ticsLogscale        = false;
             std::optional<std::string>      ticsFont;
             std::optional<std::string>      ticsTextColor;
             std::optional<std::string>      ticsOptions;
 
-            bool                            minorTics           = false;
             std::optional<size_t>           minorTicsIntervals;
 
-            bool                            gridMajor           = false;
             std::optional<std::string>      gridMajorOptions;
-            bool                            gridMinor           = false;
             std::optional<std::string>      gridMinorOptions;
 
             std::string generateRangeString (const std::optional<double>& min, const std::optional<double>& max) const;
@@ -55,9 +56,11 @@ namespace Plotypus
             void writeAxisGrid  (std::ostream& hFile, const std::string& axisName, bool off = false) const;
 
         public:
-            AxisDescriptor();       //! @todo make construct undefined axis
+            AxisDescriptor();
             AxisDescriptor(const AxisType type,                           double rangeMin = OPTIONAL_DOUBLE_DEFAULT, double rangeMax = OPTIONAL_DOUBLE_DEFAULT);
             AxisDescriptor(const AxisType type, const std::string& label, double rangeMin = OPTIONAL_DOUBLE_DEFAULT, double rangeMax = OPTIONAL_DOUBLE_DEFAULT);
+
+            AxisDescriptor& reset();
 
             std::string     getLabelText() const;
             AxisDescriptor& setLabelText(const std::string& newLabelText);

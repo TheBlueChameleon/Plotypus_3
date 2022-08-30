@@ -8,7 +8,7 @@ namespace Plotypus
 {
     class KeyDescriptor
     {
-        private:
+        public:
             enum class AbstractAlignment {Minimal, Central, Maximal};
 
             using explicitPosition_t = std::pair<bool, OverlayPosition_t>;
@@ -18,17 +18,17 @@ namespace Plotypus
             using keyPosition_t = std::variant<explicitPosition_t, marginPosition_t, insidePosition_t>;
 
         private:
-            bool on;
-
             std::optional<keyPosition_t>        position;
-            std::optional<StackingOrder>        stackOrder;
-            std::optional<HorizontalAlignment>  justification;
+            StackingOrder                       stackingOrder = StackingOrder::Default;
+            HorizontalAlignment                 justification = HorizontalAlignment::Default;
+
+            bool                                on = true;
 
             bool                                opaque = true;
-            bool                                boxed;
+            bool                                boxed  = false;
 
-            bool                                inverseOrder;
-            bool                                reverseSymbol;
+            bool                                inverseOrder  = false;
+            bool                                reverseSymbol = false;
 
             std::optional<std::string>          title;
 
@@ -38,8 +38,46 @@ namespace Plotypus
         public:
             KeyDescriptor();
 
+            KeyDescriptor&      reset();
 
-            // void write(std::ostream& hFile);
+            bool                getOn() const;
+            KeyDescriptor&      setOn(bool newOn);
+
+            keyPosition_t       getPosition() const;
+            KeyDescriptor&      setPosition(const keyPosition_t& newPosition);
+            KeyDescriptor&      clearPosition();
+
+            StackingOrder       getStackingOrder() const;
+            KeyDescriptor&      setStackingOrder(StackingOrder newStackingOrder);
+
+            HorizontalAlignment getJustification() const;
+            KeyDescriptor&      setJustification(const HorizontalAlignment newJustification);
+
+            bool                getOpaque() const;
+            KeyDescriptor&      setOpaque(bool newOpaque);
+
+            bool                getBoxed() const;
+            KeyDescriptor&      setBoxed(bool newBoxed);
+
+            bool                getInverseOrder() const;
+            KeyDescriptor&      setInverseOrder(bool newInverseOrder);
+
+            bool                getReverseSymbol() const;
+            KeyDescriptor&      setReverseSymbol(bool newReverseSymbol);
+
+            std::string         getTitle() const;
+            KeyDescriptor&      setTitle(const std::string& newTitle);
+            KeyDescriptor&      clearTitle();
+
+            size_t              getLineStyle() const;
+            KeyDescriptor&      setLineStyle(std::optional<size_t> newLineStyle);
+            KeyDescriptor&      clearLineStyle();
+
+            size_t              getMaxGroupSize() const;
+            KeyDescriptor&      setMaxGroupSize(std::optional<size_t> newMaxGroupSize);
+            KeyDescriptor&      clearMaxGroupSize();
+
+            void writeKeyDescriptor(std::ostream& hFile);
     };
 }
 

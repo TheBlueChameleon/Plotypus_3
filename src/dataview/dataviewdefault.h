@@ -16,19 +16,18 @@ namespace Plotypus
     class DataViewDefault : public DataView
     {
         protected:
+            bool variablePointSize  = false;
+            bool variablePointType  = false;
+            bool variablePointColor = false;
+
             std::string func;
 
             std::optional<size_t> lineStyle;
             std::optional<size_t> pointStyle;
-            //= OPTIONAL_SIZE_T_DEFAULT;
 
             columnAssignmentList_t columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
             columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
             columnFormatList_t     columnHeadlines   = {};
-
-            bool variablePointSize  = false;
-            bool variablePointType  = false;
-            bool variablePointColor = false;
 
             virtual void clearFunctionMembers();
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;

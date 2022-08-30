@@ -21,10 +21,10 @@ namespace Plotypus
         protected:
             static constexpr auto allowedStyleFamiles = {PlotStyleFamily::Orthogonal2D, PlotStyleFamily::Orthogonal3D, PlotStyleFamily::Custom};
 
-            std::unordered_map<AxisType, AxisDescriptor> axes;
-
             bool mode3D = false;
             bool polar  = false;
+
+            std::unordered_map<AxisType, AxisDescriptor> axes;
 
         public:
             PlotOrthogonalAxes(const std::string& title);
