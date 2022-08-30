@@ -589,7 +589,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if (styleID == OPTIONAL_SIZE_T_DEFAULT) {return "";}
-        else                                    {return optionName + " " + std::to_string(styleID + 1) + " ";}
+        else                                    {return " " + optionName + " " + std::to_string(styleID + 1);}
         // *INDENT-ON*
     }
 
@@ -598,7 +598,7 @@ namespace Plotypus
         // *INDENT-OFF*
         std::stringstream buffer;
         if (option.empty()) {return "";}
-        else                {buffer << optionName << " " << std::quoted(option) << " ";
+        else                {buffer << " " << optionName << " " << std::quoted(option);
                              return buffer.str();}
         // *INDENT-ON*
     }
@@ -608,7 +608,7 @@ namespace Plotypus
         // *INDENT-OFF*
         std::stringstream buffer;
         if (!option.has_value()) {return "";}
-        else                     {buffer << optionName << " " << std::quoted(option.value()) << " ";
+        else                     {buffer << " " << optionName << " " << std::quoted(option.value());
                                   return buffer.str();}
         // *INDENT-ON*
     }
@@ -617,7 +617,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         std::stringstream buffer;
-        if (turnOn) {buffer << optionName << " " << number << " ";
+        if (turnOn) {buffer << " " << optionName << " " << number;
                      return buffer.str();}
         else        {return "";}
         // *INDENT-ON*
@@ -664,6 +664,7 @@ namespace Plotypus
             case PositionSystem::Character: return "character";
         }
         // *INDENT-ON*
-    }
 
+        return "undefined";
+    }
 };

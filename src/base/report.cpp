@@ -332,7 +332,7 @@ namespace Plotypus
         preprocessSheets(extDat);
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
-        hFile << "# output setup" << std::endl << std::endl;
+        hFile << "# terminal setup" << std::endl << std::endl;
 
         m_terminalInfoProvider.writeTerminalInfo(hFile);
 

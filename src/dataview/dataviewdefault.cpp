@@ -347,24 +347,24 @@ namespace Plotypus
     void DataViewDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         // *INDENT-OFF*
-        if (isFunction()) {hFile << func << " ";}
+        if (isFunction()) {hFile << func;}
         else
         {
-            hFile << std::quoted(dataFilename) << " ";
-            if (binaryDataOutput) {hFile << "binary format=\"%float64\" ";}
+            hFile << " " << std::quoted(dataFilename);
+            if (binaryDataOutput) {hFile << " binary format=\"%float64\"";}
         }
         writeUsingSpecification(hFile);
 
-        hFile << optionalQuotedTextString("title", title);
+        hFile << optionalQuotedTextString(" title", title);
 
-        hFile << "with " << plotStyle << " ";
+        hFile << " with " << plotStyle << " ";
 
         hFile << optionalStyleString("linestyle", lineStyle);
         stylesColloction.writePointStyleCode(hFile, pointStyle);
 
-        if (variablePointSize ) {hFile << "pointsize variable ";}
-        if (variablePointType ) {hFile << "pointtype variable ";}
-        if (variablePointColor) {hFile << "linecolor variable ";}
+        if (variablePointSize ) {hFile << " pointsize variable";}
+        if (variablePointType ) {hFile << " pointtype variable";}
+        if (variablePointColor) {hFile << " linecolor variable";}
 
         if (!options.empty()) {hFile << options;}
         // *INDENT-ON*
