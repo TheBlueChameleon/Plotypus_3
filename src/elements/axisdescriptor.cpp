@@ -202,6 +202,36 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    AxisDescriptor& AxisDescriptor::reset()
+    {
+        tics                = true;
+        ticsAuto            = true;
+        ticsLogscale        = false;
+        minorTics           = false;
+        gridMajor           = false;
+        gridMinor           = false;
+        labelText.reset();
+        labelFont.reset();
+        labelColor.reset();
+        labelOptions.reset();
+        rangeMin            = 0.;
+        rangeMax.reset();
+        rangeOptions.reset();
+        ticsStart.reset();
+        ticsEnd.reset();
+        ticsIncrement.reset();
+        ticsFormatstring.reset();
+        ticsLabels.clear();
+        ticsFont.reset();
+        ticsTextColor.reset();
+        ticsOptions.reset();
+        minorTicsIntervals.reset();
+        gridMajorOptions.reset();
+        gridMinorOptions.reset();
+
+        return *this;
+    }
+
     std::string AxisDescriptor::getLabelText() const
     {
         return labelText.value_or("");
