@@ -300,7 +300,7 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         if      (isDummy())     {hFile << "(external input from " << std::quoted(dataFilename) << ")"  << std::endl; return;}
-        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(title) << ")"  << std::endl; return;}
+        else if (isFunction())  {hFile << "(function " << std::quoted(func) << ", title " << std::quoted(title.value_or("")) << ")"  << std::endl; return;}
         else if (!isComplete()) {throw UnsupportedOperationError("Incomplete or non-consecutive list of columns or unsupported column type or detected");}
         // *INDENT-ON*
         else
@@ -377,7 +377,7 @@ namespace Plotypus
         if (variablePointType ) {hFile << " pointtype variable";}
         if (variablePointColor) {hFile << " linecolor variable";}
 
-        if (!options.empty()) {hFile << " " << options;}
+        if (!options.has_value()) {hFile << " " << options.value();}
         // *INDENT-ON*
     }
 }

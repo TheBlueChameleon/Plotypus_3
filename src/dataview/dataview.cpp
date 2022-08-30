@@ -31,14 +31,20 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& DataView::getTitle() const
+    const std::string DataView::getTitle() const
     {
-        return title;
+        return title.value_or("");
     }
 
     DataView& DataView::setTitle(const std::string& newTitle)
     {
         title = newTitle;
+        return *this;
+    }
+
+    DataView& DataView::clearTitle()
+    {
+        title.reset();
         return *this;
     }
 
@@ -87,14 +93,20 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& DataView::getOptions() const
+    const std::string DataView::getOptions() const
     {
-        return options;
+        return options.value_or("");
     }
 
     DataView& DataView::setOptions(const std::string& newOptions)
     {
         options = newOptions;
+        return *this;
+    }
+
+    DataView& DataView::clearOptions()
+    {
+        options.reset();
         return *this;
     }
 
