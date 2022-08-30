@@ -49,6 +49,11 @@ namespace Plotypus
         Default, Polar, Graph, Screen, Character
     };
 
+    enum class Layer
+    {
+        Front, Back, Behind
+    };
+
     // ---------------------------------------------------------------------- //
     /**
      * @brief Sheet element: Point Style (used with plots)

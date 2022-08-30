@@ -355,11 +355,11 @@ namespace Plotypus
         }
         writeUsingSpecification(hFile);
 
-        hFile << optionalQuotedTextString(" title", title);
+        hFile << optionalQuotedStringArgument(" title", title);
 
         hFile << " with " << plotStyle << " ";
 
-        hFile << optionalStyleString("linestyle", lineStyle);
+        hFile << optionalSizeTArgument("linestyle", lineStyle);
         stylesColloction.writePointStyleCode(hFile, pointStyle);
 
         if (variablePointSize ) {hFile << " pointsize variable";}

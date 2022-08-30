@@ -82,8 +82,8 @@ namespace Plotypus
         {
             hFile << "set " << axisCommand
                   << std::quoted(labelText.value()) << " "
-                  << optionalQuotedTextString("font", labelFont)
-                  << optionalQuotedTextString("textcolor", labelColor)
+                  << optionalQuotedStringArgument("font", labelFont)
+                  << optionalQuotedStringArgument("textcolor", labelColor)
                   << labelOptions.value_or("")
                   << std::endl;
         }
@@ -110,8 +110,8 @@ namespace Plotypus
                   << ticsSequenceString
                   << ticsListString
                   << (ticsLogscale ? "logscale " : "nologscale ")
-                  << optionalQuotedTextString("font", ticsFont)
-                  << optionalQuotedTextString("textcolor", ticsTextColor)
+                  << optionalQuotedStringArgument("font", ticsFont)
+                  << optionalQuotedStringArgument("textcolor", ticsTextColor)
                   << ticsOptions.value_or("")
                   << std::endl;
         }

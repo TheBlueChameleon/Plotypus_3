@@ -269,13 +269,13 @@ namespace Plotypus
                 hFile << "front ";
 
                 hFile << (label.alignment.size() ? label.alignment + " " : ""s);
-                hFile << optionalNumberString("rotate by", label.rotate);
+                hFile << optionalNumberArgument("rotate by", label.rotate);
 
-                hFile << optionalQuotedTextString("font", label.font);
-                hFile << optionalQuotedTextString("textcolor", label.textcolor);
+                hFile << optionalQuotedStringArgument("font", label.font);
+                hFile << optionalQuotedStringArgument("textcolor", label.textcolor);
                 if (label.boxed)
                 {
-                    hFile << "boxed " << optionalStyleString("bs", label.boxStyleID);
+                    hFile << "boxed " << optionalSizeTArgument("bs", label.boxStyleID);
                 }
                 hFile << label.options;
                 hFile << std::endl;

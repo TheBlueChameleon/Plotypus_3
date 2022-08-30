@@ -585,7 +585,7 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 
-    std::string optionalStyleString(const std::string& optionName, const size_t styleID)
+    std::string optionalSizeTArgument(const std::string& optionName, const size_t styleID)
     {
         // *INDENT-OFF*
         if (styleID == OPTIONAL_SIZE_T_DEFAULT) {return "";}
@@ -593,7 +593,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalQuotedTextString(const std::string& optionName, const std::string& option)
+    std::string optionalQuotedStringArgument(const std::string& optionName, const std::string& option)
     {
         // *INDENT-OFF*
         std::stringstream buffer;
@@ -603,7 +603,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalQuotedTextString(const std::string& optionName, const std::optional<std::string>& option)
+    std::string optionalQuotedStringArgument(const std::string& optionName, const std::optional<std::string>& option)
     {
         // *INDENT-OFF*
         std::stringstream buffer;
@@ -613,7 +613,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalNumberString(const std::string& optionName, const double number, bool turnOn)
+    std::string optionalNumberArgument(const std::string& optionName, const double number, bool turnOn)
     {
         // *INDENT-OFF*
         std::stringstream buffer;
@@ -623,9 +623,9 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalNumberString(const std::string& optionName, const double number)
+    std::string optionalNumberArgument(const std::string& optionName, const double number)
     {
-        return optionalNumberString(optionName, number, number != 0.);
+        return optionalNumberArgument(optionName, number, number != 0.);
     }
 
     std::string optionalNumberAsString(const std::optional<double>& option, const std::string& alternative)
@@ -666,4 +666,18 @@ namespace Plotypus
 
         return "undefined";
     }
+
+    std::string getLayerName(const Layer layer)
+    {
+        // *INDENT-OFF*
+        switch (layer) {
+            case Layer::Front:  return "front";
+            case Layer::Back:   return "back";
+            case Layer::Behind: return "behind";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
 };

@@ -221,7 +221,7 @@ namespace Plotypus
 
         if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}
         else                        {hFile <<   "set border " << border;
-                                     hFile << optionalStyleString("linestyle", borderLineStyle);
+                                     hFile << optionalSizeTArgument("linestyle", borderLineStyle);
                                      hFile << std::endl;}
         // *INDENT-ON*
 

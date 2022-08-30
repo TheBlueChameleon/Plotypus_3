@@ -170,13 +170,13 @@ namespace Plotypus
                 hFile << "set style textbox ";
                 hFile << std::to_string(ID);
                 hFile << (style.opaque ? " opaque" : " transparent") ;
-                hFile << optionalQuotedTextString("fillcolor", style.fillcolor);
+                hFile << optionalQuotedStringArgument("fillcolor", style.fillcolor);
 
                 if (style.border)
                 {
                     hFile << " border";
-                    hFile << optionalQuotedTextString("bordercolor", style.bordercolor);
-                    hFile << optionalNumberString    ("linewidth",   style.linewidth);
+                    hFile << optionalQuotedStringArgument("bordercolor", style.bordercolor);
+                    hFile << optionalNumberArgument    ("linewidth",   style.linewidth);
                 }
                 else
                 {
@@ -204,20 +204,20 @@ namespace Plotypus
                 hFile << "set style line ";
                 hFile << std::to_string(ID);
 
-                hFile << optionalQuotedTextString("linecolor", style.color);
-                hFile << optionalNumberString    ("linewidth", style.width);
+                hFile << optionalQuotedStringArgument("linecolor", style.color);
+                hFile << optionalNumberArgument    ("linewidth", style.width);
 
                 if (style.pointStyle.form != PointForm::None)
                 {
                     // *INDENT-OFF*
                     const auto& ps = style.pointStyle;
-                    if (ps.form == PointForm::Custom)   {hFile << optionalQuotedTextString("pointtype", ps.customSymbol);}
+                    if (ps.form == PointForm::Custom)   {hFile << optionalQuotedStringArgument("pointtype", ps.customSymbol);}
                     else                                {hFile << " pointtype " + std::to_string(static_cast<unsigned>(ps.form));}
-                    hFile << optionalNumberString("pointsize", ps.size);
+                    hFile << optionalNumberArgument("pointsize", ps.size);
                     // *INDENT-ON*
                 }
 
-                hFile << optionalQuotedTextString("dashtype", style.dashtype);
+                hFile << optionalQuotedStringArgument("dashtype", style.dashtype);
                 hFile << " " << style.options << std::endl;
                 ++ID;
             }
@@ -237,8 +237,8 @@ namespace Plotypus
         else if (psr.form == PointForm::Custom) {hFile << " pointtype " << std::quoted(psr.customSymbol);}
         else                                    {hFile << " pointtype " << std::to_string(pointStyleInt);}
 
-        hFile << optionalNumberString("pointsize", psr.size);
-        hFile << optionalQuotedTextString("linecolor", psr.color);
+        hFile << optionalNumberArgument("pointsize", psr.size);
+        hFile << optionalQuotedStringArgument("linecolor", psr.color);
         // *INDENT-ON*
     }
 }
