@@ -60,6 +60,8 @@ namespace Plotypus
     std::string getAlignmentName(const HorizontalAlignment alignment);
     std::string getAlignmentName(const VerticalAlignment alignment);
     std::string getAlignmentName(const MarginAlignment alignment);
+    std::string getJustificationName(const HorizontalAlignment alignment);
+    std::string getStackingOrderName(const StackingOrder stackingOrder);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 

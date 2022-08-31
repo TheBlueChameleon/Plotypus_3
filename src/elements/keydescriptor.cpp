@@ -103,7 +103,11 @@ namespace Plotypus
             {
                 const auto [marginAlignment, abstractAlignment] = arg;
 
-                hFile << getAlignmentName(marginAlignment) << ", ";
+                hFile << getAlignmentName(marginAlignment);
+
+                // *INDENT-OFF*
+                if (abstractAlignment != AbstractAlignment::Default) {hFile  << " ";}
+                // *INDENT-ON*
 
                 auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
                 if (marginAlignmentSense == StackingOrder::Horizontal)
@@ -119,8 +123,15 @@ namespace Plotypus
             }
             else if constexpr (std::is_same_v<T, insidePosition_t>)
             {
+                hFile << "inside ";
+
                 const auto [horizontalAlignment, verticalAlignment] = arg;
-                hFile << getAlignmentName(horizontalAlignment) << ", " << getAlignmentName(verticalAlignment);
+                hFile << getAlignmentName(horizontalAlignment);
+                if (horizontalAlignment != HorizontalAlignment::Default && verticalAlignment != VerticalAlignment::Default)
+                {
+                    hFile  << " ";
+                }
+                hFile << getAlignmentName(verticalAlignment);
             }
 
         }, position.value());
@@ -164,6 +175,12 @@ namespace Plotypus
     KeyDescriptor& KeyDescriptor::setPosition(const bool fixed, const OverlayPosition_t& coordinates)
     {
         position = explicitPosition_t{fixed, coordinates};
+        return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment)
+    {
+        position = marginPosition_t{marginAlignment, AbstractAlignment::Default};
         return *this;
     }
 
@@ -327,11 +344,62 @@ namespace Plotypus
         return *this;
     }
 
+    std::string KeyDescriptor::getOptions() const
+    {
+        return options.value_or("");
+    }
+
+    KeyDescriptor& KeyDescriptor::setOptions(const std::string& newOptions)
+    {
+        options = newOptions;
+        return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::clearOptions()
+    {
+        options.reset();
+        return *this;
+    }
+
     // ====================================================================== //
     // writer
 
     void KeyDescriptor::writeKeyDescriptor(std::ostream& hFile) const
     {
+        hFile << "set key";
+        if (on)
+        {
+            hFile << " on";
+            writePosition(hFile);
+            // *INDENT-OFF*
+            if (opaque)                                         {hFile << " opaque";}
+            if (justification != HorizontalAlignment::Default)  {hFile << " " << getJustificationName(justification);}
+            if (inverseOrder)                                   {hFile << " invert";}
+            if (reverseSymbol)                                  {hFile << " reverse";}
+            if (boxed)                                          {hFile << " box" << optionalSizeTArgument("linestyle", lineStyle);}
+            // *INDENT-ON*
 
+
+            switch (stackingOrder)
+            {
+                case StackingOrder::Default:
+                    break;
+                case StackingOrder::Horizontal:
+                    hFile << " " << getStackingOrderName(stackingOrder);
+                    hFile << optionalSizeTArgument("maxrows", maxGroupSize);
+                    break;
+                case StackingOrder::Vertical:
+                    hFile << " " << getStackingOrderName(stackingOrder);
+                    hFile << optionalSizeTArgument("maxcols", maxGroupSize);
+                    break;
+            }
+
+            hFile << optionalQuotedStringArgument("title", title);
+        }
+        else
+        {
+            hFile << " off";
+        }
+        hFile << std::endl;
     }
 }

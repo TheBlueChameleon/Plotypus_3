@@ -24,7 +24,7 @@ namespace Plotypus
 
             bool                                on = true;
 
-            bool                                opaque = true;
+            bool                                opaque = false;
             bool                                boxed  = false;
 
             bool                                inverseOrder  = false;
@@ -34,6 +34,8 @@ namespace Plotypus
 
             std::optional<size_t>               lineStyle;
             std::optional<size_t>               maxGroupSize;
+
+            std::optional<std::string>          options;
 
             void writePosition(std::ostream& hFile) const;
 
@@ -47,6 +49,7 @@ namespace Plotypus
 
             keyPosition_t       getPosition() const;
             KeyDescriptor&      setPosition(const bool fixed, const OverlayPosition_t& coordinates);
+            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment);
             KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const HorizontalAlignment horizontalAlignment);
             KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const VerticalAlignment verticalAlignment);
             KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment);
@@ -81,6 +84,10 @@ namespace Plotypus
             size_t              getMaxGroupSize() const;
             KeyDescriptor&      setMaxGroupSize(std::optional<size_t> newMaxGroupSize);
             KeyDescriptor&      clearMaxGroupSize();
+
+            std::string         getOptions() const;
+            KeyDescriptor&      setOptions(const std::string& newOptions);
+            KeyDescriptor&      clearOptions();
 
             void writeKeyDescriptor(std::ostream& hFile) const;
     };

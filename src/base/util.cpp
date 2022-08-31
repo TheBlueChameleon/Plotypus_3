@@ -582,6 +582,104 @@ namespace Plotypus
         return false;
     }
 
+    std::string getPositionSystemName(const PositionSystem ps)
+    {
+        // *INDENT-OFF*
+        switch (ps) {
+            case PositionSystem::Default:   return "";
+            case PositionSystem::Polar:     return "polar";
+            case PositionSystem::Graph:     return "graph";
+            case PositionSystem::Screen:    return "screen";
+            case PositionSystem::Character: return "character";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getLayerName(const Layer layer)
+    {
+        // *INDENT-OFF*
+        switch (layer) {
+            case Layer::Default:    return "";
+            case Layer::Front:      return "front";
+            case Layer::Back:       return "back";
+            case Layer::Behind:     return "behind";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getAlignmentName(const HorizontalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case HorizontalAlignment::Default:  return "";
+            case HorizontalAlignment::Left:     return "left";
+            case HorizontalAlignment::Center:   return "center";
+            case HorizontalAlignment::Right:    return "right";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getAlignmentName(const VerticalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case VerticalAlignment::Default:    return "";
+            case VerticalAlignment::Top:        return "top";
+            case VerticalAlignment::Center:     return "center";
+            case VerticalAlignment::Bottom:     return "bottom";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getAlignmentName(const MarginAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case MarginAlignment::Top:      return "tmargin";
+            case MarginAlignment::Bottom:   return "bmargin";
+            case MarginAlignment::Left:     return "lmargin";
+            case MarginAlignment::Right:    return "rmargin";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getJustificationName(const HorizontalAlignment alignment)
+    {
+        // *INDENT-OFF*
+        switch (alignment) {
+            case HorizontalAlignment::Default:  return "";
+            case HorizontalAlignment::Left:     return "Left";
+            case HorizontalAlignment::Center:   return "Center";
+            case HorizontalAlignment::Right:    return "Right";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getStackingOrderName(const StackingOrder stackingOrder)
+    {
+        // *INDENT-OFF*
+        switch (stackingOrder) {
+            case StackingOrder::Default:    return "";
+            case StackingOrder::Horizontal: return "horizontal";
+            case StackingOrder::Vertical:   return "vertical";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 
@@ -662,76 +760,4 @@ namespace Plotypus
         else                                    {option = value;}
         // *INDENT-ON*
     }
-
-    std::string getPositionSystemName(const PositionSystem ps)
-    {
-        // *INDENT-OFF*
-        switch (ps) {
-            case PositionSystem::Default:   return "";
-            case PositionSystem::Polar:     return "polar";
-            case PositionSystem::Graph:     return "graph";
-            case PositionSystem::Screen:    return "screen";
-            case PositionSystem::Character: return "character";
-        }
-        // *INDENT-ON*
-
-        return "undefined";
-    }
-
-    std::string getLayerName(const Layer layer)
-    {
-        // *INDENT-OFF*
-        switch (layer) {
-            case Layer::Default:    return "";
-            case Layer::Front:      return "front";
-            case Layer::Back:       return "back";
-            case Layer::Behind:     return "behind";
-        }
-        // *INDENT-ON*
-
-        return "undefined";
-    }
-
-    std::string getAlignmentName(const HorizontalAlignment alignment)
-    {
-        // *INDENT-OFF*
-        switch (alignment) {
-            case HorizontalAlignment::Default:  return "";
-            case HorizontalAlignment::Left:     return "left";
-            case HorizontalAlignment::Center:   return "center";
-            case HorizontalAlignment::Right:    return "right";
-        }
-        // *INDENT-ON*
-
-        return "undefined";
-    }
-
-    std::string getAlignmentName(const VerticalAlignment alignment)
-    {
-        // *INDENT-OFF*
-        switch (alignment) {
-            case VerticalAlignment::Default:    return "";
-            case VerticalAlignment::Top:        return "top";
-            case VerticalAlignment::Center:     return "center";
-            case VerticalAlignment::Bottom:     return "bottom";
-        }
-        // *INDENT-ON*
-
-        return "undefined";
-    }
-
-    std::string getAlignmentName(const MarginAlignment alignment)
-    {
-        // *INDENT-OFF*
-        switch (alignment) {
-            case MarginAlignment::Top:      return "tmargin";
-            case MarginAlignment::Bottom:   return "bmargin";
-            case MarginAlignment::Left:     return "lmargin";
-            case MarginAlignment::Right:    return "rmargin";
-        }
-        // *INDENT-ON*
-
-        return "undefined";
-    }
-
 };
