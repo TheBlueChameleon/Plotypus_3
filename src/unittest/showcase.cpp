@@ -296,6 +296,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
     sheet1
     .addDataViewSeparate(sepData_X, sepData_Y, PlotStyle::LinesPoints)
     .setPointStyle(pointStyleOffset);
+//    .clearTitle();
+//    .setTitle("TODO - empty title");
 
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines, "Sine Wave");
     sheet1.addDataViewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::Steps, "Cosine Wave");
@@ -304,6 +306,11 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     sheet1.axis(AxisType::X).setLabelText("abscissa");
     sheet1.axis(AxisType::Y).setLabelText("ordinate");
+
+    sheet1.key()
+    .setPosition(HorizontalAlignment::Left, VerticalAlignment::Center)
+    .setReverseSymbol(true)
+    .setJustification(HorizontalAlignment::Left);
 
     // ---------------------------------------------------------------------- //
     // Sheet 2: polar line plots
@@ -324,6 +331,11 @@ void showcase_run_plots2d(Plotypus::Report& report,
     sheet2.dataViewAs<compound_view_t>(1).setPlotStyleID(PlotStyle::Dots);
     // or:
     // dynamic_cast<DataViewDefaultCompound<compound_t>&>(sheet2.dataView(1)).setStyleID(PlotStyle::Dots);
+
+    sheet2.key()
+    .setPosition(MarginAlignment::Right)
+    .setBoxed(true)
+    .setTitle("Foo bar");
 
     // ---------------------------------------------------------------------- //
     // Sheet 3: bar plots
@@ -439,13 +451,23 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     .setRangeMax(+1.0);
     sheet2.setAspectEqual();
 
-    sheet2.addDataViewSeparate(PlotStyle::Image, "sin(1/r)")
+    sheet2.addDataViewSeparate(PlotStyle::Image, "sin(2/r)")
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
     .setData(ColumnType::Color, sepData_Z);
 
     sheet2.addLabel("Rendering of", -1.7, 0.6);
     sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
+
+    sheet2.key().setPosition(MarginAlignment::Bottom, HorizontalAlignment::Right);
+    try
+    {
+        sheet2.key().setPosition(MarginAlignment::Bottom, VerticalAlignment::Bottom);
+    }
+    catch (const PlotypusError& e)
+    {
+        std::cout << "No double specification of key position";
+    }
 }
 
 // ========================================================================== //

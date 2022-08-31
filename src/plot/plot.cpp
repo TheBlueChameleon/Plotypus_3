@@ -226,7 +226,8 @@ namespace Plotypus
                                      hFile << std::endl;}
         // *INDENT-ON*
 
-        hFile << "set key " << (m_key.getOn() ? "on" : "off") << std::endl;
+        m_key.writeKeyDescriptor(hFile);
+
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
         hFile << std::endl;
     }

@@ -278,8 +278,14 @@ namespace Plotypus
 
             hFile << "plot [][] 1/0 t\"\"" << std::endl;
         }
+        else
+        {
+            hFile << "set key default" << std::endl;
+        }
 
         hFile << "unset label" << std::endl;
+        hFile << "unset arrow" << std::endl;
+        hFile << "unset object" << std::endl;
         hFile << std::endl;
     }
 
