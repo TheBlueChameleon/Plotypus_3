@@ -56,7 +56,8 @@ namespace Plotypus
 
     BoxStyle& StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
     {
-        return addBoxStyle({true, border, 1.0, fillcolor, bordercolor});
+        const std::optional<std::string> fillcolorOptional = (fillcolor.empty() ? std::optional<std::string>() : fillcolor);
+        return addBoxStyle({true, border, 1.0, fillcolorOptional, bordercolor});
     }
 
     // ---------------------------------------------------------------------- //
@@ -97,10 +98,16 @@ namespace Plotypus
 
     LineStyle& StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
     {
-        return addLineStyle({color, width, dashtype, pointForm});
+        LineStyle ls = LineStyle{std::optional(color), std::optional(width), std::optional(dashtype)};
+        if (pointForm != PointForm::None)
+        {
+            ls.pointStyle->form = pointForm;
+        }
+
+        return addLineStyle(ls);
     }
 
-    // ---------------------------------------------------------------------- //
+// ---------------------------------------------------------------------- //
 
     size_t StylesCollection::getPointStyleCount() const
     {
@@ -147,7 +154,7 @@ namespace Plotypus
         });
     }
 
-    // ====================================================================== //
+// ====================================================================== //
 
     void StylesCollection::writeStyles(std::ostream& hFile) const
     {
@@ -182,7 +189,9 @@ namespace Plotypus
                 {
                     hFile << "noborder ";
                 }
-                hFile << style.options << std::endl;
+
+                hFile << optionalStringArgument("", style.options);
+                hFile << std::endl;
 
                 ++ID;
             }
@@ -205,20 +214,26 @@ namespace Plotypus
                 hFile << std::to_string(ID);
 
                 hFile << optionalQuotedStringArgument("linecolor", style.color);
-                hFile << optionalNumberArgument    ("linewidth", style.width);
+                hFile << optionalNumberArgument      ("linewidth", style.width);
 
-                if (style.pointStyle.form != PointForm::None)
+                if (style.pointStyle.has_value())
                 {
-                    // *INDENT-OFF*
-                    const auto& ps = style.pointStyle;
-                    if (ps.form == PointForm::Custom)   {hFile << optionalQuotedStringArgument("pointtype", ps.customSymbol);}
-                    else                                {hFile << " pointtype " + std::to_string(static_cast<unsigned>(ps.form));}
-                    hFile << optionalNumberArgument("pointsize", ps.size);
-                    // *INDENT-ON*
+                    const auto& ps = style.pointStyle.value();
+                    if (ps.form != PointForm::None)
+                    {
+                        // *INDENT-OFF*
+                        if (ps.form == PointForm::Custom)   {hFile << " pointtype " << std::quoted(ps.customSymbol);}
+                        else                                {hFile << " pointtype " << std::to_string(static_cast<unsigned>(ps.form));}
+
+                        hFile << optionalNumberArgument("pointsize", ps.size);
+                        // *INDENT-ON*
+                    }
                 }
 
                 hFile << optionalQuotedStringArgument("dashtype", style.dashtype);
-                hFile << " " << style.options << std::endl;
+                hFile << optionalStringArgument      ("", style.options);
+                hFile << std::endl;
+
                 ++ID;
             }
             hFile << std::endl;
@@ -240,6 +255,8 @@ namespace Plotypus
 
         hFile << optionalNumberArgument("pointsize", psr.size);
         hFile << optionalQuotedStringArgument("linecolor", psr.color);
+
+        hFile << optionalStringArgument("", psr.options);
         // *INDENT-ON*
     }
 }

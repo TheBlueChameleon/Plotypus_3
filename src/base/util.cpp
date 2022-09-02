@@ -691,13 +691,13 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    std::string optionalQuotedStringArgument(const std::string& optionName, const std::string& option)
+    std::string optionalStringArgument(const std::string& optionName, const std::optional<std::string>& option)
     {
         // *INDENT-OFF*
         std::stringstream buffer;
-        if (option.empty()) {return "";}
-        else                {buffer << " " << optionName << " " << std::quoted(option);
-                             return buffer.str();}
+        if (!option.has_value()) {return "";}
+        else                     {buffer << " " << optionName << " " << option.value();
+                                  return buffer.str();}
         // *INDENT-ON*
     }
 
@@ -709,21 +709,6 @@ namespace Plotypus
         else                     {buffer << " " << optionName << " " << std::quoted(option.value());
                                   return buffer.str();}
         // *INDENT-ON*
-    }
-
-    std::string optionalNumberArgument(const std::string& optionName, const double number, bool turnOn)
-    {
-        // *INDENT-OFF*
-        std::stringstream buffer;
-        if (turnOn) {buffer << " " << optionName << " " << number;
-                     return buffer.str();}
-        else        {return "";}
-        // *INDENT-ON*
-    }
-
-    std::string optionalNumberArgument(const std::string& optionName, const double number)
-    {
-        return optionalNumberArgument(optionName, number, number != 0.);
     }
 
     std::string optionalNumberArgument(const std::string& optionName, const std::optional<double>& number)

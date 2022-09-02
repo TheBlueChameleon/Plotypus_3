@@ -98,8 +98,9 @@ namespace Plotypus
         FilledDiamond,
         Pentagon,
         FilledPentagon,
+
         None = -1,
-        Custom = -2
+        Custom = -2,
     };
 
     // ====================================================================== //

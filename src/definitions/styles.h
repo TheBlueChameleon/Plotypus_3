@@ -1,6 +1,7 @@
 #ifndef STYLES_H
 #define STYLES_H
 
+#include <optional>
 #include <string>
 #include <utility>
 
@@ -13,10 +14,12 @@ namespace Plotypus
 
     struct PointStyle
     {
-        PointForm   form = PointForm::Point;
-        std::string customSymbol = "\\U+2299";
-        double      size = 1.0;
-        std::string color = "";
+        PointForm                   form = PointForm::Point;
+        std::string                 customSymbol;
+        std::optional<double>       size;
+        std::optional<std::string>  color;
+
+        std::optional<std::string> options;
 
         bool operator== (const PointStyle&) const = default;
 
@@ -32,11 +35,11 @@ namespace Plotypus
      */
     struct LineStyle
     {
-        std::string color       = "";
-        double      width       = 0.0;
-        std::string dashtype    = "";
-        PointStyle  pointStyle;
-        std::string options     = "";
+        std::optional<std::string> color;
+        std::optional<double>      width;
+        std::optional<std::string> dashtype;
+        std::optional<PointStyle>  pointStyle;
+        std::optional<std::string> options;
 
         bool operator== (const LineStyle&) const = default;
     };
@@ -55,12 +58,12 @@ namespace Plotypus
      */
     struct BoxStyle
     {
-        bool        opaque      = true;
-        bool        border      = true;
-        double      linewidth   = 0.0;
-        std::string fillcolor   = "";
-        std::string bordercolor = "";
-        std::string options     = "";
+        bool                        opaque      = true;
+        bool                        border      = true;
+        std::optional<double>       linewidth;
+        std::optional<std::string>  fillcolor;
+        std::optional<std::string>  bordercolor;
+        std::optional<std::string>  options;
 
         bool operator== (const BoxStyle&) const = default;
     };

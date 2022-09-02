@@ -466,7 +466,7 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     }
     catch (const PlotypusError& e)
     {
-        std::cout << "No double specification of key position";
+        std::cout << "No double specification of key position" << std::endl;
     }
 }
 
