@@ -14,6 +14,13 @@ namespace Plotypus
 
     Sheet& SheetsCollection::addSheet(Sheet* newSheet)
     {
+        auto sheetType = newSheet->getType();
+        if (contains(sheetType, forbiddenSheetTypes))
+        {
+            delete newSheet;
+            throw UnsupportedOperationError("Cannot add Sheet of type " + getSheetTypeName(sheetType));
+        }
+
         sheets.push_back(newSheet);
         return *sheets.back();
     }

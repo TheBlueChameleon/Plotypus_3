@@ -6,15 +6,13 @@
 namespace Plotypus
 {
     class PlotOrthogonalAxes;
+    class Sheet;
 
-    /**
-     * @todo make use of forbiddenSheetTypes
-     */
     class SheetsCollection
     {
         protected:
             std::vector<Plotypus::Sheet*> sheets;
-            const std::vector<SheetType> forbiddenSheetTypes;
+            const std::vector<SheetType>  forbiddenSheetTypes;
 
             Plotypus::Sheet& addSheet (Plotypus::Sheet* newSheet);
 
