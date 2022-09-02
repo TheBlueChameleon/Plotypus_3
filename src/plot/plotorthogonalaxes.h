@@ -14,6 +14,8 @@ namespace Plotypus
 {
     /**
      * @todo set equal xy / xyz
+     *
+     * @todo externalize
      */
 
     class PlotOrthogonalAxes : public Plot
@@ -27,6 +29,7 @@ namespace Plotypus
             std::unordered_map<AxisType, AxisDescriptor> axes;
 
         public:
+            PlotOrthogonalAxes();
             PlotOrthogonalAxes(const std::string& title);
             ~PlotOrthogonalAxes();
 

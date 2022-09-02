@@ -15,6 +15,10 @@ namespace Plotypus
      * @todo key descriptor (cf. p.160)
      *
      * @todo strings as std::optional
+     *
+     * @todo make abstract
+     *
+     * @todo externalize std::vector<DataView*> dataViews via new base class DataViewsCollection..?
      */
     class Plot : public Sheet
     {
@@ -31,12 +35,13 @@ namespace Plotypus
             std::string datalineSeparatorTxt = "................................................................................\n";
 
             KeyDescriptor m_key;
-            bool        parametric  = false;
+            bool          parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
 
         public:
-            Plot(const std::string& title);
+            Plot(const SheetType& type);
+            Plot(const SheetType& type, const std::string& title);
 
             virtual Plot& reset();
 

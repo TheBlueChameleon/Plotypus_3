@@ -2,11 +2,16 @@
 
 namespace Plotypus
 {
-    PlotOrthogonalAxes::PlotOrthogonalAxes(const std::string& title) :
-        Plot(title)
+    PlotOrthogonalAxes::PlotOrthogonalAxes() :
+        Plot(SheetType::PlotOrthogonalAxis)
     {
-        type = SheetType::PlotOrthogonalAxis;
+        axes[AxisType::X] = AxisDescriptor(AxisType::X);
+        axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
+    }
 
+    PlotOrthogonalAxes::PlotOrthogonalAxes(const std::string& title) :
+        Plot(SheetType::PlotOrthogonalAxis, title)
+    {
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
@@ -50,6 +55,8 @@ namespace Plotypus
         if (axisID == AxisType::Undefined) {throw UnsupportedOperationError("Cannot operate on undefined axis");}
         if (!axes.contains(axisID)) {axes[axisID] = AxisDescriptor(axisID);}
         // *INDENT-ON*
+
+//        std::cout <<
 
         return axes[axisID];
     }

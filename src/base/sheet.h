@@ -21,7 +21,7 @@ namespace Plotypus
             // .............................................................. //
             // behaviour objects
 
-            SheetType type;
+            const SheetType type;
 
             std::optional<std::string> title;
             std::optional<std::string> defaultFont = "Arial,7";
@@ -34,7 +34,10 @@ namespace Plotypus
             std::vector<Overlay*> overlays;
 
         public:
-            Sheet(const std::string& title);
+            Sheet();
+            Sheet(const SheetType& type);
+            Sheet(                       const std::string& title);
+            Sheet(const SheetType& type, const std::string& title);
             ~Sheet();
 
             SheetType getType() const;

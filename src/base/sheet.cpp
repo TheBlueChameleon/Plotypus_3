@@ -4,9 +4,22 @@ using namespace std::string_literals;
 
 namespace Plotypus
 {
+    Sheet::Sheet() :
+        type(SheetType::Sheet)
+    {}
+
+    Sheet::Sheet(const SheetType& type) :
+        type(type)
+    {}
+
     Sheet::Sheet(const std::string& title) :
         title(title),
         type(SheetType::Sheet)
+    {}
+
+    Sheet::Sheet(const SheetType& type, const std::string& title) :
+        type(type),
+        title(title)
     {}
 
     Sheet::~Sheet()

@@ -5,8 +5,13 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    Plot::Plot(const std::string& title) :
-        Sheet(title)
+
+    Plot::Plot(const SheetType& type) :
+        Sheet(type)
+    {}
+
+    Plot::Plot(const SheetType& type, const std::string& title) :
+        Sheet(type, title)
     {}
 
     // ====================================================================== //

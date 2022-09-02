@@ -63,9 +63,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    Report::Report() {}
+    Report::Report() :
+        SheetsCollection(forbiddenSheetTypes)
+    {}
 
-    Report::Report(FileType fileType)
+    Report::Report(FileType fileType) :
+        SheetsCollection(forbiddenSheetTypes)
     {
         setFileType(fileType);
         m_terminalInfoProvider.setFileType(fileType);
@@ -102,43 +105,6 @@ namespace Plotypus
     TerminalInfoProvider& Report::terminalInfoProvider()
     {
         return m_terminalInfoProvider;
-    }
-
-    // ====================================================================== //
-
-    size_t Report::getReportSize() const
-    {
-        return sheets.size();
-    }
-
-    Sheet& Report::sheet(const size_t i) const
-    {
-        throwIfInvalidIndex("sheet index", i, sheets);
-        return *(sheets[i]);
-    }
-
-    Sheet& Report::addSheet(const std::string& title)
-    {
-        sheets.push_back(new Sheet(title));
-        return *sheets.back();
-    }
-
-    PlotOrthogonalAxes& Report::addPlotOrthogonalAxes(const std::string& title)
-    {
-        PlotOrthogonalAxes* newPlot = new PlotOrthogonalAxes(title);
-        sheets.push_back(newPlot);
-        return *newPlot;
-    }
-
-    Report& Report::clearSheets()
-    {
-        for (auto ptr : sheets)
-        {
-            delete ptr;
-        }
-        sheets.clear();
-
-        return *this;
     }
 
     // ====================================================================== //

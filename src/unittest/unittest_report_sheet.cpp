@@ -21,7 +21,7 @@ bool unittest_report_basicSheetManagement()
 
     // ...................................................................... //
 
-    UNITTEST_ASSERT(r.getReportSize() == 0,
+    UNITTEST_ASSERT(r.getSheetCount() == 0,
                     "initialize empty list of sheets");
 
     UNITTEST_THROWS(r.sheet(0),
@@ -29,13 +29,13 @@ bool unittest_report_basicSheetManagement()
                     "prevent access to nonexistent sheets");
 
     r.addSheet();
-    UNITTEST_ASSERT(r.getReportSize() == 1,
+    UNITTEST_ASSERT(r.getSheetCount() == 1,
                     "add sheet");
 
     {
         auto& s = r.addSheet();
     }
-    UNITTEST_ASSERT(r.getReportSize() == 2,
+    UNITTEST_ASSERT(r.getSheetCount() == 2,
                     "add sheet in scope and persist thereafter");
 
     UNITTEST_DOESNT_THROW(r.sheet(0),
