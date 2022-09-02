@@ -1,4 +1,5 @@
 #include "plotorthogonalaxes.h"
+#include <iostream>
 
 namespace Plotypus
 {
@@ -55,8 +56,6 @@ namespace Plotypus
         if (axisID == AxisType::Undefined) {throw UnsupportedOperationError("Cannot operate on undefined axis");}
         if (!axes.contains(axisID)) {axes[axisID] = AxisDescriptor(axisID);}
         // *INDENT-ON*
-
-//        std::cout <<
 
         return axes[axisID];
     }

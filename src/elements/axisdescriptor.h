@@ -27,7 +27,7 @@ namespace Plotypus
             std::optional<std::string>      labelColor;
             std::optional<std::string>      labelOptions;
 
-            std::optional<double>           rangeMin            = 0.;
+            std::optional<double>           rangeMin;
             std::optional<double>           rangeMax;
             std::optional<std::string>      rangeOptions;
 
