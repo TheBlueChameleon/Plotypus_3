@@ -20,6 +20,7 @@
 #include "definitions/constants.h"
 
 #include "base/util.h"
+#include "base/sheetscollection.h"
 #include "base/report.h"
 #include "base/sheet.h"
 #include "base/stylescollection.h"
