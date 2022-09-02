@@ -18,7 +18,7 @@ namespace Plotypus
     // throw if ...
 
     template<std::ranges::sized_range T>
-    void throwIfInvalidIndex(const std::string& indexName, const size_t i, T collection)
+    void throwIfInvalidIndex(const std::string& indexName, const size_t i, const T& collection)
     {
         if (i >= collection.size())
         {

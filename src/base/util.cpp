@@ -423,6 +423,20 @@ namespace Plotypus
         return "(undefined)";
     }
 
+    std::string getSheetTypeName(const SheetType sheetType)
+    {
+        // *INDENT-OFF*
+        switch (sheetType) {
+            case SheetType::Sheet               : return "Sheet";
+            case SheetType::Multiplot           : return "Multiplot";
+            case SheetType::PlotOrthogonalAxis  : return "PlotOrthogonalAxis";
+            case SheetType::PlotRadialAxes      : return "PlotRadialAxis";
+        }
+        // *INDENT-ON*
+
+        return "(undefined)";
+    }
+
     std::string getColumnIDName(const ColumnType columnType)
     {
         // *INDENT-OFF*

@@ -13,7 +13,6 @@ namespace Plotypus
 {
     /**
      * @todo objects (rects, ellipses, ...), arrows
-     * @todo introduce customScriptInter, before plot, after generated.
      */
     class Sheet
     {

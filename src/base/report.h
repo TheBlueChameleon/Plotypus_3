@@ -19,8 +19,7 @@ namespace Plotypus
      * Sheets and write all related output to files.
      *
      * @todo better support for Filetype Screen
-     * @todo move responsibility for "tidy up code" to individual sheets
-     * @todo monadic design: setters return ref to self
+     * @todo rethink responsibility for outputToFile, filenameBase wrt. TerminalInfoProvider (command set output 'filename')
      */
 
     class Sheet;
@@ -31,8 +30,6 @@ namespace Plotypus
     {
         private:
             static constexpr std::initializer_list<SheetType> forbiddenSheetTypes = {};
-
-            //std::vector<Plotypus::Sheet*> sheets;
 
             std::string outputDirectory     = "";
             std::string filenameBase        = "report";

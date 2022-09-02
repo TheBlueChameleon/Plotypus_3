@@ -30,7 +30,7 @@ namespace Plotypus
     void throwIfInvalidFilename(const std::string& component, const std::string& stringToTest);
 
     template<std::ranges::sized_range T>
-    void throwIfInvalidIndex(const std::string& indexName, const size_t i, T collection);
+    void throwIfInvalidIndex(const std::string& indexName, const size_t i, const T& collection);
 
     // ---------------------------------------------------------------------- //
     // column assignment magic
@@ -53,6 +53,7 @@ namespace Plotypus
     std::string getTerminalName(const FileType fileType);
     std::string getLengthUnitName(const LengthUnit lengthUnit);
     std::string getColumnIDName(const ColumnType columnType);
+    std::string getSheetTypeName(const SheetType sheetType);
     std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
     std::string getPositionSystemName(const PositionSystem ps);

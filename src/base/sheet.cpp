@@ -37,10 +37,11 @@ namespace Plotypus
     Sheet& Sheet::reset()
     {
         title.reset();
-        defaultFont = "arial,7";
+        defaultFont = "Arial,7";
 
-        customScriptBegin = "";
-        customScriptEnd   = "";
+        customScriptBegin.reset();
+        customScriptInter.reset();
+        customScriptEnd  .reset();
 
         clearOverlays();
 
