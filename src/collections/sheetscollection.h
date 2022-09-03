@@ -8,24 +8,29 @@ namespace Plotypus
     class PlotOrthogonalAxes;
     class Sheet;
 
+    //! @todo copy sheet funcs
     class SheetsCollection
     {
         protected:
             std::vector<Plotypus::Sheet*> sheets;
-            const std::vector<SheetType>  forbiddenSheetTypes;
+            const std::vector<SheetType>  allowedSheetTypes;
 
             Plotypus::Sheet& addSheet (Plotypus::Sheet* newSheet);
+            static void clearSheet(Sheet* sheet);
 
         public:
-            SheetsCollection(const std::vector<SheetType>& forbiddenSheetTypes);
+            SheetsCollection(const std::vector<SheetType>& allowedSheetTypes);
             ~SheetsCollection();
 
             SheetsCollection& reset();
+            SheetsCollection& clearSheets();
 
             size_t getSheetCount() const;
 
-            Plotypus::Sheet& sheet(const size_t i);
+            const std::vector<Plotypus::Sheet*>&    getSheets() const;
+            const std::vector<SheetType>&           getAllowedSheetTypes() const;
 
+            Plotypus::Sheet& sheet(const size_t i);
             template<SheetLike T>
             T& sheetAs(const size_t i);
 
@@ -34,9 +39,6 @@ namespace Plotypus
 
             Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes();
             Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title = "");
-
-            //! @todo cast and properly deallocate sheets by const SheetType type;
-            SheetsCollection& clearSheets();
     };
 }
 

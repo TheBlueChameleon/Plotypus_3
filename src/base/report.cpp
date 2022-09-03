@@ -64,19 +64,13 @@ namespace Plotypus
     // ====================================================================== //
 
     Report::Report() :
-        SheetsCollection(forbiddenSheetTypes)
+        SheetsCollection(allowedSheetTypes)
     {}
 
     Report::Report(FileType fileType) :
-        SheetsCollection(forbiddenSheetTypes)
+        SheetsCollection(allowedSheetTypes)
     {
         setFileType(fileType);
-        m_terminalInfoProvider.setFileType(fileType);
-    }
-
-    Report::~Report()
-    {
-        clearSheets();
     }
 
     Report& Report::reset()
