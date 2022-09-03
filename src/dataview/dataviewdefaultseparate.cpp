@@ -20,11 +20,11 @@ namespace Plotypus
     }
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& label) :
-        DataViewDefault(style, label)
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, label)
     {}
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& label) :
-        DataViewDefault(style, label)
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, label)
     {}
 
     size_t DataViewDefaultSeparate::getArity() const

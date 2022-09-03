@@ -4,14 +4,24 @@ using namespace Plotypus;
 
 namespace Plotypus
 {
-    DataView::DataView(const PlotStyle plotStyleID, const std::string& label) :
-        title(label)
+    DataView::DataView(const DataViewType type, const PlotStyle plotStyleID) :
+        type(type), title(std::optional<std::string>())
     {
         setPlotStyleID(plotStyleID);
     }
 
-    DataView::DataView(const std::string& plotStyle, const std::string& label) :
-        title(label), plotStyle(plotStyle), plotStyleID(PlotStyle::Custom)
+    DataView::DataView(const DataViewType type, const PlotStyle plotStyleID, const std::string& title) :
+        type(type), title(title)
+    {
+        setPlotStyleID(plotStyleID);
+    }
+
+    DataView::DataView(const DataViewType type, const std::string& plotStyle) :
+        type(type), title(std::optional<std::string>()), plotStyle(plotStyle), plotStyleID(PlotStyle::Custom)
+    {}
+
+    DataView::DataView(const DataViewType type, const std::string& plotStyle, const std::string& title) :
+        type(type), title(title), plotStyle(plotStyle), plotStyleID(PlotStyle::Custom)
     {}
 
     // ====================================================================== //

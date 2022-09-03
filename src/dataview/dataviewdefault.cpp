@@ -133,12 +133,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataViewDefault::DataViewDefault(const PlotStyle plotStyleID, const std::string& label) :
-        DataView(plotStyleID, label)
+    DataViewDefault::DataViewDefault(const DataViewType type, const PlotStyle plotStyleID, const std::string& label) :
+        DataView(type, plotStyleID, label)
     {}
 
-    DataViewDefault::DataViewDefault(const std::string& plotStyle, const std::string& label) :
-        DataView(plotStyle, label)
+    DataViewDefault::DataViewDefault(const DataViewType type, const std::string& plotStyle, const std::string& label) :
+        DataView(type, plotStyle, label)
     {}
 
     // ====================================================================== //

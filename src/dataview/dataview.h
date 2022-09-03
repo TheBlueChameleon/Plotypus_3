@@ -43,9 +43,10 @@ namespace Plotypus
             virtual void clearNonFunctionMembers() = 0;
 
         public:
-            //! @bug call of virtual method in CTor
-            DataView(const PlotStyle    plotStyleID, const std::string& label = "");
-            DataView(const std::string& plotStyle, const std::string& label = "");
+            DataView(const DataViewType type, const PlotStyle    plotStyleID);
+            DataView(const DataViewType type, const PlotStyle    plotStyleID, const std::string& title);
+            DataView(const DataViewType type, const std::string& plotStyle);
+            DataView(const DataViewType type, const std::string& plotStyle,   const std::string& title);
 
             virtual DataView&   reset();
 
@@ -62,7 +63,7 @@ namespace Plotypus
             DataView&           setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
             const PlotStyle     getPlotStyleID() const;
-            virtual DataView&   setPlotStyleID(const PlotStyle newStyle);
+            DataView&           setPlotStyleID(const PlotStyle newStyle);
 
             const std::string   getOptions() const;
             DataView&           setOptions(const std::string& newOptions);
