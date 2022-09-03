@@ -21,6 +21,8 @@ namespace Plotypus
     class DataView
     {
         protected:
+            DataViewType                type;
+
             PlotStyle                   plotStyleID;
             PlotStyleFamily             plotStyleFamily;
 
@@ -41,11 +43,13 @@ namespace Plotypus
             virtual void clearNonFunctionMembers() = 0;
 
         public:
-            //! @bug call of virtual method
+            //! @bug call of virtual method in CTor
             DataView(const PlotStyle    plotStyleID, const std::string& label = "");
             DataView(const std::string& plotStyle, const std::string& label = "");
 
-            virtual DataView& reset();
+            virtual DataView&   reset();
+
+            DataViewType        getType() const;
 
             const std::string   getTitle() const;
             DataView&           setTitle(const std::string& newTitle);
