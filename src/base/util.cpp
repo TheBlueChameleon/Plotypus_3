@@ -437,6 +437,18 @@ namespace Plotypus
         return "(undefined)";
     }
 
+    std::string getDataViewTypeName(const DataViewType viewType)
+    {
+        // *INDENT-OFF*
+        switch (viewType) {
+            case DataViewType::DataViewDefaultCompound : return "DataViewDefaultCompound";
+            case DataViewType::DataViewDefaultSeparate : return "DataViewDefaultSeparate";
+        }
+        // *INDENT-ON*
+
+        return "(undefined)";
+    }
+
     std::string getColumnIDName(const ColumnType columnType)
     {
         // *INDENT-OFF*

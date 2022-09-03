@@ -54,6 +54,7 @@ namespace Plotypus
     std::string getLengthUnitName(const LengthUnit lengthUnit);
     std::string getColumnIDName(const ColumnType columnType);
     std::string getSheetTypeName(const SheetType sheetType);
+    std::string getDataViewTypeName(const DataViewType viewType);
     std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
     std::string getPositionSystemName(const PositionSystem ps);
