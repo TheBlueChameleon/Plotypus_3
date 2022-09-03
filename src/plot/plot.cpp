@@ -141,9 +141,9 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Plot::getAspect() const
+    const std::string Plot::getAspect() const
     {
-        return aspect;
+        return aspect.value_or("");
     }
 
     Plot& Plot::setAspect(const std::string& newAspect)
@@ -176,14 +176,26 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& Plot::getFill() const
+    Plot& Plot::clearAspect()
     {
-        return fill;
+        aspect.reset();
+        return *this;
+    }
+
+    const std::string Plot::getFill() const
+    {
+        return fill.value_or("");
     }
 
     Plot& Plot::setFill(const std::string& newFill)
     {
         fill = newFill;
+        return *this;
+    }
+
+    Plot& Plot::clearFill()
+    {
+        fill.reset();
         return *this;
     }
 
@@ -221,8 +233,8 @@ namespace Plotypus
         Sheet::writeScriptHead(hFile);
 
         // *INDENT-OFF*
-        if (!aspect.empty()) {hFile << "set size " << aspect << std::endl;}
-        if (!fill.  empty()) {hFile << "set style fill " << fill << std::endl;}
+        if (aspect.has_value()) {hFile << "set size " << aspect.value() << std::endl;}
+        if (fill.  has_value()) {hFile << "set style fill " << fill.value() << std::endl;}
 
 
         if (border == BORDERS_NONE) {hFile << "unset border" << std::endl;}

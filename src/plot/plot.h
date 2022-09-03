@@ -12,25 +12,21 @@ namespace Plotypus
     /**
      * @brief foo bar
      *
-     * @todo key descriptor (cf. p.160)
-     *
-     * @todo strings as std::optional
-     *
      * @todo make abstract
      *
-     * @todo externalize std::vector<DataView*> dataViews via new base class DataViewsCollection..?
+     * @note externalize std::vector<DataView*> dataViews via new base class DataViewsCollection..? probably not necessary, since there will be no other DataViewCollections.
      */
     class Plot : public Sheet
     {
         protected:
-            PlotStyleFamily         plotStyleFamily = PlotStyleFamily::Undefined;
-            std::vector<DataView*>  dataViews;
+            PlotStyleFamily             plotStyleFamily = PlotStyleFamily::Undefined;
+            std::vector<DataView*>      dataViews;
 
-            size_t                  border = BORDERS_DEFAULT;
-            std::optional<size_t>   borderLineStyle;
+            size_t                      border = BORDERS_DEFAULT;
+            std::optional<size_t>       borderLineStyle;
 
-            std::string aspect      = "noratio";
-            std::string fill        = "solid";
+            std::optional<std::string>  aspect = "noratio";
+            std::optional<std::string>  fill   = "solid";
 
             std::string datalineSeparatorTxt = "................................................................................\n";
 
@@ -61,14 +57,16 @@ namespace Plotypus
             Plot&               setBorderLineStyle(size_t newBorderLineStyle);
             Plot&               clearBorderLineStyle();
 
-            const std::string&  getAspect      () const;
+            const std::string   getAspect      () const;
             Plot&               setAspect      (const std::string& newAspect);
             Plot&               setAspectNone  ();
             Plot&               setAspectSquare();
             Plot&               setAspectEqual ();
             Plot&               setAspectRatio (double ratio);
-            const std::string&  getFill() const;
+            Plot&               clearAspect    ();
+            const std::string   getFill() const;
             Plot&               setFill(const std::string& newFill);
+            Plot&               clearFill();
 
             const std::string&  getDatalineSeparatorTxt() const;
             Plot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
