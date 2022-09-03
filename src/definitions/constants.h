@@ -1,10 +1,14 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include "internalconstants.h"
+
 namespace Plotypus
 {
 //! @addtogroup Plotypus_Definitions
+//! @todo introduce header internal consts?
 //! @{
+
 
     // ====================================================================== //
     // TerminalInfoProvider
@@ -30,12 +34,15 @@ namespace Plotypus
 
     enum class LengthUnit
     {
-        Inch, Centimeter,
+        Inch,
+        Centimeter,
     };
 
     enum class LineEnds
     {
-        Default, Rounded, Butt,
+        Default,
+        Rounded,
+        Butt,
     };
 
     // ====================================================================== //
@@ -46,34 +53,52 @@ namespace Plotypus
      */
     enum class PositionSystem
     {
-        Default, Polar, Graph, Screen, Character
+        Default,
+        Polar,
+        Graph,
+        Screen,
+        Character
     };
 
     enum class Layer
     {
-        Default, Front, Back, Behind
+        Default,
+        Front,
+        Back,
+        Behind
     };
 
     // ---------------------------------------------------------------------- //
 
     enum class HorizontalAlignment
     {
-        Default, Left, Center, Right,
+        Default,
+        Left,
+        Center,
+        Right,
     };
 
     enum class VerticalAlignment
     {
-        Default, Bottom, Center, Top
+        Default,
+        Bottom,
+        Center,
+        Top
     };
 
     enum class MarginAlignment
     {
-        Left, Right, Top, Bottom
+        Left,
+        Right,
+        Top,
+        Bottom
     };
 
     enum class StackingOrder
     {
-        Default, Vertical, Horizontal
+        Default,
+        Vertical,
+        Horizontal
     };
 
     // ---------------------------------------------------------------------- //
@@ -103,26 +128,7 @@ namespace Plotypus
         Custom = -2,
     };
 
-    // ====================================================================== //
-    // Sheet
 
-    /**
-     * @brief internally used specifyer of data format
-     */
-    enum class SheetType
-    {
-        //! @brief an empty sheet, optionally with title. Ready to be populated with overlays
-        Sheet,
-
-        //! @brief functionality of sheet, together with capacity to render 2D/3D plots with orthogonal axes
-        PlotOrthogonalAxis,
-
-        //! @brief same, but renders pie charts and spiderplots
-        PlotRadialAxes,
-
-        //! @brief a sheet with multiple subsheets on it
-        Multiplot
-    };
 
     // ========================================================================== //
     // Plot
@@ -173,19 +179,6 @@ namespace Plotypus
         Vectors3D,
         Image3D,
 
-        Custom
-    };
-
-    // ---------------------------------------------------------------------- //
-    /**
-     * @brief used internally to distinguish between mechanisms for plot command generation
-     */
-    enum class PlotStyleFamily
-    {
-        Undefined,
-        Orthogonal2D,
-        Orthogonal3D,
-        Radial,
         Custom
     };
 

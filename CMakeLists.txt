@@ -21,6 +21,7 @@ add_library(Plotypus-lib SHARED
     src/definitions/styles.h
     src/definitions/errors.h
     src/definitions/constants.h
+    src/definitions/internalconstants.h
     #
     src/collections/stylescollection.h src/collections/stylescollection.cpp
     src/collections/sheetscollection.h src/collections/sheetscollection.cpp src/collections/sheetscollection.txx
