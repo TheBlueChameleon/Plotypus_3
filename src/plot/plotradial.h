@@ -7,6 +7,9 @@ namespace Plotypus
 {
     class PlotRadial : public Plot
     {
+        protected:
+            void abstractToken();
+
         public:
             PlotRadial(const std::string& title);
     };

@@ -13,8 +13,7 @@ namespace Plotypus
         else if (plotStyleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
-        dataViews.push_back(dataView);
-        return *dataView;
+        return *static_cast<DataViewDefaultCompound<T>*>(DataViewCollection::addDataView(dataView));
     }
 
     template<class T>

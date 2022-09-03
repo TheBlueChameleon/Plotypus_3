@@ -17,6 +17,8 @@ namespace Plotypus
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
+    void PlotOrthogonalAxes::abstractToken() {}
+
     // ====================================================================== //
 
     PlotOrthogonalAxes& PlotOrthogonalAxes::reset()
@@ -134,14 +136,12 @@ namespace Plotypus
         else if (plotStyleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
-        dataViews.push_back(dataView);
-        return *dataView;
+        return *static_cast<DataViewDefaultSeparate*>(DataViewCollection::addDataView(dataView));
     }
 
     DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const PlotStyle style, const std::string& label)
     {
-        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
-        return addDataViewSeparate(dataView);
+        return addDataViewSeparate( new DataViewDefaultSeparate(style, label) );
     }
 
     DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)

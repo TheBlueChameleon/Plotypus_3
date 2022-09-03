@@ -2,7 +2,7 @@
 
 namespace Plotypus
 {
-    DataView& DataViewCollection::addDataView(DataView* dataView)
+    DataView* DataViewCollection::addDataView(DataView* dataView)
     {
         auto viewType = dataView->getType();
         if (contains(viewType, allowedDataViewTypes))
@@ -15,7 +15,7 @@ namespace Plotypus
             throw UnsupportedOperationError("Cannot add Sheet of type " + getDataViewTypeName(viewType));
         }
 
-        return *dataViews.back();
+        return dataViews.back();
     }
 
     void DataViewCollection::clearDataView(DataView* dataView)

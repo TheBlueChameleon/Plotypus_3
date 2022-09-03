@@ -11,7 +11,7 @@ namespace Plotypus
             std::vector<DataView*>          dataViews;
             const std::vector<DataViewType> allowedDataViewTypes;
 
-            DataView&   addDataView(DataView* dataView);
+            DataView* addDataView(DataView* dataView);
 
             static void clearDataView(DataView* dataView);
 

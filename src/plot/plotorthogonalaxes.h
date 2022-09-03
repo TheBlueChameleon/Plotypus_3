@@ -18,6 +18,8 @@ namespace Plotypus
      * @todo cannot splot in polar coordinate system
      *
      * @todo addView(View& other) as add Copy
+     *
+     * @todo adders with empty label; label alias title?
      */
 
     class PlotOrthogonalAxes : public Plot
@@ -33,6 +35,8 @@ namespace Plotypus
             DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
             template<class T>
             DataViewDefaultCompound<T>& addDataViewCompound(DataViewDefaultCompound<T>* dataView);
+
+            void abstractToken();
 
         public:
             PlotOrthogonalAxes();

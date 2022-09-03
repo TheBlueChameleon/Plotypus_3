@@ -12,8 +12,6 @@ namespace Plotypus
 {
     /**
      * @brief foo bar
-     *
-     * @todo make abstract
      */
     class Plot : public Sheet, public DataViewCollection
     {
@@ -38,6 +36,8 @@ namespace Plotypus
             bool          parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
+
+            virtual void abstractToken() = 0;
 
         public:
             Plot(const SheetType& type);
