@@ -19,13 +19,25 @@ namespace Plotypus
         }
     }
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& label) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, label)
+    // ====================================================================== //
+
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style) :
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style)
     {}
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& label) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, label)
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& title) :
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, title)
     {}
+
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style) :
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style)
+    {}
+
+    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& title) :
+        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, title)
+    {}
+
+    // ====================================================================== //
 
     size_t DataViewDefaultSeparate::getArity() const
     {

@@ -14,8 +14,10 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataViewDefaultSeparate(const PlotStyle  style, const std::string& label = "");
-            DataViewDefaultSeparate(const std::string& style, const std::string& label = "");
+            DataViewDefaultSeparate(const PlotStyle    style);
+            DataViewDefaultSeparate(const PlotStyle    style, const std::string& title);
+            DataViewDefaultSeparate(const std::string& style);
+            DataViewDefaultSeparate(const std::string& style, const std::string& title);
 
             //! @todo maybe do check: isComplete?
             virtual size_t              getArity() const;

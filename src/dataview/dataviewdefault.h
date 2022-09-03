@@ -43,8 +43,10 @@ namespace Plotypus
             void makePlusMinusFormat();
 
         public:
-            DataViewDefault(const DataViewType type, const PlotStyle    plotStyleID, const std::string& label = "");
-            DataViewDefault(const DataViewType type, const std::string& plotStyle,   const std::string& label = "");
+            DataViewDefault(const DataViewType type, const PlotStyle    plotStyleID);
+            DataViewDefault(const DataViewType type, const PlotStyle    plotStyleID, const std::string& title);
+            DataViewDefault(const DataViewType type, const std::string& plotStyle);
+            DataViewDefault(const DataViewType type, const std::string& plotStyle,   const std::string& title);
 
             virtual DataViewDefault& reset();
 
