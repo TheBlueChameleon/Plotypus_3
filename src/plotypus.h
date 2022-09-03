@@ -20,10 +20,11 @@
 #include "definitions/constants.h"
 
 #include "base/util.h"
-#include "base/sheetscollection.h"
 #include "base/report.h"
 #include "base/sheet.h"
-#include "base/stylescollection.h"
+
+#include "collections/sheetscollection.h"
+#include "collections/stylescollection.h"
 
 #include "dataview/dataview.h"
 #include "dataview/dataviewdefault.h"

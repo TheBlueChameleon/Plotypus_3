@@ -6,9 +6,10 @@
 
 #include "util.h"
 
-#include "sheetscollection.h"
-#include "stylescollection.h"
 #include "terminalinfoprovider.h"
+
+#include "../collections/sheetscollection.h"
+#include "../collections/stylescollection.h"
 
 namespace Plotypus
 {

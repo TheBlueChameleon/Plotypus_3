@@ -29,7 +29,8 @@ namespace Plotypus
 
     SheetsCollection& SheetsCollection::reset()
     {
-        return clearSheets();
+        sheets.clear();
+        return *this;
     }
 
     size_t SheetsCollection::getSheetCount() const

@@ -22,10 +22,11 @@ add_library(Plotypus-lib SHARED
     src/definitions/errors.h
     src/definitions/constants.h
     #
+    src/collections/stylescollection.h src/collections/stylescollection.cpp
+    src/collections/sheetscollection.h src/collections/sheetscollection.cpp src/collections/sheetscollection.txx
+    #
     src/base/util.h src/base/util.cpp src/base/util.txx
-    src/base/stylescollection.h src/base/stylescollection.cpp
-    src/base/sheetscollection.h src/base/sheetscollection.cpp src/base/sheetscollection.txx
-    src/base/report.h src/base/report.cpp src/base/report.txx
+    src/base/report.h src/base/report.cpp
     src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
     src/base/sheet.h src/base/sheet.cpp src/base/sheet.txx
     src/base/mulitplot.h src/base/mulitplot.cpp
