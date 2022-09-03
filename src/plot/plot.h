@@ -15,6 +15,8 @@ namespace Plotypus
      * @todo make abstract
      *
      * @note externalize std::vector<DataView*> dataViews via new base class DataViewsCollection..? probably not necessary, since there will be no other DataViewCollections.
+     *
+     * @todo introduce enum DataViewType and const member for proper deallocation
      */
     class Plot : public Sheet
     {
@@ -38,6 +40,7 @@ namespace Plotypus
         public:
             Plot(const SheetType& type);
             Plot(const SheetType& type, const std::string& title);
+            //! @todo move effective code to clearDataViews; apply casts to full View type
             ~Plot();
 
             virtual Plot& reset();
