@@ -18,7 +18,7 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataViewDefaultCompound(const PlotStyle  style, const std::string& label = "");
+            DataViewDefaultCompound(const PlotStyle    style, const std::string& label = "");
             DataViewDefaultCompound(const std::string& style, const std::string& label = "");
 
             virtual size_t                          getArity() const;

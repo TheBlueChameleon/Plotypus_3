@@ -68,6 +68,7 @@ namespace Plotypus
             Plot&               setAspectEqual ();
             Plot&               setAspectRatio (double ratio);
             Plot&               clearAspect    ();
+
             const std::string   getFill() const;
             Plot&               setFill(const std::string& newFill);
             Plot&               clearFill();
