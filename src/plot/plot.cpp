@@ -14,6 +14,14 @@ namespace Plotypus
         Sheet(type, title)
     {}
 
+    Plot::~Plot()
+    {
+        for (auto dataView : dataViews)
+        {
+            delete dataView;
+        }
+    }
+
     // ====================================================================== //
 
     void Plot::checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
@@ -53,13 +61,13 @@ namespace Plotypus
         border = BORDERS_DEFAULT;
         borderLineStyle.reset();
 
-        aspect          = "noratio";
-        fill            = "solid";
+        aspect = "noratio";
+        fill   = "solid";
 
         datalineSeparatorTxt = "................................................................................\n";
 
         m_key.reset();
-        parametric      = false;
+        parametric = false;
 
         return *this;
     }

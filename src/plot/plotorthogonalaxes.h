@@ -15,7 +15,7 @@ namespace Plotypus
     /**
      * @todo set equal xy / xyz
      *
-     * @todo externalize
+     * @todo cannot splot in polar coordinate system
      */
 
     class PlotOrthogonalAxes : public Plot
@@ -31,7 +31,6 @@ namespace Plotypus
         public:
             PlotOrthogonalAxes();
             PlotOrthogonalAxes(const std::string& title);
-            ~PlotOrthogonalAxes();
 
             virtual PlotOrthogonalAxes& reset();
 

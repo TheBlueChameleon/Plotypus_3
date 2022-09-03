@@ -38,6 +38,7 @@ namespace Plotypus
         public:
             Plot(const SheetType& type);
             Plot(const SheetType& type, const std::string& title);
+            ~Plot();
 
             virtual Plot& reset();
 

@@ -17,14 +17,6 @@ namespace Plotypus
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
-    PlotOrthogonalAxes::~PlotOrthogonalAxes()
-    {
-        for (auto dataView : dataViews)
-        {
-            delete dataView;
-        }
-    }
-
     // ====================================================================== //
 
     PlotOrthogonalAxes& PlotOrthogonalAxes::reset()
