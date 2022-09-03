@@ -35,6 +35,7 @@ namespace Plotypus
             Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes();
             Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title = "");
 
+            //! @todo cast and properly deallocate sheets by const SheetType type;
             SheetsCollection& clearSheets();
     };
 }

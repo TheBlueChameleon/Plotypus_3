@@ -10,6 +10,7 @@ namespace Plotypus
     class Overlay
     {
         protected:
+            // const OverlayType type;
             size_t                              tag;
 
             std::optional<OverlayPosition_t>    position;

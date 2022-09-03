@@ -33,10 +33,9 @@ namespace Plotypus
             std::vector<Overlay*> overlays;
 
         public:
-            Sheet();
             Sheet(const SheetType& type);
-            Sheet(                       const std::string& title);
             Sheet(const SheetType& type, const std::string& title);
+            //! @todo cast overlay to specific type and thus call apt DTor: intro enum OverlayType
             ~Sheet();
 
             SheetType getType() const;

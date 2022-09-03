@@ -32,18 +32,18 @@ namespace Plotypus
         private:
             static constexpr std::initializer_list<SheetType> forbiddenSheetTypes = {};
 
-            std::string outputDirectory     = "";
-            std::string filenameBase        = "report";
+            std::string             outputDirectory     = "";
+            std::string             filenameBase        = "report";
 
-            std::string extTxt              = "txt";
-            std::string extDat              = "dat";
-            std::string extGnu              = "gnuplot";
+            std::string             extTxt              = "txt";
+            std::string             extDat              = "dat";
+            std::string             extGnu              = "gnuplot";
 
-            bool verbose                    = true;
-            bool autoRunScript              = true;
+            bool                    verbose             = true;
+            bool                    autoRunScript       = true;
 
-            std::string pageSeparatorTxt    = "================================================================================\n";
-            std::string frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
+            std::string             pageSeparatorTxt    = "================================================================================\n";
+            std::string             frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
             StylesCollection        m_stylesCollection;
             TerminalInfoProvider    m_terminalInfoProvider;

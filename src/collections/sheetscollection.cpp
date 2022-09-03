@@ -46,12 +46,12 @@ namespace Plotypus
 
     Sheet& SheetsCollection::addSheet()
     {
-        return addSheet(new Sheet());
+        return addSheet(new Sheet(SheetType::Sheet));
     }
 
     Sheet& SheetsCollection::addSheet(const std::string& title)
     {
-        return addSheet(new Sheet(title) );
+        return addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
     PlotOrthogonalAxes& SheetsCollection::addPlotOrthogonalAxes()
