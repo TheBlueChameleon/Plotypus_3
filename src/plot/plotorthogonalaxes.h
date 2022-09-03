@@ -16,6 +16,8 @@ namespace Plotypus
      * @todo set equal xy / xyz
      *
      * @todo cannot splot in polar coordinate system
+     *
+     * @todo addView(View& other) as add Copy
      */
 
     class PlotOrthogonalAxes : public Plot
@@ -27,6 +29,10 @@ namespace Plotypus
             bool polar  = false;
 
             std::unordered_map<AxisType, AxisDescriptor> axes;
+
+            DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
+            template<class T>
+            DataViewDefaultCompound<T>& addDataViewCompound(DataViewDefaultCompound<T>* dataView);
 
         public:
             PlotOrthogonalAxes();
@@ -47,14 +53,11 @@ namespace Plotypus
             bool                        getPolar() const;
             PlotOrthogonalAxes&         setPolar(bool newPolar);
 
-            DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
             DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(const std::string& func,                                        const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
 
-            template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(DataViewDefaultCompound<T>* dataView);
             template<class T>
             DataViewDefaultCompound<T>& addDataViewCompound(                          const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>

@@ -1,4 +1,5 @@
 #include "sheetscollection.h"
+#include "../base/mulitplot.h"
 
 using namespace Plotypus;
 namespace Plotypus
@@ -20,8 +21,11 @@ namespace Plotypus
             delete newSheet;
             throw UnsupportedOperationError("Cannot add Sheet of type " + getSheetTypeName(sheetType));
         }
+        else
+        {
+            sheets.push_back(newSheet);
+        }
 
-        sheets.push_back(newSheet);
         return *sheets.back();
     }
 
@@ -68,7 +72,24 @@ namespace Plotypus
     {
         for (auto ptr : sheets)
         {
-            delete ptr;
+            switch (ptr->getType())
+            {
+                case SheetType::Sheet:
+                    delete dynamic_cast<Sheet*>(ptr);
+                    break;
+
+                case SheetType::PlotOrthogonalAxis:
+                    delete dynamic_cast<PlotOrthogonalAxes*>(ptr);
+                    break;
+
+                case SheetType::PlotRadialAxes:
+                    delete dynamic_cast<PlotRadial*>(ptr);
+                    break;
+
+                case SheetType::Multiplot:
+                    delete dynamic_cast<MulitPlot*>(ptr);
+                    break;
+            }
         }
         sheets.clear();
 

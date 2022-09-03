@@ -13,6 +13,8 @@ namespace Plotypus
 {
     /**
      * @todo objects (rects, ellipses, ...), arrows
+     *
+     * @todo externalize OverlayCollection
      */
     class Sheet
     {
