@@ -6,6 +6,7 @@
 
 #include "../base/sheet.h"
 #include "../elements/keydescriptor.h"
+#include "../collections/dataviewcollection.h"
 
 namespace Plotypus
 {
@@ -13,16 +14,17 @@ namespace Plotypus
      * @brief foo bar
      *
      * @todo make abstract
-     *
-     * @note externalize std::vector<DataView*> dataViews via new base class DataViewsCollection..? probably not necessary, since there will be no other DataViewCollections.
-     *
-     * @todo introduce enum DataViewType and const member for proper deallocation
      */
-    class Plot : public Sheet
+    class Plot : public Sheet, public DataViewCollection
     {
         protected:
+            static constexpr auto allowedDataViewTypes =
+            {
+                DataViewType::DataViewDefaultCompound,
+                DataViewType::DataViewDefaultSeparate
+            };
+
             PlotStyleFamily             plotStyleFamily = PlotStyleFamily::Undefined;
-            std::vector<DataView*>      dataViews;
 
             size_t                      border = BORDERS_DEFAULT;
             std::optional<size_t>       borderLineStyle;
@@ -40,19 +42,12 @@ namespace Plotypus
         public:
             Plot(const SheetType& type);
             Plot(const SheetType& type, const std::string& title);
-            //! @todo move effective code to clearDataViews; apply casts to full View type
-            ~Plot();
 
             virtual Plot& reset();
 
             PlotStyleFamily     getPlotStyleFamily() const;
             //! @todo couple with mode3D in ortho-axes..? virtual?
             Plot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);
-
-            const std::vector<DataView*>& getDataViews() const;
-            DataView&           dataView(const size_t i);
-            template<DataViewLike T>
-            T&                  dataViewAs(const size_t i);
 
             size_t              getBorder() const;
             Plot&               setBorder(size_t newBorder);
@@ -90,5 +85,4 @@ namespace Plotypus
     };
 }
 
-#include "plot.txx"
 #endif // PLOT_H

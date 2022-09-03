@@ -7,20 +7,12 @@ namespace Plotypus
 {
 
     Plot::Plot(const SheetType& type) :
-        Sheet(type)
+        Sheet(type), DataViewCollection(allowedDataViewTypes)
     {}
 
     Plot::Plot(const SheetType& type, const std::string& title) :
-        Sheet(type, title)
+        Sheet(type, title), DataViewCollection(allowedDataViewTypes)
     {}
-
-    Plot::~Plot()
-    {
-        for (auto dataView : dataViews)
-        {
-            delete dataView;
-        }
-    }
 
     // ====================================================================== //
 
@@ -50,13 +42,9 @@ namespace Plotypus
     Plot& Plot::reset()
     {
         Sheet::reset();
+        clearDataViews();
 
         plotStyleFamily = PlotStyleFamily::Undefined;
-        for (auto dataView : dataViews)
-        {
-            delete dataView;
-        }
-        dataViews.clear();
 
         border = BORDERS_DEFAULT;
         borderLineStyle.reset();
@@ -90,17 +78,6 @@ namespace Plotypus
         }
 
         return *this;
-    }
-
-    const std::vector<DataView*>& Plot::getDataViews() const
-    {
-        return dataViews;
-    }
-
-    DataView& Plot::dataView(const size_t i)
-    {
-        throwIfInvalidIndex("dataView index", i, dataViews);
-        return *dataViews[i];
     }
 
     // ====================================================================== //

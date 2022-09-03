@@ -33,7 +33,7 @@ add_library(Plotypus-lib SHARED
     src/base/sheet.h src/base/sheet.cpp src/base/sheet.txx
     src/base/mulitplot.h src/base/mulitplot.cpp
     #
-    src/plot/plot.h src/plot/plot.cpp src/plot/plot.txx
+    src/plot/plot.h src/plot/plot.cpp
     src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
     src/plot/plotradial.h src/plot/plotradial.cpp
     #
