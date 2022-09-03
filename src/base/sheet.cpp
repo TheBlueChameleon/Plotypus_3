@@ -21,11 +21,6 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    SheetType Sheet::getType() const
-    {
-        return type;
-    }
-
     Sheet& Sheet::reset()
     {
         title.reset();
@@ -38,6 +33,11 @@ namespace Plotypus
         clearOverlays();
 
         return *this;
+    }
+
+    SheetType Sheet::getType() const
+    {
+        return type;
     }
 
     const std::string Sheet::getTitle() const

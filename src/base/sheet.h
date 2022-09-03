@@ -40,9 +40,9 @@ namespace Plotypus
             //! @todo cast overlay to specific type and thus call apt DTor: intro enum OverlayType
             ~Sheet();
 
-            SheetType getType() const;
-
             virtual Sheet& reset();
+
+            SheetType getType() const;
 
             const std::string           getTitle() const;
             Sheet&                      setTitle(const std::string& newTitle);
