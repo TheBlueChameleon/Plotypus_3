@@ -270,6 +270,10 @@ namespace Plotypus
 
     void Report::writeTxt(std::ostream& hFile) const
     {
+        // *INDENT-OFF*
+        if (verbose) {std::cout << "about to write TXT report " << filenameBase << " ..." << std::endl;}
+        // *INDENT-OFF*
+
         preprocessSheets(extTxt);
 
         for (size_t i = 1u; auto sheet : sheets)
@@ -285,6 +289,10 @@ namespace Plotypus
             }
             ++i;
         }
+
+        // *INDENT-OFF*
+        if (verbose) {std::cout << "TXT report for " << filenameBase << " completed." << std::endl;}
+        // *INDENT-OFF*
     }
 
     void Report::writeScript(std::ostream& hFile) const
