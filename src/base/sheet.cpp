@@ -14,23 +14,18 @@ namespace Plotypus
         title(title)
     {}
 
-    Sheet::~Sheet()
-    {
-        clearOverlays();
-    }
-
     // ====================================================================== //
 
     Sheet& Sheet::reset()
     {
+        clearOverlays();
+
         title.reset();
         defaultFont = "Arial,7";
 
         customScriptBegin.reset();
         customScriptInter.reset();
         customScriptEnd  .reset();
-
-        clearOverlays();
 
         return *this;
     }
@@ -140,39 +135,6 @@ namespace Plotypus
     {
         customScriptEnd.reset();
         return *this;
-    }
-
-    // ====================================================================== //
-
-    size_t Sheet::getOverlayCount() const
-    {
-        return overlays.size();
-    }
-
-    Overlay& Sheet::overlay(const size_t i)
-    {
-        throwIfInvalidIndex("label index", i, overlays);
-        return *overlays[i];
-    }
-
-    void Sheet::clearOverlays()
-    {
-        for (auto overlay : overlays)
-        {
-            delete overlay;
-        }
-        overlays.clear();
-    }
-
-    Overlay& Sheet::addOverlay(Overlay* newOverlay)
-    {
-        overlays.push_back(newOverlay);
-        return *overlays.back();
-    }
-
-    Label& Sheet::addLabel(const std::string& text, double x, double y, bool boxed, size_t boxStyleID)
-    {
-        return reinterpret_cast<Label&>(addOverlay( new Label(text, x, y, boxed, boxStyleID) ));
     }
 
     // ====================================================================== //

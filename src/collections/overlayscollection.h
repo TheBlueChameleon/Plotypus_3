@@ -7,6 +7,7 @@
 namespace Plotypus
 {
     class Overlay;
+    class Label;
 
     class OverlaysCollection
     {
@@ -36,4 +37,5 @@ namespace Plotypus
     };
 }
 
+#include "overlayscollection.txx"
 #endif // OVERLAYSCOLLECTION_H

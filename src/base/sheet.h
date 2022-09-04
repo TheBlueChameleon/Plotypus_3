@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "../collections/overlayscollection.h"
+
 #include "../definitions/types.h"
 
 #include "../elements/overlay.h"
@@ -16,12 +18,9 @@ namespace Plotypus
      *
      * @todo externalize OverlayCollection
      */
-    class Sheet
+    class Sheet : public OverlaysCollection
     {
         protected:
-            // .............................................................. //
-            // behaviour objects
-
             const SheetType type;
 
             std::optional<std::string> title;
@@ -32,19 +31,15 @@ namespace Plotypus
             std::optional<std::string> customScriptInter;
             std::optional<std::string> customScriptEnd;
 
-            std::vector<Overlay*> overlays;
-
             Overlay& addOverlay (Overlay* newOverlay);
 
         public:
             Sheet(const SheetType& type);
             Sheet(const SheetType& type, const std::string& title);
-            //! @todo cast overlay to specific type and thus call apt DTor: intro enum OverlayType
-            ~Sheet();
 
             virtual Sheet& reset();
 
-            SheetType getType() const;
+            SheetType                   getType() const;
 
             const std::string           getTitle() const;
             Sheet&                      setTitle(const std::string& newTitle);
@@ -69,16 +64,6 @@ namespace Plotypus
             const std::string           getCustomScriptEnd() const;
             Sheet&                      setCustomScriptEnd(const std::string& newCustomScriptEnd);
             Sheet&                      clearCustomScriptEnd();
-
-            size_t                      getOverlayCount() const;
-
-            Overlay&                    overlay (const size_t i);
-            template<OverlayLike T>
-            T&                          overlayAs(const size_t i);
-
-            void                        clearOverlays();
-
-            Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);
 
             // -------------------------------------------------------------- //
             // writers
