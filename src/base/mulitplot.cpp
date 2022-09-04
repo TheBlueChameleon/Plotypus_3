@@ -3,6 +3,6 @@
 namespace Plotypus
 {
     MulitPlot::MulitPlot(const std::string& title) :
-        Sheet(SheetType::Multiplot, title)
+        Sheet(SheetType::Multiplot, title), SheetsCollection(allowedSheetTypes)
     {}
 }

@@ -13,7 +13,7 @@ namespace Plotypus
         clearSheets();
     }
 
-    Sheet& SheetsCollection::addSheet(Sheet* newSheet)
+    Sheet* SheetsCollection::addSheet(Sheet* newSheet)
     {
         auto sheetType = newSheet->getType();
         if (contains(sheetType, allowedSheetTypes))
@@ -26,7 +26,7 @@ namespace Plotypus
             throw UnsupportedOperationError("Cannot add Sheet of type " + getSheetTypeName(sheetType));
         }
 
-        return *sheets.back();
+        return sheets.back();
     }
 
     void SheetsCollection::clearSheet(Sheet* sheet)
@@ -92,21 +92,21 @@ namespace Plotypus
 
     Sheet& SheetsCollection::addSheet()
     {
-        return addSheet(new Sheet(SheetType::Sheet));
+        return *addSheet(new Sheet(SheetType::Sheet));
     }
 
     Sheet& SheetsCollection::addSheet(const std::string& title)
     {
-        return addSheet(new Sheet(SheetType::Sheet, title) );
+        return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
     PlotOrthogonalAxes& SheetsCollection::addPlotOrthogonalAxes()
     {
-        return dynamic_cast<PlotOrthogonalAxes&>(addSheet( new PlotOrthogonalAxes() ));
+        return *dynamic_cast<PlotOrthogonalAxes*>(addSheet( new PlotOrthogonalAxes() ));
     }
 
     PlotOrthogonalAxes& SheetsCollection::addPlotOrthogonalAxes(const std::string& title)
     {
-        return dynamic_cast<PlotOrthogonalAxes&>(addSheet( new PlotOrthogonalAxes(title) ));
+        return *dynamic_cast<PlotOrthogonalAxes*>(addSheet( new PlotOrthogonalAxes(title) ));
     }
 }

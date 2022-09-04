@@ -9,13 +9,15 @@ namespace Plotypus
     class Sheet;
 
     //! @todo copy sheet funcs
+    //! @todo abstract writers?
+
     class SheetsCollection
     {
         protected:
-            std::vector<Plotypus::Sheet*> sheets;
+            std::vector<Sheet*> sheets;
             const std::vector<SheetType>  allowedSheetTypes;
 
-            Plotypus::Sheet& addSheet (Plotypus::Sheet* newSheet);
+            Sheet* addSheet (Sheet* newSheet);
             static void clearSheet(Sheet* sheet);
 
         public:
@@ -27,18 +29,23 @@ namespace Plotypus
 
             size_t getSheetCount() const;
 
-            const std::vector<Plotypus::Sheet*>&    getSheets() const;
-            const std::vector<SheetType>&           getAllowedSheetTypes() const;
+            const std::vector<Sheet*>&      getSheets() const;
+            const std::vector<SheetType>&   getAllowedSheetTypes() const;
 
-            Plotypus::Sheet& sheet(const size_t i);
+            Sheet& sheet(const size_t i);
             template<SheetLike T>
             T& sheetAs(const size_t i);
 
-            Plotypus::Sheet& addSheet ();
-            Plotypus::Sheet& addSheet (const std::string& title);
+            Sheet& addSheet ();
+            Sheet& addSheet (const std::string& title);
 
-            Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes();
-            Plotypus::PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title = "");
+            PlotOrthogonalAxes& addPlotOrthogonalAxes();
+            PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title);
+
+            // -------------------------------------------------------------- //
+            // writers
+
+            // ???
     };
 }
 

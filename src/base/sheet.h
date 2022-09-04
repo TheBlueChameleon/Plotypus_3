@@ -34,6 +34,8 @@ namespace Plotypus
 
             std::vector<Overlay*> overlays;
 
+            Overlay& addOverlay (Overlay* newOverlay);
+
         public:
             Sheet(const SheetType& type);
             Sheet(const SheetType& type, const std::string& title);
@@ -74,7 +76,6 @@ namespace Plotypus
             template<OverlayLike T>
             T&                          overlayAs(const size_t i);
 
-            Overlay&                    addOverlay (Overlay* newOverlay);
             void                        clearOverlays();
 
             Label&                      addLabel (const std::string& text, double x, double y, bool boxed = false, size_t boxStyleID = OPTIONAL_SIZE_T_DEFAULT);

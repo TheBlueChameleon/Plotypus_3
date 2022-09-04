@@ -5,8 +5,13 @@
 
 namespace Plotypus
 {
-    class MulitPlot : public Sheet
+    class MulitPlot : public Sheet, public SheetsCollection
     {
+        protected:
+            static constexpr std::initializer_list<SheetType> allowedSheetTypes = {SheetType::Sheet,
+                                                                                   SheetType::PlotOrthogonalAxis,
+                                                                                   SheetType::PlotRadialAxes
+                                                                                  };
         public:
             MulitPlot(const std::string& title);
     };
