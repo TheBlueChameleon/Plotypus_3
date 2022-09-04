@@ -24,8 +24,8 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    Overlay::Overlay(const OverlayPosition_t& position) :
-        position(position)
+    Overlay::Overlay(const OverlayType type, const OverlayPosition_t& position) :
+        type(type), position(position)
     {
         tag = ++lastTag;
     }
@@ -40,6 +40,11 @@ namespace Plotypus
     }
 
     // ====================================================================== //
+
+    OverlayType Overlay::getType() const
+    {
+        return type;
+    }
 
     size_t Overlay::getTag() const
     {
@@ -113,5 +118,4 @@ namespace Plotypus
         options.reset();
         return *this;
     }
-
 }

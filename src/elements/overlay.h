@@ -10,7 +10,7 @@ namespace Plotypus
     class Overlay
     {
         protected:
-            // const OverlayType type;
+            const OverlayType                   type;
             size_t                              tag;
 
             std::optional<OverlayPosition_t>    position;
@@ -22,10 +22,11 @@ namespace Plotypus
             void writePosition(std::ostream& hFile) const;
 
         public:
-            Overlay(const OverlayPosition_t& position);
+            Overlay(const OverlayType type, const OverlayPosition_t& position);
 
             Overlay&            reset();
 
+            OverlayType         getType() const;
             size_t              getTag() const;
 
             OverlayPosition_t   getPosition() const;

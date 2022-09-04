@@ -24,6 +24,7 @@
 #include "base/sheet.h"
 
 #include "collections/sheetscollection.h"
+#include "collections/overlayscollection.h"
 #include "collections/stylescollection.h"
 
 #include "dataview/dataview.h"

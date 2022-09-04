@@ -3,17 +3,23 @@
 namespace Plotypus
 {
     Label::Label() :
-        Overlay(POSITION_ORIGIN)
+        Overlay(OverlayType::Label, POSITION_ORIGIN)
     {}
 
     Label::Label(const std::string& text, double x, double y, bool boxed, size_t boxStyleID) :
-        Overlay({x, y, std::optional<double>()}), text(text), boxed(boxed)
+        Overlay(OverlayType::Label,
+    {
+        x, y, std::optional<double>()
+    }), text(text), boxed(boxed)
     {
         setBoxStyleID(boxStyleID);
     }
 
     Label::Label(const std::string& text, double x, double y, double z, bool boxed, size_t boxStyleID) :
-        Overlay({x, y, z}), text(text), boxed(boxed)
+        Overlay(OverlayType::Label,
+    {
+        x, y, z
+    }), text(text), boxed(boxed)
     {
         setBoxStyleID(boxStyleID);
     }

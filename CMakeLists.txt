@@ -25,7 +25,7 @@ add_library(Plotypus-lib SHARED
     #
     src/collections/stylescollection.h src/collections/stylescollection.cpp
     src/collections/sheetscollection.h src/collections/sheetscollection.cpp src/collections/sheetscollection.txx
-    src/collections/overlayscollection.h src/collections/overlayscollection.cpp
+    src/collections/overlayscollection.h src/collections/overlayscollection.cpp src/collections/overlayscollection.txx
     src/collections/dataviewcollection.h src/collections/dataviewcollection.cpp src/collections/dataviewcollection.txx
     #
     src/base/util.h src/base/util.cpp src/base/util.txx

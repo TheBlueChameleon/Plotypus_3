@@ -13,7 +13,7 @@ namespace Plotypus
         protected:
             std::vector<Overlay*> overlays;
 
-            Overlay* addOverlay();
+            Overlay* addOverlay(Overlay* overlay);
             static void clearOverlay(Overlay* overlay);
 
         public:
