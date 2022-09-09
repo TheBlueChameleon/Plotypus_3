@@ -197,7 +197,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    void Sheet::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
     {
         if (customScriptInter.has_value())
         {

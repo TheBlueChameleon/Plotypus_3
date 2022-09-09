@@ -88,7 +88,6 @@ namespace Plotypus
         autoRunScript       = true;
 
         pageSeparatorTxt    = "================================================================================\n";
-        frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
         m_stylesCollection.reset();
         m_terminalInfoProvider.reset();
@@ -320,10 +319,10 @@ namespace Plotypus
             if (needCleanSheetCommands && sheet->getType() == SheetType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
             else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
-            sheet->writeScriptHead  (hFile);
-            sheet->writeScriptOverlays(hFile);
-            sheet->writeScriptData  (hFile, m_stylesCollection);
-            sheet->writeScriptFooter(hFile, i);
+            sheet->writeScriptHead      (hFile);
+            sheet->writeScriptOverlays  (hFile);
+            sheet->writeScriptData      (hFile, m_stylesCollection);
+            sheet->writeScriptFooter    (hFile, i);
             ++i;
 
             if (verbose) {std::cout << "done." << std::endl;}

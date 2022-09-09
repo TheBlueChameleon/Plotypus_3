@@ -21,6 +21,8 @@ namespace Plotypus
      *
      * @todo better support for Filetype Screen
      * @todo rethink responsibility for outputToFile, filenameBase wrt. TerminalInfoProvider (command set output 'filename')
+     * @todo introduce customScripts on Report level
+     * @todo rethink auto-preprocess mechanism wrt. repetition of same action on write{txt|dat|script}
      */
 
     class Sheet;
@@ -47,10 +49,12 @@ namespace Plotypus
             bool                    autoRunScript       = true;
 
             std::string             pageSeparatorTxt    = "================================================================================\n";
-            std::string             frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
             StylesCollection        m_stylesCollection;
             TerminalInfoProvider    m_terminalInfoProvider;
+
+//            std::optional<std::string> customScriptBegin;
+//            std::optional<std::string> customScriptEnd;
 
             void preprocessSheets(const std::string& extension) const;
             std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;

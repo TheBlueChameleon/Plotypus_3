@@ -70,6 +70,7 @@ namespace Plotypus
 
             virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
 
+            //! @todo implement reasonable specific body
             virtual void writeTxtHead       (std::ostream& hFile) const;
             virtual void writeTxtData       (std::ostream& hFile) const;
             virtual void writeTxtOverlays   (std::ostream& hFile) const;
@@ -78,7 +79,7 @@ namespace Plotypus
             virtual void writeDatData() const;
 
             virtual void writeScriptHead    (std::ostream& hFile) const;
-            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesColloction) const;
+            virtual void writeScriptData    (std::ostream& hFile, const StylesCollection& stylesCollection) const;
             virtual void writeScriptOverlays(std::ostream& hFile) const;
             virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };

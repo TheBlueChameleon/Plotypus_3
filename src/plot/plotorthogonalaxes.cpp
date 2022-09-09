@@ -209,16 +209,16 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotOrthogonalAxes::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    void PlotOrthogonalAxes::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
     {
-        Plot::writeScriptData(hFile, stylesColloction);
+        Plot::writeScriptData(hFile, stylesCollection);
 
         hFile << (mode3D ? "splot " : "plot ");
 
         const auto viewCount = dataViews.size();
         for (size_t i = 0u; const auto dataView : dataViews)
         {
-            dataView->writeScriptData(hFile, stylesColloction);
+            dataView->writeScriptData(hFile, stylesCollection);
             ++i;
             if (i < viewCount)
             {
