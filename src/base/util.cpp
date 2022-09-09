@@ -665,14 +665,14 @@ namespace Plotypus
         return "undefined";
     }
 
-    std::string getAlignmentName(const MarginAlignment alignment)
+    std::string getAlignmentName(const Margin alignment)
     {
         // *INDENT-OFF*
         switch (alignment) {
-            case MarginAlignment::Top:      return "tmargin";
-            case MarginAlignment::Bottom:   return "bmargin";
-            case MarginAlignment::Left:     return "lmargin";
-            case MarginAlignment::Right:    return "rmargin";
+            case Margin::Top:      return "tmargin";
+            case Margin::Bottom:   return "bmargin";
+            case Margin::Left:     return "lmargin";
+            case Margin::Right:    return "rmargin";
         }
         // *INDENT-ON*
 

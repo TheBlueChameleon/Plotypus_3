@@ -86,7 +86,7 @@ namespace Plotypus
         Top
     };
 
-    enum class MarginAlignment
+    enum class Margin
     {
         Left,
         Right,
@@ -99,6 +99,13 @@ namespace Plotypus
         Default,
         Vertical,
         Horizontal
+    };
+
+    enum class StackingDirection
+    {
+        Default,
+        Downwards,
+        Upwards
     };
 
     // ---------------------------------------------------------------------- //
@@ -362,7 +369,7 @@ namespace Plotypus
     constexpr auto SYMBOL_PROPORTIONAL          = "{/symbol \\265}";
     constexpr auto SYMBOL_PLUSMINUS             = "{/symbol \\261}";
     constexpr auto SYMBOL_SQUAREROOT            = "{/symbol \\326}";
-    constexpr auto SYMBOL_DOT                   = "·";
+    constexpr auto SYMBOL_DOT                   = "{\\267}";
     constexpr auto SYMBOL_TIMES                 = "{/symbol \\264}";
     constexpr auto SYMBOL_DIVISION              = "{/symbol \\270}";
     constexpr auto SYMBOL_PARTIAL_DERIVATIVE    = "{/symbol \\266}";

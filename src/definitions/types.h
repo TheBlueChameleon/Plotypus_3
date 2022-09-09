@@ -65,12 +65,34 @@ namespace Plotypus
     using columnFormatList_t        = std::array<std::string, 6>;
 
     // ====================================================================== //
-    // overlays
+    // Overlays
 
     using OverlayPosition_t = std::tuple<double, double, std::optional<double>>;
     constexpr OverlayPosition_t POSITION_ORIGIN = {0, 0, std::optional<double>()};
 
     // ====================================================================== //
+    // Multiplots
+
+    using GridPosition_t = std::pair<size_t, size_t>;
+    constexpr GridPosition_t DEFAULT_GRID_POSITION = {0, 0};
+
+    //! @todo use this also for set margin command
+    using Margins_t = std::array<double, 4>;                       // use MarginAlignment as indices
+    constexpr Margins_t DEFAULT_MARGIN_SIZE = {0., 0., 0., 0.};
+
+    using MultiplotSpacing_t = std::pair<double, std::optional<double>>;
+    constexpr MultiplotSpacing_t DEFAULT_MULTIPLOT_SPACING = {0., std::optional<double>()};
+
+    struct MultiplotLayout_t
+    {
+        GridPosition_t                      gridDimensions;
+        StackingOrder                       stackingOrder;                  // rowsfirst ~> Vertical; columnsfirst ~> Horizontal
+        StackingDirection                   stackingDirection;
+        std::optional<Margins_t>            margins;
+        std::optional<MultiplotSpacing_t>   spacing;
+    };
+
+    constexpr MultiplotLayout_t DEFAULT_MULTIPLOT_LAYOUT{DEFAULT_GRID_POSITION};
 
     //! }
 }

@@ -12,7 +12,7 @@ namespace Plotypus
             enum class AbstractAlignment {Default, Minimal, Central, Maximal};
 
             using explicitPosition_t = std::pair<bool, OverlayPosition_t>;
-            using marginPosition_t   = std::pair<MarginAlignment, AbstractAlignment>;
+            using marginPosition_t   = std::pair<Margin, AbstractAlignment>;
             using insidePosition_t   = std::pair<HorizontalAlignment, VerticalAlignment>;
 
             using keyPosition_t = std::variant<explicitPosition_t, marginPosition_t, insidePosition_t>;
@@ -49,9 +49,9 @@ namespace Plotypus
 
             keyPosition_t       getPosition() const;
             KeyDescriptor&      setPosition(const bool fixed, const OverlayPosition_t& coordinates);
-            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment);
-            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const HorizontalAlignment horizontalAlignment);
-            KeyDescriptor&      setPosition(const MarginAlignment marginAlignment, const VerticalAlignment verticalAlignment);
+            KeyDescriptor&      setPosition(const Margin marginAlignment);
+            KeyDescriptor&      setPosition(const Margin marginAlignment, const HorizontalAlignment horizontalAlignment);
+            KeyDescriptor&      setPosition(const Margin marginAlignment, const VerticalAlignment verticalAlignment);
             KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment);
             KeyDescriptor&      clearPosition();
 

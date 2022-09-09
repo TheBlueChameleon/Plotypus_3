@@ -210,7 +210,6 @@ void showcase_run_overlays(Plotypus::Report& report)
     sheet1.addLabel("auto-boxed", .30, .10, true);
     sheet1.addLabel("explicitly boxed", .50, .10, true, boxStyleOffset);
 
-
     sheet1.addLabel("normal text", .10, .20).setTextcolor("blue");
     sheet1.addLabel("abcdefghijklmnopqrstuvwxyz01234567890  ", .10, .26, true);
     sheet1.addLabel("ABCDEFGHIJKLMNOPQRSTUVWXYZ=!\"§$%&/()= ", .10, .32, true);
@@ -339,7 +338,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     // dynamic_cast<DataViewDefaultCompound<compound_t>&>(sheet2.dataView(1)).setStyleID(PlotStyle::Dots);
 
     sheet2.key()
-    .setPosition(MarginAlignment::Right)
+    .setPosition(Margin::Right)
     .setBoxed(true)
     .setTitle("Foo bar");
 
@@ -465,10 +464,10 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     sheet2.addLabel("Rendering of", -1.7, 0.6);
     sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
 
-    sheet2.key().setPosition(MarginAlignment::Bottom, HorizontalAlignment::Right);
+    sheet2.key().setPosition(Margin::Bottom, HorizontalAlignment::Right);
     try
     {
-        sheet2.key().setPosition(MarginAlignment::Bottom, VerticalAlignment::Bottom);
+        sheet2.key().setPosition(Margin::Bottom, VerticalAlignment::Bottom);
     }
     catch (const PlotypusError& e)
     {

@@ -61,7 +61,7 @@ namespace Plotypus
     std::string getLayerName(const Layer layer);
     std::string getAlignmentName(const HorizontalAlignment alignment);
     std::string getAlignmentName(const VerticalAlignment alignment);
-    std::string getAlignmentName(const MarginAlignment alignment);
+    std::string getAlignmentName(const Margin alignment);
     std::string getJustificationName(const HorizontalAlignment alignment);
     std::string getStackingOrderName(const StackingOrder stackingOrder);
 

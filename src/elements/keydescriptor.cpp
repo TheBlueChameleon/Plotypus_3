@@ -2,15 +2,15 @@
 
 namespace Plotypus
 {
-    StackingOrder getMarginAlignmentSense(MarginAlignment alignment)
+    StackingOrder getMarginAlignmentSense(Margin alignment)
     {
         // *INDENT-OFF*
         switch (alignment)
         {
-            case MarginAlignment::Left:     return StackingOrder::Horizontal;
-            case MarginAlignment::Right:    return StackingOrder::Horizontal;
-            case MarginAlignment::Top:      return StackingOrder::Vertical;
-            case MarginAlignment::Bottom:   return StackingOrder::Vertical;
+            case Margin::Left:     return StackingOrder::Horizontal;
+            case Margin::Right:    return StackingOrder::Horizontal;
+            case Margin::Top:      return StackingOrder::Vertical;
+            case Margin::Bottom:   return StackingOrder::Vertical;
         }
         // *INDENT-ON*
 
@@ -178,13 +178,13 @@ namespace Plotypus
         return *this;
     }
 
-    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment)
+    KeyDescriptor& KeyDescriptor::setPosition(const Margin marginAlignment)
     {
         position = marginPosition_t{marginAlignment, AbstractAlignment::Default};
         return *this;
     }
 
-    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment, const HorizontalAlignment horizontalAlignment)
+    KeyDescriptor& KeyDescriptor::setPosition(const Margin marginAlignment, const HorizontalAlignment horizontalAlignment)
     {
         auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
 
@@ -197,7 +197,7 @@ namespace Plotypus
         return *this;
     }
 
-    KeyDescriptor& KeyDescriptor::setPosition(const MarginAlignment marginAlignment, const VerticalAlignment verticalAlignment)
+    KeyDescriptor& KeyDescriptor::setPosition(const Margin marginAlignment, const VerticalAlignment verticalAlignment)
     {
         auto marginAlignmentSense = getMarginAlignmentSense(marginAlignment);
 
