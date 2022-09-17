@@ -1,29 +1,29 @@
-#include "plotorthogonalaxes.h"
+#include "plotdefault.h"
 #include <iostream>
 
 namespace Plotypus
 {
-    PlotOrthogonalAxes::PlotOrthogonalAxes() :
-        Plot(SheetType::PlotOrthogonalAxis)
+    PlotDefault::PlotDefault() :
+        AbstractPlot(SheetType::PlotOrthogonalAxis)
     {
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
-    PlotOrthogonalAxes::PlotOrthogonalAxes(const std::string& title) :
-        Plot(SheetType::PlotOrthogonalAxis, title)
+    PlotDefault::PlotDefault(const std::string& title) :
+        AbstractPlot(SheetType::PlotOrthogonalAxis, title)
     {
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
-    void PlotOrthogonalAxes::abstractToken() {}
+    void PlotDefault::abstractToken() {}
 
     // ====================================================================== //
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::reset()
+    PlotDefault& PlotDefault::reset()
     {
-        Plot::reset();
+        AbstractPlot::reset();
 
         axes.clear();
         polar = false;
@@ -33,18 +33,18 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    const std::unordered_map<AxisType, AxisDescriptor>& PlotOrthogonalAxes::getAxes() const
+    const std::unordered_map<AxisType, AxisDescriptor>& PlotDefault::getAxes() const
     {
         return axes;
     }
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
+    PlotDefault& PlotDefault::setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes)
     {
         axes = newAxes;
         return *this;
     }
 
-    AxisDescriptor& PlotOrthogonalAxes::axis(const AxisType axisID)
+    AxisDescriptor& PlotDefault::axis(const AxisType axisID)
     {
         // *INDENT-OFF*
         if (axisID == AxisType::Undefined) {throw UnsupportedOperationError("Cannot operate on undefined axis");}
@@ -54,13 +54,13 @@ namespace Plotypus
         return axes[axisID];
     }
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::clearAxes()
+    PlotDefault& PlotDefault::clearAxes()
     {
         axes.clear();
         return *this;
     }
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::clearAxis(const AxisType axisID)
+    PlotDefault& PlotDefault::clearAxis(const AxisType axisID)
     {
         axes.erase(axisID);
         return *this;
@@ -68,12 +68,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    bool PlotOrthogonalAxes::getMode3D() const
+    bool PlotDefault::getMode3D() const
     {
         return mode3D;
     }
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::setMode3D(bool newMode3D)
+    PlotDefault& PlotDefault::setMode3D(bool newMode3D)
     {
         if (mode3D != newMode3D)
         {
@@ -86,12 +86,12 @@ namespace Plotypus
         return *this;
     }
 
-    bool PlotOrthogonalAxes::getPolar() const
+    bool PlotDefault::getPolar() const
     {
         return polar;
     }
 
-    PlotOrthogonalAxes& PlotOrthogonalAxes::setPolar(bool newPolar)
+    PlotDefault& PlotDefault::setPolar(bool newPolar)
     {
         polar = newPolar;
 
@@ -127,7 +127,7 @@ namespace Plotypus
     // ====================================================================== //
     // dataview adders
 
-    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(DataViewDefaultSeparate* dataView)
+    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(DataViewDefaultSeparate* dataView)
     {
         checkAndSetStyleFamily(dataView->getPlotStyleFamily(), allowedStyleFamiles);
 
@@ -139,12 +139,12 @@ namespace Plotypus
         return *static_cast<DataViewDefaultSeparate*>(DataViewCollection::addDataView(dataView));
     }
 
-    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const PlotStyle style, const std::string& label)
+    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const PlotStyle style, const std::string& label)
     {
         return addDataViewSeparate( new DataViewDefaultSeparate(style, label) );
     }
 
-    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
 
@@ -153,7 +153,7 @@ namespace Plotypus
         return addDataViewSeparate(dataView);
     }
 
-    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
 
@@ -163,7 +163,7 @@ namespace Plotypus
         return addDataViewSeparate(dataView);
     }
 
-    DataViewDefaultSeparate& PlotOrthogonalAxes::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
+    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
 
@@ -175,9 +175,9 @@ namespace Plotypus
     // ====================================================================== //
     // writers
 
-    void PlotOrthogonalAxes::writeTxtData(std::ostream& hFile) const
+    void PlotDefault::writeTxtData(std::ostream& hFile) const
     {
-        Plot::writeTxtData(hFile);
+        AbstractPlot::writeTxtData(hFile);
         for (const auto dataView : dataViews)
         {
             hFile << datalineSeparatorTxt;
@@ -185,18 +185,18 @@ namespace Plotypus
         }
     }
 
-    void PlotOrthogonalAxes::writeDatData() const
+    void PlotDefault::writeDatData() const
     {
-        Plot::writeDatData();
+        AbstractPlot::writeDatData();
         for (const auto dataView : dataViews)
         {
             dataView->writeDatData();
         }
     }
 
-    void PlotOrthogonalAxes::writeScriptHead(std::ostream& hFile) const
+    void PlotDefault::writeScriptHead(std::ostream& hFile) const
     {
-        Plot::writeScriptHead(hFile);
+        AbstractPlot::writeScriptHead(hFile);
 
         hFile << (polar ? "" : "un") << "set polar" << std::endl;
         hFile << std::endl;
@@ -209,9 +209,9 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void PlotOrthogonalAxes::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
+    void PlotDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
     {
-        Plot::writeScriptData(hFile, stylesCollection);
+        AbstractPlot::writeScriptData(hFile, stylesCollection);
 
         hFile << (mode3D ? "splot " : "plot ");
 
@@ -228,9 +228,9 @@ namespace Plotypus
         hFile << std::endl << std::endl;
     }
 
-    void PlotOrthogonalAxes::writeScriptFooter(std::ostream& hFile, int pageNum) const
+    void PlotDefault::writeScriptFooter(std::ostream& hFile, int pageNum) const
     {
-        Plot::writeScriptFooter(hFile, pageNum);
+        AbstractPlot::writeScriptFooter(hFile, pageNum);
 
         for (const auto& [axisID, axis] : axes)
         {

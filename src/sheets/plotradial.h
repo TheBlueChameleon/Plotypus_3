@@ -1,11 +1,11 @@
 #ifndef PLOT_RADIAL_H
 #define PLOT_RADIAL_H
 
-#include "plot.h"
+#include "abstractplot.h"
 
 namespace Plotypus
 {
-    class PlotRadial : public Plot
+    class PlotRadial : public AbstractPlot
     {
         protected:
             void abstractToken();

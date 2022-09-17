@@ -1,5 +1,5 @@
-#ifndef PLOTORTHOGONALAXES_H
-#define PLOTORTHOGONALAXES_H
+#ifndef PLOTDEFAULT_H
+#define PLOTDEFAULT_H
 
 #include <span>
 #include <string>
@@ -8,7 +8,7 @@
 #include "../elements/axisdescriptor.h"
 #include "../dataview/dataviewdefaultcompound.h"
 
-#include "plot.h"
+#include "abstractplot.h"
 
 namespace Plotypus
 {
@@ -20,9 +20,11 @@ namespace Plotypus
      * @todo addView(View& other) as add Copy
      *
      * @todo adders with empty label; label alias title?
+     *
+     * @todo empty title/clear title variants
      */
 
-    class PlotOrthogonalAxes : public Plot
+    class PlotDefault : public AbstractPlot
     {
         protected:
             static constexpr auto allowedStyleFamiles = {PlotStyleFamily::Orthogonal2D, PlotStyleFamily::Orthogonal3D, PlotStyleFamily::Custom};
@@ -39,23 +41,23 @@ namespace Plotypus
             void abstractToken();
 
         public:
-            PlotOrthogonalAxes();
-            PlotOrthogonalAxes(const std::string& title);
+            PlotDefault();
+            PlotDefault(const std::string& title);
 
-            virtual PlotOrthogonalAxes& reset();
+            virtual PlotDefault& reset();
 
             const std::unordered_map<AxisType, AxisDescriptor>& getAxes() const;
-            PlotOrthogonalAxes&                                 setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
+            PlotDefault&                                 setAxes(const std::unordered_map<AxisType, AxisDescriptor>& newAxes);
 
             AxisDescriptor&                  axis(const AxisType axisID);
-            PlotOrthogonalAxes&         clearAxes();
-            PlotOrthogonalAxes&         clearAxis(const AxisType axisID);
+            PlotDefault&         clearAxes();
+            PlotDefault&         clearAxis(const AxisType axisID);
 
             bool                        getMode3D() const;
-            PlotOrthogonalAxes&         setMode3D(bool newMode3D);
+            PlotDefault&         setMode3D(bool newMode3D);
 
             bool                        getPolar() const;
-            PlotOrthogonalAxes&         setPolar(bool newPolar);
+            PlotDefault&         setPolar(bool newPolar);
 
             DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             DataViewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
@@ -84,5 +86,5 @@ namespace Plotypus
     };
 }
 
-#include "plotorthogonalaxes.txx"
-#endif // PLOTORTHOGONALAXES_H
+#include "plotdefault.txx"
+#endif // PLOTDEFAULT_H

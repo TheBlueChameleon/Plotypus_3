@@ -1,4 +1,4 @@
-#include "plot.h"
+#include "abstractplot.h"
 
 using namespace std::string_literals;
 using namespace Plotypus;
@@ -6,17 +6,17 @@ using namespace Plotypus;
 namespace Plotypus
 {
 
-    Plot::Plot(const SheetType& type) :
+    AbstractPlot::AbstractPlot(const SheetType& type) :
         Sheet(type), DataViewCollection(allowedDataViewTypes)
     {}
 
-    Plot::Plot(const SheetType& type, const std::string& title) :
+    AbstractPlot::AbstractPlot(const SheetType& type, const std::string& title) :
         Sheet(type, title), DataViewCollection(allowedDataViewTypes)
     {}
 
     // ====================================================================== //
 
-    void Plot::checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
+    void AbstractPlot::checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies)
     {
         if      (plotStyleFamily == PlotStyleFamily::Custom)
         {
@@ -39,7 +39,7 @@ namespace Plotypus
         }
     }
 
-    Plot& Plot::reset()
+    AbstractPlot& AbstractPlot::reset()
     {
         Sheet::reset();
         clearDataViews();
@@ -62,12 +62,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    PlotStyleFamily Plot::getPlotStyleFamily() const
+    PlotStyleFamily AbstractPlot::getPlotStyleFamily() const
     {
         return plotStyleFamily;
     }
 
-    Plot& Plot::setPlotStyleFamily(PlotStyleFamily newStyleFamily)
+    AbstractPlot& AbstractPlot::setPlotStyleFamily(PlotStyleFamily newStyleFamily)
     {
         if (plotStyleFamily != newStyleFamily)
         {
@@ -82,114 +82,114 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    size_t Plot::getBorder() const
+    size_t AbstractPlot::getBorder() const
     {
         return border;
     }
 
-    Plot& Plot::setBorder(size_t newBorder)
+    AbstractPlot& AbstractPlot::setBorder(size_t newBorder)
     {
         border = newBorder;
         return *this;
     }
 
-    size_t Plot::getBorderLineStyle() const
+    size_t AbstractPlot::getBorderLineStyle() const
     {
         return borderLineStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
-    Plot& Plot::setBorderLineStyle(size_t newBorderLineStyle)
+    AbstractPlot& AbstractPlot::setBorderLineStyle(size_t newBorderLineStyle)
     {
         borderLineStyle = newBorderLineStyle;
         return *this;
     }
 
-    Plot& Plot::clearBorderLineStyle()
+    AbstractPlot& AbstractPlot::clearBorderLineStyle()
     {
         borderLineStyle.reset();
         return *this;
     }
 
-    KeyDescriptor& Plot::key()
+    KeyDescriptor& AbstractPlot::key()
     {
         return m_key;
     }
 
-    bool Plot::getParametric() const
+    bool AbstractPlot::getParametric() const
     {
         return parametric;
     }
 
-    Plot& Plot::setParametric(bool newParametric)
+    AbstractPlot& AbstractPlot::setParametric(bool newParametric)
     {
         parametric = newParametric;
         return *this;
     }
 
-    const std::string Plot::getAspect() const
+    const std::string AbstractPlot::getAspect() const
     {
         return aspect.value_or("");
     }
 
-    Plot& Plot::setAspect(const std::string& newAspect)
+    AbstractPlot& AbstractPlot::setAspect(const std::string& newAspect)
     {
         aspect = newAspect;
         return *this;
     }
 
-    Plot& Plot::setAspectNone()
+    AbstractPlot& AbstractPlot::setAspectNone()
     {
         aspect = "noratio";
         return *this;
     }
 
-    Plot& Plot::setAspectSquare()
+    AbstractPlot& AbstractPlot::setAspectSquare()
     {
         aspect = "square";
         return *this;
     }
 
-    Plot& Plot::setAspectEqual()
+    AbstractPlot& AbstractPlot::setAspectEqual()
     {
         aspect = "ratio -1";
         return *this;
     }
 
-    Plot& Plot::setAspectRatio(double ratio)
+    AbstractPlot& AbstractPlot::setAspectRatio(double ratio)
     {
         aspect = "ratio "s + std::to_string(ratio);
         return *this;
     }
 
-    Plot& Plot::clearAspect()
+    AbstractPlot& AbstractPlot::clearAspect()
     {
         aspect.reset();
         return *this;
     }
 
-    const std::string Plot::getFill() const
+    const std::string AbstractPlot::getFill() const
     {
         return fill.value_or("");
     }
 
-    Plot& Plot::setFill(const std::string& newFill)
+    AbstractPlot& AbstractPlot::setFill(const std::string& newFill)
     {
         fill = newFill;
         return *this;
     }
 
-    Plot& Plot::clearFill()
+    AbstractPlot& AbstractPlot::clearFill()
     {
         fill.reset();
         return *this;
     }
 
-    const std::string& Plot::getDatalineSeparatorTxt() const
+    const std::string& AbstractPlot::getDatalineSeparatorTxt() const
     {
         return datalineSeparatorTxt;
     }
 
-    Plot& Plot::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
+    AbstractPlot& AbstractPlot::setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt)
     {
         datalineSeparatorTxt = newDatalineSeparatorTxt;
         return *this;
@@ -198,7 +198,7 @@ namespace Plotypus
     // ====================================================================== //
     // writers
 
-    void Plot::preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const
+    void AbstractPlot::preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const
     {
         Sheet::preprocessSheet(autoDataFilename, extension);
 
@@ -213,7 +213,7 @@ namespace Plotypus
         }
     }
 
-    void Plot::writeScriptHead(std::ostream& hFile) const
+    void AbstractPlot::writeScriptHead(std::ostream& hFile) const
     {
         Sheet::writeScriptHead(hFile);
 

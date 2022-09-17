@@ -38,7 +38,7 @@ namespace Plotypus
                 break;
 
             case SheetType::PlotOrthogonalAxis:
-                delete dynamic_cast<PlotOrthogonalAxes*>(sheet);
+                delete dynamic_cast<PlotDefault*>(sheet);
                 break;
 
             case SheetType::PlotRadialAxes:
@@ -100,13 +100,13 @@ namespace Plotypus
         return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
-    PlotOrthogonalAxes& SheetsCollection::addPlotOrthogonalAxes()
+    PlotDefault& SheetsCollection::addPlotDefault()
     {
-        return *dynamic_cast<PlotOrthogonalAxes*>(addSheet( new PlotOrthogonalAxes() ));
+        return *dynamic_cast<PlotDefault*>(addSheet( new PlotDefault() ));
     }
 
-    PlotOrthogonalAxes& SheetsCollection::addPlotOrthogonalAxes(const std::string& title)
+    PlotDefault& SheetsCollection::addPlotDefault(const std::string& title)
     {
-        return *dynamic_cast<PlotOrthogonalAxes*>(addSheet( new PlotOrthogonalAxes(title) ));
+        return *dynamic_cast<PlotDefault*>(addSheet( new PlotDefault(title) ));
     }
 }

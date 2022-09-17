@@ -1,10 +1,10 @@
-#ifndef PLOT_H
-#define PLOT_H
+#ifndef ABSTRACTPLOT_H
+#define ABSTRACTPLOT_H
 
 #include <optional>
 #include <vector>
 
-#include "../base/sheet.h"
+#include "../sheets/sheet.h"
 #include "../elements/keydescriptor.h"
 #include "../collections/dataviewcollection.h"
 
@@ -12,8 +12,10 @@ namespace Plotypus
 {
     /**
      * @brief foo bar
+     *
+     * @todo set palette, colorbox ~> new element, optional here
      */
-    class Plot : public Sheet, public DataViewCollection
+    class AbstractPlot : public Sheet, public DataViewCollection
     {
         protected:
             static constexpr auto allowedDataViewTypes =
@@ -40,41 +42,41 @@ namespace Plotypus
             virtual void abstractToken() = 0;
 
         public:
-            Plot(const SheetType& type);
-            Plot(const SheetType& type, const std::string& title);
+            AbstractPlot(const SheetType& type);
+            AbstractPlot(const SheetType& type, const std::string& title);
 
-            virtual Plot& reset();
+            virtual AbstractPlot& reset();
 
             PlotStyleFamily     getPlotStyleFamily() const;
             //! @todo couple with mode3D in ortho-axes..? virtual?
-            Plot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);
+            AbstractPlot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
             size_t              getBorder() const;
-            Plot&               setBorder(size_t newBorder);
+            AbstractPlot&               setBorder(size_t newBorder);
 
             size_t              getBorderLineStyle() const;
-            Plot&               setBorderLineStyle(size_t newBorderLineStyle);
-            Plot&               clearBorderLineStyle();
+            AbstractPlot&               setBorderLineStyle(size_t newBorderLineStyle);
+            AbstractPlot&               clearBorderLineStyle();
 
             const std::string   getAspect      () const;
-            Plot&               setAspect      (const std::string& newAspect);
-            Plot&               setAspectNone  ();
-            Plot&               setAspectSquare();
-            Plot&               setAspectEqual ();
-            Plot&               setAspectRatio (double ratio);
-            Plot&               clearAspect    ();
+            AbstractPlot&               setAspect      (const std::string& newAspect);
+            AbstractPlot&               setAspectNone  ();
+            AbstractPlot&               setAspectSquare();
+            AbstractPlot&               setAspectEqual ();
+            AbstractPlot&               setAspectRatio (double ratio);
+            AbstractPlot&               clearAspect    ();
 
             const std::string   getFill() const;
-            Plot&               setFill(const std::string& newFill);
-            Plot&               clearFill();
+            AbstractPlot&               setFill(const std::string& newFill);
+            AbstractPlot&               clearFill();
 
             const std::string&  getDatalineSeparatorTxt() const;
-            Plot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
+            AbstractPlot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
             KeyDescriptor&      key();
 
             bool                getParametric() const;
-            Plot&               setParametric(bool newParametric);
+            AbstractPlot&               setParametric(bool newParametric);
 
             // -------------------------------------------------------------- //
             // writers
@@ -85,4 +87,4 @@ namespace Plotypus
     };
 }
 
-#endif // PLOT_H
+#endif // ABSTRACTPLOT_H

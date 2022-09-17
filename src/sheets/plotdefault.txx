@@ -4,7 +4,7 @@
 namespace Plotypus
 {
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
+    DataViewDefaultCompound<T>& PlotDefault::addDataViewCompound(DataViewDefaultCompound<T>* dataView)
     {
         checkAndSetStyleFamily(dataView->getPlotStyleFamily(), allowedStyleFamiles);
 
@@ -17,14 +17,14 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotDefault::addDataViewCompound(const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::span<T>& data, const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotDefault::addDataViewCompound(const std::span<T>& data, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
@@ -34,7 +34,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(T* data, const size_t N, const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotDefault::addDataViewCompound(T* data, const size_t N, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 
@@ -44,7 +44,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& PlotOrthogonalAxes::addDataViewCompound(const std::string& func, const PlotStyle style, const std::string& label)
+    DataViewDefaultCompound<T>& PlotDefault::addDataViewCompound(const std::string& func, const PlotStyle style, const std::string& label)
     {
         DataViewDefaultCompound<T>* dataView = new DataViewDefaultCompound<T>(style, label);
 

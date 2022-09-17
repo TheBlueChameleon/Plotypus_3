@@ -16,7 +16,7 @@ namespace Plotypus
         blanks.clear();
         options.reset();
 
-        frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
+        frameSeparatorTxt = "--------------------------------------------------------------------------------\n";
 
         return *this;
     }

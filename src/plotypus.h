@@ -21,7 +21,6 @@
 
 #include "base/util.h"
 #include "base/report.h"
-#include "base/sheet.h"
 
 #include "collections/sheetscollection.h"
 #include "collections/overlayscollection.h"
@@ -32,8 +31,9 @@
 #include "dataview/dataviewdefaultcompound.h"
 #include "dataview/dataviewdefaultseparate.h"
 
-#include "plot/plot.h"
-#include "plot/plotorthogonalaxes.h"
-#include "plot/plotradial.h"
+#include "sheets/sheet.h"
+#include "sheets/abstractplot.h"
+#include "sheets/plotdefault.h"
+#include "sheets/plotradial.h"
 
 #endif // PLOTYPUS_H

@@ -5,7 +5,7 @@
 
 namespace Plotypus
 {
-    class PlotOrthogonalAxes;
+    class PlotDefault;
     class Sheet;
 
     //! @todo copy sheet funcs
@@ -39,8 +39,8 @@ namespace Plotypus
             Sheet& addSheet ();
             Sheet& addSheet (const std::string& title);
 
-            PlotOrthogonalAxes& addPlotOrthogonalAxes();
-            PlotOrthogonalAxes& addPlotOrthogonalAxes(const std::string& title);
+            PlotDefault& addPlotDefault();
+            PlotDefault& addPlotDefault(const std::string& title);
 
             // -------------------------------------------------------------- //
             // writers

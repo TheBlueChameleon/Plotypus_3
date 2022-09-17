@@ -4,10 +4,10 @@
 
 namespace Plotypus
 {
-    template PlotOrthogonalAxes&    SheetsCollection::sheetAs<PlotOrthogonalAxes>   (const size_t index);
-    template PlotRadial&            SheetsCollection::sheetAs<PlotRadial>           (const size_t index);
+    template PlotDefault&   SheetsCollection::sheetAs<PlotDefault>   (const size_t index);
+    template PlotRadial&    SheetsCollection::sheetAs<PlotRadial>    (const size_t index);
 
-    template Label&                 OverlaysCollection::overlayAs<Label>            (const size_t index);
+    template Label&         OverlaysCollection::overlayAs<Label>     (const size_t index);
 
     template bool contains<std::string>     (const std::string&     toFind, const std::vector<std::string>&     container);
     template bool contains<FileType>        (const FileType&        toFind, const std::vector<FileType>&        container);

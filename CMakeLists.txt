@@ -31,12 +31,12 @@ add_library(Plotypus-lib SHARED
     src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/report.h src/base/report.cpp
     src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
-    src/base/sheet.h src/base/sheet.cpp src/base/sheet.txx
     src/base/mulitplot.h src/base/mulitplot.cpp
     #
-    src/plot/plot.h src/plot/plot.cpp
-    src/plot/plotorthogonalaxes.h src/plot/plotorthogonalaxes.cpp src/plot/plotorthogonalaxes.txx
-    src/plot/plotradial.h src/plot/plotradial.cpp
+    src/sheets/sheet.h src/sheets/sheet.cpp src/sheets/sheet.txx
+    src/sheets/abstractplot.h src/sheets/abstractplot.cpp
+    src/sheets/plotdefault.h src/sheets/plotdefault.cpp src/sheets/plotdefault.txx
+    src/sheets/plotradial.h src/sheets/plotradial.cpp
     #
     src/elements/axisdescriptor.h src/elements/axisdescriptor.cpp
     src/elements/keydescriptor.h src/elements/keydescriptor.cpp
