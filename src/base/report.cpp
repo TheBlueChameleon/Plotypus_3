@@ -45,22 +45,6 @@ namespace Plotypus
         return p;
     }
 
-    void Report::writeCleanSheetCommands(std::ostream& hFile) const
-    {
-        hFile << "# " << std::string(76, '-') << " #\n";
-        hFile << "# prepare empty page" << std::endl << std::endl;
-
-        hFile << "unset border" << std::endl;
-        hFile << "unset xtics"  << std::endl;
-        hFile << "unset xlabel" << std::endl;
-        hFile << "unset ytics"  << std::endl;
-        hFile << "unset ylabel" << std::endl;
-
-        hFile << "set xrange[0:1]" << std::endl;
-        hFile << "set yrange[1:0]" << std::endl;
-        hFile << std::endl;
-    }
-
     // ====================================================================== //
 
     Report::Report() :
@@ -291,7 +275,6 @@ namespace Plotypus
     void Report::writeScript(std::ostream& hFile) const
     {
         const std::string outputFilename = getOutputFilename(m_terminalInfoProvider.getExtOut());
-        bool              needCleanSheetCommands = true;
 
         // *INDENT-OFF*
         if (verbose) {std::cout << "about to write script for " << outputFilename << " ..." << std::endl;}
@@ -315,9 +298,6 @@ namespace Plotypus
 
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# page " << i << std::endl << std::endl;
-
-            if (needCleanSheetCommands && sheet->getType() == SheetType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
-            else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead      (hFile);
             sheet->writeScriptOverlays  (hFile);

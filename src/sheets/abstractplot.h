@@ -4,7 +4,8 @@
 #include <optional>
 #include <vector>
 
-#include "../sheets/sheet.h"
+#include "sheet.h"
+
 #include "../elements/keydescriptor.h"
 #include "../collections/dataviewcollection.h"
 

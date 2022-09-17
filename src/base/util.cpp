@@ -9,6 +9,22 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // general purpose
 
+    std::string gnuplotCommand = "gnuplot";
+
+    void runGnuplot(const std::string& filename, bool verbose)
+    {
+    // *INDENT-OFF*
+    if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+
+    const auto error = std::system((gnuplotCommand + " " + filename).data());
+
+    if (verbose) {
+        if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
+        else        {std::cout << "done." << std::endl;}
+    }
+    // *INDENT-ON*
+    }
+
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
     {
         std::fstream hFile(filename, mode);
@@ -21,18 +37,18 @@ namespace Plotypus
         return hFile;
     }
 
-    void runGnuplot(const std::string& filename, bool verbose)
+    void writeCleanSheetCommands(std::ostream& hFile)
     {
-        // *INDENT-OFF*
-        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+        hFile << "# " << std::string(76, '-') << " #\n";
+        hFile << "# prepare empty page" << std::endl << std::endl;
 
-        const auto error = std::system((std::string("gnuplot ") + filename).data());
+        hFile << "unset border" << std::endl;
+        hFile << "unset xtics"  << std::endl;
+        hFile << "unset xlabel" << std::endl;
+        hFile << "unset ytics"  << std::endl;
+        hFile << "unset ylabel" << std::endl;
 
-        if (verbose) {
-            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
-            else        {std::cout << "done." << std::endl;}
-        }
-        // *INDENT-ON*
+        hFile << std::endl;
     }
 
     // ---------------------------------------------------------------------- //

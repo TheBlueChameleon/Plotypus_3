@@ -236,24 +236,25 @@ namespace Plotypus
     {
         Sheet::writeTxtHead(hFile);
 
-        // introduce multi section with some comment and title
+        hFile << "page contents:" << std::endl;
+        for (const auto& sheet : sheets)
+        {
+            hFile << " * " << sheet->getTitle() << std::endl;
+        }
+        hFile << std::endl;
     }
 
     void MulitPlot::writeTxtData(std::ostream& hFile) const
     {
         Sheet::writeTxtData(hFile);
 
-        for (size_t i = 1u; auto sheet : sheets)
+        for (auto sheet : sheets)
         {
+            hFile << frameSeparatorTxt;
+
             sheet->writeTxtHead  (hFile);
             sheet->writeTxtData  (hFile);
             sheet->writeTxtOverlays(hFile);
-
-            if (i != sheets.size())
-            {
-                hFile << frameSeparatorTxt;
-            }
-            ++i;
         }
     }
 
@@ -285,17 +286,25 @@ namespace Plotypus
             hFile << "set font " << std::quoted(defaultFont.value()) << std::endl;
         }
 
-        // set multiplot
+        hFile << "set title \"\"" << std::endl;
+        hFile << "set multiplot";
         // title, titleFont aka font
 
-//        if (title.has_value())
-//        {
-//            hFile << "set title " << std::quoted("{/" + titleFont.value_or("") + " " + title.value() + "}") << std::endl;
-//        }
+        if (title.has_value())
+        {
+            hFile << " title " << std::quoted("{/" + titleFont.value_or("") + " " + title.value() + "}");
+        }
 
-        // layout
-        // options
+        if (layout.has_value())
+        {
+            const auto& layoutData = layout.value();
 
+            hFile << " layout " << layoutData.gridDimensions.first << ", " << layoutData.gridDimensions.second;
+        }
+
+        hFile << optionalStringArgument("", options);
+
+        hFile << std::endl;
     }
 
     void MulitPlot::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
@@ -323,7 +332,7 @@ namespace Plotypus
     {
         // explicityl call parent at END of method
 
-        // unset multiplot
+        hFile << "unset multiplot" << std::endl;
 
         Sheet::writeScriptFooter(hFile, pageNum);
     }

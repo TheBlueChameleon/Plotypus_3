@@ -185,6 +185,8 @@ namespace Plotypus
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
 
+        writeCleanSheetCommands(hFile);
+
         if (defaultFont.has_value())
         {
             hFile << "set font " << std::quoted(defaultFont.value()) << std::endl;
@@ -244,7 +246,7 @@ namespace Plotypus
             hFile << "# " << std::string(76, '-') << " #\n";
             hFile << "# dummy plot for empty page" << std::endl << std::endl;
 
-            hFile << "plot [][] 1/0 t\"\"" << std::endl;
+            hFile << "plot [0:1][1:0] 1/0 t\"\"" << std::endl;
         }
         else
         {

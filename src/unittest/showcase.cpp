@@ -138,6 +138,7 @@ void showcase_run_plots2d (Plotypus::Report& report,
 void showcase_run_plots2d_maps(Plotypus::Report& report,
                                std::vector<compound_complex_t>& compound_complex,
                                std::array<std::vector<double>, 3>& separate_data);
+void showcase_run_plots_multiplot(Plotypus::Report& report);
 
 // ========================================================================== //
 // exposed interface
@@ -177,7 +178,10 @@ void showcase_run(Showcases selection)
         separate_filed   = generateScalarField();
         showcase_run_plots2d_maps(report, compound_complex, separate_filed);
     }
-
+    if (selection & Showcases::Plots_Multiplot)
+    {
+        showcase_run_plots_multiplot(report);
+    }
 
     // ---------------------------------------------------------------------- //
     // write the report
@@ -473,6 +477,26 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     {
         std::cout << "No double specification of key position" << std::endl;
     }
+}
+
+// -------------------------------------------------------------------------- //
+
+void showcase_run_plots_multiplot(Plotypus::Report& report)
+{
+    auto& sheet1 = report.addMultiPlot("multiplot").setGridDimensions({1, 3});
+    auto& subplot_1_1 = sheet1.addPlotDefault("subplot 1");
+    auto& subplot_1_2 = sheet1.addSheet("subplot 2");
+    auto& subplot_1_3 = sheet1.addPlotDefault("subplot 3");
+
+    auto& f_sin = subplot_1_1.addDataViewSeparate("[0:2*pi]sin(x)");
+    auto& f_cos = subplot_1_3.addDataViewSeparate("[0:3*pi]cos(x)");
+    f_sin.setTitle("foo bar");
+    f_cos.setTitle("BOO FAR");
+
+    subplot_1_1.addLabel("foo bar", 0.1, 0.1);
+    subplot_1_2.addLabel("FOO BAR", 0.1, 0.1);
+
+    report.addSheet("Simple Sheet").addLabel("after a multiplot, the normal features are available as usual.", 0.05, 0.1);
 }
 
 // ========================================================================== //

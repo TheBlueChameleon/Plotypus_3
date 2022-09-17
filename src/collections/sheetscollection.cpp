@@ -100,6 +100,11 @@ namespace Plotypus
         return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
+    MulitPlot& SheetsCollection::addMultiPlot(const std::string& title)
+    {
+        return *dynamic_cast<MulitPlot*>(addSheet(new MulitPlot(title)));
+    }
+
     PlotDefault& SheetsCollection::addPlotDefault()
     {
         return *dynamic_cast<PlotDefault*>(addSheet( new PlotDefault() ));

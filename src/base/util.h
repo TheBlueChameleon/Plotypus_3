@@ -18,11 +18,15 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // general purpose
 
+    extern std::string gnuplotCommand;
+    void runGnuplot(const std::string& filename, bool verbose = true);
+
     template<class T>
     bool contains(const T& toFind, const std::vector<T>& container);
 
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode = std::ios_base::out);
-    void runGnuplot(const std::string& filename, bool verbose = true);
+
+    void writeCleanSheetCommands(std::ostream& hFile);
 
     // ---------------------------------------------------------------------- //
     // throw if ...

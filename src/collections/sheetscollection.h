@@ -7,6 +7,7 @@ namespace Plotypus
 {
     class PlotDefault;
     class Sheet;
+    class MulitPlot;
 
     //! @todo copy sheet funcs
     //! @todo abstract writers?
@@ -41,6 +42,8 @@ namespace Plotypus
 
             PlotDefault& addPlotDefault();
             PlotDefault& addPlotDefault(const std::string& title);
+
+            MulitPlot& addMultiPlot(const std::string& title);
 
             // -------------------------------------------------------------- //
             // writers

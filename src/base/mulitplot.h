@@ -11,6 +11,7 @@
 namespace Plotypus
 {
 
+    //! @todo most of the layout-commands
     //! @todo add size/origin on Sheet
     //! @todo add convenience non-uniform grid creators aka arrangeX
     //! @todo lock adding overlays (as positioning cannot be distinguished from in-frame); maybe add boolean 'locked' to OverlaysCollection

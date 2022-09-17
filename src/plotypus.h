@@ -21,6 +21,7 @@
 
 #include "base/util.h"
 #include "base/report.h"
+#include "base/mulitplot.h"
 
 #include "collections/sheetscollection.h"
 #include "collections/overlayscollection.h"
