@@ -272,27 +272,9 @@ namespace Plotypus
 
     void MulitPlot::writeScriptHead(std::ostream& hFile) const
     {
-        // explicitly no call to parent due to different handling of title
+        Sheet::writeScriptHead(hFile);
 
-        if (customScriptBegin.has_value())
-        {
-            hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# custom setup script I" << std::endl << std::endl;
-            hFile << customScriptBegin.value() << std::endl;
-            hFile << std::endl;
-        }
-
-        hFile << "# " << std::string(76, '-') << " #\n";
-        hFile << "# generated setup script" << std::endl << std::endl;
-
-        if (defaultFont.has_value())
-        {
-            hFile << "set font " << std::quoted(defaultFont.value()) << std::endl;
-        }
-
-        hFile << "set title \"\"" << std::endl;
         hFile << "set multiplot";
-        // title, titleFont aka font
 
         if (title.has_value())
         {

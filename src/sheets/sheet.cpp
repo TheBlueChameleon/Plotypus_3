@@ -219,7 +219,22 @@ namespace Plotypus
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# generated setup script" << std::endl << std::endl;
 
-        writeCleanSheetCommands(hFile);
+        if (type == SheetType::Sheet)
+        {
+            writeCleanSheetCommands(hFile);
+        }
+
+        if (origin.has_value())
+        {
+            const auto& originValue = origin.value();
+            hFile << "set origin " << originValue.first << ", " << originValue.second << std::endl;
+        }
+
+        if (size.has_value())
+        {
+            const auto& sizeValue = size.value();
+            hFile << "set size " << sizeValue.first << ", " << sizeValue.second << std::endl;
+        }
 
         if (defaultFont.has_value())
         {

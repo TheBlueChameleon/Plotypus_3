@@ -496,7 +496,20 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
     subplot_1_1.addLabel("foo bar", 0.1, 0.1);
     subplot_1_2.addLabel("FOO BAR", 0.1, 0.1);
 
-    report.addSheet("Simple Sheet").addLabel("after a multiplot, the normal features are available as usual.", 0.05, 0.1);
+    auto& sheet2 = report.addSheet("Simple Sheet").addLabel("after a multiplot, the normal features are available as usual.", 0.05, 0.1);
+
+    auto& sheet3 = report.addMultiPlot("second one");
+    auto& subplot_3_1 = sheet3.addPlotDefault("subplot 1");
+    auto& subplot_3_2 = sheet3.addPlotDefault("subplot 2");
+
+    subplot_3_1.setSize  ({0.5, 1.0});
+    subplot_3_2.setSize  ({0.5, 1.0});
+    subplot_3_2.setOrigin({0.5, 0.0});
+
+    subplot_3_1.addDataViewSeparate("[0:pi]tan(x)");
+    subplot_3_2.addDataViewSeparate("[0:pi]exp(x)");
+
+    sheet3.addLabel("centered label on multiplot level", 0.5, 0.5, true);
 }
 
 // ========================================================================== //
