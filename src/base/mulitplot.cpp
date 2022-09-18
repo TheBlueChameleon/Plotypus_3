@@ -2,8 +2,12 @@
 
 namespace Plotypus
 {
+    MulitPlot::MulitPlot() :
+        Sheet(SheetType::Multiplot), SheetsCollection(allowedSheetTypes, true)
+    {}
+
     MulitPlot::MulitPlot(const std::string& title) :
-        Sheet(SheetType::Multiplot, title), SheetsCollection(allowedSheetTypes)
+        Sheet(SheetType::Multiplot, title), SheetsCollection(allowedSheetTypes, true)
     {}
 
     // ====================================================================== //
@@ -315,10 +319,6 @@ namespace Plotypus
         {
             hFile << "# " << std::string(76, '=') << " #\n";
             hFile << "# subplot " << i << std::endl << std::endl;
-
-            // maybe: move writeCleanSheetCommands to util?
-//            if (needCleanSheetCommands && sheet->getType() == SheetType::Sheet) {needCleanSheetCommands = false; writeCleanSheetCommands(hFile);}
-//            else if                      (sheet->getType() != SheetType::Sheet) {needCleanSheetCommands = true ;}
 
             sheet->writeScriptHead      (hFile);
             sheet->writeScriptOverlays  (hFile);

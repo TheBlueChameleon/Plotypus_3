@@ -71,6 +71,12 @@ namespace Plotypus
     constexpr OverlayPosition_t POSITION_ORIGIN = {0, 0, std::optional<double>()};
 
     // ====================================================================== //
+    // Sheets
+
+    using SheetPosition_t = std::pair<double, double>;
+    constexpr SheetPosition_t DEFAULT_SHEET_POSITION = {-1., -1.};
+
+    // ====================================================================== //
     // Multiplots
 
     using GridPosition_t = std::pair<size_t, size_t>;

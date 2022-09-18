@@ -34,6 +34,7 @@ namespace Plotypus
             std::string                         frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
         public:
+            MulitPlot();
             MulitPlot(const std::string& title);
 
             MulitPlot&          reset();

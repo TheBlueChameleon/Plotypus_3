@@ -27,6 +27,9 @@ namespace Plotypus
             std::optional<std::string> defaultFont = "Arial,7";
             std::optional<std::string> titleFont = "Arial:bold*2";
 
+            std::optional<SheetPosition_t> origin;
+            std::optional<SheetPosition_t> size;
+
             std::optional<std::string> customScriptBegin;
             std::optional<std::string> customScriptInter;
             std::optional<std::string> customScriptEnd;
@@ -52,6 +55,14 @@ namespace Plotypus
             const std::string           getTitleFont() const;
             Sheet&                      setTitleFont(const std::string& newTitleFont);
             Sheet&                      clearTitleFont();
+
+            const SheetPosition_t       getOrigin() const;
+            Sheet&                      setOrigin(const SheetPosition_t& newOrigin);
+            Sheet&                      clearOrigin();
+
+            const SheetPosition_t       getSize() const;
+            Sheet&                      setSize(const SheetPosition_t& newSize);
+            Sheet&                      clearSize();
 
             const std::string           getCustomScriptBegin() const;
             Sheet&                      setCustomScriptBegin(const std::string& newCustomScriptBegin);

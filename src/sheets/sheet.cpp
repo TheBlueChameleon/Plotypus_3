@@ -86,6 +86,40 @@ namespace Plotypus
         return *this;
     }
 
+    const SheetPosition_t Sheet::getOrigin() const
+    {
+        return origin.value_or(DEFAULT_SHEET_POSITION);
+    }
+
+    Sheet& Sheet::setOrigin(const SheetPosition_t& newOrigin)
+    {
+        origin = newOrigin;
+        return *this;
+    }
+
+    Sheet& Sheet::clearOrigin()
+    {
+        origin.reset();
+        return *this;
+    }
+
+    const SheetPosition_t Sheet::getSize() const
+    {
+        return size.value_or(DEFAULT_SHEET_POSITION);
+    }
+
+    Sheet& Sheet::setSize(const SheetPosition_t& newSize)
+    {
+        size = newSize;
+        return *this;
+    }
+
+    Sheet& Sheet::clearSize()
+    {
+        size.reset();
+        return *this;
+    }
+
     const std::string Sheet::getCustomScriptBegin() const
     {
         return customScriptBegin.value_or("");

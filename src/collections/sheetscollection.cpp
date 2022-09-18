@@ -4,8 +4,8 @@
 using namespace Plotypus;
 namespace Plotypus
 {
-    SheetsCollection::SheetsCollection(const std::vector<SheetType>& allowedSheetTypes) :
-        allowedSheetTypes(allowedSheetTypes)
+    SheetsCollection::SheetsCollection(const std::vector<SheetType>& allowedSheetTypes, bool adjustDefaultFontSize) :
+        allowedSheetTypes(allowedSheetTypes), adjustDefaultFontSize(adjustDefaultFontSize)
     {}
 
     SheetsCollection::~SheetsCollection()
@@ -24,6 +24,11 @@ namespace Plotypus
         {
             clearSheet(newSheet);
             throw UnsupportedOperationError("Cannot add Sheet of type " + getSheetTypeName(sheetType));
+        }
+
+        if (adjustDefaultFontSize)
+        {
+            newSheet->setTitleFont("Arial:bold*1.2");
         }
 
         return sheets.back();
@@ -100,6 +105,11 @@ namespace Plotypus
         return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
+    MulitPlot& SheetsCollection::addMultiPlot()
+    {
+        return *dynamic_cast<MulitPlot*>(addSheet(new MulitPlot));
+    }
+
     MulitPlot& SheetsCollection::addMultiPlot(const std::string& title)
     {
         return *dynamic_cast<MulitPlot*>(addSheet(new MulitPlot(title)));
@@ -107,7 +117,7 @@ namespace Plotypus
 
     PlotDefault& SheetsCollection::addPlotDefault()
     {
-        return *dynamic_cast<PlotDefault*>(addSheet( new PlotDefault() ));
+        return *dynamic_cast<PlotDefault*>(addSheet( new PlotDefault ));
     }
 
     PlotDefault& SheetsCollection::addPlotDefault(const std::string& title)

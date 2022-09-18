@@ -15,14 +15,15 @@ namespace Plotypus
     class SheetsCollection
     {
         protected:
-            std::vector<Sheet*> sheets;
-            const std::vector<SheetType>  allowedSheetTypes;
+            std::vector<Sheet*>             sheets;
+            const std::vector<SheetType>    allowedSheetTypes;
+            bool                            adjustDefaultFontSize;
 
             Sheet* addSheet (Sheet* newSheet);
             static void clearSheet(Sheet* sheet);
 
         public:
-            SheetsCollection(const std::vector<SheetType>& allowedSheetTypes);
+            SheetsCollection(const std::vector<SheetType>& allowedSheetTypes, bool adjustDefaultFontSize = false);
             ~SheetsCollection();
 
             SheetsCollection& reset();
@@ -40,15 +41,11 @@ namespace Plotypus
             Sheet& addSheet ();
             Sheet& addSheet (const std::string& title);
 
-            PlotDefault& addPlotDefault();
-            PlotDefault& addPlotDefault(const std::string& title);
-
+            MulitPlot& addMultiPlot();
             MulitPlot& addMultiPlot(const std::string& title);
 
-            // -------------------------------------------------------------- //
-            // writers
-
-            // ???
+            PlotDefault& addPlotDefault();
+            PlotDefault& addPlotDefault(const std::string& title);
     };
 }
 
