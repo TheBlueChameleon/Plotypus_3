@@ -139,12 +139,12 @@ namespace Plotypus
         return *static_cast<DataviewDefaultSeparate*>(DataviewCollection::addDataview(dataView));
     }
 
-    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataviewSeparate(const PlotStyle style, const std::string& label)
     {
         return addDataViewSeparate( new DataviewDefaultSeparate(style, label) );
     }
 
-    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataviewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 
@@ -153,7 +153,7 @@ namespace Plotypus
         return addDataViewSeparate(dataView);
     }
 
-    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataviewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 
@@ -163,7 +163,7 @@ namespace Plotypus
         return addDataViewSeparate(dataView);
     }
 
-    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataviewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 

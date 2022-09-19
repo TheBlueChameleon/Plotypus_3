@@ -46,38 +46,38 @@ namespace Plotypus
             AbstractPlot(const SheetType& type);
             AbstractPlot(const SheetType& type, const std::string& title);
 
-            virtual AbstractPlot& reset();
+            virtual AbstractPlot&   reset();
 
-            PlotStyleFamily     getPlotStyleFamily() const;
+            PlotStyleFamily         getPlotStyleFamily() const;
             //! @todo couple with mode3D in ortho-axes..? virtual?
-            AbstractPlot&               setPlotStyleFamily(PlotStyleFamily newStyleFamily);
+            AbstractPlot&           setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
-            size_t              getBorder() const;
-            AbstractPlot&               setBorder(size_t newBorder);
+            size_t                  getBorder() const;
+            AbstractPlot&           setBorder(size_t newBorder);
 
-            size_t              getBorderLineStyle() const;
-            AbstractPlot&               setBorderLineStyle(size_t newBorderLineStyle);
-            AbstractPlot&               clearBorderLineStyle();
+            size_t                  getBorderLineStyle() const;
+            AbstractPlot&           setBorderLineStyle(size_t newBorderLineStyle);
+            AbstractPlot&           clearBorderLineStyle();
 
-            const std::string   getAspect      () const;
-            AbstractPlot&               setAspect      (const std::string& newAspect);
-            AbstractPlot&               setAspectNone  ();
-            AbstractPlot&               setAspectSquare();
-            AbstractPlot&               setAspectEqual ();
-            AbstractPlot&               setAspectRatio (double ratio);
-            AbstractPlot&               clearAspect    ();
+            const std::string       getAspect      () const;
+            AbstractPlot&           setAspect      (const std::string& newAspect);
+            AbstractPlot&           setAspectNone  ();
+            AbstractPlot&           setAspectSquare();
+            AbstractPlot&           setAspectEqual ();
+            AbstractPlot&           setAspectRatio (double ratio);
+            AbstractPlot&           clearAspect    ();
 
-            const std::string   getFill() const;
-            AbstractPlot&               setFill(const std::string& newFill);
-            AbstractPlot&               clearFill();
+            const std::string       getFill() const;
+            AbstractPlot&           setFill(const std::string& newFill);
+            AbstractPlot&           clearFill();
 
-            const std::string&  getDatalineSeparatorTxt() const;
-            AbstractPlot&               setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
+            const std::string&      getDatalineSeparatorTxt() const;
+            AbstractPlot&           setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
-            KeyDescriptor&      key();
+            KeyDescriptor&          key();
 
-            bool                getParametric() const;
-            AbstractPlot&               setParametric(bool newParametric);
+            bool                    getParametric() const;
+            AbstractPlot&           setParametric(bool newParametric);
 
             // -------------------------------------------------------------- //
             // writers
