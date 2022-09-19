@@ -42,6 +42,7 @@ add_library(Plotypus-lib SHARED
     src/elements/keydescriptor.h src/elements/keydescriptor.cpp
     src/elements/overlay.h src/elements/overlay.cpp
     src/elements/label.h src/elements/label.cpp
+    src/elements/palettedescriptor.h src/elements/palettedescriptor.cpp
     #
     src/dataview/dataview.h src/dataview/dataview.cpp
     src/dataview/dataviewdefault.h src/dataview/dataviewdefault.cpp
