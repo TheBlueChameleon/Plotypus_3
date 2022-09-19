@@ -10,7 +10,6 @@ namespace Plotypus
     class MulitPlot;
 
     //! @todo copy sheet funcs
-    //! @todo abstract writers?
 
     class SheetsCollection
     {
@@ -19,6 +18,8 @@ namespace Plotypus
             const std::vector<SheetType>    allowedSheetTypes;
             bool                            adjustDefaultFontSize;
 
+            std::string                     alternativeHeadFont = "Arial:bold*1.3";
+
             Sheet* addSheet (Sheet* newSheet);
             static void clearSheet(Sheet* sheet);
 
@@ -26,10 +27,13 @@ namespace Plotypus
             SheetsCollection(const std::vector<SheetType>& allowedSheetTypes, bool adjustDefaultFontSize = false);
             ~SheetsCollection();
 
-            SheetsCollection& reset();
-            SheetsCollection& clearSheets();
+            SheetsCollection&               reset();
+            SheetsCollection&               clearSheets();
 
-            size_t getSheetCount() const;
+            const std::string&              getAlternativeHeadFont() const;
+            SheetsCollection&               setAlternativeHeadFont(const std::string& newAlternativeHeadFont);
+
+            size_t                          getSheetCount() const;
 
             const std::vector<Sheet*>&      getSheets() const;
             const std::vector<SheetType>&   getAllowedSheetTypes() const;
@@ -38,14 +42,14 @@ namespace Plotypus
             template<SheetLike T>
             T& sheetAs(const size_t i);
 
-            Sheet& addSheet ();
-            Sheet& addSheet (const std::string& title);
+            Sheet&          addSheet();
+            Sheet&          addSheet(const std::string& title);
 
-            MulitPlot& addMultiPlot();
-            MulitPlot& addMultiPlot(const std::string& title);
+            MulitPlot&      addMultiPlot();
+            MulitPlot&      addMultiPlot(const std::string& title);
 
-            PlotDefault& addPlotDefault();
-            PlotDefault& addPlotDefault(const std::string& title);
+            PlotDefault&    addPlotDefault();
+            PlotDefault&    addPlotDefault(const std::string& title);
     };
 }
 

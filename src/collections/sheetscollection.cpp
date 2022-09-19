@@ -28,7 +28,7 @@ namespace Plotypus
 
         if (adjustDefaultFontSize)
         {
-            newSheet->setTitleFont("Arial:bold*1.2");
+            newSheet->setTitleFont(alternativeHeadFont);
         }
 
         return sheets.back();
@@ -61,6 +61,8 @@ namespace Plotypus
     SheetsCollection& SheetsCollection::reset()
     {
         return clearSheets();
+
+        alternativeHeadFont = "Arial:bold*1.3";
     }
 
     SheetsCollection& SheetsCollection::clearSheets()
@@ -71,6 +73,17 @@ namespace Plotypus
         }
         sheets.clear();
 
+        return *this;
+    }
+
+    const std::string& SheetsCollection::getAlternativeHeadFont() const
+    {
+        return alternativeHeadFont;
+    }
+
+    SheetsCollection& SheetsCollection::setAlternativeHeadFont(const std::string& newAlternativeHeadFont)
+    {
+        alternativeHeadFont = newAlternativeHeadFont;
         return *this;
     }
 
