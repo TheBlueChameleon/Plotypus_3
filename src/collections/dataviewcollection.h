@@ -27,7 +27,7 @@ namespace Plotypus
             const std::vector<Dataview*>&   getDataviews() const;
 
             Dataview&                       dataview(const size_t i);
-            template<DataViewLike T>
+            template<DataviewLike T>
             T&                              dataviewAs(const size_t i);
     };
 }

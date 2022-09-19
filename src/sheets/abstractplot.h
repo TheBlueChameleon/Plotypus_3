@@ -7,6 +7,8 @@
 #include "sheet.h"
 
 #include "../elements/keydescriptor.h"
+#include "../elements/palettedescriptor.h"
+
 #include "../collections/dataviewcollection.h"
 
 namespace Plotypus
