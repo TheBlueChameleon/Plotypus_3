@@ -64,14 +64,17 @@ namespace Plotypus
     std::string getPositionSystemName(const PositionSystem ps);
     std::string getLayerName(const Layer layer);
     std::string getAlignmentName(const HorizontalAlignment alignment);
-    std::string getAlignmentName(const VerticalAlignment alignment);
-    std::string getAlignmentName(const Margin alignment);
+    std::string getAlignmentName(const VerticalAlignment   alignment);
+    std::string getAlignmentName(const Margin              alignment);
     std::string getJustificationName(const HorizontalAlignment alignment);
-    std::string getStackingOrderName(const StackingOrder stackingOrder);
+    std::string getStackingOrderName(const StackingOrder stackingOrder, bool variantMultiPlot = false);
+    std::string getStackingDirectionName(const StackingDirection stackingDirection);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 
     bool hasAxisLabel(const AxisType axis);
+
+    double& getMarginsElement(Plotypus::Margins_t margins, const Margin margin);
 
     // ---------------------------------------------------------------------- //
     // optional parameters handling

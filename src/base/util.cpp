@@ -439,32 +439,6 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getSheetTypeName(const SheetType sheetType)
-    {
-        // *INDENT-OFF*
-        switch (sheetType) {
-            case SheetType::Sheet               : return "Sheet";
-            case SheetType::Multiplot           : return "Multiplot";
-            case SheetType::PlotOrthogonalAxis  : return "PlotOrthogonalAxis";
-            case SheetType::PlotRadialAxes      : return "PlotRadialAxis";
-        }
-        // *INDENT-ON*
-
-        return "(undefined)";
-    }
-
-    std::string getDataViewTypeName(const DataViewType viewType)
-    {
-        // *INDENT-OFF*
-        switch (viewType) {
-            case DataViewType::DataViewDefaultCompound : return "DataViewDefaultCompound";
-            case DataViewType::DataViewDefaultSeparate : return "DataViewDefaultSeparate";
-        }
-        // *INDENT-ON*
-
-        return "(undefined)";
-    }
-
     std::string getColumnIDName(const ColumnType columnType)
     {
         // *INDENT-OFF*
@@ -492,6 +466,32 @@ namespace Plotypus
             case ColumnType::Boxwidth:     return "Boxwidth";
             case ColumnType::Length:       return "Length";
             case ColumnType::Angle:        return "angle";
+        }
+        // *INDENT-ON*
+
+        return "(undefined)";
+    }
+
+    std::string getSheetTypeName(const SheetType sheetType)
+    {
+        // *INDENT-OFF*
+        switch (sheetType) {
+            case SheetType::Sheet               : return "Sheet";
+            case SheetType::Multiplot           : return "Multiplot";
+            case SheetType::PlotOrthogonalAxis  : return "PlotOrthogonalAxis";
+            case SheetType::PlotRadialAxes      : return "PlotRadialAxis";
+        }
+        // *INDENT-ON*
+
+        return "(undefined)";
+    }
+
+    std::string getDataViewTypeName(const DataViewType viewType)
+    {
+        // *INDENT-OFF*
+        switch (viewType) {
+            case DataViewType::DataViewDefaultCompound : return "DataViewDefaultCompound";
+            case DataViewType::DataViewDefaultSeparate : return "DataViewDefaultSeparate";
         }
         // *INDENT-ON*
 
@@ -558,70 +558,6 @@ namespace Plotypus
         // *INDENT-ON*
 
         return "(undefined)";
-    }
-
-    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID)
-    {
-        // *INDENT-OFF*
-        switch(plotStyleID)
-        {
-            case PlotStyle::Dots:           return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Points:         return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::XErrorBars:     return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::YErrorBars:     return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::XYErrorBars:    return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Lines:          return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::LinesPoints:    return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::FilledCurves:   return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::XErrorLines:    return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::YErrorLines:    return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::XYErrorLines:   return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Steps:          return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::FSteps:         return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::FillSteps:      return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Impulses:       return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Boxes:          return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::HBoxes:         return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::BoxErrorBars:   return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::BoxxyError:     return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Arrows:         return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Vectors:        return PlotStyleFamily::Orthogonal2D;
-            case PlotStyle::Image:          return PlotStyleFamily::Orthogonal2D;
-
-            case PlotStyle::Dots3D:         return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Points3D:       return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Lines3D:        return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::LinesPoints3D:  return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Impulses3D:     return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Boxes3D:        return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Vectors3D:      return PlotStyleFamily::Orthogonal3D;
-            case PlotStyle::Image3D:        return PlotStyleFamily::Orthogonal3D;
-
-            case PlotStyle::Custom:         return PlotStyleFamily::Custom;
-        }
-        // *INDENT-ON*
-
-        return PlotStyleFamily::Undefined;
-    }
-
-    bool hasAxisLabel(const AxisType axis)
-    {
-        // *INDENT-OFF*
-        switch (axis)
-        {
-            case AxisType::Azimuthal:   return false;
-            case AxisType::Colourbar:   return true;
-            case AxisType::Radial:      return true;
-            case AxisType::X:           return true;
-            case AxisType::X2:          return true;
-            case AxisType::Y:           return true;
-            case AxisType::Y2:          return true;
-            case AxisType::Z:           return true;
-            case AxisType::Undefined:   return false;
-        }
-        // *INDENT-ON*
-
-        return false;
     }
 
     std::string getPositionSystemName(const PositionSystem ps)
@@ -709,17 +645,109 @@ namespace Plotypus
         return "undefined";
     }
 
-    std::string getStackingOrderName(const StackingOrder stackingOrder)
+    std::string getStackingOrderName(const StackingOrder stackingOrder, bool variantMultiPlot)
     {
         // *INDENT-OFF*
-        switch (stackingOrder) {
-            case StackingOrder::Default:    return "";
-            case StackingOrder::Horizontal: return "horizontal";
-            case StackingOrder::Vertical:   return "vertical";
+        if (variantMultiPlot) {
+            switch (stackingOrder) {
+                case StackingOrder::Default:    return "";
+                case StackingOrder::Horizontal: return "columnsfirst";
+                case StackingOrder::Vertical:   return "rowsfirst";
+            }
+
+        } else {
+            switch (stackingOrder) {
+                case StackingOrder::Default:    return "";
+                case StackingOrder::Horizontal: return "horizontal";
+                case StackingOrder::Vertical:   return "vertical";
+            }
         }
         // *INDENT-ON*
 
         return "undefined";
+    }
+
+    std::string getStackingDirectionName(const StackingDirection stackingDirection)
+    {
+        // *INDENT-OFF*
+        switch (stackingDirection) {
+            case StackingDirection::Default:    return "";
+            case StackingDirection::Downwards:  return "downwards";
+            case StackingDirection::Upwards:    return "upwards";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID)
+    {
+        // *INDENT-OFF*
+        switch(plotStyleID)
+        {
+            case PlotStyle::Dots:           return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Points:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XErrorBars:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::YErrorBars:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XYErrorBars:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Lines:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::LinesPoints:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FilledCurves:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XErrorLines:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::YErrorLines:    return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::XYErrorLines:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Steps:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FSteps:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::FillSteps:      return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Impulses:       return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Boxes:          return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::HBoxes:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::BoxErrorBars:   return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::BoxxyError:     return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Arrows:         return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Vectors:        return PlotStyleFamily::Orthogonal2D;
+            case PlotStyle::Image:          return PlotStyleFamily::Orthogonal2D;
+
+            case PlotStyle::Dots3D:         return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Points3D:       return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Lines3D:        return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::LinesPoints3D:  return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Impulses3D:     return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Boxes3D:        return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Vectors3D:      return PlotStyleFamily::Orthogonal3D;
+            case PlotStyle::Image3D:        return PlotStyleFamily::Orthogonal3D;
+
+            case PlotStyle::Custom:         return PlotStyleFamily::Custom;
+        }
+        // *INDENT-ON*
+
+        return PlotStyleFamily::Undefined;
+    }
+
+    bool hasAxisLabel(const AxisType axis)
+    {
+        // *INDENT-OFF*
+        switch (axis)
+        {
+            case AxisType::Azimuthal:   return false;
+            case AxisType::Colourbar:   return true;
+            case AxisType::Radial:      return true;
+            case AxisType::X:           return true;
+            case AxisType::X2:          return true;
+            case AxisType::Y:           return true;
+            case AxisType::Y2:          return true;
+            case AxisType::Z:           return true;
+            case AxisType::Undefined:   return false;
+        }
+        // *INDENT-ON*
+
+        return false;
+    }
+
+    double& getMarginsElement(Margins_t margins, const Margin margin)
+    {
+        const size_t index = static_cast<size_t>(margin);
+        return margins[index];
     }
 
     // ---------------------------------------------------------------------- //
