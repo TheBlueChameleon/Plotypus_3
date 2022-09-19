@@ -37,35 +37,38 @@ namespace Plotypus
             MulitPlot();
             MulitPlot(const std::string& title);
 
-            MulitPlot&          reset();
+            MulitPlot&              reset();
 
-            MultiplotLayout_t   getLayout() const;
-            MulitPlot&          setLayout(const MultiplotLayout_t& newLayout);
-            MulitPlot&          clearLayout();
+            MultiplotLayout_t       getLayout() const;
+            MulitPlot&              setLayout(const MultiplotLayout_t& newLayout);
+            MulitPlot&              clearLayout();
 
-            GridPosition_t      getGridDimensions() const;
-            MulitPlot&          setGridDimensions(const GridPosition_t& newGridDimensions);
+            const std::set<size_t>& getBlanks() const;
+            MulitPlot&              setBlanks(const std::set<size_t>& newBlanks);
 
-            StackingOrder       getStackingOrder() const;
-            MulitPlot&          setStackingOrder(const StackingOrder newStackingOrder);
+            GridPosition_t          getGridDimensions() const;
+            MulitPlot&              setGridDimensions(const GridPosition_t& newGridDimensions);
 
-            StackingDirection   getStackingDirection() const;
-            MulitPlot&          setStackingDirection(const StackingDirection newStackingDirection);
+            StackingOrder           getStackingOrder() const;
+            MulitPlot&              setStackingOrder(const StackingOrder newStackingOrder);
 
-            Margins_t           getMargins() const;
-            MulitPlot&          setMargins(const Margins_t& newMargins);
-            MulitPlot&          clearMargins();
+            StackingDirection       getStackingDirection() const;
+            MulitPlot&              setStackingDirection(const StackingDirection newStackingDirection);
 
-            MultiplotSpacing_t  getSpacing() const;
-            MulitPlot&          setSpacing(const MultiplotSpacing_t& newSpacing);
-            MulitPlot&          clearSpacing();
+            Margins_t               getMargins() const;
+            MulitPlot&              setMargins(const Margins_t& newMargins);
+            MulitPlot&              clearMargins();
 
-            std::string         getOptions() const;
-            MulitPlot&          setOptions(const std::string& newOptions);
-            MulitPlot&          clearOptions();
+            MultiplotSpacing_t      getSpacing() const;
+            MulitPlot&              setSpacing(const MultiplotSpacing_t& newSpacing);
+            MulitPlot&              clearSpacing();
 
-            const std::string&  getFrameSeparatorTxt() const;
-            void                setFrameSeparatorTxt(const std::string& newFrameSeparatorTxt);
+            std::string             getOptions() const;
+            MulitPlot&              setOptions(const std::string& newOptions);
+            MulitPlot&              clearOptions();
+
+            const std::string&      getFrameSeparatorTxt() const;
+            void                    setFrameSeparatorTxt(const std::string& newFrameSeparatorTxt);
 
             // -------------------------------------------------------------- //
             // writers

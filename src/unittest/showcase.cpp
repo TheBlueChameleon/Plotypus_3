@@ -509,7 +509,14 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
     subplot_3_1.addDataViewSeparate("[0:pi]tan(x)");
     subplot_3_2.addDataViewSeparate("[0:pi]exp(x)");
 
-    sheet3.addLabel("centered label on multiplot level", 0.5, 0.5, true);
+    sheet3.addLabel("label on multiplot level behaves like subplot 1 element", 0.1, 40);
+
+    auto& sheet4 = report.addMultiPlot("blanks test").setGridDimensions({2, 2}).setBlanks({2, 3});
+    auto& subplot_4_1 = sheet4.addPlotDefault("subplot 1");
+    auto& subplot_4_2 = sheet4.addPlotDefault("subplot 2");
+
+    subplot_4_1.addDataViewSeparate("[0:2*pi]sin(x)");
+    subplot_4_2.addDataViewSeparate("[0:2*pi]cos(x)");
 }
 
 // ========================================================================== //

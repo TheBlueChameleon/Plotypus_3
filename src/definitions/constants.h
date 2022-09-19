@@ -90,8 +90,8 @@ namespace Plotypus
     {
         Left,
         Right,
+        Bottom,
         Top,
-        Bottom
     };
 
     enum class StackingOrder

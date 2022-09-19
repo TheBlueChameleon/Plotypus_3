@@ -42,6 +42,17 @@ namespace Plotypus
         return *this;
     }
 
+    const std::set<size_t>& MulitPlot::getBlanks() const
+    {
+        return blanks;
+    }
+
+    MulitPlot& MulitPlot::setBlanks(const std::set<size_t>& newBlanks)
+    {
+        blanks = newBlanks;
+        return *this;
+    }
+
     GridPosition_t MulitPlot::getGridDimensions() const
     {
         if (layout.has_value())
@@ -286,6 +297,35 @@ namespace Plotypus
             const auto& layoutData = layout.value();
 
             hFile << " layout " << layoutData.gridDimensions.first << ", " << layoutData.gridDimensions.second;
+
+            hFile << " " << getStackingOrderName    (layoutData.stackingOrder, true);
+            hFile << " " << getStackingDirectionName(layoutData.stackingDirection);
+
+            if (layoutData.margins.has_value())
+            {
+                const auto& marginsData = layoutData.margins.value();
+                hFile << " margins ";
+                for (size_t i = 0; const auto marginSize : marginsData)
+                {
+                    hFile << marginSize;
+                    ++i;
+                    if (i < marginsData.size())
+                    {
+                        hFile << ", ";
+                    }
+                }
+            }
+
+            if (layoutData.spacing.has_value())
+            {
+                const auto& spacingData = layoutData.spacing.value();
+                hFile << " spacing " << spacingData.first;
+
+                if (spacingData.second.has_value())
+                {
+                    hFile << ", " << spacingData.second.value();
+                }
+            }
         }
 
         hFile << optionalStringArgument("", options);
@@ -299,7 +339,15 @@ namespace Plotypus
 
         for (size_t i = 1u; auto sheet : sheets)
         {
-            hFile << "# " << std::string(76, '=') << " #\n";
+            while (blanks.contains(i))
+            {
+                hFile << "# " << std::string(76, '~') << " #\n";
+                hFile << "# leaving subplot " << i << " empty." << std::endl << std::endl;
+                hFile << "set multiplot next" << std::endl;
+                ++i;
+            }
+
+            hFile << "# " << std::string(76, '~') << " #\n";
             hFile << "# subplot " << i << std::endl << std::endl;
 
             sheet->writeScriptHead      (hFile);
