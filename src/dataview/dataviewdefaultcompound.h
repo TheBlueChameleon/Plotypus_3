@@ -8,7 +8,7 @@
 namespace Plotypus
 {
     template<class T>
-    class DataViewDefaultCompound : public DataViewDefault
+    class DataviewDefaultCompound : public DataviewDefault
     {
         protected:
             std::span<T>                        data;
@@ -18,20 +18,20 @@ namespace Plotypus
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const;
 
         public:
-            DataViewDefaultCompound(const PlotStyle    style);
-            DataViewDefaultCompound(const PlotStyle    style, const std::string& label);
-            DataViewDefaultCompound(const std::string& style);
-            DataViewDefaultCompound(const std::string& style, const std::string& label);
+            DataviewDefaultCompound(const PlotStyle    style);
+            DataviewDefaultCompound(const PlotStyle    style, const std::string& label);
+            DataviewDefaultCompound(const std::string& style);
+            DataviewDefaultCompound(const std::string& style, const std::string& label);
 
             virtual size_t                          getArity() const;
 
             const std::span<T>&                     getData() const;
-            DataViewDefaultCompound&                setData(const std::span<T>& newDataSource);
-            DataViewDefaultCompound&                setData(const T* newDataSource, size_t N);
+            DataviewDefaultCompound&                setData(const std::span<T>& newDataSource);
+            DataviewDefaultCompound&                setData(const T* newDataSource, size_t N);
 
             const std::array<DataSelector_t<T>, 6>& getSelectors() const;
-            DataViewDefaultCompound&                setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
-            DataViewDefaultCompound&                setSelector (const ColumnType columnType, const DataSelector_t<T>& selector);
+            DataviewDefaultCompound&                setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors);
+            DataviewDefaultCompound&                setSelector (const ColumnType columnType, const DataSelector_t<T>& selector);
 
             virtual bool isDummy() const;
             virtual bool isComplete() const;

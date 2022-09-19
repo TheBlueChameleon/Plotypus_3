@@ -4,12 +4,12 @@
 
 namespace Plotypus
 {
-    void DataViewDefault::clearFunctionMembers()
+    void DataviewDefault::clearFunctionMembers()
     {
         func = "";
     }
 
-    void DataViewDefault::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
+    void DataviewDefault::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
         for (size_t i = 0u; i < getArity(); ++i)
         {
@@ -22,7 +22,7 @@ namespace Plotypus
         }
     }
 
-    void DataViewDefault::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
+    void DataviewDefault::writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
         for (size_t i = 0u; i < getArity(); ++i)
         {
@@ -34,7 +34,7 @@ namespace Plotypus
         }
     }
 
-    void DataViewDefault::writeUsingSpecification(std::ostream& hFile) const
+    void DataviewDefault::writeUsingSpecification(std::ostream& hFile) const
     {
         // *INDENT-OFF*
         if (isFunction()) {return;}
@@ -57,7 +57,7 @@ namespace Plotypus
         }
     }
 
-    size_t DataViewDefault::getColumnIDOrThrow(const ColumnType columnType)
+    size_t DataviewDefault::getColumnIDOrThrow(const ColumnType columnType)
     {
         auto columnID = getColumnID(plotStyleID, columnType);
 
@@ -74,7 +74,7 @@ namespace Plotypus
         return columnID;
     }
 
-    void DataViewDefault::postSetColumnActions(const ColumnType columnType)
+    void DataviewDefault::postSetColumnActions(const ColumnType columnType)
     {
         if (plotStyleID == PlotStyle::FilledCurves && columnType == ColumnType::DeltaY)
         {
@@ -92,7 +92,7 @@ namespace Plotypus
         }
     }
 
-    void DataViewDefault::makePlusMinusFormat()
+    void DataviewDefault::makePlusMinusFormat()
     {
         /* check prerequisites:
          * - is PlotStyle::FilledCurve
@@ -133,25 +133,25 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataViewDefault::DataViewDefault(const DataviewType type, const PlotStyle plotStyleID) :
+    DataviewDefault::DataviewDefault(const DataviewType type, const PlotStyle plotStyleID) :
         Dataview(type, plotStyleID)
     {}
 
-    DataViewDefault::DataViewDefault(const DataviewType type, const PlotStyle plotStyleID, const std::string& title) :
+    DataviewDefault::DataviewDefault(const DataviewType type, const PlotStyle plotStyleID, const std::string& title) :
         Dataview(type, plotStyleID, title)
     {}
 
-    DataViewDefault::DataViewDefault(const DataviewType type, const std::string& plotStyle) :
+    DataviewDefault::DataviewDefault(const DataviewType type, const std::string& plotStyle) :
         Dataview(type, plotStyle)
     {}
 
-    DataViewDefault::DataViewDefault(const DataviewType type, const std::string& plotStyle, const std::string& title) :
+    DataviewDefault::DataviewDefault(const DataviewType type, const std::string& plotStyle, const std::string& title) :
         Dataview(type, plotStyle, title)
     {}
 
     // ====================================================================== //
 
-    DataViewDefault& DataViewDefault::reset()
+    DataviewDefault& DataviewDefault::reset()
     {
         Dataview::reset();
 
@@ -168,7 +168,7 @@ namespace Plotypus
         return *this;
     }
 
-    DataViewDefault& DataViewDefault::setPlotStyleID(const PlotStyle newPlotStyle)
+    DataviewDefault& DataviewDefault::setPlotStyleID(const PlotStyle newPlotStyle)
     {
         Dataview::setPlotStyleID(newPlotStyle);
 
@@ -185,126 +185,126 @@ namespace Plotypus
         return *this;
     }
 
-    const std::string& DataViewDefault::getFunc() const
+    const std::string& DataviewDefault::getFunc() const
     {
         return func;
     }
 
-    DataViewDefault& DataViewDefault::setFunc(const std::string& newFunc)
+    DataviewDefault& DataviewDefault::setFunc(const std::string& newFunc)
     {
         func        = newFunc;
         clearNonFunctionMembers();
         return *this;
     }
 
-    size_t DataViewDefault::getLineStyle() const
+    size_t DataviewDefault::getLineStyle() const
     {
         return lineStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
-    DataViewDefault& DataViewDefault::setLineStyle(size_t newLineStyle)
+    DataviewDefault& DataviewDefault::setLineStyle(size_t newLineStyle)
     {
         lineStyle = newLineStyle;
         return *this;
     }
 
-    DataViewDefault& DataViewDefault::clearLineStyle()
+    DataviewDefault& DataviewDefault::clearLineStyle()
     {
         lineStyle.reset();
         return *this;
     }
 
-    size_t DataViewDefault::getPointStyle() const
+    size_t DataviewDefault::getPointStyle() const
     {
         return pointStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
-    DataViewDefault& DataViewDefault::setPointStyle(size_t newPointStyle)
+    DataviewDefault& DataviewDefault::setPointStyle(size_t newPointStyle)
     {
         pointStyle = newPointStyle;
         return *this;
     }
 
-    DataViewDefault& DataViewDefault::clearPointStyle()
+    DataviewDefault& DataviewDefault::clearPointStyle()
     {
         pointStyle.reset();
         return *this;
     }
 
-    size_t& DataViewDefault::columnAssignment(const size_t columnID)
+    size_t& DataviewDefault::columnAssignment(const size_t columnID)
     {
         throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnAssignments[columnID];
     }
 
-    size_t& DataViewDefault::columnAssignment(const ColumnType columnType)
+    size_t& DataviewDefault::columnAssignment(const ColumnType columnType)
     {
         return columnAssignment(getColumnID(plotStyleID, columnType) - 1);
     }
 
-    std::string& DataViewDefault::columnFormat(const size_t columnID)
+    std::string& DataviewDefault::columnFormat(const size_t columnID)
     {
         throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnFormats[columnID];
     }
 
-    std::string& DataViewDefault::columnFormat(const ColumnType columnType)
+    std::string& DataviewDefault::columnFormat(const ColumnType columnType)
     {
         return columnFormat(getColumnID(plotStyleID, columnType) - 1);
     }
 
-    std::string& DataViewDefault::columnHeadline(const size_t columnID)
+    std::string& DataviewDefault::columnHeadline(const size_t columnID)
     {
         throwIfInvalidIndex("column ID", columnID, columnAssignments);
         return columnHeadlines[columnID];
     }
 
-    std::string& DataViewDefault::columnHeadline(const ColumnType columnType)
+    std::string& DataviewDefault::columnHeadline(const ColumnType columnType)
     {
         return columnHeadline(getColumnID(plotStyleID, columnType) - 1);
     }
 
-    bool DataViewDefault::getVariablePointSize() const
+    bool DataviewDefault::getVariablePointSize() const
     {
         return variablePointSize;
     }
 
-    DataViewDefault& DataViewDefault::setVariablePointSize(bool newVariablePointSize)
+    DataviewDefault& DataviewDefault::setVariablePointSize(bool newVariablePointSize)
     {
         variablePointSize = newVariablePointSize;
         return *this;
     }
 
-    bool DataViewDefault::getVariablePointType() const
+    bool DataviewDefault::getVariablePointType() const
     {
         return variablePointType;
     }
 
-    DataViewDefault& DataViewDefault::setVariablePointType(bool newVariablePointType)
+    DataviewDefault& DataviewDefault::setVariablePointType(bool newVariablePointType)
     {
         variablePointType = newVariablePointType;
         return *this;
     }
 
-    bool DataViewDefault::getVariablePointColor() const
+    bool DataviewDefault::getVariablePointColor() const
     {
         return variablePointColor;
     }
 
-    DataViewDefault& DataViewDefault::setVariablePointColor(bool newVariablePointColor)
+    DataviewDefault& DataviewDefault::setVariablePointColor(bool newVariablePointColor)
     {
         variablePointColor = newVariablePointColor;
         return *this;
     }
 
-    bool DataViewDefault::isFunction() const
+    bool DataviewDefault::isFunction() const
     {
         return !func.empty();
     }
 
 // ====================================================================== //
 
-    void DataViewDefault::writeTxtData(std::ostream& hFile) const
+    void DataviewDefault::writeTxtData(std::ostream& hFile) const
     {
         // *INDENT-OFF*
         if      (isDummy())     {hFile << "(external input from " << std::quoted(dataFilename) << ")"  << std::endl; return;}
@@ -342,7 +342,7 @@ namespace Plotypus
         }
     }
 
-    void DataViewDefault::writeDatData() const
+    void DataviewDefault::writeDatData() const
     {
 
         // *INDENT-OFF*
@@ -363,7 +363,7 @@ namespace Plotypus
         // *INDENT-ON*
     }
 
-    void DataViewDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
+    void DataviewDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
         // *INDENT-OFF*
         if (isFunction()) {hFile << func;}

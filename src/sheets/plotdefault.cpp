@@ -127,7 +127,7 @@ namespace Plotypus
     // ====================================================================== //
     // dataview adders
 
-    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(DataViewDefaultSeparate* dataView)
+    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(DataviewDefaultSeparate* dataView)
     {
         checkAndSetStyleFamily(dataView->getPlotStyleFamily(), allowedStyleFamiles);
 
@@ -136,26 +136,26 @@ namespace Plotypus
         else if (plotStyleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
-        return *static_cast<DataViewDefaultSeparate*>(DataviewCollection::addDataview(dataView));
+        return *static_cast<DataviewDefaultSeparate*>(DataviewCollection::addDataview(dataView));
     }
 
-    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const PlotStyle style, const std::string& label)
     {
-        return addDataViewSeparate( new DataViewDefaultSeparate(style, label) );
+        return addDataViewSeparate( new DataviewDefaultSeparate(style, label) );
     }
 
-    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
-        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+        DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 
         dataView->setData(ColumnType::Y, dataY);
 
         return addDataViewSeparate(dataView);
     }
 
-    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style, const std::string& label)
     {
-        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+        DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 
         dataView->setData(ColumnType::X, dataX);
         dataView->setData(ColumnType::Y, dataY);
@@ -163,9 +163,9 @@ namespace Plotypus
         return addDataViewSeparate(dataView);
     }
 
-    DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
+    DataviewDefaultSeparate& PlotDefault::addDataViewSeparate(const std::string& func, const PlotStyle style, const std::string& label)
     {
-        DataViewDefaultSeparate* dataView = new DataViewDefaultSeparate(style, label);
+        DataviewDefaultSeparate* dataView = new DataviewDefaultSeparate(style, label);
 
         dataView->setFunc(func);
 

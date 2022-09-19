@@ -13,7 +13,7 @@
 namespace Plotypus
 {
     //! @todo cannot splot in polar coordinate system
-    class DataViewDefault : public Dataview
+    class DataviewDefault : public Dataview
     {
         protected:
             bool variablePointSize  = false;
@@ -43,27 +43,27 @@ namespace Plotypus
             void makePlusMinusFormat();
 
         public:
-            DataViewDefault(const DataviewType type, const PlotStyle    plotStyleID);
-            DataViewDefault(const DataviewType type, const PlotStyle    plotStyleID, const std::string& title);
-            DataViewDefault(const DataviewType type, const std::string& plotStyle);
-            DataViewDefault(const DataviewType type, const std::string& plotStyle,   const std::string& title);
+            DataviewDefault(const DataviewType type, const PlotStyle    plotStyleID);
+            DataviewDefault(const DataviewType type, const PlotStyle    plotStyleID, const std::string& title);
+            DataviewDefault(const DataviewType type, const std::string& plotStyle);
+            DataviewDefault(const DataviewType type, const std::string& plotStyle,   const std::string& title);
 
-            virtual DataViewDefault& reset();
+            virtual DataviewDefault& reset();
 
-            virtual DataViewDefault& setPlotStyleID(const PlotStyle newPlotStyle);
+            virtual DataviewDefault& setPlotStyleID(const PlotStyle newPlotStyle);
 
             virtual size_t      getArity() const = 0;
 
             const std::string&  getFunc() const;
-            DataViewDefault&    setFunc(const std::string& newFunc);
+            DataviewDefault&    setFunc(const std::string& newFunc);
 
             size_t              getLineStyle() const;
-            DataViewDefault&    setLineStyle(size_t newLineStyle);
-            DataViewDefault&    clearLineStyle();
+            DataviewDefault&    setLineStyle(size_t newLineStyle);
+            DataviewDefault&    clearLineStyle();
 
             size_t              getPointStyle() const;
-            DataViewDefault&    setPointStyle(size_t newPointStyle);
-            DataViewDefault&    clearPointStyle();
+            DataviewDefault&    setPointStyle(size_t newPointStyle);
+            DataviewDefault&    clearPointStyle();
 
             size_t&             columnAssignment(const size_t       columnID);
             size_t&             columnAssignment(const ColumnType   columnType);
@@ -73,11 +73,11 @@ namespace Plotypus
             std::string&        columnHeadline  (const ColumnType   columnType);
 
             bool                getVariablePointSize() const;
-            DataViewDefault&    setVariablePointSize(bool newVariablePointSize);
+            DataviewDefault&    setVariablePointSize(bool newVariablePointSize);
             bool                getVariablePointType() const;
-            DataViewDefault&    setVariablePointType(bool newVariablePointType);
+            DataviewDefault&    setVariablePointType(bool newVariablePointType);
             bool                getVariablePointColor() const;
-            DataViewDefault&    setVariablePointColor(bool newVariablePointColor);
+            DataviewDefault&    setVariablePointColor(bool newVariablePointColor);
 
             virtual bool isFunction() const;
 

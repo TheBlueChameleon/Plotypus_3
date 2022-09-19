@@ -23,10 +23,10 @@ namespace Plotypus
         switch (dataview->getType())
         {
             case DataviewType::DataViewDefaultCompound:
-                delete dynamic_cast<DataViewDefault*>(dataview);
+                delete dynamic_cast<DataviewDefault*>(dataview);
                 break;
             case DataviewType::DataViewDefaultSeparate:
-                delete dynamic_cast<DataViewDefaultSeparate*>(dataview);
+                delete dynamic_cast<DataviewDefaultSeparate*>(dataview);
                 break;
         }
     }

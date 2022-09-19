@@ -6,14 +6,14 @@
 namespace Plotypus
 {
     template<class T>
-    void DataViewDefaultCompound<T>::clearNonFunctionMembers()
+    void DataviewDefaultCompound<T>::clearNonFunctionMembers()
     {
         data      = std::span<T>();
         selectors = {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr};
     }
 
     template<class T>
-    void DataViewDefaultCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
+    void DataviewDefaultCompound<T>::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
         // *INDENT-OFF*
         const T& datapoint = data[recordID];
@@ -32,61 +32,61 @@ namespace Plotypus
     // ====================================================================== //
 
     template<class T>
-    DataViewDefaultCompound<T>::DataViewDefaultCompound(const PlotStyle style) :
-        DataViewDefault(DataviewType::DataViewDefaultCompound, style)
+    DataviewDefaultCompound<T>::DataviewDefaultCompound(const PlotStyle style) :
+        DataviewDefault(DataviewType::DataViewDefaultCompound, style)
     {}
 
     template<class T>
-    DataViewDefaultCompound<T>::DataViewDefaultCompound(const PlotStyle style, const std::string& label) :
-        DataViewDefault(DataviewType::DataViewDefaultCompound, style, label)
+    DataviewDefaultCompound<T>::DataviewDefaultCompound(const PlotStyle style, const std::string& label) :
+        DataviewDefault(DataviewType::DataViewDefaultCompound, style, label)
     {}
 
     template<class T>
-    DataViewDefaultCompound<T>::DataViewDefaultCompound(const std::string& style, const std::string& label) :
-        DataViewDefault(DataviewType::DataViewDefaultCompound, style, label)
+    DataviewDefaultCompound<T>::DataviewDefaultCompound(const std::string& style, const std::string& label) :
+        DataviewDefault(DataviewType::DataViewDefaultCompound, style, label)
     {}
 
     template<class T>
-    DataViewDefaultCompound<T>::DataViewDefaultCompound(const std::string& style) :
-        DataViewDefault(DataviewType::DataViewDefaultCompound, style)
+    DataviewDefaultCompound<T>::DataviewDefaultCompound(const std::string& style) :
+        DataviewDefault(DataviewType::DataViewDefaultCompound, style)
     {}
 
     // ====================================================================== //
 
     template<class T>
-    size_t DataViewDefaultCompound<T>::getArity() const
+    size_t DataviewDefaultCompound<T>::getArity() const
     {
         return data.size();
     }
 
     template<class T>
-    const std::span<T>& DataViewDefaultCompound<T>::getData() const
+    const std::span<T>& DataviewDefaultCompound<T>::getData() const
     {
         return data;
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setData(const std::span<T>& newDataSource)
+    DataviewDefaultCompound<T>& DataviewDefaultCompound<T>::setData(const std::span<T>& newDataSource)
     {
         data = newDataSource;
         return *this;
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setData(const T* newDataSource, size_t N)
+    DataviewDefaultCompound<T>& DataviewDefaultCompound<T>::setData(const T* newDataSource, size_t N)
     {
         data = std::span<T>(newDataSource, newDataSource + N);
         return *this;
     }
 
     template<class T>
-    const std::array<DataSelector_t<T>, 6>& DataViewDefaultCompound<T>::getSelectors() const
+    const std::array<DataSelector_t<T>, 6>& DataviewDefaultCompound<T>::getSelectors() const
     {
         return selectors;
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
+    DataviewDefaultCompound<T>& DataviewDefaultCompound<T>::setSelectors(const std::array<DataSelector_t<T>, 6>& newSelectors)
     {
         selectors = newSelectors;
         for (size_t i = 0u; const auto& selector : selectors)
@@ -99,7 +99,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataViewDefaultCompound<T>& DataViewDefaultCompound<T>::setSelector(const ColumnType columnType, const DataSelector_t<T>& selector)
+    DataviewDefaultCompound<T>& DataviewDefaultCompound<T>::setSelector(const ColumnType columnType, const DataSelector_t<T>& selector)
     {
         const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
@@ -113,7 +113,7 @@ namespace Plotypus
     }
 
     template<class T>
-    bool DataViewDefaultCompound<T>::isDummy() const
+    bool DataviewDefaultCompound<T>::isDummy() const
     {
         bool result = func.empty();
         result &= data.empty();
@@ -125,7 +125,7 @@ namespace Plotypus
     }
 
     template<class T>
-    bool DataViewDefaultCompound<T>::isComplete() const
+    bool DataviewDefaultCompound<T>::isComplete() const
     {
         // *INDENT-OFF*
         if (isDummy())      {return true;}

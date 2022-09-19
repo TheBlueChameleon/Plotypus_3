@@ -34,9 +34,9 @@ namespace Plotypus
 
             std::unordered_map<AxisType, AxisDescriptor> axes;
 
-            DataViewDefaultSeparate&    addDataViewSeparate(DataViewDefaultSeparate* dataView);
+            DataviewDefaultSeparate&    addDataViewSeparate(DataviewDefaultSeparate* dataView);
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(DataViewDefaultCompound<T>* dataView);
+            DataviewDefaultCompound<T>& addDataViewCompound(DataviewDefaultCompound<T>* dataView);
 
             void abstractToken();
 
@@ -59,19 +59,19 @@ namespace Plotypus
             bool                        getPolar() const;
             PlotDefault&         setPolar(bool newPolar);
 
-            DataViewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
-            DataViewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
-            DataViewDefaultSeparate&    addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
-            DataViewDefaultSeparate&    addDataViewSeparate(const std::string& func,                                        const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultSeparate&    addDataViewSeparate(                                                                const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultSeparate&    addDataViewSeparate(                                const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultSeparate&    addDataViewSeparate(const std::span<double>& dataX, const std::span<double>& dataY, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultSeparate&    addDataViewSeparate(const std::string& func,                                        const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
 
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(                          const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultCompound<T>& addDataViewCompound(                          const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(const std::span<T>& data, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultCompound<T>& addDataViewCompound(const std::span<T>& data, const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(T* data, const size_t N,  const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultCompound<T>& addDataViewCompound(T* data, const size_t N,  const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
             template<class T>
-            DataViewDefaultCompound<T>& addDataViewCompound(const std::string& func,  const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
+            DataviewDefaultCompound<T>& addDataViewCompound(const std::string& func,  const PlotStyle style = PlotStyle::Lines, const std::string& label = "");
 
             // -------------------------------------------------------------- //
             // writers

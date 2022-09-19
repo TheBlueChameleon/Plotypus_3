@@ -2,7 +2,7 @@
 
 namespace Plotypus
 {
-    void DataViewDefaultSeparate::clearNonFunctionMembers()
+    void DataviewDefaultSeparate::clearNonFunctionMembers()
     {
         for (auto& component : data)
         {
@@ -10,7 +10,7 @@ namespace Plotypus
         }
     }
 
-    void DataViewDefaultSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
+    void DataviewDefaultSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
         const auto width = buffer.size();
         for (int columnIndex = missingXColumn; columnIndex < width; ++columnIndex)
@@ -21,35 +21,35 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style) :
-        DataViewDefault(DataviewType::DataViewDefaultSeparate, style)
+    DataviewDefaultSeparate::DataviewDefaultSeparate(const PlotStyle style) :
+        DataviewDefault(DataviewType::DataViewDefaultSeparate, style)
     {}
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& title) :
-        DataViewDefault(DataviewType::DataViewDefaultSeparate, style, title)
+    DataviewDefaultSeparate::DataviewDefaultSeparate(const PlotStyle style, const std::string& title) :
+        DataviewDefault(DataviewType::DataViewDefaultSeparate, style, title)
     {}
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style) :
-        DataViewDefault(DataviewType::DataViewDefaultSeparate, style)
+    DataviewDefaultSeparate::DataviewDefaultSeparate(const std::string& style) :
+        DataviewDefault(DataviewType::DataViewDefaultSeparate, style)
     {}
 
-    DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& title) :
-        DataViewDefault(DataviewType::DataViewDefaultSeparate, style, title)
+    DataviewDefaultSeparate::DataviewDefaultSeparate(const std::string& style, const std::string& title) :
+        DataviewDefault(DataviewType::DataViewDefaultSeparate, style, title)
     {}
 
     // ====================================================================== //
 
-    size_t DataViewDefaultSeparate::getArity() const
+    size_t DataviewDefaultSeparate::getArity() const
     {
         return data[1].size();          // quick solution: return arity of Y column
     }
 
-    const columnViewList_t& DataViewDefaultSeparate::getData() const
+    const columnViewList_t& DataviewDefaultSeparate::getData() const
     {
         return data;
     }
 
-    const std::span<double>& DataViewDefaultSeparate::getData(ColumnType columnType) const
+    const std::span<double>& DataviewDefaultSeparate::getData(const ColumnType columnType) const
     {
         const auto columnID = getColumnID(plotStyleID, columnType) - 1;
         throwIfInvalidIndex("column index", columnID, data);
@@ -57,7 +57,7 @@ namespace Plotypus
         return data[columnID];
     }
 
-    DataViewDefaultSeparate& DataViewDefaultSeparate::setData(ColumnType columnType, const std::span<double>& newdata)
+    DataviewDefaultSeparate& DataviewDefaultSeparate::setData(const ColumnType columnType, const std::span<double>& newdata)
     {
         const auto columnID = getColumnIDOrThrow(columnType) - 1; // column IDs are 1-based...
 
@@ -70,7 +70,7 @@ namespace Plotypus
         return *this;
     }
 
-    bool DataViewDefaultSeparate::isDummy() const
+    bool DataviewDefaultSeparate::isDummy() const
     {
         auto isEmpty = [] (const std::span<double>& component)
         {
@@ -80,7 +80,7 @@ namespace Plotypus
         return std::ranges::all_of(data, isEmpty) && func.empty();
     }
 
-    bool DataViewDefaultSeparate::isComplete() const
+    bool DataviewDefaultSeparate::isComplete() const
     {
         // *INDENT-OFF*
         if (isDummy())                                                          {return true;}

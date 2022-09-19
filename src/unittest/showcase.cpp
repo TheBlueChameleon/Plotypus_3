@@ -269,7 +269,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     // for compound data: prepare selectors
 
     using compound_selector_t = DataSelector_t<compound_t>;
-    using compound_view_t     = DataViewDefaultCompound<compound_t>;
+    using compound_view_t     = DataviewDefaultCompound<compound_t>;
 
     // *INDENT-OFF*
     compound_selector_t compoundSelectorX    = [] (const compound_t& data) {return data.x;};
@@ -389,7 +389,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     // ill-typed references cause a catch-able exception
 
     // *INDENT-OFF*
-    try                             {auto& ill_typed_reference = sheet1.dataviewAs<DataViewDefaultCompound<double>>(2);}
+    try                             {auto& ill_typed_reference = sheet1.dataviewAs<DataviewDefaultCompound<double>>(2);}
     catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
     // *INDENT-ON*
 }
@@ -416,7 +416,7 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     // for compound data: prepare selectors
 
     using compound_selector_t = DataSelector_t<compound_complex_t>;
-    using compound_view_t     = DataViewDefaultCompound<compound_complex_t>;
+    using compound_view_t     = DataviewDefaultCompound<compound_complex_t>;
 
     // *INDENT-OFF*
     compound_selector_t compoundSelectorX      = [] (const compound_complex_t& data) {return data.coordinate.real();};
