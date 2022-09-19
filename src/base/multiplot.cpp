@@ -1,18 +1,18 @@
-#include "mulitplot.h"
+#include "multiplot.h"
 
 namespace Plotypus
 {
-    MulitPlot::MulitPlot() :
+    Multiplot::Multiplot() :
         Sheet(SheetType::Multiplot), SheetsCollection(allowedSheetTypes, true)
     {}
 
-    MulitPlot::MulitPlot(const std::string& title) :
+    Multiplot::Multiplot(const std::string& title) :
         Sheet(SheetType::Multiplot, title), SheetsCollection(allowedSheetTypes, true)
     {}
 
     // ====================================================================== //
 
-    MulitPlot& MulitPlot::reset()
+    Multiplot& Multiplot::reset()
     {
         Sheet::reset();
 
@@ -25,35 +25,35 @@ namespace Plotypus
         return *this;
     }
 
-    MultiplotLayout_t MulitPlot::getLayout() const
+    MultiplotLayout_t Multiplot::getLayout() const
     {
         return layout.value_or(DEFAULT_MULTIPLOT_LAYOUT);
     }
 
-    MulitPlot& MulitPlot::setLayout(const MultiplotLayout_t& newLayout)
+    Multiplot& Multiplot::setLayout(const MultiplotLayout_t& newLayout)
     {
         layout = newLayout;
         return *this;
     }
 
-    MulitPlot& MulitPlot::clearLayout()
+    Multiplot& Multiplot::clearLayout()
     {
         layout.reset();
         return *this;
     }
 
-    const std::set<size_t>& MulitPlot::getBlanks() const
+    const std::set<size_t>& Multiplot::getBlanks() const
     {
         return blanks;
     }
 
-    MulitPlot& MulitPlot::setBlanks(const std::set<size_t>& newBlanks)
+    Multiplot& Multiplot::setBlanks(const std::set<size_t>& newBlanks)
     {
         blanks = newBlanks;
         return *this;
     }
 
-    GridPosition_t MulitPlot::getGridDimensions() const
+    GridPosition_t Multiplot::getGridDimensions() const
     {
         if (layout.has_value())
         {
@@ -65,7 +65,7 @@ namespace Plotypus
         }
     }
 
-    MulitPlot& MulitPlot::setGridDimensions(const GridPosition_t& newGridDimensions)
+    Multiplot& Multiplot::setGridDimensions(const GridPosition_t& newGridDimensions)
     {
         if (layout.has_value())
         {
@@ -79,7 +79,7 @@ namespace Plotypus
         return *this;
     }
 
-    StackingOrder MulitPlot::getStackingOrder() const
+    StackingOrder Multiplot::getStackingOrder() const
     {
         if (layout.has_value())
         {
@@ -91,7 +91,7 @@ namespace Plotypus
         }
     }
 
-    MulitPlot& MulitPlot::setStackingOrder(const StackingOrder newStackingOrder)
+    Multiplot& Multiplot::setStackingOrder(const StackingOrder newStackingOrder)
     {
         if (layout.has_value())
         {
@@ -106,7 +106,7 @@ namespace Plotypus
         return *this;
     }
 
-    StackingDirection MulitPlot::getStackingDirection() const
+    StackingDirection Multiplot::getStackingDirection() const
     {
         if (layout.has_value())
         {
@@ -118,7 +118,7 @@ namespace Plotypus
         }
     }
 
-    MulitPlot& MulitPlot::setStackingDirection(const StackingDirection newStackingDirection)
+    Multiplot& Multiplot::setStackingDirection(const StackingDirection newStackingDirection)
     {
         if (layout.has_value())
         {
@@ -133,7 +133,7 @@ namespace Plotypus
         return *this;
     }
 
-    Margins_t MulitPlot::getMargins() const
+    Margins_t Multiplot::getMargins() const
     {
         if (layout.has_value())
         {
@@ -145,7 +145,7 @@ namespace Plotypus
         }
     }
 
-    MulitPlot& MulitPlot::setMargins(const Margins_t& newMargins)
+    Multiplot& Multiplot::setMargins(const Margins_t& newMargins)
     {
         if (layout.has_value())
         {
@@ -160,7 +160,7 @@ namespace Plotypus
         return *this;
     }
 
-    MulitPlot& MulitPlot::clearMargins()
+    Multiplot& Multiplot::clearMargins()
     {
         if (layout.has_value())
         {
@@ -170,7 +170,7 @@ namespace Plotypus
         return *this;
     }
 
-    MultiplotSpacing_t MulitPlot::getSpacing() const
+    MultiplotSpacing_t Multiplot::getSpacing() const
     {
         if (layout.has_value())
         {
@@ -182,7 +182,7 @@ namespace Plotypus
         }
     }
 
-    MulitPlot& MulitPlot::setSpacing(const MultiplotSpacing_t& newSpacing)
+    Multiplot& Multiplot::setSpacing(const MultiplotSpacing_t& newSpacing)
     {
         if (layout.has_value())
         {
@@ -197,7 +197,7 @@ namespace Plotypus
         return *this;
     }
 
-    MulitPlot& MulitPlot::clearSpacing()
+    Multiplot& Multiplot::clearSpacing()
     {
         if (layout.has_value())
         {
@@ -207,29 +207,29 @@ namespace Plotypus
         return *this;
     }
 
-    std::string MulitPlot::getOptions() const
+    std::string Multiplot::getOptions() const
     {
         return options.value_or("");
     }
 
-    MulitPlot& MulitPlot::setOptions(const std::string& newOptions)
+    Multiplot& Multiplot::setOptions(const std::string& newOptions)
     {
         options = newOptions;
         return *this;
     }
 
-    MulitPlot& MulitPlot::clearOptions()
+    Multiplot& Multiplot::clearOptions()
     {
         options.reset();
         return *this;
     }
 
-    const std::string& MulitPlot::getFrameSeparatorTxt() const
+    const std::string& Multiplot::getFrameSeparatorTxt() const
     {
         return frameSeparatorTxt;
     }
 
-    void MulitPlot::setFrameSeparatorTxt(const std::string& newFrameSeparatorTxt)
+    void Multiplot::setFrameSeparatorTxt(const std::string& newFrameSeparatorTxt)
     {
         frameSeparatorTxt = newFrameSeparatorTxt;
     }
@@ -237,7 +237,7 @@ namespace Plotypus
     // ====================================================================== //
     // writers
 
-    void MulitPlot::preprocessSheet(const std::string& autoFilenameBase, const std::string& extension) const
+    void Multiplot::preprocessSheet(const std::string& autoFilenameBase, const std::string& extension) const
     {
         for (size_t i = 1u; auto sheet : sheets)
         {
@@ -247,7 +247,7 @@ namespace Plotypus
         }
     }
 
-    void MulitPlot::writeTxtHead(std::ostream& hFile) const
+    void Multiplot::writeTxtHead(std::ostream& hFile) const
     {
         Sheet::writeTxtHead(hFile);
 
@@ -259,7 +259,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void MulitPlot::writeTxtData(std::ostream& hFile) const
+    void Multiplot::writeTxtData(std::ostream& hFile) const
     {
         Sheet::writeTxtData(hFile);
 
@@ -273,7 +273,7 @@ namespace Plotypus
         }
     }
 
-    void MulitPlot::writeDatData() const
+    void Multiplot::writeDatData() const
     {
         for (auto sheet : sheets)
         {
@@ -281,7 +281,7 @@ namespace Plotypus
         }
     }
 
-    void MulitPlot::writeScriptHead(std::ostream& hFile) const
+    void Multiplot::writeScriptHead(std::ostream& hFile) const
     {
         Sheet::writeScriptHead(hFile);
 
@@ -333,7 +333,7 @@ namespace Plotypus
         hFile << std::endl;
     }
 
-    void MulitPlot::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
+    void Multiplot::writeScriptData(std::ostream& hFile, const StylesCollection& stylesCollection) const
     {
         Sheet::writeScriptData(hFile, stylesCollection);
 
@@ -358,7 +358,7 @@ namespace Plotypus
         }
     }
 
-    void MulitPlot::writeScriptFooter(std::ostream& hFile, const int pageNum) const
+    void Multiplot::writeScriptFooter(std::ostream& hFile, const int pageNum) const
     {
         // explicityl call parent at END of method
 

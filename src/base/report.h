@@ -33,7 +33,7 @@ namespace Plotypus
     {
         private:
             static constexpr std::initializer_list<SheetType> allowedSheetTypes = {SheetType::Sheet,
-                                                                                   SheetType::PlotOrthogonalAxis,
+                                                                                   SheetType::PlotDefault,
                                                                                    SheetType::PlotRadialAxes,
                                                                                    SheetType::Multiplot
                                                                                   };

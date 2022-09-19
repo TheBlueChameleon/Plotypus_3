@@ -1,5 +1,5 @@
-#ifndef MULITPLOT_H
-#define MULITPLOT_H
+#ifndef MULTIPLOT_H
+#define MULTIPLOT_H
 
 #include <optional>
 #include <set>
@@ -16,11 +16,11 @@ namespace Plotypus
     //! @todo add convenience non-uniform grid creators aka arrangeX
     //! @todo lock adding overlays (as positioning cannot be distinguished from in-frame); maybe add boolean 'locked' to OverlaysCollection
 
-    class MulitPlot : public Sheet, public SheetsCollection
+    class Multiplot : public Sheet, public SheetsCollection
     {
         protected:
             static constexpr std::initializer_list<SheetType> allowedSheetTypes = {SheetType::Sheet,
-                                                                                   SheetType::PlotOrthogonalAxis,
+                                                                                   SheetType::PlotDefault,
                                                                                    SheetType::PlotRadialAxes
                                                                                   };
 
@@ -34,38 +34,38 @@ namespace Plotypus
             std::string                         frameSeparatorTxt   = "--------------------------------------------------------------------------------\n";
 
         public:
-            MulitPlot();
-            MulitPlot(const std::string& title);
+            Multiplot();
+            Multiplot(const std::string& title);
 
-            MulitPlot&              reset();
+            Multiplot&              reset();
 
             MultiplotLayout_t       getLayout() const;
-            MulitPlot&              setLayout(const MultiplotLayout_t& newLayout);
-            MulitPlot&              clearLayout();
+            Multiplot&              setLayout(const MultiplotLayout_t& newLayout);
+            Multiplot&              clearLayout();
 
             const std::set<size_t>& getBlanks() const;
-            MulitPlot&              setBlanks(const std::set<size_t>& newBlanks);
+            Multiplot&              setBlanks(const std::set<size_t>& newBlanks);
 
             GridPosition_t          getGridDimensions() const;
-            MulitPlot&              setGridDimensions(const GridPosition_t& newGridDimensions);
+            Multiplot&              setGridDimensions(const GridPosition_t& newGridDimensions);
 
             StackingOrder           getStackingOrder() const;
-            MulitPlot&              setStackingOrder(const StackingOrder newStackingOrder);
+            Multiplot&              setStackingOrder(const StackingOrder newStackingOrder);
 
             StackingDirection       getStackingDirection() const;
-            MulitPlot&              setStackingDirection(const StackingDirection newStackingDirection);
+            Multiplot&              setStackingDirection(const StackingDirection newStackingDirection);
 
             Margins_t               getMargins() const;
-            MulitPlot&              setMargins(const Margins_t& newMargins);
-            MulitPlot&              clearMargins();
+            Multiplot&              setMargins(const Margins_t& newMargins);
+            Multiplot&              clearMargins();
 
             MultiplotSpacing_t      getSpacing() const;
-            MulitPlot&              setSpacing(const MultiplotSpacing_t& newSpacing);
-            MulitPlot&              clearSpacing();
+            Multiplot&              setSpacing(const MultiplotSpacing_t& newSpacing);
+            Multiplot&              clearSpacing();
 
             std::string             getOptions() const;
-            MulitPlot&              setOptions(const std::string& newOptions);
-            MulitPlot&              clearOptions();
+            Multiplot&              setOptions(const std::string& newOptions);
+            Multiplot&              clearOptions();
 
             const std::string&      getFrameSeparatorTxt() const;
             void                    setFrameSeparatorTxt(const std::string& newFrameSeparatorTxt);
@@ -86,4 +86,4 @@ namespace Plotypus
     };
 }
 
-#endif // MULITPLOT_H
+#endif // MULTIPLOT_H

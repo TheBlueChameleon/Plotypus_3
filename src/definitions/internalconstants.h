@@ -12,7 +12,7 @@ namespace Plotypus
     enum class SheetType
     {
         Sheet,
-        PlotOrthogonalAxis,
+        PlotDefault,
         PlotRadialAxes,
         Multiplot
     };

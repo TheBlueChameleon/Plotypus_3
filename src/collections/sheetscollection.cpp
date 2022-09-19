@@ -1,5 +1,5 @@
 #include "sheetscollection.h"
-#include "../base/mulitplot.h"
+#include "../base/multiplot.h"
 
 using namespace Plotypus;
 namespace Plotypus
@@ -42,7 +42,7 @@ namespace Plotypus
                 delete dynamic_cast<Sheet*>(sheet);
                 break;
 
-            case SheetType::PlotOrthogonalAxis:
+            case SheetType::PlotDefault:
                 delete dynamic_cast<PlotDefault*>(sheet);
                 break;
 
@@ -51,7 +51,7 @@ namespace Plotypus
                 break;
 
             case SheetType::Multiplot:
-                delete dynamic_cast<MulitPlot*>(sheet);
+                delete dynamic_cast<Multiplot*>(sheet);
                 break;
         }
     }
@@ -118,14 +118,14 @@ namespace Plotypus
         return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
-    MulitPlot& SheetsCollection::addMultiPlot()
+    Multiplot& SheetsCollection::addMultiPlot()
     {
-        return *dynamic_cast<MulitPlot*>(addSheet(new MulitPlot));
+        return *dynamic_cast<Multiplot*>(addSheet(new Multiplot));
     }
 
-    MulitPlot& SheetsCollection::addMultiPlot(const std::string& title)
+    Multiplot& SheetsCollection::addMultiPlot(const std::string& title)
     {
-        return *dynamic_cast<MulitPlot*>(addSheet(new MulitPlot(title)));
+        return *dynamic_cast<Multiplot*>(addSheet(new Multiplot(title)));
     }
 
     PlotDefault& SheetsCollection::addPlotDefault()

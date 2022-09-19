@@ -31,7 +31,7 @@ add_library(Plotypus-lib SHARED
     src/base/util.h src/base/util.cpp src/base/util.txx
     src/base/report.h src/base/report.cpp
     src/base/terminalinfoprovider.h src/base/terminalinfoprovider.cpp
-    src/base/mulitplot.h src/base/mulitplot.cpp
+    src/base/multiplot.h src/base/multiplot.cpp
     #
     src/sheets/sheet.h src/sheets/sheet.cpp src/sheets/sheet.txx
     src/sheets/abstractplot.h src/sheets/abstractplot.cpp

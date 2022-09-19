@@ -478,7 +478,7 @@ namespace Plotypus
         switch (sheetType) {
             case SheetType::Sheet               : return "Sheet";
             case SheetType::Multiplot           : return "Multiplot";
-            case SheetType::PlotOrthogonalAxis  : return "PlotOrthogonalAxis";
+            case SheetType::PlotDefault  : return "PlotOrthogonalAxis";
             case SheetType::PlotRadialAxes      : return "PlotRadialAxis";
         }
         // *INDENT-ON*

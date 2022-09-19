@@ -4,14 +4,14 @@
 namespace Plotypus
 {
     PlotDefault::PlotDefault() :
-        AbstractPlot(SheetType::PlotOrthogonalAxis)
+        AbstractPlot(SheetType::PlotDefault)
     {
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
     }
 
     PlotDefault::PlotDefault(const std::string& title) :
-        AbstractPlot(SheetType::PlotOrthogonalAxis, title)
+        AbstractPlot(SheetType::PlotDefault, title)
     {
         axes[AxisType::X] = AxisDescriptor(AxisType::X);
         axes[AxisType::Y] = AxisDescriptor(AxisType::Y);
