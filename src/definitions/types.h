@@ -27,9 +27,9 @@ namespace Plotypus
     /**
      * @brief foo bar
      */
-    class DataView;
+    class Dataview;
     template <typename T>
-    concept DataViewLike = std::is_base_of<DataView, T>::value;
+    concept DataViewLike = std::is_base_of<Dataview, T>::value;
 
     /**
      * @brief foo bar

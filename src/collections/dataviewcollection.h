@@ -5,27 +5,28 @@ namespace Plotypus
 {
     //! @todo copy-adder
     //! @bug hack in clearDataView at DataViewDefaultCompound
+
     class DataviewCollection
     {
         protected:
-            std::vector<DataView*>          dataviews;
-            const std::vector<DataViewType> allowedDataviewTypes;
+            std::vector<Dataview*>          dataviews;
+            const std::vector<DataviewType> allowedDataviewTypes;
 
-            DataView* addDataview(DataView* dataview);
+            Dataview* addDataview(Dataview* dataview);
 
-            static void clearDataview(DataView* dataview);
+            static void clearDataview(Dataview* dataview);
 
         public:
-            DataviewCollection(const std::vector<DataViewType>& allowedDataviewTypes);
+            DataviewCollection(const std::vector<DataviewType>& allowedDataviewTypes);
             ~DataviewCollection();
 
             DataviewCollection&             reset();
             DataviewCollection&             clearDataviews();
 
             size_t                          getDataviewCount();
-            const std::vector<DataView*>&   getDataviews() const;
+            const std::vector<Dataview*>&   getDataviews() const;
 
-            DataView&                       dataview(const size_t i);
+            Dataview&                       dataview(const size_t i);
             template<DataViewLike T>
             T&                              dataviewAs(const size_t i);
     };

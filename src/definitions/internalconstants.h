@@ -36,7 +36,7 @@ namespace Plotypus
     /**
      * @brief used internally to select proper destructor
      */
-    enum class DataViewType
+    enum class DataviewType
     {
         DataViewDefaultCompound,
         DataViewDefaultSeparate

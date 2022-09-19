@@ -133,27 +133,27 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataViewDefault::DataViewDefault(const DataViewType type, const PlotStyle plotStyleID) :
-        DataView(type, plotStyleID)
+    DataViewDefault::DataViewDefault(const DataviewType type, const PlotStyle plotStyleID) :
+        Dataview(type, plotStyleID)
     {}
 
-    DataViewDefault::DataViewDefault(const DataViewType type, const PlotStyle plotStyleID, const std::string& title) :
-        DataView(type, plotStyleID, title)
+    DataViewDefault::DataViewDefault(const DataviewType type, const PlotStyle plotStyleID, const std::string& title) :
+        Dataview(type, plotStyleID, title)
     {}
 
-    DataViewDefault::DataViewDefault(const DataViewType type, const std::string& plotStyle) :
-        DataView(type, plotStyle)
+    DataViewDefault::DataViewDefault(const DataviewType type, const std::string& plotStyle) :
+        Dataview(type, plotStyle)
     {}
 
-    DataViewDefault::DataViewDefault(const DataViewType type, const std::string& plotStyle, const std::string& title) :
-        DataView(type, plotStyle, title)
+    DataViewDefault::DataViewDefault(const DataviewType type, const std::string& plotStyle, const std::string& title) :
+        Dataview(type, plotStyle, title)
     {}
 
     // ====================================================================== //
 
     DataViewDefault& DataViewDefault::reset()
     {
-        DataView::reset();
+        Dataview::reset();
 
         clearFunctionMembers();
         clearNonFunctionMembers();
@@ -170,7 +170,7 @@ namespace Plotypus
 
     DataViewDefault& DataViewDefault::setPlotStyleID(const PlotStyle newPlotStyle)
     {
-        DataView::setPlotStyleID(newPlotStyle);
+        Dataview::setPlotStyleID(newPlotStyle);
 
         if (newPlotStyle == PlotStyle::HBoxes)
         {

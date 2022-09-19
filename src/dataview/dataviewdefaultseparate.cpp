@@ -22,19 +22,19 @@ namespace Plotypus
     // ====================================================================== //
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style)
+        DataViewDefault(DataviewType::DataViewDefaultSeparate, style)
     {}
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const PlotStyle style, const std::string& title) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, title)
+        DataViewDefault(DataviewType::DataViewDefaultSeparate, style, title)
     {}
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style)
+        DataViewDefault(DataviewType::DataViewDefaultSeparate, style)
     {}
 
     DataViewDefaultSeparate::DataViewDefaultSeparate(const std::string& style, const std::string& title) :
-        DataViewDefault(DataViewType::DataViewDefaultSeparate, style, title)
+        DataViewDefault(DataviewType::DataViewDefaultSeparate, style, title)
     {}
 
     // ====================================================================== //

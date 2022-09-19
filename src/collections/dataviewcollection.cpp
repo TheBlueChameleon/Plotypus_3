@@ -2,7 +2,7 @@
 
 namespace Plotypus
 {
-    DataView* DataviewCollection::addDataview(DataView* dataview)
+    Dataview* DataviewCollection::addDataview(Dataview* dataview)
     {
         auto viewType = dataview->getType();
         if (contains(viewType, allowedDataviewTypes))
@@ -18,14 +18,14 @@ namespace Plotypus
         return dataviews.back();
     }
 
-    void DataviewCollection::clearDataview(DataView* dataview)
+    void DataviewCollection::clearDataview(Dataview* dataview)
     {
         switch (dataview->getType())
         {
-            case DataViewType::DataViewDefaultCompound:
+            case DataviewType::DataViewDefaultCompound:
                 delete dynamic_cast<DataViewDefault*>(dataview);
                 break;
-            case DataViewType::DataViewDefaultSeparate:
+            case DataviewType::DataViewDefaultSeparate:
                 delete dynamic_cast<DataViewDefaultSeparate*>(dataview);
                 break;
         }
@@ -33,7 +33,7 @@ namespace Plotypus
 
     // ====================================================================== //
 
-    DataviewCollection::DataviewCollection(const std::vector<DataViewType>& allowedDataviewTypes) :
+    DataviewCollection::DataviewCollection(const std::vector<DataviewType>& allowedDataviewTypes) :
         allowedDataviewTypes(allowedDataviewTypes)
     {}
 
@@ -65,12 +65,12 @@ namespace Plotypus
         return dataviews.size();
     }
 
-    const std::vector<DataView*>& DataviewCollection::getDataviews() const
+    const std::vector<Dataview*>& DataviewCollection::getDataviews() const
     {
         return dataviews;
     }
 
-    DataView& DataviewCollection::dataview(const size_t i)
+    Dataview& DataviewCollection::dataview(const size_t i)
     {
         throwIfInvalidIndex("dataview index", i, dataviews);
         return *(dataviews[i]);

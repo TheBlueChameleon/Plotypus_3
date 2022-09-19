@@ -21,8 +21,8 @@ namespace Plotypus
         protected:
             static constexpr auto allowedDataViewTypes =
             {
-                DataViewType::DataViewDefaultCompound,
-                DataViewType::DataViewDefaultSeparate
+                DataviewType::DataViewDefaultCompound,
+                DataviewType::DataViewDefaultSeparate
             };
 
             PlotStyleFamily             plotStyleFamily = PlotStyleFamily::Undefined;
