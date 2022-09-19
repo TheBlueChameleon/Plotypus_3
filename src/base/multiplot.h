@@ -10,9 +10,6 @@
 
 namespace Plotypus
 {
-
-    //! @todo most of the layout-commands
-    //! @todo add size/origin on Sheet
     //! @todo add convenience non-uniform grid creators aka arrangeX
     //! @todo lock adding overlays (as positioning cannot be distinguished from in-frame); maybe add boolean 'locked' to OverlaysCollection
 
@@ -21,7 +18,7 @@ namespace Plotypus
         protected:
             static constexpr std::initializer_list<SheetType> allowedSheetTypes = {SheetType::Sheet,
                                                                                    SheetType::PlotDefault,
-                                                                                   SheetType::PlotRadialAxes
+                                                                                   SheetType::PlotRadial
                                                                                   };
 
             // note: optional string 'title' present from Sheet

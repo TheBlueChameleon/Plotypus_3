@@ -16,6 +16,8 @@ namespace Plotypus
      * @todo update the supported types table in docs
      *
      * @todo add quick setup for A4, portrait/landscape, ...
+     *
+     * @todo maybe use GridPos, SheetPos types for dimension_..._t
      */
 
     /**

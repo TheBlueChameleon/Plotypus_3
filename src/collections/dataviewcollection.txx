@@ -4,9 +4,9 @@
 namespace Plotypus
 {
     template<DataViewLike T>
-    T& DataViewCollection::dataViewAs(const size_t i)
+    T& DataviewCollection::dataviewAs(const size_t i)
     {
-        return static_cast<T&>(dataView(i));
+        return static_cast<T&>(dataview(i));
     }
 }
 

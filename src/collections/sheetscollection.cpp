@@ -46,7 +46,7 @@ namespace Plotypus
                 delete dynamic_cast<PlotDefault*>(sheet);
                 break;
 
-            case SheetType::PlotRadialAxes:
+            case SheetType::PlotRadial:
                 delete dynamic_cast<PlotRadial*>(sheet);
                 break;
 

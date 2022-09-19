@@ -305,7 +305,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     sheet1.addDataViewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines, "Sine Wave");
     sheet1.addDataViewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::Steps, "Cosine Wave");
 
-    sheet1.dataViewAs<compound_view_t>(2).setLineStyle(linesStyleOffset);
+    sheet1.dataviewAs<compound_view_t>(2).setLineStyle(linesStyleOffset);
 
     sheet1.axis(AxisType::X).setLabelText("abscissa");
     sheet1.axis(AxisType::Y).setLabelText("ordinate");
@@ -337,7 +337,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
 
     sheet2.addDataViewCompound<compound_t>("[0:pi] sin(t)", PlotStyle::Lines, "Sine Wave");
 
-    sheet2.dataViewAs<compound_view_t>(1).setPlotStyleID(PlotStyle::Dots);
+    sheet2.dataviewAs<compound_view_t>(1).setPlotStyleID(PlotStyle::Dots);
     // or:
     // dynamic_cast<DataViewDefaultCompound<compound_t>&>(sheet2.dataView(1)).setStyleID(PlotStyle::Dots);
 
@@ -389,7 +389,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     // ill-typed references cause a catch-able exception
 
     // *INDENT-OFF*
-    try                             {auto& ill_typed_reference = sheet1.dataViewAs<DataViewDefaultCompound<double>>(2);}
+    try                             {auto& ill_typed_reference = sheet1.dataviewAs<DataViewDefaultCompound<double>>(2);}
     catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
     // *INDENT-ON*
 }

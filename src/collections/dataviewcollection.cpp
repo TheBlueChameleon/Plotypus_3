@@ -2,77 +2,77 @@
 
 namespace Plotypus
 {
-    DataView* DataViewCollection::addDataView(DataView* dataView)
+    DataView* DataviewCollection::addDataview(DataView* dataview)
     {
-        auto viewType = dataView->getType();
-        if (contains(viewType, allowedDataViewTypes))
+        auto viewType = dataview->getType();
+        if (contains(viewType, allowedDataviewTypes))
         {
-            dataViews.push_back(dataView);
+            dataviews.push_back(dataview);
         }
         else
         {
-            clearDataView(dataView);
+            clearDataview(dataview);
             throw UnsupportedOperationError("Cannot add Sheet of type " + getDataViewTypeName(viewType));
         }
 
-        return dataViews.back();
+        return dataviews.back();
     }
 
-    void DataViewCollection::clearDataView(DataView* dataView)
+    void DataviewCollection::clearDataview(DataView* dataview)
     {
-        switch (dataView->getType())
+        switch (dataview->getType())
         {
             case DataViewType::DataViewDefaultCompound:
-                delete dynamic_cast<DataViewDefault*>(dataView);
+                delete dynamic_cast<DataViewDefault*>(dataview);
                 break;
             case DataViewType::DataViewDefaultSeparate:
-                delete dynamic_cast<DataViewDefaultSeparate*>(dataView);
+                delete dynamic_cast<DataViewDefaultSeparate*>(dataview);
                 break;
         }
     }
 
     // ====================================================================== //
 
-    DataViewCollection::DataViewCollection(const std::vector<DataViewType>& allowedDataViewTypes) :
-        allowedDataViewTypes(allowedDataViewTypes)
+    DataviewCollection::DataviewCollection(const std::vector<DataViewType>& allowedDataviewTypes) :
+        allowedDataviewTypes(allowedDataviewTypes)
     {}
 
-    DataViewCollection::~DataViewCollection()
+    DataviewCollection::~DataviewCollection()
     {
-        clearDataViews();
+        clearDataviews();
     }
 
     // ====================================================================== //
 
-    DataViewCollection& DataViewCollection::reset()
+    DataviewCollection& DataviewCollection::reset()
     {
-        return clearDataViews();
+        return clearDataviews();
     }
 
-    DataViewCollection& DataViewCollection::clearDataViews()
+    DataviewCollection& DataviewCollection::clearDataviews()
     {
-        for (auto view : dataViews)
+        for (auto view : dataviews)
         {
-            clearDataView(view);
+            clearDataview(view);
         }
-        dataViews.clear();
+        dataviews.clear();
 
         return *this;
     }
 
-    size_t DataViewCollection::getDataViewCount()
+    size_t DataviewCollection::getDataviewCount()
     {
-        return dataViews.size();
+        return dataviews.size();
     }
 
-    const std::vector<DataView*>& DataViewCollection::getDataViews() const
+    const std::vector<DataView*>& DataviewCollection::getDataviews() const
     {
-        return dataViews;
+        return dataviews;
     }
 
-    DataView& DataViewCollection::dataView(const size_t i)
+    DataView& DataviewCollection::dataview(const size_t i)
     {
-        throwIfInvalidIndex("dataview index", i, dataViews);
-        return *(dataViews[i]);
+        throwIfInvalidIndex("dataview index", i, dataviews);
+        return *(dataviews[i]);
     }
 }

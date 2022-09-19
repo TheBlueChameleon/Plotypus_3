@@ -13,16 +13,16 @@ namespace Plotypus
 
     void runGnuplot(const std::string& filename, bool verbose)
     {
-    // *INDENT-OFF*
-    if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
+        // *INDENT-OFF*
+        if (verbose)    {std::cout << "About to run gnuplot script '" << filename << "' ..." << std::endl;}
 
-    const auto error = std::system((gnuplotCommand + " " + filename).data());
+        const auto error = std::system((gnuplotCommand + " " + filename).data());
 
-    if (verbose) {
-        if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
-        else        {std::cout << "done." << std::endl;}
-    }
-    // *INDENT-ON*
+        if (verbose) {
+            if (error)  {std::cerr << "gnuplot did not succeed. Error code: " << error << std::endl;}
+            else        {std::cout << "done." << std::endl;}
+        }
+        // *INDENT-ON*
     }
 
     std::fstream openOrThrow(const std::string& filename, const std::ios_base::openmode& mode)
@@ -479,7 +479,7 @@ namespace Plotypus
             case SheetType::Sheet               : return "Sheet";
             case SheetType::Multiplot           : return "Multiplot";
             case SheetType::PlotDefault  : return "PlotOrthogonalAxis";
-            case SheetType::PlotRadialAxes      : return "PlotRadialAxis";
+            case SheetType::PlotRadial      : return "PlotRadialAxis";
         }
         // *INDENT-ON*
 

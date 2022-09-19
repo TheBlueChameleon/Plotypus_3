@@ -16,7 +16,7 @@ namespace Plotypus
      *
      * @todo set palette, colorbox ~> new element, optional here
      */
-    class AbstractPlot : public Sheet, public DataViewCollection
+    class AbstractPlot : public Sheet, public DataviewCollection
     {
         protected:
             static constexpr auto allowedDataViewTypes =

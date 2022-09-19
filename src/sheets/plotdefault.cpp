@@ -136,7 +136,7 @@ namespace Plotypus
         else if (plotStyleFamily == PlotStyleFamily::Orthogonal3D) {setMode3D(true) ;}
         // *INDENT-ON*
 
-        return *static_cast<DataViewDefaultSeparate*>(DataViewCollection::addDataView(dataView));
+        return *static_cast<DataViewDefaultSeparate*>(DataviewCollection::addDataview(dataView));
     }
 
     DataViewDefaultSeparate& PlotDefault::addDataViewSeparate(const PlotStyle style, const std::string& label)
@@ -178,7 +178,7 @@ namespace Plotypus
     void PlotDefault::writeTxtData(std::ostream& hFile) const
     {
         AbstractPlot::writeTxtData(hFile);
-        for (const auto dataView : dataViews)
+        for (const auto dataView : dataviews)
         {
             hFile << datalineSeparatorTxt;
             dataView->writeTxtData(hFile);
@@ -188,7 +188,7 @@ namespace Plotypus
     void PlotDefault::writeDatData() const
     {
         AbstractPlot::writeDatData();
-        for (const auto dataView : dataViews)
+        for (const auto dataView : dataviews)
         {
             dataView->writeDatData();
         }
@@ -215,8 +215,8 @@ namespace Plotypus
 
         hFile << (mode3D ? "splot " : "plot ");
 
-        const auto viewCount = dataViews.size();
-        for (size_t i = 0u; const auto dataView : dataViews)
+        const auto viewCount = dataviews.size();
+        for (size_t i = 0u; const auto dataView : dataviews)
         {
             dataView->writeScriptData(hFile, stylesCollection);
             ++i;

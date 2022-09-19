@@ -13,7 +13,7 @@ namespace Plotypus
     {
         Sheet,
         PlotDefault,
-        PlotRadialAxes,
+        PlotRadial,
         Multiplot
     };
 
