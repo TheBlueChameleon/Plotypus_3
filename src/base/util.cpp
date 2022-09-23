@@ -476,10 +476,10 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (sheetType) {
-            case SheetType::Sheet               : return "Sheet";
-            case SheetType::Multiplot           : return "Multiplot";
-            case SheetType::PlotDefault  : return "PlotOrthogonalAxis";
-            case SheetType::PlotRadial      : return "PlotRadialAxis";
+            case SheetType::Sheet       : return "Sheet";
+            case SheetType::Multiplot   : return "Multiplot";
+            case SheetType::PlotDefault : return "PlotOrthogonalAxis";
+            case SheetType::PlotRadial  : return "PlotRadialAxis";
         }
         // *INDENT-ON*
 
@@ -674,6 +674,19 @@ namespace Plotypus
             case StackingDirection::Default:    return "";
             case StackingDirection::Downwards:  return "downwards";
             case StackingDirection::Upwards:    return "upwards";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getColorSpaceName(const ColorSpace colorSpace)
+    {
+        // *INDENT-OFF*
+        switch (colorSpace) {
+            case ColorSpace::RGB: return "RGB";
+            case ColorSpace::HSV: return "HSV";
+            case ColorSpace::CMY: return "CMY";
         }
         // *INDENT-ON*
 

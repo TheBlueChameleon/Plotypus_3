@@ -148,6 +148,20 @@ namespace Plotypus
 
         return false;
     }
+
+    // ---------------------------------------------------------------------- //
+    // optional parameters handling
+
+    template<typename T>
+    std::string optionalEnumArgument(const std::string& optionName, const std::optional<T> enumValue, const std::function<std::string (const T)> nameGetter)
+    {
+        // *INDENT-OFF*
+        std::stringstream buffer;
+        if (!enumValue.has_value()) {return "";}
+        else                        {buffer << " " << optionName << " " << nameGetter( enumValue.value() );
+                                     return buffer.str();}
+        // *INDENT-ON*
+    }
 }
 
 #endif // UTIL_TXX

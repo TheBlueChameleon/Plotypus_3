@@ -9,6 +9,7 @@
 #include <ranges>
 #include <span>
 #include <string>
+#include <sstream>
 #include <vector>
 
 #include "../definitions/constants.h"
@@ -69,6 +70,7 @@ namespace Plotypus
     std::string getJustificationName(const HorizontalAlignment alignment);
     std::string getStackingOrderName(const StackingOrder stackingOrder, bool variantMultiPlot = false);
     std::string getStackingDirectionName(const StackingDirection stackingDirection);
+    std::string getColorSpaceName(const ColorSpace colorSpace);
 
     PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
 
@@ -83,6 +85,9 @@ namespace Plotypus
     std::string optionalStringArgument      (const std::string& optionName, const std::optional<std::string>& option);
     std::string optionalQuotedStringArgument(const std::string& optionName, const std::optional<std::string>& option);
     std::string optionalNumberArgument      (const std::string& optionName, const std::optional<double>& number);
+
+    template<typename T>
+    std::string optionalEnumArgument        (const std::string& optionName, const std::optional<T> enumValue, const std::function<std::string(const T)> nameGetter);
 
     std::string optionalNumberAsString      (const std::optional<double>& option, const std::string& alternative);
 

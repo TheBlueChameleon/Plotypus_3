@@ -88,6 +88,7 @@ namespace Plotypus
             TerminalInfoProvider& reset();
 
             FileType                            getFileType() const;
+            //! @todo consider moving lookup to util
             TerminalInfoProvider&               setFileType(FileType newFileType);
 
             const std::string&                  getTerminal() const;
