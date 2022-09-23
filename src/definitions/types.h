@@ -83,7 +83,7 @@ namespace Plotypus
     constexpr GridPosition_t DEFAULT_GRID_POSITION = {0, 0};
 
     //! @todo use this also for set margin command
-    using Margins_t = std::array<double, 4>;                       // use MarginAlignment as indices
+    using Margins_t = std::array<double, 4>;                       // uses enum Margin as indices
     constexpr Margins_t DEFAULT_MARGIN_SIZE = {0., 0., 0., 0.};
 
     using MultiplotSpacing_t = std::pair<double, std::optional<double>>;
