@@ -45,7 +45,7 @@ int main()
     std::cout << "SHOWCASE CODE BEGINS HERE" << std::endl;
 
 //    showcase_run(Showcases::Plots_Multiplot);
-//    showcase_run(Showcases::All);
+    showcase_run(Showcases::All);
 
     return 0;
 }

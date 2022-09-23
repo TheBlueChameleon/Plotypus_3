@@ -258,6 +258,13 @@ namespace Plotypus
 
     void PaletteDescriptor::writePaletteDescriptor(std::ostream& hFile) const
     {
+        // *INDENT-OFF*
+        if (!mapping   .has_value() &&
+            !colorSpace.has_value() &&
+            !options   .has_value()
+        ) {return;}
+        // *INDENT-ON*
+
         hFile << "set palette";
 
         if (mapping.has_value())

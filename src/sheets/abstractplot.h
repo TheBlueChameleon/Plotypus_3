@@ -37,8 +37,10 @@ namespace Plotypus
 
             std::string datalineSeparatorTxt = "................................................................................\n";
 
-            KeyDescriptor m_key;
-            bool          parametric  = false;
+            KeyDescriptor       m_key;
+            PaletteDescriptor   m_paletteDescriptor;
+
+            bool parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
 
@@ -77,6 +79,7 @@ namespace Plotypus
             AbstractPlot&           setDatalineSeparatorTxt(const std::string& newDatalineSeparatorTxt);
 
             KeyDescriptor&          key();
+            PaletteDescriptor&      paletteDescriptor();
 
             bool                    getParametric() const;
             AbstractPlot&           setParametric(bool newParametric);

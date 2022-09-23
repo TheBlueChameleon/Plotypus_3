@@ -468,6 +468,8 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     sheet2.addLabel("Rendering of", -1.7, 0.6);
     sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
 
+    sheet2.paletteDescriptor().setMapping(NamedPalette::Gnu_Rainbow);
+
     sheet2.key().setPosition(Margin::Bottom, HorizontalAlignment::Right);
     try
     {

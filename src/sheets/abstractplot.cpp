@@ -55,6 +55,8 @@ namespace Plotypus
         datalineSeparatorTxt = "................................................................................\n";
 
         m_key.reset();
+        m_paletteDescriptor.reset();
+
         parametric = false;
 
         return *this;
@@ -113,6 +115,11 @@ namespace Plotypus
     KeyDescriptor& AbstractPlot::key()
     {
         return m_key;
+    }
+
+    PaletteDescriptor& AbstractPlot::paletteDescriptor()
+    {
+        return m_paletteDescriptor;
     }
 
     bool AbstractPlot::getParametric() const
@@ -229,6 +236,7 @@ namespace Plotypus
         // *INDENT-ON*
 
         m_key.writeKeyDescriptor(hFile);
+        m_paletteDescriptor.writePaletteDescriptor(hFile);
 
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
         hFile << std::endl;
