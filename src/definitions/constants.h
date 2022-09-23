@@ -86,6 +86,7 @@ namespace Plotypus
         Top
     };
 
+    //! @note this also gives the indices in Margins_t
     enum class Margin
     {
         Left,
@@ -257,6 +258,39 @@ namespace Plotypus
         Boxwidth,
 
         Length, Angle
+    };
+
+    // ====================================================================== //
+    // Palette
+
+    enum class NamedPalette
+    {
+        // GnuPlot Analytic Functions
+        Gnu_Traditional,
+        Gnu_Autumn,
+        Gnu_Ocean,
+        Gnu_Hot,
+        Gnu_Brilliant,
+        Gnu_Rainbow,
+        Gnu_AFM_Hot,
+        Gnu_Colorwheel,
+
+        // MatPlotLib Palettes
+        Plt_Viridis,
+        Plt_Plasma,
+        Plt_Inferno,
+        Plt_Magma,
+        Plt_Cividis,
+
+        // Other
+        Greys
+    };
+
+    enum class ColorSpace
+    {
+        RGB,
+        HSV,
+        CMY
     };
 
     // ========================================================================== //
