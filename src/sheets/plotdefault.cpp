@@ -77,10 +77,25 @@ namespace Plotypus
     {
         if (mode3D != newMode3D)
         {
-            // *INDENT-OFF*
-            if (contains(plotStyleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))   {mode3D = newMode3D;}
-            else                                                                                    {throw IncompatiblePlotStyle("Cannot override 3D mode: not a custom plot style");}
-            // *INDENT-ON*
+            if (contains(plotStyleFamily, {PlotStyleFamily::Custom, PlotStyleFamily::Undefined}))
+            {
+                mode3D = newMode3D;
+            }
+            else
+            {
+                if      ( newMode3D && (plotStyleFamily == PlotStyleFamily::Orthogonal3D))
+                {
+                    mode3D = true;
+                }
+                else if (!newMode3D && (plotStyleFamily == PlotStyleFamily::Orthogonal2D))
+                {
+                    mode3D = false;
+                }
+                else
+                {
+                    throw IncompatiblePlotStyle("Cannot override 3D mode: not a custom plot style");
+                }
+            }
         }
 
         return *this;
