@@ -63,7 +63,7 @@ namespace Plotypus
             Dataview&           setPlotStyleFamily(PlotStyleFamily newStyleFamily);
 
             const PlotStyle     getPlotStyleID() const;
-            Dataview&           setPlotStyleID(const PlotStyle newStyle);
+            virtual Dataview&   setPlotStyleID(const PlotStyle newStyle);
 
             const std::string   getOptions() const;
             Dataview&           setOptions(const std::string& newOptions);
