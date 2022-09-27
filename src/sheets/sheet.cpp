@@ -302,6 +302,15 @@ namespace Plotypus
             hFile << "set key default" << std::endl;
         }
 
+        if (origin.has_value())
+        {
+            hFile << "set origin" << std::endl;
+        }
+        if (size.has_value())
+        {
+            hFile << "set size" << std::endl;
+        }
+
         hFile << "unset label" << std::endl;
         hFile << "unset arrow" << std::endl;
         hFile << "unset object" << std::endl;
