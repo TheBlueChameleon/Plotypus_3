@@ -1,5 +1,4 @@
 #include "plotdefault.h"
-#include <iostream>
 
 namespace Plotypus
 {
