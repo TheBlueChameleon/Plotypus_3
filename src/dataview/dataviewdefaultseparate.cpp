@@ -94,10 +94,12 @@ namespace Plotypus
         // *INDENT-OFF*
         if (isDummy())                                                          {return true;}
         if (std::ranges::all_of(data, [] (const auto& s) {return s.empty();}))  {return false;}
-
-        constexpr auto isNullSpan = [] (const std::span<double>& span) {return span.empty();};
-
-        return checkColumnListOccupationVsPlotStyle(plotStyleID, data, isNullSpan);
         // *INDENT-ON*
+
+        return checkColumnListOccupationVsPlotStyle(
+                   plotStyleID, data,
+                   predicateIsNullSpan,
+                   predicateConstFalse<std::span<double>>
+               );
     }
 }

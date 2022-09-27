@@ -393,6 +393,18 @@ void showcase_run_plots2d(Plotypus::Report& report,
     .setTitle("Sine approximation");
 
     // ---------------------------------------------------------------------- //
+    // Sheet 5: HBoxes with normal functions overlayed
+
+    auto& sheet5 = report.addPlotDefault("HBoxes");
+
+    std::cout << std::string(80, '-') << std::endl;
+    sheet5.addDataviewCompound<compound_t>(compound_data, PlotStyle::HBoxes, "Data")
+    .setSelector(ColumnType::X, compoundSelectorX)
+    .setSelector(ColumnType::Y, compoundSelectorY)
+    .setSelector(ColumnType::Boxwidth, compoundSelectorErrX)
+    .setPlotStyleID(PlotStyle::HBoxes);
+
+    // ---------------------------------------------------------------------- //
     // ill-typed references cause a catch-able exception
 
     // *INDENT-OFF*
@@ -543,11 +555,10 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
 
     auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
 
-
     // ---------------------------------------------------------------------- //
-    // Sheet 1: scalar field
+    // Sheet 1: dots
 
-    auto& sheet1 = report.addPlotDefault("scalar field");
+    auto& sheet1 = report.addPlotDefault("3D dots");
 
     sheet1.axis(AxisType::X)
     .setRangeMin(-1.0)
@@ -557,11 +568,49 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     .setRangeMax(+1.0);
     sheet1.setAspectEqual();
 
-    sheet1.addDataviewSeparate(PlotStyle::Dots3D, "sin(2/r)")
+    sheet1.addDataviewSeparate(PlotStyle::Points3D, "sin(2/r)")
+    .setData(ColumnType::X, sepData_X)
+    .setData(ColumnType::Y, sepData_Y)
+    .setData(ColumnType::Z, sepData_Z);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 2: image
+
+    auto& sheet2 = report.addPlotDefault("image projection");
+
+    sheet2.axis(AxisType::X)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet2.axis(AxisType::Y)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet2.setAspectEqual();
+
+    sheet2.addDataviewSeparate(PlotStyle::Image3D, "sin(2/r)")
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
     .setData(ColumnType::Z, sepData_Z)
+    .setData(ColumnType::Color, sepData_Z)
+    .setColumnFormat(ColumnType::Z, "(0)")
     .setBinaryDataOutput(false);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 2: image
+
+    auto& sheet3 = report.addPlotDefault("lines projection");
+
+    sheet3.axis(AxisType::X)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet3.axis(AxisType::Y)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet3.setAspectEqual();
+
+    sheet3.addDataviewSeparate(PlotStyle::Lines3D, "sin(2/r)")
+    .setData(ColumnType::X, sepData_X)
+    .setData(ColumnType::Y, sepData_Y)
+    .setData(ColumnType::Z, sepData_Z);
 }
 
 // ========================================================================== //

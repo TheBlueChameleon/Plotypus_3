@@ -187,12 +187,16 @@ namespace Plotypus
 
         if (newPlotStyle == PlotStyle::HBoxes)
         {
+            columnAssignments[3] = COLUMN_DUMMY;
+            columnAssignments[4] = COLUMN_DUMMY;
+            columnAssignments[5] = COLUMN_DUMMY;
+
             columnFormats[0] = "(0)";               // x     : constant zero
             columnFormats[1] = "(!1)";              // y     : x column
             columnFormats[2] = "(0)";               // x_low : constant zero
             columnFormats[3] = "(!2)";              // x_high: y column
             columnFormats[4] = "(!1 - !3 / 2.)";    // y_low : x column minus boxwidth halves
-            columnFormats[5] = "(!1 - !3 / 2.)";    // y_high: x column plus boxwidth halves
+            columnFormats[5] = "(!1 + !3 / 2.)";    // y_high: x column plus  boxwidth halves
         }
 
         return *this;
@@ -370,13 +374,8 @@ namespace Plotypus
         {
             writeTxtHeadlines(hFile);
 
-            const auto isUnusedColumn = [] (const size_t assignment)
-            {
-                return assignment == COLUMN_UNUSED;
-            };
-
             bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
-            auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
+            auto lineLength     = getConsecutiveEntriesCount(columnAssignments, predicateColumnAssignmentUnused, predicateColumnAssignmentDummy);
             // note: the case (lineLength == COLUMN_LIST_INVALID) should not be possible due to calling isComplete
 
             std::vector<double> lineBuffer(lineLength);
@@ -402,13 +401,8 @@ namespace Plotypus
         if (!isComplete())  {throw UnsupportedOperationError("Incomplete or non-consecutive list of columns or unsupported column type or detected");}
         // *INDENT-ON*
 
-        const auto isUnusedColumn = [] (const size_t assignment)
-        {
-            return assignment == COLUMN_UNUSED;
-        };
-
         bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
-        auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
+        auto lineLength     = getConsecutiveEntriesCount(columnAssignments, predicateColumnAssignmentUnused, predicateColumnAssignmentDummy);
         // note: the case (lineLength == COLUMN_LIST_INVALID) should not be possible due to calling isComplete
 
         std::vector<double> lineBuffer(lineLength);

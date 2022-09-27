@@ -21,4 +21,7 @@ namespace Plotypus
     template void throwIfInvalidIndex<std::vector<BoxStyle*>>   (const std::string& indexName, const size_t i, const std::vector<BoxStyle*>&    collection);
     template void throwIfInvalidIndex<std::vector<LineStyle*>>  (const std::string& indexName, const size_t i, const std::vector<LineStyle*>&   collection);
     template void throwIfInvalidIndex<std::vector<PointStyle*>> (const std::string& indexName, const size_t i, const std::vector<PointStyle*>&  collection);
+
+    template bool predicateIsNullSpan<double>(const std::span<double>& span);
+    template bool predicateConstFalse<double>(const double& argument);
 }

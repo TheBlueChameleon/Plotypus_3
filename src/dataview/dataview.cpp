@@ -5,12 +5,16 @@ using namespace Plotypus;
 namespace Plotypus
 {
     Dataview::Dataview(const DataviewType type, const PlotStyle plotStyleID) :
-        type(type), plotStyleID(plotStyleID), title(std::optional<std::string>())
-    {}
+        type(type), title(std::optional<std::string>())
+    {
+        setPlotStyleID(plotStyleID);
+    }
 
     Dataview::Dataview(const DataviewType type, const PlotStyle plotStyleID, const std::string& title) :
-        type(type), plotStyleID(plotStyleID), title(title)
-    {}
+        type(type), title(title)
+    {
+        setPlotStyleID(plotStyleID);
+    }
 
     Dataview::Dataview(const DataviewType type, const std::string& plotStyle) :
         type(type), title(std::optional<std::string>()), plotStyle(plotStyle), plotStyleID(PlotStyle::Custom)

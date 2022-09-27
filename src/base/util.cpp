@@ -831,4 +831,17 @@ namespace Plotypus
         else                                    {option = value;}
         // *INDENT-ON*
     }
+
+    // ---------------------------------------------------------------------- //
+    // predicates
+
+    bool predicateColumnAssignmentUnused(const size_t assignment)
+    {
+        return assignment == COLUMN_UNUSED;
+    }
+
+    bool predicateColumnAssignmentDummy(const size_t assignment)
+    {
+        return assignment == COLUMN_DUMMY;
+    }
 };

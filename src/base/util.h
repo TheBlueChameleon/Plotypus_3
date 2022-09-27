@@ -41,11 +41,17 @@ namespace Plotypus
     // column assignment magic
 
     template<class T, UnaryPredicate<T> U>
-    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn);
+    size_t getConsecutiveEntriesCount(const std::array<T, 6>& columns, const U& isNullColumn, const U& isIgnoredColumn);
     template<class T, UnaryPredicate<T> U>
-    bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn);
+    bool checkColumnListOccupationIsFrom(
+        const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations,
+        const U& isNullColumn, const U& isIgnoredColumn
+    );
     template<class T, UnaryPredicate<T> U>
-    bool checkColumnListOccupationVsPlotStyle(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData);
+    bool checkColumnListOccupationVsPlotStyle(
+        const PlotStyle styleID, const std::array<T, 6>& data,
+        const U& isNullData, const U& isIgnoredColumn
+    );
 
     const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
 
@@ -93,6 +99,20 @@ namespace Plotypus
 
     void setOptionalDoubleOrClearIfNan      (std::optional<double>& option, double value);
     void setOptionalSizeTOrClearIfDefault   (std::optional<size_t>& option, size_t value);
+
+    // ---------------------------------------------------------------------- //
+    // predicates
+
+    bool predicateColumnAssignmentUnused(const size_t assignment);
+    bool predicateColumnAssignmentDummy (const size_t assignment);
+
+    template<typename T>
+    bool predicateIsNullSpan(const std::span<T>& span);
+    template<typename T>
+    bool predicateIsNullSelector(const DataSelector_t<T>& selector);
+
+    template<typename T>
+    bool predicateConstFalse(const T& argument);
 };
 
 #include "util.txx"

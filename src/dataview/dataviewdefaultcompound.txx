@@ -132,9 +132,10 @@ namespace Plotypus
         if (isDummy())      {return true;}
         if (data.empty())   {return false;}
 
-        const auto isNullSelector = [] (const DataSelector_t<T>& selector) {return selector == nullptr;};
-
-        return checkColumnListOccupationVsPlotStyle(plotStyleID, selectors, isNullSelector);
+        return checkColumnListOccupationVsPlotStyle<
+                DataSelector_t<T>,
+                decltype(predicateIsNullSelector<T>)
+        >(plotStyleID, selectors, predicateIsNullSelector, predicateConstFalse);
         // *INDENT-ON*
     }
 }
