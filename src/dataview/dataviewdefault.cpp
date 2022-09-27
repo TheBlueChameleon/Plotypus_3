@@ -9,6 +9,15 @@ namespace Plotypus
         func = "";
     }
 
+    void DataviewDefault::writeTxtHeadlines(std::ostream& hFile) const
+    {
+        for (const auto& headline : columnHeadlines)
+        {
+            hFile << headline << columnSeparatorTxt;
+        }
+        hFile << std::endl;
+    }
+
     void DataviewDefault::writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const
     {
         for (size_t i = 0u; i < getArity(); ++i)
@@ -359,6 +368,8 @@ namespace Plotypus
         // *INDENT-ON*
         else
         {
+            writeTxtHeadlines(hFile);
+
             const auto isUnusedColumn = [] (const size_t assignment)
             {
                 return assignment == COLUMN_UNUSED;
@@ -369,12 +380,6 @@ namespace Plotypus
             // note: the case (lineLength == COLUMN_LIST_INVALID) should not be possible due to calling isComplete
 
             std::vector<double> lineBuffer(lineLength);
-
-            for (const auto& headline : columnHeadlines)
-            {
-                hFile << headline << columnSeparatorTxt;
-            }
-            hFile << std::endl;
 
             hFile << std::setprecision(numberPrecision);
             for (size_t i = 0u; i < getArity(); ++i)
@@ -395,8 +400,12 @@ namespace Plotypus
         if (isDummy())      {return;}
         if (isFunction())   {return;}
         if (!isComplete())  {throw UnsupportedOperationError("Incomplete or non-consecutive list of columns or unsupported column type or detected");}
+        // *INDENT-ON*
 
-        const auto isUnusedColumn = [] (const size_t assignment) {return assignment == COLUMN_UNUSED;};
+        const auto isUnusedColumn = [] (const size_t assignment)
+        {
+            return assignment == COLUMN_UNUSED;
+        };
 
         bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
         auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
@@ -405,6 +414,7 @@ namespace Plotypus
         std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);
 
+        // *INDENT-OFF*
         if (binaryDataOutput)   {writeDatDataBin(hFile, lineBuffer, missingXColumn);}
         else                    {writeDatDataAsc(hFile, lineBuffer, missingXColumn);}
         // *INDENT-ON*

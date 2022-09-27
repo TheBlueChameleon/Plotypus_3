@@ -32,6 +32,8 @@ namespace Plotypus
             virtual void clearFunctionMembers();
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
 
+            void writeTxtHeadlines(std::ostream& hFile) const;
+
             void writeDatDataAsc(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
             void writeDatDataBin(std::ostream& hFile, std::vector<double>& lineBuffer, bool missingXColumn) const;
 
