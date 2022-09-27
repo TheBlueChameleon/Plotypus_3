@@ -15,7 +15,7 @@ namespace Plotypus
         const auto width = buffer.size();
         for (int columnIndex = missingXColumn; columnIndex < width; ++columnIndex)
         {
-            buffer[columnIndex] = data[columnIndex][recordID];
+            buffer[columnIndex - missingXColumn] = data[columnIndex][recordID];
         }
     }
 
@@ -88,7 +88,7 @@ namespace Plotypus
 
         constexpr auto isNullSpan = [] (const std::span<double>& span) {return span.empty();};
 
-        return checkColumnListOccupationVsPlotType(plotStyleID, data, isNullSpan);
+        return checkColumnListOccupationVsPlotStyle(plotStyleID, data, isNullSpan);
         // *INDENT-ON*
     }
 }

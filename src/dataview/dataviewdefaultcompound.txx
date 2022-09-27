@@ -133,7 +133,7 @@ namespace Plotypus
 
         const auto isNullSelector = [] (const DataSelector_t<T>& selector) {return selector == nullptr;};
 
-        return checkColumnListOccupationVsPlotType(plotStyleID, selectors, isNullSelector);
+        return checkColumnListOccupationVsPlotStyle(plotStyleID, selectors, isNullSelector);
         // *INDENT-ON*
     }
 }
