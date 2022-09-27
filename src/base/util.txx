@@ -76,7 +76,7 @@ namespace Plotypus
     }
 
     template<class T, UnaryPredicate<T> U>
-    bool checkColumnListOccupationVsPlotType(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData)
+    bool checkColumnListOccupationVsPlotStyle(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData)
     {
         switch (styleID)
         {
@@ -138,7 +138,7 @@ namespace Plotypus
             case PlotStyle::Impulses3D:
                 return checkColumnListOccupationIsFrom(data, {3}, isNullData);
             case PlotStyle::Image3D:
-                return checkColumnListOccupationIsFrom(data, {4}, isNullData);
+                return checkColumnListOccupationIsFrom(data, {3, 4}, isNullData);
             case PlotStyle::Vectors3D:
                 return checkColumnListOccupationIsFrom(data, {6}, isNullData);
 

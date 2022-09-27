@@ -45,7 +45,7 @@ namespace Plotypus
     template<class T, UnaryPredicate<T> U>
     bool checkColumnListOccupationIsFrom(const std::array<T, 6>& columns, const std::vector<size_t>& allowedOccupations, const U& isNullColumn);
     template<class T, UnaryPredicate<T> U>
-    bool checkColumnListOccupationVsPlotType(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData);
+    bool checkColumnListOccupationVsPlotStyle(const PlotStyle styleID, const std::array<T, 6>& data, const U& isNullData);
 
     const std::string generateColumnFormat(const std::string& formatTemplate, size_t columnID, const Plotypus::columnAssignmentList_t& columnAssignments);
 

@@ -386,7 +386,8 @@ namespace Plotypus
                 if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};}
                 break;
             case PlotStyle::Image3D:
-                if (columnListLength == 4) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Color, ColumnType::Column5, ColumnType::Column6};}
+                if (columnListLength == 3) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Column4, ColumnType::Column5, ColumnType::Column6};}
+                if (columnListLength == 4) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::Color  , ColumnType::Column5, ColumnType::Column6};}
                 break;
             case PlotStyle::Vectors3D:
                 if (columnListLength == 6) {return {ColumnType::X, ColumnType::Y, ColumnType::Z, ColumnType::DeltaX, ColumnType::DeltaY, ColumnType::DeltaZ};}
