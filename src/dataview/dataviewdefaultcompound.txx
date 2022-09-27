@@ -18,6 +18,7 @@ namespace Plotypus
         // *INDENT-OFF*
         const T& datapoint = data[recordID];
         for (auto i : columnAssignments) {
+            if (i == COLUMN_DUMMY)  {continue;}         // ignore dummy columns
             if (i == COLUMN_UNUSED) {continue;}         // ignore unused columns
             --i;                                        // zero based indices
 

@@ -312,6 +312,7 @@ namespace Plotypus
 
     constexpr size_t COLUMN_UNUSED          = 0u;
     constexpr size_t COLUMN_UNSUPPORTED     = std::numeric_limits<size_t>::max();
+    constexpr size_t COLUMN_DUMMY           = std::numeric_limits<size_t>::max() - 1;
     constexpr size_t COLUMN_LIST_INVALID    = 0u;
 
     constexpr auto   COLUMN_FORMAT_PLACEHOLDER_COLUMN_NUMBER = '_';

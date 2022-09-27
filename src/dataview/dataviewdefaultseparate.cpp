@@ -13,9 +13,18 @@ namespace Plotypus
     void DataviewDefaultSeparate::fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const
     {
         const auto width = buffer.size();
-        for (int columnIndex = missingXColumn; columnIndex < width; ++columnIndex)
+        size_t fetchedColumns = 0u,
+               columnIndex = missingXColumn;
+
+        while (fetchedColumns < width)
         {
-            buffer[columnIndex - missingXColumn] = data[columnIndex][recordID];
+            if (columnAssignments[columnIndex] != COLUMN_DUMMY)
+            {
+                buffer[fetchedColumns] = data[columnIndex][recordID];
+                ++fetchedColumns;
+            }
+
+            ++columnIndex;
         }
     }
 
