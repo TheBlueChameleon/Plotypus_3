@@ -58,11 +58,11 @@ namespace Plotypus
             DataviewDefault&    setFunc(const std::string& newFunc);
 
             size_t              getLineStyle() const;
-            DataviewDefault&    setLineStyle(size_t newLineStyle);
+            DataviewDefault&    setLineStyle(const size_t newLineStyle);
             DataviewDefault&    clearLineStyle();
 
             size_t              getPointStyle() const;
-            DataviewDefault&    setPointStyle(size_t newPointStyle);
+            DataviewDefault&    setPointStyle(const size_t newPointStyle);
             DataviewDefault&    clearPointStyle();
 
             size_t&             columnAssignment(const size_t       columnID);

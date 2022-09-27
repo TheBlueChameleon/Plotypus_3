@@ -28,6 +28,10 @@ namespace Plotypus
             case DataviewType::DataViewDefaultSeparate:
                 delete dynamic_cast<DataviewDefaultSeparate*>(dataview);
                 break;
+            case DataviewType::DataViewMatrixCompound:
+            case DataviewType::DataViewMatrixSeparate:
+                throw std::runtime_error("feature not yet implemented!");
+                break;
         }
     }
 

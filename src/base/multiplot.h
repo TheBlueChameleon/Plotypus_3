@@ -43,8 +43,8 @@ namespace Plotypus
             const std::set<size_t>& getBlanks() const;
             Multiplot&              setBlanks(const std::set<size_t>& newBlanks);
 
-            GridPosition_t          getGridDimensions() const;
-            Multiplot&              setGridDimensions(const GridPosition_t& newGridDimensions);
+            GridDimension_t          getGridDimensions() const;
+            Multiplot&              setGridDimensions(const GridDimension_t& newGridDimensions);
 
             StackingOrder           getStackingOrder() const;
             Multiplot&              setStackingOrder(const StackingOrder newStackingOrder);

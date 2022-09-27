@@ -490,8 +490,10 @@ namespace Plotypus
     {
         // *INDENT-OFF*
         switch (viewType) {
-            case DataviewType::DataViewDefaultCompound : return "DataViewDefaultCompound";
-            case DataviewType::DataViewDefaultSeparate : return "DataViewDefaultSeparate";
+            case DataviewType::DataViewDefaultCompound : return "DataviewDefaultCompound";
+            case DataviewType::DataViewDefaultSeparate : return "DataviewDefaultSeparate";
+            case DataviewType::DataViewMatrixCompound  : return "DataviewMatrixCompound";
+            case DataviewType::DataViewMatrixSeparate  : return "DataviewMatrixSeparate";
         }
         // *INDENT-ON*
 

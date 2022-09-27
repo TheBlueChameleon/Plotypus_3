@@ -155,6 +155,10 @@ namespace Plotypus
     {
         Dataview::reset();
 
+        variablePointSize  = false;
+        variablePointType  = false;
+        variablePointColor = false;
+
         clearFunctionMembers();
         clearNonFunctionMembers();
 
@@ -202,7 +206,7 @@ namespace Plotypus
         return lineStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
-    DataviewDefault& DataviewDefault::setLineStyle(size_t newLineStyle)
+    DataviewDefault& DataviewDefault::setLineStyle(const size_t newLineStyle)
     {
         lineStyle = newLineStyle;
         return *this;
@@ -219,7 +223,7 @@ namespace Plotypus
         return pointStyle.value_or(OPTIONAL_SIZE_T_DEFAULT);
     }
 
-    DataviewDefault& DataviewDefault::setPointStyle(size_t newPointStyle)
+    DataviewDefault& DataviewDefault::setPointStyle(const size_t newPointStyle)
     {
         pointStyle = newPointStyle;
         return *this;
@@ -344,7 +348,6 @@ namespace Plotypus
 
     void DataviewDefault::writeDatData() const
     {
-
         // *INDENT-OFF*
         if (isDummy())      {return;}
         if (isFunction())   {return;}

@@ -28,11 +28,11 @@ namespace Plotypus
 
     Dataview& Dataview::reset()
     {
-        plotStyleID                     = PlotStyle::Custom;
-        plotStyleFamily                 = PlotStyleFamily::Undefined;
-        title                       = "";
-        plotStyle                       = "lines";
-        options                     = "";
+        plotStyleID                 = PlotStyle::Custom;
+        plotStyleFamily             = PlotStyleFamily::Undefined;
+        title.reset();
+        plotStyle                   = "lines";
+        options.reset();
         dataFilename                = "";
         numberPrecision             = -1;
         columnSeparatorTxt          = "\t";

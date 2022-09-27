@@ -21,7 +21,7 @@ namespace Plotypus
     class Dataview
     {
         protected:
-            DataviewType                type;
+            const DataviewType          type;
 
             PlotStyle                   plotStyleID;
             PlotStyleFamily             plotStyleFamily;

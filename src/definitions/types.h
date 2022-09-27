@@ -79,8 +79,8 @@ namespace Plotypus
     // ====================================================================== //
     // Multiplots
 
-    using GridPosition_t = std::pair<size_t, size_t>;
-    constexpr GridPosition_t DEFAULT_GRID_POSITION = {0, 0};
+    using GridDimension_t = std::pair<size_t, size_t>;
+    constexpr GridDimension_t DEFAULT_GRID_DIMENSION = {0, 0};
 
     //! @todo use this also for set margin command
     using Margins_t = std::array<double, 4>;                       // uses enum Margin as indices
@@ -91,14 +91,14 @@ namespace Plotypus
 
     struct MultiplotLayout_t
     {
-        GridPosition_t                      gridDimensions;
+        GridDimension_t                     gridDimensions;
         StackingOrder                       stackingOrder;                  // rowsfirst ~> Vertical; columnsfirst ~> Horizontal
         StackingDirection                   stackingDirection;
         std::optional<Margins_t>            margins;
         std::optional<MultiplotSpacing_t>   spacing;
     };
 
-    constexpr MultiplotLayout_t DEFAULT_MULTIPLOT_LAYOUT{DEFAULT_GRID_POSITION};
+    constexpr MultiplotLayout_t DEFAULT_MULTIPLOT_LAYOUT{DEFAULT_GRID_DIMENSION};
 
     //! }
 }

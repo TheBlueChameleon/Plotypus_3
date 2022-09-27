@@ -53,7 +53,7 @@ namespace Plotypus
         return *this;
     }
 
-    GridPosition_t Multiplot::getGridDimensions() const
+    GridDimension_t Multiplot::getGridDimensions() const
     {
         if (layout.has_value())
         {
@@ -61,11 +61,11 @@ namespace Plotypus
         }
         else
         {
-            return DEFAULT_GRID_POSITION;
+            return DEFAULT_GRID_DIMENSION;
         }
     }
 
-    Multiplot& Multiplot::setGridDimensions(const GridPosition_t& newGridDimensions)
+    Multiplot& Multiplot::setGridDimensions(const GridDimension_t& newGridDimensions)
     {
         if (layout.has_value())
         {
@@ -99,7 +99,7 @@ namespace Plotypus
         }
         else
         {
-            layout = {DEFAULT_GRID_POSITION};
+            layout = {DEFAULT_GRID_DIMENSION};
             layout->stackingOrder = newStackingOrder;
         }
 
@@ -126,7 +126,7 @@ namespace Plotypus
         }
         else
         {
-            layout = {DEFAULT_GRID_POSITION};
+            layout = {DEFAULT_GRID_DIMENSION};
             layout->stackingDirection = newStackingDirection;
         }
 
@@ -153,7 +153,7 @@ namespace Plotypus
         }
         else
         {
-            layout = {DEFAULT_GRID_POSITION};
+            layout = {DEFAULT_GRID_DIMENSION};
             layout->margins = newMargins;
         }
 
@@ -190,7 +190,7 @@ namespace Plotypus
         }
         else
         {
-            layout = {DEFAULT_GRID_POSITION};
+            layout = {DEFAULT_GRID_DIMENSION};
             layout->spacing = newSpacing;
         }
 
