@@ -48,6 +48,7 @@ add_library(Plotypus-lib SHARED
     src/dataview/dataviewdefault.h src/dataview/dataviewdefault.cpp
     src/dataview/dataviewdefaultcompound.h src/dataview/dataviewdefaultcompound.txx
     src/dataview/dataviewdefaultseparate.h src/dataview/dataviewdefaultseparate.cpp
+    src/dataview/dataviewmatrix.h src/dataview/dataviewmatrix.cpp
 )
 
 set_target_properties(Plotypus-lib PROPERTIES

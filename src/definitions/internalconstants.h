@@ -39,7 +39,9 @@ namespace Plotypus
     enum class DataviewType
     {
         DataViewDefaultCompound,
-        DataViewDefaultSeparate
+        DataViewDefaultSeparate,
+        DataViewMatrixCompound,
+        DataViewMatrixSeparate
     };
 
     // ---------------------------------------------------------------------- //
