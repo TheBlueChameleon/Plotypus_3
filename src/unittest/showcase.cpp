@@ -108,7 +108,7 @@ std::array<std::vector<double>, 3> generateScalarField()
 
     for (double q = -1.; q < 1.;)
     {
-        q += 0.02 * std::sqrt( std::abs(q) );
+        q += 0.05 * std::sqrt( std::abs(q) );
         points.push_back(q);
     }
 
@@ -139,6 +139,7 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
                                std::vector<compound_complex_t>& compound_complex,
                                std::array<std::vector<double>, 3>& separate_data);
 void showcase_run_plots_multiplot(Plotypus::Report& report);
+void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<double>, 3>& separate_data);
 
 // ========================================================================== //
 // exposed interface
@@ -181,6 +182,12 @@ void showcase_run(Showcases selection)
     if (selection & Showcases::Plots_Multiplot)
     {
         showcase_run_plots_multiplot(report);
+    }
+    if (selection & Showcases::Plots_3D)
+    {
+        // this screws up the 2d showcase because the generated views are invalid. I have to rewrite the showcase framework, anyway.
+        separate_filed   = generateScalarField();
+        showcase_run_plots3d (report, separate_filed);
     }
 
     // ---------------------------------------------------------------------- //
@@ -463,7 +470,8 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     sheet2.addDataviewSeparate(PlotStyle::Image, "sin(2/r)")
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
-    .setData(ColumnType::Color, sepData_Z);
+    .setData(ColumnType::Color, sepData_Z)
+    .setBinaryDataOutput(false);
 
     sheet2.addLabel("Rendering of", -1.7, 0.6);
     sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
@@ -519,6 +527,41 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
 
     subplot_4_1.addDataviewSeparate("[0:2*pi]sin(x)");
     subplot_4_2.addDataviewSeparate("[0:2*pi]cos(x)");
+}
+
+void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<double>, 3>& separate_data)
+{
+    using namespace Plotypus;
+
+    // ---------------------------------------------------------------------- //
+    // set up some styles
+
+    auto& stylesCollection = report.stylesCollection();
+
+    // ---------------------------------------------------------------------- //
+    // separate data as before
+
+    auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
+
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 1: scalar field
+
+    auto& sheet1 = report.addPlotDefault("scalar field");
+
+    sheet1.axis(AxisType::X)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet1.axis(AxisType::Y)
+    .setRangeMin(-1.0)
+    .setRangeMax(+1.0);
+    sheet1.setAspectEqual();
+
+    sheet1.addDataviewSeparate(PlotStyle::Dots3D, "sin(2/r)")
+    .setData(ColumnType::X, sepData_X)
+    .setData(ColumnType::Y, sepData_Y)
+    .setData(ColumnType::Z, sepData_Z)
+    .setBinaryDataOutput(false);
 }
 
 // ========================================================================== //

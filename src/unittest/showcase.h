@@ -7,6 +7,7 @@ enum Showcases
     Plots_2D        = 1 << 1,
     Plots_2D_maps   = 1 << 2,
     Plots_Multiplot = 1 << 3,
+    Plots_3D        = 1 << 4,
 
     All             = -1,
 };
