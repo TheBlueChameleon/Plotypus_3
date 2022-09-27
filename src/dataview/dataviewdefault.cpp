@@ -29,7 +29,7 @@ namespace Plotypus
             fetchData(lineBuffer, i, missingXColumn);
             hFile.write(
                 reinterpret_cast<char*>(lineBuffer.data()),
-                (lineBuffer.size() - missingXColumn) * sizeof(double)
+                lineBuffer.size() * sizeof(double)
             );
         }
     }
@@ -179,11 +179,11 @@ namespace Plotypus
         if (newPlotStyle == PlotStyle::HBoxes)
         {
             columnFormats[0] = "(0)";               // x     : constant zero
-            columnFormats[1] = "$!1";               // y     : x column
+            columnFormats[1] = "(!1)";              // y     : x column
             columnFormats[2] = "(0)";               // x_low : constant zero
-            columnFormats[3] = "$!2";               // x_high: y column
-            columnFormats[4] = "($!1 - $!3 / 2.)";  // y_low : x column minus boxwidth halves
-            columnFormats[5] = "($!1 - $!3 / 2.)";  // y_high: x column plus boxwidth halves
+            columnFormats[3] = "(!2)";              // x_high: y column
+            columnFormats[4] = "(!1 - !3 / 2.)";    // y_low : x column minus boxwidth halves
+            columnFormats[5] = "(!1 - !3 / 2.)";    // y_high: x column plus boxwidth halves
         }
 
         return *this;
@@ -235,37 +235,79 @@ namespace Plotypus
         return *this;
     }
 
-    size_t& DataviewDefault::columnAssignment(const size_t columnID)
+    DataviewDefault& DataviewDefault::setColumnAssignment(const size_t columnIndex, const size_t newSourceColumn)
     {
-        throwIfInvalidIndex("column ID", columnID, columnAssignments);
-        return columnAssignments[columnID];
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        columnAssignments[columnIndex] = newSourceColumn;
+        return *this;
     }
 
-    size_t& DataviewDefault::columnAssignment(const ColumnType columnType)
+    DataviewDefault& DataviewDefault::setColumnAssignment(const ColumnType columnType, const size_t newSourceColumn)
     {
-        return columnAssignment(getColumnID(plotStyleID, columnType) - 1);
+        const auto index = getColumnID(plotStyleID, columnType) - 1;
+        columnAssignments[index] = newSourceColumn;
+        return *this;
     }
 
-    std::string& DataviewDefault::columnFormat(const size_t columnID)
+    const size_t& DataviewDefault::getColumnAssignment(const size_t columnIndex) const
     {
-        throwIfInvalidIndex("column ID", columnID, columnAssignments);
-        return columnFormats[columnID];
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        return columnAssignments[columnIndex];
     }
 
-    std::string& DataviewDefault::columnFormat(const ColumnType columnType)
+    const size_t& DataviewDefault::getColumnAssignment(const ColumnType columnType) const
     {
-        return columnFormat(getColumnID(plotStyleID, columnType) - 1);
+        return getColumnAssignment(getColumnID(plotStyleID, columnType) - 1);
     }
 
-    std::string& DataviewDefault::columnHeadline(const size_t columnID)
+    DataviewDefault& DataviewDefault::setColumnFormat(const size_t columnIndex, const std::string& newFormat)
     {
-        throwIfInvalidIndex("column ID", columnID, columnAssignments);
-        return columnHeadlines[columnID];
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        columnFormats[columnIndex] = newFormat;
+        return *this;
     }
 
-    std::string& DataviewDefault::columnHeadline(const ColumnType columnType)
+    DataviewDefault& DataviewDefault::setColumnFormat(const ColumnType columnType, const std::string& newFormat)
     {
-        return columnHeadline(getColumnID(plotStyleID, columnType) - 1);
+        const auto index = getColumnID(plotStyleID, columnType) - 1;
+        columnFormats[index] = newFormat;
+        return *this;
+    }
+
+    const std::string& DataviewDefault::getColumnFormat(const size_t columnIndex) const
+    {
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        return columnFormats[columnIndex];
+    }
+
+    const std::string& DataviewDefault::getColumnFormat(const ColumnType columnType) const
+    {
+        return getColumnFormat(getColumnID(plotStyleID, columnType) - 1);
+    }
+
+    DataviewDefault& DataviewDefault::setColumnHeadline(const size_t columnIndex, const std::string& newHeadline)
+    {
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        columnHeadlines[columnIndex] = newHeadline;
+        return *this;
+    }
+
+    DataviewDefault& DataviewDefault::setColumnHeadline(const ColumnType columnType, const std::string& newHeadline)
+    {
+        const auto index = getColumnID(plotStyleID, columnType) - 1;
+        columnHeadlines[index] = newHeadline;
+        return *this;
+    }
+
+    const std::string& DataviewDefault::getColumnHeadline(const size_t columnIndex) const
+    {
+        throwIfInvalidIndex("column ID", columnIndex, columnAssignments);
+        return columnHeadlines[columnIndex];
+    }
+
+    const std::string& DataviewDefault::getColumnHeadline(const ColumnType columnType) const
+    {
+        return getColumnHeadline(getColumnID(plotStyleID, columnType) - 1);
     }
 
     bool DataviewDefault::getVariablePointSize() const
@@ -324,6 +366,7 @@ namespace Plotypus
 
             bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
             auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
+            // note: the case (lineLength == COLUMN_LIST_INVALID) should not be possible due to calling isComplete
 
             std::vector<double> lineBuffer(lineLength);
 
@@ -357,6 +400,7 @@ namespace Plotypus
 
         bool missingXColumn = (columnAssignments[0] == COLUMN_UNUSED);
         auto lineLength     = getConsecutiveEntriesCount(columnAssignments, isUnusedColumn);
+        // note: the case (lineLength == COLUMN_LIST_INVALID) should not be possible due to calling isComplete
 
         std::vector<double> lineBuffer(lineLength);
         std::fstream hFile = openOrThrow(dataFilename);

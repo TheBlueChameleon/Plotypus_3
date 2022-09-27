@@ -1,4 +1,4 @@
-#ifndef DATAVIEWDEFAULT_H
+﻿#ifndef DATAVIEWDEFAULT_H
 #define DATAVIEWDEFAULT_H
 
 #include <array>
@@ -65,12 +65,20 @@ namespace Plotypus
             DataviewDefault&    setPointStyle(const size_t newPointStyle);
             DataviewDefault&    clearPointStyle();
 
-            size_t&             columnAssignment(const size_t       columnID);
-            size_t&             columnAssignment(const ColumnType   columnType);
-            std::string&        columnFormat    (const size_t       columnID);
-            std::string&        columnFormat    (const ColumnType   columnType);
-            std::string&        columnHeadline  (const size_t       columnID);
-            std::string&        columnHeadline  (const ColumnType   columnType);
+            DataviewDefault&    setColumnAssignment(const size_t       columnIndex, const size_t newSourceColumn);
+            DataviewDefault&    setColumnAssignment(const ColumnType   columnType, const size_t newSourceColumn);
+            const size_t&       getColumnAssignment(const size_t       columnIndex) const;
+            const size_t&       getColumnAssignment(const ColumnType   columnType)  const;
+
+            DataviewDefault&    setColumnFormat    (const size_t       columnIndex, const std::string& newFormat);
+            DataviewDefault&    setColumnFormat    (const ColumnType   columnType, const std::string& newFormat);
+            const std::string&  getColumnFormat    (const size_t       columnIndex) const;
+            const std::string&  getColumnFormat    (const ColumnType   columnType)  const;
+
+            DataviewDefault&    setColumnHeadline  (const size_t       columnIndex, const std::string& newHeadline);
+            DataviewDefault&    setColumnHeadline  (const ColumnType   columnType, const std::string& newHeadline);
+            const std::string&  getColumnHeadline  (const size_t       columnIndex) const;
+            const std::string&  getColumnHeadline  (const ColumnType   columnType) const;
 
             bool                getVariablePointSize() const;
             DataviewDefault&    setVariablePointSize(bool newVariablePointSize);
