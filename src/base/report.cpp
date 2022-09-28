@@ -214,6 +214,12 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    void Report::writeReport() const
+    {
+        writeDat();
+        writeScript();
+    }
+
     void Report::writeTxt() const
     {
         const std::string filename = getOutputFilename(extTxt);

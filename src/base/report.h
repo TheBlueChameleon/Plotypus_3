@@ -23,6 +23,7 @@ namespace Plotypus
      * @todo rethink responsibility for outputToFile, filenameBase wrt. TerminalInfoProvider (command set output 'filename')
      * @todo introduce customScripts on Report level
      * @todo rethink auto-preprocess mechanism wrt. repetition of same action on write{txt|dat|script}
+     * @todo runScript only via writeReport?
      */
 
     class Sheet;
@@ -119,6 +120,8 @@ namespace Plotypus
 
             // -------------------------------------------------------------- //
             // writers
+
+            void writeReport() const;
 
             void writeTxt   () const;
             void writeDat   () const;
