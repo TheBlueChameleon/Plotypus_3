@@ -25,9 +25,9 @@ namespace Plotypus
             std::optional<size_t> lineStyle;
             std::optional<size_t> pointStyle;
 
-            columnAssignmentList_t columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
-            columnFormatList_t     columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
-            columnFormatList_t     columnHeadlines   = {};
+            mutable columnAssignmentList_t  columnAssignments = {COLUMN_UNUSED,         COLUMN_UNUSED,         COLUMN_UNUSED,         COLUMN_UNUSED,         COLUMN_UNUSED,         COLUMN_UNUSED};
+            mutable columnFormatList_t      columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
+            columnFormatList_t              columnHeadlines   = {};
 
             virtual void clearFunctionMembers();
             virtual void fetchData(std::vector<double>& buffer, size_t recordID, bool missingXColumn) const = 0;
@@ -43,6 +43,7 @@ namespace Plotypus
 
             void postSetColumnActions(const ColumnType columnType);
             void makePlusMinusFormat();
+            void preWriteActions() const;
 
         public:
             DataviewDefault(const DataviewType type, const PlotStyle    plotStyleID);
@@ -51,8 +52,6 @@ namespace Plotypus
             DataviewDefault(const DataviewType type, const std::string& plotStyle,   const std::string& title);
 
             virtual DataviewDefault& reset();
-
-            virtual DataviewDefault& setPlotStyleID(const PlotStyle newPlotStyle);
 
             virtual size_t      getArity() const = 0;
 

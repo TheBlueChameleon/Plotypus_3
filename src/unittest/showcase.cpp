@@ -400,9 +400,8 @@ void showcase_run_plots2d(Plotypus::Report& report,
     std::cout << std::string(80, '-') << std::endl;
     sheet5.addDataviewCompound<compound_t>(compound_data, PlotStyle::HBoxes, "Data")
     .setSelector(ColumnType::X, compoundSelectorX)
-    .setSelector(ColumnType::Y, compoundSelectorY)
-    .setSelector(ColumnType::Boxwidth, compoundSelectorErrX)
-    .setPlotStyleID(PlotStyle::HBoxes);
+    .setSelector(ColumnType::Y, compoundSelectorY);
+    //.setSelector(ColumnType::Boxwidth, compoundSelectorErrX);
 
     // ---------------------------------------------------------------------- //
     // ill-typed references cause a catch-able exception

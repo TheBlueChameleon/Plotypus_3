@@ -11,10 +11,21 @@ namespace Plotypus
 
     void DataviewDefault::writeTxtHeadlines(std::ostream& hFile) const
     {
-        for (const auto& headline : columnHeadlines)
+        bool first = true;
+
+        for (auto index = 0u; index < columnAssignments.size(); ++index)
         {
-            hFile << headline << columnSeparatorTxt;
+            // *INDENT-OFF*
+            const auto& cai = columnAssignments[index];
+            if (cai == COLUMN_UNUSED || cai == COLUMN_DUMMY) {continue;}
+
+            if (first)  {first = false;}
+            else        {hFile << columnSeparatorTxt;}
+            // *INDENT-ON*
+
+            hFile << columnHeadlines[index];
         }
+
         hFile << std::endl;
     }
 
@@ -133,11 +144,58 @@ namespace Plotypus
         const auto index_yLow  = getColumnID(PlotStyle::FilledCurves, ColumnType::YLow ) - 1;
         const auto index_yHigh = getColumnID(PlotStyle::FilledCurves, ColumnType::YHigh) - 1;
 
-        const std::string element_data  = "!" + std::to_string(id_data);
-        const std::string element_delta = "!" + std::to_string(id_delta);
+        const std::string element_data  = COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID + std::to_string(id_data);
+        const std::string element_delta = COLUMN_FORMAT_ESCAPE_INTERNAL_COLUMN_ID + std::to_string(id_delta);
 
         columnFormats[index_yLow ] = "(" + element_data + " - " + element_delta + ")";
         columnFormats[index_yHigh] = "(" + element_data + " + " + element_delta + ")";
+    }
+
+    void DataviewDefault::preWriteActions() const
+    {
+        if (plotStyleID == PlotStyle::HBoxes)
+        {
+            /* column assignments:
+             * - require all 6 columns set
+             * - default to COLUMN_DUMMY if information is not yet available
+             * - note: user may define assignment[2]: boxwidth
+             * - note: assignments[0] and [1] are mandatory for this style.
+             */
+            for (auto index = 2u; index < columnAssignments.size(); ++index)
+            {
+                columnAssignments[index] = (columnAssignments[index] == COLUMN_UNUSED ? COLUMN_DUMMY : columnAssignments[index]);
+            }
+
+            /* column formats
+             * - use these defaults:
+             *   x     : constant zero
+             *   y     : x column
+             *   x_low : constant zero
+             *   x_high: y column
+             *   y_low : x column minus boxwidth halves
+             *   y_high: x column plus  boxwidth halves
+             * - unless user has provided own settings
+             *   detectable by [format string is not COLUMN_FORMAT_DEFAULT]
+             * - exception: boxwidth may not be present
+             *   if so, adapt defaults for y_low, y_high to be equal to y.
+             */
+
+            const auto boxWidthIndex       = getColumnID(PlotStyle::HBoxes, ColumnType::Boxwidth) - 1;
+            const bool hasExplicitBoxWidth = (columnAssignments[boxWidthIndex] != COLUMN_DUMMY);
+
+            const std::vector<std::string> defaults = {"(0)",
+                                                       "(!1)",
+                                                       "(0)",
+                                                       "(!2)",
+                                                       (hasExplicitBoxWidth ? "(!1 - !3 / 2.)" : "(!1)"),
+                                                       (hasExplicitBoxWidth ? "(!1 + !3 / 2.)" : "(!1)")
+                                                      };
+
+            for (auto index = 0u; index < columnFormats.size(); ++index)
+            {
+                columnFormats[index] = (columnFormats[index] == COLUMN_FORMAT_DEFAULT ? defaults[index] : columnFormats[index]);
+            }
+        }
     }
 
     // ====================================================================== //
@@ -177,27 +235,6 @@ namespace Plotypus
         columnAssignments = {COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED, COLUMN_UNUSED};
         columnFormats     = {COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT, COLUMN_FORMAT_DEFAULT};
         columnHeadlines   = {};
-
-        return *this;
-    }
-
-    DataviewDefault& DataviewDefault::setPlotStyleID(const PlotStyle newPlotStyle)
-    {
-        Dataview::setPlotStyleID(newPlotStyle);
-
-        if (newPlotStyle == PlotStyle::HBoxes)
-        {
-            columnAssignments[3] = COLUMN_DUMMY;
-            columnAssignments[4] = COLUMN_DUMMY;
-            columnAssignments[5] = COLUMN_DUMMY;
-
-            columnFormats[0] = "(0)";               // x     : constant zero
-            columnFormats[1] = "(!1)";              // y     : x column
-            columnFormats[2] = "(0)";               // x_low : constant zero
-            columnFormats[3] = "(!2)";              // x_high: y column
-            columnFormats[4] = "(!1 - !3 / 2.)";    // y_low : x column minus boxwidth halves
-            columnFormats[5] = "(!1 + !3 / 2.)";    // y_high: x column plus  boxwidth halves
-        }
 
         return *this;
     }
@@ -416,14 +453,22 @@ namespace Plotypus
 
     void DataviewDefault::writeScriptData(std::ostream& hFile, const StylesCollection& stylesColloction) const
     {
-        // *INDENT-OFF*
-        if (isFunction()) {hFile << func;}
+        preWriteActions();
+
+        if (isFunction())
+        {
+            hFile << func;
+        }
         else
         {
             hFile << " " << std::quoted(dataFilename);
-            if (binaryDataOutput) {hFile << " binary format=\"%float64\"";}
+            if (binaryDataOutput)
+            {
+                hFile << " binary format=\"%float64\"";
+            }
+
+            writeUsingSpecification(hFile);
         }
-        writeUsingSpecification(hFile);
 
         hFile << optionalQuotedStringArgument("title", title);
 
@@ -432,6 +477,7 @@ namespace Plotypus
         hFile << optionalSizeTArgument("linestyle", lineStyle);
         stylesColloction.writePointStyleCode(hFile, pointStyle.value_or(OPTIONAL_SIZE_T_DEFAULT));
 
+        // *INDENT-OFF*
         if (variablePointSize ) {hFile << " pointsize variable";}
         if (variablePointType ) {hFile << " pointtype variable";}
         if (variablePointColor) {hFile << " linecolor variable";}
