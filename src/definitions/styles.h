@@ -130,6 +130,8 @@ namespace Plotypus
      * @brief Sheet element: BoxStyle (used with Text overlays)
      *
      * Cf. page 201 gnuplot 5.4 documentation (section set style textbox)
+     *
+     * @todo refactor to monadic style
      */
     struct BoxStyle
     {

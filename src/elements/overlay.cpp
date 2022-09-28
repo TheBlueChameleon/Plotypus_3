@@ -14,7 +14,7 @@ namespace Plotypus
             const auto&  z = std::get<2>(posValues);
 
             hFile << getPositionSystemName(positionSystem);
-            hFile << x << ", " << y;
+            hFile << " " << x << ", " << y;
             if (z.has_value())
             {
                 hFile << ", " << z.value();

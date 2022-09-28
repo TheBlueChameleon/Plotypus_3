@@ -8,6 +8,10 @@
 
 namespace Plotypus
 {
+    /**
+     * @todo consider splitting font into fontface, fontsize; rename textcolor -> fontcolor; do so consistently wherever a font attribute exists.
+     *  Reason: labels have syntax "fontface, fontsize"; sometimes, however, gnuplot uses "fontface:fontsize"
+     */
     class Label : public Overlay
     {
         private:

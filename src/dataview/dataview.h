@@ -17,6 +17,8 @@ namespace Plotypus
      * @todo notitle option (suppresses key entry)
      *
      * @todo abstract autoFormat (clip to nan); quickForm only positive
+     *
+     * @todo rename plotStyle -> plotStyleName; plotStyleID -> plotStyle.
      */
     class Dataview
     {

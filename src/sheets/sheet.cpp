@@ -97,6 +97,11 @@ namespace Plotypus
         return *this;
     }
 
+    Sheet& Sheet::setOrigin(const double x, const double y)
+    {
+        return setOrigin({x, y});
+    }
+
     Sheet& Sheet::clearOrigin()
     {
         origin.reset();
@@ -112,6 +117,11 @@ namespace Plotypus
     {
         size = newSize;
         return *this;
+    }
+
+    Sheet& Sheet::setSize(const double x, const double y)
+    {
+        return setSize({x, y});
     }
 
     Sheet& Sheet::clearSize()

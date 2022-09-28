@@ -45,8 +45,8 @@ namespace Plotypus
             Sheet&          addSheet();
             Sheet&          addSheet(const std::string& title);
 
-            Multiplot&      addMultiPlot();
-            Multiplot&      addMultiPlot(const std::string& title);
+            Multiplot&      addMultiplot();
+            Multiplot&      addMultiplot(const std::string& title);
 
             PlotDefault&    addPlotDefault();
             PlotDefault&    addPlotDefault(const std::string& title);

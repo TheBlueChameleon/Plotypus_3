@@ -118,12 +118,12 @@ namespace Plotypus
         return *addSheet(new Sheet(SheetType::Sheet, title) );
     }
 
-    Multiplot& SheetsCollection::addMultiPlot()
+    Multiplot& SheetsCollection::addMultiplot()
     {
         return *dynamic_cast<Multiplot*>(addSheet(new Multiplot));
     }
 
-    Multiplot& SheetsCollection::addMultiPlot(const std::string& title)
+    Multiplot& SheetsCollection::addMultiplot(const std::string& title)
     {
         return *dynamic_cast<Multiplot*>(addSheet(new Multiplot(title)));
     }

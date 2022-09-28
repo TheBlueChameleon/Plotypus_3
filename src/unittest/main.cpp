@@ -12,6 +12,7 @@ int main()
 {
     std::cout << "UNIT TEST MAIN" << std::endl;
 
+#if false
     UNITTEST_MAIN_VARS;
 
     // ...................................................................... //
@@ -38,14 +39,15 @@ int main()
     std::cout << "UNIT TESTS SUMMARY" << std::endl;
 
     SUMMARIZE_UNITTESTS;
-
+#endif
     // ...................................................................... //
 
     std::cout << std::endl;
     std::cout << "SHOWCASE CODE BEGINS HERE" << std::endl;
 
     showcase_minimal();
-    showcase_run(0);
+//    showcase_run(Plot_CompoundSimple);
+    showcase_run(FrameControls);
 
     //showcase_run(Showcases::Plots_2D);
 //    showcase_run(Showcases::Plots_Multiplot);

@@ -61,7 +61,7 @@ namespace Plotypus
         const size_t N = tics.size();
         for (size_t i = 1u; const auto& [text, pos] : tics)
         {
-            result += text + " " + std::to_string(pos);
+            result += "\"" + text + "\" " + std::to_string(pos);
             result += (i < N ? ", " : "");
         }
         result += ") ";

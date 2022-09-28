@@ -58,10 +58,12 @@ namespace Plotypus
 
             const SheetPosition_t       getOrigin() const;
             Sheet&                      setOrigin(const SheetPosition_t& newOrigin);
+            Sheet&                      setOrigin(const double x, const double y);
             Sheet&                      clearOrigin();
 
             const SheetPosition_t       getSize() const;
             Sheet&                      setSize(const SheetPosition_t& newSize);
+            Sheet&                      setSize(const double x, const double y);
             Sheet&                      clearSize();
 
             const std::string           getCustomScriptBegin() const;
