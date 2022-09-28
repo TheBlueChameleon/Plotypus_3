@@ -44,7 +44,10 @@ int main()
     std::cout << std::endl;
     std::cout << "SHOWCASE CODE BEGINS HERE" << std::endl;
 
-    showcase_run(Showcases::Plots_2D);
+    showcase_minimal();
+    showcase_run(0);
+
+    //showcase_run(Showcases::Plots_2D);
 //    showcase_run(Showcases::Plots_Multiplot);
 //    showcase_run(Showcases::Plots_3D);
 

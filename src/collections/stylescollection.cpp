@@ -5,10 +5,6 @@ using namespace std::string_literals;
 
 namespace Plotypus
 {
-    StylesCollection::StylesCollection() {}
-
-    // ====================================================================== //
-
     StylesCollection& StylesCollection::reset()
     {
         boxStyles  .clear();
@@ -101,13 +97,13 @@ namespace Plotypus
         LineStyle ls = LineStyle{std::optional(color), std::optional(width), std::optional(dashtype)};
         if (pointForm != PointForm::None)
         {
-            ls.pointStyle->form = pointForm;
+            ls.pointStyle->setForm(pointForm);
         }
 
         return addLineStyle(ls);
     }
 
-// ---------------------------------------------------------------------- //
+    // ---------------------------------------------------------------------- //
 
     size_t StylesCollection::getPointStyleCount() const
     {
@@ -143,18 +139,17 @@ namespace Plotypus
         return pointStyles.back();
     }
 
-    PointStyle& StylesCollection::addPointStyle(PointForm form, double size, std::string color, std::string customSymbol)
+    PointStyle& StylesCollection::addPointStyle(PointForm form, const std::optional<std::string>& color, const std::optional<double>& size)
     {
-        return addPointStyle(
-        {
-            form,
-            customSymbol,
-            size,
-            color
-        });
+        return addPointStyle(PointStyle(form, color, size));
     }
 
-// ====================================================================== //
+    PointStyle& StylesCollection::addPointStyle(const std::string& customSymbol, const std::optional<std::string>& color, const std::optional<double>& size)
+    {
+        return addPointStyle(PointStyle(customSymbol, color, size));
+    }
+
+    // ====================================================================== //
 
     void StylesCollection::writeStyles(std::ostream& hFile) const
     {
@@ -219,13 +214,13 @@ namespace Plotypus
                 if (style.pointStyle.has_value())
                 {
                     const auto& ps = style.pointStyle.value();
-                    if (ps.form != PointForm::None)
+                    if (ps.getForm() != PointForm::None)
                     {
                         // *INDENT-OFF*
-                        if (ps.form == PointForm::Custom)   {hFile << " pointtype " << std::quoted(ps.customSymbol);}
-                        else                                {hFile << " pointtype " << std::to_string(static_cast<unsigned>(ps.form));}
+                        if (ps.getForm() == PointForm::Custom)  {hFile << " pointtype " << std::quoted(ps.getCustomSymbol().value_or("*"));}
+                        else                                    {hFile << " pointtype " << std::to_string(static_cast<unsigned>(ps.getForm()));}
 
-                        hFile << optionalNumberArgument("pointsize", ps.size);
+                        hFile << optionalNumberArgument("pointsize", ps.getSize());
                         // *INDENT-ON*
                     }
                 }
@@ -247,16 +242,16 @@ namespace Plotypus
         throwIfInvalidIndex("point style index", i, pointStyles);
 
         const auto& psr = pointStyles[i];
-        const int pointStyleInt = static_cast<int>(psr.form);
+        const int pointStyleInt = static_cast<int>(psr.getForm());
 
-        if      (psr.form == PointForm::None)   {return;}
-        else if (psr.form == PointForm::Custom) {hFile << " pointtype " << std::quoted(psr.customSymbol);}
-        else                                    {hFile << " pointtype " << std::to_string(pointStyleInt);}
+        if      (psr.getForm() == PointForm::None)      {return;}
+        else if (psr.getForm() == PointForm::Custom)    {hFile << " pointtype " << std::quoted(psr.getCustomSymbol().value_or("*"));}
+        else                                            {hFile << " pointtype " << std::to_string(pointStyleInt);}
 
-        hFile << optionalNumberArgument("pointsize", psr.size);
-        hFile << optionalQuotedStringArgument("linecolor", psr.color);
+        hFile << optionalNumberArgument("pointsize", psr.getSize());
+        hFile << optionalQuotedStringArgument("linecolor", psr.getColor());
 
-        hFile << optionalStringArgument("", psr.options);
+        hFile << optionalStringArgument("", psr.getOptions());
         // *INDENT-ON*
     }
 }

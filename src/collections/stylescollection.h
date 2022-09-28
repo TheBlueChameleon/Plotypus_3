@@ -1,6 +1,7 @@
 #ifndef STYLESCOLLECTION_H
 #define STYLESCOLLECTION_H
 
+#include <optional>
 #include <vector>
 
 #include "../definitions/styles.h"
@@ -19,15 +20,9 @@ namespace Plotypus
             std::vector<PointStyle> pointStyles;
 
         public:
-            StylesCollection();
+            StylesCollection() = default;
 
-            /* generic rule for add***Style, ID parameter
-             * if ID = -1, use default:
-             *  use current length of boxstyle list as ID.
-             * ==> first call sets default, subsequent calls set user styles.
-             */
-
-            StylesCollection& reset();
+            StylesCollection&               reset();
 
             size_t                          getBoxStyleCount() const;
             const std::vector<BoxStyle>&    getBoxStyles() const;
@@ -51,7 +46,16 @@ namespace Plotypus
             const PointStyle&               getPointStyle (const size_t i) const;
             StylesCollection&               setPointStyles(const std::vector<PointStyle>& newPointStyles);
             PointStyle&                     addPointStyle (const PointStyle& newPointStyle);
-            PointStyle&                     addPointStyle (PointForm form = PointForm::Point, double size = 1.0, std::string color = "", std::string customSymbol = "");
+            PointStyle&                     addPointStyle (
+                PointForm                           form  = PointForm::Point,
+                const std::optional<std::string>&   color = std::optional<std::string>(),
+                const std::optional<double>&        size  = std::optional<double>()
+            );
+            PointStyle&                     addPointStyle (
+                const std::string&                  customSymbol,
+                const std::optional<std::string>&   color = std::optional<std::string>(),
+                const std::optional<double>&        size  = std::optional<double>()
+            );
 
             // writers
             void writeStyles        (std::ostream& hFile) const;

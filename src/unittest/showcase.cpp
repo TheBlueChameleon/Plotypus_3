@@ -8,133 +8,85 @@ using namespace std::complex_literals;
 using namespace std::string_literals;
 
 // ========================================================================== //
-// data types and constants
+// behaviour constants
 
-constexpr auto pi = std::numbers::pi;
-
-struct compound_t
-{
-    double x, y, errX, errY;
-};
-
-using complex_t = std::complex<double>;
-
-struct compound_complex_t
-{
-    complex_t coordinate;
-    complex_t value;
-};
+bool SHOWCASE_TXT_REPORT = true;
 
 // ========================================================================== //
-// data generators
 
-std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
+void showcase_minimal()
 {
-    // non-uniform sampling of the x domain, resulting in a sigmoid
+    /* This example shows the very minimal code needed to create plots from
+     * data in memory.
+     *
+     * Creating more fancy output is showcased in the other routines of this
+     * module.
+     */
 
-    std::vector<double> dataX, dataY;
+    // ---------------------------------------------------------------------- //
+    // prepare data
 
-    size_t i = -1;
-    for (double x = -1.; x < 1.;)
+    std::vector<double> data;
+
+    double x = 0.;
+    while (x < 2*pi)
     {
-        x += 0.1 * std::sqrt( std::abs(x) );
-        ++i;
-
-        dataX.push_back((x + 1.) * .5 * pi);
-        dataY.push_back(.05 * i - 1);
+        data.push_back( std::sin(x) );
+        x += .05;
     }
 
-    return std::make_pair(dataX, dataY);
+    // ---------------------------------------------------------------------- //
+    // prepare report, i.e. the primary object
+
+    Plotypus::Report report = Plotypus::Report(Plotypus::FileType::Pdf);
+    report
+    .setOutputDirectory("../TestOutput")
+    .setFilenameBase("minimal");
+
+    // ---------------------------------------------------------------------- //
+    // define the report elements
+
+    report
+    .addPlotDefault("Minimal Plotypus Example")
+    .addDataviewSeparate(data, Plotypus::PlotStyle::Lines, "sine wave");
+
+    // ---------------------------------------------------------------------- //
+    // use the report writer(s)
+
+    report.writeReport();       // generates the dat files, the gnuplot script and executes it
+    if (SHOWCASE_TXT_REPORT)
+    {
+        report.writeTxt();      // generates a CSV like, human readable file
+    }
 }
 
-std::vector<compound_t> generateCompoundData2D()
-{
-    constexpr auto N = 50;
-    constexpr auto xIncrement = pi / N;
-    std::vector<compound_t> result(N);
-
-    // Taylor approximation of sine
-    for (double x = 0.; auto& datapoint : result)
-    {
-        datapoint.x    = x;
-        datapoint.y    = x - (x*x*x / 6.) + (x*x*x*x*x / 120.);
-        datapoint.errX = 0.01 + 0.04 * std::sin(x / 2.);
-        datapoint.errY = std::abs(datapoint.y - std::sin(x)) * 1.1;
-
-        x += xIncrement;
-    }
-
-    return result;
-}
-
-std::vector<compound_complex_t> generateVectorField()
-{
-    // creates a vortex field around origin, domain is [-1, +1) x [-1, +1)
-
-    constexpr auto Nx = 25;
-    constexpr auto Ny = 25;
-
-    constexpr auto dx = 2. / Nx;
-    constexpr auto dy = 2. / Nx;
-
-    std::vector<compound_complex_t> result(Nx * Ny);
-
-    double x = -1., y = -1.;
-    for     (size_t iy = 0u; iy < Nx; ++iy)
-    {
-        x = -1.;
-        for (size_t ix = 0u; ix < Nx; ++ix)
-        {
-            x += dx;
-            const auto coordinate = complex_t(x, y);
-            const auto value      = complex_t(0, 1) * coordinate * .1;
-
-            auto& thisArrow = result[iy * Nx + ix];
-            thisArrow.coordinate = coordinate;
-            thisArrow.value      = value;
-        }
-        y += dy;
-    }
-
-    return result;
-}
-
-std::array<std::vector<double>, 3> generateScalarField()
-{
-    // non-uniform sampling of the domain {which is [-1, 1) x [-1, 1)}
-    // z = sin( 1/r ) with r = sqrt(x² + y²)
-
-    std::vector<double> points, dataX, dataY, dataZ;
-
-    for (double q = -1.; q < 1.;)
-    {
-        q += 0.05 * std::sqrt( std::abs(q) );
-        points.push_back(q);
-    }
-
-    for     (auto y : points)
-    {
-        for (auto x : points)
-        {
-            double r = std::sqrt(x*x + y*y);
-            double z = std::sin(2. / r);
-
-            dataX.push_back(x);
-            dataY.push_back(y);
-            dataZ.push_back(z);
-        }
-    }
-
-    return {dataX, dataY, dataZ};
-}
 
 // ========================================================================== //
 // internal showcase procs
 
+/* For the detail showcase examples, the same Plotypus::Report object will
+ * be used. A driver function showcase_run generates the object as well as
+ * all data that might be used for plots, akin to a main function in your
+ * simulation. It then calls various routines that configure the report to
+ * include different plots. To that end, the called routines are passed
+ * REFERENCES to the data. The actual data all "live" in showcase_run and
+ * their lifetime is the same as the Plotypuss::Report object.
+ *
+ * Below you will find the functions being called by showcase_run with brief
+ * descriptions of what features to find there.
+ */
+
+// shows how to put text and graphical non-plot elements on sheets.
 void showcase_run_overlays(Plotypus::Report& report);
-void showcase_run_plots2d (Plotypus::Report& report,
-                           std::pair<std::vector<double>, std::vector<double>>& separate_data,
-                           std::vector<compound_t>& compound_data);
+
+// shows some simple X/Y graphs with formatting
+void showcase_run_separateSimple(Plotypus::Report& report,
+                                 std::vector<double>& dataX,
+                                 std::vector<double>& dataY);
+
+void showcase_run_plots2d_prime(Plotypus::Report& report,
+                                std::pair<std::vector<double>, std::vector<double>>& separate_data,
+                                std::vector<compound_t>& compound_data);
 void showcase_run_plots2d_maps(Plotypus::Report& report,
                                std::vector<compound_complex_t>& compound_complex,
                                std::array<std::vector<double>, 3>& separate_data);
@@ -144,58 +96,45 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
 // ========================================================================== //
 // exposed interface
 
-void showcase_run(Showcases selection)
+void showcase_run(size_t selection)
 {
     // ---------------------------------------------------------------------- //
     // prepare report, i.e. the primary object
 
     Plotypus::Report report = Plotypus::Report(Plotypus::FileType::Pdf);
-    report.setOutputDirectory("../TestOutput");
+    report
+    .setOutputDirectory("../TestOutput")
+    .setFilenameBase("extended");
 
     // ---------------------------------------------------------------------- //
     // prepare some data (so they persist in memory until we write the report)
 
-    std::pair<std::vector<double>, std::vector<double>> separate_data;
-    std::vector<compound_t>                             compound_data;
-    std::vector<compound_complex_t>                     compound_complex;
-    std::array<std::vector<double>, 3>                  separate_filed;
+    std::pair<std::vector<double>, std::vector<double>> separate_data = generateSeparateData2D();
+    std::vector<compound_t>                             compound_data = generateCompoundData2D();
+    std::vector<compound_complex_t>                     compound_complex = generateVectorField();
+    std::array<std::vector<double>, 3>                  separate_filed   = generateScalarField();
 
     // ---------------------------------------------------------------------- //
-    // run desired showcase options; this invokes generation of data as well.
+    // run desired showcase options
 
-    if (selection & Showcases::Overlays)
-    {
-        showcase_run_overlays(report);
-    }
-    if (selection & Showcases::Plots_2D)
-    {
-        separate_data = generateSeparateData2D();
-        compound_data = generateCompoundData2D();
-        showcase_run_plots2d (report, separate_data, compound_data);
-    }
-    if (selection & Showcases::Plots_2D_maps)
-    {
-        compound_complex = generateVectorField();
-        separate_filed   = generateScalarField();
-        showcase_run_plots2d_maps(report, compound_complex, separate_filed);
-    }
-    if (selection & Showcases::Plots_Multiplot)
-    {
-        showcase_run_plots_multiplot(report);
-    }
-    if (selection & Showcases::Plots_3D)
-    {
-        // this screws up the 2d showcase because the generated views are invalid. I have to rewrite the showcase framework, anyway.
-        separate_filed   = generateScalarField();
-        showcase_run_plots3d (report, separate_filed);
-    }
+    showcase_run_separateSimple(report, separate_data.first, separate_data.second);
+
+    // *INDENT-OFF*
+    if (selection & Showcases::Overlays)        {showcase_run_overlays(report);}
+    if (selection & Showcases::Plots_2D)        {showcase_run_plots2d_prime(report, separate_data, compound_data);}
+    if (selection & Showcases::Plots_2D_maps)   {showcase_run_plots2d_maps(report, compound_complex, separate_filed);}
+    if (selection & Showcases::Plots_Multiplot) {showcase_run_plots_multiplot(report);}
+    if (selection & Showcases::Plots_3D)        {showcase_run_plots3d(report, separate_filed);}
+    // *INDENT-ON*
 
     // ---------------------------------------------------------------------- //
     // write the report
 
-    report.writeTxt();
-    report.writeDat();
-    report.writeScript();
+    report.writeReport();
+    if (SHOWCASE_TXT_REPORT)
+    {
+        report.writeTxt();      // generates a CSV like, human readable file
+    }
 }
 
 // ========================================================================== //
@@ -249,9 +188,97 @@ void showcase_run_overlays(Plotypus::Report& report)
 
 // -------------------------------------------------------------------------- //
 
-void showcase_run_plots2d(Plotypus::Report& report,
-                          std::pair<std::vector<double>, std::vector<double> >& separate_data,
-                          std::vector<compound_t>& compound_data)
+void showcase_run_separateSimple(Plotypus::Report& report,
+                                 std::vector<double>& dataX,
+                                 std::vector<double>& dataY)
+{
+    /* locally using namespace Plotypus will save you a lot of typing while
+     * still protecting you from most name collisions
+     */
+
+    using namespace Plotypus;
+
+    // ---------------------------------------------------------------------- //
+    // set up some styles
+
+    /* styles -- the way lines, points, ... look like are managed centrally by
+     * the Report in its stylesCollection. We later refer to these styles by
+     * their index within the collection.
+     */
+
+    auto& stylesCollection = report.stylesCollection();
+
+    /* since other showcase calls might have added other styles, we record the
+     * number of registered styles before defining own styles and use this as
+     * an offset.
+     * In your code, you probably won't need to do that.
+     */
+    int linesStyleOffset = stylesCollection.getLineStyleCount();
+    int pointStyleOffset = stylesCollection.getPointStyleCount();
+
+
+    stylesCollection.addLineStyle("#FFF8E7");                                   // "cosmic latte"
+    stylesCollection.addLineStyle("red");                                       // simply a red line
+    stylesCollection.addLineStyle("blue", 2.5, "..-", PointForm::Circle);       // a blue line with 2.5pt thickness, dash-dotted with circle markers along the line
+
+    auto& detailledLineStyle = stylesCollection.addLineStyle("steelblue");      // line styles may be changed after creation
+    detailledLineStyle.width = 0.2;                                             // this gives an alternative, more readable way of setting attributes
+    // detailledLineStyle.pointStyle->form = PointForm::Custom;                 // next to predefined symbols, ...
+    // detailledLineStyle.pointStyle->customSymbol = "*";                       // line markers may also be printable characters.
+    detailledLineStyle.options = "pointinterval 5";                             // not all options of gnuplot are natively supported. A options record/method usually allows to inject custom code
+
+    stylesCollection.addPointStyle(PointForm::Diamond, "steelblue", 0.5);       // much the same holds for point styles, too.
+    stylesCollection
+    .addPointStyle("*", "dark-chartreuse", 0.5)
+    .setOptions("pointinterval 5");
+
+    // ---------------------------------------------------------------------- //
+    // sheet 1: plots with default styles
+
+    auto& sheet1 = report.addPlotDefault("default styles");
+
+    sheet1.addDataviewSeparate(dataX, dataY, PlotStyle::Impulses, "impulses");
+
+    sheet1
+    .addDataviewSeparate()                                                  // apart from the constructor arguments, ...
+    .setData(ColumnType::X, dataX)                                          // ... attributes can be set by chainable setter functions ...
+    .setData(ColumnType::Y, dataY)                                          // ... which also throw exceptions in case of improper use.
+    .setTitle("lines (by default)");                                        // When chaining, order matters since the returned type of the setters may only decrease in specificity
+
+    sheet1.addDataviewSeparate( "sin(x)", PlotStyle::Lines,        "sin(x)");
+    sheet1.addDataviewSeparate( "cos(x)", PlotStyle::Lines,        "cos(x)");
+    sheet1.addDataviewSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)");
+    sheet1.addDataviewSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)");
+
+    // ---------------------------------------------------------------------- //
+    // sheet 2: plots with our styles
+
+    auto& sheet2 = report.addPlotDefault("custom styles");
+
+    sheet2
+    .addDataviewSeparate(dataX, dataY, PlotStyle::Impulses, "simData")
+    .setLineStyle(linesStyleOffset);
+
+    //! @todo duplicator functions here!
+    sheet2
+    .addDataviewSeparate()
+    .setData(ColumnType::X, dataX)
+    .setData(ColumnType::Y, dataY)
+    .setLineStyle(linesStyleOffset + 1)
+    .setTitle("simData");
+
+    sheet2.addDataviewSeparate( "sin(x)", PlotStyle::Lines,       "sin(x)").setLineStyle  (linesStyleOffset + 2);
+    sheet2.addDataviewSeparate( "cos(x)", PlotStyle::Lines,       "cos(x)").setLineStyle  (linesStyleOffset + 3);
+    sheet2.addDataviewSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)").setPointStyle(pointStyleOffset    );
+    sheet2.addDataviewSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)").setPointStyle(pointStyleOffset + 1);
+
+}
+
+// -------------------------------------------------------------------------- //
+
+void showcase_run_plots2d_prime(Plotypus::Report& report,
+                                std::pair<std::vector<double>, std::vector<double> >& separate_data,
+                                std::vector<compound_t>& compound_data)
 {
     using namespace Plotypus;
 
@@ -265,7 +292,7 @@ void showcase_run_plots2d(Plotypus::Report& report,
     stylesCollection.addLineStyle("blue",   2.5, "..-", PointForm::Circle);
     stylesCollection.addLineStyle("yellow", 0.1, "",    PointForm::None  );
 
-    stylesCollection.addPointStyle(PointForm::Diamond, 0.5, "gold");
+    stylesCollection.addPointStyle(PointForm::Diamond, "gold", 0.5);
 
     // ---------------------------------------------------------------------- //
     // normally, we would get separate data in individual std::vector<double>s
@@ -612,4 +639,3 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     .setData(ColumnType::Z, sepData_Z);
 }
 
-// ========================================================================== //

@@ -18,7 +18,7 @@ add_library(Plotypus-lib SHARED
     src/plotypus.h src/plotypus.cpp
     #
     src/definitions/types.h
-    src/definitions/styles.h
+    src/definitions/styles.h src/definitions/styles.cpp
     src/definitions/errors.h
     src/definitions/constants.h
     src/definitions/internalconstants.h
@@ -71,7 +71,7 @@ add_executable(Plotypus-unittest
     src/unittest/unittest.h src/unittest/unittest.cpp
 
     src/unittest/showcase.h
-    src/unittest/showcase.cpp
+    src/unittest/showcase.cpp src/unittest/showcase_data.cpp
 )
 
 target_link_libraries(Plotypus-unittest

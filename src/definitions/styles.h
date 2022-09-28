@@ -12,17 +12,59 @@ namespace Plotypus
     //! @addtogroup Plotypus_Definitions
     //! @{
 
-    struct PointStyle
+    class PointStyle
     {
-        PointForm                   form = PointForm::Point;
-        std::string                 customSymbol;
-        std::optional<double>       size;
-        std::optional<std::string>  color;
+        private:
+            PointForm                   form = PointForm::Point;
+            std::optional<std::string>  customSymbol;
+            std::optional<std::string>  color;
+            std::optional<double>       size;
 
-        std::optional<std::string> options;
+            std::optional<std::string>  options;
 
-        bool operator== (const PointStyle&) const = default;
+        public:
+            PointStyle() = default;
 
+            PointStyle(
+                const PointForm                     form,
+                const std::string&                  customSymbol,
+                const std::string&                  color,
+                const double                        size,
+                const std::optional<std::string>&   options = std::optional<std::string>()
+            );
+
+            PointStyle(
+                const PointForm                     form,
+                const std::optional<std::string>&   color = std::optional<std::string>(),
+                const std::optional<double>&        size  = std::optional<double>()
+            );
+
+            PointStyle(
+                const std::string&                  customSymbol,
+                const std::optional<std::string>&   color = std::optional<std::string>(),
+                const std::optional<double>&        size  = std::optional<double>()
+            );
+
+            PointForm                   getForm() const;
+            PointStyle&                 setForm(PointForm newForm);
+
+            std::optional<std::string>  getCustomSymbol() const;
+            PointStyle&                 setCustomSymbol(const std::string& newCustomSymbol);
+            PointStyle&                 clearCustomSymbol();
+
+            std::optional<std::string>  getColor() const;
+            PointStyle&                 setColor(const std::string& newColor);
+            PointStyle&                 clearColor();
+
+            std::optional<double>       getSize() const;
+            PointStyle&                 setSize(const double newSize);
+            PointStyle&                 clearSize();
+
+            std::optional<std::string>  getOptions() const;
+            PointStyle&                 setOptions(const std::string& newOptions);
+            PointStyle&                 clearOptions();
+
+            bool operator== (const PointStyle&) const = default;
     };
 
     // ========================================================================== //

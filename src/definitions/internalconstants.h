@@ -56,5 +56,18 @@ namespace Plotypus
         Radial,
         Custom
     };
+
+    // ---------------------------------------------------------------------- //
+    /**
+     * @brief used internally to distinguish between mechanisms for plot command generation
+     */
+    enum PlotStyleTraits
+    {
+        Orthogonal2D    = 1 << 0,
+        Orthogonal3D    = 1 << 1,
+        Radial          = 1 << 2,
+        Horizontal      = 1 << 3,
+        Matrix          = 1 << 4,
+    };
 }
 #endif // INTERNALCONSTANTS_H
