@@ -50,7 +50,7 @@ namespace Plotypus
         return boxStyles.back();
     }
 
-    BoxStyle& StylesCollection::addBoxStyle(const std::string& fillcolor, bool border, const std::string& bordercolor)
+    BoxStyle& StylesCollection::addBoxStyle(const std::string& fillcolor, const bool border, const std::string& bordercolor)
     {
         const std::optional<std::string> fillcolorOptional = (fillcolor.empty() ? std::optional<std::string>() : fillcolor);
         return addBoxStyle({true, border, 1.0, fillcolorOptional, bordercolor});
@@ -92,12 +92,17 @@ namespace Plotypus
         return lineStyles.back();
     }
 
-    LineStyle& StylesCollection::addLineStyle(const std::string& color, double width, std::string dashtype, PointForm pointForm)
+    LineStyle& StylesCollection::addLineStyle(
+        const std::optional<std::string>&   color,
+        const std::optional<double>         width,
+        const std::optional<std::string>    dashtype,
+        const std::optional<PointForm>      pointForm
+    )
     {
         LineStyle ls = LineStyle{std::optional(color), std::optional(width), std::optional(dashtype)};
-        if (pointForm != PointForm::None)
+        if (pointForm.has_value() && pointForm != PointForm::None)
         {
-            ls.pointStyle->setForm(pointForm);
+            ls.setPointStyle( PointStyle(pointForm.value()) );
         }
 
         return addLineStyle(ls);
@@ -139,7 +144,7 @@ namespace Plotypus
         return pointStyles.back();
     }
 
-    PointStyle& StylesCollection::addPointStyle(PointForm form, const std::optional<std::string>& color, const std::optional<double>& size)
+    PointStyle& StylesCollection::addPointStyle(const PointForm form, const std::optional<std::string>& color, const std::optional<double>& size)
     {
         return addPointStyle(PointStyle(form, color, size));
     }
@@ -208,12 +213,12 @@ namespace Plotypus
                 hFile << "set style line ";
                 hFile << std::to_string(ID);
 
-                hFile << optionalQuotedStringArgument("linecolor", style.color);
-                hFile << optionalNumberArgument      ("linewidth", style.width);
+                hFile << optionalQuotedStringArgument("linecolor", style.getColor());
+                hFile << optionalNumberArgument      ("linewidth", style.getWidth());
 
-                if (style.pointStyle.has_value())
+                if (style.getPointStyle().has_value())
                 {
-                    const auto& ps = style.pointStyle.value();
+                    const auto ps = style.getPointStyle().value();
                     if (ps.getForm() != PointForm::None)
                     {
                         // *INDENT-OFF*
@@ -225,8 +230,8 @@ namespace Plotypus
                     }
                 }
 
-                hFile << optionalQuotedStringArgument("dashtype", style.dashtype);
-                hFile << optionalStringArgument      ("", style.options);
+                hFile << optionalQuotedStringArgument("dashtype", style.getDashtype());
+                hFile << optionalStringArgument      ("", style.getOptions());
                 hFile << std::endl;
 
                 ++ID;

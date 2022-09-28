@@ -113,4 +113,101 @@ namespace Plotypus
     }
 
 // ========================================================================== //
+
+    LineStyle::LineStyle(
+        const std::optional<std::string>& color,
+        const std::optional<double>& width,
+        const std::optional<std::string>& dashtype,
+        const std::optional<PointStyle>& pointStyle,
+        const std::optional<std::string>& options
+    ) :
+        color(color), width(width), dashtype(dashtype), pointStyle(pointStyle), options(options)
+    {}
+
+    // ---------------------------------------------------------------------- //
+
+    std::optional<std::string> LineStyle::getColor() const
+    {
+        return color;
+    }
+
+    LineStyle& LineStyle::setColor(const std::string& newColor)
+    {
+        color = newColor;
+        return *this;
+    }
+
+    LineStyle& LineStyle::clearColor()
+    {
+        color.reset();
+        return *this;
+    }
+
+    std::optional<double> LineStyle::getWidth() const
+    {
+        return width;
+    }
+
+    LineStyle&  LineStyle::setWidth(const double newWidth)
+    {
+        width = newWidth;
+        return *this;
+    }
+
+    LineStyle& LineStyle::clearWidth()
+    {
+        width.reset();
+        return *this;
+    }
+
+    std::optional<std::string> LineStyle::getDashtype() const
+    {
+        return dashtype;
+    }
+
+    LineStyle&  LineStyle::setDashtype(const std::string& newDashtype)
+    {
+        dashtype = newDashtype;
+        return *this;
+    }
+
+    LineStyle& LineStyle::clearDashtype()
+    {
+        dashtype.reset();
+        return *this;
+    }
+
+    std::optional<PointStyle> LineStyle::getPointStyle() const
+    {
+        return pointStyle;
+    }
+
+    LineStyle&  LineStyle::setPointStyle(const PointStyle newPointStyle)
+    {
+        pointStyle = newPointStyle;
+        return *this;
+    }
+
+    LineStyle& LineStyle::clearPointStyle()
+    {
+        pointStyle.reset();
+        return *this;
+    }
+
+    std::optional<std::string> LineStyle::getOptions() const
+    {
+        return options;
+    }
+
+    LineStyle&  LineStyle::setOptions(const std::string& newOptions)
+    {
+        options = newOptions;
+        return *this;
+    }
+
+    LineStyle& LineStyle::clearOptions()
+    {
+        options.reset();
+        return *this;
+    }
 }

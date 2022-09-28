@@ -219,18 +219,16 @@ void showcase_run_separateSimple(Plotypus::Report& report,
 
     stylesCollection.addLineStyle("#FFF8E7");                                   // "cosmic latte"
     stylesCollection.addLineStyle("red");                                       // simply a red line
-    stylesCollection.addLineStyle("blue", 2.5, "..-", PointForm::Circle);       // a blue line with 2.5pt thickness, dash-dotted with circle markers along the line
+    stylesCollection.addLineStyle("blue", 2.5, "..-");                          // a blue line with 2.5pt thickness, dash-dotted
 
-    auto& detailledLineStyle = stylesCollection.addLineStyle("steelblue");      // line styles may be changed after creation
-    detailledLineStyle.width = 0.2;                                             // this gives an alternative, more readable way of setting attributes
-    // detailledLineStyle.pointStyle->form = PointForm::Custom;                 // next to predefined symbols, ...
-    // detailledLineStyle.pointStyle->customSymbol = "*";                       // line markers may also be printable characters.
-    detailledLineStyle.options = "pointinterval 5";                             // not all options of gnuplot are natively supported. A options record/method usually allows to inject custom code
+    stylesCollection.addLineStyle("steelblue")                                  // line styles may be changed after creation
+    .setWidth(0.2);                                                             // this gives an alternative, more readable way of setting attributes
 
     stylesCollection.addPointStyle(PointForm::Diamond, "steelblue", 0.5);       // much the same holds for point styles, too.
+
     stylesCollection
     .addPointStyle("*", "dark-chartreuse", 0.5)
-    .setOptions("pointinterval 5");
+    .setOptions("pointinterval 5");                                             // not all options of gnuplot are natively supported. A options record/method usually allows to inject custom code
 
     // ---------------------------------------------------------------------- //
     // sheet 1: plots with default styles

@@ -30,7 +30,7 @@ namespace Plotypus
             const BoxStyle&                 getBoxStyle (const size_t i) const;
             StylesCollection&               setBoxStyles(const std::vector<BoxStyle>& newBoxstyles);
             BoxStyle&                       addBoxStyle (const BoxStyle& newBoxstyle);
-            BoxStyle&                       addBoxStyle (const std::string& fillcolor, bool border = true, const std::string& bordercolor = "");
+            BoxStyle&                       addBoxStyle (const std::string& fillcolor, const bool border = true, const std::string& bordercolor = "");
 
             size_t                          getLineStyleCount() const;
             const std::vector<LineStyle>&   getLineStyles() const;
@@ -38,7 +38,12 @@ namespace Plotypus
             const LineStyle&                getLineStyle (const size_t i) const;
             StylesCollection&               setLineStyles(const std::vector<LineStyle>& newLineStyles);
             LineStyle&                      addLineStyle (const LineStyle& newLineStyle);
-            LineStyle&                      addLineStyle (const std::string& color, double width = 1.0, std::string dashtype = "", PointForm pointForm = PointForm::Point);
+            LineStyle&                      addLineStyle (
+                const std::optional<std::string>&   color,
+                const std::optional<double>         width     = std::optional<double>(),
+                const std::optional<std::string>    dashtype  = std::optional<std::string>(),
+                const std::optional<PointForm>      pointForm = std::optional<PointForm>()
+            );
 
             size_t                          getPointStyleCount() const;
             const std::vector<PointStyle>&  getPointStyles() const;
@@ -47,7 +52,7 @@ namespace Plotypus
             StylesCollection&               setPointStyles(const std::vector<PointStyle>& newPointStyles);
             PointStyle&                     addPointStyle (const PointStyle& newPointStyle);
             PointStyle&                     addPointStyle (
-                PointForm                           form  = PointForm::Point,
+                const PointForm                     form  = PointForm::Point,
                 const std::optional<std::string>&   color = std::optional<std::string>(),
                 const std::optional<double>&        size  = std::optional<double>()
             );

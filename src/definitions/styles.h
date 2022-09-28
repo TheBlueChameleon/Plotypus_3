@@ -74,23 +74,56 @@ namespace Plotypus
      * cf. gnuplot 5.4 documentation, p. 203
      * Note: there, line*types* are used, which differ from line styles in permanence
      * of the definition
+     *
+     * @todo review reference handling of optionals
      */
-    struct LineStyle
+    class LineStyle
     {
-        std::optional<std::string> color;
-        std::optional<double>      width;
-        std::optional<std::string> dashtype;
-        std::optional<PointStyle>  pointStyle;
-        std::optional<std::string> options;
+        private:
+            std::optional<std::string> color;
+            std::optional<double>      width;
+            std::optional<std::string> dashtype;
+            std::optional<PointStyle>  pointStyle;
+            std::optional<std::string> options;
 
-        bool operator== (const LineStyle&) const = default;
+        public:
+            LineStyle() = default;
+            LineStyle(
+                const std::optional<std::string>& color         = std::optional<std::string>(),
+                const std::optional<double>&      width         = std::optional<double>(),
+                const std::optional<std::string>& dashtype      = std::optional<std::string>(),
+                const std::optional<PointStyle>&  pointStyle    = std::optional<PointStyle>(),
+                const std::optional<std::string>& options       = std::optional<std::string>()
+            );
+
+            std::optional<std::string>  getColor() const;
+            LineStyle&                  setColor(const std::string& newColor);
+            LineStyle&                  clearColor();
+
+            std::optional<double>       getWidth() const;
+            LineStyle&                  setWidth(const double newWidth);
+            LineStyle&                  clearWidth();
+
+            std::optional<std::string>  getDashtype() const;
+            LineStyle&                  setDashtype(const std::string& newDashtype);
+            LineStyle&                  clearDashtype();
+
+            std::optional<PointStyle>   getPointStyle() const;
+            LineStyle&                  setPointStyle(const PointStyle newPointStyle);
+            LineStyle&                  clearPointStyle();
+
+            std::optional<std::string>  getOptions() const;
+            LineStyle&                  setOptions(const std::string& newOptions);
+            LineStyle&                  clearOptions();
+
+            bool operator== (const LineStyle&) const = default;
     };
 
     // ========================================================================== //
     /**
      * @todo set style arrow support - p. 199 -- expands LineStyle?
      */
-    struct ArrowStyle {};
+    class ArrowStyle {};
 
     // ====================================================================== //
     /**
