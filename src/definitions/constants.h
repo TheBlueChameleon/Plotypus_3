@@ -173,7 +173,6 @@ namespace Plotypus
         Vectors,
 
         Image,
-        // RgbImage -- cool, but requires three more ColumnTypes... see manual, p.75
 
         Dots3D,
         Points3D,

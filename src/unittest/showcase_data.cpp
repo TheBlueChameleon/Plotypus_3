@@ -3,7 +3,7 @@
 // ========================================================================== //
 // data generators
 
-std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
+std::array<std::vector<double>, 5> generateSeparateData2D()
 {
     // non-uniform sampling of the x domain, resulting in a sigmoid
 
@@ -19,7 +19,28 @@ std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D()
         dataY.push_back(.05 * i - 1);
     }
 
-    return std::make_pair(dataX, dataY);
+    // ---------------------------------------------------------------------- //
+    // some extra data
+
+    const auto N = dataX.size();
+    std::vector<double> sizes(N), pointTypes(N), pointColor(N);
+
+    // *INDENT-OFF*
+    std::transform(dataX.begin(), dataX.end(),
+                   sizes.begin(),
+                   [] (const auto x) {return std::sin(x) / 40.0;}
+    );
+    std::transform(dataX.begin(), dataX.end(),
+                   pointTypes.begin(),
+                   [] (const auto x) {return 1 + (x > (pi / 3.0)) + (2 * x / 3.0);}
+    );
+    std::transform(dataX.begin(), dataX.end(),
+                   pointColor.begin(),
+                   [] (const auto x) {return 2 + (x > (pi / 2.0));}
+    );
+    // *INDENT-ON*
+
+    return {dataX, dataY, sizes, pointTypes, pointColor};
 }
 
 std::vector<compound_t> generateCompoundData2D()
@@ -33,7 +54,7 @@ std::vector<compound_t> generateCompoundData2D()
     {
         datapoint.x    = x;
         datapoint.y    = x - (x*x*x / 6.) + (x*x*x*x*x / 120.);
-        datapoint.errX = 0.01 + 0.04 * std::sin(x / 2.);
+        datapoint.errX = 0.05 + 0.15 * std::sin(x);
         datapoint.errY = std::abs(datapoint.y - std::sin(x)) * 1.1;
 
         x += xIncrement;

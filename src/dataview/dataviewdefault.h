@@ -12,7 +12,16 @@
 
 namespace Plotypus
 {
-    //! @todo cannot splot in polar coordinate system
+    /**
+     *  @todo cannot splot in polar coordinate system
+     *
+     *  @bug in style Points (and related), the optional arguments "pointsize, pointtype, color" (after x, y)
+     *      actually only form the order in which they are expected, but, for example, pointtype may also be
+     *      the third param, if no pointsize is used.
+     *      Users will need to use ColumnType::ColumnN together with setVariablePointXXX as a semi-ugly
+     *      walkaround
+     */
+
     class DataviewDefault : public Dataview
     {
         protected:

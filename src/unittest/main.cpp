@@ -47,7 +47,7 @@ int main()
 
     showcase_minimal();
 //    showcase_run(Plot_CompoundSimple);
-    showcase_run(FrameControls);
+    showcase_run(Showcases::All);
 
     //showcase_run(Showcases::Plots_2D);
 //    showcase_run(Showcases::Plots_Multiplot);

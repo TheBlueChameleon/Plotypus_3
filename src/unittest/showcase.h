@@ -13,6 +13,7 @@ enum Showcases
     Plot_CompoundSimple = 1 << 2,
     FrameControls       = 1 << 3,
     Plot_Multiplot      = 1 << 4,
+    Plot2D_Variety      = 1 << 5,
 
 
     Plots_2D        = 1 << 21,
@@ -48,10 +49,10 @@ struct compound_complex_t
 // ========================================================================== //
 // data generators
 
-std::pair<std::vector<double>, std::vector<double>> generateSeparateData2D();
-std::vector<compound_t>                             generateCompoundData2D();
-std::vector<compound_complex_t>                     generateVectorField();
-std::array<std::vector<double>, 3>                  generateScalarField();
+std::array<std::vector<double>, 5> generateSeparateData2D();
+std::vector<compound_t>            generateCompoundData2D();
+std::vector<compound_complex_t>    generateVectorField();
+std::array<std::vector<double>, 3> generateScalarField();
 
 // ========================================================================== //
 // showcase interface
@@ -79,7 +80,7 @@ void showcase_run_overlays(Plotypus::Report& report);
 
 // shows some simple X/Y graphs with formatting
 void showcase_run_separateSimple(Plotypus::Report& report,
-                                 std::pair<std::vector<double>, std::vector<double>>& data);
+                                 std::vector<double>& dataX, std::vector<double>& dataY);
 
 // shows some simple X/Y based on a std::vector<some_struct>
 void showcase_run_compoundSimple(Plotypus::Report& report, std::vector<compound_t>& compound_data);
@@ -89,6 +90,11 @@ void showcase_run_frameControls(Plotypus::Report& report);
 
 // shows how to arrange several plots on a single page
 void showcase_run_plots_multiplot(Plotypus::Report& report);
+
+// shows other standard plot types and how to use them
+void showcase_run_plots2d_variety (Plotypus::Report& report,
+                                   std::array<std::vector<double>, 5>& dataSep,
+                                   std::vector<compound_t>& dataCmp);
 
 void showcase_run_plots2d_prime(Plotypus::Report& report,
                                 std::pair<std::vector<double>, std::vector<double>>& separate_data,

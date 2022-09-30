@@ -79,6 +79,11 @@ namespace Plotypus
         return *this;
     }
 
+    Multiplot& Multiplot::setGridDimensions(const size_t rows, const size_t columns)
+    {
+        return setGridDimensions({rows, columns});
+    }
+
     StackingOrder Multiplot::getStackingOrder() const
     {
         if (layout.has_value())

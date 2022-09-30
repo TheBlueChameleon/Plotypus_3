@@ -110,9 +110,10 @@ namespace Plotypus
                   << ticsSequenceString
                   << ticsListString
                   << (ticsLogscale ? "logscale " : "nologscale ")
-                  << optionalQuotedStringArgument("font", ticsFont)
+                  << optionalQuotedStringArgument("format",    ticsFormatstring)
+                  << optionalQuotedStringArgument("font",      ticsFont)
                   << optionalQuotedStringArgument("textcolor", ticsTextColor)
-                  << ticsOptions.value_or("")
+                  << optionalStringArgument("", ticsOptions)
                   << std::endl;
         }
 
