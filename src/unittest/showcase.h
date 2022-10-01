@@ -13,14 +13,11 @@ enum Showcases
     Plot_CompoundSimple = 1 << 2,
     FrameControls       = 1 << 3,
     Plot_Multiplot      = 1 << 4,
-    Plot2D_Variety      = 1 << 5,
+    Plots_2D_Variety    = 1 << 5,
+    Plots_2D_Maps       = 1 << 6,
+    Plots_3D            = 1 << 7,
 
-
-    Plots_2D        = 1 << 21,
-    Plots_2D_maps   = 1 << 22,
-    Plots_3D        = 1 << 23,
-
-    All             = -1,
+    All                 = -1,
 };
 
 // ========================================================================== //
@@ -96,12 +93,12 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
                                    std::array<std::vector<double>, 5>& dataSep,
                                    std::vector<compound_t>& dataCmp);
 
-void showcase_run_plots2d_prime(Plotypus::Report& report,
-                                std::pair<std::vector<double>, std::vector<double>>& separate_data,
-                                std::vector<compound_t>& compound_data);
+// shows how to portray scalar and vector fields on a 2D domain
 void showcase_run_plots2d_maps(Plotypus::Report& report,
                                std::vector<compound_complex_t>& compound_complex,
                                std::array<std::vector<double>, 3>& separate_data);
+
+// show some 3d capabilities
 void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<double>, 3>& separate_data);
 
 

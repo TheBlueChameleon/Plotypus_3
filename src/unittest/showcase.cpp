@@ -93,7 +93,7 @@ void showcase_minimal()
 
     report
     .addPlotDefault("Minimal Plotypus Example")
-    .addDataviewSeparate(data, Plotypus::PlotStyle::Lines, "sine wave")
+    .addDataviewDefaultSeparate(data, Plotypus::PlotStyle::Lines, "sine wave")
     ;
 
     /* A PlotDefault is one of several variations of a Plotypus::Sheet, i.e.
@@ -156,7 +156,7 @@ void showcase_run(size_t selection)
     std::array<std::vector<double>, 5> separate_data = generateSeparateData2D();
     std::vector<compound_t>            compound_data = generateCompoundData2D();
     std::vector<compound_complex_t>    compound_complex = generateVectorField();
-    std::array<std::vector<double>, 3> separate_filed   = generateScalarField();
+    std::array<std::vector<double>, 3> separate_field   = generateScalarField();
 
     // ---------------------------------------------------------------------- //
     // run desired showcase options
@@ -167,11 +167,9 @@ void showcase_run(size_t selection)
     if (selection & Showcases::Plot_CompoundSimple) {showcase_run_compoundSimple(report, compound_data);}
     if (selection & Showcases::Plot_Multiplot)      {showcase_run_plots_multiplot(report);}
     if (selection & Showcases::FrameControls)       {showcase_run_frameControls(report);}
-    if (selection & Showcases::Plot2D_Variety)      {showcase_run_plots2d_variety(report, separate_data, compound_data);}
-
-    //if (selection & Showcases::Plots_2D)        {showcase_run_plots2d_prime(report, separate_data, compound_data);}
-//    if (selection & Showcases::Plots_2D_maps)   {showcase_run_plots2d_maps(report, compound_complex, separate_filed);}
-//    if (selection & Showcases::Plots_3D)        {showcase_run_plots3d(report, separate_filed);}
+    if (selection & Showcases::Plots_2D_Variety)    {showcase_run_plots2d_variety(report, separate_data, compound_data);}
+    if (selection & Showcases::Plots_2D_Maps)       {showcase_run_plots2d_maps(report, compound_complex, separate_field);}
+    if (selection & Showcases::Plots_3D)            {showcase_run_plots3d(report, separate_field);}
     // *INDENT-ON*
 
     // ---------------------------------------------------------------------- //
@@ -275,7 +273,7 @@ void showcase_run_separateSimple(Plotypus::Report& report,
 
 
     stylesCollection.addLineStyle("red");                                       // simply a red line; later referenced as <lineStyleOffset + 0>
-    stylesCollection.addLineStyle("#FFF8E7");                                   // "cosmic latte", as <lineStyleOffset + 1>
+    stylesCollection.addLineStyle("#ac1d1c");                                   // hex code specified colour name, as <lineStyleOffset + 1>
     stylesCollection.addLineStyle("blue", 2.5, "..-");                          // a blue line with 2.5pt thickness, dash-dotted, as <lineStyleOffset + 2>
 
     stylesCollection                                                            // <lineStyleOffset + 3>
@@ -306,10 +304,10 @@ void showcase_run_separateSimple(Plotypus::Report& report,
      * std::vector<double>s as a data source for the plot to be generated.
      */
 
-    sheet1.addDataviewSeparate(dataX, dataY, PlotStyle::Lines, "lines (by default)");
+    sheet1.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Lines, "lines (by default)");
 
     sheet1
-    .addDataviewSeparate()                                                  // apart from the constructor arguments, ...
+    .addDataviewDefaultSeparate()                                                  // apart from the constructor arguments, ...
     .setData(ColumnType::X, dataX)                                          // ... attributes can be set by chainable setter functions ...
     .setData(ColumnType::Y, dataY)                                          // ... which also throw exceptions in case of improper use.
     .setPlotStyleID(PlotStyle::Impulses)
@@ -321,10 +319,10 @@ void showcase_run_separateSimple(Plotypus::Report& report,
      * form in the txt report
      */
 
-    sheet1.addDataviewSeparate( "sin(x)", PlotStyle::Lines,        "sin(x)");
-    sheet1.addDataviewSeparate( "cos(x)", PlotStyle::Lines,        "cos(x)");
-    sheet1.addDataviewSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)");
-    sheet1.addDataviewSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)");
+    sheet1.addDataviewDefaultSeparate( "sin(x)", PlotStyle::Lines,        "sin(x)");
+    sheet1.addDataviewDefaultSeparate( "cos(x)", PlotStyle::Lines,        "cos(x)");
+    sheet1.addDataviewDefaultSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)");
+    sheet1.addDataviewDefaultSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)");
 
     // ---------------------------------------------------------------------- //
     // sheet 2: plots with our styles
@@ -336,13 +334,13 @@ void showcase_run_separateSimple(Plotypus::Report& report,
     auto& sheet2 = report.addPlotDefault("custom styles");
 
     sheet2
-    .addDataviewSeparate(dataX, dataY, PlotStyle::Lines, "simData")
+    .addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Lines, "simData")
     .setLineStyle(linesStyleOffset)
     ;
 
     //! @todo duplicator functions here!
     sheet2
-    .addDataviewSeparate()
+    .addDataviewDefaultSeparate()
     .setData(ColumnType::X, dataX)
     .setData(ColumnType::Y, dataY)
     .setLineStyle(linesStyleOffset + 1)                 // here
@@ -351,10 +349,10 @@ void showcase_run_separateSimple(Plotypus::Report& report,
     ;
 
     // and here, at the end of each line
-    sheet2.addDataviewSeparate( "sin(x)", PlotStyle::Lines,       "sin(x)").setLineStyle  (linesStyleOffset + 2);
-    sheet2.addDataviewSeparate( "cos(x)", PlotStyle::Lines,       "cos(x)").setLineStyle  (linesStyleOffset + 3);
-    sheet2.addDataviewSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)").setPointStyle(pointStyleOffset    );
-    sheet2.addDataviewSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)").setPointStyle(pointStyleOffset + 1);
+    sheet2.addDataviewDefaultSeparate( "sin(x)", PlotStyle::Lines,       "sin(x)").setLineStyle  (linesStyleOffset + 2);
+    sheet2.addDataviewDefaultSeparate( "cos(x)", PlotStyle::Lines,       "cos(x)").setLineStyle  (linesStyleOffset + 3);
+    sheet2.addDataviewDefaultSeparate("-sin(x)", PlotStyle::LinesPoints, "-sin(x)").setPointStyle(pointStyleOffset    );
+    sheet2.addDataviewDefaultSeparate("-cos(x)", PlotStyle::LinesPoints, "-cos(x)").setPointStyle(pointStyleOffset + 1);
 }
 
 // -------------------------------------------------------------------------- //
@@ -419,7 +417,7 @@ void showcase_run_compoundSimple(Plotypus::Report& report, std::vector<compound_
     auto& sheet1 = report.addPlotDefault("line plot (cartesian)");
 
     sheet1
-    .addDataviewCompound<compound_t>(PlotStyle::YErrorLines, "Sine Approximation")
+    .addDataviewDefaultCompound<compound_t>(PlotStyle::YErrorLines, "Sine Approximation")
     .setData(compound_data)
     .setSelector(ColumnType::X,      compoundSelectorX)
     .setSelector(ColumnType::Y,      compoundSelectorY)
@@ -431,8 +429,8 @@ void showcase_run_compoundSimple(Plotypus::Report& report, std::vector<compound_
      * mentioned, it is preferred to use DataviewSeparate for that job.
      */
 
-    sheet1.addDataviewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Steps, "Sine Wave");
-    sheet1.addDataviewSeparate            ("[0:pi] cos(x)", PlotStyle::LinesPoints, "Cosine Wave");
+    sheet1.addDataviewDefaultCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Steps, "Sine Wave");
+    sheet1.addDataviewDefaultSeparate            ("[0:pi] cos(x)", PlotStyle::LinesPoints, "Cosine Wave");
 
     // ---------------------------------------------------------------------- //
     // retrieving references to the sheets dataviews
@@ -529,11 +527,11 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
      */
 
     subplot_1_1
-    .addDataviewSeparate("[0:2*pi]sin(x)")
+    .addDataviewDefaultSeparate("[0:2*pi]sin(x)")
     .setTitle("foo bar")
     ;
     subplot_1_3
-    .addDataviewSeparate("[0:3*pi]cos(x)")
+    .addDataviewDefaultSeparate("[0:3*pi]cos(x)")
     .setTitle("BOO FAR")
     ;
 
@@ -567,8 +565,8 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
     auto& subplot_3_1 = sheet3.addPlotDefault("subplot 1");
     auto& subplot_3_2 = sheet3.addPlotDefault("subplot 2");
 
-    subplot_3_1.addDataviewSeparate("[0:2*pi]sin(x)");
-    subplot_3_2.addDataviewSeparate("[0:2*pi]cos(x)");
+    subplot_3_1.addDataviewDefaultSeparate("[0:2*pi]sin(x)");
+    subplot_3_2.addDataviewDefaultSeparate("[0:2*pi]cos(x)");
 
     // ---------------------------------------------------------------------- //
     // manual arrangement
@@ -585,8 +583,8 @@ void showcase_run_plots_multiplot(Plotypus::Report& report)
     subplot_4_2.setSize  (0.5, 1.0);
     subplot_4_2.setOrigin(0.5, 0.0);
 
-    subplot_4_1.addDataviewSeparate("[0:pi]tan(x)");
-    subplot_4_2.addDataviewSeparate("[0:pi]exp(x)");
+    subplot_4_1.addDataviewDefaultSeparate("[0:pi]tan(x)");
+    subplot_4_2.addDataviewDefaultSeparate("[0:pi]exp(x)");
 
     sheet4.addLabel("label on multiplot level behaves like subplot 1 element", 0.1, 40);
 }
@@ -650,13 +648,24 @@ void showcase_run_frameControls(Plotypus::Report& report)
 
     sheet1.addLabel(lbl);
 
-    sheet1.addDataviewSeparate("cos(x)", PlotStyle::Lines, "cosine");
+    sheet1.addDataviewDefaultSeparate("cos(x)", PlotStyle::Lines, "cosine");
 
     sheet1.key()
     .setPosition(Margin::Right, VerticalAlignment::Top)
     .setReverseSymbol(true)
     .setJustification(HorizontalAlignment::Left)
     ;
+
+    /* Some key positions are mutually exclusive: for example, an object cannot
+     * be both, at the bottom WITHIN the plot and at the bottom AT THE MARGIN
+     * (i.e. WITHOUT the plot). Where a user attempts to set such a position,
+     * an error is thrown.
+     */
+
+    // *INDENT-OFF*
+    try {sheet1.key().setPosition(Margin::Bottom, VerticalAlignment::Bottom);}
+    catch (const PlotypusError& e) {std::cout << "No double specification of key position" << std::endl;}
+    // *INDENT-ON*
 
     // ---------------------------------------------------------------------- //
     // polar plots
@@ -690,7 +699,7 @@ void showcase_run_frameControls(Plotypus::Report& report)
     /* the plot variable for polar plots is t (unless specified otherwise in a
      * custom script
      */
-    sheet2.addDataviewSeparate("[0:pi]sin(5*t) + .25");
+    sheet2.addDataviewDefaultSeparate("[0:pi]sin(5*t) + .25");
 
     // ---------------------------------------------------------------------- //
     // custom scripts
@@ -799,16 +808,16 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
                    ;
 
     auto& subplot_1_1 = sheet1.addPlotDefault("dots");
-    subplot_1_1.addDataviewSeparate(dataX, dataY, PlotStyle::Dots, "");
+    subplot_1_1.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Dots, "");
     setAxes(subplot_1_1);
 
     auto& subplot_1_2 = sheet1.addPlotDefault("points ...");
-    subplot_1_2.addDataviewSeparate(dataX, dataY, PlotStyle::Points, "");
+    subplot_1_2.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Points, "");
     setAxes(subplot_1_2);
 
     auto& subplot_1_3 = sheet1.addPlotDefault("... with extra");
     subplot_1_3
-    .addDataviewSeparate(dataX, dataY, PlotStyle::Points, "")
+    .addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Points, "")
     .setData(ColumnType::Pointsize, sizes)
     .setData(ColumnType::Pointtype, pointTypes)
     .setData(ColumnType::Color, pointColor)
@@ -816,16 +825,16 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
     setAxes(subplot_1_3);
 
     auto& subplot_1_4 = sheet1.addPlotDefault("lines");
-    subplot_1_4.addDataviewSeparate(dataX, dataY, PlotStyle::Lines, "");
+    subplot_1_4.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Lines, "");
     setAxes(subplot_1_4);
 
     auto& subplot_1_5 = sheet1.addPlotDefault("linespoints");
-    subplot_1_5.addDataviewSeparate(dataX, dataY, PlotStyle::LinesPoints, "");
+    subplot_1_5.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::LinesPoints, "");
     setAxes(subplot_1_5);
 
     auto& subplot_1_6 = sheet1.addPlotDefault("... with extra");
     subplot_1_6
-    .addDataviewSeparate(dataX, dataY, PlotStyle::LinesPoints, "")
+    .addDataviewDefaultSeparate(dataX, dataY, PlotStyle::LinesPoints, "")
     .setData(ColumnType::Pointsize, sizes)
     .setData(ColumnType::Pointtype, pointTypes)
     .setData(ColumnType::Color, pointColor)
@@ -842,7 +851,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_1 = sheet2.addPlotDefault("x error");
     subplot_2_1
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::XErrorBars, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::XErrorBars, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaX, compoundSelectorErrX)
@@ -852,7 +861,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_2 = sheet2.addPlotDefault("y error");
     subplot_2_2
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::YErrorBars, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::YErrorBars, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
@@ -862,7 +871,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_3 = sheet2.addPlotDefault("x/y error");
     subplot_2_3
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::XYErrorBars, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::XYErrorBars, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaX, compoundSelectorErrX)
@@ -873,7 +882,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_4 = sheet2.addPlotDefault("and");
     subplot_2_4
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::XErrorLines, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::XErrorLines, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaX, compoundSelectorErrX)
@@ -883,7 +892,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_5 = sheet2.addPlotDefault("with");
     subplot_2_5
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::YErrorLines, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::YErrorLines, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
@@ -893,7 +902,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_2_6 = sheet2.addPlotDefault("line");
     subplot_2_6
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::XYErrorLines, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::XYErrorLines, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaX, compoundSelectorErrX)
@@ -911,23 +920,23 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
                    .setBlanks({4});
 
     auto& subplot_3_1 = sheet3.addPlotDefault("impulses");
-    subplot_3_1.addDataviewSeparate(dataX, dataY, PlotStyle::Impulses, "");
+    subplot_3_1.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Impulses, "");
     setAxes(subplot_3_1);
 
     auto& subplot_3_2 = sheet3.addPlotDefault("boxes");
-    subplot_3_2.addDataviewSeparate(dataX, dataY, PlotStyle::Boxes, "");
+    subplot_3_2.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Boxes, "");
     setAxes(subplot_3_2);
 
     auto& subplot_3_3 = sheet3.addPlotDefault("hor. boxes");
-    subplot_3_3.addDataviewSeparate(dataX, dataY, PlotStyle::HBoxes, "");
+    subplot_3_3.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::HBoxes, "");
     setAxes(subplot_3_3, true);
 
     auto& subplot_3_4 = sheet3.addPlotDefault("width-controlled");
-    subplot_3_4.addDataviewSeparate(dataX, dataY, PlotStyle::Boxes, "").setData(ColumnType::Boxwidth, sizes);
+    subplot_3_4.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Boxes, "").setData(ColumnType::Boxwidth, sizes);
     setAxes(subplot_3_4);
 
     auto& subplot_3_5 = sheet3.addPlotDefault("width-controlled");
-    subplot_3_5.addDataviewSeparate(dataX, dataY, PlotStyle::HBoxes, "").setData(ColumnType::Boxwidth, sizes);
+    subplot_3_5.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::HBoxes, "").setData(ColumnType::Boxwidth, sizes);
     setAxes(subplot_3_5, true);
 
     // ---------------------------------------------------------------------- //
@@ -939,14 +948,14 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_4_1 = sheet4.addPlotDefault("symmetrical errors");
     subplot_4_1
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::FilledCurves, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::FilledCurves, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
     .setLineStyle(linesStyleOffset + 1)
     ;
     subplot_4_1
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::Lines, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::Lines, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setLineStyle(linesStyleOffset)
@@ -955,7 +964,7 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
 
     auto& subplot_4_2 = sheet4.addPlotDefault("explicit boundaries");
     subplot_4_2
-    .addDataviewCompound<compound_t>(dataCmp, PlotStyle::FilledCurves, "")
+    .addDataviewDefaultCompound<compound_t>(dataCmp, PlotStyle::FilledCurves, "")
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::YHigh, compoundSelectorY)
     .setSelector(ColumnType::YLow, compoundSelectorErrY)
@@ -971,178 +980,13 @@ void showcase_run_plots2d_variety (Plotypus::Report& report,
                    .setGridDimensions(1, 2);
 
     auto& subplot_5_1 = sheet5.addPlotDefault("steps");
-    subplot_5_1.addDataviewSeparate(dataX, dataY, PlotStyle::Steps, "");
+    subplot_5_1.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::Steps, "");
     setAxes(subplot_5_1);
 
     auto& subplot_5_2 = sheet5.addPlotDefault("fsteps and fillsteps");
-    subplot_5_2.addDataviewSeparate(dataX, dataY, PlotStyle::FillSteps, "").setLineStyle(linesStyleOffset + 1);
-    subplot_5_2.addDataviewSeparate(dataX, dataY, PlotStyle::FSteps, "")   .setLineStyle(linesStyleOffset);
+    subplot_5_2.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::FillSteps, "").setLineStyle(linesStyleOffset + 1);
+    subplot_5_2.addDataviewDefaultSeparate(dataX, dataY, PlotStyle::FSteps, "")   .setLineStyle(linesStyleOffset);
     setAxes(subplot_5_2);
-}
-
-// -------------------------------------------------------------------------- //
-
-void showcase_run_plots2d_prime(Plotypus::Report& report,
-                                std::pair<std::vector<double>, std::vector<double> >& separate_data,
-                                std::vector<compound_t>& compound_data)
-{
-    using namespace Plotypus;
-
-    // ---------------------------------------------------------------------- //
-    // set up some styles
-
-    auto& stylesCollection = report.stylesCollection();
-    int linesStyleOffset = stylesCollection.getLineStyleCount();
-    int pointStyleOffset = stylesCollection.getPointStyleCount();
-
-    stylesCollection.addLineStyle("blue",   2.5, "..-", PointForm::Circle);
-    stylesCollection.addLineStyle("yellow", 0.1, "",    PointForm::None  );
-
-    stylesCollection.addPointStyle(PointForm::Diamond, "gold", 0.5);
-
-    // ---------------------------------------------------------------------- //
-    // normally, we would get separate data in individual std::vector<double>s
-
-    auto& [sepData_X, sepData_Y] = separate_data;
-
-    // ---------------------------------------------------------------------- //
-    // for compound data: prepare selectors
-
-    using compound_selector_t = DataSelector_t<compound_t>;
-    using compound_view_t     = DataviewDefaultCompound<compound_t>;
-
-    // *INDENT-OFF*
-    compound_selector_t compoundSelectorX    = [] (const compound_t& data) {return data.x;};
-    compound_selector_t compoundSelectorY    = [] (const compound_t& data) {return data.y;};
-    compound_selector_t compoundSelectorErrX = [] (const compound_t& data) {return data.errX;};
-    compound_selector_t compoundSelectorErrY = [] (const compound_t& data) {return data.errY;};
-    // *INDENT-ON*
-
-
-    // ---------------------------------------------------------------------- //
-    // Sheet 1: cartesian line plots
-
-    auto& sheet1 = report.addPlotDefault("line plot (cartesian)");
-
-    sheet1
-    .setCustomScriptBegin("# put here setup code that should be executed BEFORE the code generated by Plotypus")
-    .setCustomScriptInter("# put here setup code that should be executed AFTER the code generated by Plotypus")
-    .setCustomScriptEnd  ("# put here setup code that should be executed BEFORE the tidy up code generated by Plotypus but AFTER the plots");
-
-    sheet1
-    .addDataviewCompound<compound_t>(PlotStyle::YErrorLines, "Sine Approximation")
-    .setData(compound_data)
-    .setSelector(ColumnType::X,      compoundSelectorX)
-    .setSelector(ColumnType::Y,      compoundSelectorY)
-    .setSelector(ColumnType::DeltaY, compoundSelectorErrY);
-
-    sheet1
-    .addDataviewSeparate(sepData_X, sepData_Y, PlotStyle::LinesPoints)
-    .setPointStyle(pointStyleOffset);
-//    .clearTitle();
-//    .setTitle("TODO - empty title");
-
-    sheet1.addDataviewCompound<compound_t>("[0:pi] sin(x)", PlotStyle::Lines, "Sine Wave");
-    sheet1.addDataviewCompound<compound_t>("[0:pi] cos(x)", PlotStyle::Steps, "Cosine Wave");
-
-    sheet1.dataviewAs<compound_view_t>(2).setLineStyle(linesStyleOffset);
-
-    sheet1.axis(AxisType::X).setLabelText("abscissa");
-    sheet1.axis(AxisType::Y).setLabelText("ordinate");
-
-    sheet1.key()
-    .setPosition(HorizontalAlignment::Left, VerticalAlignment::Center)
-    .setReverseSymbol(true)
-    .setJustification(HorizontalAlignment::Left);
-
-    // ---------------------------------------------------------------------- //
-    // Sheet 2: polar line plots
-
-    auto& sheet2 = report
-                   .addPlotDefault("line plot (polar)")
-                   .setPolar(true);
-    sheet2
-    .setAspectEqual()
-    .setBorder(BorderLine::Polar);
-
-    sheet2.axis(AxisType::Radial).setRangeMax(1.5);
-    sheet2.axis(AxisType::Azimuthal).setRangeMax(180);
-
-    sheet2
-    .addDataviewCompound<compound_t>(PlotStyle::YErrorLines, "Sine Approximation")
-    .setData(compound_data)
-    .setSelector(ColumnType::X,      compoundSelectorX)
-    .setSelector(ColumnType::Y,      compoundSelectorY)
-    .setSelector(ColumnType::DeltaY, compoundSelectorErrY);
-
-    sheet2.addDataviewCompound<compound_t>("[0:pi] sin(t)", PlotStyle::Lines, "Sine Wave");
-
-    sheet2.dataviewAs<compound_view_t>(1).setPlotStyleID(PlotStyle::Dots);
-    // or:
-    // dynamic_cast<DataViewDefaultCompound<compound_t>&>(sheet2.dataView(1)).setStyleID(PlotStyle::Dots);
-
-    sheet2.key()
-    .setPosition(Margin::Right)
-    .setBoxed(true)
-    .setTitle("Foo bar");
-
-    // ---------------------------------------------------------------------- //
-    // Sheet 3: bar plots
-
-    auto& sheet3 = report.addPlotDefault("bar plots");
-    sheet3.setAspectSquare();
-
-    sheet3.axis(AxisType::X)
-    .setRangeMin(0)
-    .setRangeMax(pi);
-    sheet3.axis(AxisType::Y).setRangeMax(1.5);
-
-    sheet3.addDataviewCompound<compound_t>(compound_data, PlotStyle::Boxes, "compound data series")
-    .setSelector(ColumnType::X, compoundSelectorX)
-    .setSelector(ColumnType::Y, compoundSelectorY)
-    .setSelector(ColumnType::Boxwidth, compoundSelectorErrX)
-    .setLineStyle(linesStyleOffset + 1);
-
-    sheet3
-    .addDataviewSeparate(sepData_X, sepData_Y, PlotStyle::Impulses, "separated data series")
-    .setLineStyle(linesStyleOffset + 5);
-
-    // ---------------------------------------------------------------------- //
-    // Sheet 4: filled curve
-
-    auto& sheet4 = report.addPlotDefault("filled curves");
-
-    sheet4.addDataviewCompound<compound_t>(compound_data, PlotStyle::FilledCurves, "Error")
-    .setSelector(ColumnType::X, compoundSelectorX)
-    .setSelector(ColumnType::Y, compoundSelectorY)
-    .setSelector(ColumnType::DeltaY, compoundSelectorErrY)
-    .setOptions("lc rgb \"#AACCFF\"");
-
-    sheet4
-    .addDataviewCompound<compound_t>()
-    .setData(compound_data)
-    .setSelector(ColumnType::X, compoundSelectorX)
-    .setSelector(ColumnType::Y, compoundSelectorY)
-    .setTitle("Sine approximation");
-
-    // ---------------------------------------------------------------------- //
-    // Sheet 5: HBoxes with normal functions overlayed
-
-    auto& sheet5 = report.addPlotDefault("HBoxes");
-
-    std::cout << std::string(80, '-') << std::endl;
-    sheet5.addDataviewCompound<compound_t>(compound_data, PlotStyle::HBoxes, "Data")
-    .setSelector(ColumnType::X, compoundSelectorX)
-    .setSelector(ColumnType::Y, compoundSelectorY);
-    //.setSelector(ColumnType::Boxwidth, compoundSelectorErrX);
-
-    // ---------------------------------------------------------------------- //
-    // ill-typed references cause a catch-able exception
-
-    // *INDENT-OFF*
-    try                             {auto& ill_typed_reference = sheet1.dataviewAs<DataviewDefaultCompound<double>>(2);}
-    catch (const std::bad_cast& e)  {std::cout << "prevented misinterpretation of dataview object" << std::endl;}
-    // *INDENT-ON*
 }
 
 // -------------------------------------------------------------------------- //
@@ -1151,20 +995,17 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
                                std::vector<compound_complex_t>& compound_complex,
                                std::array<std::vector<double>, 3>& separate_data)
 {
+    /* There is no principal between how Plotypus handles 2D and 3D information.
+     * However, there are some additional options that are showcased here.
+     */
+
+    // ---------------------------------------------------------------------- //
+    // usual setup
+
+
     using namespace Plotypus;
 
-    // ---------------------------------------------------------------------- //
-    // set up some styles
-
-    auto& stylesCollection = report.stylesCollection();
-
-    // ---------------------------------------------------------------------- //
-    // separate data as before
-
     auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
-
-    // ---------------------------------------------------------------------- //
-    // for compound data: prepare selectors
 
     using compound_selector_t = DataSelector_t<compound_complex_t>;
     using compound_view_t     = DataviewDefaultCompound<compound_complex_t>;
@@ -1177,61 +1018,131 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
     // *INDENT-ON*
 
     // ---------------------------------------------------------------------- //
-    // Sheet 1: vector field
+    // Sheet 1: scalar field
 
-    auto& sheet1 = report.addPlotDefault("vector field");
+    auto& sheet1 = report.addPlotDefault("scalar field");
 
-    sheet1.axis(AxisType::X)
+    /* Gnuplot provides a dedicated style for scalar fields f(x, y), which
+     * maps the function value to a colour. All of that can be handled in
+     * the usual way.
+     *
+     * We will re-create this plot with different options, hence the
+     * lambda expression
+     */
+
+    auto addPlotImage = [&separate_data] (PlotDefault& sheet)
+    {
+        auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
+
+        sheet.addDataviewDefaultSeparate(PlotStyle::Image, "sin(2/r)")
+        .setData(ColumnType::X, sepData_X)
+        .setData(ColumnType::Y, sepData_Y)
+        .setData(ColumnType::Color, sepData_Z)
+        ;
+    };
+
+    addPlotImage(sheet1);
+
+    // setting up the axes:
+
+    auto setAxes = [] (PlotDefault& sheet)
+    {
+        sheet.axis(AxisType::X)                // setting up the axis happens as usual, but...
+        .setRangeMin(-1.0)
+        .setRangeMax(+1.0)
+        .setTicsIncrement(.25)
+        ;
+        sheet.axis(AxisType::Y)
+        .setRangeMin(-1.0)
+        .setRangeMax(+1.0)
+        .setTicsIncrement(.25)
+        ;
+
+        sheet.axis(AxisType::Colourbar)        // ... there is a new axis type involved in colour maps:
+        .setLabelText("sin(2/r)")
+        ;
+
+        sheet.setAspectEqual();
+    };
+
+    setAxes(sheet1);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 2: Default palettes
+
+    /* The mapping to a colour is done by means of a palette, of which
+     * there are several predefined. * Most of them are taken from Python's
+     * matplotlib; you will recognize them by their prefix Plt and the alike
+     * name. Other than that, there also are some recommended palettes from the
+     * makes of gnuplot.
+     */
+
+    auto& sheet2 = report
+                   .addMultiplot("palettes (or some of them)")
+                   .setGridDimensions(2, 3);
+
+    auto& subPlot_2_1 = sheet2.addPlotDefault("plt: viridis");
+    addPlotImage(subPlot_2_1);
+    subPlot_2_1.paletteDescriptor().setMapping(NamedPalette::Plt_Viridis);
+
+    auto& subPlot_2_2 = sheet2.addPlotDefault("plt: cividis");
+    addPlotImage(subPlot_2_2);
+    subPlot_2_2.paletteDescriptor().setMapping(NamedPalette::Plt_Cividis);
+
+    auto& subPlot_2_3 = sheet2.addPlotDefault("plt: inferno");
+    addPlotImage(subPlot_2_3);
+    subPlot_2_3.paletteDescriptor().setMapping(NamedPalette::Plt_Inferno);
+
+    auto& subPlot_2_4 = sheet2.addPlotDefault("gnu: rainbow");
+    addPlotImage(subPlot_2_4);
+    subPlot_2_4.paletteDescriptor().setMapping(NamedPalette::Gnu_Rainbow);
+
+    auto& subPlot_2_5 = sheet2.addPlotDefault("gnu: Brilliant");
+    addPlotImage(subPlot_2_5);
+    subPlot_2_5.paletteDescriptor().setMapping(NamedPalette::Gnu_Brilliant);
+
+    auto& subPlot_2_6 = sheet2.addPlotDefault("gnu: ocean");
+    addPlotImage(subPlot_2_6);
+    subPlot_2_6.paletteDescriptor().setMapping(NamedPalette::Gnu_Ocean);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 3: vector field
+
+    /* For vector valued functions v(x, y) with v = (v_x, v_y), the PlotStyle
+     * Vectors can be used. Analogously, for polar vectors v = (v_r, v_phi) the
+     * PlotStyle Arrows can be used with the fields ColumnType::Angle and
+     * ColumnType::Length
+     */
+
+    auto& sheet3 = report.addPlotDefault("vector field");
+
+    sheet3.axis(AxisType::X)
     .setRangeMin (-1.5)
     .setRangeMax (+1.5)
+    .clearTicsIncrement()
     .setLabelText(SYMBOL_REAL_PART);
-    sheet1.axis(AxisType::Y)
+    sheet3.axis(AxisType::Y)
     .setRangeMin (-1.5)
     .setRangeMax (+1.5)
+    .clearTicsIncrement()
     .setLabelText(SYMBOL_IMAGINARY_PART);
-    sheet1.setAspectSquare();
+    sheet3.setAspectSquare();
 
-    sheet1.addDataviewCompound<compound_complex_t>(PlotStyle::Vectors, "vortex")
+    sheet3.addDataviewDefaultCompound<compound_complex_t>(PlotStyle::Vectors, "vortex")
     .setData(compound_complex)
     .setSelector(ColumnType::X, compoundSelectorX)
     .setSelector(ColumnType::Y, compoundSelectorY)
     .setSelector(ColumnType::DeltaX, compoundSelectorDeltaX)
     .setSelector(ColumnType::DeltaY, compoundSelectorDeltaY);
 
-    // ---------------------------------------------------------------------- //
-    // Sheet 2: scalar field
-
-    auto& sheet2 = report.addPlotDefault("scalar field");
-
-    sheet2.axis(AxisType::X)
-    .setRangeMin(-1.0)
-    .setRangeMax(+1.0);
-    sheet2.axis(AxisType::Y)
-    .setRangeMin(-1.0)
-    .setRangeMax(+1.0);
-    sheet2.setAspectEqual();
-
-    sheet2.addDataviewSeparate(PlotStyle::Image, "sin(2/r)")
-    .setData(ColumnType::X, sepData_X)
-    .setData(ColumnType::Y, sepData_Y)
-    .setData(ColumnType::Color, sepData_Z)
-    .setBinaryDataOutput(false);
-
-    sheet2.addLabel("Rendering of", -1.7, 0.6);
-    sheet2.addLabel("sin(2/r)",     -1.7, 0.5);
-
-    sheet2.paletteDescriptor().setMapping(NamedPalette::Gnu_Rainbow);
-
-    sheet2.key().setPosition(Margin::Bottom, HorizontalAlignment::Right);
-    try
-    {
-        sheet2.key().setPosition(Margin::Bottom, VerticalAlignment::Bottom);
-    }
-    catch (const PlotypusError& e)
-    {
-        std::cout << "No double specification of key position" << std::endl;
-    }
+    sheet3
+    .key()
+    .setPosition(Margin::Bottom, HorizontalAlignment::Right)
+    ;
 }
+
+// -------------------------------------------------------------------------- //
+
 void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<double>, 3>& separate_data)
 {
     using namespace Plotypus;
@@ -1247,7 +1158,7 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     auto& [sepData_X, sepData_Y, sepData_Z] = separate_data;
 
     // ---------------------------------------------------------------------- //
-    // Sheet 1: dots
+    // Sheet 1: dots and image
 
     auto& sheet1 = report.addPlotDefault("3D dots");
 
@@ -1259,7 +1170,7 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     .setRangeMax(+1.0);
     sheet1.setAspectEqual();
 
-    sheet1.addDataviewSeparate(PlotStyle::Points3D, "sin(2/r)")
+    sheet1.addDataviewDefaultSeparate(PlotStyle::Dots3D, "sin(2/r)")
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
     .setData(ColumnType::Z, sepData_Z);
@@ -1267,7 +1178,7 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     // ---------------------------------------------------------------------- //
     // Sheet 2: image
 
-    auto& sheet2 = report.addPlotDefault("image projection");
+    auto& sheet2 = report.addPlotDefault("3D Lines");
 
     sheet2.axis(AxisType::X)
     .setRangeMin(-1.0)
@@ -1277,30 +1188,25 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     .setRangeMax(+1.0);
     sheet2.setAspectEqual();
 
-    sheet2.addDataviewSeparate(PlotStyle::Image3D, "sin(2/r)")
+    sheet2.addDataviewDefaultSeparate(PlotStyle::Lines3D, "sin(2/r)")
+    .setData(ColumnType::X, sepData_X)
+    .setData(ColumnType::Y, sepData_Y)
+    .setData(ColumnType::Z, sepData_Z);
+
+    // ---------------------------------------------------------------------- //
+    // Sheet 3: image
+
+    auto& sheet3 = report.addPlotDefault("3D image");
+
+    sheet3.addDataviewDefaultSeparate(PlotStyle::Image3D, "sin(2/r)")
     .setData(ColumnType::X, sepData_X)
     .setData(ColumnType::Y, sepData_Y)
     .setData(ColumnType::Z, sepData_Z)
     .setData(ColumnType::Color, sepData_Z)
     .setColumnFormat(ColumnType::Z, "(0)")
-    .setBinaryDataOutput(false);
+    .setBinaryDataOutput(false)
+    ;
 
-    // ---------------------------------------------------------------------- //
-    // Sheet 2: image
-
-    auto& sheet3 = report.addPlotDefault("lines projection");
-
-    sheet3.axis(AxisType::X)
-    .setRangeMin(-1.0)
-    .setRangeMax(+1.0);
-    sheet3.axis(AxisType::Y)
-    .setRangeMin(-1.0)
-    .setRangeMax(+1.0);
-    sheet3.setAspectEqual();
-
-    sheet3.addDataviewSeparate(PlotStyle::Lines3D, "sin(2/r)")
-    .setData(ColumnType::X, sepData_X)
-    .setData(ColumnType::Y, sepData_Y)
-    .setData(ColumnType::Z, sepData_Z);
+    sheet3.paletteDescriptor().setMapping(NamedPalette::Gnu_Hot);
 }
 

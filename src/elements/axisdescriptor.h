@@ -7,6 +7,7 @@ namespace Plotypus
      * @brief used to compactly describe an axis of a plot
      *
      * @todo tics generators
+     * @todo tidy up code that clears ticsIncrement
      */
 
     struct AxisDescriptor

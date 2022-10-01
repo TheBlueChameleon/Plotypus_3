@@ -12,6 +12,7 @@ namespace Plotypus
 {
     //! @todo add convenience non-uniform grid creators aka arrangeX
     //! @todo lock adding overlays (as positioning cannot be distinguished from in-frame); maybe add boolean 'locked' to OverlaysCollection
+    //! @todo tidy-up code that clears StackingOrder and StackingDirection
 
     class Multiplot : public Sheet, public SheetsCollection
     {

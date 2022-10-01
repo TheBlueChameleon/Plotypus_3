@@ -3,6 +3,9 @@
 
 namespace Plotypus
 {
+    /**
+     * @todo tidy up code: restore default palette
+     */
     class PaletteDescriptor
     {
         public:

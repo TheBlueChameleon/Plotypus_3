@@ -45,12 +45,16 @@ namespace Plotypus
 
         hFile << " defined (";
 
-        for (const auto& [grey, color] : gradient)
+        const auto N = gradient.size();
+        for (auto i = 1u; const auto& [grey, color] : gradient)
         {
-            hFile << grey << " " << color << ", ";
-        }
+            hFile << grey << " " << std::quoted(color);
 
-        hFile << ")";
+            // *INDENT-OFF*
+            if (i < N)  {hFile << ", ";}
+            else        {hFile << ")";}
+            // *INDENT-ON*
+        }
     }
 
     void PaletteDescriptor::writeFileSpecMapping(std::ostream& hFile) const

@@ -17,14 +17,14 @@ namespace Plotypus
     }
 
     template<class T>
-    DataviewDefaultCompound<T>& PlotDefault::addDataviewCompound(const PlotStyle style, const std::string& label)
+    DataviewDefaultCompound<T>& PlotDefault::addDataviewDefaultCompound(const PlotStyle style, const std::string& label)
     {
         DataviewDefaultCompound<T>* dataView = new DataviewDefaultCompound<T>(style, label);
         return addDataViewCompound(dataView);
     }
 
     template<class T>
-    DataviewDefaultCompound<T>& PlotDefault::addDataviewCompound(const std::span<T>& data, const PlotStyle style, const std::string& label)
+    DataviewDefaultCompound<T>& PlotDefault::addDataviewDefaultCompound(const std::span<T>& data, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultCompound<T>* dataView = new DataviewDefaultCompound<T>(style, label);
 
@@ -34,7 +34,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataviewDefaultCompound<T>& PlotDefault::addDataviewCompound(T* data, const size_t N, const PlotStyle style, const std::string& label)
+    DataviewDefaultCompound<T>& PlotDefault::addDataviewDefaultCompound(T* data, const size_t N, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultCompound<T>* dataView = new DataviewDefaultCompound<T>(style, label);
 
@@ -44,7 +44,7 @@ namespace Plotypus
     }
 
     template<class T>
-    DataviewDefaultCompound<T>& PlotDefault::addDataviewCompound(const std::string& func, const PlotStyle style, const std::string& label)
+    DataviewDefaultCompound<T>& PlotDefault::addDataviewDefaultCompound(const std::string& func, const PlotStyle style, const std::string& label)
     {
         DataviewDefaultCompound<T>* dataView = new DataviewDefaultCompound<T>(style, label);
 
