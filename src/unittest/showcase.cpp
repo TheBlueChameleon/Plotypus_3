@@ -1084,26 +1084,32 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
 
     auto& subPlot_2_1 = sheet2.addPlotDefault("plt: viridis");
     addPlotImage(subPlot_2_1);
+    setAxes     (subPlot_2_1);
     subPlot_2_1.paletteDescriptor().setMapping(NamedPalette::Plt_Viridis);
 
     auto& subPlot_2_2 = sheet2.addPlotDefault("plt: cividis");
     addPlotImage(subPlot_2_2);
+    setAxes     (subPlot_2_2);
     subPlot_2_2.paletteDescriptor().setMapping(NamedPalette::Plt_Cividis);
 
     auto& subPlot_2_3 = sheet2.addPlotDefault("plt: inferno");
     addPlotImage(subPlot_2_3);
+    setAxes     (subPlot_2_3);
     subPlot_2_3.paletteDescriptor().setMapping(NamedPalette::Plt_Inferno);
 
     auto& subPlot_2_4 = sheet2.addPlotDefault("gnu: rainbow");
     addPlotImage(subPlot_2_4);
+    setAxes     (subPlot_2_4);
     subPlot_2_4.paletteDescriptor().setMapping(NamedPalette::Gnu_Rainbow);
 
     auto& subPlot_2_5 = sheet2.addPlotDefault("gnu: Brilliant");
     addPlotImage(subPlot_2_5);
+    setAxes     (subPlot_2_5);
     subPlot_2_5.paletteDescriptor().setMapping(NamedPalette::Gnu_Brilliant);
 
     auto& subPlot_2_6 = sheet2.addPlotDefault("gnu: ocean");
     addPlotImage(subPlot_2_6);
+    setAxes     (subPlot_2_6);
     subPlot_2_6.paletteDescriptor().setMapping(NamedPalette::Gnu_Ocean);
 
     // ---------------------------------------------------------------------- //
@@ -1138,7 +1144,7 @@ void showcase_run_plots2d_maps(Plotypus::Report& report,
 
     sheet3
     .key()
-    .setPosition(Margin::Bottom, HorizontalAlignment::Right)
+    .setPosition(Margin::Top, HorizontalAlignment::Right)
     ;
 }
 
@@ -1208,6 +1214,6 @@ void showcase_run_plots3d (Plotypus::Report& report, std::array<std::vector<doub
     .setBinaryDataOutput(false)
     ;
 
-    sheet3.paletteDescriptor().setMapping(NamedPalette::Gnu_Hot);
+    //sheet3.paletteDescriptor().setMapping(NamedPalette::Gnu_Hot);
 }
 

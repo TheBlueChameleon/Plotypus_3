@@ -65,6 +65,8 @@ namespace Plotypus
             PaletteDescriptor&                      clearOptions();
 
             void writePaletteDescriptor(std::ostream& hFile) const;
+            //! @todo implement
+            void writeUnsetCommands (std::ostream& hFile) const;
     };
 }
 

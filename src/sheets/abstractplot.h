@@ -27,20 +27,20 @@ namespace Plotypus
                 DataviewType::DataViewDefaultSeparate
             };
 
-            PlotStyleFamily             plotStyleFamily = PlotStyleFamily::Undefined;
+            PlotStyleFamily                     plotStyleFamily = PlotStyleFamily::Undefined;
 
-            size_t                      border = BORDERS_DEFAULT;
-            std::optional<size_t>       borderLineStyle;
+            size_t                              border = BORDERS_DEFAULT;
+            std::optional<size_t>               borderLineStyle;
 
-            std::optional<std::string>  aspect = "noratio";
-            std::optional<std::string>  fill   = "solid";
+            std::optional<std::string>          aspect = "noratio";
+            std::optional<std::string>          fill   = "solid";
 
-            std::string datalineSeparatorTxt = "................................................................................\n";
+            std::string                         datalineSeparatorTxt = "................................................................................\n";
 
-            KeyDescriptor       m_key;
-            PaletteDescriptor   m_paletteDescriptor;
+            std::optional<KeyDescriptor>        m_key;
+            std::optional<PaletteDescriptor>    m_paletteDescriptor;
 
-            bool parametric  = false;
+            bool                                parametric  = false;
 
             void checkAndSetStyleFamily(PlotStyleFamily newDataViewFamily, const std::vector<PlotStyleFamily> allowedFamilies);
 
@@ -90,6 +90,7 @@ namespace Plotypus
             virtual void preprocessSheet(const std::string& autoDataFilename, const std::string& extension) const;
 
             virtual void writeScriptHead(std::ostream& hFile) const;
+            virtual void writeScriptFooter  (std::ostream& hFile, const int pageNum) const;
     };
 }
 

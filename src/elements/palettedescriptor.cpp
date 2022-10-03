@@ -299,4 +299,9 @@ namespace Plotypus
 
         hFile << std::endl;
     }
+
+    void PaletteDescriptor::writeUnsetCommands(std::ostream& hFile) const
+    {
+        hFile << "set palette" << std::endl;
+    }
 }

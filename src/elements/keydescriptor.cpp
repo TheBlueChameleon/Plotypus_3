@@ -172,7 +172,7 @@ namespace Plotypus
         return position.value_or(explicitPosition_t(true, POSITION_ORIGIN));
     }
 
-    KeyDescriptor& KeyDescriptor::setPosition(const bool fixed, const OverlayPosition_t& coordinates)
+    KeyDescriptor& KeyDescriptor::setPosition(const OverlayPosition_t& coordinates, const bool fixed)
     {
         position = explicitPosition_t{fixed, coordinates};
         return *this;
@@ -210,10 +210,25 @@ namespace Plotypus
         return *this;
     }
 
+    KeyDescriptor& KeyDescriptor::setPosition(const HorizontalAlignment horizontalAlignment)
+    {
+        return setPosition(horizontalAlignment, VerticalAlignment::Default);
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const VerticalAlignment verticalAlignment)
+    {
+        return setPosition(HorizontalAlignment::Default, verticalAlignment);
+    }
+
     KeyDescriptor& KeyDescriptor::setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment)
     {
         position = insidePosition_t{horizontalAlignment, verticalAlignment};
         return *this;
+    }
+
+    KeyDescriptor& KeyDescriptor::setPosition(const VerticalAlignment verticalAlignment, const HorizontalAlignment horizontalAlignment)
+    {
+        return setPosition(horizontalAlignment, verticalAlignment);
     }
 
     KeyDescriptor& KeyDescriptor::clearPosition()
@@ -401,5 +416,10 @@ namespace Plotypus
             hFile << " off";
         }
         hFile << std::endl;
+    }
+
+    void KeyDescriptor::writeUnsetCommands(std::ostream& hFile) const
+    {
+        hFile << "set key default" << std::endl;
     }
 }

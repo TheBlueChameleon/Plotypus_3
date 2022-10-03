@@ -48,11 +48,14 @@ namespace Plotypus
             KeyDescriptor&      setOn(bool newOn);
 
             keyPosition_t       getPosition() const;
-            KeyDescriptor&      setPosition(const bool fixed, const OverlayPosition_t& coordinates);
+            KeyDescriptor&      setPosition(const OverlayPosition_t& coordinates, const bool fixed = false);
             KeyDescriptor&      setPosition(const Margin marginAlignment);
             KeyDescriptor&      setPosition(const Margin marginAlignment, const HorizontalAlignment horizontalAlignment);
-            KeyDescriptor&      setPosition(const Margin marginAlignment, const VerticalAlignment verticalAlignment);
-            KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment verticalAlignment);
+            KeyDescriptor&      setPosition(const Margin marginAlignment, const VerticalAlignment   verticalAlignment);
+            KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment);
+            KeyDescriptor&      setPosition(const VerticalAlignment   verticalAlignment);
+            KeyDescriptor&      setPosition(const HorizontalAlignment horizontalAlignment, const VerticalAlignment   verticalAlignment);
+            KeyDescriptor&      setPosition(const VerticalAlignment   verticalAlignment,   const HorizontalAlignment horizontalAlignment);
             KeyDescriptor&      clearPosition();
 
             StackingOrder       getStackingOrder() const;
@@ -90,6 +93,8 @@ namespace Plotypus
             KeyDescriptor&      clearOptions();
 
             void writeKeyDescriptor(std::ostream& hFile) const;
+            //! @todo flesh out
+            void writeUnsetCommands (std::ostream& hFile) const;
     };
 }
 

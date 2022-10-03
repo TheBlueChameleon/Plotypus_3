@@ -45,13 +45,10 @@ int main()
     std::cout << std::endl;
     std::cout << "SHOWCASE CODE BEGINS HERE" << std::endl;
 
-    showcase_minimal();
-//    showcase_run(Plot_CompoundSimple);
-    showcase_run(Showcases::All);
+    SHOWCASE_TXT_REPORT = false;
 
-    //showcase_run(Showcases::Plots_2D);
-//    showcase_run(Showcases::Plots_Multiplot);
-//    showcase_run(Showcases::Plots_3D);
+    showcase_minimal();
+    showcase_run(Showcases::All);
 
     return 0;
 }

@@ -114,12 +114,22 @@ namespace Plotypus
 
     KeyDescriptor& AbstractPlot::key()
     {
-        return m_key;
+        if (!m_key.has_value())
+        {
+            m_key = KeyDescriptor();
+        }
+
+        return m_key.value();
     }
 
     PaletteDescriptor& AbstractPlot::paletteDescriptor()
     {
-        return m_paletteDescriptor;
+        if (!m_paletteDescriptor.has_value())
+        {
+            m_paletteDescriptor = PaletteDescriptor();
+        }
+
+        return m_paletteDescriptor.value();
     }
 
     bool AbstractPlot::getParametric() const
@@ -233,12 +243,22 @@ namespace Plotypus
         else                        {hFile <<   "set border " << border;
                                      hFile << optionalSizeTArgument("linestyle", borderLineStyle);
                                      hFile << std::endl;}
-        // *INDENT-ON*
 
-        m_key.writeKeyDescriptor(hFile);
-        m_paletteDescriptor.writePaletteDescriptor(hFile);
+        if (m_key               .has_value()) {m_key                .value().writeKeyDescriptor     (hFile);}
+        if (m_paletteDescriptor .has_value()) {m_paletteDescriptor  .value().writePaletteDescriptor (hFile);}
+        // *INDENT-ON*
 
         hFile << (parametric    ? "" : "un") << "set parametric" << std::endl;
         hFile << std::endl;
+    }
+
+    void AbstractPlot::writeScriptFooter(std::ostream& hFile, const int pageNum) const
+    {
+        Sheet::writeScriptFooter(hFile, pageNum);
+
+        // *INDENT-OFF*
+        if (m_key               .has_value()) {m_key                .value().writeUnsetCommands(hFile);}
+        if (m_paletteDescriptor .has_value()) {m_paletteDescriptor  .value().writeUnsetCommands(hFile);}
+        // *INDENT-ON*
     }
 }
