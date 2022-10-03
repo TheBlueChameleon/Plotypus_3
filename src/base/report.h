@@ -20,7 +20,6 @@ namespace Plotypus
      * Sheets and write all related output to files.
      *
      * @todo better support for Filetype Screen
-     * @todo rethink responsibility for outputToFile, filenameBase wrt. TerminalInfoProvider (command set output 'filename')
      * @todo rethink auto-preprocess mechanism wrt. repetition of same action on write{txt|dat|script}
      * @todo runScript only via writeReport?
      */
@@ -38,26 +37,18 @@ namespace Plotypus
                                                                                    SheetType::Multiplot
                                                                                   };
 
-            StylesCollection        m_stylesCollection;
-            TerminalInfoProvider    m_terminalInfoProvider;
+            StylesCollection            m_stylesCollection;
+            TerminalInfoProvider        m_terminalInfoProvider;
 
-            std::string             outputDirectory     = "";
-            std::string             filenameBase        = "report";
+            bool                        verbose             = true;
+            bool                        autoRunScript       = true;
 
-            std::string             extTxt              = "txt";
-            std::string             extDat              = "dat";
-            std::string             extGnu              = "gnuplot";
+            std::string                 pageSeparatorTxt    = "================================================================================\n";
 
-            bool                    verbose             = true;
-            bool                    autoRunScript       = true;
-
-            std::string             pageSeparatorTxt    = "================================================================================\n";
-
-            std::optional<std::string> customScriptBegin;
-            std::optional<std::string> customScriptEnd;
+            std::optional<std::string>  customScriptBegin;
+            std::optional<std::string>  customScriptEnd;
 
             void preprocessSheets(const std::string& extension) const;
-            std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;
 
         public:
             //! @brief Default CTor for setting up a PDF report with pdfcairo as terminal engine.
@@ -73,9 +64,8 @@ namespace Plotypus
             // -------------------------------------------------------------- //
             // file output specs
 
-            /**
-             * @brief changes the default values for terminal engine and output filename extension associated with the new FileType
-             */
+            FileType            getFileType() const;
+            //! @brief changes the default values for terminal engine and output filename extension associated with the new FileType
             Report&             setFileType(FileType newFileType);
 
             //! @brief returns the name of the currently used terminal engine

@@ -43,16 +43,23 @@ namespace Plotypus
             enum DimensionsTypeIndex {Pixels, Length};
 
         private:
-            FileType                            fileType;
-            std::string                         terminal;
-            std::string                         extOut;
-            bool                                outputToFile;
+            FileType                            fileType            = FileType::Pdf;
+            std::string                         terminal            = "pdfcairo";
+            bool                                outputToFile        = true;
+
+            std::string                         outputDirectory     = "";
+            std::string                         filenameBase        = "report";
+
+            std::string                         extTxt              = "txt";
+            std::string                         extDat              = "dat";
+            std::string                         extGnu              = "gnuplot";
+            std::string                         extOut              = "pdf";
 
             std::optional<dimensions_t>         dimensions;
             std::optional<dimensions_pixels_t>  position;
 
             std::optional<std::string>          backgroundColor;
-            LineEnds                            lineEnds;
+            LineEnds                            lineEnds            = LineEnds::Default;
             std::optional<bool>                 transparent;
 
             std::optional<bool>                 animate;
@@ -85,7 +92,8 @@ namespace Plotypus
             TerminalInfoProvider(FileType fileType);
             TerminalInfoProvider(const std::string& terminal);
 
-            TerminalInfoProvider& reset();
+            TerminalInfoProvider&               reset();
+            TerminalInfoProvider&               clearOptionals();
 
             FileType                            getFileType() const;
             //! @todo consider moving lookup to util
@@ -94,11 +102,26 @@ namespace Plotypus
             const std::string&                  getTerminal() const;
             TerminalInfoProvider&               setTerminal(const std::string& newTerminal);
 
+            bool                                getOutputToFile() const;
+            TerminalInfoProvider&               setOutputToFile(bool newOutputToFile);
+
+            const std::string&                  getOutputDirectory() const;
+            TerminalInfoProvider&               setOutputDirectory(const std::string& newOutputDirectory);
+
+            const std::string&                  getFilenameBase() const;
+            TerminalInfoProvider&               setFilenameBase(const std::string& newFilenameBase);
+
+            const std::string&                  getExtTxt() const;
+            TerminalInfoProvider&               setExtTxt(const std::string& newExtTxt);
+
+            const std::string&                  getExtDat() const;
+            TerminalInfoProvider&               setExtDat(const std::string& newExtDat);
+
             const std::string&                  getExtOut() const;
             TerminalInfoProvider&               setExtOut(const std::string& newExtOut);
 
-            bool                                getOutputToFile() const;
-            TerminalInfoProvider&               setOutputToFile(bool newOutputToFile);
+            const std::string&                  getExtGnu() const;
+            TerminalInfoProvider&               setExtGnu(const std::string& newExtGnu);
 
             dimensions_t                        getDimensions() const;
             TerminalInfoProvider&               setDimensions(const dimensions_t& newDimensions);
@@ -149,6 +172,10 @@ namespace Plotypus
             std::string                         getOptions() const;
             TerminalInfoProvider&               setOptions(const std::string& newOptions);
             TerminalInfoProvider&               clearOptions();
+
+            // util
+
+            std::string getOutputFilename(const GeneratedFileType filetype, const std::string& infix = "") const;
 
             // writer
 

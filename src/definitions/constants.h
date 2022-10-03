@@ -45,6 +45,26 @@ namespace Plotypus
         Butt,
     };
 
+    // ---------------------------------------------------------------------- //
+
+    enum class GeneratedFileType
+    {
+        None,
+        Txt,
+        Data,
+        Script,
+        Report
+    };
+
+    // ---------------------------------------------------------------------- //
+
+    //! @todo add more formats
+    enum class PaperFormats
+    {
+        A4_Portrait,
+        A4_Landscape,
+    };
+
     // ====================================================================== //
     // Overlays
 

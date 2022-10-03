@@ -6,7 +6,6 @@
 #include "report.h"
 
 namespace fs = std::filesystem;
-using namespace Plotypus;
 
 namespace Plotypus
 {
@@ -17,32 +16,13 @@ namespace Plotypus
             // *INDENT-OFF*
             if (verbose) {std::cout << "preprocessing sheet #" << i << " ... ";}
 
-            const std::string autoOutputFilename = getOutputFilename("", "_" + std::to_string(i));
+            const std::string autoOutputFilename = m_terminalInfoProvider.getOutputFilename(GeneratedFileType::None, "_" + std::to_string(i));
             sheet->preprocessSheet(autoOutputFilename, extension);
             ++i;
 
             if (verbose) {std::cout << "done." << std::endl;}
             // *INDENT-ON*
         }
-    }
-
-    std::string Report::getOutputFilename(const std::string& extension, const std::string& infix) const
-    {
-        fs::path p(outputDirectory);
-        p.append(filenameBase);
-
-        if (!infix.empty())
-        {
-            p.concat(infix);
-        }
-
-        if (!extension.empty())
-        {
-            p.concat(".");
-            p.concat(extension);
-        }
-
-        return p;
     }
 
     // ====================================================================== //
@@ -60,13 +40,6 @@ namespace Plotypus
     Report& Report::reset()
     {
         clearSheets();
-
-        outputDirectory     = "";
-        filenameBase        = "report";
-
-        extTxt              = "txt";
-        extDat              = "dat";
-        extGnu              = "gnuplot";
 
         verbose             = true;
         autoRunScript       = true;
@@ -86,6 +59,11 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    FileType Report::getFileType() const
+    {
+        return m_terminalInfoProvider.getFileType();
+    }
+
     Report& Report::setFileType(FileType newFileType)
     {
         m_terminalInfoProvider.setFileType(newFileType);
@@ -103,46 +81,47 @@ namespace Plotypus
         return *this;
     }
 
+    const std::string& Report::getOutputDirectory() const
+    {
+        return m_terminalInfoProvider.getOutputDirectory();
+    }
+
     Report& Report::setOutputDirectory(const std::string& newOutputDirectory)
     {
-        throwIfInvalidFilename("output directory", newOutputDirectory);
-        outputDirectory = newOutputDirectory;
+        m_terminalInfoProvider.setOutputDirectory(newOutputDirectory);
         return *this;
     }
 
     const std::string& Report::getFilenameBase() const
     {
-        return filenameBase;
+        return m_terminalInfoProvider.getFilenameBase();
     }
 
     Report& Report::setFilenameBase(const std::string& newFilenameBase)
     {
-        throwIfInvalidFilename("filename base", newFilenameBase);
-        filenameBase = newFilenameBase;
+        m_terminalInfoProvider.setFilenameBase(newFilenameBase);
         return *this;
     }
 
     const std::string& Report::getExtTxt() const
     {
-        return extTxt;
+        return m_terminalInfoProvider.getExtTxt();
     }
 
     Report& Report::setExtTxt(const std::string& newExtTxt)
     {
-        throwIfInvalidFilename("extension for text files", newExtTxt);
-        extTxt = newExtTxt;
+        m_terminalInfoProvider.setExtTxt(newExtTxt);
         return *this;
     }
 
     const std::string& Report::getExtDat() const
     {
-        return extDat;
+        return m_terminalInfoProvider.getExtDat();
     }
 
     Report& Report::setExtDat(const std::string& newExtDat)
     {
-        throwIfInvalidFilename("extension for gnuplot data files", newExtDat);
-        extDat = newExtDat;
+        m_terminalInfoProvider.setExtDat(newExtDat);
         return *this;
     }
 
@@ -159,13 +138,12 @@ namespace Plotypus
 
     const std::string& Report::getExtGnu() const
     {
-        return extGnu;
+        return m_terminalInfoProvider.getExtGnu();
     }
 
     Report& Report::setExtGnu(const std::string& newExtGnu)
     {
-        throwIfInvalidFilename("extension for gnuplot script files", newExtGnu);
-        extGnu = newExtGnu;
+        m_terminalInfoProvider.setExtGnu(newExtGnu);
         return *this;
     }
 
@@ -189,11 +167,6 @@ namespace Plotypus
     {
         autoRunScript = newAutoRunScript;
         return *this;
-    }
-
-    const std::string& Report::getOutputDirectory() const
-    {
-        return outputDirectory;
     }
 
     const std::string& Report::getPageSeparatorTxt() const
@@ -257,14 +230,14 @@ namespace Plotypus
 
     void Report::writeTxt() const
     {
-        const std::string filename = getOutputFilename(extTxt);
+        const std::string filename = m_terminalInfoProvider.getOutputFilename(GeneratedFileType::Txt);
         std::fstream hFile = openOrThrow(filename);
         writeTxt(hFile);
     }
 
     void Report::writeDat() const
     {
-        preprocessSheets(extDat);
+        preprocessSheets(getExtDat());
 
         for (auto sheet : sheets)
         {
@@ -274,7 +247,7 @@ namespace Plotypus
 
     void Report::writeScript() const
     {
-        const std::string filenameGnu = getOutputFilename(extGnu);
+        const std::string filenameGnu = m_terminalInfoProvider.getOutputFilename(GeneratedFileType::Script);
         std::fstream hFile = openOrThrow(filenameGnu);
 
         writeScript(hFile);
@@ -289,10 +262,10 @@ namespace Plotypus
     void Report::writeTxt(std::ostream& hFile) const
     {
         // *INDENT-OFF*
-        if (verbose) {std::cout << "about to write TXT report " << filenameBase << " ..." << std::endl;}
+        if (verbose) {std::cout << "about to write TXT report " << getFilenameBase() << " ..." << std::endl;}
         // *INDENT-OFF*
 
-        preprocessSheets(extTxt);
+        preprocessSheets(getExtTxt());
 
         for (size_t i = 1u; auto sheet : sheets)
         {
@@ -309,18 +282,18 @@ namespace Plotypus
         }
 
         // *INDENT-OFF*
-        if (verbose) {std::cout << "TXT report for " << filenameBase << " completed." << std::endl;}
+        if (verbose) {std::cout << "TXT report for " << getFilenameBase() << " completed." << std::endl;}
         // *INDENT-OFF*
     }
 
     void Report::writeScript(std::ostream& hFile) const
     {
-        const std::string outputFilename = getOutputFilename(m_terminalInfoProvider.getExtOut());
+        const std::string outputFilename = m_terminalInfoProvider.getOutputFilename(GeneratedFileType::Report);
 
         // *INDENT-OFF*
         if (verbose) {std::cout << "about to write script for " << outputFilename << " ..." << std::endl;}
 
-        preprocessSheets(extDat);
+        preprocessSheets(getExtDat());
 
         hFile << "# " << std::string(76, '=') << " #" << std::endl;
         hFile << "# terminal setup" << std::endl << std::endl;
@@ -332,10 +305,6 @@ namespace Plotypus
             hFile << "# user setup script" << std::endl << std::endl;
 
             hFile << customScriptBegin.value() << std::endl << std::endl;
-        }
-
-        if (m_terminalInfoProvider.getOutputToFile()) {
-            hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
         }
 
         m_stylesCollection.writeStyles(hFile);

@@ -1,9 +1,11 @@
+#include <filesystem>
 #include <iomanip>
 
 #include "../definitions/errors.h"
 
 #include "terminalinfoprovider.h"
 
+namespace fs = std::filesystem;
 using namespace std::string_literals;
 
 namespace Plotypus
@@ -193,8 +195,24 @@ namespace Plotypus
     {
         fileType        = FileType::Pdf;
         terminal        = "pdfcairo";
-        extOut          = "pdf";
         outputToFile    = true;
+        outputDirectory = "";
+
+        outputDirectory = "";
+        filenameBase    = "report";
+
+        extTxt          = "txt";
+        extDat          = "dat";
+        extGnu          = "gnuplot";
+        extOut          = "pdf";
+
+        clearOptionals();
+
+        return *this;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::clearOptionals()
+    {
         dimensions      .reset();
         position        .reset();
         backgroundColor .reset();
@@ -219,7 +237,7 @@ namespace Plotypus
 
     TerminalInfoProvider& TerminalInfoProvider::setFileType(FileType newFileType)
     {
-        reset();
+        clearOptionals();
 
         fileType = newFileType;
         terminal = getFileTypeTerminal (newFileType);
@@ -245,6 +263,63 @@ namespace Plotypus
         return *this;
     }
 
+    bool TerminalInfoProvider::getOutputToFile() const
+    {
+        return outputToFile;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setOutputToFile(bool newOutputToFile)
+    {
+        outputToFile = newOutputToFile;
+        return *this;
+    }
+
+    const std::string& TerminalInfoProvider::getOutputDirectory() const
+    {
+        return outputDirectory;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setOutputDirectory(const std::string& newOutputDirectory)
+    {
+        outputDirectory = newOutputDirectory;
+        return *this;
+    }
+
+    const std::string& TerminalInfoProvider::getFilenameBase() const
+    {
+        return filenameBase;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setFilenameBase(const std::string& newFilenameBase)
+    {
+        filenameBase = newFilenameBase;
+        return *this;
+    }
+
+    const std::string& TerminalInfoProvider::getExtTxt() const
+    {
+        return extTxt;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setExtTxt(const std::string& newExtTxt)
+    {
+        throwIfInvalidFilename("extension for script output", newExtTxt);
+        extTxt = newExtTxt;
+        return *this;
+    }
+
+    const std::string& TerminalInfoProvider::getExtDat() const
+    {
+        return extDat;
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setExtDat(const std::string& newExtDat)
+    {
+        throwIfInvalidFilename("extension for script output", newExtDat);
+        extDat = newExtDat;
+        return *this;
+    }
+
     const std::string& TerminalInfoProvider::getExtOut() const
     {
         return extOut;
@@ -257,14 +332,15 @@ namespace Plotypus
         return *this;
     }
 
-    bool TerminalInfoProvider::getOutputToFile() const
+    const std::string& TerminalInfoProvider::getExtGnu() const
     {
-        return outputToFile;
+        return extGnu;
     }
 
-    TerminalInfoProvider& TerminalInfoProvider::setOutputToFile(bool newOutputToFile)
+    TerminalInfoProvider& TerminalInfoProvider::setExtGnu(const std::string& newExtGnu)
     {
-        outputToFile = newOutputToFile;
+        throwIfInvalidFilename("extension for script output", newExtGnu);
+        extGnu = newExtGnu;
         return *this;
     }
 
@@ -522,6 +598,47 @@ namespace Plotypus
 
     // ====================================================================== //
 
+    std::string TerminalInfoProvider::getOutputFilename(const GeneratedFileType filetype, const std::string& infix) const
+    {
+        fs::path p(outputDirectory);
+        p.append(filenameBase);
+
+        if (!infix.empty())
+        {
+            p.concat(infix);
+        }
+
+        switch (filetype)
+        {
+            case GeneratedFileType::None:
+                break;
+
+            case GeneratedFileType::Data:
+                p.concat(".");
+                p.concat(extDat);
+                break;
+
+            case GeneratedFileType::Txt:
+                p.concat(".");
+                p.concat(extTxt);
+                break;
+
+            case GeneratedFileType::Script:
+                p.concat(".");
+                p.concat(extGnu);
+                break;
+
+            case GeneratedFileType::Report:
+                p.concat(".");
+                p.concat(extOut);
+                break;
+        }
+
+        return p.string();
+    }
+
+    // ====================================================================== //
+
     void TerminalInfoProvider::writeTerminalInfo(std::ostream& hFile) const
     {
         hFile << "set term " << terminal << " ";
@@ -534,7 +651,13 @@ namespace Plotypus
         writeWindowTitle (hFile);
         writeWindowNumber(hFile);
         writeOptions     (hFile);
+        hFile << std::endl;
 
-        hFile << std::endl << std::endl;
+        if (outputToFile)
+        {
+            hFile << "set output '" << getOutputFilename(GeneratedFileType::Report) << "'" << std::endl;
+        }
+
+        hFile << std::endl;
     }
 }
