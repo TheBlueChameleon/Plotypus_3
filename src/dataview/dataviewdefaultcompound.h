@@ -7,13 +7,10 @@ namespace Plotypus
 {
     /**
      * @brief foo bar
-     *
-     * @note for the DTor Call in DataviewCollection to work properly, this class and all classes derived thereof
-     * must only contain stack-allocatable members. Thus, this class is final
      */
 
     template<class T>
-    class DataviewDefaultCompound final : public DataviewDefault
+    class DataviewDefaultCompound : public DataviewDefault
     {
         protected:
             std::span<T>                        data;

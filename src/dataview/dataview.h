@@ -49,6 +49,7 @@ namespace Plotypus
             Dataview(const DataviewType type, const PlotStyle    plotStyleID, const std::string& title);
             Dataview(const DataviewType type, const std::string& plotStyle);
             Dataview(const DataviewType type, const std::string& plotStyle,   const std::string& title);
+            virtual ~Dataview() = default;
 
             virtual Dataview&   reset();
 

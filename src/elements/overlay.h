@@ -23,6 +23,7 @@ namespace Plotypus
 
         public:
             Overlay(const OverlayType type, const OverlayPosition_t& position);
+            virtual ~Overlay() = default;
 
             Overlay&            reset();
 

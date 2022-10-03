@@ -15,7 +15,6 @@ namespace Plotypus
             std::vector<Overlay*> overlays;
 
             Overlay* addOverlay(Overlay* overlay);
-            static void clearOverlay(Overlay* overlay);
 
         public:
             OverlaysCollection() = default;

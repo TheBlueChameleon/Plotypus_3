@@ -13,8 +13,6 @@ namespace Plotypus
 
             Dataview* addDataview(Dataview* dataview);
 
-            static void clearDataview(Dataview* dataview);
-
         public:
             DataviewCollection(const std::vector<DataviewType>& allowedDataviewTypes);
             ~DataviewCollection();

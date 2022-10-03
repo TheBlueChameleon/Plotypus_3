@@ -10,25 +10,6 @@ namespace Plotypus
         return overlays.back();
     }
 
-    void OverlaysCollection::clearOverlay(Overlay* overlay)
-    {
-        auto overlayType = overlay->getType();
-        switch (overlayType)
-        {
-            case OverlayType::Label:
-                delete dynamic_cast<Label*>(overlay);
-                break;
-            case OverlayType::Arrow:
-                std::cerr << "Warning: missing call to DTOR:Arrow in OverlaysCollection::clearOverlay" << std::endl;
-                //delete dynamic_cast<Arrow*>(overlay);
-                break;
-            case OverlayType::Object:
-                std::cerr << "Warning: missing call to DTOR:Object in OverlaysCollection::clearOverlay" << std::endl;
-                //delete dynamic_cast<Object*>(overlay);
-                break;
-        }
-    }
-
     // ====================================================================== //
 
     OverlaysCollection::~OverlaysCollection()
@@ -47,7 +28,7 @@ namespace Plotypus
     {
         for (auto overlay : overlays)
         {
-            clearOverlay(overlay);
+            delete overlay;
         }
         overlays.clear();
 
