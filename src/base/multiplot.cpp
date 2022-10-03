@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "multiplot.h"
 
 namespace Plotypus

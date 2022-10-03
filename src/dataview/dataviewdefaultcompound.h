@@ -1,14 +1,19 @@
 #ifndef DATAVIEWDEFAULTCOMPOUND_H
 #define DATAVIEWDEFAULTCOMPOUND_H
 
-#include <iomanip>
-
 #include "dataviewdefault.h"
 
 namespace Plotypus
 {
+    /**
+     * @brief foo bar
+     *
+     * @note for the DTor Call in DataviewCollection to work properly, this class and all classes derived thereof
+     * must only contain stack-allocatable members. Thus, this class is final
+     */
+
     template<class T>
-    class DataviewDefaultCompound : public DataviewDefault
+    class DataviewDefaultCompound final : public DataviewDefault
     {
         protected:
             std::span<T>                        data;

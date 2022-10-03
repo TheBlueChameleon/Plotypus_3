@@ -4,7 +4,6 @@
 namespace Plotypus
 {
     //! @todo copy-adder
-    //! @bug hack in clearDataView at DataViewDefaultCompound
 
     class DataviewCollection
     {

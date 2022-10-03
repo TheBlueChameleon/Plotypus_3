@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "../definitions/errors.h"
 
 #include "terminalinfoprovider.h"

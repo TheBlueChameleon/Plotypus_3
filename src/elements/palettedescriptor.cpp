@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <numeric>
 
 #include "palettedescriptor.h"

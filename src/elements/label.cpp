@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "label.h"
 
 namespace Plotypus

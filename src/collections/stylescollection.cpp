@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "stylescollection.h"
 
 using namespace Plotypus;

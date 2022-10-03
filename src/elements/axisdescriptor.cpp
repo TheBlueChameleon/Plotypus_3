@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "axisdescriptor.h"
 
 namespace Plotypus

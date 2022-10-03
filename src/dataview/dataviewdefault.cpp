@@ -1,3 +1,5 @@
+#include <iomanip>
+
 #include "../base/util.h"
 
 #include "dataviewdefault.h"
