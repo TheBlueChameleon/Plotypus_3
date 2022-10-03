@@ -613,7 +613,8 @@ void showcase_run_frameControls(Plotypus::Report& report)
 
     tip
     .setFileType(FileType::Pdf)                                 // actually the default value, but just to hint at the alternatives
-    .setDimensions(29.7, 21.0, LengthUnit::Centimeter)          // DIN A4 // todo: provide an enum-driven form for this
+    //.setDimensions(29.7, 21.0, LengthUnit::Centimeter)          // DIN A4 // todo: provide an enum-driven form for this
+    .setDimensions(PaperFormats::A4_Landscape)
     ;
 
     // ---------------------------------------------------------------------- //

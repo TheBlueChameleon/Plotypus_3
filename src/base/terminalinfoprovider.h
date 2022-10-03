@@ -29,14 +29,15 @@ namespace Plotypus
      * | `Png`        | pngcairo        | png       |
      * | `PostScript` | epscairo        | eps       |
      * | `Gif`        | gif animate     | gif       |
+     *
+     * @todo remove aliases dimensions_pixels_t, dimensions_length_t
      */
 
     class TerminalInfoProvider
     {
-
         public:
-            using dimensions_pixels_t           = std::pair<int, int>;
-            using dimensions_length_t           = std::pair<double, double>;
+            using dimensions_pixels_t           = GridDimension_t;
+            using dimensions_length_t           = SheetPosition_t;
             using dimensions_length_with_unit_t = std::pair<dimensions_length_t, std::string>;
             using dimensions_t                  = std::variant<dimensions_pixels_t, dimensions_length_with_unit_t>;
 
@@ -129,9 +130,10 @@ namespace Plotypus
             TerminalInfoProvider&               setDimensions(const dimensions_length_t& newDimensions);
             TerminalInfoProvider&               setDimensions(const dimensions_length_t& newDimensions, const LengthUnit lengthUnit);
             TerminalInfoProvider&               setDimensions(const dimensions_length_with_unit_t& newDimensions);
-            TerminalInfoProvider&               setDimensions(const int width, const int height);
+            TerminalInfoProvider&               setDimensions(const size_t width, const size_t height);
             TerminalInfoProvider&               setDimensions(const double width, const double height);
             TerminalInfoProvider&               setDimensions(const double width, const double height, const LengthUnit lengthUnit);
+            TerminalInfoProvider&               setDimensions(const PaperFormats paperformat);
             TerminalInfoProvider&               clearDimensions();
 
             dimensions_pixels_t                 getPosition() const;

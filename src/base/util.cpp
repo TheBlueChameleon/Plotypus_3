@@ -807,6 +807,18 @@ namespace Plotypus
         return margins[index];
     }
 
+    SheetPosition_t getPaperformatSize(const PaperFormats paperformat)
+    {
+        // *INDENT-OFF*
+        switch (paperformat) {
+            case PaperFormats::A4_Portrait:     return {21.1, 29.7};
+            case PaperFormats::A4_Landscape:    return {29.7, 21.0};
+        }
+        // *INDENT-ON*
+
+        return DEFAULT_SHEET_POSITION;
+    }
+
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 

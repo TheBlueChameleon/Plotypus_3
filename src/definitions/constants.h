@@ -6,7 +6,6 @@
 namespace Plotypus
 {
 //! @addtogroup Plotypus_Definitions
-//! @todo introduce header internal consts?
 //! @{
 
 

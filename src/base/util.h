@@ -86,6 +86,8 @@ namespace Plotypus
 
     double& getMarginsElement(Plotypus::Margins_t margins, const Margin margin);
 
+    SheetPosition_t getPaperformatSize(const PaperFormats paperformat);
+
     // ---------------------------------------------------------------------- //
     // optional parameters handling
 

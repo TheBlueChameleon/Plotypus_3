@@ -396,7 +396,7 @@ namespace Plotypus
         return setDimensions(dimensions_t(newDimensions));
     }
 
-    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const int width, const int height)
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const size_t width, const size_t height)
     {
         return setDimensions(std::make_pair(width, height));
     }
@@ -409,6 +409,48 @@ namespace Plotypus
     TerminalInfoProvider& TerminalInfoProvider::setDimensions(const double width, const double height, const LengthUnit lengthUnit)
     {
         return setDimensions(std::make_pair(width, height), lengthUnit);
+    }
+
+    TerminalInfoProvider& TerminalInfoProvider::setDimensions(const PaperFormats paperformat)
+    {
+        dimensions_length_t paperSize = getPaperformatSize(paperformat);
+        dimensions_t        finalDimensions;
+
+        constexpr auto cmPerInch     = 2.54;
+        constexpr auto pixelsPerInch = 72.0;
+        constexpr auto pixelsPerCm   = pixelsPerInch / cmPerInch;
+
+        auto attachUnitCm = [] (const dimensions_length_t paperSize)
+        {
+            return dimensions_length_with_unit_t{paperSize, getLengthUnitName(LengthUnit::Centimeter)};
+        };
+
+        auto convertToPixels = [] (const dimensions_length_t paperSize)
+        {
+            return dimensions_pixels_t{paperSize.first * pixelsPerCm, paperSize.second * pixelsPerCm};
+        };
+
+        auto convertToChars = [] (const dimensions_length_t paperSize)
+        {
+            return dimensions_pixels_t{paperSize.first* (pixelsPerCm / 8.0), paperSize.second* (pixelsPerCm / 16.0)};
+        };
+
+        // *INDENT-OFF*
+        switch(fileType)
+        {
+            case FileType::Custom:      finalDimensions = attachUnitCm      (paperSize); break;
+            case FileType::Ascii:       finalDimensions = convertToChars    (paperSize); break;
+            case FileType::Gif:         finalDimensions = convertToPixels   (paperSize); break;
+            case FileType::Jpeg:        finalDimensions = convertToPixels   (paperSize); break;
+            case FileType::LaTeX:       finalDimensions = attachUnitCm      (paperSize); break;
+            case FileType::Pdf:         finalDimensions = attachUnitCm      (paperSize); break;
+            case FileType::Png:         finalDimensions = attachUnitCm      (paperSize); break;
+            case FileType::PostScript:  finalDimensions = attachUnitCm      (paperSize); break;
+            case FileType::Screen:      finalDimensions = convertToPixels   (paperSize); break;
+        }
+        // *INDENT-ON*
+
+        return setDimensions(finalDimensions);
     }
 
     TerminalInfoProvider& TerminalInfoProvider::clearDimensions()
