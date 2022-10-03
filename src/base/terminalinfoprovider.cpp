@@ -574,6 +574,6 @@ namespace Plotypus
         writeWindowNumber(hFile);
         writeOptions     (hFile);
 
-        hFile << std::endl;
+        hFile << std::endl << std::endl;
     }
 }

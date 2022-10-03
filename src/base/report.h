@@ -21,7 +21,6 @@ namespace Plotypus
      *
      * @todo better support for Filetype Screen
      * @todo rethink responsibility for outputToFile, filenameBase wrt. TerminalInfoProvider (command set output 'filename')
-     * @todo introduce customScripts on Report level
      * @todo rethink auto-preprocess mechanism wrt. repetition of same action on write{txt|dat|script}
      * @todo runScript only via writeReport?
      */
@@ -39,6 +38,9 @@ namespace Plotypus
                                                                                    SheetType::Multiplot
                                                                                   };
 
+            StylesCollection        m_stylesCollection;
+            TerminalInfoProvider    m_terminalInfoProvider;
+
             std::string             outputDirectory     = "";
             std::string             filenameBase        = "report";
 
@@ -51,11 +53,8 @@ namespace Plotypus
 
             std::string             pageSeparatorTxt    = "================================================================================\n";
 
-            StylesCollection        m_stylesCollection;
-            TerminalInfoProvider    m_terminalInfoProvider;
-
-//            std::optional<std::string> customScriptBegin;
-//            std::optional<std::string> customScriptEnd;
+            std::optional<std::string> customScriptBegin;
+            std::optional<std::string> customScriptEnd;
 
             void preprocessSheets(const std::string& extension) const;
             std::string getOutputFilename(const std::string& extension, const std::string& infix = "") const;
@@ -117,6 +116,14 @@ namespace Plotypus
 
             const std::string&  getPageSeparatorTxt() const;
             Report&             setPageSeparatorTxt(const std::string& newNewPageTXT);
+
+            std::string         getCustomScriptBegin() const;
+            Report&             setCustomScriptBegin(const std::string& newCustomScriptBegin);
+            Report&             clearCustomScriptBegin();
+
+            std::string         getCustomScriptEnd() const;
+            Report&             setCustomScriptEnd(const std::string& newCustomScriptEnd);
+            Report&             clearCustomScriptEnd();
 
             // -------------------------------------------------------------- //
             // writers

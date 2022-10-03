@@ -270,6 +270,11 @@ namespace Plotypus
 
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# plot commands" << std::endl << std::endl;
+
+        if (type == SheetType::Sheet)
+        {
+            hFile << "plot [0:1][1:0] 1/0 t\"\"  # dummy plot for empty page" << std::endl << std::endl;
+        }
     }
 
     void Sheet::writeScriptOverlays(std::ostream& hFile) const
@@ -300,26 +305,11 @@ namespace Plotypus
         hFile << "# " << std::string(76, '-') << " #\n";
         hFile << "# tidy up code" << std::endl << std::endl;
 
-        if (type == SheetType::Sheet)
-        {
-            hFile << "# " << std::string(76, '-') << " #\n";
-            hFile << "# dummy plot for empty page" << std::endl << std::endl;
-
-            hFile << "plot [0:1][1:0] 1/0 t\"\"" << std::endl;
-        }
-        else
-        {
-            hFile << "set key default" << std::endl;
-        }
-
-        if (origin.has_value())
-        {
-            hFile << "set origin" << std::endl;
-        }
-        if (size.has_value())
-        {
-            hFile << "set size" << std::endl;
-        }
+        // *INDENT-OFF*
+        if (type != SheetType::Sheet)   {hFile << "set key default" << std::endl;}
+        if (origin.has_value())         {hFile << "set origin" << std::endl;}
+        if (size.has_value())           {hFile << "set size" << std::endl;}
+        // *INDENT-ON*
 
         hFile << "unset label" << std::endl;
         hFile << "unset arrow" << std::endl;

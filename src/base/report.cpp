@@ -212,6 +212,41 @@ namespace Plotypus
         return m_stylesCollection;
     }
 
+
+    std::string Report::getCustomScriptBegin() const
+    {
+        return customScriptBegin.value_or("");
+    }
+
+    Report& Report::setCustomScriptBegin(const std::string& newCustomScriptBegin)
+    {
+        customScriptBegin = newCustomScriptBegin;
+        return *this;
+    }
+
+    Report& Report::clearCustomScriptBegin()
+    {
+        customScriptBegin.reset();
+        return *this;
+    }
+
+    std::string Report::getCustomScriptEnd() const
+    {
+        return customScriptEnd.value_or("");
+    }
+
+    Report& Report::setCustomScriptEnd(const std::string& newCustomScriptEnd)
+    {
+        customScriptEnd = newCustomScriptEnd;
+        return *this;
+    }
+
+    Report& Report::clearCustomScriptEnd()
+    {
+        customScriptEnd.reset();
+        return *this;
+    }
+
     // ====================================================================== //
 
     void Report::writeReport() const
@@ -292,6 +327,13 @@ namespace Plotypus
 
         m_terminalInfoProvider.writeTerminalInfo(hFile);
 
+        if (customScriptBegin.has_value()) {
+            hFile << "# " << std::string(76, '=') << " #" << std::endl;
+            hFile << "# user setup script" << std::endl << std::endl;
+
+            hFile << customScriptBegin.value() << std::endl << std::endl;
+        }
+
         if (m_terminalInfoProvider.getOutputToFile()) {
             hFile << "set output '" << outputFilename << "'" << std::endl << std::endl;
         }
@@ -312,6 +354,13 @@ namespace Plotypus
             ++i;
 
             if (verbose) {std::cout << "done." << std::endl;}
+        }
+
+        if (customScriptEnd.has_value()) {
+            hFile << "# " << std::string(76, '=') << " #" << std::endl;
+            hFile << "# user finalize script" << std::endl << std::endl;
+
+            hFile << customScriptEnd.value() << std::endl << std::endl;
         }
 
         if (verbose) {std::cout << "script for " << outputFilename << " completed." << std::endl;}

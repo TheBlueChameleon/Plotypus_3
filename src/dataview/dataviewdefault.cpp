@@ -461,7 +461,7 @@ namespace Plotypus
         }
         else
         {
-            hFile << " " << std::quoted(dataFilename);
+            hFile << std::quoted(dataFilename);
             if (binaryDataOutput)
             {
                 hFile << " binary format=\"%float64\"";
