@@ -61,11 +61,13 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // enum lookups
 
-    std::string getTerminalName(const FileType fileType);
+    std::string getFileTypeName     (const FileType fileType);
+    std::string getFileTypeTerminal (const FileType fileType);
+    std::string getFileTypeExtension(const FileType fileType);
     std::string getLengthUnitName(const LengthUnit lengthUnit);
-    std::string getColumnIDName(const ColumnType columnType);
+    std::string getColumnTypeName(const ColumnType columnType);
     std::string getSheetTypeName(const SheetType sheetType);
-    std::string getDataViewTypeName(const DataviewType viewType);
+    std::string getDataviewTypeName(const DataviewType viewType);
     std::string getPlotStyleName(const PlotStyle plotStyleID);
     std::string getAxisName(const AxisType axis);
     std::string getPositionSystemName(const PositionSystem ps);
@@ -78,7 +80,7 @@ namespace Plotypus
     std::string getStackingDirectionName(const StackingDirection stackingDirection);
     std::string getColorSpaceName(const ColorSpace colorSpace);
 
-    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID);
+    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyle);
 
     bool hasAxisLabel(const AxisType axis);
 

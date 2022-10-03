@@ -84,7 +84,7 @@ namespace Plotypus
         if (columnID == COLUMN_UNSUPPORTED)
         {
             std::string errMsg = "Column type ";
-            errMsg += "\"" + getColumnIDName(columnType) + "\"";
+            errMsg += "\"" + getColumnTypeName(columnType) + "\"";
             errMsg += " not supported for plot type ";
             errMsg += "\"" + getPlotStyleName(plotStyleID) + "\"";
 

@@ -12,7 +12,7 @@ namespace Plotypus
         else
         {
             clearDataview(dataview);
-            throw UnsupportedOperationError("Cannot add Sheet of type " + getDataViewTypeName(viewType));
+            throw UnsupportedOperationError("Cannot add Sheet of type " + getDataviewTypeName(viewType));
         }
 
         return dataviews.back();

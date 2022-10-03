@@ -32,7 +32,7 @@ namespace Plotypus
         {
             throw InvalidArgumentError("    Invalid dimensions specification.\n"
                                        "      given   : "s + getDimensionTypeName(dimensions) + "\n"
-                                       "      terminal: "s + getTerminalName(fileType));
+                                       "      terminal: "s + getFileTypeName(fileType));
         }
     }
 
@@ -47,7 +47,7 @@ namespace Plotypus
         {
             throw InvalidArgumentError("    Feature not supported for this type of terminal.\n"
                                        "      feature : "s + feature + "\n"
-                                       "      terminal: "s + getTerminalName(fileType));
+                                       "      terminal: "s + getFileTypeName(fileType));
         }
     }
 
@@ -219,56 +219,15 @@ namespace Plotypus
     {
         reset();
 
-        switch(newFileType)
+        fileType = newFileType;
+        terminal = getFileTypeTerminal (newFileType);
+        extOut   = getFileTypeExtension(newFileType);
+
+        if (newFileType == FileType::Screen)
         {
-            case FileType::Custom:
-                terminal = "";
-                extOut   = "";
-                break;
-
-            case FileType::Ascii:
-                terminal = "dumb";
-                extOut   = "txt";
-                break;
-
-            case FileType::Gif:
-                terminal = "gif";
-                extOut   = "gif";
-                break;
-
-            case FileType::Jpeg:
-                terminal = "jpeg";
-                extOut   = "jpg";
-                break;
-
-            case FileType::LaTeX:
-                terminal = "lua tikz";
-                extOut   = "tex";
-                break;
-
-            case FileType::Pdf:
-                terminal = "pdfcairo";
-                extOut   = "pdf";
-                break;
-
-            case FileType::Png:
-                terminal = "pngcairo";
-                extOut   = "png";
-                break;
-
-            case FileType::PostScript:
-                terminal = "epscairo";
-                extOut   = "eps";
-                break;
-
-            case FileType::Screen:
-                terminal = "qt";
-                extOut   = "";
-                outputToFile = false;
-                break;
+            outputToFile = false;
         }
 
-        fileType = newFileType;
         return *this;
     }
 

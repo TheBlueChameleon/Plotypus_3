@@ -407,14 +407,14 @@ namespace Plotypus
     // ---------------------------------------------------------------------- //
     // enum name lookups
 
-    std::string getTerminalName(const FileType fileType)
+    std::string getFileTypeName(const FileType fileType)
     {
         // *INDENT-OFF*
         switch(fileType)
         {
             case FileType::Custom:      return "Custom";
             case FileType::Ascii:       return "Ascii";
-            case FileType::Gif:         return "gif";
+            case FileType::Gif:         return "Gif";
             case FileType::Jpeg:        return "Jpeg";
             case FileType::LaTeX:       return "LaTeX";
             case FileType::Pdf:         return "Pdf";
@@ -425,6 +425,46 @@ namespace Plotypus
         // *INDENT-ON*
 
         return "(undefined)";
+    }
+
+    std::string getFileTypeTerminal(const FileType fileType)
+    {
+        // *INDENT-OFF*
+        switch(fileType)
+        {
+            case FileType::Custom:      return "";
+            case FileType::Ascii:       return "dumb";
+            case FileType::Gif:         return "gif";
+            case FileType::Jpeg:        return "jpeg";
+            case FileType::LaTeX:       return "lua tikz";
+            case FileType::Pdf:         return "pdfcairo";
+            case FileType::Png:         return "pngcairo";
+            case FileType::PostScript:  return "epscairo";
+            case FileType::Screen:      return "qt";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
+    }
+
+    std::string getFileTypeExtension(const FileType fileType)
+    {
+        // *INDENT-OFF*
+        switch(fileType)
+        {
+            case FileType::Custom:      return "";
+            case FileType::Ascii:       return "asc";
+            case FileType::Gif:         return "gif";
+            case FileType::Jpeg:        return "jpg";
+            case FileType::LaTeX:       return "tex";
+            case FileType::Pdf:         return "pdf";
+            case FileType::Png:         return "png";
+            case FileType::PostScript:  return "eps";
+            case FileType::Screen:      return "";
+        }
+        // *INDENT-ON*
+
+        return "undefined";
     }
 
     std::string getLengthUnitName(const LengthUnit lengthUnit)
@@ -440,7 +480,7 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getColumnIDName(const ColumnType columnType)
+    std::string getColumnTypeName(const ColumnType columnType)
     {
         // *INDENT-OFF*
         switch(columnType)
@@ -487,7 +527,7 @@ namespace Plotypus
         return "(undefined)";
     }
 
-    std::string getDataViewTypeName(const DataviewType viewType)
+    std::string getDataviewTypeName(const DataviewType viewType)
     {
         // *INDENT-OFF*
         switch (viewType) {
@@ -696,10 +736,10 @@ namespace Plotypus
         return "undefined";
     }
 
-    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyleID)
+    PlotStyleFamily getPlotStyleFamily(const PlotStyle plotStyle)
     {
         // *INDENT-OFF*
-        switch(plotStyleID)
+        switch(plotStyle)
         {
             case PlotStyle::Dots:           return PlotStyleFamily::Orthogonal2D;
             case PlotStyle::Points:         return PlotStyleFamily::Orthogonal2D;
@@ -844,4 +884,5 @@ namespace Plotypus
     {
         return assignment == COLUMN_DUMMY;
     }
+
 };

@@ -72,7 +72,7 @@ namespace Plotypus
 
         data             [columnID] = newdata;
         columnAssignments[columnID] = columnID + 1;
-        columnHeadlines  [columnID] = getColumnIDName(columnType);
+        columnHeadlines  [columnID] = getColumnTypeName(columnType);
 
         postSetColumnActions(columnType);
 

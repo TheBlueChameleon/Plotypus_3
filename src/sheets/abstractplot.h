@@ -15,8 +15,6 @@ namespace Plotypus
 {
     /**
      * @brief foo bar
-     *
-     * @todo set palette, colorbox ~> new element, optional here
      */
     class AbstractPlot : public Sheet, public DataviewCollection
     {
