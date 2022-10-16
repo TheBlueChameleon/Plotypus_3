@@ -289,7 +289,7 @@ linkshowcase_shared:
 	$(call boxtop)
 	$(call boxtext, "attempting to link showcase binary with shared library...")
 
-	$(eval LDFLAGS += "$(LIBNAME_SHARED)")
+	$(eval LDFLAGS += "$(abspath $(LIBNAME_SHARED))")
 	$(call linkBinary)
 
 	$(call boxtext, "done.")
@@ -317,7 +317,7 @@ clean:
 # ---------------------------------------------------------------------------- #
 # help section
 
-vars :
+vars:
 	@clear
 	$(call fatbox, "variables dump:")
 
@@ -330,7 +330,7 @@ vars :
 	@echo "source code  directory   : $(SRCDIR)"
 	@echo "include file directory   : $(INCDIR)"
 	@echo "object file  directory   : $(OBJDIR)"
-	@echo "binary       directory   : $(EXEDIR)"
+	@echo "binaries     directory   : $(EXEDIR)"
 	@echo ""
 
 	@echo "object file directories  :"
@@ -343,7 +343,7 @@ vars :
 	@echo "   $(OBJ)"
 	@echo "showcase objects         :"
 	@echo "   $(OBJ_SHOWCASE)"
-	@echo "library objects         :"
+	@echo "library objects          :"
 	@echo "   $(OBJ_LIB)"
 	@echo ""
 
