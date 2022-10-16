@@ -47,6 +47,7 @@ int main()
 
     SHOWCASE_TXT_REPORT = false;
 
+    showcase_environment();
     showcase_minimal();
     showcase_run(Showcases::All);
 

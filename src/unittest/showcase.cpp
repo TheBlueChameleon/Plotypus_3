@@ -1,3 +1,4 @@
+#include <filesystem>
 #include <complex>
 #include <iostream>
 
@@ -6,6 +7,8 @@
 
 using namespace std::complex_literals;
 using namespace std::string_literals;
+
+namespace fs = std::filesystem;
 
 // ========================================================================== //
 // behaviour constants
@@ -16,6 +19,38 @@ using namespace std::string_literals;
 bool SHOWCASE_TXT_REPORT = false;
 
 // ========================================================================== //
+// called by main
+
+void showcase_environment()
+{
+    /* The showcase code below expects the directory "../TestOutput" to exist.
+     * Code in this function ensures the existence; otherwise it does not
+     * show you anything about the Plotypus library.
+     */
+
+    fs::path outputDir("../TestOutput/");
+
+    if (fs::exists(outputDir))
+    {
+        if (fs::is_directory(outputDir))
+        {
+            std::cout << "Detected output directory for showcase code. Ready to write plots..." << std::endl;
+            return;
+        }
+        else
+        {
+            std::cout << "Detected non-directory file system object '../TestOutput' -- aborting" << std::endl;
+            throw std::runtime_error("File system in incompatible state for Plotypus Showcase.");
+        }
+    }
+    else
+    {
+        std::cout << "Creating output directory in '../TestOutput' ..." << std::flush;
+        fs::create_directories(outputDir);
+        std::cout << "done. Ready to write plots..." << std::endl;
+    }
+
+}
 
 void showcase_minimal()
 {
@@ -29,7 +64,7 @@ void showcase_minimal()
     // ---------------------------------------------------------------------- //
     // prepare data
 
-    /* The below code is a stand in for an arbitrary complex simulation.
+    /* The below code is a stand-in for an arbitrary complex simulation.
      * Here, we simply sample a sine wave at equidistant points and use a
      * single std::vector as data source for our plot.
      */
@@ -51,6 +86,8 @@ void showcase_minimal()
      * the created plots to the hard disk.
      * You will need to create such an object in each project involving
      * Plotypus.
+     * Here, we only where to write the report file to, and what name it shall
+     * be given.
      */
 
     Plotypus::Report report = Plotypus::Report();
@@ -123,16 +160,14 @@ void showcase_minimal()
         report.writeTxt();      // generates a CSV like, human readable file
     }
 }
-// ========================================================================== //
-// exposed interface
 
 void showcase_run(size_t selection)
 {
-    /* If you find your way around the minimal example above, you'll find
-     * nothing funny going on here. The function prepares one shared
-     * Plotypus::Report that is passed to a number of functions, each of
+    /* If you are comfortable with the minimal example above, you'll find
+     * nothing funny going on here. This function prepares one Plotypus::Report
+     * shared between and passed to a number of functions, each of
      * which adds one or more pages to the report, thereby showcasing the
-     * capabilities and mode of usage of Plotypus.
+     * capabilities and use of Plotypus.
      *
      * This function ties the various examples together by creating the
      * Report object, the data and calling the code to add the pages.
@@ -193,7 +228,7 @@ void showcase_run(size_t selection)
 }
 
 // ========================================================================== //
-// showcases
+// called by showcase_run
 
 void showcase_run_overlays(Plotypus::Report& report)
 {

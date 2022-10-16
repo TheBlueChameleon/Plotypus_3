@@ -56,6 +56,7 @@ std::array<std::vector<double>, 3> generateScalarField();
 // ========================================================================== //
 // showcase interface
 
+void showcase_environment();
 void showcase_minimal();
 void showcase_run(size_t selection);
 
