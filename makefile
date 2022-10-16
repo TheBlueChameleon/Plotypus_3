@@ -23,7 +23,7 @@ EXTENSION_CODE   = .cpp
 EXTENSION_HEADER = .h
 EXTENSION_OBJECT = .o
 
-EXENAME = Plotypus-Showcase
+EXENAME = Plotypus-showcase
 LIBNAME = plotypus
 
 # ============================================================================ #
@@ -147,7 +147,9 @@ help:
 	$(call fatbox, "PLOTYPUS MAKEFILE")
 	@echo
 	@echo "Please type one of the following:"
-	@echo "$(COLOR_YELLOW)Executable generation $(COLOR_END)"
+	@echo "$(COLOR_YELLOW)Library and executable generation $(COLOR_END)"
+	@echo "    $(COLOR_LCYAN)make default$(COLOR_END)"
+	@echo "      compiles, links the static library and creates the showcase executable"
 	@echo "    $(COLOR_LCYAN)make all$(COLOR_END)"
 	@echo "      compiles, links the static and dynamic library and creates the showcase executable"
 	@echo "    $(COLOR_LCYAN)make static$(COLOR_END)"
@@ -171,30 +173,40 @@ help:
 	@echo "    $(COLOR_LCYAN)make linkshowcase_default$(COLOR_END)"
 	@echo "      links the showcase object files and the library to an executable."
 	@echo "      uses the shared library if present, otherwise defaults to the static library."
+	@echo "      $(COLOR_LCYAN)make compile$(COLOR_END) must have been invoked before."
 	@echo "    $(COLOR_LCYAN)make linkshowcase_static$(COLOR_END)"
 	@echo "      same as $(COLOR_LCYAN)make linkshowcase_default$(COLOR_END), but always links against the static library version"
+	@echo "    $(COLOR_LCYAN)make linkshowcase_shared$(COLOR_END)"
+	@echo "      same as $(COLOR_LCYAN)make linkshowcase_default$(COLOR_END), but always links against the shared library version"
 	@echo
 	@echo "$(COLOR_YELLOW)Misc$(COLOR_END)"
 	@echo "    $(COLOR_LCYAN)make clean$(COLOR_END)"
-	@echo "      removes $(OBJDIR) and its contents."
+	@echo "      removes the directory $(OBJDIR) and its contents."
 	@echo "    $(COLOR_LCYAN)make vars$(COLOR_END)"
-	@echo "      show variables generated and set by this script"
+	@echo "      show variables generated and set by this makefile"
+	@echo "    $(COLOR_LCYAN)make execute$(COLOR_END)"
+	@echo "      run the last compiled showcase"
 	@echo "    $(COLOR_LCYAN)make help$(COLOR_END)"
 	@echo "      show this help"
 	@echo
 	@echo "Note that you can create compound targets such as:"
-	@echo "   $(COLOR_LCYAN)make clean run$(COLOR_END)"
+	@echo "   $(COLOR_LCYAN)make clean static run$(COLOR_END)"
 
 # ---------------------------------------------------------------------------- #
 # compound targets
 
-all:            intro binaries extro
-new:      clean intro binaries extro
-run:            intro binaries extro execute
-grind:          intro binaries extro valgrind
-binaries: compile linklib_static linklib_shared linkshowcase_default
-static:   compile linklib_static                linkshowcase_static
-shared:   compile                linklib_shared linkshowcase_shared
+default: static
+
+all:            intro bin_all    extro
+static:         intro bin_static extro
+shared:         intro bin_shared extro
+new:      clean intro bin_all    extro
+run:            intro bin_all    extro execute
+grind:          intro bin_all    extro valgrind
+
+bin_all:    compile linklib_static linklib_shared linkshowcase_default
+bin_static: compile linklib_static                linkshowcase_static
+bin_shared: compile                linklib_shared linkshowcase_shared
 
 # ---------------------------------------------------------------------------- #
 # visual feedback
