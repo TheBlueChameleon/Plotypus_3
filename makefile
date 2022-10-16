@@ -168,9 +168,11 @@ help:
 	@echo "      links all library object files to a static library. $(COLOR_LCYAN)make compile$(COLOR_END) must have been invoked before."
 	@echo "    $(COLOR_LCYAN)make linklib_shared$(COLOR_END)"
 	@echo "      links all library object files to a shared library. $(COLOR_LCYAN)make compile$(COLOR_END) must have been invoked before."
-	@echo "    $(COLOR_LCYAN)make linkshowcase$(COLOR_END)"
+	@echo "    $(COLOR_LCYAN)make linkshowcase_default$(COLOR_END)"
 	@echo "      links the showcase object files and the library to an executable."
 	@echo "      uses the shared library if present, otherwise defaults to the static library."
+	@echo "    $(COLOR_LCYAN)make linkshowcase_static$(COLOR_END)"
+	@echo "      same as $(COLOR_LCYAN)make linkshowcase_default$(COLOR_END), but always links against the static library version"
 	@echo
 	@echo "$(COLOR_YELLOW)Misc$(COLOR_END)"
 	@echo "    $(COLOR_LCYAN)make clean$(COLOR_END)"
@@ -186,13 +188,13 @@ help:
 # ---------------------------------------------------------------------------- #
 # compound targets
 
-all:      intro binaries extro
-binaries: compile linklib_static linklib_shared linkshowcase_default
-static:   compile linklib_static linkshowcase_static
-shared:   compile linklib_shared linkshowcase_shared
+all:            intro binaries extro
 new:      clean intro binaries extro
-run:      intro binaries extro execute
-grind:    intro binaries extro valgrind
+run:            intro binaries extro execute
+grind:          intro binaries extro valgrind
+binaries: compile linklib_static linklib_shared linkshowcase_default
+static:   compile linklib_static                linkshowcase_static
+shared:   compile                linklib_shared linkshowcase_shared
 
 # ---------------------------------------------------------------------------- #
 # visual feedback
@@ -296,9 +298,34 @@ linkshowcase_shared:
 	$(call boxbottom)
 # ............................................................................ #
 define linkBinary
+	@mkdir -p $(EXEDIR)
 	@$(CXX) $(OBJ_SHOWCASE) $(LDFLAGS) -o $(EXENAME_FULL)  \
 		|| (echo "$(MSG_ERROR)"; exit 1)
+
+	$(call boxtext, "successfully created executable in $(EXENAME_FULL)")
 endef
+
+# ---------------------------------------------------------------------------- #
+# execute
+
+execute:
+	$(call fatbox, "Executing showcase code")
+	$(call boxtop)
+	$(call boxtext, "launching $(EXENAME_FULL) ...")
+
+	@cd $(EXEDIR); ./$(EXENAME)
+
+	$(call boxtext, "done!")
+	$(call boxbottom)
+valgrind:
+	$(call fatbox, "Executing showcase code with valgrind analysis")
+	$(call boxtop)
+	$(call boxtext, "launching $(EXENAME_FULL) ...")
+
+	@cd $(EXEDIR); valgrind ./$(EXENAME)
+
+	$(call boxtext, "done!")
+	$(call boxbottom)
 # ---------------------------------------------------------------------------- #
 # delete the object directory
 
