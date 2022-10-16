@@ -3,6 +3,8 @@
 
 #include <complex>
 
+#include "../plotypus.h"
+
 // ========================================================================== //
 // showcase selection
 

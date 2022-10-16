@@ -1,5 +1,8 @@
 #include "dataviewcollection.h"
 
+#include "../dataview/dataview.h"
+#include "../base/util.h"
+
 namespace Plotypus
 {
     Dataview* DataviewCollection::addDataview(Dataview* dataview)

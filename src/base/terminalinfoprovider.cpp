@@ -1,6 +1,7 @@
 #include <filesystem>
 #include <iomanip>
 
+#include "../base/util.h"
 #include "../definitions/errors.h"
 
 #include "terminalinfoprovider.h"

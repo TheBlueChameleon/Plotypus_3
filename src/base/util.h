@@ -13,6 +13,8 @@
 #include <vector>
 
 #include "../definitions/constants.h"
+#include "../definitions/errors.h"
+#include "../definitions/types.h"
 
 namespace Plotypus
 {

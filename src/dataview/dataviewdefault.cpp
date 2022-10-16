@@ -1,8 +1,9 @@
 #include <iomanip>
 
-#include "../base/util.h"
-
 #include "dataviewdefault.h"
+
+#include "../base/util.h"
+#include "../collections/stylescollection.h"
 
 namespace Plotypus
 {

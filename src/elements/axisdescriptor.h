@@ -1,6 +1,8 @@
 #ifndef AXISDESCRIPTOR_H
 #define AXISDESCRIPTOR_H
 
+#include "../definitions/types.h"
+
 namespace Plotypus
 {
     /**

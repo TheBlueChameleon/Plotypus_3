@@ -1,5 +1,7 @@
 #include "dataviewdefaultseparate.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     void DataviewDefaultSeparate::clearNonFunctionMembers()

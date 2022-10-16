@@ -1,6 +1,9 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <limits>
+#include <cstddef>
+
 #include "internalconstants.h"
 
 namespace Plotypus

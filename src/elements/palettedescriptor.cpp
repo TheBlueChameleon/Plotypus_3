@@ -3,6 +3,8 @@
 
 #include "palettedescriptor.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     const PaletteDescriptor::paletteData_t PaletteDescriptor::EMPTY_PALETTE_DATA = gradientElementList_t();

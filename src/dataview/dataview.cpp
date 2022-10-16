@@ -1,5 +1,8 @@
 #include "dataview.h"
 
+#include "../base/util.h"
+#include "../definitions/errors.h"
+
 using namespace Plotypus;
 
 namespace Plotypus

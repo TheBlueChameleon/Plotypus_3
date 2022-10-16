@@ -37,6 +37,7 @@ Thumbs.db
 
 # qtcreator generated files
 *.pro.user*
+CMakeLists.txt.user
 
 # xemacs temporary files
 *.flc
@@ -69,15 +70,14 @@ Thumbs.db
 # doxygen
 docs/
 
-# qt config
-CMakeLists.txt.user
-
 # Binaries
 # --------
 *.dll
 *.exe
 *.gch
 build*/
+bin/
+lib/
 
 # Test Output
 # -----------

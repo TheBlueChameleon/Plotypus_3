@@ -1,6 +1,7 @@
 #include "overlayscollection.h"
 
-#include <iostream>
+#include "../base/util.h"
+#include "../elements/label.h"
 
 namespace Plotypus
 {

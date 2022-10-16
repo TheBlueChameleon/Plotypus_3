@@ -1,5 +1,8 @@
 #include "abstractplot.h"
 
+#include "../base/util.h"
+#include "../dataview/dataview.h"
+
 using namespace std::string_literals;
 using namespace Plotypus;
 

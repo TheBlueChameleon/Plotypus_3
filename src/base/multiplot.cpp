@@ -2,6 +2,8 @@
 
 #include "multiplot.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     Multiplot::Multiplot() :

@@ -7,6 +7,7 @@
 
 #include "../definitions/types.h"
 #include "../sheets/sheet.h"
+#include "../collections/sheetscollection.h"
 
 namespace Plotypus
 {

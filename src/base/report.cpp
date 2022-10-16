@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "../definitions/errors.h"
-
+#include "../sheets/sheet.h"
 #include "report.h"
 
 namespace fs = std::filesystem;

@@ -30,8 +30,8 @@ bool unittest_foobar()
 // ========================================================================== //
 // dependencies
 
+#include <functional>
 #include <stdexcept>
-
 #include <string>
 #include <sstream>
 #include <vector>

@@ -24,6 +24,10 @@ namespace Plotypus
      * @todo empty title/clear title variants
      */
 
+    template<class T>
+    class DataviewDefaultCompound;
+    class DataviewDefaultSeparate;
+
     class PlotDefault : public AbstractPlot
     {
         protected:

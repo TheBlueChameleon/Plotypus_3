@@ -4,7 +4,10 @@
 #include <string>
 #include <vector>
 
+#include "../base/util.h"
+
 #include "../collections/overlayscollection.h"
+#include "../collections/stylescollection.h"
 
 #include "../definitions/types.h"
 

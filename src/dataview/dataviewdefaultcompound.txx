@@ -3,6 +3,8 @@
 
 #include "dataviewdefaultcompound.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     template<class T>

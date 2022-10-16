@@ -2,6 +2,8 @@
 
 #include "stylescollection.h"
 
+#include "../base/util.h"
+
 using namespace Plotypus;
 using namespace std::string_literals;
 

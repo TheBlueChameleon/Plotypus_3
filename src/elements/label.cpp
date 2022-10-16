@@ -2,6 +2,8 @@
 
 #include "label.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     Label::Label() :

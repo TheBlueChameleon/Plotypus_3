@@ -1,6 +1,12 @@
 #ifndef PALETTEDESCRIPTOR_H
 #define PALETTEDESCRIPTOR_H
 
+#include <optional>
+#include <variant>
+#include <vector>
+
+#include "../definitions/types.h"
+
 namespace Plotypus
 {
     /**

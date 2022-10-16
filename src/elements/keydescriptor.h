@@ -4,6 +4,8 @@
 #include <optional>
 #include <variant>
 
+#include "../definitions/types.h"
+
 namespace Plotypus
 {
     class KeyDescriptor

@@ -1,5 +1,6 @@
 #include "sheetscollection.h"
 #include "../base/multiplot.h"
+#include "../sheets/plotradial.h"
 
 using namespace Plotypus;
 namespace Plotypus

@@ -1,5 +1,7 @@
 #include "overlay.h"
 
+#include "../base/util.h"
+
 static size_t lastTag = 0;
 
 namespace Plotypus

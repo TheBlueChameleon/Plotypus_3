@@ -10,6 +10,8 @@
 
 #include "dataview.h"
 
+#include "../definitions/types.h"
+
 namespace Plotypus
 {
     /**

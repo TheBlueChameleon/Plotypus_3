@@ -1,5 +1,8 @@
 #include "plotdefault.h"
 
+#include "../base/util.h"
+#include "../dataview/dataviewdefaultseparate.h"
+
 namespace Plotypus
 {
     PlotDefault::PlotDefault() :

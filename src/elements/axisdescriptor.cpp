@@ -2,6 +2,8 @@
 
 #include "axisdescriptor.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     std::string AxisDescriptor::generateRangeString(const std::optional<double>& min, const std::optional<double>& max) const

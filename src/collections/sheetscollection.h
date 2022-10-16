@@ -1,12 +1,16 @@
 #ifndef SHEETSCOLLECTION_H
 #define SHEETSCOLLECTION_H
 
+#include <string>
 #include <vector>
+
+#include "../base/util.h"
+#include "../definitions/types.h"
+#include "../sheets/plotdefault.h"
 
 namespace Plotypus
 {
-    class PlotDefault;
-    class Sheet;
+    enum class SheetType;
     class Multiplot;
 
     //! @todo copy sheet funcs

@@ -1,9 +1,11 @@
 #ifndef TERMINALINFOPROVIDER_H
 #define TERMINALINFOPROVIDER_H
 
-#include <variant>
 #include <optional>
 #include <string>
+#include <variant>
+
+#include "../definitions/types.h"
 
 namespace Plotypus
 {

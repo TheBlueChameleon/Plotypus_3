@@ -1,5 +1,7 @@
 #include "keydescriptor.h"
 
+#include "../base/util.h"
+
 namespace Plotypus
 {
     StackingOrder getMarginAlignmentSense(Margin alignment)

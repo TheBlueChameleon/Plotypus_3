@@ -1,9 +1,16 @@
 #ifndef DATAVIEWCOLLECTION_H
 #define DATAVIEWCOLLECTION_H
 
+#include <vector>
+
+#include "../definitions/types.h"
+
 namespace Plotypus
 {
     //! @todo copy-adder
+
+    class Dataview;
+    enum class DataviewType;
 
     class DataviewCollection
     {
